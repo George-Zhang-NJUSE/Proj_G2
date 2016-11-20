@@ -1,25 +1,39 @@
 package group2.grade15.njuse.presentation.main;
 
+import group2.grade15.njuse.presentation.loginui.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader=new FXMLLoader(new URL("file:src/presentation/loginui/login_webadmin.fxml"));
-        Pane root=loader.load();
-        primaryStage.setTitle("酒店预订系统——网站管理人员端");
-        primaryStage.setScene(new Scene(root,900,600));
-        primaryStage.sizeToScene();
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/webAdminLogin.fxml"));
+
+            primaryStage.setTitle("酒店预订系统——网站管理人员端");
+            primaryStage.setScene(new Scene((Parent) loader.load()));
+            primaryStage.sizeToScene();
+            primaryStage.setResizable(false);
+
+            LoginController loginController = loader.<LoginController>getController();
+            loginController.setStage(primaryStage);
+
+            primaryStage.show();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
