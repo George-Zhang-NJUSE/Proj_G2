@@ -5,14 +5,13 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CreditVO;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.WebMarketerVO;
-import group2.grade15.njuse.vo.WebPromotionListVO;
 
 public interface WebMarketerServ {
 	public WebMarketerVO getInfo(int WebMarketerId) ;
 	
 	public Promotion createWebPromotion (Promotion promotionInfo); 
 	
-	public WebPromotionListVO getWebPromotionList (String hotelId); 
+//	public WebPromotionListVO getWebPromotionList (String hotelId);
 	
 	public ResultMessage modifyWebPromotion (Promotion promotion); 
 	
