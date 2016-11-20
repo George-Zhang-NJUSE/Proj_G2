@@ -8,13 +8,13 @@ import group2.grade15.njuse.dataservice.WebMarketerDataService;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
 
-public class LoginController implements LoginControllerServ {
+public class LoginControllerImpl implements LoginControllerServ {
 	CustomerDataService customerData;
 	HotelManagerDataService hotelManager;
 	WebMarketerDataService webMarketer;
 	WebAdminDataService webAdmin;
 
-	public ResultMessage login(int customerId, String password, IDType type) {
+	public ResultMessage login(int id, String password, IDType type) {
 		ResultMessage result = null;
 		
 		switch(type){

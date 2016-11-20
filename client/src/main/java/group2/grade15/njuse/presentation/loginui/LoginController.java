@@ -3,40 +3,97 @@ package group2.grade15.njuse.presentation.loginui;
  * Created by George on 2016/11/16.
  */
 
-import javafx.application.Application;
+import group2.grade15.njuse.presentation.webadminui.WebAdminController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-public class LoginController extends Application {
+public class LoginController {
 
-    public static void main(String[] args) {
-        launch(args);
+    private Stage currentStage;
+
+    public void setStage(Stage s) {
+        currentStage = s;
     }
 
-    @Override
-    public void start(Stage primaryStage) {
+    @FXML
+    private ImageView loginIconImage;
 
-        try {
-            Parent root= FXMLLoader.load(getClass().getResource("login.fxml"));
+    @FXML
+    private TextField accoutField;
 
-            primaryStage.setTitle("酒店预订系统——管理员端");
-            primaryStage.setScene(new Scene(root,900,600));
-            primaryStage.sizeToScene();
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    private PasswordField passwordField;
 
+    @FXML
+    protected void mouseInLogin(MouseEvent event) {
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_movein.png"));
+    }
+
+    @FXML
+    protected void mouseExitLogin(MouseEvent event) {
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon.png"));
+    }
+
+    @FXML
+    protected void mousePressLogin(MouseEvent event) {
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_press.png"));
+    }
+
+    @FXML
+    protected void mouseReleaseLogin(MouseEvent event) {
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_movein.png"));
+        login();
     }
 
     @FXML
     protected void login() {
         // TODO: 2016/11/18
+//        int webAdminId = Integer.parseInt(accoutField.getText());
+//        String webAdminPsw = passwordField.getText();
+//
+//       switch (loginControllerServ.login(webAdminId, webAdminPsw, IDType.webAdmin)) {
+//            case SUCCESS:
+//
+//
+//        }
+
+        jumpToMain();
+
     }
+
+    private void jumpToMain() {
+        try {
+            FXMLLoader webAdminMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webadminui/WebAdminMain.fxml"));
+            Stage webAdminStage = new Stage();
+            webAdminStage.setScene(new Scene((Parent) webAdminMainLoader.load()));
+
+            WebAdminController webAdminController = webAdminMainLoader.<WebAdminController>getController();
+//            webAdminController.initData();
+
+            currentStage.close();
+
+            webAdminStage.setTitle("酒店预订系统——网站管理人员端");
+            webAdminStage.sizeToScene();
+            webAdminStage.setResizable(false);
+            webAdminStage.show();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
