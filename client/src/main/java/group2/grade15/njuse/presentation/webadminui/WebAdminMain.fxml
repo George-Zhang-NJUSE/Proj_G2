@@ -16,59 +16,56 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.group2.grade15.njuse.presentation.webadminui.WebAdminController">
    <center>
       <Group BorderPane.alignment="CENTER">
          <children>
             <Group>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="772.0" stroke="BLACK" strokeType="INSIDE" width="1063.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="778.0" stroke="BLACK" strokeType="INSIDE" width="1063.0" />
                   <ImageView fitHeight="780.0" fitWidth="1066.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
                      <image>
-                        <Image url="file:client/src/main/res/webadmin/bc.jpg" />
+                        <Image url="file:src/main/res/webadmin/bc.jpg" />
                      </image>
                      <effect>
                         <GaussianBlur radius="42.97" />
                      </effect>
                   </ImageView>
-                  <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1060.0" visible="false">
+                  <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1063.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="0.0" prefWidth="234.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="154.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="229.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="217.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="421.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="270.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="262.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0">
-                           <center>
-                              <Label onMouseClicked="#function1" BorderPane.alignment="CENTER">
-                                  <graphic>
-                                      <ImageView>
-                                         <image>
-                                             <Image requestedHeight="235" requestedWidth="163" url="file:res/buttonGra/Account.png" />
-                                         </image>
-                                      </ImageView>
-                                  </graphic>
-                              </Label>
-                           </center>
-                        </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <center>
-                              <Label BorderPane.alignment="CENTER">
-                                  <graphic>
-                                      <ImageView>
-                                         <image>
-                                             <Image requestedHeight="235" requestedWidth="163" url="file:res/buttonGra/Hotel.png" />
-                                         </image>
-                                      </ImageView>
-                                  </graphic>
-                              </Label>
-                           </center>
-                        </BorderPane>
+                        <Label onMouseEntered="#Hotel_movein" onMouseExited="#Hotel_moveout" onMousePressed="#Hotel_press" onMouseReleased="#Hotel_release" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <graphic>
+                                <ImageView fx:id="hotelImage" fitHeight="350.0" fitWidth="237.5" smooth="false" scaleX="0.8" scaleY="0.8">
+                                   <image>
+                                       <Image url="file:src/main/res/webadmin/Hotel.png" />
+                                   </image>
+                                </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label onMouseEntered="#Account_movein" onMouseExited="#Account_moveout" onMousePressed="#Account_press" onMouseReleased="#Account_release" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fx:id="accountImage" fitHeight="360.0" fitWidth="237.5" smooth="false" scaleX="0.8" scaleY="0.8">
+                                 <image>
+                                    <Image url="file:src/main/res/webadmin/Account.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
                      </children>
                   </GridPane>
-                  <GridPane fx:id="accountManage" layoutY="2.0" prefHeight="770.0" prefWidth="1060.0">
+                  <GridPane fx:id="accountManage" layoutY="2.0" prefHeight="770.0" prefWidth="1060.0" visible="false">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -144,20 +141,20 @@
                         <Insets bottom="10" left="20" />
                      </padding>
                      <children>
-                        <Label fx:id="messageButton">
+                        <Label fx:id="messageButton" onMouseEntered="#message_movein" onMouseExited="#message_moveout" onMousePressed="#message_press" onMouseReleased="#message_release">
                             <graphic>
-                                <ImageView>
+                                <ImageView fx:id="messageImage" fitHeight="28" fitWidth="119" smooth="false">
                                    <image>
-                                       <Image url="file:res/buttonGra/message.png" />
+                                       <Image url="file:src/main/res/webadmin/message.png" />
                                    </image>
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <Label fx:id="settingButton">
+                        <Label fx:id="settingButton" onMouseEntered="#setting_movein" onMouseExited="#setting_moveout" onMousePressed="#setting_press" onMouseReleased="#setting_release">
                             <graphic>
-                                <ImageView>
+                                <ImageView fx:id="settingImage" fitHeight="46" fitWidth="118" smooth="false">
                                    <image>
-                                       <Image url="file:res/buttonGra/setting.png" />
+                                       <Image url="file:src/main/res/webadmin/setting.png" />
                                    </image>
                                 </ImageView>
                             </graphic>

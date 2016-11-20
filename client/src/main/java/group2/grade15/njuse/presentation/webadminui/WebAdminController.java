@@ -1,4 +1,4 @@
-package group2.grade15.njuse.presentation.webadminui;
+package main.java.group2.grade15.njuse.presentation.webadminui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
