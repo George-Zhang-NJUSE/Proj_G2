@@ -1,6 +1,5 @@
 package group2.grade15.njuse.dataservice;
 
-import group2.grade15.njuse.po.HotelPromotionListPO;
 import group2.grade15.njuse.po.PromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
