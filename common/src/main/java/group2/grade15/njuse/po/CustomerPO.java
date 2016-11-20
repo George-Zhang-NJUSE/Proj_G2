@@ -1,5 +1,7 @@
 package group2.grade15.njuse.po;
 
+import group2.grade15.njuse.utility.MemberType;
+
 import java.io.Serializable;
 
 public class CustomerPO implements Serializable{
@@ -8,25 +10,21 @@ public class CustomerPO implements Serializable{
 	private String password;
 	private String contact;
 	private String identityNum;
-	private final int credit;
-	boolean isVIP;
+	private final double credit;
+	private MemberType type;
 	
-	public CustomerPO(int id,String name,String password,String contact,String identity,int credit,boolean isVIP){
+	public CustomerPO(int id,String name,String password,String contact,String identity,double credit,MemberType type){
 		this.id=id;
 		this.name=name;
 		this.password=password;
 		this.contact=contact;
 		this.identityNum=identity;
 		this.credit=credit;
-		this.isVIP=isVIP;
+		this.type=type;
 	}
 
 	public String getIdentityNum() {
 		return identityNum;
-	}
-
-	public boolean isVIP() {
-		return isVIP;
 	}
 
 	public int getId() {
@@ -45,10 +43,11 @@ public class CustomerPO implements Serializable{
 		return contact;
 	}
 
-	public int getCredit() {
+	public double getCredit() {
 		return credit;
 	}
-	
-	
 
+	public MemberType getType() {
+		return type;
+	}
 }
