@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
  */
 public class DatabaseFactory implements DataFactory{
     static DatabaseFactory dbFactory=null;
-    DatabaseInfo info=new DatabaseInfo("jdbc:postgresql://localhost/FirstDatabase","postgres","1997wyh");
+    DatabaseInfo info=new DatabaseInfo("jdbc:postgresql://localhost:5432/FirstDatabase","postgres","1997wyh");
     CustomerDataBaseImpl customerDataBase=null;
 
     private DatabaseFactory(){}

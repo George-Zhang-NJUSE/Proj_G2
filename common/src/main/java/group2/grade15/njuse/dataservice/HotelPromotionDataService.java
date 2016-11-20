@@ -2,6 +2,7 @@ package group2.grade15.njuse.dataservice;
 
 import group2.grade15.njuse.po.PromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.po.HotelPromotionListPO;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
