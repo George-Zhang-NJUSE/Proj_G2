@@ -1,11 +1,11 @@
-package bl.hotelbl;
+package group2.grade15.njuse.bl.hotelbl;
 
-import blservice.HotelServ;
-import utility.ResultMessage;
-import po.CustomerPO;
-import po.RoomPO;
-import vo.HotelVO;
-import vo.RoomVO;
+import group2.grade15.njuse.blservice.HotelServ;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.po.CustomerPO;
+import group2.grade15.njuse.po.RoomPO;
+import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.RoomVO;
 
 import java.util.ArrayList;
 

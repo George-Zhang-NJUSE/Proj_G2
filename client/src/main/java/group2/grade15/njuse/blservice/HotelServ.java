@@ -1,8 +1,8 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.ResultMessage;
-import vo.HotelVO;
-import vo.RoomVO;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.RoomVO;
 
 public interface HotelServ {
 	public ResultMessage modifyInfo (HotelVO hotel);

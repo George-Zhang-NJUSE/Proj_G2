@@ -1,9 +1,9 @@
-package bl.hotelmanagerbl;
+package group2.grade15.njuse.bl.hotelmanagerbl;
 
-import blservice.HotelManagerServ;
-import utility.ResultMessage;
-import utility.OrderState;
-import vo.*;
+import group2.grade15.njuse.blservice.HotelManagerServ;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.vo.*;
 
 /**
  * Created by ALIENWARE-PC on 2016/11/13.

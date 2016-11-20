@@ -1,7 +1,7 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import vo.HotelListVO;
-import vo.SearchVO;
+import group2.grade15.njuse.vo.HotelListVO;
+import group2.grade15.njuse.vo.SearchVO;
 
 public interface SearchServ {
 	public SearchVO createCondition (SearchVO conditionInfo);

@@ -1,7 +1,7 @@
-package bl.hotelbl;
+package group2.grade15.njuse.bl.hotelbl;
 
-import vo.HotelListVO;
-import vo.HotelVO;
+import group2.grade15.njuse.vo.HotelListVO;
+import group2.grade15.njuse.vo.HotelVO;
 
 import java.util.ArrayList;
 

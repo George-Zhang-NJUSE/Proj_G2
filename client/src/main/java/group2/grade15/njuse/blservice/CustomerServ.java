@@ -1,7 +1,7 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.ResultMessage;
-import vo.CustomerVO;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CustomerVO;
 
 public interface CustomerServ {
 

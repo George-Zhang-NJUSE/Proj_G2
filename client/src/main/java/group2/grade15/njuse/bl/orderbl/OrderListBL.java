@@ -1,7 +1,7 @@
-package bl.orderbl;
+package group2.grade15.njuse.bl.orderbl;
 
-import utility.IDType;
-import vo.OrderListVO;
+import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.vo.OrderListVO;
 
 /**
  * Created by George on 2016/11/6.

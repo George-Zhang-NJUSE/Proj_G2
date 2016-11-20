@@ -1,12 +1,10 @@
-package bl.orderbl;
+package group2.grade15.njuse.bl.orderbl;
 
-import po.OrderPO;
-import utility.OrderState;
-import utility.ResultMessage;
-import vo.CustomerVO;
-import vo.HotelVO;
-import vo.OrderVO;
-import vo.RoomVO;
+import group2.grade15.njuse.po.OrderPO;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.OrderVO;
+import group2.grade15.njuse.vo.RoomVO;
 
 import java.util.ArrayList;
 import java.util.Date;

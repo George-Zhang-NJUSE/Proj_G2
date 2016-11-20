@@ -1,8 +1,8 @@
-package bl.webadminbl;
+package group2.grade15.njuse.bl.webadminbl;
 
-import blservice.WebAdminServ;
-import dataservice.WebAdminDataService;
-import vo.WebAdminVO;
+import group2.grade15.njuse.blservice.WebAdminServ;
+import group2.grade15.njuse.dataservice.WebAdminDataService;
+import group2.grade15.njuse.vo.WebAdminVO;
 
 public class WebAdminController implements WebAdminServ {
 	WebAdminDataService webadminData;
@@ -14,17 +14,14 @@ public class WebAdminController implements WebAdminServ {
 		userProxy = new UserProxy();
 	}
 
-	@Override
 	public WebAdminVO getInfo(int WebAdminId) {
 		return null;
 	}
 
-	@Override
 	public HotelProxy getHotelProxy() {
 		return hotelProxy;
 	}
 
-	@Override
 	public UserProxy getUserProxy() {
 		return userProxy;
 	}

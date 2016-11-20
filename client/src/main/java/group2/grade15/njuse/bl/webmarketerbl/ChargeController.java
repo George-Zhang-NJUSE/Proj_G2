@@ -1,15 +1,12 @@
-package bl.webmarketerbl;
+package group2.grade15.njuse.bl.webmarketerbl;
 
-import blservice.CreditModificationServ;
-import utility.ResultMessage;
-import vo.CreditVO;
+import group2.grade15.njuse.blservice.CreditModificationServ;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditVO;
 
 public class ChargeController implements CreditModificationServ {
 
-	@Override
 	public ResultMessage modifyCredit(CreditVO Credit) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

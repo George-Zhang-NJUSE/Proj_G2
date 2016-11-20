@@ -1,20 +1,19 @@
-package bl.loginbl;
+package group2.grade15.njuse.bl.loginbl;
 
-import blservice.LoginControllerServ;
-import dataservice.CustomerDataService;
-import dataservice.HotelManagerDataService;
-import dataservice.WebAdminDataService;
-import dataservice.WebMarketerDataService;
-import utility.IDType;
-import utility.ResultMessage;
+import group2.grade15.njuse.blservice.LoginControllerServ;
+import group2.grade15.njuse.dataservice.CustomerDataService;
+import group2.grade15.njuse.dataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.WebAdminDataService;
+import group2.grade15.njuse.dataservice.WebMarketerDataService;
+import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.ResultMessage;
 
 public class LoginController implements LoginControllerServ {
 	CustomerDataService customerData;
 	HotelManagerDataService hotelManager;
 	WebMarketerDataService webMarketer;
 	WebAdminDataService webAdmin;
-	
-	@Override
+
 	public ResultMessage login(int customerId, String password, IDType type) {
 		ResultMessage result = null;
 		

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url(file:res/loginback.jpg); -fx-background-size: contain;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.loginui.LoginController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url(file:client/src/main/res/login/loginback.jpg); -fx-background-size: contain;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.loginui.LoginController">
 
     <right>
         <VBox opacity="0.6" prefHeight="600.0" prefWidth="220.0" style="-fx-background-color: black;">

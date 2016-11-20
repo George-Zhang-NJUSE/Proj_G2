@@ -1,7 +1,7 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.IDType;
-import vo.OrderListVO;
+import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.vo.OrderListVO;
 
 import java.util.Date;
 

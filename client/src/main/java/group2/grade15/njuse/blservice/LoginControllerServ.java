@@ -1,7 +1,7 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.IDType;
-import utility.ResultMessage;
+import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.ResultMessage;
 
 public interface LoginControllerServ {
 	public ResultMessage login(int customerId,String password, IDType type);

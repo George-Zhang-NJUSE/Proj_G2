@@ -25,7 +25,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="772.0" stroke="BLACK" strokeType="INSIDE" width="1063.0" />
                   <ImageView fitHeight="780.0" fitWidth="1066.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
                      <image>
-                        <Image url="file:res/bc/bc.jpg" />
+                        <Image url="file:client/src/main/res/webadmin/bc.jpg" />
                      </image>
                      <effect>
                         <GaussianBlur radius="42.97" />

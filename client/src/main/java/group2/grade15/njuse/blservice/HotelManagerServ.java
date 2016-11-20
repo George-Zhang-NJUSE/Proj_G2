@@ -1,21 +1,22 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.OrderState;
-import utility.ResultMessage;
-import vo.*;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.*;
+
 
 public interface HotelManagerServ {
 	public ResultMessage modifyInfo(HotelManagerVO hotelManager) ;
 
-	public ResultMessage modifyHotelInfo (HotelVO hotel); 
+	public ResultMessage modifyHotelInfo (HotelVO hotel);
 	
 	public HotelVO getHotelInfo (int hotelID); 
 
-	public ResultMessage modifyRoomInfo (RoomVO roomInfo); 
+	public ResultMessage modifyRoomInfo (RoomVO roomInfo);
 
 	public HotelPromotionVO createHotelPromotion (HotelPromotionVO promotionInfo);
 
-	public HotelPromotionListVO getHotelPromotionList (); 
+	public HotelPromotionListVO getHotelPromotionList ();
 	
 	public ResultMessage modifyHotelPromotion (HotelPromotionVO hotelPromotion);
 

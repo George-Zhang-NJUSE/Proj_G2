@@ -1,7 +1,7 @@
-package bl.hotelpromotionbl;
+package group2.grade15.njuse.bl.hotelpromotionbl;
 
-import blservice.HotelPromotionServ;
-import vo.HotelPromotionVO;
+import group2.grade15.njuse.blservice.HotelPromotionServ;
+import group2.grade15.njuse.vo.HotelPromotionVO;
 
 /**
  * Created by ALIENWARE-PC on 2016/11/13.

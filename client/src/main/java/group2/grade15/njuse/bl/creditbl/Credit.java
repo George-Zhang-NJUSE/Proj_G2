@@ -1,29 +1,23 @@
-package bl.creditbl;
+package group2.grade15.njuse.bl.creditbl;
 
-import blservice.CreditHistoryServ;
-import blservice.CreditModificationServ;
-import utility.ResultMessage;
-import vo.CreditListVO;
-import vo.CreditVO;
+import group2.grade15.njuse.blservice.CreditHistoryServ;
+import group2.grade15.njuse.blservice.CreditModificationServ;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditListVO;
+import group2.grade15.njuse.vo.CreditVO;
 
 public class Credit implements CreditModificationServ,CreditHistoryServ{
 
-	@Override
+
 	public ResultMessage modifyCredit(CreditVO Credit) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public CreditVO getCredit(int customerId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public CreditListVO getCreditHistory(CreditVO CreditInfo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

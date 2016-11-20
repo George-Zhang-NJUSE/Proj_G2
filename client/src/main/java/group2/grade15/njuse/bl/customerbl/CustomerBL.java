@@ -1,7 +1,7 @@
-package bl.customerbl;
+package group2.grade15.njuse.bl.customerbl;
 
-import utility.ResultMessage;
-import vo.CustomerVO;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CustomerVO;
 
 /**
  * Created by George on 2016/11/6.

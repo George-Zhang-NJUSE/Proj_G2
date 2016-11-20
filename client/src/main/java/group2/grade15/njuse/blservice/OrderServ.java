@@ -1,8 +1,8 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import utility.OrderState;
-import utility.ResultMessage;
-import vo.OrderVO;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.OrderVO;
 
 public interface OrderServ {
 

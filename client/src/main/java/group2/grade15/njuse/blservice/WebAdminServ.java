@@ -1,8 +1,8 @@
-package blservice;
+package group2.grade15.njuse.blservice;
 
-import bl.webadminbl.HotelProxy;
-import bl.webadminbl.UserProxy;
-import vo.WebAdminVO;
+import group2.grade15.njuse.bl.webadminbl.HotelProxy;
+import group2.grade15.njuse.bl.webadminbl.UserProxy;
+import group2.grade15.njuse.vo.WebAdminVO;
 
 public interface WebAdminServ {
 	public WebAdminVO getInfo(int WebAdminId);

@@ -1,26 +1,24 @@
-package bl.orderbl;
+package group2.grade15.njuse.bl.orderbl;
 
-import blservice.OrderServ;
-import utility.OrderState;
-import utility.ResultMessage;
-import vo.OrderVO;
+import group2.grade15.njuse.blservice.OrderServ;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.OrderVO;
 
 /**
  * Created by George on 2016/11/13.
  */
 public class OrderController implements OrderBL, OrderServ{
 
-    @Override
+
     public OrderVO getOrder(int orderId) {
         return null;
     }
 
-    @Override
     public ResultMessage modifyState(int orderId, OrderState state) {
         return null;
     }
 
-    @Override
     public ResultMessage addOrder(OrderVO vo) {
         return null;
     }

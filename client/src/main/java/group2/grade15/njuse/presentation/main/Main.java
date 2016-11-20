@@ -1,4 +1,4 @@
-package presentation.main;
+package group2.grade15.njuse.presentation.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

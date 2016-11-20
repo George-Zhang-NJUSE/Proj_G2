@@ -1,4 +1,4 @@
-package presentation.loginui;
+package group2.grade15.njuse.presentation.loginui;
 /**
  * Created by George on 2016/11/16.
  */
