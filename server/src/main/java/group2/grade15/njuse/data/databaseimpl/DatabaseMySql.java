@@ -18,7 +18,6 @@ public class DatabaseMySql {
        try{
            Class.forName("org.postgresql.Driver");
            c= DriverManager.getConnection(info.url,info.name,info.password);
-           c.setAutoCommit(false);
        }catch(Exception e){
            e.printStackTrace();
        }

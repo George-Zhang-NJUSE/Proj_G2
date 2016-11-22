@@ -13,7 +13,7 @@ public interface CustomerDataService extends Remote{
 
     public CustomerPO get(int customerId) throws RemoteException;
 
-    public ResultMessage add(CustomerPO po) throws RemoteException;
+    public CustomerPO add(CustomerPO po) throws RemoteException;
 
     public ResultMessage modify(CustomerPO po) throws RemoteException;
 
