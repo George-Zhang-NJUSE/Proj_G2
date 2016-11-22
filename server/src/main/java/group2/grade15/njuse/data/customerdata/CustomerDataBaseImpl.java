@@ -74,7 +74,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
      * @param po
      * @return ResultMessage
      * @throws RemoteException
-     * 仅name，password，contact，identity，type可进行添加，identity和type一经添加不可修改
+     * 仅name，password，contact，birthday，type可进行添加，birthday和type一经添加不可修改
      */
     public CustomerPO add(CustomerPO po) throws RemoteException {
         if(customerConnection==null){
@@ -85,7 +85,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         String name=po.getName(),password=po.getPassword(),contact=po.getContact();
         Date birthday=po.getBirthday();
         MemberType type=po.getType();
-        float credit=0;
+        double credit=0.00;
 
         try{
             Statement makeID=customerConnection.createStatement();
@@ -117,6 +117,9 @@ public class CustomerDataBaseImpl implements CustomerDataService {
                 throw new SQLException();
             }
 
+            customerConnection.close();
+            customerConnection=null;
+
         }catch(SQLException e){
             e.printStackTrace();
             return null;
@@ -126,7 +129,34 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         return newCustomer;
     }
 
+    /**
+     * @param po
+     * @return ResultMessage
+     * @throws RemoteException
+     * 只能更改name，password，telnum，bl层在申请更改后应立即调用get方法更新信息
+     */
     public ResultMessage modify(CustomerPO po) throws RemoteException {
-        return null;
+        if(customerConnection==null){
+            customerConnection=mySql.init();
+        }
+
+        try{
+            PreparedStatement modify=customerConnection.prepareStatement("update customer set name = ?,password = ?,telnum= ? " +
+                    "where customerid = "+po.getId());
+            modify.setString(1,po.getName());
+            modify.setString(2,po.getPassword());
+            modify.setString(3,po.getContact());
+            modify.executeUpdate();
+            modify.close();
+
+            customerConnection.close();
+            customerConnection=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+
     }
 }
