@@ -30,13 +30,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="client" target="1.5" />
-      <module name="common" target="1.5" />
+      <module name="client" target="1.8" />
+      <module name="common" target="1.8" />
       <module name="Proj_G2" target="1.5" />
-      <module name="server" target="1.5" />
+      <module name="server" target="1.8" />
       <module name="stub&amp;driver" target="1.5" />
       <module name="stubNdriver" target="1.5" />
-      <module name="stubndriver" target="1.5" />
+      <module name="stubndriver" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

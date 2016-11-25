@@ -1,12 +1,13 @@
 package group2.grade15.njuse.presentation.loginui;
 
+import group2.grade15.njuse.presentation.applyui.CustomerApplyController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.webadminui.WebAdminController;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -20,11 +21,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by George on 2016/11/24.
  */
-public class CustomerLoginController {
+public class CustomerLoginController implements Initializable {
 
     private Stage currentStage;
 
@@ -33,7 +35,7 @@ public class CustomerLoginController {
     }
 
     @FXML
-    private Pane loginVboxBack;
+    private Pane loginVBoxBack;
 
     @FXML
     private VBox loginVBox;
@@ -49,6 +51,15 @@ public class CustomerLoginController {
 
     @FXML
     private PasswordField passwordField;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //渐入动画
+        Fade loginFadeIn = new Fade(loginVBox, 300, true);
+        loginVBox.setOpacity(0);
+        loginFadeIn.setOnFinished((ActionEvent e)->loginVBox.setOpacity(1));
+        loginFadeIn.play();
+    }
 
     @FXML
     protected void mouseInLogin() {
@@ -94,12 +105,12 @@ public class CustomerLoginController {
 
     private void showApplyPanel() {
 
-        //使申请窗口从右边推出，原面板淡出，申请窗口淡入
-        ChangeWidth loginExtendFromRight = new ChangeWidth(loginVboxBack, 500, 700);
-        loginExtendFromRight.setOnFinished((ActionEvent e)->loadApplyPanel());
+        //使申请窗口从右边推出，原面板淡出，加载申请账号面板
+        ChangeWidth loginExtendFromRight = new ChangeWidth(loginVBoxBack, 300, 700);
+        loginExtendFromRight.setOnFinished((ActionEvent e) -> loadApplyPanel());
 
-        Fade loginFadeOut = new Fade(loginVBox, 200, false);
-        loginFadeOut.setOnFinished((ActionEvent e)->loginExtendFromRight.play());
+        Fade loginFadeOut = new Fade(loginVBox, 300, false);
+        loginFadeOut.setOnFinished((ActionEvent e) -> loginExtendFromRight.play());
 
         loginFadeOut.play();
 
@@ -110,6 +121,8 @@ public class CustomerLoginController {
         try {
             FXMLLoader customerApplyLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/applyui/CustomerApply.fxml"));
             currentStage.setScene(new Scene(customerApplyLoader.load()));
+            CustomerApplyController applyController = customerApplyLoader.getController();
+            applyController.setStage(currentStage);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -159,5 +172,6 @@ public class CustomerLoginController {
             e.printStackTrace();
         }
     }
+
 
 }
