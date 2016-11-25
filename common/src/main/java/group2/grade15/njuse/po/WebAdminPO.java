@@ -3,25 +3,19 @@ package group2.grade15.njuse.po;
 import java.io.Serializable;;
 
 public class WebAdminPO implements Serializable{
-	private int id;
 	private String password;
-	private int staffID;
+	private String staffID;
 	
-	public WebAdminPO(int id,String password,int staffID){
-		this.id=id;
+	public WebAdminPO(String password,String staffID){
 		this.password=password;
 		this.staffID=staffID;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public int getStaffID() {
+	public String getStaffID() {
 		return staffID;
 	}
 }

@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.CustomerDataService;
+import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.po.CustomerPO;
 
 import java.rmi.RemoteException;

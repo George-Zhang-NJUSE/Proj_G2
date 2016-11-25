@@ -1,10 +1,10 @@
 package group2.grade15.njuse.bl.loginbl;
 
 import group2.grade15.njuse.blservice.LoginControllerServ;
-import group2.grade15.njuse.dataservice.CustomerDataService;
-import group2.grade15.njuse.dataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
+import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.WebAdminDataService;
-import group2.grade15.njuse.dataservice.WebMarketerDataService;
+import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
 

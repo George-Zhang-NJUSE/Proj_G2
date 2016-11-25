@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 

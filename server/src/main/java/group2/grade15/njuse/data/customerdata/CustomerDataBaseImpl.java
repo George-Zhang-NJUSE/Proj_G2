@@ -3,15 +3,13 @@ package group2.grade15.njuse.data.customerdata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.CustomerDataService;
+import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.utility.ResultMessage;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.rmi.RemoteException;
 import java.sql.*;
-import java.util.*;
 import java.sql.Date;
 
 /**
