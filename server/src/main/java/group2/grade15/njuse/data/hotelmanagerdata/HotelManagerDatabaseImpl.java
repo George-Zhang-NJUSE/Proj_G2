@@ -7,10 +7,7 @@ import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by ALIENWARE-PC on 2016/11/13.
@@ -24,6 +21,11 @@ public class HotelManagerDatabaseImpl implements HotelManagerDataService {
         hotelManagerConnection = mySql.init();
     }
 
+    /**
+     * @param hotelManagerId
+     * @return HotelManagerPO
+     * @throws RemoteException
+     */
     public HotelManagerPO get(int hotelManagerId) throws RemoteException {
         if (hotelManagerConnection == null) {
             hotelManagerConnection = mySql.init();
@@ -57,7 +59,35 @@ public class HotelManagerDatabaseImpl implements HotelManagerDataService {
         return hotelManagerPO;
     }
 
+    /**
+     * @param po
+     * @return ResultMessage
+     * @throws RemoteException
+     * 除id和hotelID外其它均可修改
+     */
     public ResultMessage modify(HotelManagerPO po) throws RemoteException {
-        return null;
+        if (hotelManagerConnection == null) {
+            hotelManagerConnection = mySql.init();
+        }
+
+        String password = po.getPassword(), name = po.getName(), contact = po.getContact();
+        try{
+            PreparedStatement modify=hotelManagerConnection.prepareStatement("update hotelmanager set password = ?," +
+                    "name = ?,telnum = ?" +
+                    "where hotelmanagerid = "+po.getId());
+            modify.setString(1,password);
+            modify.setString(2,name);
+            modify.setString(3,contact);
+            modify.executeUpdate();
+
+            modify.close();
+            hotelManagerConnection.close();
+            hotelManagerConnection=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 }
