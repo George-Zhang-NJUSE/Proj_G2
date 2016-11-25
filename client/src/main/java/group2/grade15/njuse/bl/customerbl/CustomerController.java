@@ -9,7 +9,7 @@ import group2.grade15.njuse.vo.CustomerVO;
  */
 public class CustomerController implements CustomerBL, CustomerServ {
 
-    public ResultMessage addCustomer(CustomerVO newCustomerVO) {
+    public CustomerVO addCustomer(CustomerVO newCustomerVO) {
         return null;
     }
 

@@ -14,7 +14,6 @@ public class Customer {
     private String name;
     private String password;
     private String contact;
-    private String identityNum;
     private int credit;
 
     public Customer(CustomerPO po) {
@@ -22,13 +21,11 @@ public class Customer {
         name = po.getName();
         password = po.getPassword();
         contact = po.getContact();
-        identityNum = po.getIdentityNum();
-
     }
 
 
     public CustomerVO getInfo() {
-        return new CustomerVO(id, name, password, contact, identityNum, credit);
+        return new CustomerVO(id, name, password, contact, credit);
     }
 
     public ResultMessage modifyInfo(CustomerVO vo) {

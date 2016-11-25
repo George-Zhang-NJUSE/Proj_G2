@@ -7,20 +7,14 @@ public class CustomerVO implements Serializable{
 	private String name;
 	private String password;
 	private String contact;
-	private String identityNum;
 	private final int credit;
 	
-	public CustomerVO(int id,String name,String password,String contact,String identity,int credit){
+	public CustomerVO(int id,String name,String password,String contact,int credit){
 		this.id=id;
 		this.name=name;
 		this.password=password;
 		this.contact=contact;
-		this.identityNum=identity;
 		this.credit=credit;
-	}
-
-	public String getIdentityNum() {
-		return identityNum;
 	}
 
 	public int getId() {
@@ -42,7 +36,5 @@ public class CustomerVO implements Serializable{
 	public int getCredit() {
 		return credit;
 	}
-	
-	
 
 }

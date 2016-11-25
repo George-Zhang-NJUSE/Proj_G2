@@ -5,7 +5,7 @@ import group2.grade15.njuse.vo.CustomerVO;
 
 public interface CustomerServ {
 
-	public ResultMessage addCustomer(CustomerVO newCustomerVO);
+	public CustomerVO addCustomer(CustomerVO newCustomerVO);
 	
 	public CustomerVO getInfo(int customerID) ;
 
