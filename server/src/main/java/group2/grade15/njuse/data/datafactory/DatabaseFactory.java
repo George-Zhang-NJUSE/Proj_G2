@@ -3,9 +3,11 @@ package group2.grade15.njuse.data.datafactory;
 import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
+import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 
 import java.rmi.RemoteException;
 
@@ -19,6 +21,7 @@ public class DatabaseFactory implements DataFactory {
     CustomerDataBaseImpl customerDataBase=null;
     HotelManagerDatabaseImpl hotelManagerDatabase=null;
     WebMarketerDatabaseImpl webMarketerDatabase=null;
+    WebAdminDatabaseImpl webAdminDatabase=null;
 
     private DatabaseFactory(){}
 
@@ -64,6 +67,19 @@ public class DatabaseFactory implements DataFactory {
             }
         }
         return webMarketerDatabase;
+    }
+
+    @Override
+    public WebAdminDataService getWebAdminDataService() throws RemoteException {
+        if(webAdminDatabase==null){
+            try{
+                webAdminDatabase=new WebAdminDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return webAdminDatabase;
     }
 
 }

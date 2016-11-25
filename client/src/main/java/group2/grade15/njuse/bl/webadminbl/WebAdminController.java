@@ -1,7 +1,7 @@
 package group2.grade15.njuse.bl.webadminbl;
 
 import group2.grade15.njuse.blservice.WebAdminServ;
-import group2.grade15.njuse.dataservice.WebAdminDataService;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.vo.WebAdminVO;
 
 public class WebAdminController implements WebAdminServ {
