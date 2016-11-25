@@ -26,8 +26,8 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 		}
 
 		try{
-			PreparedStatement getInfo=webAdminConnection.prepareStatement("select * from webadmin where" +
-					"employeeid = ?");
+			PreparedStatement getInfo=webAdminConnection.prepareStatement("select * from webadmin where " +
+					"employeeid=?");
 			getInfo.setString(1,webAdminId);
 			ResultSet resultSet=getInfo.executeQuery();
 
