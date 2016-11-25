@@ -8,6 +8,7 @@ import group2.grade15.njuse.po.WebAdminPO;
 public class WebAdminData implements WebAdminDataService {
 
 	public WebAdminPO get(int webAdminId) throws RemoteException {
+
 		return null;
 	}
 }
