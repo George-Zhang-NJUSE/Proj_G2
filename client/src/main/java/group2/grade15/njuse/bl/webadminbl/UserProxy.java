@@ -2,7 +2,7 @@ package group2.grade15.njuse.bl.webadminbl;
 
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
-import group2.grade15.njuse.dataservice.WebAdminDataService;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CustomerListVO;

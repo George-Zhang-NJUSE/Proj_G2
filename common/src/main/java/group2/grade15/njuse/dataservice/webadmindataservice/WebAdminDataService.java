@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.webadmindataservice;
 
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.WebAdminPO;
@@ -11,10 +11,5 @@ import java.rmi.RemoteException;
  * Created by George on 2016/10/16.
  */
 public interface WebAdminDataService extends Remote{
-
-    public WebAdminPO get(int webAdminId) throws RemoteException;
-
-    public CustomerPO getCustomerInfo(int customerID) throws RemoteException;
-
-    public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException;
+    public WebAdminPO get(String webAdminId) throws RemoteException;
 }
