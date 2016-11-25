@@ -1,4 +1,7 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.datafactory;
+
+import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
+import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

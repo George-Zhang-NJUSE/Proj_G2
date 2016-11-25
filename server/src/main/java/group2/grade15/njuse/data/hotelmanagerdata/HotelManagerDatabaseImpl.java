@@ -2,7 +2,7 @@ package group2.grade15.njuse.data.hotelmanagerdata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 

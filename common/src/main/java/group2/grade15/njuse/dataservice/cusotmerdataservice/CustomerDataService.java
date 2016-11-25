@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.cusotmerdataservice;
 
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.utility.ResultMessage;
