@@ -17,7 +17,7 @@ public class CustomerMainController {
     private Stage currentStage;
 
     public CustomerMainController(Stage priStage) {
-        currentStage=priStage;
+        currentStage = priStage;
         try {
             FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
 

@@ -13,7 +13,7 @@ import java.net.URL;
 /**
  * Created by George on 2016/11/24.
  */
-public class CustomerStart extends Application{
+public class CustomerStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {

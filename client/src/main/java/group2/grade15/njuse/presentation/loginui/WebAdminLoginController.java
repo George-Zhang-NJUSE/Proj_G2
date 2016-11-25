@@ -22,10 +22,6 @@ public class WebAdminLoginController {
 
     private Stage currentStage;
 
-    public void setStage(Stage s) {
-        currentStage = s;
-    }
-
     @FXML
     private ImageView loginIconImage;
 
@@ -34,6 +30,10 @@ public class WebAdminLoginController {
 
     @FXML
     private PasswordField passwordField;
+
+    public void setStage(Stage s) {
+        currentStage = s;
+    }
 
     @FXML
     protected void mouseInLogin() {

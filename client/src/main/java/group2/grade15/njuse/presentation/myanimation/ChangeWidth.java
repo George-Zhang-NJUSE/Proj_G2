@@ -16,24 +16,25 @@ public class ChangeWidth {
     private Timeline timeline;
 
     /**
-     * @param pane 要改变宽度的面板
+     * @param pane     要改变宽度的面板
      * @param duration 以毫秒计的持续时间长度，正数
      * @param endWidth 结束时的宽度
      **/
-    public ChangeWidth(Pane pane, int duration,int endWidth) {
+    public ChangeWidth(Pane pane, int duration, int endWidth) {
         timeline = new Timeline();
         timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, new KeyValue(pane.prefWidthProperty(),pane.getPrefWidth())),
-                new KeyFrame(new Duration(duration), new KeyValue(pane.prefWidthProperty(),endWidth))
+                new KeyFrame(Duration.ZERO, new KeyValue(pane.prefWidthProperty(), pane.getPrefWidth())),
+                new KeyFrame(new Duration(duration), new KeyValue(pane.prefWidthProperty(), endWidth))
         );
     }
 
     /**
      * 设置动画结束时执行的操作
+     *
      * @param handler 动画结束事件的监听器，为匿名类，建议用lambda表达式
      * @see EventHandler
-    **/
-    public void setOnFinished(EventHandler<ActionEvent> handler){
+     **/
+    public void setOnFinished(EventHandler<ActionEvent> handler) {
         timeline.setOnFinished(handler);
     }
 
