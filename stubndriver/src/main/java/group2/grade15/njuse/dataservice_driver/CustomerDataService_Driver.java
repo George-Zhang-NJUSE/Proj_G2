@@ -12,7 +12,7 @@ public class CustomerDataService_Driver {
 
     public void drive(CustomerDataService customerDataService) {
         try {
-            CustomerPO customerPO = customerDataService.get(123456);
+            CustomerPO customerPO = customerDataService.getCustomer(123456);
 //            ResultMessage addInfo = customerDataService.add(new CustomerPO());
 //            ResultMessage modifyInfo = customerDataService.modify(new CustomerPO());
         } catch (RemoteException e) {
