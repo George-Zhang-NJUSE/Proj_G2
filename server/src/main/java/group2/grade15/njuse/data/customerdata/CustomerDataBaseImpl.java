@@ -30,7 +30,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
      * @throws RemoteException
      * 获取customer信息
      */
-    public CustomerPO get(int customerId) throws RemoteException {
+    public CustomerPO getCustomer(int customerId) throws RemoteException {
         if(customerConnection==null){
             customerConnection=mySql.init();
         }

@@ -12,5 +12,5 @@ import java.rmi.RemoteException;
 public interface WebMarketerDataService extends Remote {
     //这里删掉的add,remove和modify方法将在WebAdmin里实现
 
-    public WebMarketerPO get(String webMarketerId) throws RemoteException;
+    public WebMarketerPO getWebMarketer(String webMarketerId) throws RemoteException;
 }

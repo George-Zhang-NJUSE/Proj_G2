@@ -20,7 +20,7 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 		webAdminConnection=mySql.init();
 	}
 
-	public WebAdminPO get(String webAdminId) throws RemoteException {
+	public WebAdminPO getWebAdmin(String webAdminId) throws RemoteException {
 		if(webAdminConnection==null){
 			webAdminConnection=mySql.init();
 		}

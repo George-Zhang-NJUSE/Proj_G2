@@ -22,7 +22,7 @@ public class WebMarketerDatabaseImpl implements WebMarketerDataService{
 	 * @return WebMarketerPO
 	 * @throws RemoteException
 	 */
-	public WebMarketerPO get(String webMarketerId) throws RemoteException {
+	public WebMarketerPO getWebMarketer(String webMarketerId) throws RemoteException {
 		if(hotelManagerConnection==null){
 			hotelManagerConnection=mySql.init();
 		}
