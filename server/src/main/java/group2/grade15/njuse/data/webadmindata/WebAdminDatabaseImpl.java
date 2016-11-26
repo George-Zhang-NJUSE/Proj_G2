@@ -12,10 +12,13 @@ import group2.grade15.njuse.po.WebAdminPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartService,HotelManagerPartService,HotelPartService,WebMarketerPartService{
+	private DatabaseInfo info=null;
 	private DatabaseMySql mySql=null;
 	private Connection webAdminConnection=null;
+	private CustomerPart customerPart=null;
 
 	public WebAdminDatabaseImpl(DatabaseInfo info) throws RemoteException{
+		this.info=info;
 		mySql=new DatabaseMySql(info);
 		webAdminConnection=mySql.init();
 	}
@@ -46,5 +49,23 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public CustomerPO getCustomerInfo(int customerID) throws RemoteException {
+		if(customerPart==null){
+			customerPart=new CustomerPart(info);
+		}
+
+		return customerPart.getCustomerInfo(customerID);
+	}
+
+	@Override
+	public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
+		if(customerPart==null){
+			customerPart=new CustomerPart(info);
+		}
+
+		return customerPart.modifyCustomerInfo(customerPO);
 	}
 }
