@@ -34,7 +34,7 @@
             <children>
                 <Group>
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="778.0" stroke="BLACK" strokeType="INSIDE" width="1063.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="778.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1063.0" />
                         <ImageView fitHeight="780.0" fitWidth="1066.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
                             <image>
                                 <Image url="file:client/src/main/res/webadmin/bc.jpg" />
@@ -44,7 +44,7 @@
                             </effect>
                         </ImageView>
 
-                        <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1063.0">
+                                    <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1063.0">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="0.0" prefWidth="234.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="228.0" />
@@ -97,7 +97,7 @@
                                             <children>
                                                 <ScrollPane prefHeight="600.0" prefWidth="1000.0">
                                                     <content>
-                                                        <TableView editable="true" prefHeight="600.0" prefWidth="996.0">
+                                                        <TableView fx:id="accountList" editable="true" prefHeight="600.0" prefWidth="996.0">
                                                             <columns>
                                                                 <TableColumn prefWidth="112.0" text="ID" />
                                                                 <TableColumn minWidth="0.0" prefWidth="174.99998474121094" text="Account" />
@@ -136,12 +136,12 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets right="40.0" top="30.0" />
                            </GridPane.margin>
                            <children>
-                              <Label fx:id="addAccountLabel" contentDisplay="RIGHT" onMouseEntered="#addAccount_movein" onMouseExited="#addAccount_moveout" onMousePressed="#addAccount_press" onMouseReleased="#addAccount_release">
+                              <Label fx:id="addAccountLabel" contentDisplay="RIGHT" onMouseClicked="#addAccount_action" onMouseEntered="#addAccount_movein" onMouseExited="#addAccount_moveout" onMousePressed="#addAccount_press" onMouseReleased="#addAccount_release">
                                  <font>
                                     <Font name="MFYueHei_Noncommercial-Regular" size="30.0" />
                                  </font>
@@ -175,9 +175,11 @@
                                                         <TableView editable="true" prefHeight="600.0" prefWidth="996.0">
                                                             <columns>
                                                                 <TableColumn prefWidth="112.0" text="ID" />
-                                                                <TableColumn minWidth="0.0" prefWidth="174.99998474121094" text="Account" />
-                                                                <TableColumn minWidth="0.0" prefWidth="201.0" text="Password" />
-                                                                <TableColumn prefWidth="109.0" text="Type" />
+                                                                <TableColumn minWidth="0.0" prefWidth="174.99998474121094" text="名称" />
+                                                                <TableColumn minWidth="0.0" prefWidth="201.0" text="地址" />
+                                                                <TableColumn prefWidth="109.0" text="星级" />
+                                                <TableColumn prefWidth="181.0" text="管理账户名" />
+                                                <TableColumn prefWidth="135.0" text="管理账户密码" />
                                                             </columns>
                                                         </TableView>
                                                     </content>
@@ -214,9 +216,9 @@
                                         <Insets left="20.0" top="30.0" />
                                     </GridPane.margin>
                                 </HBox>
-                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1">
                                     <children>
-                                        <Label fx:id="addHotelLabel1" contentDisplay="RIGHT" onMouseEntered="#addHotel_movein" onMouseExited="#addHotel_moveout" onMousePressed="#addHotel_press" onMouseReleased="#addHotel_release">
+                                        <Label fx:id="addHotelLabel1" contentDisplay="RIGHT" onMouseClicked="#addHotel_action" onMouseEntered="#addHotel_movein" onMouseExited="#addHotel_moveout" onMousePressed="#addHotel_press" onMouseReleased="#addHotel_release">
                                             <font>
                                                 <Font name="MFYueHei_Noncommercial-Regular" size="30.0" />
                                             </font>
@@ -250,6 +252,162 @@
                                 <RowConstraints maxHeight="679.0" minHeight="10.0" prefHeight="661.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                         </GridPane>
+                  <Pane fx:id="accountAddFrame" layoutX="763.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);" visible="false">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="添加账户">
+                           <font>
+                              <Font name="MFYueHei_Noncommercial-Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="20.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="260.0" />
+                        <GridPane hgap="10.0" layoutX="28.0" layoutY="64.0" prefHeight="169.0" prefWidth="245.0" vgap="5.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="76.0" />
+                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="114.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="账户名">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="账户类型" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="默认密码" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="userName" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" />
+                              <TextField fx:id="userPW" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="管理ID" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="accountID" editable="false" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="userType" prefWidth="150.0" style="-fx-background-radius: 0; -fx-border-color: WHITE; -fx-background-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Label layoutX="20.0" layoutY="268.0" text="Feed back infomation here">
+                           <font>
+                              <Font name="Microsoft YaHei" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="240.0" layoutY="440.0" onMouseClicked="#AAcheck_action" onMouseEntered="#AAcheck_movin" onMouseExited="#AAcheck_moveout" onMousePressed="#AAcheck_press" onMouseReleased="#AAcheck_release">
+                           <graphic>
+                              <ImageView fx:id="AAcheck" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                     <Image url="file:client/src/main/res/webadmin/Check.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label layoutX="240.0" layoutY="500.0" onMouseClicked="#AAcancel_action" onMouseEntered="#AAcancel_movein" onMouseExited="#AAcancel_moveout" onMousePressed="#AAcancel_press" onMouseReleased="#AAcancel_release">
+                           <graphic>
+                              <ImageView fx:id="AAcancel" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                     <Image url="file:client/src/main/res/webadmin/Cancel.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="hotelAddFrame" layoutX="763.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);" visible="false">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="添加酒店">
+                           <font>
+                              <Font name="MFYueHei_Noncommercial-Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="20.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="260.0" />
+                        <GridPane hgap="10.0" layoutX="3.0" layoutY="61.0" prefHeight="243.0" prefWidth="289.0" vgap="5.0">
+                           <children>
+                              <Label text="酒店名称">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="酒店地址" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="酒店星级" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="hotelName" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" />
+                              <TextField fx:id="hotelRank" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="管理ID" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="hotelID" editable="false" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="hotelAddress" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="酒店管理账号" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="酒店管理密码" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="hotelAccountName" editable="false" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="hotelAccountPW" editable="false" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="110.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="125.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <Label layoutX="14.0" layoutY="421.0" text="Feed back infomation here">
+                           <font>
+                              <Font name="Microsoft YaHei" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="240.0" layoutY="440.0" onMouseClicked="#HAcheck_action" onMouseEntered="#HAcheck_movin" onMouseExited="#HAcheck_moveout" onMousePressed="#HAcheck_press" onMouseReleased="#HAcheck_release">
+                           <graphic>
+                              <ImageView fx:id="HAcheck" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webadmin/Check.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label layoutX="240.0" layoutY="500.0" onMouseClicked="#HAcancel_action" onMouseEntered="#HAcancel_movein" onMouseExited="#HAcancel_moveout" onMousePressed="#HAcancel_press" onMouseReleased="#HAcancel_release">
+                           <graphic>
+                              <ImageView fx:id="HAcancel" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webadmin/Cancel.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </Pane>
                     </children>
                 </Group>
             </children>
