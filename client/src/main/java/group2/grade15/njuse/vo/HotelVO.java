@@ -1,5 +1,7 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.RoomPO;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public class HotelVO implements Serializable{
 	private int rank;
 	private int score;
 	
-	public HotelVO(String name,String address,String contact,String introduction,ArrayList<String> facility,ArrayList<RoomVO> roomList,int rank,int score){
+	public HotelVO(int id, String name, String address, String contact, String introduction, ArrayList<String> facility, ArrayList<RoomVO> roomList, int rank, int score){
 		this.name=name;
 		this.address=address;
 		this.contact=contact;
