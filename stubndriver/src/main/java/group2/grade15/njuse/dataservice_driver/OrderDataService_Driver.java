@@ -17,7 +17,7 @@ public class OrderDataService_Driver {
             ArrayList<OrderPO> hotelPromotionListPO = orderDataService.getList(123456, IDType.customer);
 //          ResultMessage addInfo = orderDataService.add(new OrderPO());
 //          ResultMessage modifyInfo = orderDataService.modify(new OrderPO());
-            OrderPO orderPO = orderDataService.get(12346);
+            OrderPO orderPO = orderDataService.getOrder(12346);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

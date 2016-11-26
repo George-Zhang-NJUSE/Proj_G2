@@ -13,7 +13,7 @@ public class HotelDataService_Driver {
 
     public void drive(HotelDataService hotelDataService) {
         try {
-            HotelPO hotelPO = hotelDataService.get(123456);
+            HotelPO hotelPO = hotelDataService.getHotel(123456);
 //            ResultMessage addInfo = hotelDataService.add(new HotelPO());
 //            ResultMessage modifyInfo = hotelDataService.modify(new HotelPO());
 //            ResultMessage modifyRoomInfo = hotelDataService.modifyRoom(123456, new RoomPO());

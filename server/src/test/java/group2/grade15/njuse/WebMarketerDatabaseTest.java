@@ -24,7 +24,7 @@ public class WebMarketerDatabaseTest {
 
     @Test
     public void getTest() throws RemoteException{
-        WebMarketerPO webMarketerPO=webMarketerDatabase.get("wm00000000");
+        WebMarketerPO webMarketerPO=webMarketerDatabase.getWebMarketer("wm00000000");
         assertEquals("12345",webMarketerPO.getPassword());
     }
 

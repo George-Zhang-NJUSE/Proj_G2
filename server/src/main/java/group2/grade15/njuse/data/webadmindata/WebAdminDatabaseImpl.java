@@ -18,6 +18,7 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 	private CustomerPart customerPart=null;
 	private HotelManagerPart hotelManagerPart=null;
 	private WebMarketerPart webMarketerPart=null;
+	private HotelPart hotelPart=null;
 
 	public WebAdminDatabaseImpl(DatabaseInfo info) throws RemoteException{
 		this.info=info;
@@ -120,5 +121,41 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 		}
 
 		return webMarketerPart.deleteWebMarketer(webMarketerID);
+	}
+
+	@Override
+	public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
+		if(hotelPart==null){
+			hotelPart=new HotelPart(info);
+		}
+
+		return hotelPart.addHotel(hotelPO);
+	}
+
+	@Override
+	public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
+		if(hotelPart==null){
+			hotelPart=new HotelPart(info);
+		}
+
+		return hotelPart.getHotelInfo();
+	}
+
+	@Override
+	public ResultMessage modifyHotelInfo(HotelPO hotelPO) throws RemoteException {
+		if(hotelPart==null){
+			hotelPart=new HotelPart(info);
+		}
+
+		return hotelPart.modifyHotelInfo(hotelPO);
+	}
+
+	@Override
+	public ResultMessage deleteHotelInfo(int hotelID) throws RemoteException {
+		if(hotelPart==null){
+			hotelPart=new HotelPart(info);
+		}
+
+		return hotelPart.deleteHotelInfo(hotelID);
 	}
 }
