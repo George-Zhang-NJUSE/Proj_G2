@@ -1,9 +1,10 @@
 package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.WebPromotionDataService;
-import group2.grade15.njuse.po.WebPromotionListPO;
+import group2.grade15.njuse.po.PromotionPO;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by George on 2016/10/16.
@@ -12,10 +13,10 @@ public class WebPromotionDataService_Driver {
 
     public void drive(WebPromotionDataService webPromotionDataService) {
         try {
-            WebPromotionListPO webMarketerPO = webPromotionDataService.getList();
-//            ResultMessage addInfo = webPromotionDataService.add(new PromotionPO());
-//            ResultMessage modifyInfo = webPromotionDataService.modify(new PromotionPO());
-//            ResultMessage removeInfo = webPromotionDataService.remove(new PromotionPO());
+            ArrayList<PromotionPO> webMarketerPO = webPromotionDataService.getList();
+//          ResultMessage addInfo = webPromotionDataService.add(new PromotionPO());
+//          ResultMessage modifyInfo = webPromotionDataService.modify(new PromotionPO());
+//          ResultMessage removeInfo = webPromotionDataService.remove(new PromotionPO());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

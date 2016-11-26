@@ -1,12 +1,12 @@
 package group2.grade15.njuse.data.orderdata;
 
 import group2.grade15.njuse.dataservice.OrderDataService;
-import group2.grade15.njuse.po.OrderListPO;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -27,11 +27,11 @@ public class OrderData implements OrderDataService {
         return null;
     }
 
-    public OrderListPO getList(int id, IDType type) throws RemoteException {
+    public ArrayList<OrderPO> getList(int id, IDType type) throws RemoteException {
         return null;
     }
 
-    public OrderListPO getList(Date date) throws RemoteException {
+    public ArrayList<OrderPO> getList(Date date) throws RemoteException {
         return null;
     }
 }

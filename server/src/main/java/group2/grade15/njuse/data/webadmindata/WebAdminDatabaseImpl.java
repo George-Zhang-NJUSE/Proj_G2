@@ -2,20 +2,25 @@ package group2.grade15.njuse.data.webadmindata;
 
 import java.rmi.RemoteException;
 import java.sql.*;
+import java.util.ArrayList;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
-import group2.grade15.njuse.po.CustomerPO;
-import group2.grade15.njuse.po.HotelManagerPO;
-import group2.grade15.njuse.po.WebAdminPO;
+import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.ResultMessage;
 
 public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartService,HotelManagerPartService,HotelPartService,WebMarketerPartService{
+	private DatabaseInfo info=null;
 	private DatabaseMySql mySql=null;
 	private Connection webAdminConnection=null;
 
+	private CustomerPart customerPart=null;
+	private HotelManagerPart hotelManagerPart=null;
+	private WebMarketerPart webMarketerPart=null;
+
 	public WebAdminDatabaseImpl(DatabaseInfo info) throws RemoteException{
+		this.info=info;
 		mySql=new DatabaseMySql(info);
 		webAdminConnection=mySql.init();
 	}
@@ -46,5 +51,74 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
+		if(customerPart==null){
+			customerPart=new CustomerPart(info);
+		}
+
+		return customerPart.getCustomerInfo();
+	}
+
+	@Override
+	public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
+		if(customerPart==null){
+			customerPart=new CustomerPart(info);
+		}
+
+		return customerPart.modifyCustomerInfo(customerPO);
+	}
+
+	@Override
+	public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
+		if(hotelManagerPart==null){
+			hotelManagerPart=new HotelManagerPart(info);
+		}
+		return hotelManagerPart.getHotelManagerInfo();
+	}
+
+	@Override
+	public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+		if(hotelManagerPart==null){
+			hotelManagerPart=new HotelManagerPart(info);
+		}
+		return hotelManagerPart.modifyHotelManagerInfo(hotelManagerPO);
+	}
+
+	@Override
+	public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+		return webMarketerPart.addWebMarketerInfo(webMarketerPO);
+	}
+
+	@Override
+	public ArrayList<WebMarketerPO> getWebMarketerInfo() throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.getWebMarketerInfo();
+	}
+
+	@Override
+	public ResultMessage modifyWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.modifyWebMarketerInfo(webMarketerPO);
+	}
+
+	@Override
+	public ResultMessage deleteWebMarketer(String webMarketerID) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.deleteWebMarketer(webMarketerID);
 	}
 }

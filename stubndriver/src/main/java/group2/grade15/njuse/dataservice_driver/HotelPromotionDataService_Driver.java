@@ -1,9 +1,10 @@
 package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.HotelPromotionDataService;
-import group2.grade15.njuse.po.HotelPromotionListPO;
+import group2.grade15.njuse.po.PromotionPO;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by George on 2016/10/16.
@@ -12,10 +13,10 @@ public class HotelPromotionDataService_Driver {
 
     public void drive(HotelPromotionDataService hotelPromotionDataService) {
         try {
-            HotelPromotionListPO hotelPromotionListPO = hotelPromotionDataService.getList(123456);
-//            ResultMessage addInfo = hotelPromotionDataService.add(new PromotionPO());
-//            ResultMessage modifyInfo = hotelPromotionDataService.modify(new PromotionPO());
-//            ResultMessage removeInfo = hotelPromotionDataService.remove(12346);
+            ArrayList<PromotionPO> hotelPromotionListPO = hotelPromotionDataService.getList(123456);
+//          ResultMessage addInfo = hotelPromotionDataService.add(new PromotionPO());
+//          ResultMessage modifyInfo = hotelPromotionDataService.modify(new PromotionPO());
+//          ResultMessage removeInfo = hotelPromotionDataService.remove(12346);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
