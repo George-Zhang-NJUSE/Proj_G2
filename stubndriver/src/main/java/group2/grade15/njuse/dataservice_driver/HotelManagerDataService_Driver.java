@@ -13,10 +13,10 @@ public class HotelManagerDataService_Driver {
 
     public void drive(HotelManagerDataService hotelManagerDataService) {
         try {
-            HotelManagerPO hotelManagerPO = hotelManagerDataService.get(123456);
-//            ResultMessage addInfo = hotelManagerDataService.add(new HotelManagerPO());
-//            ResultMessage modifyInfo = hotelManagerDataService.modify(new HotelManagerPO());
-            ResultMessage removeInfo = hotelManagerDataService.remove(12346);
+            HotelManagerPO hotelManagerPO = hotelManagerDataService.getHotelManager(123456);
+//          ResultMessage addInfo = hotelManagerDataService.add(new HotelManagerPO());
+//          ResultMessage modifyInfo = hotelManagerDataService.modify(new HotelManagerPO());
+           // ResultMessage removeInfo = hotelManagerDataService.remove(12346);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

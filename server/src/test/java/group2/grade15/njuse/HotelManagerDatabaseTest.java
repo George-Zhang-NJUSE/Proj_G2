@@ -25,7 +25,7 @@ public class HotelManagerDatabaseTest {
 
     @Test
     public void getTest () throws RemoteException{
-        HotelManagerPO hotelManagerPO=hotelManagerDatabase.get(0);
+        HotelManagerPO hotelManagerPO=hotelManagerDatabase.getHotelManager(0);
         assertEquals("MissWu",hotelManagerPO.getName());
     }
 

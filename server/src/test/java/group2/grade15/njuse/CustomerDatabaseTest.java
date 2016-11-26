@@ -27,7 +27,7 @@ public class CustomerDatabaseTest {
 
     @Test
     public void getTest() throws RemoteException{
-        CustomerPO temp=customerDataBase.get(000000000);
+        CustomerPO temp=customerDataBase.getCustomer(000000000);
         if(temp==null) {
             System.err.print("wrong");
         }

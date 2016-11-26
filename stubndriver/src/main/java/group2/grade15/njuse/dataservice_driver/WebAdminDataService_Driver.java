@@ -12,7 +12,7 @@ public class WebAdminDataService_Driver {
 
         public void drive(WebAdminDataService webAdminDataService) {
         try {
-            WebAdminPO webAdminPO = webAdminDataService.get(123456);
+            WebAdminPO webAdminPO = webAdminDataService.getWebAdmin("wm00000000");
         } catch (RemoteException e) {
             e.printStackTrace();
         }

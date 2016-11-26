@@ -13,10 +13,9 @@ public class WebMarketerDataService_Driver {
 
     public void drive(WebMarketerDataService webMarketerDataService) {
         try {
-            WebMarketerPO webMarketerPO = webMarketerDataService.get(123456);
-//            ResultMessage addInfo = webMarketerDataService.add(new WebMarketerPO());
-//            ResultMessage modifyInfo = webMarketerDataService.modify(new WebMarketerPO());
-            ResultMessage removeInfo = webMarketerDataService.remove(123456);
+            WebMarketerPO webMarketerPO = webMarketerDataService.getWebMarketer("wm00000000");
+//          ResultMessage addInfo = webMarketerDataService.add(new WebMarketerPO());
+//          ResultMessage modifyInfo = webMarketerDataService.modify(new WebMarketerPO());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
