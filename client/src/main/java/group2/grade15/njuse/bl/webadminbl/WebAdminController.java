@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.WebAdminVO;
 import java.rmi.RemoteException;
 
 public class WebAdminController implements WebAdminServ {
+
 	private WebAdminVO webAdminVO;
 	private HotelProxy hotelProxy;
 	private UserProxy userProxy;
