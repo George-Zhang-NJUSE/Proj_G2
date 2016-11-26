@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
  */
 public interface CustomerDataService extends Remote{
 
-    public CustomerPO get(int customerId) throws RemoteException;
+    public CustomerPO getCustomer(int customerId) throws RemoteException;
 
     public CustomerPO add(CustomerPO po) throws RemoteException;
 

@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
  */
 public class HotelData implements HotelDataService {
 
-    public HotelPO get(int hotelId) throws RemoteException {
+    public HotelPO getHotel(int hotelId) throws RemoteException {
         return null;
     }
 

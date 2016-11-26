@@ -26,7 +26,7 @@ public class HotelManagerDatabaseImpl implements HotelManagerDataService {
      * @return HotelManagerPO
      * @throws RemoteException
      */
-    public HotelManagerPO get(int hotelManagerId) throws RemoteException {
+    public HotelManagerPO getHotelManager(int hotelManagerId) throws RemoteException {
         if (hotelManagerConnection == null) {
             hotelManagerConnection = mySql.init();
         }

@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public interface OrderDataService extends Remote {
 
-    public OrderPO get(int orderId) throws RemoteException;
+    public OrderPO getOrder(int orderId) throws RemoteException;
 
     public ResultMessage add(OrderPO po) throws RemoteException;
 

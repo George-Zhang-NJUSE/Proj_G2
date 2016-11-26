@@ -11,5 +11,5 @@ import java.rmi.RemoteException;
  * Created by George on 2016/10/16.
  */
 public interface WebAdminDataService extends Remote{
-    public WebAdminPO get(String webAdminId) throws RemoteException;
+    public WebAdminPO getWebAdmin(String webAdminId) throws RemoteException;
 }
