@@ -15,7 +15,9 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 	private DatabaseInfo info=null;
 	private DatabaseMySql mySql=null;
 	private Connection webAdminConnection=null;
+
 	private CustomerPart customerPart=null;
+	private HotelManagerPart hotelManagerPart=null;
 
 	public WebAdminDatabaseImpl(DatabaseInfo info) throws RemoteException{
 		this.info=info;
@@ -67,5 +69,21 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 		}
 
 		return customerPart.modifyCustomerInfo(customerPO);
+	}
+
+	@Override
+	public HotelManagerPO getHotelManagerInfo(int hotelManagerID) throws RemoteException {
+		if(hotelManagerPart==null){
+			hotelManagerPart=new HotelManagerPart(info);
+		}
+		return hotelManagerPart.getHotelManagerInfo(hotelManagerID);
+	}
+
+	@Override
+	public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+		if(hotelManagerPart==null){
+			hotelManagerPart=new HotelManagerPart(info);
+		}
+		return hotelManagerPart.modifyHotelManagerInfo(hotelManagerPO);
 	}
 }

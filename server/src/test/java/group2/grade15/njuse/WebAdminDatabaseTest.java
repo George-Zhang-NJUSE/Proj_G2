@@ -3,6 +3,7 @@ package group2.grade15.njuse;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.po.CustomerPO;
+import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.po.WebAdminPO;
 import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -45,5 +46,16 @@ public class WebAdminDatabaseTest {
         assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyCustomerInfo(customerPO));
     }
 
+    @Test
+    public void getHotelManagerInfoTest() throws RemoteException{
+        HotelManagerPO hotelManagerPO=webAdminDatabase.getHotelManagerInfo(0);
+        assertEquals("MissWu",hotelManagerPO.getName());
+    }
+
+    @Test
+    public void modifyHotelManagerInfoTest() throws RemoteException{
+        HotelManagerPO hotelManagerPO=new HotelManagerPO(0,"12345","MissWu","6883221",1);
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyHotelManagerInfo(hotelManagerPO));
+    }
 
 }
