@@ -2,9 +2,7 @@ package group2.grade15.njuse;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
-import group2.grade15.njuse.po.CustomerPO;
-import group2.grade15.njuse.po.HotelManagerPO;
-import group2.grade15.njuse.po.WebAdminPO;
+import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.utility.ResultMessage;
 import org.junit.Before;
@@ -12,6 +10,7 @@ import org.junit.Test;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -35,8 +34,8 @@ public class WebAdminDatabaseTest {
 
     @Test
     public void getCustomerInfoTest() throws RemoteException{
-        CustomerPO customerPO=webAdminDatabase.getCustomerInfo(0);
-        assertEquals("Sue",customerPO.getName());
+        ArrayList<CustomerPO> customerList=webAdminDatabase.getCustomerInfo();
+        assertEquals("Sue",customerList.get(0).getName());
     }
 
     @Test
@@ -48,8 +47,8 @@ public class WebAdminDatabaseTest {
 
     @Test
     public void getHotelManagerInfoTest() throws RemoteException{
-        HotelManagerPO hotelManagerPO=webAdminDatabase.getHotelManagerInfo(0);
-        assertEquals("MissWu",hotelManagerPO.getName());
+        ArrayList<HotelManagerPO> hotelManagerList=webAdminDatabase.getHotelManagerInfo();
+        assertEquals("MissWu",hotelManagerList.get(0).getName());
     }
 
     @Test
@@ -58,4 +57,25 @@ public class WebAdminDatabaseTest {
         assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyHotelManagerInfo(hotelManagerPO));
     }
 
+    @Test
+    public void addWebMarketerInfoTest() throws RemoteException{
+        WebMarketerPO webMarketerPO=new WebMarketerPO("123abc","wm00000001");
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.addWebMarketerInfo(webMarketerPO));
+    }
+
+    @Test
+    public void getWebMarketerInfoTest() throws RemoteException{
+        assertEquals(2,webAdminDatabase.getWebMarketerInfo().size());
+    }
+
+    @Test
+    public void modifyWebMarketerInfoTest() throws RemoteException{
+        WebMarketerPO webMarketerPO=new WebMarketerPO("1234a","wm00000001");
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyWebMarketerInfo(webMarketerPO));
+    }
+
+    @Test
+    public void deleteWebMarketerInfoTest() throws RemoteException{
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.deleteWebMarketer("wm00000001"));
+    }
 }

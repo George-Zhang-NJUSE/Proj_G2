@@ -2,13 +2,12 @@ package group2.grade15.njuse.data.webadmindata;
 
 import java.rmi.RemoteException;
 import java.sql.*;
+import java.util.ArrayList;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
-import group2.grade15.njuse.po.CustomerPO;
-import group2.grade15.njuse.po.HotelManagerPO;
-import group2.grade15.njuse.po.WebAdminPO;
+import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.ResultMessage;
 
 public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartService,HotelManagerPartService,HotelPartService,WebMarketerPartService{
@@ -18,6 +17,7 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 
 	private CustomerPart customerPart=null;
 	private HotelManagerPart hotelManagerPart=null;
+	private WebMarketerPart webMarketerPart=null;
 
 	public WebAdminDatabaseImpl(DatabaseInfo info) throws RemoteException{
 		this.info=info;
@@ -54,12 +54,12 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 	}
 
 	@Override
-	public CustomerPO getCustomerInfo(int customerID) throws RemoteException {
+	public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
 		if(customerPart==null){
 			customerPart=new CustomerPart(info);
 		}
 
-		return customerPart.getCustomerInfo(customerID);
+		return customerPart.getCustomerInfo();
 	}
 
 	@Override
@@ -72,11 +72,11 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 	}
 
 	@Override
-	public HotelManagerPO getHotelManagerInfo(int hotelManagerID) throws RemoteException {
+	public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
 		if(hotelManagerPart==null){
 			hotelManagerPart=new HotelManagerPart(info);
 		}
-		return hotelManagerPart.getHotelManagerInfo(hotelManagerID);
+		return hotelManagerPart.getHotelManagerInfo();
 	}
 
 	@Override
@@ -85,5 +85,40 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 			hotelManagerPart=new HotelManagerPart(info);
 		}
 		return hotelManagerPart.modifyHotelManagerInfo(hotelManagerPO);
+	}
+
+	@Override
+	public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+		return webMarketerPart.addWebMarketerInfo(webMarketerPO);
+	}
+
+	@Override
+	public ArrayList<WebMarketerPO> getWebMarketerInfo() throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.getWebMarketerInfo();
+	}
+
+	@Override
+	public ResultMessage modifyWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.modifyWebMarketerInfo(webMarketerPO);
+	}
+
+	@Override
+	public ResultMessage deleteWebMarketer(String webMarketerID) throws RemoteException {
+		if(webMarketerPart==null){
+			webMarketerPart=new WebMarketerPart(info);
+		}
+
+		return webMarketerPart.deleteWebMarketer(webMarketerID);
 	}
 }

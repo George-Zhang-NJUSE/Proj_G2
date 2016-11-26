@@ -1,9 +1,10 @@
 package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.CreditDataService;
-import group2.grade15.njuse.po.CreditListPO;
+import group2.grade15.njuse.po.CreditPO;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by George on 2016/10/16.
@@ -12,8 +13,8 @@ public class CreditDataService_Driver {
 
     public void drive(CreditDataService creditDataService) {
         try {
-            CreditListPO history = creditDataService.getHistory(123456);
-//            ResultMessage addInfo = creditDataService.add(new CreditPO());
+            ArrayList<CreditPO> history = creditDataService.getHistory(123456);
+//          ResultMessage addInfo = creditDataService.add(new CreditPO());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

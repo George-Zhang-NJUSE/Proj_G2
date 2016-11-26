@@ -2,32 +2,53 @@ package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
 import group2.grade15.njuse.dataservice.webadmindataservice.HotelManagerPartService;
 import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by dell on 2016/11/25.
  */
 public class HotelManagerPart implements HotelManagerPartService{
-    private DatabaseInfo info=null;
     private DatabaseMySql mySql=null;
     private Connection hotelManagerPartDatabase=null;
 
     public HotelManagerPart(DatabaseInfo info){
-        this.info=info;
+        mySql=new DatabaseMySql(info);
+        hotelManagerPartDatabase=mySql.init();
     }
 
     @Override
-    public HotelManagerPO getHotelManagerInfo(int hotelManagerID) throws RemoteException {
-        HotelManagerDatabaseImpl hotelManagerDatabase=new HotelManagerDatabaseImpl(info);
-        return hotelManagerDatabase.get(hotelManagerID);
+    public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
+        if(hotelManagerPartDatabase==null){
+            hotelManagerPartDatabase=mySql.init();
+        }
+
+        try{
+            Statement getInfo=hotelManagerPartDatabase.createStatement();
+            ResultSet resultSet=getInfo.executeQuery("select * from hotelmanager");
+
+            ArrayList<HotelManagerPO> list=new ArrayList<HotelManagerPO>();
+            while(resultSet.next()){
+                int id=resultSet.getInt(1);
+                String password=resultSet.getString(2);
+                String name=resultSet.getString(3);
+                String tel=resultSet.getString(4);
+                int hotelID=resultSet.getInt(5);
+
+                HotelManagerPO hotelManagerPO=new HotelManagerPO(id,password,name,tel,hotelID);
+                list.add(hotelManagerPO);
+            }
+            ;
+            return list;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -38,9 +59,6 @@ public class HotelManagerPart implements HotelManagerPartService{
      */
     @Override
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
-        if(mySql==null){
-            mySql=new DatabaseMySql(info);
-        }
         if(hotelManagerPartDatabase==null){
             hotelManagerPartDatabase=mySql.init();
         }

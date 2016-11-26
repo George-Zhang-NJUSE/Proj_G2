@@ -1,34 +1,62 @@
 package group2.grade15.njuse.data.webadmindata;
 
-import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.CustomerPartService;
 import group2.grade15.njuse.po.CustomerPO;
+import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by dell on 2016/11/25.
  */
 public class CustomerPart implements CustomerPartService{
-    private DatabaseInfo info=null;
     private DatabaseMySql mySql=null;
     private Connection customerPartDatabase=null;
 
     public CustomerPart(DatabaseInfo info){
-        this.info=info;
+        mySql=new DatabaseMySql(info);
+        customerPartDatabase=mySql.init();
     }
 
     @Override
-    public CustomerPO getCustomerInfo(int customerID) throws RemoteException {
-        CustomerDataBaseImpl customerDataBase=new CustomerDataBaseImpl(info);
-        return customerDataBase.get(customerID);
+    public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
+        if(customerPartDatabase==null){
+            customerPartDatabase=mySql.init();
+        }
+
+        try{
+            Statement getInfo=customerPartDatabase.createStatement();
+            ResultSet resultSet=getInfo.executeQuery("select * from customer");
+
+            ArrayList<CustomerPO> list=new ArrayList<CustomerPO>();
+            while(resultSet.next()){
+                int id=resultSet.getInt(1);
+                String password=resultSet.getString(2);
+                String name=resultSet.getString(3);
+                String tel=resultSet.getString(4);
+                double credit=resultSet.getDouble(5);
+                MemberType type=MemberType.values()[resultSet.getInt(6)];
+                Date birthday=resultSet.getDate(7);
+
+                CustomerPO customerPO=new CustomerPO(id,name,password,tel,birthday,credit,type);
+                list.add(customerPO);
+            }
+
+            getInfo.close();
+            customerPartDatabase.close();
+            customerPartDatabase=null;
+
+            return list;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -39,9 +67,6 @@ public class CustomerPart implements CustomerPartService{
      */
     @Override
     public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
-        if(mySql==null){
-            mySql=new DatabaseMySql(info);
-        }
         if(customerPartDatabase==null){
             customerPartDatabase=mySql.init();
         }
