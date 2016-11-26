@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
@@ -19,88 +28,69 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-            prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="group2.grade15.njuse.presentation.webadminui.WebAdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webadminui.WebAdminController">
     <center>
         <Group BorderPane.alignment="CENTER">
             <children>
                 <Group>
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="778.0" stroke="BLACK"
-                                   strokeType="INSIDE" width="1063.0"/>
-                        <ImageView fitHeight="780.0" fitWidth="1066.0" opacity="0.73" pickOnBounds="true" scaleX="1.1"
-                                   scaleY="1.1">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="778.0" stroke="BLACK" strokeType="INSIDE" width="1063.0" />
+                        <ImageView fitHeight="780.0" fitWidth="1066.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
                             <image>
-                                <Image url="file:client/src/main/res/webadmin/bc.jpg"/>
+                                <Image url="file:client/src/main/res/webadmin/bc.jpg" />
                             </image>
                             <effect>
-                                <GaussianBlur radius="42.97"/>
+                                <GaussianBlur radius="42.97" />
                             </effect>
                         </ImageView>
-                        <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true"
-                                  nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1063.0">
+
+                        <GridPane fx:id="welcome" alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="778.0" prefWidth="1063.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="0.0" prefWidth="234.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0"
-                                                   prefWidth="228.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0"
-                                                   prefWidth="154.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0"
-                                                   prefWidth="229.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0"
-                                                   prefWidth="217.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="0.0" prefWidth="234.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="228.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="154.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="229.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="217.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="252.0"
-                                                vgrow="SOMETIMES"/>
-                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="270.0"
-                                                vgrow="SOMETIMES"/>
-                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="262.0"
-                                                vgrow="SOMETIMES"/>
+                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="270.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="262.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label onMouseEntered="#Hotel_movein" onMouseExited="#Hotel_moveout"
-                                       onMousePressed="#Hotel_press" onMouseReleased="#Hotel_release"
-                                       GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                <Label onMouseClicked="#Hotel_action" onMouseEntered="#Hotel_movein" onMouseExited="#Hotel_moveout" onMousePressed="#Hotel_press" onMouseReleased="#Hotel_release" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                     <graphic>
-                                        <ImageView fx:id="hotelImage" fitHeight="350.0" fitWidth="237.5" scaleX="0.8"
-                                                   scaleY="0.8" smooth="false">
+                                        <ImageView fx:id="hotelImage" fitHeight="350.0" fitWidth="237.5" scaleX="0.8" scaleY="0.8" smooth="false">
                                             <image>
-                                                <Image url="file:client/src/main/res/webadmin/Hotel.png"/>
+                                                <Image url="file:client/src/main/res/webadmin/Hotel.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Label>
-                                <Label onMouseEntered="#Account_movein" onMouseExited="#Account_moveout"
-                                       onMousePressed="#Account_press" onMouseReleased="#Account_release"
-                                       GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Label onMouseClicked="#Account_action" onMouseEntered="#Account_movein" onMouseExited="#Account_moveout" onMousePressed="#Account_press" onMouseReleased="#Account_release" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <graphic>
-                                        <ImageView fx:id="accountImage" fitHeight="360.0" fitWidth="237.5" scaleX="0.8"
-                                                   scaleY="0.8" smooth="false">
+                                        <ImageView fx:id="accountImage" fitHeight="360.0" fitWidth="237.5" scaleX="0.8" scaleY="0.8" smooth="false">
                                             <image>
-                                                <Image url="file:client/src/main/res/webadmin/Account.png"/>
+                                                <Image url="file:client/src/main/res/webadmin/Account.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Label>
                             </children>
                         </GridPane>
-                        <GridPane fx:id="accountManage" layoutY="2.0" prefHeight="770.0" prefWidth="1060.0"
-                                  visible="false">
+                        <GridPane fx:id="accountManage" prefHeight="770.0" prefWidth="1060.0" visible="false">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints maxHeight="384.0" minHeight="10.0" prefHeight="116.0"
-                                                vgrow="SOMETIMES"/>
-                                <RowConstraints maxHeight="679.0" minHeight="10.0" prefHeight="661.0"
-                                                vgrow="SOMETIMES"/>
+                                <RowConstraints maxHeight="384.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="679.0" minHeight="10.0" prefHeight="661.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <BorderPane prefHeight="660.0" prefWidth="1060.0" GridPane.rowIndex="1">
                                     <padding>
-                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                     </padding>
                                     <center>
                                         <Group BorderPane.alignment="CENTER">
@@ -109,13 +99,10 @@
                                                     <content>
                                                         <TableView editable="true" prefHeight="600.0" prefWidth="996.0">
                                                             <columns>
-                                                                <TableColumn prefWidth="112.0" text="ID"/>
-                                                                <TableColumn minWidth="0.0"
-                                                                             prefWidth="174.99998474121094"
-                                                                             text="Account"/>
-                                                                <TableColumn minWidth="0.0" prefWidth="201.0"
-                                                                             text="Password"/>
-                                                                <TableColumn prefWidth="109.0" text="Type"/>
+                                                                <TableColumn prefWidth="112.0" text="ID" />
+                                                                <TableColumn minWidth="0.0" prefWidth="174.99998474121094" text="Account" />
+                                                                <TableColumn minWidth="0.0" prefWidth="201.0" text="Password" />
+                                                                <TableColumn prefWidth="109.0" text="Type" />
                                                             </columns>
                                                         </TableView>
                                                     </content>
@@ -124,11 +111,144 @@
                                         </Group>
                                     </center>
                                     <top>
-                                        <Separator nodeOrientation="LEFT_TO_RIGHT" prefWidth="200.0"
-                                                   BorderPane.alignment="CENTER"/>
+                                        <Separator nodeOrientation="LEFT_TO_RIGHT" prefWidth="200.0" BorderPane.alignment="CENTER" />
                                     </top>
                                 </BorderPane>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="30.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label onMouseClicked="#AMBack_action" onMouseEntered="#AMBack_movein" onMouseExited="#AMBack_moveout" onMousePressed="#AMBack_press" onMouseReleased="#AMBack_release">
+                                 <graphic>
+                                    <ImageView fx:id="AMBack" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                           <Image url="file:client/src/main/res/webadmin/back.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="0.5" />
+                              <Label text="账户管理">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="40.0" top="30.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label fx:id="addAccountLabel" contentDisplay="RIGHT" onMouseEntered="#addAccount_movein" onMouseExited="#addAccount_moveout" onMousePressed="#addAccount_press" onMouseReleased="#addAccount_release">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="30.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fx:id="addAccount" fitHeight="100.0" fitWidth="70.0" scaleX="0.5" scaleY="0.5">
+                                       <image>
+                                           <Image url="file:client/src/main/res/webadmin/addAccount.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label />
+                              <TextField prefHeight="32.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: WHITE;" />
+                              <ImageView fx:id="AMsearch" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webadmin/search.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
                             </children>
+                        </GridPane>
+                        <GridPane fx:id="hotelManage" prefHeight="770.0" prefWidth="1060.0" visible="false">
+                            <children>
+                                <BorderPane prefHeight="660.0" prefWidth="1060.0" GridPane.rowIndex="1">
+                                    <center>
+                                        <Group BorderPane.alignment="CENTER">
+                                            <children>
+                                                <ScrollPane prefHeight="600.0" prefWidth="1000.0">
+                                                    <content>
+                                                        <TableView editable="true" prefHeight="600.0" prefWidth="996.0">
+                                                            <columns>
+                                                                <TableColumn prefWidth="112.0" text="ID" />
+                                                                <TableColumn minWidth="0.0" prefWidth="174.99998474121094" text="Account" />
+                                                                <TableColumn minWidth="0.0" prefWidth="201.0" text="Password" />
+                                                                <TableColumn prefWidth="109.0" text="Type" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </Group>
+                                    </center>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <top>
+                                        <Separator nodeOrientation="LEFT_TO_RIGHT" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                    </top>
+                                </BorderPane>
+                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20">
+                                    <children>
+                                        <Label onMouseClicked="#HMBack_action" onMouseEntered="#HMBack_movein" onMouseExited="#HMBack_moveout" onMousePressed="#HMBack_press" onMouseReleased="#HMBack_release">
+                                            <graphic>
+                                                <ImageView fx:id="HMBack" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="file:client/src/main/res/webadmin/back.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Label>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="0.5" />
+                                        <Label text="酒店管理">
+                                            <font>
+                                                <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" top="30.0" />
+                                    </GridPane.margin>
+                                </HBox>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label fx:id="addHotelLabel1" contentDisplay="RIGHT" onMouseEntered="#addHotel_movein" onMouseExited="#addHotel_moveout" onMousePressed="#addHotel_press" onMouseReleased="#addHotel_release">
+                                            <font>
+                                                <Font name="MFYueHei_Noncommercial-Regular" size="30.0" />
+                                            </font>
+                                            <graphic>
+                                                <ImageView fx:id="addHotel" fitHeight="100.0" fitWidth="100.0" scaleX="0.5" scaleY="0.5">
+                                                    <image>
+                                                        <Image url="file:client/src/main/res/webadmin/addHotel.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Label>
+                                        <Label />
+                                        <TextField prefHeight="32.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: WHITE;" />
+                                        <ImageView fx:id="HMsearch" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="file:client/src/main/res/webadmin/search.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                    <GridPane.margin>
+                                        <Insets right="40.0" top="30.0" />
+                                    </GridPane.margin>
+                                </HBox>
+                            </children>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="384.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="679.0" minHeight="10.0" prefHeight="661.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
                         </GridPane>
                     </children>
                 </Group>
@@ -138,25 +258,24 @@
     <left>
         <Group BorderPane.alignment="CENTER">
             <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="773.0" stroke="BLACK" strokeType="INSIDE"
-                           width="219.0"/>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="773.0" stroke="BLACK" strokeType="INSIDE" width="219.0" />
                 <BorderPane layoutY="2.0" prefHeight="770.0" prefWidth="155.0">
                     <top>
                         <VBox prefHeight="270.0" prefWidth="219.0" BorderPane.alignment="CENTER">
                             <children>
                                 <FlowPane prefHeight="117.0" prefWidth="219.0">
                                     <padding>
-                                        <Insets bottom="10" left="20" right="10" top="20"/>
+                                        <Insets bottom="10" left="20" right="10" top="20" />
                                     </padding>
                                     <children>
                                         <Label text="工号：">
                                             <font>
-                                                <Font name="FZLanTingHeiS-UL-GB" size="24.0"/>
+                                                <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
                                             </font>
                                         </Label>
                                         <Label fx:id="workingNumber" text="12">
                                             <font>
-                                                <Font name="FZLanTingHeiS-UL-GB" size="24.0"/>
+                                                <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
                                             </font>
                                         </Label>
                                     </children>
@@ -165,30 +284,25 @@
                         </VBox>
                     </top>
                     <bottom>
-                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20"
-                              BorderPane.alignment="CENTER">
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20" BorderPane.alignment="CENTER">
                             <padding>
-                                <Insets bottom="10" left="20"/>
+                                <Insets bottom="10.0" left="10.0" />
                             </padding>
                             <children>
-                                <Label fx:id="messageButton" onMouseEntered="#message_movein"
-                                       onMouseExited="#message_moveout" onMousePressed="#message_press"
-                                       onMouseReleased="#message_release">
+                                <Label fx:id="messageButton" onMouseEntered="#message_movein" onMouseExited="#message_moveout" onMousePressed="#message_press" onMouseReleased="#message_release">
                                     <graphic>
-                                        <ImageView fx:id="messageImage" fitHeight="28" fitWidth="119" smooth="false">
+                                        <ImageView fx:id="messageImage" fitHeight="20.0" fitWidth="84.0" smooth="false">
                                             <image>
-                                                <Image url="file:client/src/main/res/webadmin/message.png"/>
+                                                <Image url="file:client/src/main/res/webadmin/message.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Label>
-                                <Label fx:id="settingButton" onMouseEntered="#setting_movein"
-                                       onMouseExited="#setting_moveout" onMousePressed="#setting_press"
-                                       onMouseReleased="#setting_release">
+                                <Label fx:id="settingButton" onMouseEntered="#setting_movein" onMouseExited="#setting_moveout" onMousePressed="#setting_press" onMouseReleased="#setting_release">
                                     <graphic>
-                                        <ImageView fx:id="settingImage" fitHeight="46" fitWidth="118" smooth="false">
+                                        <ImageView fx:id="settingImage" fitHeight="30.0" fitWidth="84.0" smooth="false">
                                             <image>
-                                                <Image url="file:client/src/main/res/webadmin/setting.png"/>
+                                                <Image url="file:client/src/main/res/webadmin/setting.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -203,11 +317,10 @@
     <bottom>
         <Group BorderPane.alignment="CENTER">
             <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="35.0" stroke="BLACK"
-                           strokeType="INSIDE" width="1280.0"/>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="35.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
                 <Label fx:id="infoLabel" layoutX="14.0" layoutY="10.0" text="已连接到服务器">
                     <font>
-                        <Font name="FZLanTingHeiS-UL-GB" size="14.0"/>
+                        <Font name="FZLanTingHeiS-UL-GB" size="14.0" />
                     </font>
                 </Label>
             </children>
