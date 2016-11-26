@@ -117,5 +117,6 @@ public class HotelProxy {
         int score = hotel.getScore();
 
         HotelVO vo = new HotelVO(id, name, address, contact, introduction, facility, roomList, rank, score);
+        return vo;
     }
 }
