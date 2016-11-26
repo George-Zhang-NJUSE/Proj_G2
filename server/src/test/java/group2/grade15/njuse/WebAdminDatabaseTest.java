@@ -28,7 +28,7 @@ public class WebAdminDatabaseTest {
 
     @Test
     public void getTest() throws RemoteException{
-        WebAdminPO webAdminPO=webAdminDatabase.get("wa00000000");
+        WebAdminPO webAdminPO=webAdminDatabase.getWebAdmin("wa00000000");
         assertEquals("12345",webAdminPO.getPassword());
     }
 

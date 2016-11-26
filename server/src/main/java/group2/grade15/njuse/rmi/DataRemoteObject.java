@@ -13,6 +13,7 @@ import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -81,12 +82,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public OrderListPO getList(int id, IDType type) throws RemoteException {
+    public ArrayList<OrderPO> getList(int id, IDType type) throws RemoteException {
         return null;
     }
 
     @Override
-    public OrderListPO getList(Date date) throws RemoteException {
+    public ArrayList<OrderPO> getList(Date date) throws RemoteException {
         return null;
     }
 
@@ -111,7 +112,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public CreditListPO getHistory(int customerId) throws RemoteException {
+    public ArrayList<CreditPO> getHistory(int customerId) throws RemoteException {
         return null;
     }
 
@@ -131,12 +132,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public CommentListPO getHotelComments(int hotelID) throws RemoteException {
+    public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
         return null;
     }
 
     @Override
-    public CommentListPO getCustomerComments(int customerID) throws RemoteException {
+    public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
         return null;
     }
 
@@ -146,12 +147,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public WebPromotionListPO getList() throws RemoteException {
+    public ArrayList<PromotionPO> getList() throws RemoteException {
         return null;
     }
 
     @Override
-    public HotelPromotionListPO getList(int hotelId) throws RemoteException {
+    public ArrayList<PromotionPO> getList(int hotelId) throws RemoteException {
         return null;
     }
 
@@ -186,7 +187,47 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public HotelListPO getAreaList(CbdPO conditionInfo) throws RemoteException {
+    public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
         return null;
     }
+
+    @Override
+    public ArrayList<WebMarketerPO> getWebMarketerInfo() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteWebMarketer(String webMarketerID) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+        return null;
+    }
+
+    /*@Override
+    public ArrayList<HotelPO> getAreaList(CbdPO conditionInfo) throws RemoteException {
+        return null;
+    }*/
 }
