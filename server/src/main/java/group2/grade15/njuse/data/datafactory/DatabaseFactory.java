@@ -1,10 +1,15 @@
 package group2.grade15.njuse.data.datafactory;
 
+import group2.grade15.njuse.data.commentdata.CommentDatabaseImpl;
+import group2.grade15.njuse.data.commentdata.HotelCommentPart;
 import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
+import group2.grade15.njuse.dataservice.commentdataservice.CustomerComment;
+import group2.grade15.njuse.dataservice.commentdataservice.HotelComment;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
@@ -22,6 +27,7 @@ public class DatabaseFactory implements DataFactory {
     HotelManagerDatabaseImpl hotelManagerDatabase=null;
     WebMarketerDatabaseImpl webMarketerDatabase=null;
     WebAdminDatabaseImpl webAdminDatabase=null;
+    CommentDatabaseImpl commentDatabase=null;
 
     private DatabaseFactory(){}
 
@@ -80,6 +86,19 @@ public class DatabaseFactory implements DataFactory {
             }
         }
         return webAdminDatabase;
+    }
+
+    @Override
+    public CommentDataService getCommentDataService() throws RemoteException {
+        if(commentDatabase==null){
+            try{
+                commentDatabase=new CommentDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return commentDatabase;
     }
 
 }
