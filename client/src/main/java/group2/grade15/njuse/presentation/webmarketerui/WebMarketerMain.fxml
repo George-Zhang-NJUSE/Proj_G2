@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webadminui.WebAdminController">
+   <bottom>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="35.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+            <Label fx:id="infoLabel" layoutX="14.0" layoutY="10.0" text="已连接到服务器">
+               <font>
+                  <Font name="FZLanTingHeiS-UL-GB" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+   </bottom>
+   <center>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <Group>
+               <children>
+                  <ImageView fitHeight="710.0" fitWidth="991.0" layoutX="26.0" layoutY="24.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
+                     <image>
+                        <Image url="file:client/src/main/res/webadmin/bc.jpg" />
+                     </image>
+                  </ImageView>
+                  <GridPane layoutX="75.0" layoutY="219.0" prefHeight="321.0" prefWidth="893.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="125.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="125.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="125.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="180.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label>
+                           <graphic>
+                              <ImageView fx:id="promotionIcon" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webmarketer/promotionManage.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fx:id="creditIcon" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webmarketer/creditCharge.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label GridPane.columnIndex="4">
+                           <graphic>
+                              <ImageView fx:id="fixIcon" fitHeight="180.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webmarketer/fix.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </Group>
+         </children>
+      </Group>
+   </center>
+   <left>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="773.0" stroke="BLACK" strokeType="INSIDE" width="219.0" />
+            <BorderPane layoutY="2.0" prefHeight="770.0" prefWidth="155.0">
+               <bottom>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="messageButton" onMouseEntered="#message_movein" onMouseExited="#message_moveout" onMousePressed="#message_press" onMouseReleased="#message_release">
+                           <graphic>
+                              <ImageView fx:id="messageImage" fitHeight="20.0" fitWidth="84.0" smooth="false">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webadmin/message.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label fx:id="settingButton" onMouseEntered="#setting_movein" onMouseExited="#setting_moveout" onMousePressed="#setting_press" onMouseReleased="#setting_release">
+                           <graphic>
+                              <ImageView fx:id="settingImage" fitHeight="30.0" fitWidth="84.0" smooth="false">
+                                 <image>
+                                    <Image url="file:client/src/main/res/webadmin/setting.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" />
+                     </padding>
+                  </VBox>
+               </bottom>
+               <top>
+                  <VBox prefHeight="270.0" prefWidth="219.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <FlowPane prefHeight="117.0" prefWidth="219.0">
+                           <children>
+                              <Label text="工号：">
+                                 <font>
+                                    <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="workingNumber" text="12">
+                                 <font>
+                                    <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10" left="20" right="10" top="20" />
+                           </padding>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </top>
+            </BorderPane>
+         </children>
+      </Group>
+   </left>
+</BorderPane>
