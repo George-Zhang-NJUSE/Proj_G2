@@ -226,6 +226,26 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
         return null;
     }
 
+    @Override
+    public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyHotelInfo(HotelPO hotelPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteHotelInfo(int hotelId) throws RemoteException {
+        return null;
+    }
+
     /*@Override
     public ArrayList<HotelPO> getAreaList(CbdPO conditionInfo) throws RemoteException {
         return null;

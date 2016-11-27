@@ -78,4 +78,28 @@ public class WebAdminDatabaseTest {
     public void deleteWebMarketerInfoTest() throws RemoteException{
         assertEquals(ResultMessage.SUCCESS,webAdminDatabase.deleteWebMarketer("wm00000001"));
     }
+
+    @Test
+    public void addHotelinfoTest() throws RemoteException{
+        HotelPO hotelPO=new HotelPO(0,"莫泰","00001000010000100001","6883221",null,
+                "健身馆",null,2,0.00,null,null);
+        assertEquals(2,webAdminDatabase.addHotel(hotelPO).getId());
+    }
+
+    @Test
+    public void getHotelInfoTest() throws RemoteException{
+        assertEquals(2,webAdminDatabase.getHotelInfo().size());
+    }
+
+    @Test
+    public void modifyHotelInfoTest() throws RemoteException{
+        HotelPO hotelPO=new HotelPO(2,"如家","00001000010000100001","6883221",null,
+                null,null,2,0.00,null,null);
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyHotelInfo(hotelPO));
+    }
+
+    @Test
+    public void deleteHotelInfoTest() throws RemoteException{
+        assertEquals(ResultMessage.SUCCESS,webAdminDatabase.deleteHotelInfo(2));
+    }
 }
