@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.webadminbl;
 
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
@@ -13,7 +14,7 @@ import group2.grade15.njuse.vo.RoomVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class HotelProxy {
+public class HotelProxyImpl implements HotelProxyBL{
 
 	public ResultMessage createHotel(HotelVO hotel){
 
@@ -64,9 +65,6 @@ public class HotelProxy {
 
 	//HotelProxy的私有方法，专门用于将HotelVO转化为HotelPO
 	private HotelPO voToPo(HotelVO hotel){
-        /**
-        * 解决获取id的问题
-        * */
         int id = 0;
         String name = hotel.getName();
         String address = hotel.getAddress();
