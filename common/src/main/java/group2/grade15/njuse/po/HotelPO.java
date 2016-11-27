@@ -14,8 +14,6 @@ public class HotelPO implements Serializable{
 	private int rank;
 	private int score;
 	private ArrayList<CustomerPO> vipList; 
-	
-	
 
 	public HotelPO(int id,String name,String address,String contact,String introduction,ArrayList<String> facility,ArrayList<RoomPO> roomList,int rank,int score, ArrayList<CustomerPO> vipList){
 		this.id=id;
