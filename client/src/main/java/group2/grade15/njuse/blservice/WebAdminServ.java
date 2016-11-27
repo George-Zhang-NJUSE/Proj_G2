@@ -8,7 +8,4 @@ public interface WebAdminServ {
 
 	public WebAdminVO getInfo(String webAdminId);
 
-	public HotelProxy getHotelProxy();
-
-	public UserProxy getUserProxy();
 }
