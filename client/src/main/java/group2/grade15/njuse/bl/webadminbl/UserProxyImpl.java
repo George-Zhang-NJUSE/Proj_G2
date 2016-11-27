@@ -10,11 +10,7 @@ import group2.grade15.njuse.vo.HotelManagerListVO;
 import group2.grade15.njuse.vo.HotelManagerVO;
 import group2.grade15.njuse.vo.WebMarketerVO;
 
-public class UserProxy {
-	CustomerDataService customerData;
-	HotelManagerDataService hotelManager;
-	WebMarketerDataService webMarketer;
-	WebAdminDataService webAdmin;
+public class UserProxyImpl implements UserProxyBL{
 	
 	public CustomerListVO getCustomerList(){
 		return null;

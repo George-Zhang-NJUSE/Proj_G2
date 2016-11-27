@@ -2,28 +2,102 @@ package group2.grade15.njuse.bl.webadminbl;
 
 import group2.grade15.njuse.blservice.WebAdminServ;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
-import group2.grade15.njuse.vo.WebAdminVO;
+import group2.grade15.njuse.po.WebAdminPO;
+import group2.grade15.njuse.rmi.RemoteHelper;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.*;
 
-public class WebAdminController implements WebAdminServ {
-	WebAdminDataService webadminData;
-	HotelProxy hotelProxy;
-	UserProxy userProxy;
+import java.rmi.RemoteException;
+
+/**
+ * 负责执行网站管理人员的业务逻辑
+ * 只有获取网站管理人员信息的方法由自己的业务逻辑进行处理
+ * 对酒店的管理采用代理的方式交给酒店代理进行真正的业务逻辑处理
+ * 对用户的管理采用代理的方式交给用户代理进行真正的业务逻辑处理
+ * */
+
+public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxyBL{
+
+	private HotelProxyBL hotelProxy;
+	private UserProxyBL userProxy;
 	
 	public WebAdminController(){
-		hotelProxy = new HotelProxy();
-		userProxy = new UserProxy();
+		hotelProxy = new HotelProxyImpl();
+		userProxy = new UserProxyImpl();
 	}
 
-	public WebAdminVO getInfo(int WebAdminId) {
-		return null;
+	public WebAdminVO getInfo(String webAdminId) {
+        WebAdminVO vo = null;
+        WebAdminPO po = null;
+
+		try {
+			po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(webAdminId);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+		if(po != null) {
+            int id = Integer.parseInt(webAdminId);
+            String password = po.getPassword();
+            int staffID = Integer.parseInt(po.getStaffID());
+            vo = new WebAdminVO(id, password, staffID);
+        }
+
+        return vo;
 	}
 
-	public HotelProxy getHotelProxy() {
-		return hotelProxy;
-	}
+    @Override
+    public ResultMessage createHotel(HotelVO hotel) {
+        return hotelProxy.createHotel(hotel);
+    }
 
-	public UserProxy getUserProxy() {
-		return userProxy;
-	}
-	
+    @Override
+    public HotelListVO getHotelList() {
+        return hotelProxy.getHotelList();
+    }
+
+    @Override
+    public HotelListVO modifyHotel(HotelVO hotel) {
+        return hotelProxy.modifyHotel(hotel);
+    }
+
+    @Override
+    public ResultMessage deleteHotel(HotelVO hotel) {
+        return hotelProxy.deleteHotel(hotel);
+    }
+
+    @Override
+    public CustomerListVO getCustomerList() {
+        return userProxy.getCustomerList();
+    }
+
+    @Override
+    public HotelManagerListVO getHotelManagerList() {
+        return userProxy.getHotelManagerList();
+    }
+
+    @Override
+    public WebMarketerVO getWebMarketerList() {
+        return userProxy.getWebMarketerList();
+    }
+
+    @Override
+    public ResultMessage createHotelManager(HotelManagerVO hotelManager) {
+        return userProxy.createHotelManager(hotelManager);
+    }
+
+    @Override
+    public ResultMessage modifyWebMarketer(WebMarketerVO webMarketer) {
+        return userProxy.modifyWebMarketer(webMarketer);
+    }
+
+    @Override
+    public ResultMessage createWebMarketer(WebMarketerVO webMarketer) {
+        return userProxy.createWebMarketer(webMarketer);
+    }
+
+    @Override
+    public ResultMessage deleteWebMarketer(WebMarketerVO webMarketer) {
+        return deleteWebMarketer(webMarketer);
+    }
 }
