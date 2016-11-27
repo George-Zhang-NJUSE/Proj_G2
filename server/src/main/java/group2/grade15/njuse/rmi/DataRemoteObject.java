@@ -2,6 +2,7 @@ package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
 import group2.grade15.njuse.dataservice.*;
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
@@ -11,6 +12,7 @@ import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -19,7 +21,9 @@ import java.util.Date;
 /**
  * Created by Guo on 2016/11/26.
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CustomerDataService, HotelManagerDataService, CustomerPartService, HotelManagerPartService, HotelPartService, WebAdminDataService, WebMarketerPartService, WebMarketerDataService, AreaDataSevice, CommentDataService, CreditDataService, HotelDataService, HotelPromotionDataService, OrderDataService, WebPromotionDataService {
+public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService,CustomerDataService, HotelManagerDataService, CustomerPartService,
+        HotelManagerPartService, HotelPartService, WebAdminDataService, WebMarketerPartService, WebMarketerDataService,
+        AreaDataSevice, CreditDataService, HotelDataService, HotelPromotionDataService, OrderDataService, WebPromotionDataService, Remote {
 
     private DataFactory dataFactory;
     private CustomerDataService customerDataService;
@@ -122,26 +126,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
     }
 
     @Override
-    public ResultMessage add(CommentPO po) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ResultMessage modify(CommentPO po) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
-        return null;
-    }
-
-    @Override
     public WebAdminPO getWebAdmin(String webAdminId) throws RemoteException {
         return null;
     }
@@ -223,6 +207,46 @@ public class DataRemoteObject extends UnicastRemoteObject implements CustomerDat
 
     @Override
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyHotelInfo(HotelPO hotelPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteHotelInfo(int hotelId) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage add(CommentPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modify(CommentPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
         return null;
     }
 

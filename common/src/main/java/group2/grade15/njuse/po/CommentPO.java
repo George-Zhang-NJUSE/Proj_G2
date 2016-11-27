@@ -3,39 +3,39 @@ package group2.grade15.njuse.po;
 import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class CommentPO implements Serializable{
-	private String hotelName;
+	private int hotelID;
 	private int userID;
-	private Date checkInTime;
-	private RoomType type;
 	private String comment;
+	private int commentID;
+	private Date time;
 	private double score;
 	
-	public CommentPO(String hotelName,int userID,Date checkInTime,RoomType type,String comment,double score){
-		this.hotelName=hotelName;
+	public CommentPO(int hotelID,int userID,Date commentTime,String comment,int commentID,double score){
+		this.hotelID=hotelID;
 		this.userID=userID;
-		this.checkInTime=checkInTime;
-		this.type=type;
 		this.comment=comment;
+		this.commentID=commentID;
+		this.time=commentTime;
 		this.score=score;
 	}
 
-	public String getHotelName() {
-		return hotelName;
+	public int getHotelID() {
+		return hotelID;
+	}
+
+	public int getCommentID() {
+		return commentID;
+	}
+
+	public Date getTime() {
+		return time;
 	}
 
 	public int getUserID() {
 		return userID;
-	}
-
-	public Date getCheckInTime() {
-		return checkInTime;
-	}
-
-	public RoomType getType() {
-		return type;
 	}
 
 	public String getComment() {

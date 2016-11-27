@@ -9,13 +9,19 @@ public class HotelPO implements Serializable{
 	private String address;
 	private String contact;
 	private String introduction;
-	private ArrayList<String> facility;
+	private String facility;
 	private ArrayList<RoomPO> roomList;
 	private int rank;
-	private int score;
-	private ArrayList<CustomerPO> vipList; 
+	private double score;
+	private ArrayList<CustomerPO> vipList;
+	private Byte[][] picture;
 
-	public HotelPO(int id,String name,String address,String contact,String introduction,ArrayList<String> facility,ArrayList<RoomPO> roomList,int rank,int score, ArrayList<CustomerPO> vipList){
+	public Byte[][] getPicture() {
+		return picture;
+	}
+
+	public HotelPO(int id, String name, String address, String contact, String introduction, String facility,
+				   ArrayList<RoomPO> roomList, int rank, double score,ArrayList<CustomerPO> vipList,Byte[][] picture){
 		this.id=id;
 		this.name=name;
 		this.address=address;
@@ -26,9 +32,10 @@ public class HotelPO implements Serializable{
 		this.rank=rank;
 		this.score=score;
 		this.vipList=vipList;
+		this.picture=picture;
 	}
-
-    public int getId() {
+	
+	public int getId() {
 		return id;
 	}
 
@@ -52,7 +59,7 @@ public class HotelPO implements Serializable{
 		return introduction;
 	}
 
-	public ArrayList<String> getFacility() {
+	public String getFacility() {
 		return facility;
 	}
 
@@ -64,9 +71,8 @@ public class HotelPO implements Serializable{
 		return rank;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	
 
 }
