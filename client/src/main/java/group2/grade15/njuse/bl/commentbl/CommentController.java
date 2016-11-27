@@ -1,7 +1,6 @@
 package group2.grade15.njuse.bl.commentbl;
 
 import group2.grade15.njuse.blservice.CommentServ;
-import group2.grade15.njuse.dataservice.CommentDataService;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CommentListVO;
 import group2.grade15.njuse.vo.CommentVO;

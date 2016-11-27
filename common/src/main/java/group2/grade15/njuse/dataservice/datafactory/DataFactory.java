@@ -1,7 +1,11 @@
 package group2.grade15.njuse.dataservice.datafactory;
 
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
+import group2.grade15.njuse.dataservice.commentdataservice.CustomerComment;
+import group2.grade15.njuse.dataservice.commentdataservice.HotelComment;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.webadmindataservice.CustomerPartService;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 
@@ -19,4 +23,7 @@ public interface DataFactory extends Remote{
     public WebMarketerDataService getWebMarketerDataService() throws RemoteException;
 
     public WebAdminDataService getWebAdminDataService() throws RemoteException;
+
+    public CommentDataService getCommentDataService() throws RemoteException;
+
 }
