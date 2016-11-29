@@ -40,7 +40,7 @@ public class HotelCommentPart implements HotelComment{
                 Date time=resultSet.getDate(6);
                 double score=resultSet.getDouble(7);
 
-                CommentPO commentPO=new CommentPO(hotelID,customerID,time,comment,commentNum,score);
+                CommentPO commentPO=new CommentPO(hotelID,customerID,time,comment,commentNum,score,orderNum);
                 list.add(commentPO);
             }
             return list;
