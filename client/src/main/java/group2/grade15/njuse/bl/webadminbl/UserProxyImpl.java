@@ -1,27 +1,63 @@
 package group2.grade15.njuse.bl.webadminbl;
 
-import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
-import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
-import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
-import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
+import group2.grade15.njuse.po.CustomerPO;
+import group2.grade15.njuse.po.HotelManagerPO;
+import group2.grade15.njuse.po.WebMarketerPO;
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.CustomerListVO;
-import group2.grade15.njuse.vo.HotelManagerListVO;
-import group2.grade15.njuse.vo.HotelManagerVO;
-import group2.grade15.njuse.vo.WebMarketerVO;
+import group2.grade15.njuse.vo.*;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class UserProxyImpl implements UserProxyBL{
 	
 	public CustomerListVO getCustomerList(){
-		return null;
+		ArrayList<CustomerPO> customerPOList = null;
+		ArrayList<CustomerVO> customerList = new ArrayList();
+		try {
+			customerPOList = RemoteHelper.getInstance().getWebAdminDataService().getCustomerInfo();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+		for(CustomerPO po : customerPOList){
+			customerList.add(new CustomerVO(po));
+		}
+
+		return new CustomerListVO(customerList);
 	}
 
 	public HotelManagerListVO getHotelManagerList(){
-		return null;
+		ArrayList<HotelManagerPO> hotelManagerPOList = null;
+		ArrayList<HotelManagerVO> hotelManagerList = new ArrayList();
+		try {
+			hotelManagerPOList = RemoteHelper.getInstance().getWebAdminDataService().getHotelManagerInfo();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+		for(HotelManagerPO po : hotelManagerPOList){
+			hotelManagerList.add(new HotelManagerVO(po));
+		}
+
+		return new HotelManagerListVO(hotelManagerList);
 	}
 	
-	public WebMarketerVO getWebMarketerList(){
-		return null;
+	public WebMarketerListVO getWebMarketerList(){
+		ArrayList<WebMarketerPO> webMarketerPOList = null;
+		ArrayList<WebMarketerVO> webMarketerList = new ArrayList();
+		try {
+			webMarketerPOList = RemoteHelper.getInstance().getWebAdminDataService().getWebMarketerInfo();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+		for(WebMarketerPO po : webMarketerPOList){
+			webMarketerList.add(new WebMarketerVO(po));
+		}
+
+		return new WebMarketerListVO(webMarketerList);
 	}
 
 	public ResultMessage createHotelManager(HotelManagerVO hotelManager){
@@ -29,14 +65,32 @@ public class UserProxyImpl implements UserProxyBL{
 	}
 	
 	public ResultMessage modifyWebMarketer(WebMarketerVO webMarketer){
-		return null;
+		ResultMessage result = ResultMessage.FAILED;
+		try {
+			result = RemoteHelper.getInstance().getWebAdminDataService().modifyWebMarketerInfo(webMarketer.toPO());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	public ResultMessage createWebMarketer(WebMarketerVO webMarketer){
-		return null;
+		ResultMessage result = ResultMessage.FAILED;
+		try {
+			result = RemoteHelper.getInstance().getWebAdminDataService().addWebMarketerInfo(webMarketer.toPO());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	public ResultMessage deleteWebMarketer(WebMarketerVO webMarketer){
-		return null;
+		ResultMessage result = ResultMessage.FAILED;
+		try {
+			result = RemoteHelper.getInstance().getWebAdminDataService().deleteWebMarketer(webMarketer.getStaffID());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
