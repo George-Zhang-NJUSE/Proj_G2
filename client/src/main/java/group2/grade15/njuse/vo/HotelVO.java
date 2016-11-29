@@ -22,6 +22,7 @@ public class HotelVO implements Serializable{
 	private ArrayList<CustomerVO> vipList;
 	private int rank;
 	private double score;
+    private Byte[][] picture;
 	
 	public HotelVO(HotelPO hotel){
 		id = hotel.getId();
@@ -32,6 +33,7 @@ public class HotelVO implements Serializable{
 		facility = hotel.getFacility();
 		rank = hotel.getRank();
 		score = hotel.getScore();
+        picture = hotel.getPicture();
 
         roomList = new ArrayList();
         ArrayList<RoomPO> roomPOList = hotel.getRoomList();
@@ -88,4 +90,21 @@ public class HotelVO implements Serializable{
 		return score;
 	}
 
+	public Byte[][] getPicture(){
+        return picture;
+    }
+
+	public HotelPO toPO(){
+        ArrayList<RoomPO> roomPOList = new ArrayList();
+        for(RoomVO vo : roomList){
+            roomPOList.add(vo.toPO());
+        }
+
+        ArrayList<CustomerPO> vipPOList = new ArrayList();
+        for(CustomerVO vo : vipList){
+            vipPOList.add(vo.toPO());
+        }
+
+        return new HotelPO(id, name, address, contact, introduction, facility, roomPOList, rank, score, vipPOList, picture);
+    }
 }

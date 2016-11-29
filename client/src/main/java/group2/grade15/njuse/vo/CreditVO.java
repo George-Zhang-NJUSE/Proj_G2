@@ -41,4 +41,7 @@ public class CreditVO implements Serializable{
 		return reason;
 	}
 
+	public CreditPO toPO(){
+		return new CreditPO(orderID, creditLeft, creditChange, time, reason);
+	}
 }

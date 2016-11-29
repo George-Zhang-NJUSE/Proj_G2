@@ -20,4 +20,8 @@ public class WebAdminVO implements Serializable{
 	public String getStaffID() {
 		return staffID;
 	}
+
+	public WebAdminPO toPO(){
+		return new WebAdminPO(password, staffID);
+	}
 }

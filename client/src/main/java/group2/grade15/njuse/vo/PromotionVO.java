@@ -15,4 +15,5 @@ public class PromotionVO {
     public PromotionType getType() {
         return type;
     }
+
 }

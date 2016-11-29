@@ -15,9 +15,6 @@ public class HotelPO implements Serializable{
 	private double score;
 	private ArrayList<CustomerPO> vipList;
 	private Byte[][] picture;
-	public Byte[][] getPicture() {
-		return picture;
-	}
 
 	public HotelPO(int id, String name, String address, String contact, String introduction, String facility,
 				   ArrayList<RoomPO> roomList, int rank, double score,ArrayList<CustomerPO> vipList,Byte[][] picture){
@@ -74,5 +71,7 @@ public class HotelPO implements Serializable{
 		return score;
 	}
 
-
+	public Byte[][] getPicture() {
+		return picture;
+	}
 }

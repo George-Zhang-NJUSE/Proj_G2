@@ -39,4 +39,8 @@ public class HotelManagerVO implements Serializable{
 	public int getHotelID() {
 		return hotelID;
 	}
+
+	public HotelManagerPO toPO(){
+        return new HotelManagerPO(id, password, name, contact, hotelID);
+    }
 }
