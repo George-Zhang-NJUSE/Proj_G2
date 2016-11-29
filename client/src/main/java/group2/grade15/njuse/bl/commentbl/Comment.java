@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.commentbl;
 
+import group2.grade15.njuse.po.CommentPO;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.CommentListVO;
@@ -8,12 +9,7 @@ import group2.grade15.njuse.vo.CommentVO;
 import java.util.Date;
 
 public class Comment {
-	private String hotelName;
-	private int userID;
-	private Date checkInTime;
-	private RoomType type;
-	private String comment;
-	private double score;
+	CommentPO commentPO;
 	
 	public ResultMessage createComment(CommentVO CommentInfo){
 		return null;

@@ -9,45 +9,36 @@ import group2.grade15.njuse.vo.CustomerVO;
 import java.rmi.RemoteException;
 
 /**
- * Created by George on 2016/11/6.
+ * Created by Guo on 2016/11/6.
  */
 public class Customer {
 
-    private int id;
-    private String name;
-    private String password;
-    private String contact;
-    private int credit;
+    CustomerPO customerPO;
 
     public Customer(CustomerPO po) {
-        id = po.getId();
-        name = po.getName();
-        password = po.getPassword();
-        contact = po.getContact();
+        customerPO = po;
     }
 
     public CustomerVO getInfo() {
-        CustomerPO po = null;
 
-        try {
-            po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(id);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(po != null) {
-            return new CustomerVO(po);
+        if(customerPO != null) {
+            return new CustomerVO(customerPO);
         } else {
             return null;
         }
     }
 
     public ResultMessage modifyInfo(CustomerVO vo) {
-        return ResultMessage.SUCCESS;
+        try {
+            return RemoteHelper.getInstance().getCustomerDataService().modify(vo.toPO());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 
     public int getId() {
-        return id;
+        return customerPO.getId();
     }
 
 }
