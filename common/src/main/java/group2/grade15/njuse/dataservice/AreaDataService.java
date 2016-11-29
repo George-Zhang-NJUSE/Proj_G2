@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by George on 2016/10/16.
  */
-public interface AreaDataSevice extends Remote {
+public interface AreaDataService extends Remote {
     //public ArrayList<HotelPO> getAreaList(CbdPO conditionInfo) throws RemoteException;
 
 }

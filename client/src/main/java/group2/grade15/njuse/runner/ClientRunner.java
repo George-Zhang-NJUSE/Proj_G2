@@ -15,15 +15,15 @@ public class ClientRunner {
 
     private RemoteHelper remoteHelper;
 
-    //启动客户端
-    public static void main(String[] args){
-        new ClientRunner();
-    }
-
-    public ClientRunner() {
-        initGUI();
-        linkToServer();
-    }
+//    //启动客户端
+//    public static void main(String[] args){
+//        new ClientRunner();
+//    }
+//
+//    public ClientRunner() {
+//        initGUI();
+//        linkToServer();
+//    }
 
     //进行RMI连接
     private void linkToServer() {
