@@ -1,10 +1,7 @@
 package group2.grade15.njuse.bl.webadminbl;
 
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.CustomerListVO;
-import group2.grade15.njuse.vo.HotelManagerListVO;
-import group2.grade15.njuse.vo.HotelManagerVO;
-import group2.grade15.njuse.vo.WebMarketerVO;
+import group2.grade15.njuse.vo.*;
 
 /**
  * Created by 果宝 on 2016/11/27.
@@ -14,7 +11,7 @@ public interface UserProxyBL {
 
     public HotelManagerListVO getHotelManagerList();
 
-    public WebMarketerVO getWebMarketerList();
+    public WebMarketerListVO getWebMarketerList();
 
     public ResultMessage createHotelManager(HotelManagerVO hotelManager);
 

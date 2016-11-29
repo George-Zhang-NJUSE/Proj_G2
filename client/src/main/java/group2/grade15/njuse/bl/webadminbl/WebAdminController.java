@@ -74,7 +74,7 @@ public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxy
     }
 
     @Override
-    public WebMarketerVO getWebMarketerList() {
+    public WebMarketerListVO getWebMarketerList() {
         return userProxy.getWebMarketerList();
     }
 

@@ -19,7 +19,7 @@ public class HotelProxyImpl implements HotelProxyBL{
         HotelPO po = hotel.toPO();
 
         try {
-            RemoteHelper.getInstance().getHotelPartService().addHotel(po);
+            RemoteHelper.getInstance().getWebAdminDataService().addHotel(po);
             result = ResultMessage.SUCCESS;
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -35,7 +35,7 @@ public class HotelProxyImpl implements HotelProxyBL{
         ArrayList<HotelVO> hotelList = new ArrayList();
 
         try {
-            hotelPOList = RemoteHelper.getInstance().getHotelPartService().getHotelInfo();
+            hotelPOList = RemoteHelper.getInstance().getWebAdminDataService().getHotelInfo();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -51,10 +51,26 @@ public class HotelProxyImpl implements HotelProxyBL{
 	}
 	
 	public HotelListVO modifyHotel (HotelVO hotel){
-		return null;
-	}
+        ResultMessage result = ResultMessage.FAILED;
+        try {
+             result = RemoteHelper.getInstance().getWebAdminDataService().modifyHotelInfo(hotel.toPO());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if(result == ResultMessage.SUCCESS){
+            return getHotelList();
+        } else {
+            return null;
+        }
+    }
 	
 	public ResultMessage deleteHotel(HotelVO hotel){
-		return null;	
-	}
+        try {
+            return RemoteHelper.getInstance().getWebAdminDataService().deleteHotelInfo(hotel.getId());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
 }

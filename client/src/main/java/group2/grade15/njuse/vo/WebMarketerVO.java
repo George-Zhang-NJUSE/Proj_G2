@@ -9,7 +9,7 @@ public class WebMarketerVO implements Serializable{
 	private String password;
 	private String staffID;
 	
-	public WebMarketerVO(WebAdminPO po){
+	public WebMarketerVO(WebMarketerPO po){
 		password = po.getPassword();
 		staffID = po.getStaffID();
 	}
