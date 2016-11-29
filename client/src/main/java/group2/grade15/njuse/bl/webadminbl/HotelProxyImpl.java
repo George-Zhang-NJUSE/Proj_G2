@@ -31,8 +31,8 @@ public class HotelProxyImpl implements HotelProxyBL{
 
 	public HotelListVO getHotelList(){
         HotelListVO vo;
-        ArrayList<HotelPO> hotelPOList = null;
-        ArrayList<HotelVO> hotelList = null;
+        ArrayList<HotelPO> hotelPOList = new ArrayList();
+        ArrayList<HotelVO> hotelList = new ArrayList();
 
         try {
             hotelPOList = RemoteHelper.getInstance().getHotelPartService().getHotelInfo();
