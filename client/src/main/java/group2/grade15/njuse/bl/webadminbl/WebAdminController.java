@@ -19,16 +19,17 @@ public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxy
 
 	private HotelProxyBL hotelProxy;
 	private UserProxyBL userProxy;
-	
-	public WebAdminController(){
+    private WebAdminPO webAdminPO;
+
+	public WebAdminController(WebAdminPO po){
+        webAdminPO = po;
 		hotelProxy = new HotelProxyImpl();
 		userProxy = new UserProxyImpl();
 	}
 
 	public WebAdminVO getInfo(String webAdminId) {
-        WebAdminVO vo = null;
-        WebAdminPO po = null;
 
+        WebAdminPO po = null;
 		try {
 			po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(webAdminId);
 		} catch (RemoteException e) {
