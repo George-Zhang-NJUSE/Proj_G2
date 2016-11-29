@@ -1,11 +1,14 @@
 package group2.grade15.njuse.bl.orderbl;
 
 import group2.grade15.njuse.po.OrderPO;
+import group2.grade15.njuse.po.RoomPO;
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.RoomVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,7 +24,7 @@ public class Order {
     private Date checkInTime;
     private Date checkOutTime;
     private Date finalExecuteTime;
-    private ArrayList<RoomVO> selectRoom;
+    private ArrayList<RoomPO> selectRoom;
     private int numOfCustomer;
     private boolean haveChild;
     private OrderState state;
@@ -34,14 +37,26 @@ public class Order {
         checkInTime = po.getCheckInTime();
         checkOutTime = po.getCheckOutTime();
         finalExecuteTime = po.getFinalExecuteTime();
-//        selectRoom = po.getSelectRoom();
+        selectRoom = po.getSelectRoom();
         numOfCustomer = po.getNumOfCustomer();
         haveChild = po.isHaveChild();
         state = po.getState();
     }
 
     public OrderVO getInfo(){
-        return new OrderVO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, selectRoom, numOfCustomer, haveChild, state);
+        OrderPO po = null;
+
+        try {
+            po = RemoteHelper.getInstance().getOrderDataService().getOrder(orderID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if(po != null) {
+            return new OrderVO(po);
+        } else {
+            return null;
+        }
     }
 
     public ResultMessage modifyState(OrderState state){

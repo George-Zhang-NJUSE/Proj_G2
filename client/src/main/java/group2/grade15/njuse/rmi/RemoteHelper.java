@@ -1,6 +1,7 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.dataservice.*;
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
@@ -37,9 +38,11 @@ public class RemoteHelper {
     public CustomerPartService getCustomerPartService(){
         return null;
     }
+
     public HotelManagerPartService getHotelManagerService(){
         return null;
     }
+
     public HotelPartService getHotelPartService(){
         return null;
     }
@@ -56,7 +59,7 @@ public class RemoteHelper {
         return null;
     }
 
-    public AreaDataSevice getAreaDataService(){
+    public AreaDataService getAreaDataService(){
         return null;
     }
 
