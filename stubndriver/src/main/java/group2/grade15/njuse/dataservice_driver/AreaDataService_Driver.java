@@ -1,13 +1,13 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.AreaDataSevice;
+import group2.grade15.njuse.dataservice.AreaDataService;
 
 /**
  * Created by George on 2016/10/16.
  */
 public class AreaDataService_Driver {
 
-    public void drive(AreaDataSevice areaDataSevice) {
+    public void drive(AreaDataService areaDataSevice) {
 //        try {
 ////            HotelListPO hotelListPO = areaDataSevice.getHotelList(new AreaPO());
 ////            AreaListPO areaListPO = areaDataSevice.getAreaList(new SearchPO());
