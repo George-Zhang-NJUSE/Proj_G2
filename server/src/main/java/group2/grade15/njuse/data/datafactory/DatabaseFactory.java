@@ -1,15 +1,14 @@
 package group2.grade15.njuse.data.datafactory;
 
 import group2.grade15.njuse.data.commentdata.CommentDatabaseImpl;
-import group2.grade15.njuse.data.commentdata.HotelCommentPart;
+import group2.grade15.njuse.data.creditdata.CreditDatabaseImpl;
 import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
-import group2.grade15.njuse.dataservice.commentdataservice.CustomerComment;
-import group2.grade15.njuse.dataservice.commentdataservice.HotelComment;
+import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
@@ -23,11 +22,12 @@ public class DatabaseFactory implements DataFactory {
     static DatabaseFactory dbFactory=null;
     DatabaseInfo info=new DatabaseInfo("jdbc:postgresql://localhost:5432/FirstDatabase","postgres","1997wyh");
 
-    CustomerDataBaseImpl customerDataBase=null;
+    CustomerDataBaseImpl customerDatabase=null;
     HotelManagerDatabaseImpl hotelManagerDatabase=null;
     WebMarketerDatabaseImpl webMarketerDatabase=null;
     WebAdminDatabaseImpl webAdminDatabase=null;
     CommentDatabaseImpl commentDatabase=null;
+    CreditDataService creditDatabase=null;
 
     private DatabaseFactory(){}
 
@@ -40,15 +40,15 @@ public class DatabaseFactory implements DataFactory {
 
 
     public CustomerDataService getCustomerDataService() throws RemoteException{
-        if(customerDataBase==null) {
+        if(customerDatabase==null) {
             try {
-                customerDataBase = new CustomerDataBaseImpl(info);
+                customerDatabase = new CustomerDataBaseImpl(info);
             } catch (RemoteException e) {
                 e.printStackTrace();
                 return null;
             }
         }
-        return customerDataBase;
+        return customerDatabase;
     }
 
     public HotelManagerDatabaseImpl getHotelManagerDataService() throws RemoteException{
@@ -99,6 +99,19 @@ public class DatabaseFactory implements DataFactory {
             }
         }
         return commentDatabase;
+    }
+
+    @Override
+    public CreditDataService getCreditDataService() throws RemoteException {
+        if(creditDatabase==null){
+            try{
+                creditDatabase=new CreditDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return creditDatabase;
     }
 
 }

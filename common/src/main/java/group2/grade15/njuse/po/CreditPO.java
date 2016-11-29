@@ -3,26 +3,31 @@ package group2.grade15.njuse.po;
 import group2.grade15.njuse.utility.ChangeReason;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
-;
 
 public class CreditPO implements Serializable{
+	private final int customerID;
 	private final int orderID;
-	private final int creditLeft;
-	private final int creditChange;
+	private final int creditID;
+	private final double creditLeft;
+	private final double creditChange;
 	private final Date time;
 	private final ChangeReason reason;
-	
-	public CreditPO(int id,int creditLeft,int n,Date time,ChangeReason reason){
+
+
+
+	public CreditPO(int customer, int id, int creditID, double creditLeft, double n, Date time, ChangeReason reason){
+		this.customerID=customer;
 		this.orderID=id;
+		this.creditID=creditID;
 		this.creditLeft=creditLeft;
 		this.creditChange=n;
 		this.time=time;
 		this.reason=reason;
 	}
 
-	public int getCreditChange() {
+	public double getCreditChange() {
 		return creditChange;
 	}
 
@@ -38,7 +43,15 @@ public class CreditPO implements Serializable{
 		return orderID;
 	}
 
-	public int getCreditLeft() {
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public double getCreditLeft() {
 		return creditLeft;
+	}
+
+	public int getCreditID() {
+		return creditID;
 	}
 }
