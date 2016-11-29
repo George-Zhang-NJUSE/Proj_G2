@@ -1,5 +1,6 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.utility.ChangeReason;
 
 import java.io.Serializable;
@@ -12,12 +13,20 @@ public class CreditVO implements Serializable{
 	private final Date time;
 	private final ChangeReason reason;
 	
-	public CreditVO(int id,int creditLeft,int n,Date time,ChangeReason reason){
-		this.orderID=id;
-		this.creditLeft=creditLeft;
-		this.creditChange=n;
-		this.time=time;
-		this.reason=reason;
+	public CreditVO(CreditPO po){
+		orderID = po.getOrderID();
+		creditLeft = po.getCreditLeft();
+		creditChange = po.getCreditChange();
+		time = po.getTime();
+		reason = po.getReason();
+	}
+
+	public int getOrderID() {
+		return orderID;
+	}
+
+	public int getCreditLeft() {
+		return creditLeft;
 	}
 
 	public int getCreditChange() {
@@ -31,5 +40,5 @@ public class CreditVO implements Serializable{
 	public ChangeReason getReason() {
 		return reason;
 	}
-	
+
 }

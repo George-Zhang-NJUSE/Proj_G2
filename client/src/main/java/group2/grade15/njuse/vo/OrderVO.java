@@ -1,5 +1,7 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.OrderPO;
+import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.utility.OrderState;
 
 import java.io.Serializable;
@@ -19,18 +21,24 @@ public class OrderVO implements Serializable{
 	private boolean haveChild;
 	private OrderState state;
 	
-	public OrderVO(int orderID,int customer,int hotel,int amount,Date checkInTime,Date checkOutTime,Date finalExecuteTime,ArrayList<RoomVO> selectRoom,int numOfCustomer,boolean haveChild,OrderState state){
-		this.orderID=orderID;
-		this.customerID=customer;
-		this.hotelID=hotel;
-		this.amount=amount;
-		this.checkInTime=checkInTime;
-		this.checkOutTime=checkOutTime;
-		this.finalExecuteTime=finalExecuteTime;
-		this.selectRoom=selectRoom;
-		this.numOfCustomer=numOfCustomer;
-		this.haveChild=haveChild;
-		this.state=state;
+	public OrderVO(OrderPO po){
+		orderID = po.getOrderID();
+		customerID = po.getCustomerID();
+		hotelID = po.getHotelID();
+		amount = po.getAmount();
+		checkInTime = po.getCheckInTime();
+		checkOutTime = po.getCheckOutTime();
+		finalExecuteTime = po.getFinalExecuteTime();
+		numOfCustomer = po.getNumOfCustomer();
+		haveChild = po.isHaveChild();
+		state = po.getState();
+
+		selectRoom = new ArrayList();
+		ArrayList<RoomPO> roomPOList = po.getSelectRoom();
+		for(RoomPO roomPO : roomPOList){
+			RoomVO room = new RoomVO(roomPO);
+			selectRoom.add(room);
+		}
 	}
 
 	public int getCustomerID() {

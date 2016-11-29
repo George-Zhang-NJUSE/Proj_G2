@@ -16,6 +16,4 @@ public class Promotion {
 	public int getId() {
 		return id;
 	}
-	
-	
 }

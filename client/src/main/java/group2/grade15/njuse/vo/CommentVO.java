@@ -1,48 +1,52 @@
 package group2.grade15.njuse.vo;
 
-import group2.grade15.njuse.utility.RoomType;
+import group2.grade15.njuse.po.CommentPO;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class CommentVO implements Serializable{
-	private String hotelName;
+	private int hotelID;
 	private int userID;
-	private Date checkInTime;
-	private RoomType type;
 	private String comment;
+	private int commentID;
+	private Date time;
 	private double score;
 	
-	public CommentVO(String hotelName,int userID,Date checkInTime,RoomType type,String comment,double score){
-		this.hotelName=hotelName;
-		this.userID=userID;
-		this.checkInTime=checkInTime;
-		this.type=type;
-		this.comment=comment;
-		this.score=score;
+	public CommentVO(CommentPO po){
+		hotelID = po.getHotelID();
+		userID = po.getUserID();
+		comment = po.getComment();
+		commentID = po.getCommentID();
+		time = po.getTime();
+		score = po.getScore();
 	}
 
-	public String getHotelName() {
-		return hotelName;
-	}
+    public int getHotelID() {
+        return hotelID;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    public int getUserID() {
+        return userID;
+    }
 
-	public Date getCheckInTime() {
-		return checkInTime;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public RoomType getType() {
-		return type;
-	}
+    public int getCommentID() {
+        return commentID;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public Date getTime() {
+        return time;
+    }
 
-	public double getScore() {
-		return score;
-	}
+    public double getScore() {
+        return score;
+    }
+
+    public CommentPO toPO(){
+        return new CommentPO(hotelID, userID, time, comment,commentID, score);
+    }
 }

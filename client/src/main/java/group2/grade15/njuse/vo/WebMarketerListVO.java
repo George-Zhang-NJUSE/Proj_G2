@@ -7,7 +7,7 @@ public class WebMarketerListVO implements Serializable{
 	private ArrayList<WebMarketerVO> list;
 	
 	public WebMarketerListVO(ArrayList<WebMarketerVO> list){
-		this.list=list;
+		this.list = list;
 	}
 
 	public ArrayList<WebMarketerVO> getList() {

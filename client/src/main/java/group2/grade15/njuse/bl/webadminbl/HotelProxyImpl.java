@@ -72,7 +72,7 @@ public class HotelProxyImpl implements HotelProxyBL{
         String address = hotel.getAddress();
         String contact = hotel.getContact();
         String introduction = hotel.getIntroduction();
-        ArrayList<String> facility = hotel.getFacility();
+        String facility = hotel.getFacility();
         ArrayList<RoomVO> roomVOList = hotel.getRoomList();
 
         ArrayList<RoomPO> roomList = new ArrayList<RoomPO>();
@@ -86,7 +86,7 @@ public class HotelProxyImpl implements HotelProxyBL{
         }
 
         int rank = hotel.getRank();
-        int score = hotel.getScore();
+        double score = hotel.getScore();
 
         ArrayList<CustomerVO> vipVOList = hotel.getVipList();
         ArrayList<CustomerPO> vipList = new ArrayList<CustomerPO>();
@@ -107,32 +107,4 @@ public class HotelProxyImpl implements HotelProxyBL{
         return po;
     }
 
-    //HotelProxy的私有方法，专门用于将HotelPO转化为HotelVO
-    private HotelVO hotelPOToVO(HotelPO hotel){
-        int id = hotel.getId();
-        String name = hotel.getName();
-        String address = hotel.getAddress();
-        String contact = hotel.getContact();
-        String introduction = hotel.getIntroduction();
-        ArrayList<String> facility = hotel.getFacility();
-        ArrayList<RoomPO> roomPOList = hotel.getRoomList();
-
-        ArrayList<RoomVO> roomList = new ArrayList<RoomVO>();
-        for(RoomPO po : roomPOList){
-            RoomType type = po.getType();
-            double price = po.getPrice();
-            int totalRoomNum = po.getTotalRoomNum();
-            int spareRommNum = po.getSpareRoomNum();
-            RoomVO room = new RoomVO(type, price, totalRoomNum, spareRommNum);
-            roomList.add(room);
-        }
-
-        int rank = hotel.getRank();
-        int score = hotel.getScore();
-
-        ArrayList<CustomerVO> vipList = new ArrayList<CustomerVO>();
-
-        HotelVO vo = new HotelVO(id, name, address, contact, introduction, facility, roomList, rank, score, vipList);
-        return vo;
-    }
 }
