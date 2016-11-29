@@ -2,7 +2,6 @@ package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.webadmindataservice.WebMarketerPartService;
 import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 

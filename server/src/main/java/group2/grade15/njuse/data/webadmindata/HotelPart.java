@@ -2,12 +2,10 @@ package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.webadmindataservice.HotelPartService;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.io.File;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;

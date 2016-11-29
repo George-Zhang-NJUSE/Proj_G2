@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice.commentdataservice;
+package group2.grade15.njuse.data.commentdata;
 
 import group2.grade15.njuse.po.CommentPO;
 import group2.grade15.njuse.utility.ResultMessage;

@@ -4,13 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProvincePO implements Serializable{
-	ArrayList<String> province;
+	String provinceName;
+	String provinceID;
 	
-	public ProvincePO(ArrayList<String> provinceList){ 
-		this.province=provinceList;
+	public ProvincePO(String province,String id){
+		this.provinceName=province;
+		this.provinceID=id;
 	}
 
-	public ArrayList<String> getProvince() {
-		return province;
+	public String getProvinceID() {
+		return provinceID;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
 	}
 }

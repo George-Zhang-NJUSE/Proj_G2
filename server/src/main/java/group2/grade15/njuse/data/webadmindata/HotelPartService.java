@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice.webadmindataservice;
+package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.utility.ResultMessage;

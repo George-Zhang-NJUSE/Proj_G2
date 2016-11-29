@@ -5,8 +5,10 @@ import group2.grade15.njuse.data.creditdata.CreditDatabaseImpl;
 import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
+import group2.grade15.njuse.data.searchdata.SearchDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
+import group2.grade15.njuse.dataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
@@ -28,6 +30,7 @@ public class DatabaseFactory implements DataFactory {
     WebAdminDatabaseImpl webAdminDatabase=null;
     CommentDatabaseImpl commentDatabase=null;
     CreditDataService creditDatabase=null;
+    AreaDataService areaDatabase=null;
 
     private DatabaseFactory(){}
 
@@ -112,6 +115,19 @@ public class DatabaseFactory implements DataFactory {
             }
         }
         return creditDatabase;
+    }
+
+    @Override
+    public AreaDataService getAreaDataService() throws RemoteException {
+        if(areaDatabase==null){
+            try{
+                areaDatabase=new SearchDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return areaDatabase;
     }
 
 }
