@@ -1,6 +1,10 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
+import group2.grade15.njuse.data.webadmindata.CustomerPartService;
+import group2.grade15.njuse.data.webadmindata.HotelManagerPartService;
+import group2.grade15.njuse.data.webadmindata.HotelPartService;
+import group2.grade15.njuse.data.webadmindata.WebMarketerPartService;
 import group2.grade15.njuse.dataservice.*;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -22,20 +26,16 @@ import java.util.Date;
 /**
  * Created by Guo on 2016/11/26.
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService,CustomerDataService, HotelManagerDataService, CustomerPartService,
-        HotelManagerPartService, HotelPartService, WebAdminDataService, WebMarketerPartService, WebMarketerDataService,
-        AreaDataSevice, CreditDataService, HotelDataService, HotelPromotionDataService, OrderDataService, WebPromotionDataService, Remote {
+public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService,CustomerDataService, HotelManagerDataService,
+        WebAdminDataService,WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
+        OrderDataService, WebPromotionDataService, Remote {
 
     private DataFactory dataFactory;
     private CustomerDataService customerDataService;
     private HotelManagerDataService hotelManagerDataService;
-    private CustomerPartService customerPartService;
-    private HotelManagerPartService hotelManagerPartService;
-    private HotelPartService hotelPartService;
     private WebAdminDataService webAdminDataService;
-    private WebMarketerPartService webMarketerPartService;
     private WebMarketerDataService webMarketerDataService;
-    private AreaDataSevice areaDataSevice;
+    private AreaDataService areaDataService;
     private CommentDataService commentDataService;
     private CreditDataService creditDataService;
     private HotelDataService hotelDataService;
@@ -51,6 +51,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         webAdminDataService = dataFactory.getWebAdminDataService();
         commentDataService=dataFactory.getCommentDataService();
         creditDataService=dataFactory.getCreditDataService();
+        areaDataService=dataFactory.getAreaDataService();
     }
 
     @Override
@@ -250,6 +251,26 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ProvincePO> getProvince() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CityPO> getCity(String provinceNum) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<DistrictPO> getDistrict(String cityNum) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<CbdPO> getCbd(String districtNum) {
         return null;
     }
 

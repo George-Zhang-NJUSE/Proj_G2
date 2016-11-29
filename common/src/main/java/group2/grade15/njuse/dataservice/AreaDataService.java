@@ -1,8 +1,6 @@
 package group2.grade15.njuse.dataservice;
 
-import group2.grade15.njuse.po.CbdPO;
-import group2.grade15.njuse.po.HotelManagerPO;
-import group2.grade15.njuse.po.HotelPO;
+import group2.grade15.njuse.po.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,6 +10,8 @@ import java.util.ArrayList;
  * Created by George on 2016/10/16.
  */
 public interface AreaDataService extends Remote {
-    //public ArrayList<HotelPO> getAreaList(CbdPO conditionInfo) throws RemoteException;
-
+    public ArrayList<ProvincePO> getProvince();
+    public ArrayList<CityPO> getCity(String provinceNum);
+    public ArrayList<DistrictPO> getDistrict(String cityNum);
+    public ArrayList<CbdPO> getCbd(String districtNum);
 }
