@@ -36,23 +36,7 @@ public class RemoteHelper {
         return null;
     }
 
-    public CustomerPartService getCustomerPartService(){
-        return null;
-    }
-
-    public HotelManagerPartService getHotelManagerService(){
-        return null;
-    }
-
-    public HotelPartService getHotelPartService(){
-        return null;
-    }
-
     public WebAdminDataService getWebAdminDataService(){
-        return null;
-    }
-
-    public WebMarketerPartService getMarketerPartService(){
         return null;
     }
 
@@ -71,6 +55,7 @@ public class RemoteHelper {
     public CreditDataService getCreditDataService(){
         return null;
     }
+    
     public HotelDataService getHotelDataService(){
         return null;
     }
