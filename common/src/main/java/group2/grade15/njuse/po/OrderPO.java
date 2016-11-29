@@ -20,10 +20,10 @@ public class OrderPO implements Serializable{
 	private boolean haveChild;
 	private OrderState state;
 	
-	public OrderPO(int orderID,int customer,int hotel,int amount,Date checkInTime,Date checkOutTime,Date finalExecuteTime,ArrayList<RoomPO> selectRoom,int numOfCustomer,boolean haveChild,OrderState state){
+	public OrderPO(int orderID,int customerID,int hotelID,int amount,Date checkInTime,Date checkOutTime,Date finalExecuteTime,ArrayList<RoomPO> selectRoom,int numOfCustomer,boolean haveChild,OrderState state){
 		this.orderID=orderID;
-		this.customerID=customer;
-		this.hotelID=hotel;
+		this.customerID=customerID;
+		this.hotelID=hotelID;
 		this.amount=amount;
 		this.checkInTime=checkInTime;
 		this.checkOutTime=checkOutTime;

@@ -35,5 +35,4 @@ public class SearchVO implements Serializable{
 	public ArrayList<HotelVO> getHotelList() {
 		return hotelList;
 	}
-
 }

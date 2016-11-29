@@ -84,6 +84,12 @@ public class OrderVO implements Serializable{
 	public OrderState getState() {
 		return state;
 	}
-	
 
+	public OrderPO toPO(){
+		ArrayList<RoomPO> selectPOList = new ArrayList();
+		for(RoomVO vo : selectRoom){
+			selectPOList.add(vo.toPO());
+		}
+		return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, selectPOList, numOfCustomer, haveChild, state);
+	}
 }

@@ -52,4 +52,8 @@ public class CustomerVO implements Serializable{
 	public MemberType getType() {
 		return type;
 	}
+
+	public CustomerPO toPO(){
+		return new CustomerPO(id, name, password, contact, birthday, credit, type);
+	}
 }

@@ -33,6 +33,8 @@ public class RoomVO implements Serializable{
 	public int getSpareRoomNum() {
 		return spareRoomNum;
 	}
-	
 
+	public RoomPO toPO(){
+		return new RoomPO(type, price, totalRoomNum, spareRoomNum);
+	}
 }
