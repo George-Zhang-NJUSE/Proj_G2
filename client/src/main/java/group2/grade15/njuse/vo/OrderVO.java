@@ -6,7 +6,7 @@ import group2.grade15.njuse.utility.OrderState;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;;
+import java.util.Date;
 
 public class OrderVO implements Serializable{
 	private int orderID;
