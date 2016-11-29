@@ -13,11 +13,11 @@ import java.rmi.RemoteException;
  */
 public class WebAdminLoginImpl implements LoginControllerServ {
 
-    WebAdminPO po;
     ResultMessage result;
 
     @Override
     public ResultMessage login(int id, String password) {
+        WebAdminPO po = null;
         try {
             po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(String.valueOf(id));
         } catch (RemoteException e) {
