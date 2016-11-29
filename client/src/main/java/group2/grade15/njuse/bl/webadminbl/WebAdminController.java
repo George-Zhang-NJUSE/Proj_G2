@@ -1,7 +1,6 @@
 package group2.grade15.njuse.bl.webadminbl;
 
 import group2.grade15.njuse.blservice.WebAdminServ;
-import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.po.WebAdminPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -36,14 +35,11 @@ public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxy
 			e.printStackTrace();
 		}
 
-		if(po != null) {
-            int id = Integer.parseInt(webAdminId);
-            String password = po.getPassword();
-            int staffID = Integer.parseInt(po.getStaffID());
-            vo = new WebAdminVO(id, password, staffID);
+		if(po != null){
+            return new WebAdminVO(po);
+        } else {
+            return null;
         }
-
-        return vo;
 	}
 
     @Override

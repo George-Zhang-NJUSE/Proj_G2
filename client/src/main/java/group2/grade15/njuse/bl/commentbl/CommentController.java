@@ -6,8 +6,6 @@ import group2.grade15.njuse.vo.CommentListVO;
 import group2.grade15.njuse.vo.CommentVO;
 
 public class CommentController implements CommentServ, CommentBL{
-	CommentDataService commentData;
-
 
 	public ResultMessage createComment(CommentVO CommentInfo) {
 		return null;
