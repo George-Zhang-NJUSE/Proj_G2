@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class OrderListVO implements Serializable{
 	private ArrayList<OrderVO> orderList;
+
 	public OrderListVO(ArrayList<OrderVO> orderList){
-		orderList=orderList;
+		this.orderList = orderList;
 	}
+
 	public ArrayList<OrderVO> getOrderList() {
 		return orderList;
 	}

@@ -33,5 +33,12 @@ public class CreditPO implements Serializable{
 	public ChangeReason getReason() {
 		return reason;
 	}
-	
+
+	public int getOrderID() {
+		return orderID;
+	}
+
+	public int getCreditLeft() {
+		return creditLeft;
+	}
 }

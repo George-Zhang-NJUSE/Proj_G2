@@ -1,5 +1,6 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.utility.MemberType;
 
 import java.io.Serializable;
@@ -14,14 +15,14 @@ public class CustomerVO implements Serializable{
 	private final double credit;
 	private MemberType type;
 
-	public CustomerVO(int id,String name,String password,String contact,Date birthday,double credit,MemberType type){
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.contact = contact;
-		this.birthday = birthday;
-		this.credit = credit;
-		this.type = type;
+	public CustomerVO(CustomerPO po){
+		this.id = po.getId();
+		this.name = po.getName();
+		this.password = po.getPassword();
+		this.contact = po.getContact();
+		this.birthday = po.getBirthday();
+		this.credit = po.getCredit();
+		this.type = po.getType();
 	}
 
 	public int getId() {

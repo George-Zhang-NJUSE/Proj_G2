@@ -1,27 +1,24 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.WebAdminPO;
+
 import java.io.Serializable;;
 
 public class WebMarketerVO implements Serializable{
-	private int id;
 	private String password;
-	private int staffID;
+	private String staffID;
 	
-	public WebMarketerVO(int id,String password,int staffID){
-		this.id=id;
-		this.password=password;
-		this.staffID=staffID;
+	public WebMarketerVO(WebAdminPO po){
+		password = po.getPassword();
+		staffID = po.getStaffID();
 	}
 
-	public int getId() {
-		return id;
-	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public int getStaffID() {
+	public String getStaffID() {
 		return staffID;
 	}
 

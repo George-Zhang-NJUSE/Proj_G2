@@ -1,10 +1,15 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
 import group2.grade15.njuse.po.CustomerPO;
+import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
+import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import static group2.grade15.njuse.utility.IDType.hotel;
 
 public class HotelVO implements Serializable{
 	private int id;
@@ -12,23 +17,35 @@ public class HotelVO implements Serializable{
 	private String address;
 	private String contact;
 	private String introduction;
-	private ArrayList<String> facility;
+	private String facility;
 	private ArrayList<RoomVO> roomList;
 	private ArrayList<CustomerVO> vipList;
 	private int rank;
-	private int score;
+	private double score;
 	
-	public HotelVO(int id, String name, String address, String contact, String introduction, ArrayList<String> facility, ArrayList<RoomVO> roomList, int rank, int score, ArrayList<CustomerVO> vipList){
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.contact = contact;
-		this.introduction = introduction;
-		this.facility = facility;
-		this.roomList = roomList;
-		this.rank = rank;
-		this.score = score;
-		this.vipList = vipList;
+	public HotelVO(HotelPO hotel){
+		id = hotel.getId();
+		name = hotel.getName();
+		address = hotel.getAddress();
+		contact = hotel.getContact();
+		introduction = hotel.getIntroduction();
+		facility = hotel.getFacility();
+		rank = hotel.getRank();
+		score = hotel.getScore();
+
+        roomList = new ArrayList();
+        ArrayList<RoomPO> roomPOList = hotel.getRoomList();
+        for(RoomPO po : roomPOList) {
+            RoomVO room = new RoomVO(po);
+            roomList.add(room);
+        }
+
+        vipList = new ArrayList();
+		ArrayList<CustomerPO> vipPOList = hotel.getVipList();
+        for(CustomerPO po : vipPOList){
+            CustomerVO customer = new CustomerVO(po);
+            vipList.add(customer);
+        }
 	}
 
 	public int getId() {
@@ -51,7 +68,7 @@ public class HotelVO implements Serializable{
 		return introduction;
 	}
 
-	public ArrayList<String> getFacility() {
+	public String  getFacility() {
 		return facility;
 	}
 
@@ -63,14 +80,12 @@ public class HotelVO implements Serializable{
 		return vipList;
 	}
 
-
 	public int getRank() {
 		return rank;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	
 
 }

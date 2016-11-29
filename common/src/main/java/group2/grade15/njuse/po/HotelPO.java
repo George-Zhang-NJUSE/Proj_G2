@@ -15,7 +15,6 @@ public class HotelPO implements Serializable{
 	private double score;
 	private ArrayList<CustomerPO> vipList;
 	private Byte[][] picture;
-
 	public Byte[][] getPicture() {
 		return picture;
 	}
@@ -74,5 +73,6 @@ public class HotelPO implements Serializable{
 	public double getScore() {
 		return score;
 	}
+
 
 }

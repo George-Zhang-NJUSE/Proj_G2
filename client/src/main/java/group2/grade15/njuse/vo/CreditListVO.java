@@ -7,7 +7,7 @@ public class CreditListVO implements Serializable{
 	private ArrayList<CreditVO> creditList;
 	
 	public CreditListVO(ArrayList<CreditVO> creditList){
-		this.creditList=creditList;
+		this.creditList = creditList;
 	}
 
 	public ArrayList<CreditVO> getCreditList() {

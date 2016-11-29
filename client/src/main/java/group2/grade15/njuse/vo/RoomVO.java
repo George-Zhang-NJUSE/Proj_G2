@@ -1,5 +1,6 @@
 package group2.grade15.njuse.vo;
 
+import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
@@ -10,11 +11,11 @@ public class RoomVO implements Serializable{
 	private int totalRoomNum;
 	private int spareRoomNum;
 	
-	public RoomVO(RoomType type,double price,int totalRoomNum,int spareRoomNum){
-		this.type=type;
-		this.price=price;
-		this.totalRoomNum=totalRoomNum;
-		this.spareRoomNum=spareRoomNum;
+	public RoomVO(RoomPO po){
+		type = po.getType();
+		price = po.getPrice();
+		totalRoomNum = po.getTotalRoomNum();
+		spareRoomNum = po.getSpareRoomNum();
 	}
 
 	public RoomType getType() {
