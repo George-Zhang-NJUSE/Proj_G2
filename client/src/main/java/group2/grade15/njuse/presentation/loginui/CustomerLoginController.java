@@ -1,9 +1,9 @@
 package group2.grade15.njuse.presentation.loginui;
 
 import group2.grade15.njuse.presentation.applyui.CustomerApplyController;
+import group2.grade15.njuse.presentation.customerui.CustomerMainController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
-import group2.grade15.njuse.presentation.webadminui.WebAdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -145,26 +145,26 @@ public class CustomerLoginController implements Initializable {
 //        Alert accountInvalid = new Alert(Alert.AlertType.ERROR, "该账号未注册");
 //        accountInvalid.showAndWait();
 
-//        jumpToMain();
+        jumpToMain();
 
     }
 
     private void jumpToMain() {
         // TODO: 2016/11/25 customer主界面还没写 
         try {
-            FXMLLoader webAdminMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webadminui/WebAdminMain.fxml"));
-            Stage webAdminStage = new Stage();
-            webAdminStage.setScene(new Scene((Parent) webAdminMainLoader.load()));
+            FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerMain.fxml"));
+            Stage customerStage = new Stage();
+            customerStage.setScene(new Scene((Parent) customerMainLoader.load()));
 
-            WebAdminController webAdminController = webAdminMainLoader.<WebAdminController>getController();
+            CustomerMainController mainController = customerMainLoader.<CustomerMainController>getController();
 //            webAdminController.initData();
 
             currentStage.close();
 
-            webAdminStage.setTitle("酒店预订系统——客户端");
-            webAdminStage.sizeToScene();
-            webAdminStage.setResizable(false);
-            webAdminStage.show();
+            customerStage.setTitle("酒店预订系统——客户端");
+            customerStage.sizeToScene();
+            customerStage.setResizable(false);
+            customerStage.show();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
