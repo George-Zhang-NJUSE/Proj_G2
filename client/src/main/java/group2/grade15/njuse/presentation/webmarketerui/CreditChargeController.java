@@ -34,7 +34,7 @@ public class CreditChargeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/marketer/Cancel");
+        CustomeButton.implButton(cancel,"file:client/src/main/res/webmarketer/Cancel");
 
     }
 }

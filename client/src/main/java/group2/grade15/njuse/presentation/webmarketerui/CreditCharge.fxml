@@ -70,13 +70,13 @@
                   <Label fx:id="check">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" >
-                            <Image url="flie:client/src/main/res/webmarketer/Check.png"/>
+                            <Image url="file:client/src/main/res/webmarketer/Check.png"/>
                         </ImageView>
                      </graphic>
                   </Label>
-                  <Label>
+                  <Label fx:id="cancel">
                      <graphic>
-                        <ImageView fx:id="cancel" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView  fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="file:client/src/main/res/webmarketer/Cancel.png"/>
                         </ImageView>
                      </graphic>
