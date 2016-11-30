@@ -55,7 +55,7 @@ public class RemoteHelper {
     public CreditDataService getCreditDataService(){
         return null;
     }
-    
+
     public HotelDataService getHotelDataService(){
         return null;
     }
