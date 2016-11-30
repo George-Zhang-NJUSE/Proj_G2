@@ -16,4 +16,11 @@ public class PromotionVO {
         return type;
     }
 
+    public PromotionPO toPO(){
+        return new PromotionPO(type);
+    }
+
+    public int getId() {
+        return id;
+    }
 }
