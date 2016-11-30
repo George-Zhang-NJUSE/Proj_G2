@@ -19,7 +19,15 @@ public class HotelManagerVO implements Serializable{
 		contact = po.getContact();
 		hotelID = po.getHotelID();
 	}
-	
+
+	public HotelManagerVO(int id, String password, String name, String contact, int hotelID){
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.contact = contact;
+        this.hotelID = hotelID;
+    }
+
 	public int getId() {
 		return id;
 	}

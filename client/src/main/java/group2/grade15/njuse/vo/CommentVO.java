@@ -12,6 +12,7 @@ public class CommentVO implements Serializable{
 	private int commentID;
 	private Date time;
 	private double score;
+    private int orderID;
 	
 	public CommentVO(CommentPO po){
 		hotelID = po.getHotelID();
@@ -20,7 +21,18 @@ public class CommentVO implements Serializable{
 		commentID = po.getCommentID();
 		time = po.getTime();
 		score = po.getScore();
+        orderID = po.getOrderID();
 	}
+
+	public CommentVO(int hotelID, int userID, String comment, int commentID, Date time, double score, int orderID){
+        this.hotelID = hotelID;
+        this.userID = userID;
+        this.comment = comment;
+        this.commentID = commentID;
+        this.time = time;
+        this.score = score;
+        this.orderID = orderID;
+    }
 
     public int getHotelID() {
         return hotelID;
@@ -47,6 +59,6 @@ public class CommentVO implements Serializable{
     }
 
     public CommentPO toPO(){
-        return new CommentPO(hotelID, userID, time, comment,commentID, score);
+        return new CommentPO(hotelID, userID, time, comment,commentID, score, orderID);
     }
 }
