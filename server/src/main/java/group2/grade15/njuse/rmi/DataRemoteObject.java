@@ -215,6 +215,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
+    public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
         return null;
     }
