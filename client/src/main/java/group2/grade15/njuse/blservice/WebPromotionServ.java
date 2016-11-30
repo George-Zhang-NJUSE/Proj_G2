@@ -11,5 +11,5 @@ public interface WebPromotionServ {
 	
 	public ResultMessage modifyWebPromotion (Promotion promotion); 
 
-	public ResultMessage changeState(Promotion PromotionVO); 
+	public ResultMessage changeState(Promotion romotion);
 }

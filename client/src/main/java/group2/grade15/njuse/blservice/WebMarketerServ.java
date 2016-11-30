@@ -8,7 +8,7 @@ import group2.grade15.njuse.vo.WebMarketerVO;
 import group2.grade15.njuse.vo.WebPromotionListVO;
 
 public interface WebMarketerServ {
-	public WebMarketerVO getInfo(int WebMarketerId) ;
+	public WebMarketerVO getInfo(String webMarketerId) ;
 	
 	public Promotion createWebPromotion (Promotion promotionInfo); 
 	

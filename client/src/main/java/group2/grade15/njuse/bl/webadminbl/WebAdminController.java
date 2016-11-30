@@ -19,10 +19,8 @@ public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxy
 
 	private HotelProxyBL hotelProxy;
 	private UserProxyBL userProxy;
-    private WebAdminPO webAdminPO;
 
-	public WebAdminController(WebAdminPO po){
-        webAdminPO = po;
+	public WebAdminController(){
 		hotelProxy = new HotelProxyImpl();
 		userProxy = new UserProxyImpl();
 	}
