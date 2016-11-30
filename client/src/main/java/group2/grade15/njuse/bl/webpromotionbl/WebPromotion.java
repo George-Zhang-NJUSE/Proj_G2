@@ -2,17 +2,23 @@ package group2.grade15.njuse.bl.webpromotionbl;
 
 import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.WebPromotionServ;
+import group2.grade15.njuse.po.PromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.PromotionVO;
 import group2.grade15.njuse.vo.WebPromotionListVO;
+import group2.grade15.njuse.vo.WebPromotionVO;
 
-public class WebPromotion implements WebPromotionServ,WebPromotionBL{
+public class WebPromotion extends Promotion implements WebPromotionServ,WebPromotionBL{
 
+	public WebPromotion(PromotionPO po) {
+		super(po);
+	}
 
 	public WebPromotionListVO getWebPromotionList() {
 		return null;
 	}
 
-	public Promotion createWebPromotion(Promotion promotionInfo) {
+	public WebPromotionVO createWebPromotion(PromotionVO promotionInfo) {
 		return null;
 	}
 
@@ -20,11 +26,11 @@ public class WebPromotion implements WebPromotionServ,WebPromotionBL{
 		return null;
 	}
 
-	public ResultMessage modifyWebPromotion(Promotion promotion) {
+	public ResultMessage modifyWebPromotion(PromotionVO promotion) {
 		return null;
 	}
 
-	public ResultMessage changeState(Promotion PromotionVO) {
+	public ResultMessage changeState(PromotionVO PromotionVO) {
 		return null;
 	}
 }

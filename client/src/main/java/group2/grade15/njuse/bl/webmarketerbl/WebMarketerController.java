@@ -8,10 +8,7 @@ import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.CreditVO;
-import group2.grade15.njuse.vo.OrderListVO;
-import group2.grade15.njuse.vo.WebMarketerVO;
-import group2.grade15.njuse.vo.WebPromotionListVO;
+import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 
@@ -48,7 +45,7 @@ public class WebMarketerController implements WebMarketerServ{
     }
 
     @Override
-    public Promotion createWebPromotion(Promotion promotionInfo) {
+    public WebPromotionVO createWebPromotion(PromotionVO promotionInfo) {
         return webPromotionProxy.createWebPromotion(promotionInfo);
     }
 
@@ -58,12 +55,12 @@ public class WebMarketerController implements WebMarketerServ{
     }
 
     @Override
-    public ResultMessage modifyWebPromotion(Promotion promotion) {
+    public ResultMessage modifyWebPromotion(PromotionVO promotion) {
         return webPromotionProxy.modifyWebPromotion(promotion);
     }
 
     @Override
-    public ResultMessage changeState(Promotion promotion) {
+    public ResultMessage changeState(PromotionVO promotion) {
         return webPromotionProxy.changeState(promotion);
     }
 
