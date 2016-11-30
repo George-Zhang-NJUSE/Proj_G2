@@ -10,7 +10,13 @@ public class PromotionVO {
 
 	public PromotionVO(PromotionPO po) {
 		type = po.getType();
+        id = po.getId();
 	}
+
+	public PromotionVO(PromotionType type, int id){
+        this.type = type;
+        this.id = id;
+    }
 
     public PromotionType getType() {
         return type;

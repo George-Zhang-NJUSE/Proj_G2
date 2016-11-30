@@ -14,6 +14,10 @@ public class WebMarketerVO implements Serializable{
 		staffID = po.getStaffID();
 	}
 
+	public WebMarketerVO(String password, String staffID){
+		this.password = password;
+		this.staffID = staffID;
+	}
 
 	public String getPassword() {
 		return password;
