@@ -1,9 +1,8 @@
 package group2.grade15.njuse.presentation.customerui;
 
-import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,27 +13,25 @@ import java.net.URL;
  */
 public class CustomerMainController {
 
-    private Stage currentStage;
+    @FXML
+    private Pane functionPane;
 
-    public CustomerMainController(Stage priStage) {
-        currentStage = priStage;
+    @FXML
+    protected void mouseReleasePersonalInfo() {
+        showPersonalInfoPane();
+    }
+
+    private void showPersonalInfoPane() {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
-
-            currentStage.setTitle("酒店预订系统——客户端");
-            currentStage.setScene(new Scene(loader.load()));
-            currentStage.sizeToScene();
-            currentStage.setResizable(false);
-
-            CustomerLoginController loginController = loader.getController();
-            loginController.setStage(currentStage);
-
-            currentStage.show();
-
+            FXMLLoader personalInfoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml"));
+            functionPane.getChildren().removeAll();
+            functionPane.getChildren().add(personalInfoLoader.load());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
