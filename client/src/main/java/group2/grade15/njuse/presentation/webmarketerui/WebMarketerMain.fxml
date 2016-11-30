@@ -32,7 +32,7 @@
                         <Image url="file:client/src/main/res/webadmin/bc.jpg" />
                      </image>
                   </ImageView>
-                  <Pane fx:id="opPane" layoutX="40.0" layoutY="63.0" prefHeight="800.0" prefWidth="1200.0" />
+                  <Pane fx:id="motherPane" layoutX="40.0" layoutY="63.0" prefHeight="800.0" prefWidth="1200.0" />
                </children>
             </Group>
          </children>

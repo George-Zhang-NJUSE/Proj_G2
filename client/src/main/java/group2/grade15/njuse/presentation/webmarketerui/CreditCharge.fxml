@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.CreditChargeController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.2" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
          <children>
             <Label text="信用充值" GridPane.columnIndex="1">
