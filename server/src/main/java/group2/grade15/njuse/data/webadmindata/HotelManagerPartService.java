@@ -13,4 +13,5 @@ import java.util.ArrayList;
 public interface HotelManagerPartService extends Remote{
     public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException;
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException;
+    public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException;
 }

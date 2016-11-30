@@ -81,4 +81,44 @@ public class HotelManagerPart implements HotelManagerPartService{
             return ResultMessage.FAILED;
         }
     }
+
+    @Override
+    public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+        if(hotelManagerPartDatabase==null){
+            hotelManagerPartDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement add=hotelManagerPartDatabase.prepareStatement("insert into hotelmanager values(?,?,?,?,?)");
+            Statement makeID=hotelManagerPartDatabase.createStatement();
+            ResultSet resultSet=makeID.executeQuery("select max(hotelmanagerid) from hotelmanager");
+            int id=0;
+            if(resultSet.next()){
+                id=resultSet.getInt(1)+1;
+            }
+            else{
+                throw new SQLException();
+            }
+            makeID.close();
+
+            add.setInt(1,id);
+            add.setString(2,hotelManagerPO.getPassword());
+            add.setString(3,hotelManagerPO.getName());
+            add.setString(4,hotelManagerPO.getContact());
+            add.setInt(5,hotelManagerPO.getHotelID());
+
+            add.executeUpdate();
+
+            add.close();
+            hotelManagerPartDatabase.close();
+            hotelManagerPartDatabase=null;
+
+            HotelManagerPO po=new HotelManagerPO(id,hotelManagerPO.getPassword(),hotelManagerPO.getName(),
+                    hotelManagerPO.getContact(),hotelManagerPO.getHotelID());
+            return po;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -89,6 +89,14 @@ public class WebAdminDatabaseImpl implements WebAdminDataService,CustomerPartSer
 	}
 
 	@Override
+	public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
+		if(hotelManagerPart==null){
+			hotelManagerPart=new HotelManagerPart(info);
+		}
+		return hotelManagerPart.addHotelManagerInfo(hotelManagerPO);
+	}
+
+	@Override
 	public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
 		if(webMarketerPart==null){
 			webMarketerPart=new WebMarketerPart(info);

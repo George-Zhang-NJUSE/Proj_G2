@@ -102,4 +102,10 @@ public class WebAdminDatabaseTest {
     public void deleteHotelInfoTest() throws RemoteException{
         assertEquals(ResultMessage.SUCCESS,webAdminDatabase.deleteHotelInfo(2));
     }
+
+    @Test
+    public void addHotelManagerTest() throws RemoteException{
+        HotelManagerPO po=new HotelManagerPO(0,"111","wang","110",1);
+        assertEquals(2,webAdminDatabase.addHotelManagerInfo(po).getId());
+    }
 }
