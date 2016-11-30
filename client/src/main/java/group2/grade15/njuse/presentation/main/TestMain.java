@@ -13,6 +13,8 @@ import java.net.URL;
 
 /**
  * Created by ALIENWARE-PC on 2016/11/27.
+ * 这个启动类被且仅被用于测试单个fxml的界面
+ * 它不应该跟任何一个其他类构成耦合_(:з」∠)_
  */
 public class TestMain extends Application{
     @Override
