@@ -13,11 +13,11 @@ public class HotelPO implements Serializable{
 	private ArrayList<RoomPO> roomList;
 	private int rank;
 	private double score;
-	private ArrayList<CustomerPO> vipList;
-	private Byte[][] picture;
+	//private ArrayList<CustomerPO> vipList;
+	private byte[][] picture;
 
 	public HotelPO(int id, String name, String address, String contact, String introduction, String facility,
-				   ArrayList<RoomPO> roomList, int rank, double score,ArrayList<CustomerPO> vipList,Byte[][] picture){
+				   ArrayList<RoomPO> roomList, int rank, double score/*,ArrayList<CustomerPO> vipList*/,byte[][] picture){
 		this.id=id;
 		this.name=name;
 		this.address=address;
@@ -27,7 +27,7 @@ public class HotelPO implements Serializable{
 		this.roomList=roomList;
 		this.rank=rank;
 		this.score=score;
-		this.vipList=vipList;
+		//this.vipList=vipList;
 		this.picture=picture;
 	}
 	
@@ -35,9 +35,9 @@ public class HotelPO implements Serializable{
 		return id;
 	}
 
-	public ArrayList<CustomerPO> getVipList() {
+	/*public ArrayList<CustomerPO> getVipList() {
 		return vipList;
-	}
+	}*/
 	
 	public String getName() {
 		return name;
@@ -71,7 +71,7 @@ public class HotelPO implements Serializable{
 		return score;
 	}
 
-	public Byte[][] getPicture() {
+	public byte[][] getPicture() {
 		return picture;
 	}
 }
