@@ -4,7 +4,7 @@ import group2.grade15.njuse.utility.PromotionType;
 
 import java.io.Serializable;
 
-public abstract class PromotionPO implements Serializable{
+public class PromotionPO implements Serializable{
 	private PromotionType type;
 	private int id;
 	public PromotionPO(PromotionType type){

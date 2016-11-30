@@ -18,7 +18,7 @@ public class HotelPromotion extends Promotion implements HotelPromotionBL, Hotel
     }
 
     @Override
-    public HotelPromotionVO createHotelPromotion(PromotionVO promotionInfo) {
+    public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo) {
         return null;
     }
 
@@ -28,12 +28,12 @@ public class HotelPromotion extends Promotion implements HotelPromotionBL, Hotel
     }
 
     @Override
-    public ResultMessage modifyHotelPromotion(PromotionVO promotion) {
+    public ResultMessage modifyHotelPromotion(HotelPromotionVO promotion) {
         return null;
     }
 
     @Override
-    public ResultMessage changeState(PromotionVO PromotionVO) {
+    public ResultMessage changeState(HotelPromotionVO promotionVO) {
         return null;
     }
 
