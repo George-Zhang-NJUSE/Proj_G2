@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotion;
 import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.vo.HotelPromotionVO;
@@ -24,7 +25,7 @@ public class HotelPromotionFactory {
         return hotelPromotionFactory;
     }
 
-    public HotelPromotionVO createHotelPromotion(PromotionVO vo) {
+    public HotelPromotionVO createHotelPromotion(HotelPromotionVO vo) {
         return hotelPromotionImpl.createHotelPromotion(vo);
     }
 

@@ -25,7 +25,7 @@ public class WebPromotionFactory {
         return webPromotionFactory;
     }
 
-    public WebPromotionVO createWebPromotion(PromotionVO vo) {
+    public WebPromotionVO createWebPromotion(WebPromotionVO vo) {
         return webPromotionImpl.createWebPromotion(vo);
     }
 
