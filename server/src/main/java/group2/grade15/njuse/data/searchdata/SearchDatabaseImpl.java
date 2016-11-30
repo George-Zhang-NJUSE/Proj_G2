@@ -6,29 +6,26 @@ import group2.grade15.njuse.dataservice.AreaDataService;
 import group2.grade15.njuse.po.*;
 
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class SearchDatabaseImpl implements AreaDataService {
 	private DatabaseMySql mySql=null;
-	private Connection searchDatabese=null;
+	private Connection searchDatabase=null;
 
 	public SearchDatabaseImpl(DatabaseInfo info) throws RemoteException{
 		mySql=new DatabaseMySql(info);
-		searchDatabese=mySql.init();
+		searchDatabase=mySql.init();
 	}
 
 	@Override
 	public ArrayList<ProvincePO> getProvince() {
-	    if(searchDatabese==null){
-	        searchDatabese=mySql.init();
+	    if(searchDatabase==null){
+	        searchDatabase=mySql.init();
         }
 
         try{
-            Statement getProvince=searchDatabese.createStatement();
+            Statement getProvince=searchDatabase.createStatement();
             ResultSet resultSet=getProvince.executeQuery("select * from province");
 
             ArrayList<ProvincePO> list=new ArrayList<ProvincePO>();
@@ -41,8 +38,8 @@ public class SearchDatabaseImpl implements AreaDataService {
             }
 
             getProvince.close();
-            searchDatabese.close();
-            searchDatabese=null;
+            searchDatabase.close();
+            searchDatabase=null;
 
             return list;
         }catch (SQLException e){
@@ -53,16 +50,96 @@ public class SearchDatabaseImpl implements AreaDataService {
 
 	@Override
 	public ArrayList<CityPO> getCity(String provinceNum) {
-		return null;
+		if(searchDatabase==null){
+		    searchDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement city=searchDatabase.prepareStatement("select cityname,citynum from city where provincenum = ?");
+            city.setString(1,provinceNum);
+            ResultSet resultSet=city.executeQuery();
+
+            ArrayList<CityPO> list=new ArrayList<CityPO>();
+            while(resultSet.next()){
+                String name=resultSet.getString(1);
+                String num=resultSet.getString(2);
+                CityPO cityPO=new CityPO(name,num);
+                list.add(cityPO);
+            }
+
+            city.close();
+            searchDatabase.close();
+            searchDatabase=null;
+
+            return list;
+        }catch (SQLException e){
+		    e.printStackTrace();
+		    return null;
+        }
 	}
 
 	@Override
 	public ArrayList<DistrictPO> getDistrict(String cityNum) {
-		return null;
+        if(searchDatabase==null){
+            searchDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement district=searchDatabase.prepareStatement("select districtname,districtnum from district where citynum = ?");
+            district.setString(1,cityNum);
+            ResultSet resultSet=district.executeQuery();
+
+            ArrayList<DistrictPO> list=new ArrayList<DistrictPO>();
+            while(resultSet.next()){
+                String name=resultSet.getString(1);
+                String num=resultSet.getString(2);
+                DistrictPO districtPO=new DistrictPO(name,num);
+                list.add(districtPO);
+            }
+
+            district.close();
+            searchDatabase.close();
+            searchDatabase=null;
+
+            return list;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
 	}
 
 	@Override
 	public ArrayList<CbdPO> getCbd(String districtNum) {
-		return null;
+        if(searchDatabase==null){
+            searchDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement cbd=searchDatabase.prepareStatement("select cbdname,cbdnum from cbd where districtnum = ?");
+            cbd.setString(1,districtNum);
+            ResultSet resultSet=cbd.executeQuery();
+
+            ArrayList<CbdPO> list=new ArrayList<CbdPO>();
+            while(resultSet.next()){
+                String name=resultSet.getString(1);
+                String num=resultSet.getString(2);
+                CbdPO cbdPO=new CbdPO(name,num);
+                list.add(cbdPO);
+            }
+
+            cbd.close();
+            searchDatabase.close();
+            searchDatabase=null;
+
+            return list;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
 	}
+
+    @Override
+    public ArrayList<HotelPO> getHotel(String address) {
+        return null;
+    }
 }

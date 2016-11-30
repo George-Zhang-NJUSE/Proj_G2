@@ -4,14 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CbdPO implements Serializable{
-	ArrayList<String> cbd;
-	
-	public CbdPO (ArrayList<String> cbd){
-		this.cbd=cbd;
+	private String cbdName;
+	private String cbdNum;
+
+	public CbdPO(String cbdName, String cbdNum) {
+
+		this.cbdName = cbdName;
+		this.cbdNum = cbdNum;
 	}
 
-	public ArrayList<String> getCbd() {
-		return cbd;
+	public String getCbdName() {
+		return cbdName;
 	}
 
+	public String getCbdNum() {
+		return cbdNum;
+	}
 }
