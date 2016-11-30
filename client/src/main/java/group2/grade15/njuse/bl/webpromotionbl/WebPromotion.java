@@ -3,10 +3,12 @@ package group2.grade15.njuse.bl.webpromotionbl;
 import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.WebPromotionServ;
 import group2.grade15.njuse.po.PromotionPO;
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.PromotionVO;
 import group2.grade15.njuse.vo.WebPromotionListVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
+
+import java.rmi.RemoteException;
 
 public class WebPromotion extends Promotion implements WebPromotionServ,WebPromotionBL{
 
@@ -18,7 +20,15 @@ public class WebPromotion extends Promotion implements WebPromotionServ,WebPromo
 		return null;
 	}
 
-	public WebPromotionVO createWebPromotion(PromotionVO promotionInfo) {
+	public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
+		ResultMessage result = ResultMessage.FAILED;
+
+		try {
+			result = RemoteHelper.getInstance().getWebPromotionDataService().add(promotionInfo.toPO());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
@@ -26,11 +36,11 @@ public class WebPromotion extends Promotion implements WebPromotionServ,WebPromo
 		return null;
 	}
 
-	public ResultMessage modifyWebPromotion(PromotionVO promotion) {
+	public ResultMessage modifyWebPromotion(WebPromotionVO promotion) {
 		return null;
 	}
 
-	public ResultMessage changeState(PromotionVO PromotionVO) {
+	public ResultMessage changeState(WebPromotionVO promotionVO) {
 		return null;
 	}
 }

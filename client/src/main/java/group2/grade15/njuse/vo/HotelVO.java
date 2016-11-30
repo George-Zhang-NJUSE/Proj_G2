@@ -1,6 +1,7 @@
 package group2.grade15.njuse.vo;
 
 import group2.grade15.njuse.bl.customerbl.Customer;
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
@@ -48,6 +49,20 @@ public class HotelVO implements Serializable{
             CustomerVO customer = new CustomerVO(po);
             vipList.add(customer);
         }
+	}
+
+	public HotelVO(int id, String name, String address, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, Byte[][] picture){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.introduction = introduction;
+        this.facility = facility;
+        this.roomList = roomList;
+	    this.vipList = vipList;
+        this.rank = rank;
+        this.score = score;
+        this.picture = picture;
 	}
 
 	public int getId() {

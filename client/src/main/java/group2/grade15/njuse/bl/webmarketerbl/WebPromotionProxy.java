@@ -13,7 +13,7 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 public class WebPromotionProxy implements WebPromotionServ {
 
     @Override
-    public WebPromotionVO createWebPromotion(PromotionVO promotionInfo) {
+    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
         return WebPromotionFactory.getInstance().createWebPromotion(promotionInfo);
     }
 
@@ -23,12 +23,12 @@ public class WebPromotionProxy implements WebPromotionServ {
     }
 
     @Override
-    public ResultMessage modifyWebPromotion(PromotionVO promotion) {
+    public ResultMessage modifyWebPromotion(WebPromotionVO promotion) {
         return null;
     }
 
     @Override
-    public ResultMessage changeState(PromotionVO PromotionVO) {
+    public ResultMessage changeState(WebPromotionVO PromotionVO) {
         return null;
     }
 }

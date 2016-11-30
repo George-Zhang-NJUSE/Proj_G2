@@ -61,7 +61,13 @@ public class UserProxyImpl implements UserProxyBL{
 	}
 
 	public ResultMessage createHotelManager(HotelManagerVO hotelManager){
-		return null;
+		ResultMessage result = ResultMessage.FAILED;
+		try {
+			RemoteHelper.getInstance().getWebAdminDataService().addHotelManagerInfo(hotelManager.toPO());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	public ResultMessage modifyWebMarketer(WebMarketerVO webMarketer){

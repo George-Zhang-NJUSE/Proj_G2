@@ -18,6 +18,13 @@ public class RoomVO implements Serializable{
 		spareRoomNum = po.getSpareRoomNum();
 	}
 
+	public RoomVO(RoomType type, double price, int totalRoomNum, int spareRoomNum){
+		this.type = type;
+		this.price = price;
+		this.totalRoomNum = totalRoomNum;
+		this.spareRoomNum = spareRoomNum;
+	}
+
 	public RoomType getType() {
 		return type;
 	}

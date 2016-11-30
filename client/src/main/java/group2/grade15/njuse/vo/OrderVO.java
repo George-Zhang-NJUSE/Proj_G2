@@ -41,6 +41,20 @@ public class OrderVO implements Serializable{
 		}
 	}
 
+	public OrderVO(int orderID, int customerID, int hotelID, int amount, Date checkInTime, Date checkOutTime, Date finalExecuteTime, ArrayList<RoomVO> selectRoom, int numOfCustomer, boolean haveChild, OrderState state){
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.hotelID = hotelID;
+        this.amount = amount;
+        this.checkInTime = checkInTime;
+        this.checkOutTime = checkOutTime;
+        this.finalExecuteTime = finalExecuteTime;
+        this.numOfCustomer = numOfCustomer;
+        this.haveChild = haveChild;
+        this.state = state;
+        this.selectRoom = selectRoom;
+    }
+
 	public int getCustomerID() {
 		return customerID;
 	}
