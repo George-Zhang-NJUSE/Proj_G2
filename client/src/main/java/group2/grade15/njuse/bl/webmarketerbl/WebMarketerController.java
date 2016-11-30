@@ -45,7 +45,7 @@ public class WebMarketerController implements WebMarketerServ{
     }
 
     @Override
-    public WebPromotionVO createWebPromotion(PromotionVO promotionInfo) {
+    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
         return webPromotionProxy.createWebPromotion(promotionInfo);
     }
 
@@ -55,12 +55,12 @@ public class WebMarketerController implements WebMarketerServ{
     }
 
     @Override
-    public ResultMessage modifyWebPromotion(PromotionVO promotion) {
+    public ResultMessage modifyWebPromotion(WebPromotionVO promotion) {
         return webPromotionProxy.modifyWebPromotion(promotion);
     }
 
     @Override
-    public ResultMessage changeState(PromotionVO promotion) {
+    public ResultMessage changeState(WebPromotionVO promotion) {
         return webPromotionProxy.changeState(promotion);
     }
 
