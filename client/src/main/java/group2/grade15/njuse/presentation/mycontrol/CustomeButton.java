@@ -15,12 +15,11 @@ public class CustomeButton{
      *
      * @param label
      * @param url 不要加后缀名 比如直接写client/src/main/res/webadmin/setting
-     *            连file:都不要写
      */
     public static void implButton(Label label, String url){
-        String originURL="file:"+url+".png";
-        String enterURL="file:"+url+"_enter.png";
-        String pressURL="file:"+url+"_press.png";
+        String originURL=url+".png";
+        String enterURL=url+"_enter.png";
+        String pressURL=url+"_press.png";
         Image origin=new Image(originURL);
         Image press=new Image(pressURL);
         Image enter=new Image(enterURL);
