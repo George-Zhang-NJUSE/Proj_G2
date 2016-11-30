@@ -63,7 +63,7 @@ public class CustomerLoginController implements Initializable {
 
     @FXML
     protected void mouseInLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_movein.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_enter.png"));
     }
 
     @FXML
@@ -78,13 +78,13 @@ public class CustomerLoginController implements Initializable {
 
     @FXML
     protected void mouseReleaseLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_movein.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_enter.png"));
         login();
     }
 
     @FXML
     protected void mouseInApply() {
-        applyIconImage.setImage(new Image("file:client/src/main/res/login/applyicon_movein.png"));
+        applyIconImage.setImage(new Image("file:client/src/main/res/login/applyicon_enter.png"));
     }
 
     @FXML
@@ -99,7 +99,7 @@ public class CustomerLoginController implements Initializable {
 
     @FXML
     protected void mouseReleaseApply() {
-        applyIconImage.setImage(new Image("file:client/src/main/res/login/applyicon_movein.png"));
+        applyIconImage.setImage(new Image("file:client/src/main/res/login/applyicon_enter.png"));
         showApplyPanel();
     }
 
