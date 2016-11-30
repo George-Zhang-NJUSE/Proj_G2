@@ -279,6 +279,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         return null;
     }
 
+    @Override
+    public ArrayList<HotelPO> getHotel(String address) {
+        return null;
+    }
+
     /*@Override
     public ArrayList<HotelPO> getAreaList(CbdPO conditionInfo) throws RemoteException {
         return null;

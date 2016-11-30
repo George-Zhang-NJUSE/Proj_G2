@@ -26,4 +26,19 @@ public class SearchDatabaseTest {
         assertEquals("江苏省",searchDatabase.getProvince().get(0).getProvinceName());
     }
 
+    @Test
+    public void getCityTest() throws RemoteException{
+        assertEquals("南京市",searchDatabase.getCity("00001").get(0).getCityName());
+    }
+
+   @Test
+    public void getDistrictTest() throws RemoteException{
+        assertEquals("栖霞区",searchDatabase.getDistrict("0000100001").get(0).getDistrictName());
+   }
+
+   @Test
+    public void getCBDTest() throws RemoteException{
+        assertEquals("仙林中心",searchDatabase.getCbd("000010000100001").get(0).getCbdName());
+   }
+
 }

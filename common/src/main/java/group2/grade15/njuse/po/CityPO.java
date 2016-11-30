@@ -4,14 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CityPO implements Serializable{
-	ArrayList<String> city;
-	
-	public CityPO(ArrayList<String> cityList){
-		this.city=cityList;
+	private String cityName;
+	private String cityNum;
+
+	public CityPO(String cityName, String cityNum) {
+		this.cityName = cityName;
+		this.cityNum = cityNum;
 	}
 
-	public ArrayList<String> getCity() {
-		return city;
+	public String getCityName() {
+		return cityName;
 	}
-	
+
+	public String getCityNum() {
+		return cityNum;
+	}
 }

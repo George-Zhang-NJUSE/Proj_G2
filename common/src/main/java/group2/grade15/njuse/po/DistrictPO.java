@@ -4,13 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DistrictPO implements Serializable{
-	ArrayList<String> district;
-	
-	public DistrictPO(ArrayList<String> districtList){
-		this.district=districtList;
+	private String districtName;
+	private String districtNum;
+
+	public DistrictPO(String districtName, String districtNum) {
+		this.districtName = districtName;
+		this.districtNum = districtNum;
 	}
 
-	public ArrayList<String> getDistrict() {
-		return district;
+	public String getDistrictName() {
+		return districtName;
 	}
+
+	public String getDistrictNum() {
+		return districtNum;
+	}
+
+
+
 }
