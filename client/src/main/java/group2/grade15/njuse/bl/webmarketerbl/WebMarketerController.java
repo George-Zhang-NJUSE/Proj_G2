@@ -19,13 +19,13 @@ import java.rmi.RemoteException;
  * Created by Guo on 2016/11/30.
  */
 public class WebMarketerController implements WebMarketerServ{
-    ChargeRroxy chargeRroxy;
+    ChargeProxy chargeProxy;
     RevokeProxy revokeProxy;
     WebPromotionProxy webPromotionProxy;
     OrderListBL orderList;
 
     public WebMarketerController(){
-        chargeRroxy = new ChargeRroxy();
+        chargeProxy = new ChargeProxy();
         revokeProxy = new RevokeProxy();
         webPromotionProxy = new WebPromotionProxy();
         orderList = new OrderList();
@@ -74,6 +74,6 @@ public class WebMarketerController implements WebMarketerServ{
 
     @Override
     public ResultMessage modifyCredit(CreditVO credit) {
-        return chargeRroxy.modifyCredit(credit);
+        return chargeProxy.modifyCredit(credit);
     }
 }
