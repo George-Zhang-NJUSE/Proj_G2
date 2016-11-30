@@ -17,37 +17,17 @@ import java.util.Date;
  */
 public class Order {
 
-    private int orderID;
-    private int customerID;
-    private int hotelID;
-    private int amount;
-    private Date checkInTime;
-    private Date checkOutTime;
-    private Date finalExecuteTime;
-    private ArrayList<RoomPO> selectRoom;
-    private int numOfCustomer;
-    private boolean haveChild;
-    private OrderState state;
+    private OrderPO po;
 
     public Order(OrderPO po) {
-        orderID = po.getOrderID();
-        customerID = po.getCustomerID();
-        hotelID = po.getHotelID();
-        amount = po.getAmount();
-        checkInTime = po.getCheckInTime();
-        checkOutTime = po.getCheckOutTime();
-        finalExecuteTime = po.getFinalExecuteTime();
-        selectRoom = po.getSelectRoom();
-        numOfCustomer = po.getNumOfCustomer();
-        haveChild = po.isHaveChild();
-        state = po.getState();
+        this.po = po;
     }
 
     public OrderVO getInfo(){
         OrderPO po = null;
 
         try {
-            po = RemoteHelper.getInstance().getOrderDataService().getOrder(orderID);
+            po = RemoteHelper.getInstance().getOrderDataService().getOrder(po.getOrderID());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

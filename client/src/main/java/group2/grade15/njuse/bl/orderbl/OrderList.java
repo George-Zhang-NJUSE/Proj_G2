@@ -11,7 +11,6 @@ import java.util.Date;
  */
 public class OrderList implements OrderListBL, OrderListServ{
 
-
     public OrderListVO getAllOrderList(int id, IDType type) {
         return null;
     }

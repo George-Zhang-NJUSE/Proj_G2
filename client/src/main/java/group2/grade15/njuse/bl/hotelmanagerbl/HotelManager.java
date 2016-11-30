@@ -6,39 +6,78 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.vo.*;
 
 /**
- * Created by ALIENWARE-PC on 2016/11/13.
+ * Created by Guo on 2016/11/13.
  */
-abstract public class HotelManager implements HotelManagerServ {
-    private int id;
-    private String password;
-    private String name;
-    private String contact;
+public class HotelManager implements HotelManagerServ {
 
-    abstract public ResultMessage modifyInfo(HotelManagerVO hotelManager);
+    @Override
+    public HotelManagerVO getInfo(int hotelManagerId) {
+        return null;
+    }
 
-    abstract public ResultMessage modifyHotelInfo(HotelVO hotel);
+    @Override
+    public ResultMessage modifyInfo(HotelManagerVO hotelManager) {
+        return null;
+    }
 
-    abstract public HotelVO getHotelInfo(int hotelID);
+    @Override
+    public ResultMessage modifyHotelInfo(HotelVO hotel) {
+        return null;
+    }
 
-    abstract public ResultMessage modifyRoomInfo(RoomVO roomInfo);
+    @Override
+    public HotelVO getHotelInfo(int hotelID) {
+        return null;
+    }
 
-    abstract public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo);
+    @Override
+    public ResultMessage modifyRoomInfo(RoomVO roomInfo) {
+        return null;
+    }
 
-    abstract public HotelPromotionListVO getHotelPromotionList();
+    @Override
+    public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo) {
+        return null;
+    }
 
-    abstract public ResultMessage modifyHotelPromotion(HotelPromotionVO hotelPromotion);
+    @Override
+    public HotelPromotionListVO getHotelPromotionList() {
+        return null;
+    }
 
-    abstract public ResultMessage activateHotelPromotion(HotelPromotionVO promotionVO);
+    @Override
+    public ResultMessage modifyHotelPromotion(HotelPromotionVO hotelPromotion) {
+        return null;
+    }
 
-    abstract public ResultMessage stopHotelPromotion(HotelPromotionVO promotionVO);
+    @Override
+    public ResultMessage activateHotelPromotion(HotelPromotionVO promotionVO) {
+        return null;
+    }
 
-    abstract public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO);
+    @Override
+    public ResultMessage stopHotelPromotion(HotelPromotionVO promotionVO) {
+        return null;
+    }
 
-    abstract public ResultMessage modifyState(int orderID, OrderState s);
+    @Override
+    public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO) {
+        return null;
+    }
 
-    abstract public ResultMessage addCompany(int customerID);
+    @Override
+    public ResultMessage modifyState(int orderID, OrderState s) {
+        return null;
+    }
 
-    abstract public ResultMessage deleteCompany(int customerID);
+    @Override
+    public ResultMessage addCompany(int customerID) {
+        return null;
+    }
 
-    abstract public HotelManagerVO getInfo(int hotelManagerId);
+    @Override
+    public ResultMessage deleteCompany(int customerID) {
+        return null;
+    }
+
 }
