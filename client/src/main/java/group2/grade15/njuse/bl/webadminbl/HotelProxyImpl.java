@@ -15,11 +15,8 @@ public class HotelProxyImpl implements HotelProxyBL{
 
         ResultMessage result;
 
-        //将vo转化为po
-        HotelPO po = hotel.toPO();
-
         try {
-            RemoteHelper.getInstance().getWebAdminDataService().addHotel(po);
+            RemoteHelper.getInstance().getWebAdminDataService().addHotel(hotel.toPO());
             result = ResultMessage.SUCCESS;
         } catch (RemoteException e) {
             e.printStackTrace();
