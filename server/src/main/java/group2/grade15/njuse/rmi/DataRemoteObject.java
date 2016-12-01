@@ -280,7 +280,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ArrayList<HotelPO> getHotel(String address) {
+    public ArrayList<HotelPO> getHotelByAddress(String address) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<HotelPO> getHotelByName(String name) {
         return null;
     }
 

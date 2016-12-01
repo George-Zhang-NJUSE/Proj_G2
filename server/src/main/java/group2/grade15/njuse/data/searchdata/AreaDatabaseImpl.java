@@ -1,21 +1,28 @@
 package group2.grade15.njuse.data.searchdata;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
 import group2.grade15.njuse.dataservice.AreaDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.RoomType;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class SearchDatabaseImpl implements AreaDataService {
+public class AreaDatabaseImpl implements AreaDataService {
 	private DatabaseMySql mySql=null;
 	private Connection searchDatabase=null;
 
-	public SearchDatabaseImpl(DatabaseInfo info) throws RemoteException{
+	public AreaDatabaseImpl(DatabaseInfo info) throws RemoteException{
 		mySql=new DatabaseMySql(info);
 		searchDatabase=mySql.init();
 	}
@@ -143,10 +150,9 @@ public class SearchDatabaseImpl implements AreaDataService {
     /**
      * @param address
      * @return ArrayList<HotelPO>
-     * tup
      */
     @Override
-    public ArrayList<HotelPO> getHotel(String address) {
+    public ArrayList<HotelPO> getHotelByAddress(String address) {
         if(searchDatabase==null){
             searchDatabase=mySql.init();
         }
@@ -154,6 +160,31 @@ public class SearchDatabaseImpl implements AreaDataService {
         try{
             PreparedStatement hotel=searchDatabase.prepareStatement("select * from hotel where address = ?");
             hotel.setString(1,address);
+            return getHotelList(hotel);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<HotelPO> getHotelByName(String name) {
+        if(searchDatabase==null){
+            searchDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement hotel=searchDatabase.prepareStatement("select * from hotel where name = ?");
+            hotel.setString(1,name);
+            return getHotelList(hotel);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private ArrayList<HotelPO> getHotelList(PreparedStatement hotel){
+        try{
             ResultSet resultSet=hotel.executeQuery();
 
             ArrayList<HotelPO> list=new ArrayList<HotelPO>();
@@ -162,14 +193,21 @@ public class SearchDatabaseImpl implements AreaDataService {
                 String name=resultSet.getString(2);
                 String tel=resultSet.getString(3);
                 int rank=resultSet.getInt(4);
+                String address=resultSet.getString(5);
                 String introduction=resultSet.getString(6);
                 String facility=resultSet.getString(7);
 
                 File picPath=new File(resultSet.getString(5));
                 File[] allPic=picPath.listFiles();
-                byte[][] picByte=new byte[allPic.length][];
+                byte[][] picList;
+                if(allPic.length>0) {
+                    picList = new byte[allPic.length][];
+                }
+                else{
+                    picList=null;
+                }
                 for(int i=0;i<allPic.length;i++){
-                    picByte[i]=readPic(allPic[i].getAbsolutePath());
+                    picList[i]=readPic(allPic[i].getAbsolutePath());
                 }
 
                 Statement getRoom=searchDatabase.createStatement();
@@ -200,25 +238,36 @@ public class SearchDatabaseImpl implements AreaDataService {
                 Statement getScore=searchDatabase.createStatement();
                 ResultSet score=getScore.executeQuery("select avg(score) from comment where hotelid = "+id);
                 double hotelScore=0.00;
-                if(resultSet.next()){
+                if(score.next()){
                     hotelScore=score.getDouble(1);
                 }
                 else{
                     throw new SQLException();
                 }
 
-                HotelPO hotelPO=new HotelPO(id,name,address,tel,introduction,facility,roomList,rank,hotelScore,picByte);
+                HotelPO hotelPO=new HotelPO(id,name,address,tel,introduction,facility,roomList,rank,hotelScore,picList);
                 list.add(hotelPO);
             }
 
             return list;
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
             return null;
         }
     }
 
     private byte[] readPic(String path){
-
+        try{
+            File file=new File(path);
+            BufferedImage temp=ImageIO.read(file);
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            ImageIO.write(temp,"jpg",bos);
+            byte[] pic=bos.toByteArray();
+            bos.close();
+            return pic;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
