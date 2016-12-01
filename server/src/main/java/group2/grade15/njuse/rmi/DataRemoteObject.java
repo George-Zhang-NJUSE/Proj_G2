@@ -1,11 +1,8 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
-import group2.grade15.njuse.data.webadmindata.CustomerPartService;
-import group2.grade15.njuse.data.webadmindata.HotelManagerPartService;
-import group2.grade15.njuse.data.webadmindata.HotelPartService;
-import group2.grade15.njuse.data.webadmindata.WebMarketerPartService;
 import group2.grade15.njuse.dataservice.*;
+import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
@@ -280,7 +277,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ArrayList<HotelPO> getHotel(String address) {
+    public ArrayList<HotelPO> getHotelByAddress(String address) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<HotelPO> getHotelByName(String name) {
         return null;
     }
 

@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.areadataservice;
 
 import group2.grade15.njuse.po.*;
 
@@ -14,5 +14,6 @@ public interface AreaDataService extends Remote {
     public ArrayList<CityPO> getCity(String provinceNum);
     public ArrayList<DistrictPO> getDistrict(String cityNum);
     public ArrayList<CbdPO> getCbd(String districtNum);
-    public ArrayList<HotelPO> getHotel(String address);
+    public ArrayList<HotelPO> getHotelByAddress(String address);
+    public ArrayList<HotelPO> getHotelByName(String name);
 }

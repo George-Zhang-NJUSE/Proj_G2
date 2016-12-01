@@ -20,10 +20,9 @@ public class HotelVO implements Serializable{
 	private String introduction;
 	private String facility;
 	private ArrayList<RoomVO> roomList;
-	private ArrayList<CustomerVO> vipList;
 	private int rank;
 	private double score;
-    private Byte[][] picture;
+    private byte[][] picture;
 
 	public HotelVO(HotelPO hotel){
 		id = hotel.getId();
@@ -43,15 +42,9 @@ public class HotelVO implements Serializable{
             roomList.add(room);
         }
 
-        vipList = new ArrayList();
-		ArrayList<CustomerPO> vipPOList = hotel.getVipList();
-        for(CustomerPO po : vipPOList){
-            CustomerVO customer = new CustomerVO(po);
-            vipList.add(customer);
-        }
 	}
 
-	public HotelVO(int id, String name, String address, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, Byte[][] picture){
+	public HotelVO(int id, String name, String address, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture){
         this.id = id;
         this.name = name;
         this.address = address;
@@ -59,7 +52,6 @@ public class HotelVO implements Serializable{
         this.introduction = introduction;
         this.facility = facility;
         this.roomList = roomList;
-	    this.vipList = vipList;
         this.rank = rank;
         this.score = score;
         this.picture = picture;
@@ -93,10 +85,6 @@ public class HotelVO implements Serializable{
 		return roomList;
 	}
 
-	public ArrayList<CustomerVO> getVipList() {
-		return vipList;
-	}
-
 	public int getRank() {
 		return rank;
 	}
@@ -105,7 +93,7 @@ public class HotelVO implements Serializable{
 		return score;
 	}
 
-	public Byte[][] getPicture(){
+	public byte[][] getPicture(){
         return picture;
     }
 
@@ -116,10 +104,7 @@ public class HotelVO implements Serializable{
         }
 
         ArrayList<CustomerPO> vipPOList = new ArrayList();
-        for(CustomerVO vo : vipList){
-            vipPOList.add(vo.toPO());
-        }
 
-        return new HotelPO(id, name, address, contact, introduction, facility, roomPOList, rank, score, vipPOList, picture);
+        return new HotelPO(id, name, address, contact, introduction, facility, roomPOList, rank, score,picture);
     }
 }
