@@ -1,6 +1,8 @@
 package group2.grade15.njuse.runner;
 
+import group2.grade15.njuse.presentation.main.CustomerStart;
 import group2.grade15.njuse.rmi.RemoteHelper;
+import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -15,15 +17,9 @@ public class ClientRunner {
 
     private RemoteHelper remoteHelper;
 
-//    //启动客户端
-//    public static void main(String[] args){
-//        new ClientRunner();
-//    }
-//
-//    public ClientRunner() {
-//        initGUI();
-//        linkToServer();
-//    }
+    public ClientRunner() {
+        linkToServer();
+    }
 
     //进行RMI连接
     private void linkToServer() {
@@ -38,9 +34,5 @@ public class ClientRunner {
         } catch (NotBoundException e) {
             e.printStackTrace();
         }
-    }
-
-    //绘制界面
-    private void initGUI() {
     }
 }
