@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -8,6 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.searchui.CustomerSearchHotelController">
@@ -26,26 +28,35 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="215.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="215.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="215.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="985.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="800.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+            <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.rowSpan="2">
                <image>
                   <Image url="file:client/src/main/cache/hotelimage/hotel1.jpg" />
                </image></ImageView>
-            <Label text="地址：" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="1" />
-            <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="3" />
+            <Label text="地址：" GridPane.rowIndex="3" />
+            <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="5" />
+            <Label text="简介：" GridPane.rowIndex="4" />
+            <Label text="预订按钮" GridPane.rowIndex="6" />
+            <Label text="顾客评价" GridPane.columnIndex="2" />
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="6">
+               <content>
+                  <VBox fx:id="commentBox" prefWidth="800.0" />
+               </content>
+            </ScrollPane>
          </children>
       </GridPane>
    </center>

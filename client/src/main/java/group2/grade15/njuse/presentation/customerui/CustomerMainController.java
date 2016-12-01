@@ -26,11 +26,11 @@ public class CustomerMainController {
         showSearchHotelPane();
     }
 
-    private void showSearchHotelPane() {
+    private void showChildPane(String url) {
         try {
-            FXMLLoader SearchHotelLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml"));
+            FXMLLoader loader=new FXMLLoader(new URL(url));
             functionPane.getChildren().clear();
-            functionPane.getChildren().add(SearchHotelLoader.load());
+            functionPane.getChildren().add(loader.load());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -38,16 +38,20 @@ public class CustomerMainController {
         }
     }
 
+    private void showSearchHotelPane() {
+        String searchPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
+        showChildPane(searchPaneUrl);
+    }
+
+    private void showMyOrderPane() {
+        // TODO: 2016/12/1
+//        String myOrderPaneUrl=;
+//        showChildPane(myOrderPaneUrl);
+    }
+
     private void showPersonalInfoPane() {
-        try {
-            FXMLLoader personalInfoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml"));
-            functionPane.getChildren().clear();
-            functionPane.getChildren().add(personalInfoLoader.load());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String personalPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml";
+        showChildPane(personalPaneUrl);
     }
 
 
