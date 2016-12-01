@@ -24,7 +24,7 @@ public class HotelVO implements Serializable{
 	private int rank;
 	private double score;
     private Byte[][] picture;
-	
+
 	public HotelVO(HotelPO hotel){
 		id = hotel.getId();
 		name = hotel.getName();
