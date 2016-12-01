@@ -27,8 +27,9 @@ public class CustomerSearchHotelController {
             FXMLLoader searItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/SearchItem.fxml"));
             searchItemBox.getChildren().clear();
             Node singleItem=searItemLoader.load();
+            Node singleItem2=searItemLoader.load();
 //            for(int i=0;i<20;++i) {
-                searchItemBox.getChildren().add(singleItem);
+            searchItemBox.getChildren().addAll(singleItem, singleItem2);
 //            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
