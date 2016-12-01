@@ -114,7 +114,6 @@ public class CustomerLoginController implements Initializable {
 
         loginFadeOut.play();
 
-
     }
 
     private void loadApplyPanel() {

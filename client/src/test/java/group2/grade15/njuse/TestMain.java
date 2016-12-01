@@ -1,6 +1,5 @@
-package group2.grade15.njuse.presentation.main;
+package group2.grade15.njuse;
 
-import group2.grade15.njuse.presentation.loginui.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,7 +1,5 @@
 package group2.grade15.njuse.presentation.mycontrol;
 
-import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +12,7 @@ public class CustomeButton{
     /**
      *
      * @param label
-     * @param url 不要加后缀名 比如直接写client/src/main/res/webadmin/setting
+     * @param url 不要加后缀名,比如直接写 "file:client/src/main/res/webadmin/setting"
      */
     public static void implButton(Label label, String url){
         String originURL=url+".png";
