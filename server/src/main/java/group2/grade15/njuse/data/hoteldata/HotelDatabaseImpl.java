@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 /**
  * Created by ALIENWARE-PC on 2016/11/13.
  */
-public class HotelData implements HotelDataService {
+public class HotelDatabaseImpl implements HotelDataService {
 
     public HotelPO getHotel(int hotelId) throws RemoteException {
         return null;

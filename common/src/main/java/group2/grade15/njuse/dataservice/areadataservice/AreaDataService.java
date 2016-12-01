@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.areadataservice;
 
 import group2.grade15.njuse.po.*;
 

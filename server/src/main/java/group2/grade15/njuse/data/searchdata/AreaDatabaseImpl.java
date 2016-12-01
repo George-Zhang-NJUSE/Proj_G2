@@ -1,22 +1,18 @@
 package group2.grade15.njuse.data.searchdata;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.AreaDataService;
+import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.RoomType;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class AreaDatabaseImpl implements AreaDataService {
 	private DatabaseMySql mySql=null;
