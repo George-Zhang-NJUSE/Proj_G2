@@ -10,6 +10,10 @@ import group2.grade15.njuse.vo.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * 负责处理用户业务的代理
+ * 数据的处理通过RMI直接调用WebAdminDataService
+ */
 public class UserProxyImpl implements UserProxyBL{
 	
 	public CustomerListVO getCustomerList(){
@@ -60,11 +64,20 @@ public class UserProxyImpl implements UserProxyBL{
 		return new WebMarketerListVO(webMarketerList);
 	}
 
+	/***
+	 * 创建酒店管理人员的方法
+	 * 先根据HotelManagerVO.getHotelID获取对应的酒店ID
+	 * 然后根据酒店ID和getHotel()方法获取对应的酒店
+	 * 再检查该酒店是否已经拥有酒店管理人员：
+	 * 如果无，就在数据库添加该酒店管理人员，并将该酒店的haveManager设置为true
+	 * 否则，返回ResultMessage.EXISTENT
+	 */
 	public ResultMessage createHotelManager(HotelManagerVO hotelManager){
 		ResultMessage result = ResultMessage.FAILED;
 		try {
 			RemoteHelper.getInstance().getWebAdminDataService().addHotelManagerInfo(hotelManager.toPO());
 		} catch (RemoteException e) {
+			result = ResultMessage.CONNECTION_EXCEPTION;
 			e.printStackTrace();
 		}
 		return result;
