@@ -29,6 +29,7 @@ public class CustomerStart extends Application {
             loginController.setStage(primaryStage);
 
             primaryStage.show();
+//            ClientRunner clientRunner = new ClientRunner();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package group2.grade15.njuse.presentation.searchui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  */
 public class CustomerSearchHotelController {
 
+    private Pane parentPane;
+
     @FXML
     private VBox searchItemBox;
 
@@ -22,6 +25,7 @@ public class CustomerSearchHotelController {
     protected void search() {
         showSearchResult();
     }
+
 
     private void showSearchResult() {
         try {
@@ -31,6 +35,8 @@ public class CustomerSearchHotelController {
             for(int i=0;i<15;++i) {
                 FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/SearchItem.fxml"));
                 Node singleItemTemplate=searchItemLoader.load();
+                SearchItemController searchItemController = searchItemLoader.getController();
+                searchItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);
             }
 
@@ -43,5 +49,7 @@ public class CustomerSearchHotelController {
         }
     }
 
-
+    public void setParentPane(Pane parentPane) {
+        this.parentPane=parentPane;
+    }
 }
