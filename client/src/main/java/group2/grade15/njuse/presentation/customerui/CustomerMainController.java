@@ -17,14 +17,31 @@ public class CustomerMainController {
     private Pane functionPane;
 
     @FXML
-    protected void mouseReleasePersonalInfo() {
+    protected void mouseClickPersonalInfo() {
         showPersonalInfoPane();
+    }
+
+    @FXML
+    protected void mouseClickBookHotel() {
+        showSearchHotelPane();
+    }
+
+    private void showSearchHotelPane() {
+        try {
+            FXMLLoader SearchHotelLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml"));
+            functionPane.getChildren().clear();
+            functionPane.getChildren().add(SearchHotelLoader.load());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showPersonalInfoPane() {
         try {
             FXMLLoader personalInfoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml"));
-            functionPane.getChildren().removeAll();
+            functionPane.getChildren().clear();
             functionPane.getChildren().add(personalInfoLoader.load());
         } catch (MalformedURLException e) {
             e.printStackTrace();
