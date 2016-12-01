@@ -9,6 +9,10 @@ import group2.grade15.njuse.vo.HotelVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * 负责处理酒店业务的代理
+ * 数据的处理通过RMI直接调用WebAdminDataService
+ */
 public class HotelProxyImpl implements HotelProxyBL{
 
 	public ResultMessage createHotel(HotelVO hotel){
@@ -20,7 +24,7 @@ public class HotelProxyImpl implements HotelProxyBL{
             result = ResultMessage.SUCCESS;
         } catch (RemoteException e) {
             e.printStackTrace();
-            result = ResultMessage.FAILED;
+            result = ResultMessage.CONNECTION_EXCEPTION;
         }
 
         return result;
@@ -48,10 +52,11 @@ public class HotelProxyImpl implements HotelProxyBL{
 	}
 	
 	public HotelListVO modifyHotel (HotelVO hotel){
-        ResultMessage result = ResultMessage.FAILED;
+        ResultMessage result;
         try {
              result = RemoteHelper.getInstance().getWebAdminDataService().modifyHotelInfo(hotel.toPO());
         } catch (RemoteException e) {
+            result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
@@ -61,7 +66,8 @@ public class HotelProxyImpl implements HotelProxyBL{
             return null;
         }
     }
-	
+
+    //
 	public ResultMessage deleteHotel(HotelVO hotel){
         try {
             return RemoteHelper.getInstance().getWebAdminDataService().deleteHotelInfo(hotel.getId());
