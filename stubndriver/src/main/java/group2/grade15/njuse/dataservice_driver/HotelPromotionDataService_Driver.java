@@ -1,7 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.HotelPromotionDataService;
-import group2.grade15.njuse.po.PromotionPO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

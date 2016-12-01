@@ -1,7 +1,8 @@
 package group2.grade15.njuse.data.webpromotiondata;
 
 import group2.grade15.njuse.dataservice.WebPromotionDataService;
-import group2.grade15.njuse.po.PromotionPO;
+import group2.grade15.njuse.po.RankPO;
+import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
@@ -9,19 +10,28 @@ import java.util.ArrayList;
 
 public class WebPromotionData implements WebPromotionDataService{
 
-	public ArrayList<PromotionPO> getList() throws RemoteException {
+	@Override
+	public ArrayList<WebPromotionPO> getList() throws RemoteException {
 		return null;
 	}
 
-	public ResultMessage modify(PromotionPO po) throws RemoteException {
+	@Override
+	public ResultMessage modify(WebPromotionPO po) throws RemoteException {
 		return null;
 	}
 
-	public ResultMessage remove(PromotionPO po) throws RemoteException {
+	@Override
+	public ResultMessage remove(WebPromotionPO po) throws RemoteException {
 		return null;
 	}
 
-	public ResultMessage add(PromotionPO po) throws RemoteException {
+	@Override
+	public ResultMessage add(WebPromotionPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public RankPO getRank() throws RemoteException {
 		return null;
 	}
 }

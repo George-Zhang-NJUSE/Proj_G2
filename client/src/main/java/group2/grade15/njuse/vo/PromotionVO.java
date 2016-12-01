@@ -1,8 +1,5 @@
 package group2.grade15.njuse.vo;
 
-import group2.grade15.njuse.po.PromotionPO;
-import group2.grade15.njuse.utility.PromotionType;
-
 public class PromotionVO {
 
     private PromotionType type;
