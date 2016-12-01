@@ -50,7 +50,7 @@
             <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="2" />
             <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="5" />
             <Label text="简介：" GridPane.rowIndex="4" />
-            <Label text="预订按钮" GridPane.rowIndex="6" />
+            <Label onMouseClicked="#showMakeOrderPane" text="预订按钮" GridPane.rowIndex="6" />
             <Label text="顾客评价" GridPane.columnIndex="2" />
             <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="6">
                <content>

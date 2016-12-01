@@ -39,7 +39,7 @@
             <Insets bottom="5.0" left="10.0" top="5.0" />
          </HBox.margin>
       </Label>
-      <Label text="预订按钮">
+      <Label onMouseClicked="#showMakeOrderPane" text="预订按钮">
          <HBox.margin>
             <Insets bottom="5.0" left="10.0" top="5.0" />
          </HBox.margin>
