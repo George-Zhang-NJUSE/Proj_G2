@@ -1,7 +1,9 @@
 package group2.grade15.njuse.presentation.customerui;
 
+import group2.grade15.njuse.vo.CustomerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -13,8 +15,13 @@ import java.net.URL;
  */
 public class CustomerMainController {
 
+    private CustomerVO userVO;
+
     @FXML
     private Pane functionPane;
+
+    @FXML
+    private Label usernameLabel, creditLabel, memberLevelLabel;
 
     @FXML
     protected void mouseClickPersonalInfo() {
@@ -24,6 +31,15 @@ public class CustomerMainController {
     @FXML
     protected void mouseClickBookHotel() {
         showSearchHotelPane();
+    }
+
+    public void initData(CustomerVO vo){
+        // TODO: 2016/12/1  
+        userVO=vo;
+        usernameLabel.setText(userVO.getName());
+        creditLabel.setText(Double.toString(userVO.getCredit()));
+//        memberLevelLabel.setText(userVO.);
+
     }
 
     private void showChildPane(String url) {
