@@ -15,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -138,29 +137,29 @@ public class CustomerLoginController implements Initializable {
         LoginControllerServ loginServ=new CustomerLoginImpl();
         CustomerServ customerServ = new CustomerController();
 
-        int id = Integer.parseInt(accoutField.getText());
-        String password = passwordField.getText();
+//        int id = Integer.parseInt(accoutField.getText());
+//        String password = passwordField.getText();
 
-        switch (loginServ.login(id,password)){
-            case SUCCESS:
-                jumpToMain(customerServ.getInfo(id));
-                break;
-            case FAILED:
-                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误");
-                wrongPswAlert.showAndWait();
-                break;
-            case NON_EXISTENT:
-                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在");
-                invalidAccountAlert.showAndWait();
-                break;
-        }
+//        switch (loginServ.login(id,password)){
+//            case SUCCESS:
+//                jumpToMain(customerServ.getInfo(id));
+//                break;
+//            case FAILED:
+//                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误");
+//                wrongPswAlert.showAndWait();
+//                break;
+//            case NON_EXISTENT:
+//                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在");
+//                invalidAccountAlert.showAndWait();
+//                break;
+//        }
 
-
+        jumpToMain(null);
 
     }
 
     private void jumpToMain(CustomerVO customerVO) {
-        // TODO: 2016/11/25 customer主界面还没写 
+
         try {
             FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerMain.fxml"));
             Stage customerStage = new Stage();

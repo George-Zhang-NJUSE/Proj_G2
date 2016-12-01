@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.customerui;
 
+import group2.grade15.njuse.presentation.searchui.CustomerSearchHotelController;
 import group2.grade15.njuse.vo.CustomerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,7 @@ public class CustomerMainController {
     private Pane functionPane;
 
     @FXML
-    private Label usernameLabel, creditLabel, memberLevelLabel;
+    private Label usernameLabel, creditLabel;
 
     @FXML
     protected void mouseClickPersonalInfo() {
@@ -38,15 +39,19 @@ public class CustomerMainController {
         userVO=vo;
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
-//        memberLevelLabel.setText(userVO.);
+
 
     }
 
-    private void showChildPane(String url) {
+
+    private void showSearchHotelPane() {
+        String searchPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
         try {
-            FXMLLoader loader=new FXMLLoader(new URL(url));
+            FXMLLoader loader=new FXMLLoader(new URL(searchPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
+            CustomerSearchHotelController searchHotelController=loader.getController();//必须在load之后才能getController
+            searchHotelController.setParentPane(functionPane);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,20 +59,23 @@ public class CustomerMainController {
         }
     }
 
-    private void showSearchHotelPane() {
-        String searchPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
-        showChildPane(searchPaneUrl);
-    }
-
     private void showMyOrderPane() {
         // TODO: 2016/12/1
 //        String myOrderPaneUrl=;
-//        showChildPane(myOrderPaneUrl);
+//
     }
 
     private void showPersonalInfoPane() {
         String personalPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml";
-        showChildPane(personalPaneUrl);
+        try {
+            FXMLLoader loader=new FXMLLoader(new URL(personalPaneUrl));
+            functionPane.getChildren().clear();
+            functionPane.getChildren().add(loader.load());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
