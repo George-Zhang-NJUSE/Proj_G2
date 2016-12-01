@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.AreaDataService;
+import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 
 /**
  * Created by George on 2016/10/16.
