@@ -63,7 +63,7 @@ public class HotelPart implements HotelPartService{
             hotelPartDatabase=null;
 
             return new HotelPO(id,hotelPO.getName(),hotelPO.getAddress(),hotelPO.getContact(),hotelPO.getIntroduction(),
-                    hotelPO.getFacility(),null,hotelPO.getRank(),0.00,null,null);
+                    hotelPO.getFacility(),null,hotelPO.getRank(),0.00,null);
         }catch (SQLException e){
             e.printStackTrace();
             return null;
@@ -104,7 +104,7 @@ public class HotelPart implements HotelPartService{
                 String address=resultSet.getString(8);//未经转换的
 
                 HotelPO hotelPO=new HotelPO(id,name,address,tel,null,null,null,rank,
-                        hotelscore,null,null);
+                        hotelscore,null);
                 list.add(hotelPO);
             }
             return list;
