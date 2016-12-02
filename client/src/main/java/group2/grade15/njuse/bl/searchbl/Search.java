@@ -1,6 +1,5 @@
 package group2.grade15.njuse.bl.searchbl;
 
-import group2.grade15.njuse.bl.customerbl.Customer;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.rmi.RemoteHelper;
@@ -159,14 +158,40 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的酒店名称对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByName(String name, ArrayList<HotelVO> hotelList){
-		return null;
+		String[] keyWords = name.split(" ");
+		boolean isContain = false;
+		ArrayList<HotelVO> newHotelList = new ArrayList();
+
+		for(HotelVO vo : hotelList){
+			//判定酒店的名字是否至少含有一个关键字
+			for(String word : keyWords) {
+				if(vo.getName().contains(word)){
+					isContain = true;
+				}
+			}
+
+			//如果含有关键字，则加入到新的酒店列表中
+			if(isContain){
+				newHotelList.add(vo);
+				isContain = false;
+			}
+		}
+
+		return newHotelList;
 	}
 
 	/**
 	 * 根据SearchCondition中的房间价格对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByRoomPrice(double minPrice, double maxPrice, ArrayList<HotelVO> hotelList){
-		return null;
+		ArrayList<HotelVO> newHotelList = new ArrayList();
+
+		for(HotelVO vo : hotelList){
+			ArrayList<RoomVO> roomList = vo.getRoomList();
+//			roomList
+		}
+
+		return newHotelList;
 	}
 
 	/**
@@ -180,14 +205,30 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的酒店星级区间对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByStarLevel(int minStarLevel, int maxStarLevel, ArrayList<HotelVO> hotelList){
-		return null;
+		ArrayList<HotelVO> newHotelList = new ArrayList();
+
+		for(HotelVO vo : hotelList){
+			if( (vo.getRank() >= minStarLevel) && (vo.getRank() <= maxStarLevel) ){
+				newHotelList.add(vo);
+			}
+		}
+
+		return newHotelList;
 	}
 
 	/**
 	 * 根据SearchCondition中的酒店评分区间对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByScore(double minScore, double maxScore, ArrayList<HotelVO> hotelList){
-		return null;
+		ArrayList<HotelVO> newHotelList = new ArrayList();
+
+		for(HotelVO vo : hotelList){
+			if( (vo.getScore() >= minScore) && (vo.getScore() <= maxScore) ){
+				newHotelList.add(vo);
+			}
+		}
+
+		return newHotelList;
 	}
 
 	/**
