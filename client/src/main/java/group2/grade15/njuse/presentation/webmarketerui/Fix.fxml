@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="260.0" layoutY="540.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
@@ -75,14 +75,18 @@
             </HBox>
             <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Label>
+                  <Label fx:id="check" onMouseClicked="#fixCommit">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" >
+                            <Image url="file:client/src/main/res/webmarketer/Check.png"/>
+                        </ImageView>
                      </graphic>
                   </Label>
-                  <Label>
+                  <Label fx:id="clear" onMouseClicked="#clear">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" >
+                            <Image url="file:client/src/main/res/webmarketer/Cancel.png"/>
+                        </ImageView>
                      </graphic>
                   </Label>
                </children>
