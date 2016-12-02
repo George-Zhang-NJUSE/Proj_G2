@@ -1,5 +1,7 @@
 package group2.grade15.njuse.blservice;
 
+import group2.grade15.njuse.bl.hotelbl.HotelList;
+import group2.grade15.njuse.po.DistrictPO;
 import group2.grade15.njuse.vo.*;
 
 import java.util.ArrayList;
@@ -11,15 +13,15 @@ import java.util.ArrayList;
  */
 public interface SearchServ {
 
-    public ArrayList<HotelVO> getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO);
+    public HotelListVO getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO);
 
-	public ArrayList<ProvinceVO> getProvince();
+	public ProvinceListVO getProvince();
 
-	public ArrayList<CityVO> getCity(String provinceNum);
+	public CityListVO getCity(String provinceNum);
 
-	public ArrayList<DistrictVO> getDistrict(String cityNum);
+	public DistrictListVO getDistrict(String cityNum);
 
-	public ArrayList<CbdVO> getCbd(String districtNum);
+	public CbdListVO getCbd(String districtNum);
 
-	public ArrayList<HotelVO> getHotel(String address);
+	public HotelListVO getHotel(String address);
 }
