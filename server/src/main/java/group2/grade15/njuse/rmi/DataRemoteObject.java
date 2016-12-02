@@ -13,6 +13,7 @@ import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataSe
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -103,6 +104,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
         return null;
     }
 

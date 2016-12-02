@@ -3,7 +3,9 @@ package group2.grade15.njuse;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hoteldata.HotelDatabaseImpl;
 import group2.grade15.njuse.po.HotelPO;
+import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,5 +35,17 @@ public class HotelDatabaseTest {
         HotelPO hotelPO=new HotelPO(1,null,"00001000010000100001","江苏省南京市玄武区",
                 "6123456",null,null,null,5,0.00,null);
         assertEquals(ResultMessage.SUCCESS,hotelDatabase.modify(hotelPO));
+    }
+
+    @Test
+    public void modifyRoomTest() throws RemoteException{
+        RoomPO roomPO=new RoomPO(RoomType.bigSingleBed,700.00,100,20);
+        assertEquals(ResultMessage.SUCCESS,hotelDatabase.modifyRoom(1,roomPO));
+    }
+
+    @Test
+    public void addRoomTest() throws RemoteException{
+        RoomPO roomPO=new RoomPO(RoomType.stadardDoubleBed,700.00,200,200);
+        assertEquals(ResultMessage.SUCCESS,hotelDatabase.modifyRoom(1,roomPO));
     }
 }

@@ -20,8 +20,9 @@ import java.util.ArrayList;
  * Created by ALIENWARE-PC on 2016/11/13.
  */
 public class HotelDatabaseImpl implements HotelDataService {
-    DatabaseMySql mySql=null;
-    Connection hotelDatabase=null;
+    private DatabaseMySql mySql=null;
+    private Connection hotelDatabase=null;
+    private String[] roomName={"singlebed","doublebed","suiteroom"};
 
     public HotelDatabaseImpl(DatabaseInfo info) throws RemoteException{
         mySql=new DatabaseMySql(info);
@@ -169,7 +170,67 @@ public class HotelDatabaseImpl implements HotelDataService {
             hotelDatabase=mySql.init();
         }
 
-        
+        try{//表驱动
+            String name=roomName[po.getType().ordinal()];
+            String price=name+"price";
+            String book=name+"booked";
+            String total=name+"total";
+
+            PreparedStatement room=hotelDatabase.prepareStatement("update room set "+price+" = ?," +
+                    book+" = ?,"+total+" = ? where hotelid = ?");
+            room.setDouble(1,po.getPrice());
+            room.setInt(2,po.getTotalRoomNum()-po.getSpareRoomNum());
+            room.setInt(3,po.getTotalRoomNum());
+            room.setInt(4,hotelId);
+
+            room.executeUpdate();
+
+            room.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
+
+    @Override
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            String name=roomName[po.getType().ordinal()];
+            String price=name+"price";
+            String book=name+"booked";
+            String total=name+"total";
+
+            PreparedStatement add=hotelDatabase.prepareStatement("update room set "+name+" = ?,"+price+" = ?,"+
+                    book+" = ?,"+total+" = ? where hotelid = ?");
+            add.setBoolean(1,true);
+            add.setDouble(2,po.getPrice());
+            add.setInt(3,po.getTotalRoomNum()-po.getSpareRoomNum());
+            add.setInt(4,po.getTotalRoomNum());
+            add.setInt(5,hotelID);
+
+            add.executeUpdate();
+
+            add.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
         return null;
     }
 
