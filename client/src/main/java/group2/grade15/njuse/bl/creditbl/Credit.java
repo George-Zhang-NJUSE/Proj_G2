@@ -12,7 +12,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Credit implements CreditModificationServ,CreditHistoryServ{
-	CreditPO creditPO;
 
 	@Override
 	public ResultMessage modifyCredit(CreditVO credit) {
