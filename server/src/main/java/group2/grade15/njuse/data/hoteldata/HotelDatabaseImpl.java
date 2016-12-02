@@ -46,7 +46,7 @@ public class HotelDatabaseImpl implements HotelDataService {
             File picPath;
             double hotelScore;
             ArrayList<RoomPO> roomList=new ArrayList<RoomPO>();
-            String address,introduction,facility;
+            String address,introduction,facility,concreteAddress;
             byte[][] picList;
             if(resultSet.next()){
                 id=resultSet.getInt(1);
@@ -56,6 +56,7 @@ public class HotelDatabaseImpl implements HotelDataService {
                 address=resultSet.getString(5);
                 introduction=resultSet.getString(6);
                 facility=resultSet.getString(7);
+                concreteAddress=resultSet.getString(9);
                 picPath=new File(resultSet.getString(5));
 
                 File[] allPic=picPath.listFiles();
@@ -108,7 +109,7 @@ public class HotelDatabaseImpl implements HotelDataService {
                 throw new SQLException();
             }
 
-            HotelPO hotelPO=new HotelPO(id,name,address,tel,introduction,facility,roomList,rank,hotelScore,picList);
+            HotelPO hotelPO=new HotelPO(id,name,address,concreteAddress,tel,introduction,facility,roomList,rank,hotelScore,picList);
             return hotelPO;
         }catch (SQLException e){
             e.printStackTrace();
