@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.customerui;
 
+import group2.grade15.njuse.presentation.orderui.MyOrderListController;
 import group2.grade15.njuse.presentation.searchui.CustomerSearchHotelController;
 import group2.grade15.njuse.vo.CustomerVO;
 import javafx.fxml.FXML;
@@ -34,6 +35,11 @@ public class CustomerMainController {
         showSearchHotelPane();
     }
 
+    @FXML
+    protected void mouseClickMyOrder() {
+        showMyOrderListPane();
+    }
+
     public void initData(CustomerVO vo){
         // TODO: 2016/12/1  
         userVO=vo;
@@ -59,10 +65,20 @@ public class CustomerMainController {
         }
     }
 
-    private void showMyOrderPane() {
-        // TODO: 2016/12/1
-//        String myOrderPaneUrl=;
-//
+    private void showMyOrderListPane() {
+        String myOrderPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderList.fxml";
+        try {
+            FXMLLoader loader=new FXMLLoader(new URL(myOrderPaneUrl));
+            functionPane.getChildren().clear();
+            functionPane.getChildren().add(loader.load());
+            MyOrderListController orderListController = loader.getController();
+            orderListController.setParentPane(functionPane);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void showPersonalInfoPane() {
