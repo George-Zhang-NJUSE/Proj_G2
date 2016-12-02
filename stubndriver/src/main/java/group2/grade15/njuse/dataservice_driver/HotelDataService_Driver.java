@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.HotelDataService;
+import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
@@ -17,7 +17,6 @@ public class HotelDataService_Driver {
 //            ResultMessage addInfo = hotelDataService.add(new HotelPO());
 //            ResultMessage modifyInfo = hotelDataService.modify(new HotelPO());
 //            ResultMessage modifyRoomInfo = hotelDataService.modifyRoom(123456, new RoomPO());
-            ResultMessage removeInfo = hotelDataService.remove(12346);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

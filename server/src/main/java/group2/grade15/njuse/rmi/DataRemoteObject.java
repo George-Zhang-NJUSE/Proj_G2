@@ -7,6 +7,7 @@ import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
+import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
