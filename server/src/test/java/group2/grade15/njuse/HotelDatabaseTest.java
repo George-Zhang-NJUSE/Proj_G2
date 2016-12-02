@@ -9,6 +9,10 @@ import group2.grade15.njuse.utility.RoomType;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.rmi.RemoteException;
 
 import static org.junit.Assert.*;
@@ -47,5 +51,33 @@ public class HotelDatabaseTest {
     public void addRoomTest() throws RemoteException{
         RoomPO roomPO=new RoomPO(RoomType.stadardDoubleBed,700.00,200,200);
         assertEquals(ResultMessage.SUCCESS,hotelDatabase.modifyRoom(1,roomPO));
+    }
+
+    @Test
+    public void deleteRoomTest() throws RemoteException{
+        assertEquals(ResultMessage.SUCCESS,hotelDatabase.deleteRoomType(1,RoomType.stadardDoubleBed));
+    }
+
+    @Test
+    public void addPicTest() throws RemoteException{
+        byte[] pic=null;
+        try {
+            File file = new File("C:/Users/dell/Pictures/scenery.jpg");
+            BufferedImage temp = ImageIO.read(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(temp, "jpg", bos);
+            pic = bos.toByteArray();
+            bos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        byte[][] picList=new byte[1][];
+        picList[0]=pic;
+        assertEquals(ResultMessage.SUCCESS,hotelDatabase.uploadPic(picList,1));
+    }
+
+    @Test
+    public void deletePicTest() throws RemoteException{
+        assertEquals(ResultMessage.SUCCESS,hotelDatabase.deletePic(1,1));
     }
 }
