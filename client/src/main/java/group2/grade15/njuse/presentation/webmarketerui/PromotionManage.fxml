@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
@@ -8,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.PromotionManageController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
       <GridPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0">
@@ -16,7 +17,8 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="800.0" minWidth="800.0" prefWidth="800.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
@@ -26,7 +28,7 @@
          <children>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
               <tabs>
-                <Tab text="未激活">
+                <Tab fx:id="unactivatedTab" text="未激活">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -34,7 +36,7 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="900.0">
                                        <children>
-                                          <TableView prefHeight="450.0" prefWidth="900.0">
+                                          <TableView fx:id="unactivatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -48,7 +50,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="已激活">
+                <Tab fx:id="activatedTab" text="已激活">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -56,7 +58,7 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="900.0">
                                        <children>
-                                          <TableView prefHeight="450.0" prefWidth="900.0">
+                                          <TableView fx:id="activatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -77,6 +79,53 @@
                   <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
                </font>
             </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="changeStateButton" text="激活">
+                      <graphic>
+                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="file:client/src/main/res/webmarketer/play.png" />
+                             </image>
+                          </ImageView>
+                      </graphic>
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="modifyButton" text="修改">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="file:client/src/main/res/webmarketer/modify.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deleteButton" text="删除">
+                      <graphic>
+                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="file:client/src/main/res/webmarketer/delete.png" />
+                             </image>
+                          </ImageView>
+                      </graphic>
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="7.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets top="50.0" />
+               </GridPane.margin>
+            </VBox>
+            <Pane fx:id="opPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

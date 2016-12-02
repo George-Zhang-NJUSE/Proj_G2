@@ -20,6 +20,8 @@ public class FixController implements Initializable{
     @FXML
     private Label clear;
     @FXML
+    private TextField searchID;
+    @FXML
     private TextField orderID;
     @FXML
     private TextField currentState;
@@ -54,7 +56,11 @@ public class FixController implements Initializable{
         fixReason.setText("");
 
     }
-    public void open(int ID){
+    public void openFromID(){
+        //TODO
+
+    }
+    public void openFromClick(){
         //TODO
     }
     public ResultMessage fixCommit(){
