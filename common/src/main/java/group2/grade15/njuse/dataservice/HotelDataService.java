@@ -18,7 +18,7 @@ public interface HotelDataService extends Remote {
 
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException;
 
-    public ResultMessage uploadPic(byte[][] picList) throws RemoteException;
+    public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException;
 
-    public ResultMessage deletePic(int picNum) throws RemoteException;
+    public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException;
 }
