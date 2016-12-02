@@ -17,14 +17,13 @@ public class SearchConditionVO {
     private double maxPrice;                //顾客所接受的房间最大价格，若客户未填写，则设置为0
     private int freeRoomNum;                //顾客所接受的酒店房间的最小空闲量，若客户未填写，则设置为0
     private int minStarLevel;               //顾客所接受的酒店最低星级，若客户未填写，则设置为0
-    private int maxStarLevel;               //顾客所接受的酒店最高星级，若客户未填写，则设置为5
     private Date checkInTime;               //顾客的预计入住时段，若客户未填写，则设置为null
     private Date checkOutTime;              //顾客的预计退房时间，若客户未填写，则设置为null
     private double minScore;                //顾客所接受的酒店最低评分，若客户未填写，则设置为0
     private double maxScore;                //顾客所接受的酒店最高评分，若客户未填写，则设置为10
     private boolean isBooked;               //顾客选择是否在已预订过的酒店中搜索，若客户未填写，则设置为false
 
-    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice, double maxPrice, int freeRoomNum, int minStarLevel, int maxStarLevel, Date checkInTime, Date checkOutTime, double minScore, double maxScore, boolean isBooked) {
+    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice, double maxPrice, int freeRoomNum, int minStarLevel, Date checkInTime, Date checkOutTime, double minScore, double maxScore, boolean isBooked) {
         this.customerID = customerID;
         this.sortBy = sortBy;
         this.name = name;
@@ -33,7 +32,6 @@ public class SearchConditionVO {
         this.maxPrice = maxPrice;
         this.freeRoomNum = freeRoomNum;
         this.minStarLevel = minStarLevel;
-        this.maxStarLevel = maxStarLevel;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.minScore = minScore;
@@ -71,10 +69,6 @@ public class SearchConditionVO {
 
     public int getMinStarLevel() {
         return minStarLevel;
-    }
-
-    public int getMaxStarLevel() {
-        return maxStarLevel;
     }
 
     public Date getCheckInTime() {
