@@ -29,8 +29,8 @@ public class Search implements SearchServ{
 			hotelList = filterByName(searchCondition.getName(), hotelList);
 		}
 
-		if (searchCondition.getMinStarLevel() != 0 || searchCondition.getMaxStarLevel() != 5 && hotelList != null){
-			hotelList = filterByStarLevel(searchCondition.getMinStarLevel(), searchCondition.getMaxStarLevel(), hotelList);
+		if (searchCondition.getMinStarLevel() != 0 && hotelList != null){
+			hotelList = filterByStarLevel(searchCondition.getMinStarLevel(), hotelList);
 		}
 
 		if(searchCondition.getMinScore() != 0 || searchCondition.getMaxScore() != 10 && hotelList != null) {
@@ -244,11 +244,11 @@ public class Search implements SearchServ{
 	/**
 	 * 根据SearchCondition中的酒店星级区间对获得的酒店列表进行一次筛选
 	 */
-	private ArrayList<HotelVO> filterByStarLevel(int minStarLevel, int maxStarLevel, ArrayList<HotelVO> hotelList){
+	private ArrayList<HotelVO> filterByStarLevel(int minStarLevel, ArrayList<HotelVO> hotelList){
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
 		for(HotelVO vo : hotelList){
-			if( (vo.getRank() >= minStarLevel) && (vo.getRank() <= maxStarLevel) ){
+			if( vo.getRank() >= minStarLevel ){
 				newHotelList.add(vo);
 			}
 		}
