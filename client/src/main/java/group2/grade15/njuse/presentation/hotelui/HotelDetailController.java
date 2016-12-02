@@ -1,10 +1,11 @@
-package group2.grade15.njuse.presentation.searchui;
+package group2.grade15.njuse.presentation.hotelui;
 
-import group2.grade15.njuse.presentation.hotelui.HotelDetailController;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,24 +14,19 @@ import java.net.URL;
 /**
  * Created by George on 2016/12/1.
  */
-public class SearchItemController {
-
-    private String hotelName;
+public class HotelDetailController {
 
     private Pane parentPane;
 
     @FXML
-    protected void showHotelDetail() {
-        try {
-            FXMLLoader hotelDetailLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
-            parentPane.getChildren().add(hotelDetailLoader.load());
-            HotelDetailController detailController = hotelDetailLoader.getController();
-            detailController.setParentPane(parentPane);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private Node rootNode;
+
+    @FXML
+    private VBox commentBox;
+
+    @FXML
+    protected void goBack() {
+        parentPane.getChildren().remove(rootNode);
     }
 
     @FXML
@@ -47,7 +43,9 @@ public class SearchItemController {
         }
     }
 
+
     public void setParentPane(Pane parentPane) {
         this.parentPane = parentPane;
     }
+
 }

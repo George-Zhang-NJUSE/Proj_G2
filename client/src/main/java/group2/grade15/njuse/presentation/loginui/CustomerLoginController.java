@@ -1,9 +1,14 @@
 package group2.grade15.njuse.presentation.loginui;
 
+import group2.grade15.njuse.bl.customerbl.CustomerController;
+import group2.grade15.njuse.bl.loginbl.CustomerLoginImpl;
+import group2.grade15.njuse.blservice.CustomerServ;
+import group2.grade15.njuse.blservice.LoginControllerServ;
 import group2.grade15.njuse.presentation.applyui.CustomerApplyController;
 import group2.grade15.njuse.presentation.customerui.CustomerMainController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.vo.CustomerVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,10 +46,7 @@ public class CustomerLoginController implements Initializable {
     private VBox loginVBox;
 
     @FXML
-    private ImageView loginIconImage;
-
-    @FXML
-    private ImageView applyIconImage;
+    private ImageView loginIconImage,applyIconImage;
 
     @FXML
     private TextField accoutField;
@@ -131,32 +133,40 @@ public class CustomerLoginController implements Initializable {
 
 
     private void login() {
-        // TODO: 2016/11/18
-//        int webAdminId = Integer.parseInt(accoutField.getText());
-//        String webAdminPsw = passwordField.getText();
-//
-//       switch (loginControllerServ.login(webAdminId, webAdminPsw, IDType.webAdmin)) {
+
+        LoginControllerServ loginServ=new CustomerLoginImpl();
+        CustomerServ customerServ = new CustomerController();
+
+//        int id = Integer.parseInt(accoutField.getText());
+//        String password = passwordField.getText();
+
+//        switch (loginServ.login(id,password)){
 //            case SUCCESS:
-//
-//
+//                jumpToMain(customerServ.getInfo(id));
+//                break;
+//            case FAILED:
+//                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误");
+//                wrongPswAlert.showAndWait();
+//                break;
+//            case NON_EXISTENT:
+//                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在");
+//                invalidAccountAlert.showAndWait();
+//                break;
 //        }
 
-//        Alert accountInvalid = new Alert(Alert.AlertType.ERROR, "该账号未注册");
-//        accountInvalid.showAndWait();
-
-        jumpToMain();
+        jumpToMain(null);
 
     }
 
-    private void jumpToMain() {
-        // TODO: 2016/11/25 customer主界面还没写 
+    private void jumpToMain(CustomerVO customerVO) {
+
         try {
             FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerMain.fxml"));
             Stage customerStage = new Stage();
             customerStage.setScene(new Scene((Parent) customerMainLoader.load()));
 
             CustomerMainController mainController = customerMainLoader.<CustomerMainController>getController();
-//            webAdminController.initData();
+//            mainController.initData(customerVO);
 
             currentStage.close();
 
