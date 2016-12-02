@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.searchbl;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.rmi.RemoteHelper;
@@ -14,11 +15,11 @@ import java.util.Date;
 public class Search implements SearchServ{
 
 	@Override
-	public ArrayList<HotelVO> getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO) {
+	public HotelListVO getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO) {
 		ArrayList<HotelVO> hotelList = hotelListVO.getList();
 
-		if (searchCondition.getSortBy() != SortMethod.DEFAULT && hotelList != null) {
-			hotelList = filterByBooked(hotelList);
+		if ( hotelList != null) {
+			hotelList = filterByBooked(searchCondition.getCsutomerID(), hotelList);
 		}
 
 		if (searchCondition.getSortBy() != SortMethod.DEFAULT && hotelList != null) {
@@ -49,13 +50,13 @@ public class Search implements SearchServ{
 			hotelList = filterByRoomInfo(searchCondition.getRoomType(), searchCondition.getFreeRoomNum(), hotelList);
 		}
 
-		return hotelList;
+		return new HotelListVO(hotelList);
 	}
 
 	@Override
-	public ArrayList<ProvinceVO> getProvince() {
+	public ProvinceListVO getProvince() {
 		ArrayList<ProvincePO> provincePOList = new ArrayList();
-		ArrayList<ProvinceVO> promotionList = new ArrayList();
+		ArrayList<ProvinceVO> provinceList = new ArrayList();
 
 		try {
 			provincePOList = RemoteHelper.getInstance().getAreaDataService().getProvince();
@@ -64,14 +65,14 @@ public class Search implements SearchServ{
 		}
 
 		for(ProvincePO po : provincePOList){
-			promotionList.add(new ProvinceVO(po));
+			provinceList.add(new ProvinceVO(po));
 		}
 
-		return promotionList;
+		return new ProvinceListVO(provinceList);
 	}
 
 	@Override
-	public ArrayList<CityVO> getCity(String provinceNum) {
+	public CityListVO getCity(String provinceNum) {
 		ArrayList<CityPO> cityPOList = new ArrayList();
 		ArrayList<CityVO> cityList = new ArrayList();
 
@@ -85,11 +86,11 @@ public class Search implements SearchServ{
 			cityList.add(new CityVO(po));
 		}
 
-		return cityList;
+		return new CityListVO(cityList);
 	}
 
 	@Override
-	public ArrayList<DistrictVO> getDistrict(String cityNum) {
+	public DistrictListVO getDistrict(String cityNum) {
 		ArrayList<DistrictPO> districtPOList = new ArrayList();
 		ArrayList<DistrictVO> districtList = new ArrayList();
 
@@ -102,11 +103,11 @@ public class Search implements SearchServ{
 		for(DistrictPO po : districtPOList){
 			districtList.add(new DistrictVO(po));
 		}
-		return districtList;
+		return new DistrictListVO(districtList);
 	}
 
 	@Override
-	public ArrayList<CbdVO> getCbd(String districtNum) {
+	public CbdListVO getCbd(String districtNum) {
 		ArrayList<CbdPO> cbdPOList = new ArrayList();
 		ArrayList<CbdVO> cbdList = new ArrayList();
 
@@ -119,11 +120,11 @@ public class Search implements SearchServ{
 		for(CbdPO po : cbdPOList){
 			cbdList.add(new CbdVO(po));
 		}
-		return cbdList;
+		return new CbdListVO(cbdList);
 	}
 
 	@Override
-	public ArrayList<HotelVO> getHotel(String address) {
+	public HotelListVO getHotel(String address) {
 		ArrayList<HotelPO> hotelPOList = new ArrayList();
 		ArrayList<HotelVO> hotelList = new ArrayList();
 
@@ -136,13 +137,14 @@ public class Search implements SearchServ{
 		for(HotelPO po : hotelPOList){
 			hotelList.add(new HotelVO(po));
 		}
-		return hotelList;
+		return new HotelListVO(hotelList);
 	}
 
 	/**
 	 * 根据SearchCondition中的isBooked对获得的酒店列表进行一次筛选
 	 */
-	private ArrayList<HotelVO> filterByBooked(ArrayList<HotelVO> hotelList){
+	private ArrayList<HotelVO> filterByBooked(int customerID, ArrayList<HotelVO> hotelList){
+
 		return null;
 	}
 
