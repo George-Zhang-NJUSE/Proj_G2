@@ -32,6 +32,7 @@ public class CustomerSearchHotelController {
             searchItemBox.getChildren().clear();
             ArrayList<Node> ItemList = new ArrayList<>();
 
+            // TODO: 2016/12/2 需要更改为正确的逻辑
             for(int i=0;i<15;++i) {
                 FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/SearchItem.fxml"));
                 Node singleItemTemplate=searchItemLoader.load();
