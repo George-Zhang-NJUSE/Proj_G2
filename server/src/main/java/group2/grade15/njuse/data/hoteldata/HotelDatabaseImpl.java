@@ -13,10 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -132,21 +129,57 @@ public class HotelDatabaseImpl implements HotelDataService {
         }
     }
 
+
+    /**
+     * @param po
+     * @return ResultMessage
+     * @throws RemoteException
+     * 只能修改地址、所属商圈、简介、设施服务、星级、联系方式
+     */
     public ResultMessage modify(HotelPO po) throws RemoteException {
-        return null;
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement modify=hotelDatabase.prepareStatement("update hotel set concreteaddress = ?," +
+                    "address = ?,introduction = ?,facility = ?,rank = ? where hotelid = ?");
+            modify.setString(1,po.getConcreteAddress());
+            modify.setString(2,po.getAddress());
+            modify.setString(3,po.getIntroduction());
+            modify.setString(4,po.getFacility());
+            modify.setInt(5,po.getRank());
+            modify.setInt(6,po.getId());
+
+            modify.executeUpdate();
+
+            modify.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException {
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        
         return null;
     }
 
     @Override
-    public ResultMessage uploadPic(byte[][] picList) throws RemoteException {
+    public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage deletePic(int picNum) throws RemoteException {
+    public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException {
         return null;
     }
 }

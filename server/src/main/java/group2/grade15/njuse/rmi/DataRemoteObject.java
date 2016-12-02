@@ -107,12 +107,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage uploadPic(byte[][] picList) throws RemoteException {
+    public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage deletePic(int picNum) throws RemoteException {
+    public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException {
         return null;
     }
 
