@@ -148,26 +148,43 @@ public class Search implements SearchServ{
 	}
 
 	/**
-	 * 根据SearchCondition中的排序选择进行排序
+	 * 根据SearchCondition中的排序选择进行排序(升序)
 	 */
 	private ArrayList<HotelVO> sort(SortMethod sortBy, ArrayList<HotelVO> hotelList){
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
 		switch (sortBy){
 			case DEFAULT:
-
+				newHotelList = hotelList;
 				break;
 
 			case PRICE:
-
 				break;
 
 			case STAR_LEVEL:
-
+				newHotelList = hotelList;
+				for(int i = 1; i < newHotelList.size(); i++){
+					for(int j = 0; j < i; j ++ ){
+						if(newHotelList.get(i).getRank() < newHotelList.get(j).getRank()){
+							HotelVO temp = newHotelList.get(j);
+							newHotelList.set(j, newHotelList.get(i));
+							newHotelList.set(i, temp);
+						}
+					}
+				}
 				break;
 
 			case SCORE:
-
+				newHotelList = hotelList;
+				for(int i = 1; i < newHotelList.size(); i++){
+					for(int j = 0; j < i; j ++ ){
+						if(newHotelList.get(i).getScore() < newHotelList.get(j).getScore()){
+							HotelVO temp = newHotelList.get(j);
+							newHotelList.set(j, newHotelList.get(i));
+							newHotelList.set(i, temp);
+						}
+					}
+				}
 				break;
 
 			default:
