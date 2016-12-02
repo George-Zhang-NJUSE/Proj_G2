@@ -64,17 +64,10 @@ public class UserProxyImpl implements UserProxyBL{
 		return new WebMarketerListVO(webMarketerList);
 	}
 
-	/***
-	 * 创建酒店管理人员的方法
-	 * 先根据HotelManagerVO.getHotelID获取对应的酒店ID
-	 * 然后根据酒店ID和getHotel()方法获取对应的酒店
-	 * 再检查该酒店是否已经拥有酒店管理人员：
-	 * 如果无，就在数据库添加该酒店管理人员，并将该酒店的haveManager设置为true
-	 * 否则，返回ResultMessage.EXISTENT
-	 */
 	public ResultMessage createHotelManager(HotelManagerVO hotelManager){
-		ResultMessage result = ResultMessage.FAILED;
+		ResultMessage result;
 		try {
+			result = ResultMessage.SUCCESS;
 			RemoteHelper.getInstance().getWebAdminDataService().addHotelManagerInfo(hotelManager.toPO());
 		} catch (RemoteException e) {
 			result = ResultMessage.CONNECTION_EXCEPTION;
@@ -84,30 +77,33 @@ public class UserProxyImpl implements UserProxyBL{
 	}
 	
 	public ResultMessage modifyWebMarketer(WebMarketerVO webMarketer){
-		ResultMessage result = ResultMessage.FAILED;
+		ResultMessage result;
 		try {
 			result = RemoteHelper.getInstance().getWebAdminDataService().modifyWebMarketerInfo(webMarketer.toPO());
 		} catch (RemoteException e) {
+			result = ResultMessage.CONNECTION_EXCEPTION;
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
 	public ResultMessage createWebMarketer(WebMarketerVO webMarketer){
-		ResultMessage result = ResultMessage.FAILED;
+		ResultMessage result;
 		try {
 			result = RemoteHelper.getInstance().getWebAdminDataService().addWebMarketerInfo(webMarketer.toPO());
 		} catch (RemoteException e) {
+			result = ResultMessage.CONNECTION_EXCEPTION;
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
 	public ResultMessage deleteWebMarketer(WebMarketerVO webMarketer){
-		ResultMessage result = ResultMessage.FAILED;
+		ResultMessage result;
 		try {
 			result = RemoteHelper.getInstance().getWebAdminDataService().deleteWebMarketer(webMarketer.getStaffID());
 		} catch (RemoteException e) {
+			result = ResultMessage.CONNECTION_EXCEPTION;
 			e.printStackTrace();
 		}
 		return result;

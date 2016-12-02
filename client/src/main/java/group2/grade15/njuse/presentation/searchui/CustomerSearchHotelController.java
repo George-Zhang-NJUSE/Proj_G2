@@ -3,6 +3,9 @@ package group2.grade15.njuse.presentation.searchui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,22 +18,36 @@ import java.util.ArrayList;
  */
 public class CustomerSearchHotelController {
 
+    private Pane parentPane;
+
     @FXML
     private VBox searchItemBox;
+
+    @FXML
+    private ChoiceBox provinceChoiceBox, cityChoiceBox, districtChoiceBox, cbdChoiceBox, roomTypeChoiceBox,
+            priceRangeChoiceBox, freeRoomChoiceBox, minStarChoiceBox, scoreRangeChoiceBox;
+
+    @FXML
+    private TextField hotelNameField;
+
 
     @FXML
     protected void search() {
         showSearchResult();
     }
 
+
     private void showSearchResult() {
         try {
             searchItemBox.getChildren().clear();
             ArrayList<Node> ItemList = new ArrayList<>();
 
+            // TODO: 2016/12/2 需要更改为正确的逻辑
             for(int i=0;i<15;++i) {
                 FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/SearchItem.fxml"));
                 Node singleItemTemplate=searchItemLoader.load();
+                SearchItemController searchItemController = searchItemLoader.getController();
+                searchItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);
             }
 
@@ -43,5 +60,7 @@ public class CustomerSearchHotelController {
         }
     }
 
-
+    public void setParentPane(Pane parentPane) {
+        this.parentPane=parentPane;
+    }
 }

@@ -31,7 +31,7 @@
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="用户名" GridPane.columnSpan="2" GridPane.halignment="LEFT">
+                  <Label fx:id="usernameLabel" text="用户名" GridPane.columnSpan="2" GridPane.halignment="LEFT">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Insets bottom="5.0" left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="2000" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Label fx:id="creditLabel" text="2000" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Insets bottom="10.0" left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="memberLevelLabel" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -87,7 +87,7 @@
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin></Label>
-                  <Label>
+                  <Label onMouseClicked="#mouseClickMyOrder">
                      <graphic>
                         <ImageView fitHeight="64.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
                            <image>

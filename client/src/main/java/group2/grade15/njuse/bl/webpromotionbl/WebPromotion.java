@@ -2,7 +2,6 @@ package group2.grade15.njuse.bl.webpromotionbl;
 
 import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.WebPromotionServ;
-import group2.grade15.njuse.po.PromotionPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.WebPromotionListVO;

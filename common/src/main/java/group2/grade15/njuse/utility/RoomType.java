@@ -4,4 +4,5 @@ public enum RoomType {
 	bigSingleBed,
 	stadardDoubleBed,
 	suiteRoom,
+	all
 }

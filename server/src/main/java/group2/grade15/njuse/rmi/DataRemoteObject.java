@@ -7,12 +7,14 @@ import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
+import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -97,11 +99,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage add(HotelPO po) throws RemoteException {
-        return null;
-    }
-
-    @Override
     public ResultMessage modify(HotelPO po) throws RemoteException {
         return null;
     }
@@ -112,7 +109,22 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage remove(int hotelId) throws RemoteException {
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException {
         return null;
     }
 
@@ -132,29 +144,50 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ArrayList<PromotionPO> getList() throws RemoteException {
+    public ArrayList<WebPromotionPO> getList() throws RemoteException {
         return null;
     }
 
     @Override
-    public ArrayList<PromotionPO> getList(int hotelId) throws RemoteException {
+    public ResultMessage modify(WebPromotionPO po) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage modify(PromotionPO po) throws RemoteException {
+    public ResultMessage remove(WebPromotionPO po) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage remove(PromotionPO po) throws RemoteException {
+    public ResultMessage add(WebPromotionPO po) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage add(PromotionPO po) throws RemoteException {
+    public RankPO getRank() throws RemoteException {
         return null;
     }
+
+    @Override
+    public ArrayList<HotelPromotionPO> getList(int hotelId) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modify(HotelPromotionPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage remove(HotelPromotionPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage add(HotelPromotionPO po) throws RemoteException {
+        return null;
+    }
+
 
     @Override
     public HotelManagerPO getHotelManager(int hotelManagerId) throws RemoteException {
