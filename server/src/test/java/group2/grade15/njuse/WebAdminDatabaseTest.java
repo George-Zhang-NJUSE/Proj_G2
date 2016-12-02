@@ -81,7 +81,8 @@ public class WebAdminDatabaseTest {
 
     @Test
     public void addHotelinfoTest() throws RemoteException{
-        HotelPO hotelPO=new HotelPO(0,"莫泰","00001000010000100001","6883221",null,
+        HotelPO hotelPO=new HotelPO(0,"莫泰","00001000010000100001","江苏省南京市栖霞区马群",
+                "6883221",null,
                 "健身馆",null,2,0.00,null);
         assertEquals(2,webAdminDatabase.addHotel(hotelPO).getId());
     }
@@ -93,7 +94,8 @@ public class WebAdminDatabaseTest {
 
     @Test
     public void modifyHotelInfoTest() throws RemoteException{
-        HotelPO hotelPO=new HotelPO(2,"如家","00001000010000100001","6883221",null,
+        HotelPO hotelPO=new HotelPO(2,"如家","00001000010000100001","江苏省南京市珠江路",
+                "6883221",null,
                 null,null,2,0.00,null);
         assertEquals(ResultMessage.SUCCESS,webAdminDatabase.modifyHotelInfo(hotelPO));
     }

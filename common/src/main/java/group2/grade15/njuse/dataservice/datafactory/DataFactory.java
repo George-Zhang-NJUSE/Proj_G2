@@ -1,5 +1,6 @@
 package group2.grade15.njuse.dataservice.datafactory;
 
+import group2.grade15.njuse.dataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -28,5 +29,7 @@ public interface DataFactory extends Remote{
     public CreditDataService getCreditDataService() throws RemoteException;
 
     public AreaDataService getAreaDataService() throws RemoteException;
+
+    public HotelDataService getHotelDataService() throws RemoteException;
 
 }

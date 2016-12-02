@@ -15,5 +15,4 @@ public class HotelListVO implements Serializable{
 	public ArrayList<HotelVO> getList() {
 		return list;
 	}
-
 }

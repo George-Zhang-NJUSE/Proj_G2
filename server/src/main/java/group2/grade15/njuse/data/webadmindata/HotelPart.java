@@ -26,7 +26,7 @@ public class HotelPart implements HotelPartService{
      * @param hotelPO
      * @return HotelPO
      * @throws RemoteException
-     * 只注册酒店基本信息，不进行图片，房间,vip list录入，要求逻辑层在执行完本方法后立即执行酒店工作人员的注册
+     * 只注册酒店基本信息(包括详细地址)，不进行图片，房间,vip list录入，要求逻辑层在执行完本方法后立即执行酒店工作人员的注册
      * 酒店的地址要通过search方法获得
      */
     @Override
@@ -56,13 +56,14 @@ public class HotelPart implements HotelPartService{
             add.setString(6,hotelPO.getIntroduction());
             add.setString(7,hotelPO.getFacility());
             add.setString(8,hotelPO.getAddress());
+            add.setString(9,hotelPO.getConcreteAddress());
             add.executeUpdate();
 
             add.close();
             hotelPartDatabase.close();
             hotelPartDatabase=null;
 
-            return new HotelPO(id,hotelPO.getName(),hotelPO.getAddress(),hotelPO.getContact(),hotelPO.getIntroduction(),
+            return new HotelPO(id,hotelPO.getName(),hotelPO.getAddress(),hotelPO.getConcreteAddress(),hotelPO.getContact(),hotelPO.getIntroduction(),
                     hotelPO.getFacility(),null,hotelPO.getRank(),0.00,null);
         }catch (SQLException e){
             e.printStackTrace();
@@ -73,7 +74,7 @@ public class HotelPart implements HotelPartService{
     /**
      * @return ArrayList<HotelPO>
      * @throws RemoteException
-     * 仅返回酒店基本信息，不返回图片，简介，设施,房间，vip list的信息
+     * 仅返回酒店基本信息(包括详细地址)，不返回图片，简介，设施,房间，vip list的信息
      */
     @Override
     public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
@@ -102,8 +103,9 @@ public class HotelPart implements HotelPartService{
                 }
                 getScore.close();
                 String address=resultSet.getString(8);//未经转换的
+                String concreteAddress=resultSet.getString(9);//详细
 
-                HotelPO hotelPO=new HotelPO(id,name,address,tel,null,null,null,rank,
+                HotelPO hotelPO=new HotelPO(id,name,address,concreteAddress,tel,null,null,null,rank,
                         hotelscore,null);
                 list.add(hotelPO);
             }
