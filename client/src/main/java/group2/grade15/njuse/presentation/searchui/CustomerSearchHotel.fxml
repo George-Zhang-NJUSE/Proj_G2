@@ -28,38 +28,38 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="省（直辖市等）：" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            <ChoiceBox prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="2" />
+            <ChoiceBox fx:id="provinceChoiceBox" prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="2" />
             <Label text="市（市级县等）：" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
-            <ChoiceBox prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="4" />
+            <ChoiceBox fx:id="cityChoiceBox" prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="4" />
             <Label text="区：" GridPane.columnIndex="5" GridPane.halignment="RIGHT" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="6" />
+            <ChoiceBox fx:id="districtChoiceBox" prefWidth="100.0" GridPane.columnIndex="6" />
             <Label prefHeight="20.0" text="商圈：" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="8" />
+            <ChoiceBox fx:id="cbdChoiceBox" prefWidth="100.0" GridPane.columnIndex="8" />
             <Label onMouseClicked="#search" text="搜索按钮" GridPane.columnIndex="9" GridPane.rowSpan="2" />
             <Label text="基础条件：" />
             <Label text="可选条件：" GridPane.rowIndex="1" />
-            <Label text="酒店名称：" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField prefHeight="30.0" prefWidth="81.0" promptText="酒店全称或关键字" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="酒店名称：" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="hotelNameField" prefHeight="30.0" prefWidth="81.0" promptText="酒店全称或关键字" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="房间类型：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Label text="价格区间：" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Label text="空房数量：" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <ChoiceBox prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Label text="星级：" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="priceRangeChoiceBox" prefWidth="100.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Label text="空房数量：" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="freeRoomChoiceBox" prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Label text="星级：" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="minStarChoiceBox" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="入住时间：" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label text="退房时间：" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Label text="评分区间：" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-            <ChoiceBox prefWidth="100.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <DatePicker fx:id="checkInDatePicker" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <DatePicker fx:id="checkOutDatePicker" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Label text="评分区间：" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="scoreRangeChoiceBox" prefWidth="100.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </top>
