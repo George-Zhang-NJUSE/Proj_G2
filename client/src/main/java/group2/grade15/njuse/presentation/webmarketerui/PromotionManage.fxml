@@ -120,6 +120,18 @@
                         <Insets left="7.0" />
                      </padding>
                   </Label>
+                  <Label fx:id="addButton" text="新增促销方案" onMouseClicked="#toAdd">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:client/src/main/res/webmarketer/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
                </children>
                <GridPane.margin>
                   <Insets top="50.0" />

@@ -1,8 +1,10 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -11,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +28,8 @@ public class PromotionManageController implements Initializable{
     private Label modifyButton;
     @FXML
     private Label deleteButton;
+    @FXML
+    private Label addButton;
     @FXML
     private TableView activatedList;
     @FXML
@@ -42,6 +48,7 @@ public class PromotionManageController implements Initializable{
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
         CustomeButton.implButton(modifyButton, "file:client/src/main/res/webmarketer/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/webmarketer/delete");
+        CustomeButton.implButton(addButton,"file:client/src/main/res/webmarketer/add");
         unactivatedTab.setOnSelectionChanged((Event e)->{
             switchToUnactivated();
         });
@@ -61,5 +68,50 @@ public class PromotionManageController implements Initializable{
         ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/webmarketer/play.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
+    }
+    public void toAdd(){
+        try {
+            Fade out = new Fade(opPane, 200, false);
+            out.play();
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/AddPromotion.fxml"));
+            opPane.getChildren().clear();
+            opPane.getChildren().add(lodar.load());
+            Fade in = new Fade(opPane, 200, true);
+            in.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void toDelete(){
+        try {
+            Fade out = new Fade(opPane, 200, false);
+            out.play();
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/DeletePromotionCheck.fxml"));
+            opPane.getChildren().clear();
+            opPane.getChildren().add(lodar.load());
+            Fade in = new Fade(opPane, 200, true);
+            in.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void toModify(){
+        try {
+            Fade out = new Fade(opPane, 200, false);
+            out.play();
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/ModifyPromotion.fxml"));
+            opPane.getChildren().clear();
+            opPane.getChildren().add(lodar.load());
+            Fade in = new Fade(opPane, 200, true);
+            in.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
