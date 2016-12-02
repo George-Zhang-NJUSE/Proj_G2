@@ -7,12 +7,14 @@ import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
+import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -103,6 +105,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
         return null;
     }
 

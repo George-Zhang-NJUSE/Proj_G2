@@ -2,7 +2,7 @@ package group2.grade15.njuse.data.hoteldata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.HotelDataService;
+import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -10,6 +10,7 @@ import group2.grade15.njuse.utility.RoomType;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.rmi.RemoteException;
@@ -20,8 +21,9 @@ import java.util.ArrayList;
  * Created by ALIENWARE-PC on 2016/11/13.
  */
 public class HotelDatabaseImpl implements HotelDataService {
-    DatabaseMySql mySql=null;
-    Connection hotelDatabase=null;
+    private DatabaseMySql mySql=null;
+    private Connection hotelDatabase=null;
+    private String[] roomName={"singlebed","doublebed","suiteroom"};
 
     public HotelDatabaseImpl(DatabaseInfo info) throws RemoteException{
         mySql=new DatabaseMySql(info);
@@ -169,17 +171,152 @@ public class HotelDatabaseImpl implements HotelDataService {
             hotelDatabase=mySql.init();
         }
 
-        
-        return null;
+        try{//表驱动
+            String name=roomName[po.getType().ordinal()];
+            String price=name+"price";
+            String book=name+"booked";
+            String total=name+"total";
+
+            PreparedStatement room=hotelDatabase.prepareStatement("update room set "+price+" = ?," +
+                    book+" = ?,"+total+" = ? where hotelid = ?");
+            room.setDouble(1,po.getPrice());
+            room.setInt(2,po.getTotalRoomNum()-po.getSpareRoomNum());
+            room.setInt(3,po.getTotalRoomNum());
+            room.setInt(4,hotelId);
+
+            room.executeUpdate();
+
+            room.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
+
+    @Override
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            String name=roomName[po.getType().ordinal()];
+            String price=name+"price";
+            String book=name+"booked";
+            String total=name+"total";
+
+            PreparedStatement add=hotelDatabase.prepareStatement("update room set "+name+" = ?,"+price+" = ?,"+
+                    book+" = ?,"+total+" = ? where hotelid = ?");
+            add.setBoolean(1,true);
+            add.setDouble(2,po.getPrice());
+            add.setInt(3,po.getTotalRoomNum()-po.getSpareRoomNum());
+            add.setInt(4,po.getTotalRoomNum());
+            add.setInt(5,hotelID);
+
+            add.executeUpdate();
+
+            add.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            String name=roomName[type.ordinal()];
+            PreparedStatement delete=hotelDatabase.prepareStatement("update room set "+name+" = ? where hotelid = ?");
+            delete.setBoolean(1,false);
+            delete.setInt(2,hotelID);
+
+            delete.executeUpdate();
+
+            delete.close();
+            hotelDatabase.close();
+            hotelDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 
     @Override
     public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException {
-        return null;
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            Statement path=hotelDatabase.createStatement();
+            ResultSet resultSet=path.executeQuery("select picture from hotel where hotelid = "+hotelID);
+            String picPath;
+            if(resultSet.next()){
+                picPath=resultSet.getString(1);
+            }
+            else{
+                throw new SQLException();
+            }
+            path.close();
+
+            File directory=new File(picPath);
+            File[] pics=directory.listFiles();
+            int picNum=Integer.parseInt((pics[pics.length-1].getName()).split("\\.")[0])+1;
+            for(int i=0;i<picList.length;i++){
+                ByteArrayInputStream bis=new ByteArrayInputStream(picList[i]);
+                BufferedImage bi=ImageIO.read(bis);
+                ImageIO.write(bi,"jpg",new File(picPath+"/"+picNum+".jpg"));
+                picNum++;
+                bis.close();
+            }
+
+            return ResultMessage.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 
     @Override
     public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException {
-        return null;
+        if(hotelDatabase==null){
+            hotelDatabase=mySql.init();
+        }
+
+        try{
+            Statement path=hotelDatabase.createStatement();
+            ResultSet resultSet=path.executeQuery("select picture from hotel where hotelid = "+hotelID);
+            String picPath;
+            if(resultSet.next()){
+                picPath=resultSet.getString(1);
+            }
+            else{
+                throw new SQLException();
+            }
+            path.close();
+
+            File directory=new File(picPath);
+            File[] pics=directory.listFiles();
+            pics[picNum].delete();
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 }
