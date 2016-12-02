@@ -127,7 +127,7 @@
                                 <Insets left="10.0" right="10.0" />
                             </GridPane.margin>
                         </TextField>
-                        <DatePicker fx:id="birthdayPicker" prefHeight="36.0" prefWidth="313.0" promptText="点击右边按钮选择您的生日" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <DatePicker fx:id="birthdayPicker" editable="false" prefHeight="36.0" prefWidth="313.0" promptText="点击右边按钮选择您的生日" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <TextField fx:id="enterpriseNameField" promptText="您所在企业的中文名称" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <font>
                                 <Font size="18.0" />

@@ -3,6 +3,8 @@ package group2.grade15.njuse.presentation.searchui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -20,6 +22,14 @@ public class CustomerSearchHotelController {
 
     @FXML
     private VBox searchItemBox;
+
+    @FXML
+    private ChoiceBox provinceChoiceBox, cityChoiceBox, districtChoiceBox, cbdChoiceBox, roomTypeChoiceBox,
+            priceRangeChoiceBox, freeRoomChoiceBox, minStarChoiceBox, scoreRangeChoiceBox;
+
+    @FXML
+    private TextField hotelNameField;
+
 
     @FXML
     protected void search() {
