@@ -151,7 +151,30 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的排序选择进行排序
 	 */
 	private ArrayList<HotelVO> sort(SortMethod sortBy, ArrayList<HotelVO> hotelList){
-		return null;
+		ArrayList<HotelVO> newHotelList = new ArrayList();
+
+		switch (sortBy){
+			case DEFAULT:
+
+				break;
+
+			case PRICE:
+
+				break;
+
+			case STAR_LEVEL:
+
+				break;
+
+			case SCORE:
+
+				break;
+
+			default:
+				break;
+		}
+
+		return newHotelList;
 	}
 
 	/**
