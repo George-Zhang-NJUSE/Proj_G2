@@ -14,12 +14,11 @@ public interface HotelDataService extends Remote {
 
     public HotelPO getHotel(int hotelId) throws RemoteException;
 
-    public ResultMessage add(HotelPO po) throws RemoteException;
-
     public ResultMessage modify(HotelPO po) throws RemoteException;
 
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException;
 
-    public ResultMessage remove(int hotelId) throws RemoteException;
+    public ResultMessage uploadPic(byte[][] picList) throws RemoteException;
 
+    public ResultMessage deletePic(int picNum) throws RemoteException;
 }

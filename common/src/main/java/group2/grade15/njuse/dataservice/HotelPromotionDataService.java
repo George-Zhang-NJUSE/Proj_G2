@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice;
 
-import group2.grade15.njuse.po.PromotionPO;
+import group2.grade15.njuse.po.HotelPromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.Remote;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
  */
 public interface HotelPromotionDataService extends Remote {
 
-    public ArrayList<PromotionPO> getList(int hotelId) throws RemoteException;
+    public ArrayList<HotelPromotionPO> getList(int hotelId) throws RemoteException;
 
-    public ResultMessage modify(PromotionPO po) throws RemoteException;
+    public ResultMessage modify(HotelPromotionPO po) throws RemoteException;
 
-    public ResultMessage remove(PromotionPO po) throws RemoteException;
+    public ResultMessage remove(HotelPromotionPO po) throws RemoteException;
 
-    public ResultMessage add(PromotionPO po) throws RemoteException;
+    public ResultMessage add(HotelPromotionPO po) throws RemoteException;
 
 }
