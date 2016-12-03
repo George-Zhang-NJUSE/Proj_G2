@@ -36,7 +36,7 @@
                     <children>
                         <ImageView fitHeight="710.0" fitWidth="991.0" layoutX="26.0" layoutY="24.0" opacity="0.73" pickOnBounds="true" scaleX="1.1" scaleY="1.1">
                             <image>
-                                <Image url="file:client/src/main/res/webadmin/bc.jpg" />
+                                <Image url="file:client/src/main/res/hotelmanage/bc.jpg" />
                             </image>
                         </ImageView>
 

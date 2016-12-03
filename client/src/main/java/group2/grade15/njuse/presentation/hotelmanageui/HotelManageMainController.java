@@ -1,11 +1,16 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +34,8 @@ public class HotelManageMainController implements Initializable {
     private Rectangle roomManageRec;
     @FXML
     private Rectangle promotionManageRec;
+    @FXML
+    private Pane opPane;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addSwither(infoTag);
@@ -38,13 +45,27 @@ public class HotelManageMainController implements Initializable {
 
     }
     @FXML
-    private void toInfo(){
+    private boolean toInfo(){
+        if (infoRec.isVisible())
+            return true;
         infoRec.setVisible(true);
         orderManageRec.setVisible(false);
         roomManageRec.setVisible(false);
         promotionManageRec.setVisible(false);
-
-
+        try{
+            Fade out = new Fade(opPane, 500, false);
+            out.play();
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/HotelInfo.fxml"));
+            opPane.getChildren().clear();
+            opPane.getChildren().add(infoLoader.load());
+            Fade in=new Fade(opPane,500,true);
+            in.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
     @FXML
     private void toOrderManage(){
@@ -79,6 +100,9 @@ public class HotelManageMainController implements Initializable {
         });
         pane.setOnMousePressed((MouseEvent e)->{
             pane.setStyle("-fx-background-color: rgb(210,210,210)");
+        });
+        pane.setOnMouseReleased((MouseEvent e)->{
+            pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
     }
 }

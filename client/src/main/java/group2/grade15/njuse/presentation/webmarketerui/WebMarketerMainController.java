@@ -68,9 +68,10 @@ public class WebMarketerMainController implements Initializable{
     }
     public boolean toPromotion(){
         //TODO 到promotion管理的跳转
-        motherPaneFadeout();
+
         if (promotionTag.isVisible())
             return true;
+        motherPaneFadeout();
         promotionTag.setVisible(true);
         fixTag.setVisible(false);
         creditChargeTag.setVisible(false);
@@ -89,9 +90,10 @@ public class WebMarketerMainController implements Initializable{
     }
     public boolean toFix(){
         //TODO 到fix的跳转
-        motherPaneFadeout();
+
         if (fixTag.isVisible())
             return true;
+        motherPaneFadeout();
         promotionTag.setVisible(false);
         fixTag.setVisible(true);
         creditChargeTag.setVisible(false);
@@ -121,6 +123,9 @@ public class WebMarketerMainController implements Initializable{
         });
         pane.setOnMousePressed((MouseEvent e)->{
             pane.setStyle("-fx-background-color: rgb(210,210,210)");
+        });
+        pane.setOnMouseReleased((MouseEvent e)->{
+            pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
     }
 }
