@@ -28,6 +28,10 @@ public class Customer {
         }
     }
 
+    public int getId() {
+        return customerPO.getId();
+    }
+
     public ResultMessage modifyInfo(CustomerVO customerVO) {
         try {
             return RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
@@ -35,10 +39,6 @@ public class Customer {
             e.printStackTrace();
             return ResultMessage.FAILED;
         }
-    }
-
-    public int getId() {
-        return customerPO.getId();
     }
 
 }

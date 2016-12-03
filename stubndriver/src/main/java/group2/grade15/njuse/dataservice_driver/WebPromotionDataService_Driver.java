@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class WebPromotionDataService_Driver {
 
     public void drive(WebPromotionDataService webPromotionDataService) {
-        try {
-            ArrayList<PromotionPO> webMarketerPO = webPromotionDataService.getList();
-//          ResultMessage addInfo = webPromotionDataService.add(new PromotionPO());
-//          ResultMessage modifyInfo = webPromotionDataService.modify(new PromotionPO());
-//          ResultMessage removeInfo = webPromotionDataService.remove(new PromotionPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+//        try {
+////            ArrayList<PromotionPO> webMarketerPO = webPromotionDataService.getList();
+////          ResultMessage addInfo = webPromotionDataService.add(new PromotionPO());
+////          ResultMessage modifyInfo = webPromotionDataService.modify(new PromotionPO());
+////          ResultMessage removeInfo = webPromotionDataService.remove(new PromotionPO());
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void main(String[] args) {

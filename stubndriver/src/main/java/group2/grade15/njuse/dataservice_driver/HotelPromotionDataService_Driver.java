@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class HotelPromotionDataService_Driver {
 
     public void drive(HotelPromotionDataService hotelPromotionDataService) {
-        try {
-            ArrayList<PromotionPO> hotelPromotionListPO = hotelPromotionDataService.getList(123456);
-//          ResultMessage addInfo = hotelPromotionDataService.add(new PromotionPO());
-//          ResultMessage modifyInfo = hotelPromotionDataService.modify(new PromotionPO());
-//          ResultMessage removeInfo = hotelPromotionDataService.remove(12346);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ArrayList<PromotionPO> hotelPromotionListPO = hotelPromotionDataService.getList(123456);
+////          ResultMessage addInfo = hotelPromotionDataService.add(new PromotionPO());
+////          ResultMessage modifyInfo = hotelPromotionDataService.modify(new PromotionPO());
+////          ResultMessage removeInfo = hotelPromotionDataService.remove(12346);
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void main(String[] args) {
