@@ -2,6 +2,8 @@ package group2.grade15.njuse.presentation.orderui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 /**
@@ -15,6 +17,13 @@ public class MakeOrderController {
     private Node rootNode;
 
     @FXML
+    private ChoiceBox roomTypeChoiceBox;
+
+    @FXML
+    private Label roomNumLabel;
+
+
+    @FXML
     protected void goBack() {
         parentPane.getChildren().remove(rootNode);
     }
@@ -22,4 +31,6 @@ public class MakeOrderController {
     public void setParentPane(Pane parentPane) {
         this.parentPane = parentPane;
     }
+
+
 }
