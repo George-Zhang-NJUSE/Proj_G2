@@ -28,9 +28,9 @@ public class Customer {
         }
     }
 
-    public ResultMessage modifyInfo(CustomerVO vo) {
+    public ResultMessage modifyInfo(CustomerVO customerVO) {
         try {
-            return RemoteHelper.getInstance().getCustomerDataService().modify(vo.toPO());
+            return RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
             return ResultMessage.FAILED;

@@ -18,20 +18,20 @@ import java.rmi.RemoteException;
  */
 public class HotelManagerLoginImpl implements LoginControllerServ{
 
-    HotelManagerPO po;
+    HotelManagerPO hotelManagerPO;
     ResultMessage result;
 
     @Override
     public ResultMessage login(int id, String password) {
         try {
-            po = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(id);
+            hotelManagerPO = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(id);
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(po != null){
-            if(po.getPassword().equals(password)){
+        if(hotelManagerPO != null){
+            if(hotelManagerPO.getPassword().equals(password)){
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {
