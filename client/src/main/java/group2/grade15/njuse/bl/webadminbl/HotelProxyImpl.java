@@ -31,7 +31,7 @@ public class HotelProxyImpl implements HotelProxyBL{
 	}
 
 	public HotelListVO getHotelList(){
-        HotelListVO vo;
+        HotelListVO hotelListVO;
         ArrayList<HotelPO> hotelPOList = new ArrayList();
         ArrayList<HotelVO> hotelList = new ArrayList();
 
@@ -46,9 +46,9 @@ public class HotelProxyImpl implements HotelProxyBL{
             hotelList.add(hotel);
         }
 
-        vo = new HotelListVO(hotelList);
+        hotelListVO = new HotelListVO(hotelList);
 
-        return vo;
+        return hotelListVO;
 	}
 	
 	public HotelListVO modifyHotel (HotelVO hotel){
@@ -67,8 +67,7 @@ public class HotelProxyImpl implements HotelProxyBL{
         }
     }
 
-    //
-	public ResultMessage deleteHotel(HotelVO hotel){
+    public ResultMessage deleteHotel(HotelVO hotel){
         try {
             return RemoteHelper.getInstance().getWebAdminDataService().deleteHotelInfo(hotel.getId());
         } catch (RemoteException e) {

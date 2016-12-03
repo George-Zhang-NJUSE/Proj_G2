@@ -202,17 +202,17 @@ public class Search implements SearchServ{
 		boolean isContain = false;
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
-		for(HotelVO vo : hotelList){
+		for(HotelVO hotel : hotelList){
 			//判定酒店的名字是否至少含有一个关键字
 			for(String word : keyWords) {
-				if(vo.getName().contains(word)){
+				if(hotel.getName().contains(word)){
 					isContain = true;
 				}
 			}
 
 			//如果含有关键字，则加入到新的酒店列表中
 			if(isContain){
-				newHotelList.add(vo);
+				newHotelList.add(hotel);
 				isContain = false;
 			}
 		}
@@ -225,10 +225,20 @@ public class Search implements SearchServ{
 	 */
 	private ArrayList<HotelVO> filterByRoomPrice(double minPrice, double maxPrice, ArrayList<HotelVO> hotelList){
 		ArrayList<HotelVO> newHotelList = new ArrayList();
+		boolean isContain = false; //酒店是否含有该区间价位的房间的标志
 
-		for(HotelVO vo : hotelList){
-			ArrayList<RoomVO> roomList = vo.getRoomList();
-//			roomList
+		for(HotelVO hotel : hotelList){
+			ArrayList<RoomVO> roomList = hotel.getRoomList();
+			for(RoomVO room : roomList){
+				if( room.getPrice() <= maxPrice && room.getPrice() >= minPrice ){
+					isContain = true;
+				}
+			}
+
+			if(isContain){
+				newHotelList.add(hotel);
+				isContain = false;
+			}
 		}
 
 		return newHotelList;
@@ -247,9 +257,9 @@ public class Search implements SearchServ{
 	private ArrayList<HotelVO> filterByStarLevel(int minStarLevel, ArrayList<HotelVO> hotelList){
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
-		for(HotelVO vo : hotelList){
-			if( vo.getRank() >= minStarLevel ){
-				newHotelList.add(vo);
+		for(HotelVO hotelVO : hotelList){
+			if( hotelVO.getRank() >= minStarLevel ){
+				newHotelList.add(hotelVO);
 			}
 		}
 
@@ -262,9 +272,9 @@ public class Search implements SearchServ{
 	private ArrayList<HotelVO> filterByScore(double minScore, double maxScore, ArrayList<HotelVO> hotelList){
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
-		for(HotelVO vo : hotelList){
-			if( (vo.getScore() >= minScore) && (vo.getScore() <= maxScore) ){
-				newHotelList.add(vo);
+		for(HotelVO hotelVO : hotelList){
+			if( (hotelVO.getScore() >= minScore) && (hotelVO.getScore() <= maxScore) ){
+				newHotelList.add(hotelVO);
 			}
 		}
 
@@ -275,6 +285,7 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的入住时间信息对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByTime(Date checkInTime, Date checkOutTime, ArrayList<HotelVO> hotelList){
+
 		return null;
 	}
 }
