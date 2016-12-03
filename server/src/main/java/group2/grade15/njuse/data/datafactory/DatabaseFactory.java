@@ -10,7 +10,7 @@ import group2.grade15.njuse.data.orderdata.OrderDatabaseImpl;
 import group2.grade15.njuse.data.searchdata.AreaDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
-import group2.grade15.njuse.dataservice.OrderDataService;
+import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
@@ -20,7 +20,6 @@ import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 
 import java.rmi.RemoteException;
-import java.sql.SQLException;
 
 /**
  * Created by dell on 2016/11/20.

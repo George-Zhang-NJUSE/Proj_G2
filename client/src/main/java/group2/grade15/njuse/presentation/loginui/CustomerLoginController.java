@@ -59,7 +59,6 @@ public class CustomerLoginController implements Initializable {
         //渐入动画
         Fade loginFadeIn = new Fade(loginVBox, 300, true);
         loginVBox.setOpacity(0);
-        loginFadeIn.setOnFinished((ActionEvent e)->loginVBox.setOpacity(1));
         loginFadeIn.play();
     }
 

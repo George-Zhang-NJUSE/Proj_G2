@@ -39,7 +39,9 @@ public class SearchItemController {
             FXMLLoader makeOrderLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
             parentPane.getChildren().add(makeOrderLoader.load());
             MakeOrderController makeOrderController = makeOrderLoader.getController();
+
             makeOrderController.setParentPane(parentPane);
+            makeOrderController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

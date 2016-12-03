@@ -61,7 +61,6 @@ public class CustomerApplyController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Fade applyFadeIn = new Fade(applyPane, 300, true);
         applyPane.setOpacity(0);
-        applyFadeIn.setOnFinished((ActionEvent e)->applyPane.setOpacity(1));
         applyFadeIn.play();
     }
 
