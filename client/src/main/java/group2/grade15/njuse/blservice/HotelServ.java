@@ -10,11 +10,9 @@ public interface HotelServ {
 
 	public HotelVO getInfo (int hotelID); 
 
-	public ResultMessage modifyRoomInfo (RoomVO roomInfo); 
+	public ResultMessage modifyRoomInfo (int hotelID, RoomVO roomInfo);
 
 	public ResultMessage addCompany(int customerID);
 
 	public ResultMessage deleteCompany(int customerID);
-
-	public HotelListVO getHotelListByCustomerID(int customerID);
 }

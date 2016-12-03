@@ -1,7 +1,7 @@
 package group2.grade15.njuse.bl.searchbl;
 
+import group2.grade15.njuse.bl.hotelbl.GetHotelListBL;
 import group2.grade15.njuse.bl.hotelbl.Hotel;
-import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.rmi.RemoteHelper;
@@ -145,8 +145,8 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的isBooked对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByBooked(int customerID, ArrayList<HotelVO> hotelList){
-		HotelBL hotelBL = new Hotel();
-		HotelListVO hotelListVO = hotelBL.getHotelListByCustomerID(customerID);
+		GetHotelListBL getHotelListBL = new Hotel();
+		HotelListVO hotelListVO = getHotelListBL.getBookedHotelList(customerID);
 		ArrayList<HotelVO> bookedHotelList = hotelListVO.getList();
 		ArrayList<HotelVO> newHotelList = new ArrayList();
 
