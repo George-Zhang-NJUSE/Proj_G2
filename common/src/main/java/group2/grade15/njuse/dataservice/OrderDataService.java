@@ -2,6 +2,7 @@ package group2.grade15.njuse.dataservice;
 
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.Remote;
@@ -14,14 +15,16 @@ import java.util.Date;
  */
 public interface OrderDataService extends Remote {
 
-    public OrderPO getOrder(int orderId) throws RemoteException;
+    public ArrayList<OrderPO> getList() throws RemoteException;//用于网站管理人员
+
+    public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException;//用于customer
+
+    public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;//用于hotel
 
     public ResultMessage add(OrderPO po) throws RemoteException;
 
-    public ResultMessage modify(OrderPO po) throws RemoteException;
+    public ResultMessage modify(int orderID, OrderState state) throws RemoteException;//只能修改状态
 
-    public ArrayList<OrderPO> getList(int id, IDType type) throws RemoteException;
 
-    public ArrayList<OrderPO> getList(Date date) throws RemoteException;
 
 }
