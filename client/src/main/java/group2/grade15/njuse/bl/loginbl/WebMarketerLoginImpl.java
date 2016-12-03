@@ -1,7 +1,6 @@
 package group2.grade15.njuse.bl.loginbl;
 
 import group2.grade15.njuse.blservice.LoginControllerServ;
-import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -19,20 +18,20 @@ import java.rmi.RemoteException;
  */
 public class WebMarketerLoginImpl implements LoginControllerServ {
 
-    WebMarketerPO po;
+    WebMarketerPO webMarketerPO;
     ResultMessage result;
 
     @Override
     public ResultMessage login(int id, String password) {
         try {
-            po = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(String.valueOf(id));
+            webMarketerPO = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(String.valueOf(id));
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(po != null){
-            if(po.getPassword().equals(password)){
+        if(webMarketerPO != null){
+            if(webMarketerPO.getPassword().equals(password)){
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

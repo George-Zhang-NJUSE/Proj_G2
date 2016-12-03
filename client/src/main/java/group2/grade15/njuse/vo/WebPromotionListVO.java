@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * Created by Guo on 2016/11/29.
  */
 public class WebPromotionListVO {
-    private ArrayList<PromotionVO> promotionList;
+    private ArrayList<WebPromotionVO> promotionList;
 
-    public WebPromotionListVO (ArrayList<PromotionVO> promotionList){
+    public WebPromotionListVO (ArrayList<WebPromotionVO> promotionList){
         this.promotionList = promotionList;
     }
 
-    public ArrayList<PromotionVO> getWebPromotion() {
+    public ArrayList<WebPromotionVO> getWebPromotion() {
         return promotionList;
     }
 }

@@ -16,6 +16,7 @@ public class HotelVO implements Serializable{
 	private int id;
 	private String name;
 	private String address;
+    private String concreteAddress;//具体地址
 	private String contact;
 	private String introduction;
 	private String facility;
@@ -28,6 +29,7 @@ public class HotelVO implements Serializable{
 		id = hotel.getId();
 		name = hotel.getName();
 		address = hotel.getAddress();
+        concreteAddress = hotel.getConcreteAddress();
 		contact = hotel.getContact();
 		introduction = hotel.getIntroduction();
 		facility = hotel.getFacility();
@@ -44,10 +46,11 @@ public class HotelVO implements Serializable{
 
 	}
 
-	public HotelVO(int id, String name, String address, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture){
+	public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture){
         this.id = id;
         this.name = name;
         this.address = address;
+        this.concreteAddress = concreteAddress;
         this.contact = contact;
         this.introduction = introduction;
         this.facility = facility;
@@ -97,7 +100,11 @@ public class HotelVO implements Serializable{
         return picture;
     }
 
-	public HotelPO toPO(){
+    public String getConcreteAddress() {
+        return concreteAddress;
+    }
+
+    public HotelPO toPO(){
         ArrayList<RoomPO> roomPOList = new ArrayList();
         for(RoomVO vo : roomList){
             roomPOList.add(vo.toPO());
@@ -105,6 +112,6 @@ public class HotelVO implements Serializable{
 
         ArrayList<CustomerPO> vipPOList = new ArrayList();
 
-        return new HotelPO(id, name, address, contact, introduction, facility, roomPOList, rank, score,picture);
+        return new HotelPO(id, name, address, concreteAddress, contact, introduction, facility, roomPOList, rank, score,picture);
     }
 }

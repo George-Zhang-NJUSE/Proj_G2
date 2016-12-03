@@ -1,8 +1,6 @@
 package group2.grade15.njuse.bl.hotelpromotionbl;
 
-import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.HotelPromotionServ;
-import group2.grade15.njuse.po.HotelPromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionListVO;
 import group2.grade15.njuse.vo.HotelPromotionVO;
@@ -10,11 +8,7 @@ import group2.grade15.njuse.vo.HotelPromotionVO;
 /**
  * Created by Guo on 2016/11/13.
  */
-public class HotelPromotion extends Promotion implements HotelPromotionBL, HotelPromotionServ {
-
-    public HotelPromotion(HotelPromotionPO po) {
-        super(po);
-    }
+public class HotelPromotion implements HotelPromotionBL, HotelPromotionServ {
 
     @Override
     public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo) {
