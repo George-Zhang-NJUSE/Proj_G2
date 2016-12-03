@@ -2,16 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.customerui.CreditRecordItemController">
   <columnConstraints>
-    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="20.0" />
+    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
-      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="20.0" />
+      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
   </columnConstraints>
   <rowConstraints>
@@ -20,14 +19,15 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="评分：" />
-      <Label text="客户：" GridPane.rowIndex="1" />
-      <Label text="时间：" GridPane.rowIndex="2" />
+      <Label text="订单号：" />
+      <Label text="动作：" GridPane.rowIndex="2" />
+      <Label text="时间：" GridPane.rowIndex="1" />
       <Label text="Label" GridPane.columnIndex="1" />
       <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="评语：" GridPane.columnIndex="2" />
-      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="asdsddasdqdqwdagydsgadigasidgisagdyagsdygasdiygaidgiagdiygadigaiydgaigdyiasgdiyagdiygayigdaidgyagdiyagdiyagd" wrapText="true" GridPane.columnIndex="3" GridPane.rowSpan="3" />
+      <Label text="信用度变化：" GridPane.columnIndex="2" />
+      <Label text="Label" GridPane.columnIndex="3" />
+      <Label text="信用度结果：" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
