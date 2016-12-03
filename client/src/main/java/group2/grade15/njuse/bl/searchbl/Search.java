@@ -1,5 +1,7 @@
 package group2.grade15.njuse.bl.searchbl;
 
+import group2.grade15.njuse.bl.hotelbl.Hotel;
+import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.rmi.RemoteHelper;
@@ -143,8 +145,21 @@ public class Search implements SearchServ{
 	 * 根据SearchCondition中的isBooked对获得的酒店列表进行一次筛选
 	 */
 	private ArrayList<HotelVO> filterByBooked(int customerID, ArrayList<HotelVO> hotelList){
+		HotelBL hotelBL = new Hotel();
+		HotelListVO hotelListVO = hotelBL.getHotelListByCustomerID(customerID);
+		ArrayList<HotelVO> bookedHotelList = hotelListVO.getList();
+		ArrayList<HotelVO> newHotelList = new ArrayList();
 
-		return null;
+		for(HotelVO hotel : hotelList){
+			for(HotelVO bookedHotel : bookedHotelList){
+				if(hotel.getId() == bookedHotel.getId()){
+					newHotelList.add(hotel);
+					break;
+				}
+			}
+		}
+
+		return newHotelList;
 	}
 
 	/**
@@ -159,6 +174,33 @@ public class Search implements SearchServ{
 				break;
 
 			case PRICE:
+				newHotelList = hotelList;
+				for(int i = 1; i < newHotelList.size(); i++){
+					for(int j = 0; j < i; j ++ ){
+
+						//计算出第一个酒店的最低房价
+						double minRoomPrice1 = 0;
+						for(RoomVO room : newHotelList.get(i).getRoomList()){
+							if(minRoomPrice1 > room.getPrice() || minRoomPrice1 == 0){
+								minRoomPrice1 = room.getPrice();
+							}
+						}
+
+						//计算出第二个酒店的最低房价
+						double minRoomPrice2 = 0;
+						for(RoomVO room : newHotelList.get(j).getRoomList()){
+							if(minRoomPrice2 > room.getPrice() || minRoomPrice1 == 0){
+								minRoomPrice2 = room.getPrice();
+							}
+						}
+
+						if(minRoomPrice1 < minRoomPrice2){
+							HotelVO temp = newHotelList.get(j);
+							newHotelList.set(j, newHotelList.get(i));
+							newHotelList.set(i, temp);
+						}
+					}
+				}
 				break;
 
 			case STAR_LEVEL:

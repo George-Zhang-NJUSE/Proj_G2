@@ -25,8 +25,10 @@ public class UserProxyImpl implements UserProxyBL{
 			e.printStackTrace();
 		}
 
-		for(CustomerPO po : customerPOList){
-			customerList.add(new CustomerVO(po));
+		if(customerPOList != null) {
+			for (CustomerPO po : customerPOList) {
+				customerList.add(new CustomerVO(po));
+			}
 		}
 
 		return new CustomerListVO(customerList);
@@ -41,8 +43,10 @@ public class UserProxyImpl implements UserProxyBL{
 			e.printStackTrace();
 		}
 
-		for(HotelManagerPO po : hotelManagerPOList){
-			hotelManagerList.add(new HotelManagerVO(po));
+		if(hotelManagerPOList != null) {
+			for (HotelManagerPO po : hotelManagerPOList) {
+				hotelManagerList.add(new HotelManagerVO(po));
+			}
 		}
 
 		return new HotelManagerListVO(hotelManagerList);
@@ -57,8 +61,10 @@ public class UserProxyImpl implements UserProxyBL{
 			e.printStackTrace();
 		}
 
-		for(WebMarketerPO po : webMarketerPOList){
-			webMarketerList.add(new WebMarketerVO(po));
+		if(webMarketerPOList != null) {
+			for (WebMarketerPO po : webMarketerPOList) {
+				webMarketerList.add(new WebMarketerVO(po));
+			}
 		}
 
 		return new WebMarketerListVO(webMarketerList);

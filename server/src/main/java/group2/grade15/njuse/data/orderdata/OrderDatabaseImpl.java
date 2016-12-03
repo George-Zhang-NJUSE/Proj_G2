@@ -1,9 +1,12 @@
 package group2.grade15.njuse.data.orderdata;
 
+import group2.grade15.njuse.data.creditdata.CreditDatabaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.OrderDataService;
+import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
+import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.po.OrderPO;
+import group2.grade15.njuse.utility.ChangeReason;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
@@ -18,10 +21,12 @@ import java.util.ArrayList;
 public class OrderDatabaseImpl implements OrderDataService {
     private DatabaseMySql mySql=null;
     private Connection orderDatabase=null;
+    private DatabaseInfo info=null;
 
     public OrderDatabaseImpl(DatabaseInfo info) throws RemoteException{
         mySql=new DatabaseMySql(info);
         orderDatabase=mySql.init();
+        this.info=info;
     }
 
     /**
@@ -37,9 +42,19 @@ public class OrderDatabaseImpl implements OrderDataService {
 
         try{
             Statement unexecuted=orderDatabase.createStatement();
-            ResultSet resultSet=unexecuted.executeQuery("select * from order where state = 1");
+            ResultSet resultSet=unexecuted.executeQuery("select * from orderinfo where state = 0");
 
             ArrayList<OrderPO> list=readResult(resultSet);
+            ArrayList<OrderPO> toDelete=new ArrayList<OrderPO>();
+            for(OrderPO temp:list){
+                if(temp.getState().equals(OrderState.abnormal)){
+                    toDelete.add(temp);
+                }
+            }
+            for(OrderPO temp:toDelete){
+                list.remove(temp);
+            }
+
 
             unexecuted.close();
             orderDatabase.close();
@@ -60,7 +75,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
         try{
             Statement customer=orderDatabase.createStatement();
-            ResultSet resultSet=customer.executeQuery("select * from order where customerid = "+customerID);
+            ResultSet resultSet=customer.executeQuery("select * from orderinfo where customerid = "+customerID);
 
             ArrayList<OrderPO> list=readResult(resultSet);
 
@@ -83,7 +98,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
         try{
             Statement hotel=orderDatabase.createStatement();
-            ResultSet resultSet=hotel.executeQuery("select * from order where hotelid = "+hotelID);
+            ResultSet resultSet=hotel.executeQuery("select * from orderinfo where hotelid = "+hotelID);
 
             ArrayList<OrderPO> list=readResult(resultSet);
 
@@ -125,17 +140,23 @@ public class OrderDatabaseImpl implements OrderDataService {
                 if(state==OrderState.unexecuted&&execute.before(now)){
                     state=OrderState.abnormal;
 
-                    PreparedStatement modifyState=orderDatabase.prepareStatement("update order set state = ? where ordernum = ?");
+                    PreparedStatement modifyState=orderDatabase.prepareStatement("update orderinfo set state = ? where ordernum = ?");
                     modifyState.setInt(1,state.ordinal());
                     modifyState.setInt(2,orderNum);
                     modifyState.executeUpdate();
+
+                    CreditPO creditPO=new CreditPO(customerID,orderNum,0,0.00,-amount,null, ChangeReason.orderAbnormal);
+                    CreditDatabaseImpl creditDatabase=new CreditDatabaseImpl(info);
+                    if(!creditDatabase.add(creditPO).equals(ResultMessage.SUCCESS)){
+                        throw new Exception();
+                    }
                 }
 
                 OrderPO orderPO = new OrderPO(orderNum, customerID, hotelID, amount, checkIn, checkOut, execute, roomSum, type,
                         peopleSum, hasChild, state);
                 list.add(orderPO);
             }
-        }catch (SQLException e){
+        }catch (Exception e){
             e.printStackTrace();
             return null;
         }
@@ -144,17 +165,149 @@ public class OrderDatabaseImpl implements OrderDataService {
 
     @Override
     public OrderPO getOrder(int orderID) throws RemoteException {
+        if(orderDatabase==null){
+            orderDatabase=mySql.init();
+        }
 
-        return null;
+        try{
+            PreparedStatement getInfo=orderDatabase.prepareStatement("select * from orderinfo where ordernum = ?");
+            getInfo.setInt(1,orderID);
+            ResultSet resultSet=getInfo.executeQuery();
+            ArrayList<OrderPO> list=readResult(resultSet);
+
+            getInfo.close();
+            orderDatabase.close();
+            orderDatabase=null;
+
+            return list.get(0);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public ResultMessage add(OrderPO po) throws RemoteException {
-        return null;
+    public ResultMessage addOrder(OrderPO po) throws RemoteException {
+        if(orderDatabase==null){
+            orderDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement addOrder=orderDatabase.prepareStatement("insert into orderinfo values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            Statement makeID=orderDatabase.createStatement();
+            ResultSet id=makeID.executeQuery("select max(ordernum) from orderinfo");
+
+            int orderID;
+            if(id.next()){
+                orderID=id.getInt(1)+1;
+            }
+            else{
+                throw new SQLException();
+            }
+            makeID.close();
+
+            int hotelID=po.getHotelID();
+            int customerID=po.getCustomerID();
+            double total=po.getAmount();
+            Date checkIn=po.getCheckInTime();
+            Date checkOut=po.getCheckOutTime();
+            Date execute=po.getFinalExecuteTime();
+            int room=po.getRoomSum();
+            int people=po.getNumOfCustomer();
+            boolean hasChild=po.isHaveChild();
+            int type=po.getType().ordinal();
+            int state=po.getState().ordinal();
+
+            addOrder.setInt(1,orderID);
+            addOrder.setInt(2,customerID);
+            addOrder.setInt(3,hotelID);
+            addOrder.setDouble(4,total);
+            addOrder.setDate(5,checkIn);
+            addOrder.setDate(6,checkOut);
+            addOrder.setDate(7,execute);
+            addOrder.setInt(8,room);
+            addOrder.setInt(9,people);
+            addOrder.setBoolean(10,hasChild);
+            addOrder.setInt(11,type);
+            addOrder.setInt(12,state);
+
+            addOrder.executeUpdate();
+
+            addOrder.close();
+            orderDatabase.close();
+            orderDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 
+    /**
+     * @param orderID
+     * @param state
+     * @return ResultMessage
+     * @throws RemoteException
+     * 同时进行信用值的变化
+     */
     @Override
-    public ResultMessage modify(int orderID, OrderState state) throws RemoteException {
-        return null;
+    public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException {
+        if(orderDatabase==null){
+            orderDatabase=mySql.init();
+        }
+
+        try{
+            Statement currentState=orderDatabase.createStatement();
+            ResultSet resultSet=currentState.executeQuery("select state,total,customerid,executetime from orderinfo where ordernum = "+orderID);
+            OrderState current;
+            double sum;
+            int customerID;
+            Date execute;
+            if(resultSet.next()){
+                current=OrderState.values()[resultSet.getInt(1)];
+                sum=resultSet.getDouble(2);
+                customerID=resultSet.getInt(3);
+                execute=resultSet.getDate(4);
+            }
+            else{
+                throw new SQLException();
+            }
+            currentState.close();
+
+            PreparedStatement modifyState=orderDatabase.prepareStatement("update orderinfo set state = ? where ordernum = ?");
+            modifyState.setInt(1,state.ordinal());
+            modifyState.setInt(2,orderID);
+
+            modifyState.executeUpdate();
+
+            modifyState.close();
+            orderDatabase.close();
+            orderDatabase=null;
+
+            if(current.equals(OrderState.unexecuted)&&state.equals(OrderState.executed)){
+                CreditPO creditPO=new CreditPO(customerID,orderID,0,0,sum,null,ChangeReason.orderExecute);
+                CreditDatabaseImpl creditDatabase=new CreditDatabaseImpl(info);
+                if(creditDatabase.add(creditPO).equals(ResultMessage.FAILED)){
+                    throw new Exception();
+                }
+            }
+            else if(current.equals(OrderState.unexecuted)&&state.equals(OrderState.cancelled)){
+                java.util.Date instant=new java.util.Date();
+                Date now=new Date(instant.getTime());
+                if(execute.getTime()-now.getTime()<21600000){
+                    CreditPO creditPO=new CreditPO(customerID,orderID,0,0,-sum/2.0,null,ChangeReason.orderCancelled);
+                    CreditDatabaseImpl creditDatabase=new CreditDatabaseImpl(info);
+                    if(creditDatabase.add(creditPO).equals(ResultMessage.FAILED)){
+                        throw new Exception();
+                    }
+                }
+            }
+
+            return ResultMessage.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
 }

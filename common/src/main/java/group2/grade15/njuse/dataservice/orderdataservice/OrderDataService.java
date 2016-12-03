@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.orderdataservice;
 
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.utility.IDType;
@@ -23,8 +23,8 @@ public interface OrderDataService extends Remote {
 
     public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;
 
-    public ResultMessage add(OrderPO po) throws RemoteException;
+    public ResultMessage addOrder(OrderPO po) throws RemoteException;
 
-    public ResultMessage modify(int orderID, OrderState state) throws RemoteException;
+    public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException;
 
 }

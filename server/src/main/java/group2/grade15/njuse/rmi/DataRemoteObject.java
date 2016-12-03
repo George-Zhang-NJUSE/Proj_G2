@@ -9,10 +9,11 @@ import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
-import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 
@@ -20,7 +21,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Guo on 2016/11/26.
@@ -74,27 +74,32 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
+    public ArrayList<OrderPO> getUnexecutedList() throws RemoteException {
+        return null;
+    }
+
+    @Override
     public OrderPO getOrder(int orderId) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage add(OrderPO po) throws RemoteException {
+    public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage modify(OrderPO po) throws RemoteException {
+    public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException {
         return null;
     }
 
     @Override
-    public ArrayList<OrderPO> getList(int id, IDType type) throws RemoteException {
+    public ResultMessage addOrder(OrderPO po) throws RemoteException {
         return null;
     }
 
     @Override
-    public ArrayList<OrderPO> getList(Date date) throws RemoteException {
+    public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException {
         return null;
     }
 
