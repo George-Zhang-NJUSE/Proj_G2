@@ -48,7 +48,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label onMouseClicked="#goBack" text="返回按钮" GridPane.rowIndex="11" />
+      <Label onMouseClicked="#close" text="返回按钮" GridPane.rowIndex="11" />
       <Label text="房间数量：" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />

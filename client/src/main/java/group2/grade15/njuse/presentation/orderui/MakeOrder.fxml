@@ -71,7 +71,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label onMouseClicked="#goBack" text="取消按钮" GridPane.rowIndex="11" />
+      <Label onMouseClicked="#close" text="取消按钮" GridPane.rowIndex="11" />
       <Label text="确认按钮" GridPane.columnIndex="2" GridPane.rowIndex="11" />
       <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Label text="房间数量：" GridPane.rowIndex="8" />
