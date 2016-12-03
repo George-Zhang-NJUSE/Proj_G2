@@ -15,16 +15,16 @@ import java.util.Date;
  */
 public interface OrderDataService extends Remote {
 
-    public ArrayList<OrderPO> getList() throws RemoteException;//用于网站管理人员
+    public ArrayList<OrderPO> getUnexecutedList() throws RemoteException;
 
-    public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException;//用于customer
+    public OrderPO getOrder(int orderID) throws RemoteException;
 
-    public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;//用于hotel
+    public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException;
+
+    public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;
 
     public ResultMessage add(OrderPO po) throws RemoteException;
 
-    public ResultMessage modify(int orderID, OrderState state) throws RemoteException;//只能修改状态
-
-
+    public ResultMessage modify(int orderID, OrderState state) throws RemoteException;
 
 }
