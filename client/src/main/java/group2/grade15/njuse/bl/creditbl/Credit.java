@@ -1,7 +1,5 @@
 package group2.grade15.njuse.bl.creditbl;
 
-import group2.grade15.njuse.blservice.CreditHistoryServ;
-import group2.grade15.njuse.blservice.CreditModificationServ;
 import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -11,7 +9,7 @@ import group2.grade15.njuse.vo.CreditVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class Credit implements CreditModificationServ,CreditHistoryServ{
+public class Credit implements CreditModificationBL,CreditHistoryBL{
 
 	@Override
 	public ResultMessage modifyCredit(CreditVO credit) {

@@ -6,7 +6,7 @@ import group2.grade15.njuse.vo.*;
 /**
  * Created by 果宝 on 2016/11/27.
  */
-public interface UserProxyBL {
+public interface UserManageBL {
     public CustomerListVO getCustomerList();
 
     public HotelManagerListVO getHotelManagerList();

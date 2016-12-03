@@ -8,7 +8,7 @@ import group2.grade15.njuse.vo.HotelVO;
 /**
  * Created by Guo on 2016/11/27.
  */
-public interface HotelProxyBL {
+public interface HotelManageBL {
 
     public ResultMessage createHotel(HotelVO hotel);
 
