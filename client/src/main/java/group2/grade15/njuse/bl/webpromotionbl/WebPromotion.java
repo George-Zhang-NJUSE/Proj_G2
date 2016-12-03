@@ -1,6 +1,5 @@
 package group2.grade15.njuse.bl.webpromotionbl;
 
-import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.WebPromotionServ;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -9,11 +8,7 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 
 import java.rmi.RemoteException;
 
-public class WebPromotion extends Promotion implements WebPromotionServ,WebPromotionBL{
-
-	public WebPromotion(PromotionPO po) {
-		super(po);
-	}
+public class WebPromotion implements WebPromotionServ,WebPromotionBL{
 
 	public WebPromotionListVO getWebPromotionList() {
 		return null;

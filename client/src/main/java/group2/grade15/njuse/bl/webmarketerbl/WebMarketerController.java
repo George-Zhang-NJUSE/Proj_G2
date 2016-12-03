@@ -2,7 +2,6 @@ package group2.grade15.njuse.bl.webmarketerbl;
 
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
-import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
