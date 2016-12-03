@@ -6,9 +6,11 @@ import group2.grade15.njuse.data.customerdata.CustomerDataBaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.hoteldata.HotelDatabaseImpl;
 import group2.grade15.njuse.data.hotelmanagerdata.HotelManagerDatabaseImpl;
+import group2.grade15.njuse.data.orderdata.OrderDatabaseImpl;
 import group2.grade15.njuse.data.searchdata.AreaDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
+import group2.grade15.njuse.dataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
@@ -18,6 +20,7 @@ import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 /**
  * Created by dell on 2016/11/20.
@@ -34,6 +37,7 @@ public class DatabaseFactory implements DataFactory {
     private CreditDataService creditDatabase=null;
     private AreaDataService areaDatabase=null;
     private HotelDataService hotelDataService=null;
+    private OrderDataService orderDataService=null;
 
 
     private DatabaseFactory(){}
@@ -146,5 +150,19 @@ public class DatabaseFactory implements DataFactory {
         }
         return hotelDataService;
     }
+
+    @Override
+    public OrderDataService getOrderDataService() throws RemoteException {
+        if(orderDataService==null){
+            try{
+                orderDataService=new OrderDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();;
+                return null;
+            }
+        }
+        return orderDataService;
+    }
+
 
 }
