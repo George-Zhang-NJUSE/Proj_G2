@@ -13,6 +13,7 @@ import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 
@@ -74,7 +75,22 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
+    public ArrayList<OrderPO> getUnexecutedList() throws RemoteException {
+        return null;
+    }
+
+    @Override
     public OrderPO getOrder(int orderId) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException {
         return null;
     }
 
@@ -84,17 +100,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage modify(OrderPO po) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ArrayList<OrderPO> getList(int id, IDType type) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ArrayList<OrderPO> getList(Date date) throws RemoteException {
+    public ResultMessage modify(int orderID, OrderState state) throws RemoteException {
         return null;
     }
 

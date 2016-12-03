@@ -1,16 +1,11 @@
 package group2.grade15.njuse.vo;
 
-import group2.grade15.njuse.bl.customerbl.Customer;
-import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
-import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import static group2.grade15.njuse.utility.IDType.hotel;
 
 public class HotelVO implements Serializable{
 	private int id;
