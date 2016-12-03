@@ -10,10 +10,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
- * 负责处理酒店业务的代理
+ * 负责酒店业务的管理
  * 数据的处理通过RMI直接调用WebAdminDataService
  */
-public class HotelProxyImpl implements HotelProxyBL{
+public class HotelManageImpl implements HotelManageBL{
 
 	public ResultMessage createHotel(HotelVO hotel){
 

@@ -36,10 +36,21 @@ public class Order {
     }
 
     public ResultMessage modifyState(OrderState state){
-        return ResultMessage.SUCCESS;
+        try {
+            return RemoteHelper.getInstance().getOrderDataService().modifyOrder(po.getOrderID(), state);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.CONNECTION_EXCEPTION;
+        }
     }
 
-    public OrderPO createPO(){
-        return null;
+    public ResultMessage createPO(OrderPO order){
+        try {
+            return RemoteHelper.getInstance().getOrderDataService().addOrder(order);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return ResultMessage.CONNECTION_EXCEPTION;
+        }
     }
+
 }
