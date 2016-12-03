@@ -6,13 +6,13 @@ import group2.grade15.njuse.utility.OrderState;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class OrderVO implements Serializable{
 	private int orderID;
 	private int customerID;
 	private int hotelID;
-	private int amount;
+	private double amount;
 	private Date checkInTime;
 	private Date checkOutTime;
 	private Date finalExecuteTime;
@@ -34,11 +34,6 @@ public class OrderVO implements Serializable{
 		state = po.getState();
 
 		selectRoom = new ArrayList();
-		ArrayList<RoomPO> roomPOList = po.getSelectRoom();
-		for(RoomPO roomPO : roomPOList){
-			RoomVO room = new RoomVO(roomPO);
-			selectRoom.add(room);
-		}
 	}
 
 	public OrderVO(int orderID, int customerID, int hotelID, int amount, Date checkInTime, Date checkOutTime, Date finalExecuteTime, ArrayList<RoomVO> selectRoom, int numOfCustomer, boolean haveChild, OrderState state){
@@ -67,7 +62,7 @@ public class OrderVO implements Serializable{
 		return orderID;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -104,6 +99,6 @@ public class OrderVO implements Serializable{
 		for(RoomVO vo : selectRoom){
 			selectPOList.add(vo.toPO());
 		}
-		return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, selectPOList, numOfCustomer, haveChild, state);
+		return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime,,, numOfCustomer, haveChild, state);
 	}
 }

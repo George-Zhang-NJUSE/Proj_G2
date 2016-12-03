@@ -1,60 +1,55 @@
 package group2.grade15.njuse.po;
 
 import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 
-public class OrderPO implements Serializable{
+public class OrderPO implements Serializable {
 	private int orderID;
 	private int customerID;
 	private int hotelID;
-	private int amount;
+	private double amount;
 	private Date checkInTime;
 	private Date checkOutTime;
 	private Date finalExecuteTime;
-	private ArrayList<RoomPO> selectRoom;
+	private int roomSum;
+	private RoomType type;
 	private int numOfCustomer;
 	private boolean haveChild;
 	private OrderState state;
-	
-	public OrderPO(int orderID,int customerID,int hotelID,int amount,Date checkInTime,Date checkOutTime,Date finalExecuteTime,ArrayList<RoomPO> selectRoom,int numOfCustomer,boolean haveChild,OrderState state){
-		this.orderID=orderID;
-		this.customerID=customerID;
-		this.hotelID=hotelID;
-		this.amount=amount;
-		this.checkInTime=checkInTime;
-		this.checkOutTime=checkOutTime;
-		this.finalExecuteTime=finalExecuteTime;
-		this.selectRoom=selectRoom;
-		this.numOfCustomer=numOfCustomer;
-		this.haveChild=haveChild;
-		this.state=state;
-	}
 
-	public int getCustomerID() {
-		return customerID;
-	}
-
-	public void setCustomerID(int customerID) {
+	public OrderPO(int orderID, int customerID, int hotelID, double amount, Date checkInTime, Date checkOutTime,
+				   Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
+		this.orderID = orderID;
 		this.customerID = customerID;
-	}
-
-	public int getHotelID() {
-		return hotelID;
-	}
-
-	public void setHotelID(int hotelID) {
 		this.hotelID = hotelID;
+		this.amount = amount;
+		this.checkInTime = checkInTime;
+		this.checkOutTime = checkOutTime;
+		this.finalExecuteTime = finalExecuteTime;
+		this.roomSum = roomSum;
+		this.type = type;
+		this.numOfCustomer = numOfCustomer;
+		this.haveChild = haveChild;
+		this.state = state;
 	}
 
 	public int getOrderID() {
 		return orderID;
 	}
 
-	public int getAmount() {
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public int getHotelID() {
+		return hotelID;
+	}
+
+	public double getAmount() {
 		return amount;
 	}
 
@@ -70,8 +65,12 @@ public class OrderPO implements Serializable{
 		return finalExecuteTime;
 	}
 
-	public ArrayList<RoomPO> getSelectRoom() {
-		return selectRoom;
+	public int getRoomSum() {
+		return roomSum;
+	}
+
+	public RoomType getType() {
+		return type;
 	}
 
 	public int getNumOfCustomer() {
@@ -85,6 +84,4 @@ public class OrderPO implements Serializable{
 	public OrderState getState() {
 		return state;
 	}
-	
-
 }
