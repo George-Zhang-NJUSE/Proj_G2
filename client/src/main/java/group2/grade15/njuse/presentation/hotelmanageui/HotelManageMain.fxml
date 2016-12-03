@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
@@ -7,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <GridPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" style="-fx-background-color: rgb(250,250,250);" BorderPane.alignment="CENTER">
+      <GridPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -16,21 +20,80 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" />
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
+               <children>
+                  <FlowPane fx:id="infoTag" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0" prefHeight="200.0" prefWidth="50.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5edd42" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
+                        <Label text="酒店信息">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <FlowPane fx:id="orderManageTag" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0" prefHeight="200.0" prefWidth="50.0">
+                     <children>
+                        <Rectangle fx:id="orderManageRec" arcHeight="5.0" arcWidth="5.0" fill="#5edd42" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
+                        <Label text="订单管理">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <FlowPane fx:id="roomManageTag" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0" prefHeight="200.0" prefWidth="50.0">
+                     <children>
+                        <Rectangle fx:id="roomManageRec" arcHeight="5.0" arcWidth="5.0" fill="#5edd42" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
+                        <Label text="房间管理">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <FlowPane fx:id="promotionManageTag" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0" prefHeight="200.0" prefWidth="50.0">
+                     <children>
+                        <Rectangle fx:id="promotionManageRec" arcHeight="5.0" arcWidth="5.0" fill="#5edd42" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
+                        <Label text="促销管理">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
+               </children>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></VBox>
          </children>
       </GridPane>
    </left>
    <center>
       <Group BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" >
-                <Image url="file:client/src/main/res/hotelmanage/bc.jpg"/>
+            <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                   <Image url="file:client/src/main/res/hotelmanage/bc.jpg" />
+               </image>
             </ImageView>
-            <Pane prefHeight="800.0" prefWidth="1200.0" />
+            <Pane fx:id="opPane" prefHeight="800.0" prefWidth="1200.0" />
          </children>
       </Group>
    </center>
    <bottom>
-      <FlowPane prefHeight="24.0" prefWidth="1400.0" BorderPane.alignment="CENTER" />
+      <FlowPane prefHeight="24.0" prefWidth="1400.0" style="-fx-background-color: rgb(230,230,230);" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
