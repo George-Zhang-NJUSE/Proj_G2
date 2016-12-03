@@ -1,8 +1,6 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
-import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.bl.webpromotionbl.WebPromotion;
-import group2.grade15.njuse.vo.PromotionVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 
 /**
@@ -15,7 +13,7 @@ public class WebPromotionFactory {
     private WebPromotion webPromotionImpl;
 
     private WebPromotionFactory(){
-        webPromotionImpl = new WebPromotion(null);
+        webPromotionImpl = new WebPromotion();
     }
 
     public static WebPromotionFactory getInstance(){

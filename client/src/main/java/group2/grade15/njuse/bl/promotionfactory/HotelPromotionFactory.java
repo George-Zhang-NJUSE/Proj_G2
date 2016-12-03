@@ -1,10 +1,7 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
-import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotion;
-import group2.grade15.njuse.bl.promotion.Promotion;
 import group2.grade15.njuse.vo.HotelPromotionVO;
-import group2.grade15.njuse.vo.PromotionVO;
 
 /**
  * Created by Guo on 2016/11/30.
@@ -15,7 +12,7 @@ public class HotelPromotionFactory {
     private HotelPromotion hotelPromotionImpl;
 
     private HotelPromotionFactory(){
-        hotelPromotionImpl = new HotelPromotion(null);
+        hotelPromotionImpl = new HotelPromotion();
     }
 
     public static HotelPromotionFactory getInstance(){
