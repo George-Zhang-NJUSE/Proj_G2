@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
  * Created by ALIENWARE-PC on 2016/12/2.
  */
 public class AddPromotionController implements Initializable {
+    private int ID;
     @FXML
     private TextField name;
     @FXML
@@ -37,6 +38,6 @@ public class AddPromotionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
     }
 }

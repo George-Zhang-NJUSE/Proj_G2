@@ -45,6 +45,7 @@ public class WebMarketerMainController implements Initializable{
     }
 
     public boolean toCreditCharge() {
+
         if (creditChargeTag.isVisible())
             return true;
         promotionTag.setVisible(false);
@@ -55,6 +56,7 @@ public class WebMarketerMainController implements Initializable{
             FXMLLoader creditChargeLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/CreditCharge.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(creditChargeLoader.load());
+            motherPaneFadeout();
             Fade fadein = new Fade(motherPane, 500, true);
             fadein.play();
         } catch (MalformedURLException e) {
@@ -66,6 +68,7 @@ public class WebMarketerMainController implements Initializable{
     }
     public boolean toPromotion(){
         //TODO 到promotion管理的跳转
+        motherPaneFadeout();
         if (promotionTag.isVisible())
             return true;
         promotionTag.setVisible(true);
@@ -86,6 +89,7 @@ public class WebMarketerMainController implements Initializable{
     }
     public boolean toFix(){
         //TODO 到fix的跳转
+        motherPaneFadeout();
         if (fixTag.isVisible())
             return true;
         promotionTag.setVisible(false);
@@ -104,7 +108,10 @@ public class WebMarketerMainController implements Initializable{
         }
         return true;
     }
-
+    public void motherPaneFadeout(){
+        Fade fadeout = new Fade(motherPane, 300, false);
+        fadeout.play();
+    }
     public void addSwither(FlowPane pane){
         pane.setOnMouseEntered((MouseEvent e)->{
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
