@@ -93,7 +93,7 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="modifyButton" text="修改">
+                  <Label fx:id="modifyButton" text="修改" onMouseClicked="#toModify">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -105,7 +105,7 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="deleteButton" text="删除">
+                  <Label fx:id="deleteButton" text="删除" onMouseClicked="#toDelete">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                              <image>
