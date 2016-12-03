@@ -8,7 +8,7 @@ import group2.grade15.njuse.vo.OrderVO;
 /**
  * Created by George on 2016/11/13.
  */
-public class OrderController implements OrderBL, OrderServ{
+public class OrderController implements GetOrderBL, OrderServ{
 
 
     public OrderVO getOrder(int orderId) {
