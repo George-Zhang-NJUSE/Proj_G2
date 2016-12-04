@@ -1,4 +1,4 @@
-package group2.grade15.njuse.presentation.webmarketerui;
+package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -31,6 +31,10 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Label addButton;
     @FXML
+    private Label check;
+    @FXML
+    private Label cancel;
+    @FXML
     private TableView activatedList;
     @FXML
     private TableView unactivatedList;
@@ -42,22 +46,17 @@ public class PromotionManageController implements Initializable{
     private Pane opPane;
     @FXML
     private Pane checkPane;
-    @FXML
-    private Label check;
-    @FXML
-    private Label cancel;
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
-        CustomeButton.implButton(modifyButton, "file:client/src/main/res/webmarketer/modify");
-        CustomeButton.implButton(deleteButton,"file:client/src/main/res/webmarketer/delete");
-        CustomeButton.implButton(addButton,"file:client/src/main/res/webmarketer/add");
-        CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/webmarketer/Cancel");
-
+        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/hotelmanage/play");
+        CustomeButton.implButton(modifyButton, "file:client/src/main/res/hotelmanage/modify");
+        CustomeButton.implButton(deleteButton,"file:client/src/main/res/hotelmanage/delete");
+        CustomeButton.implButton(addButton,"file:client/src/main/res/hotelmanage/add");
+        CustomeButton.implButton(check,"file:client/src/main/res/hotelmanage/Check");
+        CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
         unactivatedTab.setOnSelectionChanged((Event e)->{
             switchToUnactivated();
         });
@@ -69,22 +68,22 @@ public class PromotionManageController implements Initializable{
     public void switchToActivated(){
         changeStateButton.setText("中止");
         ImageView a=(ImageView) changeStateButton.getGraphic();
-        a.setImage(new Image("file:client/src/main/res/webmarketer/stop.png"));
-        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/stop");
+        a.setImage(new Image("file:client/src/main/res/hotelmanage/stop.png"));
+        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/hotelmanage/stop");
     }
     public void switchToUnactivated(){
         changeStateButton.setText("激活");
         ImageView a=(ImageView) changeStateButton.getGraphic();
-        a.setImage(new Image("file:client/src/main/res/webmarketer/play.png"));
-        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
+        a.setImage(new Image("file:client/src/main/res/hotelmanage/play.png"));
+        CustomeButton.implButton(changeStateButton, "file:client/src/main/res/hotelmanage/play");
     }
     public void toAdd(){
         try {
+            opPane.setVisible(true);
             checkPane.setVisible(true);
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
-            opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/AddPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/AddPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -97,13 +96,11 @@ public class PromotionManageController implements Initializable{
     }
     public void toDelete(){
         try {
+            opPane.setVisible(true);
             checkPane.setVisible(true);
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
-            Fade out = new Fade(opPane, 200, false);
-            out.play();
-            opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/DeletePromotionCheck.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -116,13 +113,11 @@ public class PromotionManageController implements Initializable{
     }
     public void toModify(){
         try {
+            opPane.setVisible(true);
             checkPane.setVisible(true);
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
-            Fade out = new Fade(opPane, 200, false);
-            out.play();
-            opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/ModifyPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/ModifyPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -133,8 +128,8 @@ public class PromotionManageController implements Initializable{
             e.printStackTrace();
         }
     }
-    public void back(){
-        opPane.setVisible(false);
+    public void closeOpPane(){
         checkPane.setVisible(false);
+        opPane.setVisible(false);
     }
 }

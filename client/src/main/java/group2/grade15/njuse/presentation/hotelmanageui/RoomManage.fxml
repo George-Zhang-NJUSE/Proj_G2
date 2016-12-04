@@ -44,34 +44,40 @@
                   <Insets left="10.0" />
                </GridPane.margin>
                <children>
-                  <Label fx:id="addButton">
+                  <Label fx:id="addButton" onMouseClicked="#toAdd">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="file:client/src/main/res/hotelmanage/add.png"/>
+                             <image>
+                                 <Image url="file:client/src/main/res/hotelmanage/add.png" />
+                             </image>
                           </ImageView>
                       </graphic>
                   </Label>
-                  <Label fx:id="modifyButton">
+                  <Label fx:id="modifyButton" onMouseClicked="#toModify">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="file:client/src/main/res/hotelmanage/modify.png"/>
+                             <image>
+                                 <Image url="file:client/src/main/res/hotelmanage/modify.png" />
+                             </image>
                           </ImageView>
                       </graphic>
                   </Label>
-                  <Label fx:id="deleteButton">
+                  <Label fx:id="deleteButton" onMouseClicked="#toDelete">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="file:client/src/main/res/hotelmanage/delete.pmg"/>
+                             <image>
+                                 <Image url="file:client/src/main/res/hotelmanage/delete.png" />
+                             </image>
                           </ImageView>
                       </graphic>
                   </Label>
                </children>
             </HBox>
-            <Group GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Group fx:id="opGroup" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <GridPane fx:id="addPane" visible="false">
                     <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -99,6 +105,9 @@
                         <TextField fx:id="countA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="priceA" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </GridPane>
                   <GridPane fx:id="modifyPane" visible="false">
                     <columnConstraints>
@@ -133,6 +142,9 @@
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </GridPane>
                   <GridPane fx:id="deletePane" visible="false">
                     <columnConstraints>
@@ -150,10 +162,13 @@
                               <Font name="Microsoft YaHei Light" size="18.0" />
                            </font></Label>
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </GridPane>
                </children>
             </Group>
-            <HBox fx:id="checkPane" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <HBox fx:id="checkPane" prefHeight="100.0" prefWidth="200.0" spacing="20.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -161,15 +176,19 @@
                   <Label fx:id="check">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="file:client/src/main/res/hotelmanage/Check.png">
+                             <image>
+                                 <Image url="file:client/src/main/res/hotelmanage/Check.png">
                               </Image>
+                             </image>
                           </ImageView>
                       </graphic>
                   </Label>
-                  <Label fx:id="cancel">
+                  <Label fx:id="cancel" onMouseClicked="#back">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="file:client/src/main/res/hotelmanage/Cancel.png"/>
+                             <image>
+                                 <Image url="file:client/src/main/res/hotelmanage/Cancel.png" />
+                             </image>
                           </ImageView>
                       </graphic>
                   </Label>
