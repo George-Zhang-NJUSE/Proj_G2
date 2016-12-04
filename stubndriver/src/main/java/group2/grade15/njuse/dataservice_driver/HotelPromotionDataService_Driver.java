@@ -1,9 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.HotelPromotionDataService;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
+import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 
 /**
  * Created by George on 2016/10/16.

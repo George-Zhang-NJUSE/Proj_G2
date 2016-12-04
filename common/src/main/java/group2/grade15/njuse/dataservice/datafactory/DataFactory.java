@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice.datafactory;
 
-import group2.grade15.njuse.dataservice.HotelPromotionDataService;
+import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
@@ -10,7 +10,6 @@ import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
-import group2.grade15.njuse.po.HotelPromotionPO;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
