@@ -1,23 +1,30 @@
 package group2.grade15.njuse.presentation.searchui;
 
 import group2.grade15.njuse.presentation.hotelui.HotelDetailController;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by George on 2016/12/1.
  */
-public class SearchItemController {
+public class SearchItemController implements Initializable{
 
     private String hotelName;
 
-    private Pane parentPane;
+    private Pane parentPane;  //用来传递给子界面
+
+    @FXML
+    private Label showDetailLabel, makeOrderLabel;
 
     @FXML
     protected void showHotelDetail() {
@@ -51,5 +58,12 @@ public class SearchItemController {
 
     public void setParentPane(Pane parentPane) {
         this.parentPane = parentPane;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(showDetailLabel,"file:client/src/main/res/customer/more");
+        CustomeButton.implButton(makeOrderLabel,"file:client/src/main/res/search/makeorder");
     }
 }

@@ -41,7 +41,7 @@
             <ChoiceBox fx:id="districtChoiceBox" prefWidth="100.0" GridPane.columnIndex="6" />
             <Label prefHeight="20.0" text="商圈：" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
             <ChoiceBox fx:id="cbdChoiceBox" prefWidth="100.0" GridPane.columnIndex="8" />
-            <Label onMouseClicked="#search" text="搜索按钮" GridPane.columnIndex="9" GridPane.rowSpan="2" />
+            <Label fx:id="searchLabel" onMouseClicked="#search" GridPane.columnIndex="9" GridPane.rowSpan="2" />
             <Label text="基础条件：" />
             <Label text="可选条件：" GridPane.rowIndex="1" />
             <Label text="酒店名称：" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -61,17 +61,22 @@
             <Label text="评分区间：" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <ChoiceBox fx:id="scoreRangeChoiceBox" prefWidth="100.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
       </GridPane>
    </top>
    <center>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="searchItemBox" prefWidth="1180.0" spacing="10.0" />
+            <VBox fx:id="searchItemBox" prefWidth="1180.0" spacing="10.0">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding></VBox>
          </content>
       </ScrollPane>
    </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </BorderPane>

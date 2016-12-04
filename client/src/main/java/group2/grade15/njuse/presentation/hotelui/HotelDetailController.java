@@ -1,20 +1,24 @@
 package group2.grade15.njuse.presentation.hotelui;
 
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by George on 2016/12/1.
  */
-public class HotelDetailController {
+public class HotelDetailController implements Initializable{
 
     private Pane parentPane;
 
@@ -23,6 +27,9 @@ public class HotelDetailController {
 
     @FXML
     private VBox commentBox;
+
+    @FXML
+    private Label returnLabel;
 
     @FXML
     protected void goBack() {
@@ -50,4 +57,9 @@ public class HotelDetailController {
         this.parentPane = parentPane;
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(returnLabel,"file:client/src/main/res/customer/back");
+    }
 }
