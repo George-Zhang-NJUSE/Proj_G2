@@ -21,7 +21,7 @@ public class CreditDataService_Driver {
     }
 
     public static void main(String[] args) {
-        CreditDataService_Driver demo= new CreditDataService_Driver();
+        CreditDataService_Driver demo = new CreditDataService_Driver();
 //        demo.drive(new CreditData());接口实现
     }
 }

@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/1.
  */
-public class HotelDetailController implements Initializable{
+public class HotelDetailController implements Initializable {
 
     private Pane parentPane;  //用来传递给子界面
 
@@ -40,7 +40,7 @@ public class HotelDetailController implements Initializable{
     @FXML
     protected void showMakeOrderPane() {
         try {
-            FXMLLoader makeOrderLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
+            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
             parentPane.getChildren().add(makeOrderLoader.load());
             MakeOrderController makeOrderController = makeOrderLoader.getController();
 
@@ -59,9 +59,9 @@ public class HotelDetailController implements Initializable{
             ArrayList<Node> ItemList = new ArrayList<>();
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
-            for(int i=0;i<15;++i) {
-                FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/CommentItem.fxml"));
-                Node singleItemTemplate=loader.load();
+            for (int i = 0; i < 15; ++i) {
+                FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/CommentItem.fxml"));
+                Node singleItemTemplate = loader.load();
                 CommentItemController commentItemController = loader.getController();
 
                 ItemList.add(singleItemTemplate);
@@ -84,8 +84,8 @@ public class HotelDetailController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
-        CustomeButton.implButton(returnLabel,"file:client/src/main/res/customer/back");
-        CustomeButton.implButton(makeOrderLabel,"file:client/src/main/res/hoteldetail/makeorder");
+        CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");
+        CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/hoteldetail/makeorder");
         showComments();
     }
 }

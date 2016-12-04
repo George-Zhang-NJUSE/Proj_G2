@@ -1,6 +1,5 @@
 package group2.grade15.njuse.blservice;
 
-import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.ResultMessage;
 
 /**
@@ -18,5 +17,5 @@ public interface LoginControllerServ {
      * ResultMessage.NON_EXISTENT ：账号不存在
      * ResultMessage.CONNECTION_EXCEPTION ：网络异常
      */
-	public ResultMessage login(int id,String password);
+    public ResultMessage login(int id, String password);
 }

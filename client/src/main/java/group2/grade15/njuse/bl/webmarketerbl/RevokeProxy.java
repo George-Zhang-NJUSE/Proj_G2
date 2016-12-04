@@ -9,11 +9,11 @@ import group2.grade15.njuse.utility.ResultMessage;
 /**
  * Created by Guo on 2016/11/30.
  */
-public class RevokeProxy{
+public class RevokeProxy {
 
     private ModifyOrderStateBL modifyOrderStateBL;
 
-    public RevokeProxy(){
+    public RevokeProxy() {
         modifyOrderStateBL = new OrderController();
     }
 

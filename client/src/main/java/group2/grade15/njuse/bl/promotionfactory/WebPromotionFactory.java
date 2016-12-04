@@ -12,12 +12,12 @@ public class WebPromotionFactory {
     static WebPromotionFactory webPromotionFactory = null;
     private WebPromotion webPromotionImpl;
 
-    private WebPromotionFactory(){
+    private WebPromotionFactory() {
         webPromotionImpl = new WebPromotion();
     }
 
-    public static WebPromotionFactory getInstance(){
-        if(webPromotionFactory == null){
+    public static WebPromotionFactory getInstance() {
+        if (webPromotionFactory == null) {
             webPromotionFactory = new WebPromotionFactory();
         }
         return webPromotionFactory;

@@ -21,7 +21,7 @@ public class MyOrderListController {
     private Pane parentPane;
 
     @FXML
-    private VBox allOrderBox,unexecutedOrderBox, revokedOrderBox, abnormalOrderBox;
+    private VBox allOrderBox, unexecutedOrderBox, revokedOrderBox, abnormalOrderBox;
 
     @FXML
     protected void showAllOrder() {
@@ -30,9 +30,9 @@ public class MyOrderListController {
             ArrayList<Node> ItemList = new ArrayList<>();
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
-            for(int i=0;i<15;++i) {
-                FXMLLoader orderItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
-                Node singleItemTemplate=orderItemLoader.load();
+            for (int i = 0; i < 15; ++i) {
+                FXMLLoader orderItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                Node singleItemTemplate = orderItemLoader.load();
                 MyOrderItemController orderItemController = orderItemLoader.getController();
                 orderItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);
@@ -72,14 +72,13 @@ public class MyOrderListController {
         ArrayList<Node> itemList = new ArrayList<>();
 
         if (listVO != null) {
-            ArrayList<OrderVO> orderList=listVO.getOrderList();
+            ArrayList<OrderVO> orderList = listVO.getOrderList();
             for (OrderVO orderVO : orderList) {
 
             }
         }
 
     }
-
 
 
     public void setParentPane(Pane parentPane) {

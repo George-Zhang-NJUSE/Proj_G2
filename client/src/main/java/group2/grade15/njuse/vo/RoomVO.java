@@ -5,43 +5,43 @@ import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
 
-public class RoomVO implements Serializable{
-	private RoomType type;
-	private double price;
-	private int totalRoomNum;
-	private int spareRoomNum;
-	
-	public RoomVO(RoomPO po){
-		type = po.getType();
-		price = po.getPrice();
-		totalRoomNum = po.getTotalRoomNum();
-		spareRoomNum = po.getSpareRoomNum();
-	}
+public class RoomVO implements Serializable {
+    private RoomType type;
+    private double price;
+    private int totalRoomNum;
+    private int spareRoomNum;
 
-	public RoomVO(RoomType type, double price, int totalRoomNum, int spareRoomNum){
-		this.type = type;
-		this.price = price;
-		this.totalRoomNum = totalRoomNum;
-		this.spareRoomNum = spareRoomNum;
-	}
+    public RoomVO(RoomPO po) {
+        type = po.getType();
+        price = po.getPrice();
+        totalRoomNum = po.getTotalRoomNum();
+        spareRoomNum = po.getSpareRoomNum();
+    }
 
-	public RoomType getType() {
-		return type;
-	}
+    public RoomVO(RoomType type, double price, int totalRoomNum, int spareRoomNum) {
+        this.type = type;
+        this.price = price;
+        this.totalRoomNum = totalRoomNum;
+        this.spareRoomNum = spareRoomNum;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public RoomType getType() {
+        return type;
+    }
 
-	public int getTotalRoomNum() {
-		return totalRoomNum;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public int getSpareRoomNum() {
-		return spareRoomNum;
-	}
+    public int getTotalRoomNum() {
+        return totalRoomNum;
+    }
 
-	public RoomPO toPO(){
-		return new RoomPO(type, price, totalRoomNum, spareRoomNum);
-	}
+    public int getSpareRoomNum() {
+        return spareRoomNum;
+    }
+
+    public RoomPO toPO() {
+        return new RoomPO(type, price, totalRoomNum, spareRoomNum);
+    }
 }

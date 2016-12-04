@@ -10,8 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public interface HotelManagerPartService extends Remote{
+public interface HotelManagerPartService extends Remote {
     public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException;
+
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException;
+
     public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException;
 }

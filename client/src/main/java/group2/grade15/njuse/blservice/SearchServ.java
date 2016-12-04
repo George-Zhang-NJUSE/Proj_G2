@@ -21,25 +21,25 @@ public interface SearchServ {
     /**
      * 获取省的列表
      */
-	public ProvinceListVO getProvince();
+    public ProvinceListVO getProvince();
 
     /**
      * 根据输入的省名，获取该省份的所有城市名列表
      */
-	public CityListVO getCity(String provinceNum);
+    public CityListVO getCity(String provinceNum);
 
     /**
      * 根据输入的城市名，获取该城市的所有地区名列表
      */
-	public DistrictListVO getDistrict(String cityNum);
+    public DistrictListVO getDistrict(String cityNum);
 
     /**
      * 根据输入地区名，获取该地区的所有商圈名列表
      */
-	public CbdListVO getCbd(String districtNum);
+    public CbdListVO getCbd(String districtNum);
 
     /**
      * 根据输入的商圈名，获取该商圈的所有酒店列表
      */
-	public HotelListVO getHotel(String address);
+    public HotelListVO getHotel(String address);
 }

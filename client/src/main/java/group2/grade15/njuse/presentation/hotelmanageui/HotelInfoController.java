@@ -1,6 +1,5 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
-import com.sun.xml.internal.txw2.TXW;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,8 +40,8 @@ public class HotelInfoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CustomeButton.implButton(check,"file:client/src/main/res/hotelmanage/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
+        CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
+        CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
 
     }
 }

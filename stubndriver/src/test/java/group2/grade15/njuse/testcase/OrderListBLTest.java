@@ -6,8 +6,6 @@ import org.junit.Test;
 import utility.IDType;
 import vo.OrderListVO;
 
-import static junit.framework.TestCase.assertEquals;
-
 /**
  * Created by George on 2016/11/6.
  */

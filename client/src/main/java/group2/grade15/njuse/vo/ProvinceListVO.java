@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class ProvinceListVO {
     ArrayList<ProvinceVO> list;
 
-    public ProvinceListVO(ArrayList<ProvinceVO> list){
-        this.list=list;
+    public ProvinceListVO(ArrayList<ProvinceVO> list) {
+        this.list = list;
     }
 
     public ArrayList<ProvinceVO> getList() {

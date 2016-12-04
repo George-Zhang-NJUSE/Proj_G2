@@ -36,6 +36,7 @@ public class HotelManageMainController implements Initializable {
     private Rectangle promotionManageRec;
     @FXML
     private Pane opPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addSwither(infoTag);
@@ -44,21 +45,22 @@ public class HotelManageMainController implements Initializable {
         addSwither(promotionManageTag);
 
     }
+
     @FXML
-    private boolean toInfo(){
+    private boolean toInfo() {
         if (infoRec.isVisible())
             return true;
         infoRec.setVisible(true);
         orderManageRec.setVisible(false);
         roomManageRec.setVisible(false);
         promotionManageRec.setVisible(false);
-        try{
+        try {
             Fade out = new Fade(opPane, 500, false);
             out.play();
-            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/HotelInfo.fxml"));
+            FXMLLoader infoLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/HotelInfo.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
-            Fade in=new Fade(opPane,500,true);
+            Fade in = new Fade(opPane, 500, true);
             in.play();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -67,41 +69,45 @@ public class HotelManageMainController implements Initializable {
         }
         return true;
     }
+
     @FXML
-    private void toOrderManage(){
+    private void toOrderManage() {
         infoRec.setVisible(false);
         orderManageRec.setVisible(true);
         roomManageRec.setVisible(false);
         promotionManageRec.setVisible(false);
 
     }
+
     @FXML
-    private void toRoomManage(){
+    private void toRoomManage() {
         infoRec.setVisible(false);
         orderManageRec.setVisible(false);
         roomManageRec.setVisible(true);
         promotionManageRec.setVisible(false);
 
     }
+
     @FXML
-    private void toPromotionManage(){
+    private void toPromotionManage() {
         infoRec.setVisible(false);
         orderManageRec.setVisible(false);
         roomManageRec.setVisible(false);
         promotionManageRec.setVisible(true);
 
     }
-    public void addSwither(FlowPane pane){
-        pane.setOnMouseEntered((MouseEvent e)->{
+
+    public void addSwither(FlowPane pane) {
+        pane.setOnMouseEntered((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
-        pane.setOnMouseExited((MouseEvent e)->{
+        pane.setOnMouseExited((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: inherit");
         });
-        pane.setOnMousePressed((MouseEvent e)->{
+        pane.setOnMousePressed((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(210,210,210)");
         });
-        pane.setOnMouseReleased((MouseEvent e)->{
+        pane.setOnMouseReleased((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
     }

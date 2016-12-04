@@ -15,7 +15,7 @@ public class CustomerController implements CustomerBL, CustomerServ {
 
     private CustomerBL customerBL;
 
-    public CustomerController(){
+    public CustomerController() {
         customerBL = new Customer();
     }
 

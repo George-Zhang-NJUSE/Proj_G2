@@ -30,8 +30,8 @@ public class CustomerLoginImpl implements LoginControllerServ {
             e.printStackTrace();
         }
 
-        if(customerPO != null){
-            if(customerPO.getPassword().equals(password)){
+        if (customerPO != null) {
+            if (customerPO.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

@@ -1,18 +1,12 @@
 package group2.grade15.njuse.bl.hotelbl;
 
-import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.po.CustomerPO;
-import group2.grade15.njuse.po.RoomPO;
-import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.RoomVO;
 
-import javax.xml.transform.Result;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 /**
  * Created by ALIENWARE-PC on 2016/11/13.
@@ -39,7 +33,7 @@ public class Hotel implements HotelBL {
             e.printStackTrace();
         }
 
-        if(hotel != null) {
+        if (hotel != null) {
             return new HotelVO(hotel);
         } else {
             return null;

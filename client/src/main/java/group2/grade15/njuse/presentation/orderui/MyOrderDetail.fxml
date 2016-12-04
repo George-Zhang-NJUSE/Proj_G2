@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<GridPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.orderui.MyOrderDetailController">
-  <columnConstraints>
-    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Label text="酒店名称：" GridPane.rowIndex="2" />
-      <Label fx:id="hotelNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="地址：" GridPane.rowIndex="3" />
-      <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-      <Label text="预计入住时间：" GridPane.rowIndex="4" />
-      <Label text="房间种类：" GridPane.rowIndex="7" />
-      <Label text="订单详情" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label text="入住顾客数：" GridPane.rowIndex="8" />
-      <Label layoutX="33.0" layoutY="315.0" text="预计退房时间：" GridPane.rowIndex="6" />
-      <Label text="订单总价：" GridPane.rowIndex="10" />
-      <Label text="Label" textFill="#bf1c1c" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="11" />
-      <Label text="房间数量：" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label text="实际入住时间：" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <Label text="实际退房时间：" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <Label text="有无儿童" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-      <Label text="订单号：" GridPane.rowIndex="1" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label fx:id="revokeOrderLabel" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label text="最晚订单执行时间：" GridPane.rowIndex="5" />
-      <Label text="订单生成时间：" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Label text="订单状态：" GridPane.rowIndex="9" />
-      <Label text="Label" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="commentLabel" onMouseClicked="#showCommentPane" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-   </children>
-   <effect>
-      <DropShadow />
-   </effect>
+<GridPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;"
+          xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="group2.grade15.njuse.presentation.orderui.MyOrderDetailController">
+    <columnConstraints>
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Label text="酒店名称：" GridPane.rowIndex="2"/>
+        <Label fx:id="hotelNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="地址：" GridPane.rowIndex="3"/>
+        <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.columnSpan="2"
+               GridPane.rowIndex="3"/>
+        <Label text="预计入住时间：" GridPane.rowIndex="4"/>
+        <Label text="房间种类：" GridPane.rowIndex="7"/>
+        <Label text="订单详情" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <Label text="入住顾客数：" GridPane.rowIndex="8"/>
+        <Label layoutX="33.0" layoutY="315.0" text="预计退房时间：" GridPane.rowIndex="6"/>
+        <Label text="订单总价：" GridPane.rowIndex="10"/>
+        <Label text="Label" textFill="#bf1c1c" GridPane.columnIndex="1" GridPane.columnSpan="2"
+               GridPane.halignment="CENTER" GridPane.rowIndex="10">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="11"/>
+        <Label text="房间数量：" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+        <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+        <Label text="实际入住时间：" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+        <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+        <Label text="实际退房时间：" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+        <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+        <Label text="有无儿童" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+        <Label text="订单号：" GridPane.rowIndex="1"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="revokeOrderLabel" GridPane.columnIndex="3" GridPane.rowIndex="11"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        <Label text="最晚订单执行时间：" GridPane.rowIndex="5"/>
+        <Label text="订单生成时间：" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Label text="订单状态：" GridPane.rowIndex="9"/>
+        <Label text="Label" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER"
+               GridPane.rowIndex="9">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="commentLabel" onMouseClicked="#showCommentPane" GridPane.columnIndex="1" GridPane.columnSpan="2"
+               GridPane.halignment="CENTER" GridPane.rowIndex="11"/>
+    </children>
+    <effect>
+        <DropShadow/>
+    </effect>
 </GridPane>

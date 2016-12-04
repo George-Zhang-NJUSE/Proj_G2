@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class CbdListVO {
     ArrayList<CbdVO> list;
 
-    public CbdListVO(ArrayList<CbdVO> list){
-        this.list=list;
+    public CbdListVO(ArrayList<CbdVO> list) {
+        this.list = list;
     }
 
     public ArrayList<CbdVO> getList() {

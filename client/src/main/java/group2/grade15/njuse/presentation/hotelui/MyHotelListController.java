@@ -16,13 +16,12 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/4.
  */
-public class MyHotelListController implements Initializable{
+public class MyHotelListController implements Initializable {
 
     private Pane parentPane;    //用来传递给子界面
 
     @FXML
     private VBox hotelItemBox;
-
 
 
     public void setParentPane(Pane parentPane) {
@@ -47,9 +46,9 @@ public class MyHotelListController implements Initializable{
             ArrayList<Node> ItemList = new ArrayList<>();
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
-            for(int i=0;i<15;++i) {
-                FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
-                Node singleItemTemplate=searchItemLoader.load();
+            for (int i = 0; i < 15; ++i) {
+                FXMLLoader searchItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
+                Node singleItemTemplate = searchItemLoader.load();
                 HotelItemController hotelItemController = searchItemLoader.getController();
                 hotelItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);

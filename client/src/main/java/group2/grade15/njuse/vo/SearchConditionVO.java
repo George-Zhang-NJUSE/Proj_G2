@@ -39,7 +39,7 @@ public class SearchConditionVO {
         this.isBooked = isBooked;
     }
 
-    public int getCsutomerID(){
+    public int getCsutomerID() {
         return customerID;
     }
 

@@ -46,7 +46,7 @@ public class CustomerLoginController implements Initializable {
     private VBox loginVBox;
 
     @FXML
-    private ImageView loginIconImage,applyIconImage;
+    private ImageView loginIconImage, applyIconImage;
 
     @FXML
     private TextField accoutField;
@@ -133,7 +133,7 @@ public class CustomerLoginController implements Initializable {
 
     private void login() {
 
-        LoginControllerServ loginServ=new CustomerLoginImpl();
+        LoginControllerServ loginServ = new CustomerLoginImpl();
         CustomerServ customerServ = new CustomerController();
 
 //        int id = Integer.parseInt(accoutField.getText());

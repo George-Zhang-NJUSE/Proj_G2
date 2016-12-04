@@ -8,24 +8,24 @@ import org.junit.Test;
 
 import java.rmi.RemoteException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by dell on 2016/11/25.
  */
 public class WebMarketerDatabaseTest {
-    WebMarketerDatabaseImpl webMarketerDatabase=null;
+    WebMarketerDatabaseImpl webMarketerDatabase = null;
 
     @Before
     public void setUp() throws Exception {
-        DatabaseInfo info=new DatabaseInfo("jdbc:postgresql://localhost/FirstDatabase","postgres","1997wyh");
-        webMarketerDatabase=new WebMarketerDatabaseImpl(info);
+        DatabaseInfo info = new DatabaseInfo("jdbc:postgresql://localhost/FirstDatabase", "postgres", "1997wyh");
+        webMarketerDatabase = new WebMarketerDatabaseImpl(info);
     }
 
     @Test
-    public void getTest() throws RemoteException{
-        WebMarketerPO webMarketerPO=webMarketerDatabase.getWebMarketer("wm00000000");
-        assertEquals("12345",webMarketerPO.getPassword());
+    public void getTest() throws RemoteException {
+        WebMarketerPO webMarketerPO = webMarketerDatabase.getWebMarketer("wm00000000");
+        assertEquals("12345", webMarketerPO.getPassword());
     }
 
 
