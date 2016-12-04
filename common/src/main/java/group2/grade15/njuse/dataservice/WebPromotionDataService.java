@@ -18,10 +18,11 @@ public interface WebPromotionDataService extends Remote {
 
     public ResultMessage modify(WebPromotionPO po) throws RemoteException;
 
-    public ResultMessage remove(WebPromotionPO po) throws RemoteException;
+    public ResultMessage remove(int promotionID) throws RemoteException;
 
     public ResultMessage add(WebPromotionPO po) throws RemoteException;
 
     public RankPO getRank() throws RemoteException;
 
+    public ResultMessage modifyRank() throws RemoteException;
 }
