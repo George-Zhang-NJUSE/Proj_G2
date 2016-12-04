@@ -21,7 +21,17 @@ public class CustomeButton{
         Image origin=new Image(originURL);
         Image press=new Image(pressURL);
         Image enter=new Image(enterURL);
-        ImageView graphic=(ImageView) label.getGraphic();
+
+        ImageView graphic;
+
+        if (label.getGraphic() != null) {
+            graphic = (ImageView) label.getGraphic();
+        } else {
+            graphic = new ImageView();
+            graphic.setImage(origin);
+            label.setGraphic(graphic);
+        }
+
         label.setOnMouseEntered((MouseEvent e)->{
             graphic.setImage(enter);
         });

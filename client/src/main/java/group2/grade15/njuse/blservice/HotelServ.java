@@ -12,7 +12,4 @@ public interface HotelServ {
 
 	public ResultMessage modifyRoomInfo (int hotelID, RoomVO roomInfo);
 
-	public ResultMessage addCompany(int customerID);
-
-	public ResultMessage deleteCompany(int customerID);
 }

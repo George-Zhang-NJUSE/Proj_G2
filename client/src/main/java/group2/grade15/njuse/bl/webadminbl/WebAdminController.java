@@ -9,20 +9,20 @@ import group2.grade15.njuse.vo.*;
 import java.rmi.RemoteException;
 
 /**
- * 负责执行网站管理人员的业务逻辑，持有酒店代理和用户代理两个对象
+ * 负责执行网站管理人员的业务逻辑，用代理模式实现，持有酒店管理和用户管理两个对象
  * 只有获取网站管理人员信息的方法由自己的业务逻辑进行处理
- * 对酒店的管理采用代理的方式交给酒店代理进行真正的业务逻辑处理
- * 对用户的管理采用代理的方式交给用户代理进行真正的业务逻辑处理
+ * 对酒店的管理采用代理的方式交给酒店管理进行真正的业务逻辑处理
+ * 对用户的管理采用代理的方式交给用户管理进行真正的业务逻辑处理
  * */
 
-public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxyBL{
+public class WebAdminController implements WebAdminServ, HotelManageBL, UserManageBL{
 
-	private HotelProxyBL hotelProxy;
-	private UserProxyBL userProxy;
+	private HotelManageBL hotelManage;
+	private UserManageBL userManage;
 
 	public WebAdminController(){
-		hotelProxy = new HotelProxyImpl();
-		userProxy = new UserProxyImpl();
+		hotelManage = new HotelManageImpl();
+		userManage = new UserManageImpl();
 	}
 
 	public WebAdminVO getInfo(String webAdminId) {
@@ -43,52 +43,52 @@ public class WebAdminController implements WebAdminServ, HotelProxyBL, UserProxy
 
     @Override
     public ResultMessage createHotel(HotelVO hotel) {
-        return hotelProxy.createHotel(hotel);
+        return hotelManage.createHotel(hotel);
     }
 
     @Override
     public HotelListVO getHotelList() {
-        return hotelProxy.getHotelList();
+        return hotelManage.getHotelList();
     }
 
     @Override
     public HotelListVO modifyHotel(HotelVO hotel) {
-        return hotelProxy.modifyHotel(hotel);
+        return hotelManage.modifyHotel(hotel);
     }
 
     @Override
     public ResultMessage deleteHotel(HotelVO hotel) {
-        return hotelProxy.deleteHotel(hotel);
+        return hotelManage.deleteHotel(hotel);
     }
 
     @Override
     public CustomerListVO getCustomerList() {
-        return userProxy.getCustomerList();
+        return userManage.getCustomerList();
     }
 
     @Override
     public HotelManagerListVO getHotelManagerList() {
-        return userProxy.getHotelManagerList();
+        return userManage.getHotelManagerList();
     }
 
     @Override
     public WebMarketerListVO getWebMarketerList() {
-        return userProxy.getWebMarketerList();
+        return userManage.getWebMarketerList();
     }
 
     @Override
     public ResultMessage createHotelManager(HotelManagerVO hotelManager) {
-        return userProxy.createHotelManager(hotelManager);
+        return userManage.createHotelManager(hotelManager);
     }
 
     @Override
     public ResultMessage modifyWebMarketer(WebMarketerVO webMarketer) {
-        return userProxy.modifyWebMarketer(webMarketer);
+        return userManage.modifyWebMarketer(webMarketer);
     }
 
     @Override
     public ResultMessage createWebMarketer(WebMarketerVO webMarketer) {
-        return userProxy.createWebMarketer(webMarketer);
+        return userManage.createWebMarketer(webMarketer);
     }
 
     @Override

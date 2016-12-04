@@ -285,6 +285,7 @@ public class OrderDatabaseImpl implements OrderDataService {
             orderDatabase.close();
             orderDatabase=null;
 
+            //撤销异常订单需要单独调用credit
             if(current.equals(OrderState.unexecuted)&&state.equals(OrderState.executed)){
                 CreditPO creditPO=new CreditPO(customerID,orderID,0,0,sum,null,ChangeReason.orderExecute);
                 CreditDatabaseImpl creditDatabase=new CreditDatabaseImpl(info);

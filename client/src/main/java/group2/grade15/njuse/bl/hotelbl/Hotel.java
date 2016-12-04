@@ -17,11 +17,10 @@ import java.util.ArrayList;
 /**
  * Created by ALIENWARE-PC on 2016/11/13.
  */
-public class Hotel implements HotelServ, GetHotelListBL{
+public class Hotel implements HotelBL {
 
-    @Override
     public ResultMessage modifyInfo(HotelVO hotel) {
-        ResultMessage result = ResultMessage.FAILED;
+        ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getHotelDataService().modify(hotel.toPO());
         } catch (RemoteException e) {
@@ -32,7 +31,6 @@ public class Hotel implements HotelServ, GetHotelListBL{
         return result;
     }
 
-    @Override
     public HotelVO getInfo(int hotelID) {
         HotelPO hotel = null;
         try {
@@ -48,9 +46,8 @@ public class Hotel implements HotelServ, GetHotelListBL{
         }
     }
 
-    @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        ResultMessage result = ResultMessage.FAILED;
+        ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getHotelDataService().modifyRoom(hotelID, roomInfo.toPO());
         } catch (RemoteException e) {
@@ -61,18 +58,4 @@ public class Hotel implements HotelServ, GetHotelListBL{
         return result;
     }
 
-    @Override
-    public ResultMessage addCompany(int customerID) {
-        return null;
-    }
-
-    @Override
-    public ResultMessage deleteCompany(int customerID) {
-        return null;
-    }
-
-    @Override
-    public HotelListVO getBookedHotelList(int customerID) {
-        return null;
-    }
 }

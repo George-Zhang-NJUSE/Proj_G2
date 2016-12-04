@@ -11,34 +11,32 @@ import java.rmi.RemoteException;
 /**
  * Created by Guo on 2016/11/6.
  */
-public class Customer {
+public class Customer implements CustomerBL {
 
-    CustomerPO customerPO;
+    public CustomerVO getInfo(int customerID) {
+        CustomerPO po = null;
+        try {
+            po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(customerID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
-    public Customer(CustomerPO po) {
-        customerPO = po;
-    }
-
-    public CustomerVO getInfo() {
-
-        if(customerPO != null) {
-            return new CustomerVO(customerPO);
+        if(po != null) {
+            return new CustomerVO(po);
         } else {
             return null;
         }
     }
 
     public ResultMessage modifyInfo(CustomerVO customerVO) {
+        ResultMessage result;
         try {
-            return RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
+            result = RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
-            return ResultMessage.FAILED;
+            result = ResultMessage.CONNECTION_EXCEPTION;
         }
-    }
-
-    public int getId() {
-        return customerPO.getId();
+        return result;
     }
 
 }

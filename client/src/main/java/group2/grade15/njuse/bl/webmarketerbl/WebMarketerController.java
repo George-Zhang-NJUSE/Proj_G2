@@ -6,6 +6,7 @@ import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.IDType;
+import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
@@ -15,10 +16,10 @@ import java.rmi.RemoteException;
  * Created by Guo on 2016/11/30.
  */
 public class WebMarketerController implements WebMarketerServ{
-    ChargeProxy chargeProxy;
-    RevokeProxy revokeProxy;
-    WebPromotionProxy webPromotionProxy;
-    OrderListBL orderList;
+    private ChargeProxy chargeProxy;
+    private RevokeProxy revokeProxy;
+    private WebPromotionProxy webPromotionProxy;
+    private OrderListBL orderList;
 
     public WebMarketerController(){
         chargeProxy = new ChargeProxy();
@@ -65,11 +66,16 @@ public class WebMarketerController implements WebMarketerServ{
 
     @Override
     public OrderListVO getAbnomalOrderList(int customerId) {
-        return orderList.getAbnormalOrderList(customerId, IDType.customer);
+        return orderList.getAbnormalOrderList(customerId);
     }
 
     @Override
     public ResultMessage modifyCredit(CreditVO credit) {
         return chargeProxy.modifyCredit(credit);
+    }
+
+    @Override
+    public ResultMessage modifyState(int orderId, OrderState state) {
+        return revokeProxy.modifyState(orderId, state);
     }
 }

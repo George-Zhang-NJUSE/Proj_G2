@@ -11,10 +11,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
- * 负责处理用户业务的代理
+ * 负责用户业务的管理
  * 数据的处理通过RMI直接调用WebAdminDataService
  */
-public class UserProxyImpl implements UserProxyBL{
+public class UserManageImpl implements UserManageBL{
 	
 	public CustomerListVO getCustomerList(){
 		ArrayList<CustomerPO> customerPOList = null;
