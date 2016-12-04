@@ -41,16 +41,6 @@ public class HotelController  implements HotelServ, GetHotelListBL {
     }
 
     @Override
-    public ResultMessage addCompany(int customerID) {
-        return null;
-    }
-
-    @Override
-    public ResultMessage deleteCompany(int customerID) {
-        return null;
-    }
-
-    @Override
     public HotelListVO getBookedHotelList(int customerID) {
         OrderListBL orderListBL = new OrderList();
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderList(customerID).getOrderList();
