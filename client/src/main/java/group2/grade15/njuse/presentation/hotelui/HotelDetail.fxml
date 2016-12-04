@@ -14,9 +14,9 @@
 
 <BorderPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url(file:client/src/main/res/customer/bc.jpg); -fx-background-size: contain;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelui.HotelDetailController">
    <top>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="50.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label onMouseClicked="#goBack" text="返回按钮" />
+            <Label fx:id="returnLabel" onMouseClicked="#goBack" />
             <Label text="酒店名称">
                <font>
                   <Font size="18.0" />
