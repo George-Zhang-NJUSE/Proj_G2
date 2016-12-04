@@ -77,4 +77,19 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
         return null;
     }
 
+    @Override
+    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID) {
+        return null;
+    }
+
+    @Override
+    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
+        return null;
+    }
+
+    @Override
+    public OrderListVO getAbnormalOrderList(int id, int hotelID) {
+        return null;
+    }
+
 }
