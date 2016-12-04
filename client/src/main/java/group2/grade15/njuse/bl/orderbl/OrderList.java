@@ -32,4 +32,16 @@ public class OrderList implements OrderListBL {
     public OrderListVO getAbnormalOrderList(int id) {
         return null;
     }
+
+    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID) {
+        return null;
+    }
+
+    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
+        return null;
+    }
+
+    public OrderListVO getAbnormalOrderList(int id, int hotelID) {
+        return null;
+    }
 }
