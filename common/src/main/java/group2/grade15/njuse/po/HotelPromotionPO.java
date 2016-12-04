@@ -15,18 +15,18 @@ public class HotelPromotionPO implements Serializable{
     HotelPromotionType type;
     Date start;
     Date end;
-    ArrayList<Integer> vipList;
+    int vipID;
     double discount;
     String name;
     PromotionState state;
 
-    public HotelPromotionPO(int promotionID, HotelPromotionType type, Date start, Date end, ArrayList<Integer> vipList, double discount, String name, PromotionState state) {
+    public HotelPromotionPO(int promotionID, HotelPromotionType type, Date start, Date end, int vip, double discount, String name, PromotionState state) {
 
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;
         this.end = end;
-        this.vipList = vipList;
+        this.vipID = vip;
         this.discount = discount;
         this.name = name;
         this.state = state;
@@ -52,8 +52,8 @@ public class HotelPromotionPO implements Serializable{
         return end;
     }
 
-    public ArrayList<Integer> getVipList() {
-        return vipList;
+    public int getVipID() {
+        return vipID;
     }
 
     public double getDiscount() {
