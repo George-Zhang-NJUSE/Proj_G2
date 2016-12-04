@@ -16,7 +16,7 @@ public interface HotelPromotionDataService extends Remote {
 
     public ResultMessage modify(HotelPromotionPO po) throws RemoteException;
 
-    public ResultMessage remove(HotelPromotionPO po) throws RemoteException;
+    public ResultMessage remove(int promotionID) throws RemoteException;
 
     public ResultMessage add(HotelPromotionPO po) throws RemoteException;
 

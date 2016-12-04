@@ -184,8 +184,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage remove(HotelPromotionPO po) throws RemoteException {
-        return hotelPromotionDataService.remove(po);
+    public ResultMessage remove(int promotionID) throws RemoteException {
+        return null;
     }
 
     @Override
