@@ -2,11 +2,11 @@ package group2.grade15.njuse.presentation.orderui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -14,9 +14,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by George on 2016/12/1.
+ * Created by George on 2016/12/4.
  */
-public class MakeOrderController implements Initializable{
+public class CommentController implements Initializable{
 
     private Pane parentPane;
 
@@ -24,11 +24,7 @@ public class MakeOrderController implements Initializable{
     private Node rootNode;
 
     @FXML
-    private ChoiceBox roomTypeChoiceBox;
-
-    @FXML
-    private Label roomNumLabel;
-
+    private Label cancelLabel, confirmLabel, editLabel;
 
     @FXML
     protected void close() {
@@ -40,14 +36,8 @@ public class MakeOrderController implements Initializable{
         fadeOut.play();
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
-    }
-
     public void initDataAndShow() {
         // TODO: 2016/12/4 初始化数据
-
-
 
         show();
     }
@@ -61,6 +51,9 @@ public class MakeOrderController implements Initializable{
         popIn.play();
     }
 
+    public void setParentPane(Pane parentPane) {
+        this.parentPane = parentPane;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,5 +62,10 @@ public class MakeOrderController implements Initializable{
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.5);
         rootNode.setScaleY(0.5);
+
+        //加载按钮变化样式
+        CustomeButton.implButton(cancelLabel,"file:client/src/main/res/order/cancel");
+        CustomeButton.implButton(confirmLabel,"file:client/src/main/res/order/confirm");
+        CustomeButton.implButton(editLabel,"file:client/src/main/res/customer/edit");
     }
 }

@@ -9,17 +9,17 @@ import java.util.Date;
 /**
  * Created by George on 2016/11/6.
  */
-public class OrderList implements OrderListBL, OrderListServ{
+public class OrderList implements OrderListBL{
 
-    public OrderListVO getAllOrderList(int id, IDType type) {
+    public OrderListVO getAllOrderList(int id) {
         return null;
     }
 
-    public OrderListVO getExecutedOrderList(int id, IDType type) {
+    public OrderListVO getExecutedOrderList(int id) {
         return null;
     }
 
-    public OrderListVO getUnexecutedOrderList(int id, IDType type) {
+    public OrderListVO getUnexecutedOrderList(int id) {
         return null;
     }
 
@@ -27,11 +27,11 @@ public class OrderList implements OrderListBL, OrderListServ{
         return null;
     }
 
-    public OrderListVO getRevokedOrderList(int id, IDType type) {
+    public OrderListVO getRevokedOrderList(int id) {
         return null;
     }
 
-    public OrderListVO getAbnormalOrderList(int id, IDType type) {
+    public OrderListVO getAbnormalOrderList(int id) {
         return null;
     }
 }

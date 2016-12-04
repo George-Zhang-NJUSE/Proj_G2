@@ -8,6 +8,9 @@ import group2.grade15.njuse.vo.OrderListVO;
  */
 public interface OrderListBL {
 
-    public OrderListVO getAbnormalOrderList(int id, IDType type);
+    public OrderListVO getAllOrderList(int id);
+
+
+    public OrderListVO getAbnormalOrderList(int id);
 
 }
