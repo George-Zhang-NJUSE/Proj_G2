@@ -48,9 +48,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         hotelManagerDataService = dataFactory.getHotelManagerDataService();
         webMarketerDataService = dataFactory.getWebMarketerDataService();
         webAdminDataService = dataFactory.getWebAdminDataService();
-        commentDataService=dataFactory.getCommentDataService();
-        creditDataService=dataFactory.getCreditDataService();
-        areaDataService=dataFactory.getAreaDataService();
+        commentDataService = dataFactory.getCommentDataService();
+        creditDataService = dataFactory.getCreditDataService();
+        areaDataService = dataFactory.getAreaDataService();
+        hotelDataService = dataFactory.getHotelDataService();
+        orderDataService = dataFactory.getOrderDataService();
     }
 
     @Override
@@ -281,47 +283,47 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ResultMessage add(CommentPO po) throws RemoteException {
-        return null;
+        return commentDataService.add(po);
     }
 
     @Override
     public ResultMessage modify(CommentPO po) throws RemoteException {
-        return null;
+        return commentDataService.modify(po);
     }
 
     @Override
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
-        return null;
+        return commentDataService.getHotelComments(hotelID);
     }
 
     @Override
-    public ArrayList<ProvincePO> getProvince() {
-        return null;
+    public ArrayList<ProvincePO> getProvince() throws RemoteException {
+        return areaDataService.getProvince();
     }
 
     @Override
-    public ArrayList<CityPO> getCity(String provinceNum) {
-        return null;
+    public ArrayList<CityPO> getCity(String provinceNum) throws RemoteException {
+        return areaDataService.getCity(provinceNum);
     }
 
     @Override
-    public ArrayList<DistrictPO> getDistrict(String cityNum) {
-        return null;
+    public ArrayList<DistrictPO> getDistrict(String cityNum) throws RemoteException {
+        return areaDataService.getDistrict(cityNum);
     }
 
     @Override
-    public ArrayList<CbdPO> getCbd(String districtNum) {
-        return null;
+    public ArrayList<CbdPO> getCbd(String districtNum) throws RemoteException {
+        return areaDataService.getCbd(districtNum);
     }
 
     @Override
-    public ArrayList<HotelPO> getHotelByAddress(String address) {
-        return null;
+    public ArrayList<HotelPO> getHotelByAddress(String address) throws RemoteException {
+        return areaDataService.getHotelByAddress(address);
     }
 
     @Override
-    public ArrayList<HotelPO> getHotelByName(String name) {
-        return null;
+    public ArrayList<HotelPO> getHotelByName(String name) throws RemoteException {
+        return areaDataService.getHotelByName(name);
     }
 
     /*@Override
