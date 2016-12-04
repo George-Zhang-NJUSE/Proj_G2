@@ -11,6 +11,8 @@ import group2.grade15.njuse.data.orderdata.OrderDatabaseImpl;
 import group2.grade15.njuse.data.searchdata.AreaDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
+import group2.grade15.njuse.data.webpromotiondata.WebPromotionDatabaseImpl;
+import group2.grade15.njuse.dataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
@@ -40,6 +42,7 @@ public class DatabaseFactory implements DataFactory {
     private HotelDataService hotelDataService=null;
     private OrderDataService orderDataService=null;
     private HotelPromotionDataService hotelPromotionDataService=null;
+    private WebPromotionDataService webPromotionDataService=null;
 
 
     private DatabaseFactory(){}
@@ -172,7 +175,20 @@ public class DatabaseFactory implements DataFactory {
             try{
                 hotelPromotionDataService=new HotelPromotionDatabaseImpl(info);
             }catch (RemoteException e){
-                e.printStackTrace();;
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return hotelPromotionDataService;
+    }
+
+    @Override
+    public WebPromotionDataService getWebPromotionDataService() throws RemoteException {
+        if(webPromotionDataService==null){
+            try{
+                webPromotionDataService=new WebPromotionDatabaseImpl(info);
+            }catch (RemoteException e){
+                e.printStackTrace();
                 return null;
             }
         }

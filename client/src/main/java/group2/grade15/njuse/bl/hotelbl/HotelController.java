@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by 果宝 on 2016/12/4.
+ * Created by Guo on 2016/12/4.
  */
 public class HotelController  implements HotelServ, GetHotelListBL {
     HotelBL hotelBL;
