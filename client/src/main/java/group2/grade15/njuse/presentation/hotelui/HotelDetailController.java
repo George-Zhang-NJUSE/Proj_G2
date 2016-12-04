@@ -58,13 +58,17 @@ public class HotelDetailController implements Initializable {
         this.parentPane = parentPane;
     }
 
+    public void initDataAndShow() {
+        showComments();
+        showMyOrders();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");
         CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/hoteldetail/makeorder");
-        showComments();
-        showMyOrders();
+
     }
 
     private void showComments() {
@@ -100,6 +104,7 @@ public class HotelDetailController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
                 Node singleItemTemplate = loader.load();
                 MyOrderItemController orderItemController = loader.getController();
+                orderItemController.setParentPane(parentPane);
 
                 ItemList.add(singleItemTemplate);
             }

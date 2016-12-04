@@ -88,7 +88,10 @@
          </font></Label>
         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="5">
             <content>
-                <VBox fx:id="creditRecordBox" prefWidth="675.0" />
+                <VBox fx:id="creditRecordBox" prefWidth="675.0" spacing="10.0">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding></VBox>
             </content>
         </ScrollPane>
       <Label text="取消按钮" GridPane.rowIndex="5" />
