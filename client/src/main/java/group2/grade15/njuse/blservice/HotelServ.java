@@ -12,4 +12,8 @@ public interface HotelServ {
 
 	public ResultMessage modifyRoomInfo (int hotelID, RoomVO roomInfo);
 
+    /**
+     * 获取用户预订过的酒店列表
+     */
+	public HotelListVO getBookedHotelList(int customerID);
 }
