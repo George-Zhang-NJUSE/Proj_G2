@@ -91,12 +91,27 @@ public class HotelManageMainController implements Initializable {
         return true;
     }
     @FXML
-    private void toRoomManage(){
+    private boolean toRoomManage(){
+        if (roomManageRec.isVisible())
+            return true;
         infoRec.setVisible(false);
         orderManageRec.setVisible(false);
         roomManageRec.setVisible(true);
         promotionManageRec.setVisible(false);
-
+        try{
+            Fade out = new Fade(opPane, 500, false);
+            out.play();
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/RoomManage.fxml"));
+            opPane.getChildren().clear();
+            opPane.getChildren().add(infoLoader.load());
+            Fade in=new Fade(opPane,500,true);
+            in.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
     @FXML
     private void toPromotionManage(){
