@@ -13,17 +13,11 @@ import java.rmi.RemoteException;
  */
 public class Order {
 
-    private OrderPO po;
-
-    public Order(OrderPO po) {
-        this.po = po;
-    }
-
-    public OrderVO getInfo() {
+    public OrderVO getInfo(int orderID) {
         OrderPO po = null;
 
         try {
-            po = RemoteHelper.getInstance().getOrderDataService().getOrder(po.getOrderID());
+            po = RemoteHelper.getInstance().getOrderDataService().getOrder(orderID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -35,9 +29,9 @@ public class Order {
         }
     }
 
-    public ResultMessage modifyState(OrderState state) {
+    public ResultMessage modifyState(int orderID, OrderState state) {
         try {
-            return RemoteHelper.getInstance().getOrderDataService().modifyOrder(po.getOrderID(), state);
+            return RemoteHelper.getInstance().getOrderDataService().modifyOrder(orderID, state);
         } catch (RemoteException e) {
             e.printStackTrace();
             return ResultMessage.CONNECTION_EXCEPTION;
