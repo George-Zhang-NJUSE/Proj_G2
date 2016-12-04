@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.searchui;
 
+import group2.grade15.njuse.presentation.hotelui.HotelItemController;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,10 +52,10 @@ public class CustomerSearchHotelController implements Initializable{
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
             for(int i=0;i<15;++i) {
-                FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/searchui/SearchItem.fxml"));
+                FXMLLoader searchItemLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
                 Node singleItemTemplate=searchItemLoader.load();
-                SearchItemController searchItemController = searchItemLoader.getController();
-                searchItemController.setParentPane(parentPane);
+                HotelItemController hotelItemController = searchItemLoader.getController();
+                hotelItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);
             }
 

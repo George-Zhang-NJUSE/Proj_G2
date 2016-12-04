@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -9,14 +10,17 @@
     <tabs>
         <Tab closable="false" onSelectionChanged="#showAllOrder" text="所有订单">
          <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="760.0" prefWidth="1200.0">
                <content>
-                  <VBox fx:id="allOrderBox" prefWidth="1200.0" />
+                  <VBox fx:id="allOrderBox" prefWidth="1160.0" spacing="10.0" />
                </content>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
             </ScrollPane>
          </content>
         </Tab>
-        <Tab onSelectionChanged="#showUnexecutedOrder" text="未执行订单">
+        <Tab closable="false" onSelectionChanged="#showUnexecutedOrder" text="未执行订单">
          <content>
             <ScrollPane prefHeight="760.0" prefWidth="1200.0">
                <content>
@@ -25,7 +29,7 @@
             </ScrollPane>
          </content>
         </Tab>
-        <Tab onSelectionChanged="#showExecutedOrder" text="已执行订单">
+        <Tab closable="false" onSelectionChanged="#showExecutedOrder" text="已执行订单">
          <content>
             <ScrollPane prefHeight="760.0" prefWidth="1200.0">
                <content>
@@ -34,7 +38,7 @@
             </ScrollPane>
          </content>
         </Tab>
-        <Tab onSelectionChanged="#showRevokedOrder" text="已撤销订单">
+        <Tab closable="false" onSelectionChanged="#showRevokedOrder" text="已撤销订单">
          <content>
             <ScrollPane prefHeight="760.0" prefWidth="1200.0">
                <content>
@@ -43,7 +47,7 @@
             </ScrollPane>
          </content>
         </Tab>
-        <Tab onSelectionChanged="#showAbnormalOrder" text="异常订单">
+        <Tab closable="false" onSelectionChanged="#showAbnormalOrder" text="异常订单">
          <content>
             <ScrollPane prefHeight="760.0" prefWidth="1200.0">
                <content>
