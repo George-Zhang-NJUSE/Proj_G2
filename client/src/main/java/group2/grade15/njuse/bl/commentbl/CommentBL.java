@@ -5,12 +5,12 @@ import group2.grade15.njuse.vo.CommentListVO;
 import group2.grade15.njuse.vo.CommentVO;
 
 public interface CommentBL {
-	
-	public ResultMessage createComment (CommentVO CommentInfo); 
-	
-	public ResultMessage modifyComment (CommentVO ModifyInfo); 
 
-	public CommentListVO getHotelCommentList (int hotelId); 
+    public ResultMessage createComment(CommentVO CommentInfo);
 
-	public CommentListVO getCustomerCommentList (int customerId); 
+    public ResultMessage modifyComment(CommentVO ModifyInfo);
+
+    public CommentListVO getHotelCommentList(int hotelId);
+
+    public CommentListVO getCustomerCommentList(int customerId);
 }

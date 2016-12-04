@@ -1,27 +1,27 @@
 package group2.grade15.njuse.bl.hotelbl;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import group2.grade15.njuse.bl.customerbl.CustomerBL;
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.*;
+import group2.grade15.njuse.vo.HotelListVO;
+import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.OrderVO;
+import group2.grade15.njuse.vo.RoomVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Guo on 2016/12/4.
  */
-public class HotelController  implements HotelServ, GetHotelListBL {
+public class HotelController implements HotelServ, GetHotelListBL {
     HotelBL hotelBL;
 
-    public HotelController(){
+    public HotelController() {
         hotelBL = new Hotel();
     }
 
@@ -32,7 +32,7 @@ public class HotelController  implements HotelServ, GetHotelListBL {
 
     @Override
     public HotelVO getInfo(int hotelID) {
-       return hotelBL.getInfo(hotelID);
+        return hotelBL.getInfo(hotelID);
     }
 
     @Override
@@ -47,11 +47,11 @@ public class HotelController  implements HotelServ, GetHotelListBL {
         ArrayList<HotelVO> hotelList = new ArrayList();
         HashSet<Integer> hotelIDSet = new HashSet();
 
-        for(OrderVO order : orderList){
+        for (OrderVO order : orderList) {
             hotelIDSet.add(order.getHotelID());
         }
 
-        for(int hotelID : hotelIDSet){
+        for (int hotelID : hotelIDSet) {
             HotelPO hotelPO = null;
             try {
                 hotelPO = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
@@ -59,7 +59,7 @@ public class HotelController  implements HotelServ, GetHotelListBL {
                 e.printStackTrace();
             }
 
-            if(hotelPO != null) {
+            if (hotelPO != null) {
                 hotelList.add(new HotelVO(hotelPO));
             }
         }

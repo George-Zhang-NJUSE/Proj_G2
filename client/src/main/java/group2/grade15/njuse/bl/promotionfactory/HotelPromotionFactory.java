@@ -11,12 +11,12 @@ public class HotelPromotionFactory {
     static HotelPromotionFactory hotelPromotionFactory = null;
     private HotelPromotion hotelPromotionImpl;
 
-    private HotelPromotionFactory(){
+    private HotelPromotionFactory() {
         hotelPromotionImpl = new HotelPromotion();
     }
 
-    public static HotelPromotionFactory getInstance(){
-        if(hotelPromotionFactory == null){
+    public static HotelPromotionFactory getInstance() {
+        if (hotelPromotionFactory == null) {
             hotelPromotionFactory = new HotelPromotionFactory();
         }
         return hotelPromotionFactory;

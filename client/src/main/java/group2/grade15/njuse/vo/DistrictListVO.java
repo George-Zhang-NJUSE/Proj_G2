@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class DistrictListVO {
     ArrayList<DistrictVO> list;
 
-    public DistrictListVO(ArrayList<DistrictVO> list){
-        this.list=list;
+    public DistrictListVO(ArrayList<DistrictVO> list) {
+        this.list = list;
     }
 
     public ArrayList<DistrictVO> getList() {

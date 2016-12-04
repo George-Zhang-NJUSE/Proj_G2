@@ -1,7 +1,7 @@
 package group2.grade15.njuse.bl.hotelmanagerbl;
 
-import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
 /**

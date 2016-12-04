@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * 负责酒店业务的管理
  * 数据的处理通过RMI直接调用WebAdminDataService
  */
-public class HotelManageImpl implements HotelManageBL{
+public class HotelManageImpl implements HotelManageBL {
 
-	public ResultMessage createHotel(HotelVO hotel){
+    public ResultMessage createHotel(HotelVO hotel) {
 
         ResultMessage result;
 
@@ -28,9 +28,9 @@ public class HotelManageImpl implements HotelManageBL{
         }
 
         return result;
-	}
+    }
 
-	public HotelListVO getHotelList(){
+    public HotelListVO getHotelList() {
         HotelListVO hotelListVO;
         ArrayList<HotelPO> hotelPOList = new ArrayList();
         ArrayList<HotelVO> hotelList = new ArrayList();
@@ -41,7 +41,7 @@ public class HotelManageImpl implements HotelManageBL{
             e.printStackTrace();
         }
 
-        for(HotelPO po : hotelPOList){
+        for (HotelPO po : hotelPOList) {
             HotelVO hotel = new HotelVO(po);
             hotelList.add(hotel);
         }
@@ -49,25 +49,25 @@ public class HotelManageImpl implements HotelManageBL{
         hotelListVO = new HotelListVO(hotelList);
 
         return hotelListVO;
-	}
-	
-	public HotelListVO modifyHotel (HotelVO hotel){
+    }
+
+    public HotelListVO modifyHotel(HotelVO hotel) {
         ResultMessage result;
         try {
-             result = RemoteHelper.getInstance().getWebAdminDataService().modifyHotelInfo(hotel.toPO());
+            result = RemoteHelper.getInstance().getWebAdminDataService().modifyHotelInfo(hotel.toPO());
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(result == ResultMessage.SUCCESS){
+        if (result == ResultMessage.SUCCESS) {
             return getHotelList();
         } else {
             return null;
         }
     }
 
-    public ResultMessage deleteHotel(HotelVO hotel){
+    public ResultMessage deleteHotel(HotelVO hotel) {
         try {
             return RemoteHelper.getInstance().getWebAdminDataService().deleteHotelInfo(hotel.getId());
         } catch (RemoteException e) {

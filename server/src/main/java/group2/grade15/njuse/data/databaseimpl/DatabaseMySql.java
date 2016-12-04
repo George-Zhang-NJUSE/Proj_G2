@@ -7,20 +7,20 @@ import java.sql.DriverManager;
  * Created by dell on 2016/11/20.
  */
 public class DatabaseMySql {
-    DatabaseInfo info=null;
-    Connection c=null;
+    DatabaseInfo info = null;
+    Connection c = null;
 
     public DatabaseMySql(DatabaseInfo info) {
         this.info = info;
     }
 
-    public Connection init(){
-       try{
-           Class.forName("org.postgresql.Driver");
-           c= DriverManager.getConnection(info.url,info.name,info.password);
-       }catch(Exception e){
-           e.printStackTrace();
-       }
-       return c;
+    public Connection init() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection(info.url, info.name, info.password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return c;
     }
 }

@@ -7,41 +7,41 @@ import group2.grade15.njuse.po.RoomPO;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HotelVO implements Serializable{
-	private int id;
-	private String name;
-	private String address;
+public class HotelVO implements Serializable {
+    private int id;
+    private String name;
+    private String address;
     private String concreteAddress;//具体地址
-	private String contact;
-	private String introduction;
-	private String facility;
-	private ArrayList<RoomVO> roomList;
-	private int rank;
-	private double score;
+    private String contact;
+    private String introduction;
+    private String facility;
+    private ArrayList<RoomVO> roomList;
+    private int rank;
+    private double score;
     private byte[][] picture;
 
-	public HotelVO(HotelPO hotel){
-		id = hotel.getId();
-		name = hotel.getName();
-		address = hotel.getAddress();
+    public HotelVO(HotelPO hotel) {
+        id = hotel.getId();
+        name = hotel.getName();
+        address = hotel.getAddress();
         concreteAddress = hotel.getConcreteAddress();
-		contact = hotel.getContact();
-		introduction = hotel.getIntroduction();
-		facility = hotel.getFacility();
-		rank = hotel.getRank();
-		score = hotel.getScore();
+        contact = hotel.getContact();
+        introduction = hotel.getIntroduction();
+        facility = hotel.getFacility();
+        rank = hotel.getRank();
+        score = hotel.getScore();
         picture = hotel.getPicture();
 
         roomList = new ArrayList();
         ArrayList<RoomPO> roomPOList = hotel.getRoomList();
-        for(RoomPO po : roomPOList) {
+        for (RoomPO po : roomPOList) {
             RoomVO room = new RoomVO(po);
             roomList.add(room);
         }
 
-	}
+    }
 
-	public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture){
+    public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -53,45 +53,45 @@ public class HotelVO implements Serializable{
         this.rank = rank;
         this.score = score;
         this.picture = picture;
-	}
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getContact() {
-		return contact;
-	}
+    public String getContact() {
+        return contact;
+    }
 
-	public String getIntroduction() {
-		return introduction;
-	}
+    public String getIntroduction() {
+        return introduction;
+    }
 
-	public String  getFacility() {
-		return facility;
-	}
+    public String getFacility() {
+        return facility;
+    }
 
-	public ArrayList<RoomVO> getRoomList() {
-		return roomList;
-	}
+    public ArrayList<RoomVO> getRoomList() {
+        return roomList;
+    }
 
-	public int getRank() {
-		return rank;
-	}
+    public int getRank() {
+        return rank;
+    }
 
-	public double getScore() {
-		return score;
-	}
+    public double getScore() {
+        return score;
+    }
 
-	public byte[][] getPicture(){
+    public byte[][] getPicture() {
         return picture;
     }
 
@@ -99,14 +99,14 @@ public class HotelVO implements Serializable{
         return concreteAddress;
     }
 
-    public HotelPO toPO(){
+    public HotelPO toPO() {
         ArrayList<RoomPO> roomPOList = new ArrayList();
-        for(RoomVO vo : roomList){
+        for (RoomVO vo : roomList) {
             roomPOList.add(vo.toPO());
         }
 
         ArrayList<CustomerPO> vipPOList = new ArrayList();
 
-        return new HotelPO(id, name, address, concreteAddress, contact, introduction, facility, roomPOList, rank, score,picture);
+        return new HotelPO(id, name, address, concreteAddress, contact, introduction, facility, roomPOList, rank, score, picture);
     }
 }

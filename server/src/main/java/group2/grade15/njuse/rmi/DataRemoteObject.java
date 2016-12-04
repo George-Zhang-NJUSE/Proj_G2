@@ -1,7 +1,7 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
-import group2.grade15.njuse.dataservice.*;
+import group2.grade15.njuse.dataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -11,7 +11,7 @@ import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
-import group2.grade15.njuse.dataservice.webadmindataservice.*;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.OrderState;
@@ -26,8 +26,8 @@ import java.util.ArrayList;
 /**
  * Created by Guo on 2016/11/26.
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService,CustomerDataService, HotelManagerDataService,
-        WebAdminDataService,WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
+public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService, CustomerDataService, HotelManagerDataService,
+        WebAdminDataService, WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
         OrderDataService, WebPromotionDataService, Remote {
 
     private DataFactory dataFactory;

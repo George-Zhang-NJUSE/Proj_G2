@@ -19,7 +19,7 @@ public class Order {
         this.po = po;
     }
 
-    public OrderVO getInfo(){
+    public OrderVO getInfo() {
         OrderPO po = null;
 
         try {
@@ -28,14 +28,14 @@ public class Order {
             e.printStackTrace();
         }
 
-        if(po != null) {
+        if (po != null) {
             return new OrderVO(po);
         } else {
             return null;
         }
     }
 
-    public ResultMessage modifyState(OrderState state){
+    public ResultMessage modifyState(OrderState state) {
         try {
             return RemoteHelper.getInstance().getOrderDataService().modifyOrder(po.getOrderID(), state);
         } catch (RemoteException e) {
@@ -44,7 +44,7 @@ public class Order {
         }
     }
 
-    public ResultMessage createPO(OrderPO order){
+    public ResultMessage createPO(OrderPO order) {
         try {
             return RemoteHelper.getInstance().getOrderDataService().addOrder(order);
         } catch (RemoteException e) {

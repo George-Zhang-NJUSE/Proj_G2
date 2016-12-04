@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/4.
  */
-public class CommentController implements Initializable{
+public class CommentController implements Initializable {
 
     private Pane parentPane;
 
@@ -64,8 +64,8 @@ public class CommentController implements Initializable{
         rootNode.setScaleY(0.5);
 
         //加载按钮变化样式
-        CustomeButton.implButton(cancelLabel,"file:client/src/main/res/order/cancel");
-        CustomeButton.implButton(confirmLabel,"file:client/src/main/res/order/confirm");
-        CustomeButton.implButton(editLabel,"file:client/src/main/res/customer/edit");
+        CustomeButton.implButton(cancelLabel, "file:client/src/main/res/order/cancel");
+        CustomeButton.implButton(confirmLabel, "file:client/src/main/res/order/confirm");
+        CustomeButton.implButton(editLabel, "file:client/src/main/res/customer/edit");
     }
 }

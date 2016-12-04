@@ -21,7 +21,7 @@ public class CustomerDataService_Driver {
     }
 
     public static void main(String[] args) {
-        CustomerDataService_Driver demo= new CustomerDataService_Driver();
+        CustomerDataService_Driver demo = new CustomerDataService_Driver();
 //        demo.drive(new CustomerData());接口实现
     }
 }

@@ -19,7 +19,7 @@ public interface HotelDataService extends Remote {
 
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException;
 
-    public ResultMessage addRoomType(int hotelID,RoomPO po) throws RemoteException;
+    public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException;
 
     public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException;
 

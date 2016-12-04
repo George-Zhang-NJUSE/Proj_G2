@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/1.
  */
-public class MakeOrderController implements Initializable{
+public class MakeOrderController implements Initializable {
 
     private Pane parentPane;
 
@@ -46,7 +46,6 @@ public class MakeOrderController implements Initializable{
 
     public void initDataAndShow() {
         // TODO: 2016/12/4 初始化数据
-
 
 
         show();

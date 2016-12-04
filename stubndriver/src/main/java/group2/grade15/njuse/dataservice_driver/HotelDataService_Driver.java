@@ -2,7 +2,6 @@ package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.po.HotelPO;
-import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
 

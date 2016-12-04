@@ -5,12 +5,11 @@ import group2.grade15.njuse.utility.PromotionState;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * Created by dell on 2016/12/1.
  */
-public class HotelPromotionPO implements Serializable{
+public class HotelPromotionPO implements Serializable {
     int promotionID;
     HotelPromotionType type;
     Date start;
@@ -32,12 +31,12 @@ public class HotelPromotionPO implements Serializable{
         this.discount = discount;
         this.name = name;
         this.state = state;
-        this.hotelID=hotelID;
+        this.hotelID = hotelID;
 
     }
 
-    public double count(double price){
-        return discount*price;
+    public double count(double price) {
+        return discount * price;
     }
 
     public int getPromotionID() {

@@ -14,7 +14,7 @@ public class CbdVO {
         cbdNum = po.getCbdNum();
     }
 
-    public CbdVO(String cbdName, String cbdNum){
+    public CbdVO(String cbdName, String cbdNum) {
         this.cbdName = cbdName;
         this.cbdNum = cbdNum;
     }
@@ -27,7 +27,7 @@ public class CbdVO {
         return cbdNum;
     }
 
-    public CbdPO toPO(){
+    public CbdPO toPO() {
         return new CbdPO(cbdName, cbdNum);
     }
 }

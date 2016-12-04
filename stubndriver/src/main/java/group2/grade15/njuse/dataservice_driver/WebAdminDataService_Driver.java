@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  */
 public class WebAdminDataService_Driver {
 
-        public void drive(WebAdminDataService webAdminDataService) {
+    public void drive(WebAdminDataService webAdminDataService) {
         try {
             WebAdminPO webAdminPO = webAdminDataService.getWebAdmin("wm00000000");
         } catch (RemoteException e) {

@@ -3,12 +3,11 @@ package group2.grade15.njuse.po;
 import group2.grade15.njuse.utility.PromotionState;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by dell on 2016/12/1.
  */
-public class RankPO implements Serializable{
+public class RankPO implements Serializable {
     int level;
     int standard;//达到该等级的最低信用
     double discount;

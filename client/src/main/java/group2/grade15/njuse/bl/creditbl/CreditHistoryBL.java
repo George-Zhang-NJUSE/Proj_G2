@@ -9,5 +9,5 @@ import group2.grade15.njuse.vo.CreditVO;
 public interface CreditHistoryBL {
     public CreditVO getCredit(int customerId);
 
-    public CreditListVO getCreditHistory (int customerId);
+    public CreditListVO getCreditHistory(int customerId);
 }

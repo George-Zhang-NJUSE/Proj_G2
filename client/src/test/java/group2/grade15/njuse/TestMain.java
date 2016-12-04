@@ -1,6 +1,5 @@
 package group2.grade15.njuse;
 
-import group2.grade15.njuse.runner.ClientRunner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ import java.net.URL;
  * 这个启动类被且仅被用于测试单个fxml的界面
  * 它不应该跟任何一个其他类构成耦合_(:з」∠)_
  */
-public class TestMain extends Application{
+public class TestMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -35,7 +34,8 @@ public class TestMain extends Application{
             e.printStackTrace();
         }
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         launch(args);
     }
 }

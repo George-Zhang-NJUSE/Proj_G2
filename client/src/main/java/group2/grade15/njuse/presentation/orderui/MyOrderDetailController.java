@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/2.
  */
-public class MyOrderDetailController implements Initializable{
+public class MyOrderDetailController implements Initializable {
 
     private Pane parentPane;
 
@@ -42,7 +42,7 @@ public class MyOrderDetailController implements Initializable{
     @FXML
     protected void showCommentPane() {
         try {
-            FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/Comment.fxml"));
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/Comment.fxml"));
             parentPane.getChildren().add(loader.load());
             CommentController commentController = loader.getController();
 
@@ -57,7 +57,6 @@ public class MyOrderDetailController implements Initializable{
 
     public void initDataAndShow() {
         // TODO: 2016/12/4 初始化数据
-
 
 
         show();
@@ -85,8 +84,8 @@ public class MyOrderDetailController implements Initializable{
         rootNode.setScaleY(0.5);
 
         //加载按钮变化样式
-        CustomeButton.implButton(cancelLabel,"file:client/src/main/res/order/cancel");
-        CustomeButton.implButton(commentLabel,"file:client/src/main/res/order/comment");
-        CustomeButton.implButton(revokeOrderLabel,"file:client/src/main/res/order/revokeorder");
+        CustomeButton.implButton(cancelLabel, "file:client/src/main/res/order/cancel");
+        CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
+        CustomeButton.implButton(revokeOrderLabel, "file:client/src/main/res/order/revokeorder");
     }
 }

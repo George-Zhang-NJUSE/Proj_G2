@@ -9,7 +9,7 @@ import java.sql.Date;
 /**
  * Created by dell on 2016/12/1.
  */
-public class WebPromotionPO implements Serializable{
+public class WebPromotionPO implements Serializable {
     int promotionID;
     WebPromotionType type;
     Date start;
@@ -32,8 +32,8 @@ public class WebPromotionPO implements Serializable{
         this.state = state;
     }
 
-    public double count(double price){
-        return discount*price;
+    public double count(double price) {
+        return discount * price;
     }
 
     public int getPromotionID() {

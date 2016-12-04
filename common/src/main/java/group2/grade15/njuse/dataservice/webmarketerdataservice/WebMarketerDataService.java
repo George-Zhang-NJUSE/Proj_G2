@@ -1,7 +1,6 @@
 package group2.grade15.njuse.dataservice.webmarketerdataservice;
 
 import group2.grade15.njuse.po.WebMarketerPO;
-import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

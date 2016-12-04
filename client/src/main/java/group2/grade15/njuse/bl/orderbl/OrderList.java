@@ -1,7 +1,5 @@
 package group2.grade15.njuse.bl.orderbl;
 
-import group2.grade15.njuse.blservice.OrderListServ;
-import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.vo.OrderListVO;
 
 import java.util.Date;
@@ -9,7 +7,7 @@ import java.util.Date;
 /**
  * Created by George on 2016/11/6.
  */
-public class OrderList implements OrderListBL{
+public class OrderList implements OrderListBL {
 
     public OrderListVO getAllOrderList(int id) {
         return null;
