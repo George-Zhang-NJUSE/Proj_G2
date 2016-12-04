@@ -66,7 +66,7 @@ public class WebMarketerController implements WebMarketerServ{
 
     @Override
     public OrderListVO getAbnomalOrderList(int customerId) {
-        return orderList.getAbnormalOrderList(customerId, IDType.customer);
+        return orderList.getAbnormalOrderList(customerId);
     }
 
     @Override

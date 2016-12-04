@@ -12,6 +12,8 @@ import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by 果宝 on 2016/12/4.
@@ -52,10 +54,26 @@ public class HotelController  implements HotelServ, GetHotelListBL {
     public HotelListVO getBookedHotelList(int customerID) {
         OrderListBL orderListBL = new OrderList();
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderList(customerID).getOrderList();
+        ArrayList<HotelVO> hotelList = new ArrayList();
+        HashSet<Integer> hotelIDSet = new HashSet();
+
         for(OrderVO order : orderList){
-//            for(HotelVO : h)
-//            order.getHotelID()
+            hotelIDSet.add(order.getHotelID());
         }
-        return null;
+
+        for(int hotelID : hotelIDSet){
+            HotelPO hotelPO = null;
+            try {
+                hotelPO = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            if(hotelPO != null) {
+                hotelList.add(new HotelVO(hotelPO));
+            }
+        }
+
+        return new HotelListVO(hotelList);
     }
 }
