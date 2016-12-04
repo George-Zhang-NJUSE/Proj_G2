@@ -15,31 +15,34 @@ public class HotelPromotionVO {
     HotelPromotionType type;
     Date start;
     Date end;
-    ArrayList<Integer> vipList;
+    int vipID;
     double discount;
     String name;
     PromotionState state;
+    int hotelID;
 
     public HotelPromotionVO(HotelPromotionPO po){
         promotionID = po.getPromotionID();
         type = po.getType();
         start = po.getStart();
         end = po.getEnd();
-        vipList = po.getVipList();
+        vipID = po.getVipID();
         discount = po.getDiscount();
         name = po.getName();
         state = po.getState();
+        hotelID = po.getHotelID();
     }
 
-    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, ArrayList<Integer> vipList, double discount, String name, PromotionState state) {
+    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, int vipID, double discount, String name, PromotionState state, int hotelID) {
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;
         this.end = end;
-        this.vipList = vipList;
+        this.vipID = vipID;
         this.discount = discount;
         this.name = name;
         this.state = state;
+        this.hotelID = hotelID;
     }
 
     public double count(double price){
@@ -62,8 +65,8 @@ public class HotelPromotionVO {
         return end;
     }
 
-    public ArrayList<Integer> getVipList() {
-        return vipList;
+    public int getVipList() {
+        return vipID;
     }
 
     public double getDiscount() {
@@ -79,6 +82,6 @@ public class HotelPromotionVO {
     }
 
     public HotelPromotionPO toPO(){
-        return new HotelPromotionPO(promotionID, type, start, end, vipList, discount, name, state);
+        return new HotelPromotionPO(promotionID, type, start, end, vipID, discount, name, state, hotelID);
     }
 }

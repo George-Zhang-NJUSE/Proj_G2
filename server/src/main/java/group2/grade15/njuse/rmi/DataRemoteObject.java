@@ -9,6 +9,7 @@ import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.webadmindataservice.*;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
@@ -161,17 +162,17 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage remove(WebPromotionPO po) throws RemoteException {
-        return webPromotionDataService.remove(po);
-    }
-
-    @Override
     public ResultMessage add(WebPromotionPO po) throws RemoteException {
         return webPromotionDataService.add(po);
     }
 
     @Override
     public RankPO getRank() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage modifyRank() throws RemoteException {
         return null;
     }
 
@@ -186,8 +187,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage remove(HotelPromotionPO po) throws RemoteException {
-        return hotelPromotionDataService.remove(po);
+    public ResultMessage remove(int promotionID) throws RemoteException {
+        return null;
     }
 
     @Override
