@@ -17,10 +17,10 @@ import java.util.ArrayList;
 /**
  * Created by ALIENWARE-PC on 2016/11/13.
  */
-public class Hotel {
+public class Hotel implements HotelBL {
 
     public ResultMessage modifyInfo(HotelVO hotel) {
-        ResultMessage result = ResultMessage.FAILED;
+        ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getHotelDataService().modify(hotel.toPO());
         } catch (RemoteException e) {
@@ -47,7 +47,7 @@ public class Hotel {
     }
 
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        ResultMessage result = ResultMessage.FAILED;
+        ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getHotelDataService().modifyRoom(hotelID, roomInfo.toPO());
         } catch (RemoteException e) {

@@ -13,6 +13,12 @@ import java.rmi.RemoteException;
  */
 public class CustomerController implements CustomerBL, CustomerServ {
 
+    private CustomerBL customerBL;
+
+    public CustomerController(){
+        customerBL = new Customer();
+    }
+
     public CustomerVO addCustomer(CustomerVO newCustomerVO) {
         try {
             CustomerPO po = RemoteHelper.getInstance().getCustomerDataService().add(newCustomerVO.toPO());
@@ -24,36 +30,10 @@ public class CustomerController implements CustomerBL, CustomerServ {
     }
 
     public CustomerVO getInfo(int customerId) {
-        Customer customer;
-        CustomerPO po = null;
-        try {
-            po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(customerId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(po != null) {
-            customer = new Customer(po);
-            return customer.getInfo();
-        } else {
-            return null;
-        }
+        return customerBL.getInfo(customerId);
     }
 
     public ResultMessage modifyInfo(CustomerVO vo) {
-        Customer customer;
-        CustomerPO po = null;
-        try {
-            po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(vo.getId());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(po != null) {
-            customer = new Customer(po);
-            return customer.modifyInfo(vo);
-        } else {
-            return ResultMessage.FAILED;
-        }
+        return customerBL.modifyInfo(vo);
     }
 }
