@@ -36,42 +36,42 @@ public class RemoteHelper {
     }
 
     public HotelManagerDataService getHotelManagerDataService(){
-        return null;
+        return (HotelManagerDataService) remote;
     }
 
     public WebAdminDataService getWebAdminDataService(){
-        return null;
+        return (WebAdminDataService) remote;
     }
 
     public WebMarketerDataService getWebMarketerDataService(){
-        return null;
+        return (WebMarketerDataService) remote;
     }
 
     public AreaDataService getAreaDataService(){
-        return null;
+        return (AreaDataService) remote;
     }
 
     public CommentDataService getCommentDataService(){
-        return null;
+        return (CommentDataService) remote;
     }
 
     public CreditDataService getCreditDataService(){
-        return null;
+        return (CreditDataService) remote;
     }
 
     public HotelDataService getHotelDataService(){
-        return null;
+        return (HotelDataService) remote;
     }
 
     public HotelPromotionDataService getHotelPromotionDataService(){
-        return null;
+        return (HotelPromotionDataService) remote;
     }
 
     public OrderDataService getOrderDataService(){
-        return null;
+        return (OrderDataService) remote;
     }
 
     public WebPromotionDataService getWebPromotionDataService(){
-        return null;
+        return (WebPromotionDataService) remote;
     }
 }
