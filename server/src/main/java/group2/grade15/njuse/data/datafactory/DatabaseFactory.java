@@ -10,6 +10,7 @@ import group2.grade15.njuse.data.orderdata.OrderDatabaseImpl;
 import group2.grade15.njuse.data.searchdata.AreaDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
+import group2.grade15.njuse.dataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
@@ -161,6 +162,11 @@ public class DatabaseFactory implements DataFactory {
             }
         }
         return orderDataService;
+    }
+
+    @Override
+    public HotelPromotionDataService getHotelPromotionDataService() throws RemoteException {
+        return null;
     }
 
 
