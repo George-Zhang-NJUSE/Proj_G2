@@ -19,8 +19,10 @@ public class HotelPromotionPO implements Serializable{
     double discount;
     String name;
     PromotionState state;
+    int hotelID;
 
-    public HotelPromotionPO(int promotionID, HotelPromotionType type, Date start, Date end, int vip, double discount, String name, PromotionState state) {
+    public HotelPromotionPO(int promotionID, HotelPromotionType type, Date start, Date end, int vip, double discount,
+                            String name, PromotionState state, int hotelID) {
 
         this.promotionID = promotionID;
         this.type = type;
@@ -30,6 +32,8 @@ public class HotelPromotionPO implements Serializable{
         this.discount = discount;
         this.name = name;
         this.state = state;
+        this.hotelID=hotelID;
+
     }
 
     public double count(double price){
@@ -68,4 +72,7 @@ public class HotelPromotionPO implements Serializable{
         return state;
     }
 
+    public int getHotelID() {
+        return hotelID;
+    }
 }

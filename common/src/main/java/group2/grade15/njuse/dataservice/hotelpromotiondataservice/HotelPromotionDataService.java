@@ -1,4 +1,4 @@
-package group2.grade15.njuse.dataservice;
+package group2.grade15.njuse.dataservice.hotelpromotiondataservice;
 
 import group2.grade15.njuse.po.HotelPromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -16,7 +16,7 @@ public interface HotelPromotionDataService extends Remote {
 
     public ResultMessage modify(HotelPromotionPO po) throws RemoteException;
 
-    public ResultMessage remove(HotelPromotionPO po) throws RemoteException;
+    public ResultMessage remove(int promotionID) throws RemoteException;
 
     public ResultMessage add(HotelPromotionPO po) throws RemoteException;
 
