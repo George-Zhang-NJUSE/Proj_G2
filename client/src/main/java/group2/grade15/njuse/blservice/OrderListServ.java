@@ -10,15 +10,15 @@ import java.util.Date;
  */
 public interface OrderListServ {
 
-    public OrderListVO getAllOrderList(int id, IDType type);
+    public OrderListVO getAllOrderList(int id);
 
-    public OrderListVO getExecutedOrderList(int id, IDType type);
+    public OrderListVO getExecutedOrderList(int id);
 
-    public OrderListVO getUnexecutedOrderList(int id, IDType type);
+    public OrderListVO getUnexecutedOrderList(int id);
 
     public OrderListVO getNewOrderList(Date date);
 
-    public OrderListVO getRevokedOrderList(int id, IDType type);
+    public OrderListVO getRevokedOrderList(int id);
 
-    public OrderListVO getAbnormalOrderList(int id, IDType type);
+    public OrderListVO getAbnormalOrderList(int id);
 }

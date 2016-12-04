@@ -29,10 +29,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="hotel_booking_system-client" target="1.8" />
-      <module name="hotel_booking_system-common" target="1.8" />
+      <module name="hotel_booking_system-client" target="1.5" />
+      <module name="hotel_booking_system-common" target="1.5" />
       <module name="hotel_booking_system-parent" target="1.5" />
-      <module name="hotel_booking_system-server" target="1.8" />
+      <module name="hotel_booking_system-server" target="1.5" />
       <module name="hotel_booking_system-stubndriver" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,59 +1,41 @@
 package group2.grade15.njuse.bl.hotelbl;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+import group2.grade15.njuse.bl.customerbl.CustomerBL;
+import group2.grade15.njuse.bl.orderbl.OrderList;
+import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.HotelListVO;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.RoomVO;
+import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by 果宝 on 2016/12/4.
  */
 public class HotelController  implements HotelServ, GetHotelListBL {
+    HotelBL hotelBL;
+
+    public HotelController(){
+        hotelBL = new Hotel();
+    }
+
     @Override
     public ResultMessage modifyInfo(HotelVO hotel) {
-        ResultMessage result = ResultMessage.FAILED;
-        try {
-            result = RemoteHelper.getInstance().getHotelDataService().modify(hotel.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
-        }
-
-        return result;
+        return hotelBL.modifyInfo(hotel);
     }
 
     @Override
     public HotelVO getInfo(int hotelID) {
-        HotelPO hotel = null;
-        try {
-            hotel = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(hotel != null) {
-            return new HotelVO(hotel);
-        } else {
-            return null;
-        }
+       return hotelBL.getInfo(hotelID);
     }
 
     @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        ResultMessage result = ResultMessage.FAILED;
-        try {
-            result = RemoteHelper.getInstance().getHotelDataService().modifyRoom(hotelID, roomInfo.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
-        }
-
-        return result;
+        return hotelBL.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
@@ -68,6 +50,12 @@ public class HotelController  implements HotelServ, GetHotelListBL {
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
+        OrderListBL orderListBL = new OrderList();
+        ArrayList<OrderVO> orderList = orderListBL.getAllOrderList(customerID).getOrderList();
+        for(OrderVO order : orderList){
+//            for(HotelVO : h)
+//            order.getHotelID()
+        }
         return null;
     }
 }
