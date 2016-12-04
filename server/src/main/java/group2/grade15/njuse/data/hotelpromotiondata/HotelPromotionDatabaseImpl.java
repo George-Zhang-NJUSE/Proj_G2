@@ -59,9 +59,9 @@ public class HotelPromotionDatabaseImpl implements HotelPromotionDataService {
                 if(start.before(current)&&state.equals(PromotionState.unlaunched)){
                     state=PromotionState.start;
                     PreparedStatement updateState=hotelPromotionDatabase.prepareStatement("update hotelpromotion set " +
-                            "promotionstate = ? where hotelid = ?");
+                            "promotionstate = ? where promotionid = ?");
                     updateState.setInt(1,state.ordinal());
-                    updateState.setInt(2,hotelId);
+                    updateState.setInt(2,promotionID);
 
                     updateState.executeUpdate();
 
@@ -70,9 +70,9 @@ public class HotelPromotionDatabaseImpl implements HotelPromotionDataService {
                 else if(end.before(current)&&state.equals(PromotionState.start)){
                     state=PromotionState.stop;
                     PreparedStatement updateState=hotelPromotionDatabase.prepareStatement("update hotelpromotion set " +
-                            "promotionstate = ? where hotelid = ?");
+                            "promotionstate = ? where promotionid = ?");
                     updateState.setInt(1,state.ordinal());
-                    updateState.setInt(2,hotelId);
+                    updateState.setInt(2,promotionID);
 
                     updateState.executeUpdate();
 

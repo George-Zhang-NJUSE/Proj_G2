@@ -22,7 +22,7 @@ public interface WebPromotionDataService extends Remote {
 
     public ResultMessage add(WebPromotionPO po) throws RemoteException;
 
-    public RankPO getRank() throws RemoteException;
+    public ArrayList<RankPO> getRank() throws RemoteException;
 
-    public ResultMessage modifyRank() throws RemoteException;
+    public ResultMessage modifyRank(RankPO rankPO) throws RemoteException;
 }

@@ -167,12 +167,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public RankPO getRank() throws RemoteException {
+    public ArrayList<RankPO> getRank() throws RemoteException {
         return null;
     }
 
     @Override
-    public ResultMessage modifyRank() throws RemoteException {
+    public ResultMessage modifyRank(RankPO rankPO) throws RemoteException {
         return null;
     }
 
