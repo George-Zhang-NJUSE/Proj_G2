@@ -75,7 +75,7 @@
             </GridPane>
          </top>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="127.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Label onMouseClicked="#mouseClickBookHotel">
                      <graphic>
@@ -85,7 +85,7 @@
                            </image></ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets />
                      </VBox.margin></Label>
                   <Label onMouseClicked="#mouseClickMyOrder">
                      <graphic>
@@ -95,9 +95,9 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding></Label>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Label>
                   <Label onMouseClicked="#mouseClickPersonalInfo">
                      <graphic>
                         <ImageView fitHeight="51.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
@@ -107,9 +107,13 @@
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets left="10.0" right="10.0" top="10.0" />
+                        <Insets />
                      </VBox.margin></Label>
+                  <Label text="预定过的酒店" />
                </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </VBox>
          </center>
           </BorderPane>

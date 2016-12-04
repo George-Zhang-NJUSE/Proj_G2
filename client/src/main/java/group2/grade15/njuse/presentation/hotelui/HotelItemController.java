@@ -1,6 +1,5 @@
-package group2.grade15.njuse.presentation.searchui;
+package group2.grade15.njuse.presentation.hotelui;
 
-import group2.grade15.njuse.presentation.hotelui.HotelDetailController;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
@@ -17,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/1.
  */
-public class SearchItemController implements Initializable{
+public class HotelItemController implements Initializable{
 
     private String hotelName;
 
