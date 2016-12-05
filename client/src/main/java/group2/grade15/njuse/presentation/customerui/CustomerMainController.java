@@ -59,8 +59,13 @@ public class CustomerMainController {
             FXMLLoader loader = new FXMLLoader(new URL(myOrderPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
+
             MyOrderListController orderListController = loader.getController();
             orderListController.setParentPane(functionPane);
+
+
+            orderListController.initDataAndShow();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

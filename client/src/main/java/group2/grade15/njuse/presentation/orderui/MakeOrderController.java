@@ -2,6 +2,7 @@ package group2.grade15.njuse.presentation.orderui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,11 +24,12 @@ public class MakeOrderController implements Initializable {
     @FXML
     private Node rootNode;
 
+
     @FXML
     private ChoiceBox roomTypeChoiceBox;
 
     @FXML
-    private Label roomNumLabel;
+    private Label roomNumLabel, cancelLabel, confirmLabel;
 
 
     @FXML
@@ -63,6 +65,10 @@ public class MakeOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
+        CustomeButton.implButton(confirmLabel, "file:client/src/main/res/customer/confirm");
+
         //为弹出式动画做准备
         rootNode.setVisible(false);
         rootNode.setOpacity(0);
