@@ -290,7 +290,26 @@ public class Search implements SearchServ {
      * 根据SearchCondition中的房间信息对获得的酒店列表进行一次筛选
      */
     private ArrayList<HotelVO> filterByRoomInfo(RoomType roomType, int freeRoomNum, ArrayList<HotelVO> hotelList) {
-        return null;
+        ArrayList<HotelVO> newHotelList = new ArrayList();
+        boolean isFit = false;
+
+        for (HotelVO hotel : hotelList) {
+
+            ArrayList<RoomVO> roomList = hotel.getRoomList();
+            for(RoomVO room : roomList){
+                if( (room.getType() == roomType) && (room.getSpareRoomNum() >= freeRoomNum) ){
+                    isFit = true;
+                }
+            }
+
+            if(isFit){
+                newHotelList.add(hotel);
+                isFit = false;
+            }
+
+        }
+
+        return newHotelList;
     }
 
     /**
