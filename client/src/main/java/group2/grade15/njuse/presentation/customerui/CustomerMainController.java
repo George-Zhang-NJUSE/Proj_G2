@@ -99,6 +99,10 @@ public class CustomerMainController {
             FXMLLoader loader = new FXMLLoader(new URL(personalPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
+
+            CustomerInfoController infoController = loader.getController();
+            infoController.initDataAndShow(null);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
