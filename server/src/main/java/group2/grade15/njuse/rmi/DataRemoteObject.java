@@ -54,6 +54,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         areaDataService = dataFactory.getAreaDataService();
         hotelDataService = dataFactory.getHotelDataService();
         orderDataService = dataFactory.getOrderDataService();
+        hotelPromotionDataService = dataFactory.getHotelPromotionDataService();
+        webPromotionDataService = dataFactory.getWebPromotionDataService();
     }
 
     @Override

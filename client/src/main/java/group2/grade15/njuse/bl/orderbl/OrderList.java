@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.orderbl;
 
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.vo.OrderListVO;
 
 import java.util.Date;
