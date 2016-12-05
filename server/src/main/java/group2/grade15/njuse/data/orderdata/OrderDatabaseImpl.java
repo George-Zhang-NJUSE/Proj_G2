@@ -288,7 +288,7 @@ public class OrderDatabaseImpl implements OrderDataService {
                 if (creditDatabase.add(creditPO).equals(ResultMessage.FAILED)) {
                     throw new Exception();
                 }
-            } else if (current.equals(OrderState.unexecuted) && state.equals(OrderState.cancelled)) {
+            } else if (current.equals(OrderState.unexecuted) && state.equals(OrderState.revoked)) {
                 java.util.Date instant = new java.util.Date();
                 Date now = new Date(instant.getTime());
                 if (execute.getTime() - now.getTime() < 21600000) {
