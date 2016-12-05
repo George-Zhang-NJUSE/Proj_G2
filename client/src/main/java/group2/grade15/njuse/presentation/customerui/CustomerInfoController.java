@@ -1,9 +1,11 @@
 package group2.grade15.njuse.presentation.customerui;
 
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -20,10 +22,20 @@ public class CustomerInfoController implements Initializable{
     @FXML
     private VBox creditRecordBox;
 
+    @FXML
+    private Label editUserNameLabel, editPhoneNumberLabel, cancelLabel, confirmLabel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(editUserNameLabel, "file:client/src/main/res/customer/edit");
+        CustomeButton.implButton(editPhoneNumberLabel, "file:client/src/main/res/customer/edit");
+        CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
+        CustomeButton.implButton(confirmLabel, "file:client/src/main/res/customer/confirm");
+
         showCreditHistory();
+
     }
 
     private void showCreditHistory() {

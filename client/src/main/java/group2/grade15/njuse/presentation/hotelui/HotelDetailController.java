@@ -97,7 +97,7 @@ public class HotelDetailController implements Initializable {
     private void showMyOrders() {
         try {
             myOrderBox.getChildren().clear();
-            ArrayList<Node> ItemList = new ArrayList<>();
+
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
             for (int i = 0; i < 15; ++i) {
@@ -106,10 +106,11 @@ public class HotelDetailController implements Initializable {
                 MyOrderItemController orderItemController = loader.getController();
                 orderItemController.setParentPane(parentPane);
 
-                ItemList.add(singleItemTemplate);
+                myOrderBox.getChildren().add(singleItemTemplate);
+                orderItemController.initDataAndShow(null);
             }
 
-            myOrderBox.getChildren().addAll(ItemList);
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
