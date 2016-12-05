@@ -1,6 +1,7 @@
 package group2.grade15.njuse.presentation.orderui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.event.ActionEvent;
@@ -109,14 +110,17 @@ public class MyOrderListController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //为渐入动画做准备
+        //为渐入扩大动画做准备
         rootNode.setOpacity(0);
-
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
     }
 
     private void showThePane() {
         Fade fadeIn = new Fade(rootNode, 300, true);
-        fadeIn.setOnFinished((ActionEvent e) -> showAllOrder());
+        Pop popIn = new Pop(rootNode, 300, true);
+        popIn.setOnFinished((ActionEvent e) -> showAllOrder());
         fadeIn.play();
+        popIn.play();
     }
 }

@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -26,7 +25,7 @@ public class MyOrderItemController implements Initializable{
     private OrderVO orderVO;
 
     @FXML
-    private BorderPane rootPane;
+    private Node rootNode;
 
     @FXML
     private Label showDetailLabel;
@@ -66,7 +65,7 @@ public class MyOrderItemController implements Initializable{
 
     private void adaptToActualWidth() {
         //宽度太窄时不显示部分内容
-        Pane container= (Pane)rootPane.getParent();
+        Pane container= (Pane)rootNode.getParent();
         if (container.getWidth() < 900) {
             hotelInfoBox.setVisible(false);
             hotelInfoBox.setPrefWidth(0);
@@ -75,7 +74,7 @@ public class MyOrderItemController implements Initializable{
 
     private void show() {
         adaptToActualWidth();
-        Fade fadeIn = new Fade(rootPane, 300, true);
+        Fade fadeIn = new Fade(rootNode, 300, true);
         fadeIn.play();
     }
 
@@ -85,7 +84,7 @@ public class MyOrderItemController implements Initializable{
         CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
 
         //为渐入动画做准备
-        rootPane.setOpacity(0);
+        rootNode.setOpacity(0);
 
 
 

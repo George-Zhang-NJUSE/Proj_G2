@@ -1,6 +1,7 @@
 package group2.grade15.njuse.presentation.customerui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.vo.CustomerVO;
 import javafx.fxml.FXML;
@@ -79,8 +80,11 @@ public class CustomerInfoController implements Initializable{
     }
 
     private void show() {
+        //渐入扩大动画
         Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
         fadeIn.play();
+        popIn.play();
     }
 
     private void loadCreditHistory() {
@@ -114,8 +118,10 @@ public class CustomerInfoController implements Initializable{
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
         CustomeButton.implButton(confirmLabel, "file:client/src/main/res/customer/confirm");
 
-        //为渐入动画做准备
+        //为渐入扩大动画做准备
         rootNode.setOpacity(0);
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
     }
 
     public void initDataAndShow(CustomerVO vo) {

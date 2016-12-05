@@ -1,10 +1,12 @@
 package group2.grade15.njuse.presentation.hotelui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -21,6 +23,9 @@ public class HotelItemController implements Initializable {
     private String hotelName;
 
     private Pane parentPane;  //用来传递给子界面
+
+    @FXML
+    private Node rootNode;
 
     @FXML
     private Label showDetailLabel, makeOrderLabel;
@@ -61,10 +66,26 @@ public class HotelItemController implements Initializable {
         this.parentPane = parentPane;
     }
 
+    public void initDataAndShow() {
+        // TODO: 2016/12/6 加载数据
+
+
+        show();
+    }
+
+    private void show() {
+        Fade fadeIn = new Fade(rootNode, 300, true);
+        fadeIn.play();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
         CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/search/makeorder");
+
+        //为渐入动画做准备
+        rootNode.setOpacity(0);
+
     }
 }
