@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * Created by luoy on 2016/12/2.
  */
 public class HotelManageMainController implements Initializable {
+    private static int hotelID;
     @FXML
     private FlowPane infoTag;
     @FXML
@@ -136,6 +137,12 @@ public class HotelManageMainController implements Initializable {
         }
         return true;
     }
+    public  static int getHotelID(){
+        int r=hotelID;
+        return r;
+    }
+
+
     public void addSwither(FlowPane pane){
         pane.setOnMouseEntered((MouseEvent e)->{
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
