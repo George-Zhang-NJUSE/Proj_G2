@@ -20,7 +20,7 @@ public class Pop {
      *
      * @param node     要变化的节点
      * @param duration 毫秒计的动画持续时间
-     * @param toBigger true表示由小到大，false表示由大到小
+     * @param toBigger true表示由小（当前缩放，小于1）到大，false表示由大到小
      */
     public Pop(Node node, int duration, boolean toBigger) {
         timeline = new Timeline();
