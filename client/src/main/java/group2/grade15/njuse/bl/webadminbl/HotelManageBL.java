@@ -14,7 +14,7 @@ public interface HotelManageBL {
 
     public HotelListVO getHotelList();
 
-    public HotelListVO modifyHotel (HotelVO hotel);
+    public HotelListVO modifyHotel(HotelVO hotel);
 
     public ResultMessage deleteHotel(HotelVO hotel);
 }

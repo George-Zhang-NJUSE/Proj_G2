@@ -5,7 +5,6 @@ import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.utility.PromotionState;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * Created by Guo on 2016/11/29.
@@ -21,7 +20,7 @@ public class HotelPromotionVO {
     PromotionState state;
     int hotelID;
 
-    public HotelPromotionVO(HotelPromotionPO po){
+    public HotelPromotionVO(HotelPromotionPO po) {
         promotionID = po.getPromotionID();
         type = po.getType();
         start = po.getStart();
@@ -45,8 +44,8 @@ public class HotelPromotionVO {
         this.hotelID = hotelID;
     }
 
-    public double count(double price){
-        return discount*price;
+    public double count(double price) {
+        return discount * price;
     }
 
     public int getPromotionID() {
@@ -81,7 +80,7 @@ public class HotelPromotionVO {
         return state;
     }
 
-    public HotelPromotionPO toPO(){
+    public HotelPromotionPO toPO() {
         return new HotelPromotionPO(promotionID, type, start, end, vipID, discount, name, state, hotelID);
     }
 }

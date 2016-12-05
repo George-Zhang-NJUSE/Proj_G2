@@ -1,56 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.VBox?>
-
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.orderui.MyOrderListController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+         prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.72"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="group2.grade15.njuse.presentation.orderui.MyOrderListController">
     <tabs>
         <Tab closable="false" onSelectionChanged="#showAllOrder" text="所有订单">
-         <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
-               <content>
-                  <VBox fx:id="allOrderBox" prefWidth="1200.0" />
-               </content>
-            </ScrollPane>
-         </content>
+            <content>
+                <ScrollPane hbarPolicy="NEVER" prefHeight="760.0" prefWidth="1200.0">
+                    <content>
+                        <VBox fx:id="allOrderBox" prefWidth="1160.0" spacing="10.0"/>
+                    </content>
+                    <padding>
+                        <Insets left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </ScrollPane>
+            </content>
         </Tab>
-        <Tab onSelectionChanged="#showUnexecutedOrder" text="未执行订单">
-         <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
-               <content>
-                  <VBox fx:id="unexecutedOrderBox" prefWidth="1200.0" />
-               </content>
-            </ScrollPane>
-         </content>
+        <Tab closable="false" onSelectionChanged="#showUnexecutedOrder" text="未执行订单">
+            <content>
+                <ScrollPane prefHeight="760.0" prefWidth="1200.0">
+                    <content>
+                        <VBox fx:id="unexecutedOrderBox" prefWidth="1200.0"/>
+                    </content>
+                </ScrollPane>
+            </content>
         </Tab>
-        <Tab onSelectionChanged="#showExecutedOrder" text="已执行订单">
-         <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
-               <content>
-                  <VBox fx:id="executedOrderBox" prefWidth="1200.0" />
-               </content>
-            </ScrollPane>
-         </content>
+        <Tab closable="false" onSelectionChanged="#showExecutedOrder" text="已执行订单">
+            <content>
+                <ScrollPane prefHeight="760.0" prefWidth="1200.0">
+                    <content>
+                        <VBox fx:id="executedOrderBox" prefWidth="1200.0"/>
+                    </content>
+                </ScrollPane>
+            </content>
         </Tab>
-        <Tab onSelectionChanged="#showRevokedOrder" text="已撤销订单">
-         <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
-               <content>
-                  <VBox fx:id="revokedOrderBox" prefWidth="1200.0" />
-               </content>
-            </ScrollPane>
-         </content>
+        <Tab closable="false" onSelectionChanged="#showRevokedOrder" text="已撤销订单">
+            <content>
+                <ScrollPane prefHeight="760.0" prefWidth="1200.0">
+                    <content>
+                        <VBox fx:id="revokedOrderBox" prefWidth="1200.0"/>
+                    </content>
+                </ScrollPane>
+            </content>
         </Tab>
-        <Tab onSelectionChanged="#showAbnormalOrder" text="异常订单">
-         <content>
-            <ScrollPane prefHeight="760.0" prefWidth="1200.0">
-               <content>
-                  <VBox fx:id="abnormalOrderBox" prefWidth="1200.0" />
-               </content>
-            </ScrollPane>
-         </content>
+        <Tab closable="false" onSelectionChanged="#showAbnormalOrder" text="异常订单">
+            <content>
+                <ScrollPane prefHeight="760.0" prefWidth="1200.0">
+                    <content>
+                        <VBox fx:id="abnormalOrderBox" prefWidth="1200.0"/>
+                    </content>
+                </ScrollPane>
+            </content>
         </Tab>
     </tabs>
 </TabPane>

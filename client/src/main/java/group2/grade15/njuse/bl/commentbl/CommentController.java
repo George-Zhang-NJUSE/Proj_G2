@@ -10,9 +10,9 @@ import group2.grade15.njuse.vo.CommentVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class CommentController implements CommentServ, CommentBL{
+public class CommentController implements CommentServ, CommentBL {
 
-    public ResultMessage createComment(CommentVO commentInfo){
+    public ResultMessage createComment(CommentVO commentInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().add(commentInfo.toPO());
         } catch (RemoteException e) {
@@ -21,7 +21,7 @@ public class CommentController implements CommentServ, CommentBL{
         }
     }
 
-    public ResultMessage modifyComment(CommentVO modifyInfo){
+    public ResultMessage modifyComment(CommentVO modifyInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().modify(modifyInfo.toPO());
         } catch (RemoteException e) {
@@ -30,7 +30,7 @@ public class CommentController implements CommentServ, CommentBL{
         }
     }
 
-	public CommentListVO getHotelCommentList(int hotelId) {
+    public CommentListVO getHotelCommentList(int hotelId) {
         ArrayList<CommentPO> commentPOList = null;
         ArrayList<CommentVO> commentList = new ArrayList();
         try {
@@ -39,8 +39,8 @@ public class CommentController implements CommentServ, CommentBL{
             e.printStackTrace();
         }
 
-        if(commentPOList != null){
-            for(CommentPO comment : commentPOList){
+        if (commentPOList != null) {
+            for (CommentPO comment : commentPOList) {
                 commentList.add(new CommentVO(comment));
             }
         }
@@ -48,7 +48,7 @@ public class CommentController implements CommentServ, CommentBL{
         return new CommentListVO(commentList);
     }
 
-	public CommentListVO getCustomerCommentList(int customerId) {
+    public CommentListVO getCustomerCommentList(int customerId) {
         ArrayList<CommentPO> commentPOList = null;
         ArrayList<CommentVO> commentList = new ArrayList();
         try {
@@ -57,12 +57,12 @@ public class CommentController implements CommentServ, CommentBL{
             e.printStackTrace();
         }
 
-        if(commentPOList != null){
-            for(CommentPO comment : commentPOList){
+        if (commentPOList != null) {
+            for (CommentPO comment : commentPOList) {
                 commentList.add(new CommentVO(comment));
             }
         }
 
         return new CommentListVO(commentList);
-	}
+    }
 }

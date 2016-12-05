@@ -1,6 +1,5 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
-import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,22 +32,24 @@ public class CreditChargeController implements Initializable {
     private Label backInfo;
 
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/webmarketer/Cancel");
-        cancel.setOnMouseClicked((MouseEvent event)->{
+        CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
+        CustomeButton.implButton(cancel, "file:client/src/main/res/webmarketer/Cancel");
+        cancel.setOnMouseClicked((MouseEvent event) -> {
 
         });
     }
-    private void toPromotionManage(){
+
+    private void toPromotionManage() {
         //TODO 从充值到促销管理的界面
 
     }
-    private void toFix(){
+
+    private void toFix() {
         //TODO 从充值到订单申诉的界面
-    };
+    }
+
+    ;
 }

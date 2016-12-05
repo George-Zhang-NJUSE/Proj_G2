@@ -11,7 +11,10 @@ import java.util.ArrayList;
  */
 public interface CommentDataService {
     public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException;
+
     public ResultMessage add(CommentPO po) throws RemoteException;
+
     public ResultMessage modify(CommentPO po) throws RemoteException;
+
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException;
 }

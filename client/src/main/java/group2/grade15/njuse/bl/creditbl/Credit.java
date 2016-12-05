@@ -34,7 +34,7 @@ public class Credit {
             e.printStackTrace();
         }
 
-        if(creditPOList != null) {
+        if (creditPOList != null) {
             CreditPO po = creditPOList.get(0);
             return new CreditVO(po);
         } else {
@@ -52,8 +52,8 @@ public class Credit {
             e.printStackTrace();
         }
 
-        if(creditPOList != null){
-            for(CreditPO po : creditPOList){
+        if (creditPOList != null) {
+            for (CreditPO po : creditPOList) {
                 creditList.add(new CreditVO(po));
             }
         }

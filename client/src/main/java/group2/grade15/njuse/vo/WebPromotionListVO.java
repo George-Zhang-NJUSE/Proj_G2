@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class WebPromotionListVO {
     private ArrayList<WebPromotionVO> promotionList;
 
-    public WebPromotionListVO (ArrayList<WebPromotionVO> promotionList){
+    public WebPromotionListVO(ArrayList<WebPromotionVO> promotionList) {
         this.promotionList = promotionList;
     }
 

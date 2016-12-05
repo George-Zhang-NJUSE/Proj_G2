@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/27.
  */
-public interface HotelComment extends Remote{
+public interface HotelComment extends Remote {
 
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException;
 }

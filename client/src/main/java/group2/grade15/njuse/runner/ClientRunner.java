@@ -1,8 +1,6 @@
 package group2.grade15.njuse.runner;
 
-import group2.grade15.njuse.presentation.main.CustomerStart;
 import group2.grade15.njuse.rmi.RemoteHelper;
-import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

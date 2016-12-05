@@ -21,7 +21,7 @@ public class Customer implements CustomerBL {
             e.printStackTrace();
         }
 
-        if(po != null) {
+        if (po != null) {
             return new CustomerVO(po);
         } else {
             return null;

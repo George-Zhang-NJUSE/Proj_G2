@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 /**
  * Created by George on 2016/10/16.
  */
-public interface CustomerDataService extends Remote{
+public interface CustomerDataService extends Remote {
 
     public CustomerPO getCustomer(int customerId) throws RemoteException;
 

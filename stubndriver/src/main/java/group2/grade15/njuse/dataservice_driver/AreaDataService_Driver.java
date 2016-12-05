@@ -17,7 +17,7 @@ public class AreaDataService_Driver {
     }
 
     public static void main(String[] args) {
-        AreaDataService_Driver demo=new AreaDataService_Driver();
+        AreaDataService_Driver demo = new AreaDataService_Driver();
 //        demo.drive(new AreaData());接口实现
     }
 }

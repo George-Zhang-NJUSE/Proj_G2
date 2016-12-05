@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public interface CustomerPartService extends Remote{
+public interface CustomerPartService extends Remote {
     public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException;
 
     public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException;

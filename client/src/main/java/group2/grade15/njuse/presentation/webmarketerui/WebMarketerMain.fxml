@@ -1,137 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController">
-   <bottom>
-      <Group BorderPane.alignment="CENTER">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="24.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1400.0" />
-            <Label fx:id="infoLabel" layoutX="14.0" layoutY="-7.0" text="已连接到服务器">
-               <font>
-                  <Font name="FZLanTingHeiS-UL-GB" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </Group>
-   </bottom>
-   <center>
-      <Group BorderPane.alignment="CENTER">
-         <children>
-            <Group>
-               <children>
-                  <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="40.0" layoutY="63.0" opacity="0.73" pickOnBounds="true">
-                     <image>
-                        <Image url="file:client/src/main/res/webadmin/bc.jpg" />
-                     </image>
-                  </ImageView>
-                  <Pane fx:id="motherPane" layoutX="40.0" layoutY="63.0" prefHeight="800.0" prefWidth="1200.0" />
-               </children>
-            </Group>
-         </children>
-      </Group>
-   </center>
-   <left>
-      <Group BorderPane.alignment="CENTER">
-         <children>
-            <BorderPane layoutY="2.0" prefHeight="800.0" prefWidth="200.0">
-               <center>
-                  <VBox prefHeight="700.0" prefWidth="200.0" spacing="3.0" style="-fx-background-color: white;" BorderPane.alignment="TOP_LEFT">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" />
-                     </padding>
-                     <children>
-                        <FlowPane fx:id="promotionSwitcher" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0" minHeight="50.0" onMouseClicked="#toPromotion" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="promotionTag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
-                              <Label prefHeight="40.0" prefWidth="180.0" text="网站促销管理">
-                                 <font>
-                                    <Font name="Microsoft YaHei Light" size="18.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="file:client/src/main/res/webmarketer/promotion.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0"
+            prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController">
+    <bottom>
+        <Group BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="24.0" layoutY="-12.0" stroke="BLACK"
+                           strokeType="INSIDE" width="1400.0"/>
+                <Label fx:id="infoLabel" layoutX="14.0" layoutY="-7.0" text="已连接到服务器">
+                    <font>
+                        <Font name="FZLanTingHeiS-UL-GB" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Group>
+    </bottom>
+    <center>
+        <Group BorderPane.alignment="CENTER">
+            <children>
+                <Group>
+                    <children>
+                        <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="40.0" layoutY="63.0" opacity="0.73"
+                                   pickOnBounds="true">
+                            <image>
+                                <Image url="file:client/src/main/res/webadmin/bc.jpg"/>
+                            </image>
+                        </ImageView>
+                        <Pane fx:id="motherPane" layoutX="40.0" layoutY="63.0" prefHeight="800.0" prefWidth="1200.0"/>
+                    </children>
+                </Group>
+            </children>
+        </Group>
+    </center>
+    <left>
+        <Group BorderPane.alignment="CENTER">
+            <children>
+                <BorderPane layoutY="2.0" prefHeight="800.0" prefWidth="200.0">
+                    <center>
+                        <VBox prefHeight="700.0" prefWidth="200.0" spacing="3.0" style="-fx-background-color: white;"
+                              BorderPane.alignment="TOP_LEFT">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0"/>
+                            </padding>
+                            <children>
+                                <FlowPane fx:id="promotionSwitcher" alignment="CENTER_LEFT" hgap="5.0" maxHeight="50.0"
+                                          minHeight="50.0" onMouseClicked="#toPromotion" prefHeight="50.0"
+                                          prefWidth="200.0">
+                                    <children>
+                                        <Rectangle fx:id="promotionTag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE"
+                                                   height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
+                                                   visible="false" width="3.0"/>
+                                        <Label prefHeight="40.0" prefWidth="180.0" text="网站促销管理">
+                                            <font>
+                                                <Font name="Microsoft YaHei Light" size="18.0"/>
+                                            </font>
+                                            <graphic>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                                                           preserveRatio="true">
+                                                    <image>
+                                                        <Image url="file:client/src/main/res/webmarketer/promotion.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Label>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets/>
+                                    </VBox.margin>
+                                </FlowPane>
+                                <FlowPane fx:id="creditChargeSwitcher" alignment="CENTER_LEFT" hgap="5.0"
+                                          onMouseClicked="#toCreditCharge" prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                        <Rectangle fx:id="creditChargeTag" arcHeight="5.0" arcWidth="5.0"
+                                                   fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE"
+                                                   strokeWidth="0.0" visible="false" width="3.0"/>
+                                        <Label prefHeight="40.0" prefWidth="180.0" text="信用充值">
+                                            <font>
+                                                <Font name="Microsoft YaHei Light" size="18.0"/>
+                                            </font>
+                                            <graphic>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                                                           preserveRatio="true">
+                                                    <image>
+                                                        <Image url="file:client/src/main/res/webmarketer/creditCharge.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Label>
+                                    </children>
+                                </FlowPane>
+                                <FlowPane fx:id="fixSwitcher" alignment="CENTER_LEFT" hgap="5.0" onMouseClicked="#toFix"
+                                          prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                        <Rectangle fx:id="fixTag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE"
+                                                   height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
+                                                   visible="false" width="3.0"/>
+                                        <Label prefHeight="40.0" prefWidth="176.0" text="异常订单恢复">
+                                            <font>
+                                                <Font name="Microsoft YaHei Light" size="18.0"/>
+                                            </font>
+                                            <graphic>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                                                           preserveRatio="true">
+                                                    <image>
+                                                        <Image url="file:client/src/main/res/webmarketer/fix.png"/>
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                            <FlowPane.margin>
+                                                <Insets left="4.0"/>
+                                            </FlowPane.margin>
+                                        </Label>
+                                    </children>
+                                </FlowPane>
+                            </children>
+                            <BorderPane.margin>
+                                <Insets top="50.0"/>
+                            </BorderPane.margin>
+                        </VBox>
+                    </center>
+                    <top>
+                        <FlowPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label text="工号：">
+                                    <font>
+                                        <Font name="FZLanTingHeiS-UL-GB" size="24.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="workingNumber" text="12">
+                                    <font>
+                                        <Font name="FZLanTingHeiS-UL-GB" size="24.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <padding>
+                                <Insets bottom="10" left="20" right="10" top="20"/>
+                            </padding>
                         </FlowPane>
-                        <FlowPane fx:id="creditChargeSwitcher" alignment="CENTER_LEFT" hgap="5.0" onMouseClicked="#toCreditCharge" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="creditChargeTag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
-                              <Label prefHeight="40.0" prefWidth="180.0" text="信用充值">
-                                 <font>
-                                    <Font name="Microsoft YaHei Light" size="18.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="file:client/src/main/res/webmarketer/creditCharge.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                        <FlowPane fx:id="fixSwitcher" alignment="CENTER_LEFT" hgap="5.0" onMouseClicked="#toFix" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="fixTag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="3.0" />
-                              <Label prefHeight="40.0" prefWidth="176.0" text="异常订单恢复">
-                                 <font>
-                                    <Font name="Microsoft YaHei Light" size="18.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="file:client/src/main/res/webmarketer/fix.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <FlowPane.margin>
-                                    <Insets left="4.0" />
-                                 </FlowPane.margin>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                     </children>
-                     <BorderPane.margin>
-                        <Insets top="50.0" />
-                     </BorderPane.margin>
-                  </VBox>
-               </center>
-               <top>
-                  <FlowPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label text="工号：">
-                           <font>
-                              <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="workingNumber" text="12">
-                           <font>
-                              <Font name="FZLanTingHeiS-UL-GB" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets bottom="10" left="20" right="10" top="20" />
-                     </padding>
-                  </FlowPane>
-               </top>
-            </BorderPane>
-         </children>
-      </Group>
-   </left>
+                    </top>
+                </BorderPane>
+            </children>
+        </Group>
+    </left>
 </BorderPane>

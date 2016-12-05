@@ -11,11 +11,11 @@ import java.rmi.registry.LocateRegistry;
  */
 public class RemoteHelper {
 
-    public RemoteHelper(){
+    public RemoteHelper() {
         initServer();
     }
 
-    public void initServer(){
+    public void initServer() {
         DataRemoteObject dataRemoteObject;
         try {
             dataRemoteObject = new DataRemoteObject();

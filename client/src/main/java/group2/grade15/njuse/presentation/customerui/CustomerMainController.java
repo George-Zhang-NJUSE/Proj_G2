@@ -40,9 +40,9 @@ public class CustomerMainController {
         showMyOrderListPane();
     }
 
-    public void initData(CustomerVO vo){
+    public void initData(CustomerVO vo) {
         // TODO: 2016/12/1  
-        userVO=vo;
+        userVO = vo;
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
 
@@ -51,12 +51,12 @@ public class CustomerMainController {
 
 
     private void showSearchHotelPane() {
-        String searchPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
+        String searchPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
         try {
-            FXMLLoader loader=new FXMLLoader(new URL(searchPaneUrl));
+            FXMLLoader loader = new FXMLLoader(new URL(searchPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
-            CustomerSearchHotelController searchHotelController=loader.getController();//必须在load之后才能getController
+            CustomerSearchHotelController searchHotelController = loader.getController();//必须在load之后才能getController
             searchHotelController.setParentPane(functionPane);
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -66,9 +66,9 @@ public class CustomerMainController {
     }
 
     private void showMyOrderListPane() {
-        String myOrderPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderList.fxml";
+        String myOrderPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderList.fxml";
         try {
-            FXMLLoader loader=new FXMLLoader(new URL(myOrderPaneUrl));
+            FXMLLoader loader = new FXMLLoader(new URL(myOrderPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
             MyOrderListController orderListController = loader.getController();
@@ -82,9 +82,9 @@ public class CustomerMainController {
     }
 
     private void showPersonalInfoPane() {
-        String personalPaneUrl="file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml";
+        String personalPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml";
         try {
-            FXMLLoader loader=new FXMLLoader(new URL(personalPaneUrl));
+            FXMLLoader loader = new FXMLLoader(new URL(personalPaneUrl));
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
         } catch (MalformedURLException e) {

@@ -62,8 +62,7 @@ public class HotelManagerDatabaseImpl implements HotelManagerDataService {
     /**
      * @param po
      * @return ResultMessage
-     * @throws RemoteException
-     * 除id和hotelID外其它均可修改
+     * @throws RemoteException 除id和hotelID外其它均可修改
      */
     public ResultMessage modify(HotelManagerPO po) throws RemoteException {
         if (hotelManagerConnection == null) {
@@ -71,21 +70,21 @@ public class HotelManagerDatabaseImpl implements HotelManagerDataService {
         }
 
         String password = po.getPassword(), name = po.getName(), contact = po.getContact();
-        try{
-            PreparedStatement modify=hotelManagerConnection.prepareStatement("update hotelmanager set password = ?," +
+        try {
+            PreparedStatement modify = hotelManagerConnection.prepareStatement("update hotelmanager set password = ?," +
                     "name = ?,telnum = ?" +
-                    "where hotelmanagerid = "+po.getId());
-            modify.setString(1,password);
-            modify.setString(2,name);
-            modify.setString(3,contact);
+                    "where hotelmanagerid = " + po.getId());
+            modify.setString(1, password);
+            modify.setString(2, name);
+            modify.setString(3, contact);
             modify.executeUpdate();
 
             modify.close();
             hotelManagerConnection.close();
-            hotelManagerConnection=null;
+            hotelManagerConnection = null;
 
             return ResultMessage.SUCCESS;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return ResultMessage.FAILED;
         }

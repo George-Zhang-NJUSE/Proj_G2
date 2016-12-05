@@ -5,11 +5,11 @@ import group2.grade15.njuse.vo.WebPromotionListVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 
 public interface WebPromotionServ {
-	public WebPromotionVO createWebPromotion (WebPromotionVO webPromotionInfo);
-	
-	public WebPromotionListVO getWebPromotionList (String hotelId); 
-	
-	public ResultMessage modifyWebPromotion (WebPromotionVO promotion);
+    public WebPromotionVO createWebPromotion(WebPromotionVO webPromotionInfo);
 
-	public ResultMessage changeState(WebPromotionVO promotion);
+    public WebPromotionListVO getWebPromotionList(String hotelId);
+
+    public ResultMessage modifyWebPromotion(WebPromotionVO promotion);
+
+    public ResultMessage changeState(WebPromotionVO promotion);
 }

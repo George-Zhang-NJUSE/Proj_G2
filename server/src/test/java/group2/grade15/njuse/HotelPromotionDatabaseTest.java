@@ -11,44 +11,44 @@ import org.junit.Test;
 
 import java.sql.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by dell on 2016/12/4.
  */
 public class HotelPromotionDatabaseTest {
-    HotelPromotionDatabaseImpl hotelPromotionDatabase=null;
+    HotelPromotionDatabaseImpl hotelPromotionDatabase = null;
 
     @Before
     public void setUp() throws Exception {
-        DatabaseInfo info=new DatabaseInfo("jdbc:postgresql://localhost/FirstDatabase","postgres","1997wyh");
-        hotelPromotionDatabase=new HotelPromotionDatabaseImpl(info);
+        DatabaseInfo info = new DatabaseInfo("jdbc:postgresql://localhost/FirstDatabase", "postgres", "1997wyh");
+        hotelPromotionDatabase = new HotelPromotionDatabaseImpl(info);
     }
 
     @Test
     public void getList() throws Exception {
-        assertEquals(0.4,hotelPromotionDatabase.getList(1).get(0).getDiscount(),0.001);
+        assertEquals(0.4, hotelPromotionDatabase.getList(1).get(0).getDiscount(), 0.001);
     }
 
     @Test
     public void modify() throws Exception {
-        Date start=Date.valueOf("2016-12-05");
-        Date end=Date.valueOf("2016-12-07");
-        HotelPromotionPO hotelPromotionPO=new HotelPromotionPO(1,null,start,end,0,0.4,
-                "回馈熟客", PromotionState.unlaunched,0);
-        assertEquals(ResultMessage.SUCCESS,hotelPromotionDatabase.modify(hotelPromotionPO));
+        Date start = Date.valueOf("2016-12-05");
+        Date end = Date.valueOf("2016-12-07");
+        HotelPromotionPO hotelPromotionPO = new HotelPromotionPO(1, null, start, end, 0, 0.4,
+                "回馈熟客", PromotionState.unlaunched, 0);
+        assertEquals(ResultMessage.SUCCESS, hotelPromotionDatabase.modify(hotelPromotionPO));
     }
 
     @Test
     public void remove() throws Exception {
-        assertEquals(ResultMessage.SUCCESS,hotelPromotionDatabase.remove(2));
+        assertEquals(ResultMessage.SUCCESS, hotelPromotionDatabase.remove(2));
     }
 
     @Test
     public void add() throws Exception {
-        HotelPromotionPO hotelPromotionPO=new HotelPromotionPO(0, HotelPromotionType.Birthday_Promotion,
-                null,null,0,0.1,"生日特惠",PromotionState.unlaunched,1);
-        assertEquals(ResultMessage.SUCCESS,hotelPromotionDatabase.add(hotelPromotionPO));
+        HotelPromotionPO hotelPromotionPO = new HotelPromotionPO(0, HotelPromotionType.Birthday_Promotion,
+                null, null, 0, 0.1, "生日特惠", PromotionState.unlaunched, 1);
+        assertEquals(ResultMessage.SUCCESS, hotelPromotionDatabase.add(hotelPromotionPO));
     }
 
 }

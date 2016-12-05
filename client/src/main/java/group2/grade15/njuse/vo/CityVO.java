@@ -14,7 +14,7 @@ public class CityVO {
         cityNum = po.getCityNum();
     }
 
-    public CityVO(String cityName, String cityNum){
+    public CityVO(String cityName, String cityNum) {
         this.cityName = cityName;
         this.cityNum = cityNum;
     }
@@ -27,7 +27,7 @@ public class CityVO {
         return cityNum;
     }
 
-    public CityPO toPO(){
+    public CityPO toPO() {
         return new CityPO(cityName, cityNum);
     }
 }

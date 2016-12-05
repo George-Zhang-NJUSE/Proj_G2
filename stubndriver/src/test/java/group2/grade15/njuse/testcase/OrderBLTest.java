@@ -6,8 +6,6 @@ import org.junit.Test;
 import utility.OrderState;
 import utility.ResultMessage;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by George on 2016/11/6.
  */

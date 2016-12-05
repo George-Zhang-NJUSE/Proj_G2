@@ -2,7 +2,6 @@ package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
 import group2.grade15.njuse.po.HotelManagerPO;
-import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.RemoteException;
 
@@ -16,7 +15,7 @@ public class HotelManagerDataService_Driver {
             HotelManagerPO hotelManagerPO = hotelManagerDataService.getHotelManager(123456);
 //          ResultMessage addInfo = hotelManagerDataService.add(new HotelManagerPO());
 //          ResultMessage modifyInfo = hotelManagerDataService.modify(new HotelManagerPO());
-           // ResultMessage removeInfo = hotelManagerDataService.remove(12346);
+            // ResultMessage removeInfo = hotelManagerDataService.remove(12346);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

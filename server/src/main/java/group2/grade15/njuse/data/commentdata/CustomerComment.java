@@ -10,8 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/27.
  */
-public interface CustomerComment extends Remote{
+public interface CustomerComment extends Remote {
     public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException;
+
     public ResultMessage add(CommentPO po) throws RemoteException;
+
     public ResultMessage modify(CommentPO po) throws RemoteException;
 }

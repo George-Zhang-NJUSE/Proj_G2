@@ -13,33 +13,33 @@ import java.rmi.RemoteException;
  * 只有获取网站管理人员信息的方法由自己的业务逻辑进行处理
  * 对酒店的管理采用代理的方式交给酒店管理进行真正的业务逻辑处理
  * 对用户的管理采用代理的方式交给用户管理进行真正的业务逻辑处理
- * */
+ */
 
-public class WebAdminController implements WebAdminServ, HotelManageBL, UserManageBL{
+public class WebAdminController implements WebAdminServ, HotelManageBL, UserManageBL {
 
-	private HotelManageBL hotelManage;
-	private UserManageBL userManage;
+    private HotelManageBL hotelManage;
+    private UserManageBL userManage;
 
-	public WebAdminController(){
-		hotelManage = new HotelManageImpl();
-		userManage = new UserManageImpl();
-	}
+    public WebAdminController() {
+        hotelManage = new HotelManageImpl();
+        userManage = new UserManageImpl();
+    }
 
-	public WebAdminVO getInfo(String webAdminId) {
+    public WebAdminVO getInfo(String webAdminId) {
 
         WebAdminPO po = null;
-		try {
-			po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(webAdminId);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+        try {
+            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(webAdminId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
-		if(po != null){
+        if (po != null) {
             return new WebAdminVO(po);
         } else {
             return null;
         }
-	}
+    }
 
     @Override
     public ResultMessage createHotel(HotelVO hotel) {

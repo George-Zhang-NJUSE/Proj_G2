@@ -2,9 +2,6 @@ package group2.grade15.njuse.dataservice_driver;
 
 import group2.grade15.njuse.dataservice.WebPromotionDataService;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 /**
  * Created by George on 2016/10/16.
  */

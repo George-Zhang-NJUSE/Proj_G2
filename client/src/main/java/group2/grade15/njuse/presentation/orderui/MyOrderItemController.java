@@ -21,7 +21,7 @@ public class MyOrderItemController {
     @FXML
     protected void showMyOrderDetail() {
         try {
-            FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderDetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderDetail.fxml"));
             parentPane.getChildren().add(loader.load());
             MyOrderDetailController orderDetailController = loader.getController();
 

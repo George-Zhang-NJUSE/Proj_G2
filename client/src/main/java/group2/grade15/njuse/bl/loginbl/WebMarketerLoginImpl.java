@@ -30,8 +30,8 @@ public class WebMarketerLoginImpl implements LoginControllerServ {
             e.printStackTrace();
         }
 
-        if(webMarketerPO != null){
-            if(webMarketerPO.getPassword().equals(password)){
+        if (webMarketerPO != null) {
+            if (webMarketerPO.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

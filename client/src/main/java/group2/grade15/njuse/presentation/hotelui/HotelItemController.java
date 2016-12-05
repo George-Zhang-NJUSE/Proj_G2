@@ -1,6 +1,5 @@
-package group2.grade15.njuse.presentation.searchui;
+package group2.grade15.njuse.presentation.hotelui;
 
-import group2.grade15.njuse.presentation.hotelui.HotelDetailController;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import javafx.fxml.FXML;
@@ -17,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/1.
  */
-public class SearchItemController implements Initializable{
+public class HotelItemController implements Initializable {
 
     private String hotelName;
 
@@ -29,7 +28,7 @@ public class SearchItemController implements Initializable{
     @FXML
     protected void showHotelDetail() {
         try {
-            FXMLLoader hotelDetailLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
+            FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
             parentPane.getChildren().add(hotelDetailLoader.load());
             HotelDetailController detailController = hotelDetailLoader.getController();
             detailController.setParentPane(parentPane);
@@ -43,7 +42,7 @@ public class SearchItemController implements Initializable{
     @FXML
     protected void showMakeOrderPane() {
         try {
-            FXMLLoader makeOrderLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
+            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
             parentPane.getChildren().add(makeOrderLoader.load());
             MakeOrderController makeOrderController = makeOrderLoader.getController();
 
@@ -63,7 +62,7 @@ public class SearchItemController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
-        CustomeButton.implButton(showDetailLabel,"file:client/src/main/res/customer/more");
-        CustomeButton.implButton(makeOrderLabel,"file:client/src/main/res/search/makeorder");
+        CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
+        CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/search/makeorder");
     }
 }

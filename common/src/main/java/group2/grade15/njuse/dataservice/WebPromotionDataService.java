@@ -3,7 +3,6 @@ package group2.grade15.njuse.dataservice;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.utility.WebPromotionType;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -22,7 +21,7 @@ public interface WebPromotionDataService extends Remote {
 
     public ResultMessage add(WebPromotionPO po) throws RemoteException;
 
-    public RankPO getRank() throws RemoteException;
+    public ArrayList<RankPO> getRank() throws RemoteException;
 
-    public ResultMessage modifyRank() throws RemoteException;
+    public ResultMessage modifyRank(RankPO rankPO) throws RemoteException;
 }
