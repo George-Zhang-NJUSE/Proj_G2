@@ -17,64 +17,69 @@ import java.util.Date;
  */
 public class OrderController implements ModifyOrderStateBL, OrderServ, OrderListServ {
 
+    private Order order;
+    private OrderList orderList;
+
+    public OrderController(){
+        this.order = new Order();
+        this.orderList = new OrderList();
+    }
+
     public OrderVO getOrder(int orderId) {
-        Order order = null;
-        OrderPO orderPO = null;
-
-        try {
-            orderPO = RemoteHelper.getInstance().getOrderDataService().getOrder(orderId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if (orderPO != null) {
-            order = new Order(orderPO);
-        }
-
-        if (order != null) {
-            return order.getInfo();
-        } else {
-            return null;
-        }
-
+        return order.getInfo(orderId);
     }
 
     public ResultMessage modifyState(int orderId, OrderState state) {
-        return null;
+        return order.modifyState(orderId, state);
     }
 
     public ResultMessage addOrder(OrderVO vo) {
-        return null;
+        return order.createPO(vo.toPO());
     }
 
     @Override
     public OrderListVO getAllOrderList(int id) {
-        return null;
+        return orderList.getAllOrderList(id);
     }
 
     @Override
     public OrderListVO getExecutedOrderList(int id) {
-        return null;
+        return orderList.getExecutedOrderList(id);
     }
 
     @Override
     public OrderListVO getUnexecutedOrderList(int id) {
-        return null;
+        return orderList.getUnexecutedOrderList(id);
     }
 
     @Override
     public OrderListVO getNewOrderList(Date date) {
-        return null;
+        return orderList.getNewOrderList(date);
     }
 
     @Override
     public OrderListVO getRevokedOrderList(int id) {
-        return null;
+        return orderList.getRevokedOrderList(id);
     }
 
     @Override
     public OrderListVO getAbnormalOrderList(int id) {
-        return null;
+        return orderList.getAbnormalOrderList(id);
+    }
+
+    @Override
+    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID) {
+        return orderList.getExecutedOrderListInHotel(id, hotelID);
+    }
+
+    @Override
+    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
+        return orderList.getRevokedOrderListInHotel(id, hotelID);
+    }
+
+    @Override
+    public OrderListVO getAbnormalOrderList(int id, int hotelID) {
+        return orderList.getAbnormalOrderList(id, hotelID);
     }
 
 }

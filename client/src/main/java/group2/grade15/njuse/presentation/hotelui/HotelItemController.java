@@ -31,7 +31,9 @@ public class HotelItemController implements Initializable {
             FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
             parentPane.getChildren().add(hotelDetailLoader.load());
             HotelDetailController detailController = hotelDetailLoader.getController();
+
             detailController.setParentPane(parentPane);
+            detailController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

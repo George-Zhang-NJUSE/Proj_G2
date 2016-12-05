@@ -50,6 +50,7 @@ public class MyHotelListController implements Initializable {
                 FXMLLoader searchItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
                 Node singleItemTemplate = searchItemLoader.load();
                 HotelItemController hotelItemController = searchItemLoader.getController();
+
                 hotelItemController.setParentPane(parentPane);
                 ItemList.add(singleItemTemplate);
             }

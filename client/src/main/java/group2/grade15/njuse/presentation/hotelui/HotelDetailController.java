@@ -2,6 +2,7 @@ package group2.grade15.njuse.presentation.hotelui;
 
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
+import group2.grade15.njuse.presentation.orderui.MyOrderItemController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +28,7 @@ public class HotelDetailController implements Initializable {
     private Node rootNode;
 
     @FXML
-    private VBox commentBox;
+    private VBox commentBox, myOrderBox;
 
     @FXML
     private Label returnLabel, makeOrderLabel;
@@ -53,6 +54,23 @@ public class HotelDetailController implements Initializable {
         }
     }
 
+    public void setParentPane(Pane parentPane) {
+        this.parentPane = parentPane;
+    }
+
+    public void initDataAndShow() {
+        showComments();
+        showMyOrders();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");
+        CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/hoteldetail/makeorder");
+
+    }
+
     private void showComments() {
         try {
             commentBox.getChildren().clear();
@@ -76,16 +94,28 @@ public class HotelDetailController implements Initializable {
         }
     }
 
+    private void showMyOrders() {
+        try {
+            myOrderBox.getChildren().clear();
+            ArrayList<Node> ItemList = new ArrayList<>();
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
+            // TODO: 2016/12/2 需要更改为正确的逻辑
+            for (int i = 0; i < 15; ++i) {
+                FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                Node singleItemTemplate = loader.load();
+                MyOrderItemController orderItemController = loader.getController();
+                orderItemController.setParentPane(parentPane);
+
+                ItemList.add(singleItemTemplate);
+            }
+
+            myOrderBox.getChildren().addAll(ItemList);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //加载按钮变化样式
-        CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");
-        CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/hoteldetail/makeorder");
-        showComments();
-    }
 }
