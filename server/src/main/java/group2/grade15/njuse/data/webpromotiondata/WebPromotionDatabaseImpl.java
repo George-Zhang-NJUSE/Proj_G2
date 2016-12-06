@@ -49,7 +49,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
                 PromotionState state = PromotionState.values()[resultSet.getInt(8)];
                 WebPromotionType promotionType = WebPromotionType.values()[resultSet.getInt(9)];
 
-                if (start.before(current) && state.equals(PromotionState.unlaunched)) {
+                if ((start!=null)&&start.before(current) && state.equals(PromotionState.unlaunched)) {
                     state = PromotionState.start;
                     PreparedStatement updateState = webPromotionDatabase.prepareStatement("update webpromotion set " +
                             "promotionstate = ? where promotionid = ?");
@@ -59,7 +59,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
                     updateState.executeUpdate();
 
                     updateState.close();
-                } else if (end.before(current) && state.equals(PromotionState.start)) {
+                } else if ((end!=null)&&end.before(current) && state.equals(PromotionState.start)) {
                     state = PromotionState.stop;
                     PreparedStatement updateState = webPromotionDatabase.prepareStatement("update webpromotion set " +
                             "promotionstate = ? where promotionid = ?");

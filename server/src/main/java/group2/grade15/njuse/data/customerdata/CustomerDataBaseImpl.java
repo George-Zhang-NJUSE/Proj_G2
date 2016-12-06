@@ -18,12 +18,12 @@ import java.sql.*;
 public class CustomerDataBaseImpl implements CustomerDataService {
     private DatabaseMySql mySql = null;
     private Connection customerConnection = null;
-    private Encrypt encrypt;
+    private Encrypt encrypt=null;
 
     public CustomerDataBaseImpl(DatabaseInfo info) throws RemoteException {
         mySql = new DatabaseMySql(info);
         customerConnection = mySql.init();
-        encrypt=null;
+        encrypt=new Encrypt();
     }
 
     /**
@@ -52,12 +52,12 @@ public class CustomerDataBaseImpl implements CustomerDataService {
             if (r.next()) {
                 id = customerId;
                 password = encrypt.decrypt(r.getString(2));
-                name = r.getString(3);
+                name = encrypt.decrypt(r.getString(3));
                 contact = encrypt.decrypt(r.getString(4));
                 credit = r.getFloat(5);
                 type = MemberType.values()[r.getInt(6)];
                 birthday = r.getDate(7);
-                companyName=r.getString(8);
+                companyName=encrypt.decrypt(r.getString(8));
             }
             getInfo.close();
             customerConnection.close();
@@ -100,12 +100,12 @@ public class CustomerDataBaseImpl implements CustomerDataService {
 
             PreparedStatement addOne = customerConnection.prepareStatement("insert into customer values(?,?,?,?,DEFAULT,?,?,?)");
             addOne.setInt(1, id);
-            addOne.setString(2, encrypt.encryt(password));
-            addOne.setString(3, name);
-            addOne.setString(4, encrypt.encryt(contact));
+            addOne.setString(2, encrypt.encrypt(password));
+            addOne.setString(3, encrypt.encrypt(name));
+            addOne.setString(4, encrypt.encrypt(contact));
             addOne.setInt(5, type.ordinal());
             addOne.setDate(6, birthday);
-            addOne.setString(7,companyName);
+            addOne.setString(7,encrypt.encrypt(companyName));
             addOne.executeUpdate();
             addOne.close();
 
@@ -142,9 +142,9 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         try {
             PreparedStatement modify = customerConnection.prepareStatement("update customer set name = ?,password = ?,telnum= ? " +
                     "where customerid = " + po.getId());
-            modify.setString(1, po.getName());
-            modify.setString(2, encrypt.encryt(po.getPassword()));
-            modify.setString(3, encrypt.encryt(po.getContact()));
+            modify.setString(1, encrypt.encrypt(po.getName()));
+            modify.setString(2, encrypt.encrypt(po.getPassword()));
+            modify.setString(3, encrypt.encrypt(po.getContact()));
             modify.executeUpdate();
             modify.close();
 

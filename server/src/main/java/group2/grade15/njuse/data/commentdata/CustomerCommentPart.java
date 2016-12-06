@@ -2,6 +2,7 @@ package group2.grade15.njuse.data.commentdata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.po.CommentPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 public class CustomerCommentPart implements CustomerComment {
     private DatabaseMySql mySql = null;
     private Connection customerCommentDatabase = null;
+    Encrypt encrypt=null;
 
     public CustomerCommentPart(DatabaseInfo info) {
         mySql = new DatabaseMySql(info);
         customerCommentDatabase = mySql.init();
+        encrypt=new Encrypt();
     }
 
     @Override
@@ -29,12 +32,12 @@ public class CustomerCommentPart implements CustomerComment {
 
         try {
             Statement getComment = customerCommentDatabase.createStatement();
-            ResultSet resultSet = getComment.executeQuery("select * from comment where customerid = " + customerID);
+            ResultSet resultSet = getComment.executeQuery("select * from comment where customerid = " + encrypt.encrypt(customerID));
 
             ArrayList<CommentPO> list = new ArrayList<CommentPO>();
             while (resultSet.next()) {
                 int customerNum = customerID;
-                int hotelID = resultSet.getInt(2);
+                int hotelID = encrypt.decrypt(resultSet.getInt(2));
                 String comment = resultSet.getString(3);
                 int commentID = resultSet.getInt(4);
                 int orderNum = resultSet.getInt(5);
@@ -79,8 +82,8 @@ public class CustomerCommentPart implements CustomerComment {
             }
             resultSet.close();
 
-            int customer = po.getUserID();
-            int hotel = po.getHotelID();
+            int customer = encrypt.encrypt(po.getUserID());
+            int hotel = encrypt.encrypt(po.getHotelID());
             String comment = po.getComment();
             int order = po.getOrderID();
             java.util.Date current = new java.util.Date();

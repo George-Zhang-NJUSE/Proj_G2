@@ -2,6 +2,7 @@ package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -17,6 +18,7 @@ public class WebAdminDatabaseImpl implements WebAdminDataService, CustomerPartSe
     private DatabaseInfo info = null;
     private DatabaseMySql mySql = null;
     private Connection webAdminConnection = null;
+    private Encrypt encrypt;
 
     private CustomerPart customerPart = null;
     private HotelManagerPart hotelManagerPart = null;
@@ -27,6 +29,7 @@ public class WebAdminDatabaseImpl implements WebAdminDataService, CustomerPartSe
         this.info = info;
         mySql = new DatabaseMySql(info);
         webAdminConnection = mySql.init();
+        encrypt=new Encrypt();
     }
 
     public WebAdminPO getWebAdmin(String webAdminId) throws RemoteException {
@@ -37,12 +40,12 @@ public class WebAdminDatabaseImpl implements WebAdminDataService, CustomerPartSe
         try {
             PreparedStatement getInfo = webAdminConnection.prepareStatement("select * from webadmin where " +
                     "employeeid=?");
-            getInfo.setString(1, webAdminId);
+            getInfo.setString(1, encrypt.encrypt(webAdminId));
             ResultSet resultSet = getInfo.executeQuery();
 
             resultSet.next();
             String id = webAdminId;
-            String password = resultSet.getString(1);
+            String password = encrypt.decrypt(resultSet.getString(1));
 
             getInfo.close();
             webAdminConnection.close();
