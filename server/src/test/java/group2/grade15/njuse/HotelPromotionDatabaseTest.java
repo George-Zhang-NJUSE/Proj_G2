@@ -46,7 +46,7 @@ public class HotelPromotionDatabaseTest {
 
     @Test
     public void add() throws Exception {
-        HotelPromotionPO hotelPromotionPO = new HotelPromotionPO(0, HotelPromotionType.Birthday_Promotion,
+        HotelPromotionPO hotelPromotionPO = new HotelPromotionPO(0, HotelPromotionType.BirthdayHotel,
                 null, null, 0, 0.1, "生日特惠", PromotionState.unlaunched, 1);
         assertEquals(ResultMessage.SUCCESS, hotelPromotionDatabase.add(hotelPromotionPO));
     }
