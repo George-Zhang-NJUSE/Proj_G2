@@ -48,7 +48,7 @@ public class WebPromoitonDatabaseTest {
 
     @Test
     public void addTest() throws RemoteException {
-        WebPromotionPO webPromotionPO = new WebPromotionPO(0, WebPromotionType.Area_Promotion, null, null,
+        WebPromotionPO webPromotionPO = new WebPromotionPO(0, WebPromotionType.AreaWeb, null, null,
                 "00001000010000100001", 6, 0.2, "回馈顾客", PromotionState.unlaunched);
         assertEquals(ResultMessage.SUCCESS, webPromotionDatabase.add(webPromotionPO));
     }
