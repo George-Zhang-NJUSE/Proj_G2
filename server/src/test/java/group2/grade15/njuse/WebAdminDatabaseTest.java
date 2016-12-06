@@ -41,7 +41,8 @@ public class WebAdminDatabaseTest {
     @Test
     public void modifyCustomerInfoTest() throws RemoteException {
         Date birthday = Date.valueOf("1993-01-22");
-        CustomerPO customerPO = new CustomerPO(0, "Sue", "12345", "6883221", birthday, 0, MemberType.vip);
+        CustomerPO customerPO = new CustomerPO(0, "Sue", "12345", "6883221", birthday,
+                0, MemberType.vip,null);
         assertEquals(ResultMessage.SUCCESS, webAdminDatabase.modifyCustomerInfo(customerPO));
     }
 
