@@ -13,8 +13,9 @@ public class CustomerPO implements Serializable {
     private Date birthday;
     private final double credit;
     private MemberType type;
+    private String companyName;
 
-    public CustomerPO(int id, String name, String password, String contact, Date birthday, double credit, MemberType type) {
+    public CustomerPO(int id, String name, String password, String contact, Date birthday, double credit, MemberType type, String companyName) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -22,6 +23,8 @@ public class CustomerPO implements Serializable {
         this.birthday = birthday;
         this.credit = credit;
         this.type = type;
+        this.companyName=companyName;
+
     }
 
     public Date getBirthday() {
@@ -50,5 +53,9 @@ public class CustomerPO implements Serializable {
 
     public MemberType getType() {
         return type;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 }

@@ -1,6 +1,6 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
-import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotion;
+import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.vo.HotelPromotionVO;
 
 /**
@@ -9,10 +9,9 @@ import group2.grade15.njuse.vo.HotelPromotionVO;
 public class HotelPromotionFactory {
 
     static HotelPromotionFactory hotelPromotionFactory = null;
-    private HotelPromotion hotelPromotionImpl;
 
     private HotelPromotionFactory() {
-        hotelPromotionImpl = new HotelPromotion();
+
     }
 
     public static HotelPromotionFactory getInstance() {
@@ -22,8 +21,8 @@ public class HotelPromotionFactory {
         return hotelPromotionFactory;
     }
 
-    public HotelPromotionVO createHotelPromotion(HotelPromotionVO vo) {
-        return hotelPromotionImpl.createHotelPromotion(vo);
+    public HotelPromotionVO createHotelPromotion(HotelPromotionType type) {
+        return null;
     }
 
 }

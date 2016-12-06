@@ -8,9 +8,9 @@ import group2.grade15.njuse.vo.HotelPromotionVO;
  * Created by Guo on 2016/11/29.
  */
 public interface HotelPromotionServ {
-    public HotelPromotionVO createHotelPromotion(HotelPromotionVO HotelPromotionInfo);
+    public ResultMessage createHotelPromotion(HotelPromotionVO HotelPromotionInfo);
 
-    public HotelPromotionListVO getHotelPromotionList(String hotelId);
+    public HotelPromotionListVO getHotelPromotionList(int hotelId);
 
     public ResultMessage modifyHotelPromotion(HotelPromotionVO promotion);
 
