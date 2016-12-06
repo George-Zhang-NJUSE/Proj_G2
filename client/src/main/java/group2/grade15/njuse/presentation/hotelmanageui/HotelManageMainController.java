@@ -1,6 +1,8 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.vo.HotelManagerVO;
+import group2.grade15.njuse.vo.HotelVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +39,12 @@ public class HotelManageMainController implements Initializable {
     private Rectangle promotionManageRec;
     @FXML
     private Pane opPane;
+
+    //软件运行时的存储信息
+    public static HotelVO hotelVO;
+    public static HotelManagerVO hotelManagerVO;
+
+    //controller的初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addSwither(infoTag);
@@ -45,6 +53,8 @@ public class HotelManageMainController implements Initializable {
         addSwither(promotionManageTag);
 
     }
+
+    //用于界面跳转的方法
     @FXML
     private boolean toInfo(){
         if (infoRec.isVisible())
@@ -137,12 +147,31 @@ public class HotelManageMainController implements Initializable {
         }
         return true;
     }
-    public  static int getHotelID(){
-        int r=hotelID;
-        return r;
+    //逻辑数据处理的方法：
+
+    /**
+     * @param hotelVO
+     * @param hotelManagerVO
+     * 将酒店工作人员的vo和与之绑定的酒店的vo载入的controller中
+     */
+    public void initData(HotelVO hotelVO, HotelManagerVO hotelManagerVO){
+        this.hotelVO=hotelVO;
+        this.hotelManagerVO=hotelManagerVO;
+
+    }
+
+    /**
+     *
+     * @param
+     */
+    public void modifyHotelInfo(){
+
     }
 
 
+    //轮子方法：
+
+    //实现边栏按钮的轮子方法
     public void addSwither(FlowPane pane){
         pane.setOnMouseEntered((MouseEvent e)->{
             pane.setStyle("-fx-background-color: rgb(230,230,230)");

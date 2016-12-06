@@ -152,4 +152,5 @@ public class PromotionManageController implements Initializable{
         checkPane.setVisible(false);
         opPane.setVisible(false);
     }
+
 }

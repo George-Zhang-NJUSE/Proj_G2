@@ -67,10 +67,10 @@ public class ModifyPromotionController implements Initializable {
         HotelPromotionVO result;
         HotelPromotionType type=this.type.getValue();
         switch(type){
-            case Birthday_Promotion :
+            case BirthdayHotel:
                 result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), PromotionState.unlaunched,HotelManageMainController.getHotelID());
                 break;
-            case Time_Promotion:
+            case TimeHotel:
                 Date sD,eD;
                 String[] s=startDate.getEditor().getText().split("/");
                 String[] e = endDate.getEditor().getText().split("/");
@@ -78,10 +78,10 @@ public class ModifyPromotionController implements Initializable {
                 eD=new Date(Integer.parseInt(e[2]),Integer.parseInt(e[0]),Integer.parseInt(e[1]));
                 result = new HotelPromotionVO(ID, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), PromotionState.unlaunched, HotelManageMainController.getHotelID());
                 break;
-            case Buisiness_Partner_Promotion:
+            case PartnerHotel:
                 result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.getHotelID());
                 break;
-            case Multiple_Room_Promotion:
+            case MultipleHotel:
                 result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.getHotelID());
                 break;
             default:

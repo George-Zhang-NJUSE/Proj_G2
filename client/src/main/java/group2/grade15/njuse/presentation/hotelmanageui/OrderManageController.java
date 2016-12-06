@@ -48,6 +48,9 @@ public class OrderManageController implements Initializable {
     private Label check;
     @FXML
     private Label cancel;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         impleButton(checkinButton);
@@ -124,7 +127,8 @@ public class OrderManageController implements Initializable {
 
     //逻辑的数据处理部分
     public OrderVO getOrderVO(){
-        int index=unexeTable.;
+        int index=0;
         OrderVO result=unexeTable.getItems().get(index);
+        return null;
     }
 }

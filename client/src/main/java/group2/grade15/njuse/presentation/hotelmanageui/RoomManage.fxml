@@ -101,7 +101,7 @@
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="typeA" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="typeA" GridPane.columnIndex="1" />
                         <TextField fx:id="countA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="priceA" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
@@ -109,7 +109,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </GridPane>
-                  <GridPane fx:id="modifyPane" visible="false">
+                  <GridPane fx:id="modifyPane">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -123,7 +123,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="typeM" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="typeM" GridPane.columnIndex="1" />
                         <TextField fx:id="priceM" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="countM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="房间单价：" GridPane.rowIndex="2">
@@ -141,6 +141,12 @@
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
+                        <Label text="剩余房间：" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="restM" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <padding>
                         <Insets left="10.0" />

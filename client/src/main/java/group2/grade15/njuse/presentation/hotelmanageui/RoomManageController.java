@@ -2,10 +2,14 @@ package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.RoomType;
+import group2.grade15.njuse.vo.RoomVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,6 +43,15 @@ public class RoomManageController implements Initializable {
     @FXML
     private Group opGroup;
     private GridPane now=new GridPane();
+
+    @FXML
+    private ComboBox<RoomType> typeA,typeM;
+    @FXML
+    private TextField countA,countM;
+    @FXML
+    private TextField priceA,priceM;
+    @FXML
+    private TextField restM;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,5 +95,15 @@ public class RoomManageController implements Initializable {
     public void back(){
         now.setVisible(false);
         checkPane.setVisible(false);
+    }
+    //逻辑数据采集部分
+    public RoomVO getRoomVO(){
+        RoomVO result=null;
+        if (addPane.isVisible()) {
+            result = new RoomVO(typeA.getValue(),Double.parseDouble(priceA.getText()),Integer.parseInt(countA.getText()),Integer.parseInt(countA.getText()));
+        }else{
+            result = new RoomVO(typeM.getValue(), Double.parseDouble(priceM.getText()), Integer.parseInt(countM.getText()), Integer.parseInt(restM.getText()));
+        }
+        return result;
     }
 }
