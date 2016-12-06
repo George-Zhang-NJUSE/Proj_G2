@@ -3,6 +3,7 @@ package group2.grade15.njuse.data.orderdata;
 import group2.grade15.njuse.data.creditdata.CreditDatabaseImpl;
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
 import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.po.OrderPO;
@@ -22,11 +23,13 @@ public class OrderDatabaseImpl implements OrderDataService {
     private DatabaseMySql mySql = null;
     private Connection orderDatabase = null;
     private DatabaseInfo info = null;
+    private Encrypt encrypt=null;
 
     public OrderDatabaseImpl(DatabaseInfo info) throws RemoteException {
         mySql = new DatabaseMySql(info);
         orderDatabase = mySql.init();
         this.info = info;
+        encrypt=new Encrypt();
     }
 
     /**
@@ -74,7 +77,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
         try {
             Statement customer = orderDatabase.createStatement();
-            ResultSet resultSet = customer.executeQuery("select * from orderinfo where customerid = " + customerID);
+            ResultSet resultSet = customer.executeQuery("select * from orderinfo where customerid = " + encrypt.encrypt(customerID));
 
             ArrayList<OrderPO> list = readResult(resultSet);
 
@@ -97,7 +100,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
         try {
             Statement hotel = orderDatabase.createStatement();
-            ResultSet resultSet = hotel.executeQuery("select * from orderinfo where hotelid = " + hotelID);
+            ResultSet resultSet = hotel.executeQuery("select * from orderinfo where hotelid = " + encrypt.encrypt(hotelID));
 
             ArrayList<OrderPO> list = readResult(resultSet);
 
@@ -122,8 +125,8 @@ public class OrderDatabaseImpl implements OrderDataService {
         try {
             while (resultSet.next()) {
                 int orderNum = resultSet.getInt(1);
-                int customerID = resultSet.getInt(2);
-                int hotelID = resultSet.getInt(3);
+                int customerID = encrypt.decrypt(resultSet.getInt(2));
+                int hotelID = encrypt.decrypt(resultSet.getInt(3));
                 double amount = resultSet.getDouble(4);
                 Date checkIn = resultSet.getDate(5);
                 Date checkOut = resultSet.getDate(6);
@@ -204,8 +207,8 @@ public class OrderDatabaseImpl implements OrderDataService {
             }
             makeID.close();
 
-            int hotelID = po.getHotelID();
-            int customerID = po.getCustomerID();
+            int hotelID = encrypt.encrypt(po.getHotelID());
+            int customerID = encrypt.encrypt(po.getCustomerID());
             double total = po.getAmount();
             Date checkIn = po.getCheckInTime();
             Date checkOut = po.getCheckOutTime();
@@ -264,7 +267,7 @@ public class OrderDatabaseImpl implements OrderDataService {
             if (resultSet.next()) {
                 current = OrderState.values()[resultSet.getInt(1)];
                 sum = resultSet.getDouble(2);
-                customerID = resultSet.getInt(3);
+                customerID = encrypt.decrypt(resultSet.getInt(3));
                 execute = resultSet.getDate(4);
             } else {
                 throw new SQLException();

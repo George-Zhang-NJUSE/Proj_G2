@@ -27,11 +27,11 @@ public class CustomerDatabaseTest {
 
     @Test
     public void getTest() throws RemoteException {
-        CustomerPO temp = customerDataBase.getCustomer(000000001);
+        CustomerPO temp = customerDataBase.getCustomer(2);
         if (temp == null) {
             System.err.print("wrong");
         }
-        assertEquals("12345", temp.getPassword());
+        assertEquals("123abc", temp.getPassword());
         assertEquals(MemberType.normal, temp.getType());
     }
 
@@ -50,7 +50,7 @@ public class CustomerDatabaseTest {
     @Test
     public void modifyTest() throws RemoteException {
         Date birthday = Date.valueOf("1993-01-21");
-        CustomerPO input = new CustomerPO(0, "Iris", "123abc","17714363061", birthday,
+        CustomerPO input = new CustomerPO(1, "Iris", "123abc","17714363061", birthday,
                 100.00, MemberType.normal,null);
         assertEquals(ResultMessage.SUCCESS, customerDataBase.modify(input));
     }

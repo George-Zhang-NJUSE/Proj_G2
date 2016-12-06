@@ -2,6 +2,7 @@ package group2.grade15.njuse.data.creditdata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.utility.ChangeReason;
@@ -14,10 +15,12 @@ import java.util.ArrayList;
 public class CreditDatabaseImpl implements CreditDataService {
     private DatabaseMySql mySql = null;
     private Connection creditDatabase = null;
+    private Encrypt encrypt=null;
 
     public CreditDatabaseImpl(DatabaseInfo info) throws RemoteException {
         mySql = new DatabaseMySql(info);
         creditDatabase = mySql.init();
+        encrypt=new Encrypt();
     }
 
     public ArrayList<CreditPO> getHistory(int customerId) throws RemoteException {
@@ -27,11 +30,11 @@ public class CreditDatabaseImpl implements CreditDataService {
 
         try {
             Statement history = creditDatabase.createStatement();
-            ResultSet resultSet = history.executeQuery("select * from credithistory where customerid = " + customerId);
+            ResultSet resultSet = history.executeQuery("select * from credithistory where customerid = " + encrypt.encrypt(customerId));
 
             ArrayList<CreditPO> list = new ArrayList<CreditPO>();
             while (resultSet.next()) {
-                int customer = resultSet.getInt(1);
+                int customer = customerId;
                 int credit = resultSet.getInt(2);
                 int order = resultSet.getInt(3);
                 double change = resultSet.getDouble(4);
@@ -89,7 +92,7 @@ public class CreditDatabaseImpl implements CreditDataService {
             java.util.Date current = new java.util.Date();
             Date time = new Date(current.getTime());
 
-            add.setInt(1, po.getCustomerID());
+            add.setInt(1, encrypt.encrypt(po.getCustomerID()));
             add.setInt(2, creditID);
             add.setInt(3, po.getOrderID());
             add.setDouble(4, po.getCreditChange());
