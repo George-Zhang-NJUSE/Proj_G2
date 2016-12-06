@@ -5,7 +5,7 @@ import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
 /**
  * Created by Guo on 2016/12/6.
  */
-public class LevelPromotion implements WebPromotionBL {
+public class LevelWebPromotion implements WebPromotionBL {
     @Override
     public double countPrice(double originalPrice) {
         return 0;
