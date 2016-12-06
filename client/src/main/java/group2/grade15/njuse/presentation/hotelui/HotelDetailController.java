@@ -1,5 +1,7 @@
 package group2.grade15.njuse.presentation.hotelui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import group2.grade15.njuse.presentation.orderui.MyOrderItemController;
@@ -59,8 +61,9 @@ public class HotelDetailController implements Initializable {
     }
 
     public void initDataAndShow() {
-        showComments();
-        showMyOrders();
+        loadComments();
+        loadMyOrders();
+        show();
     }
 
     @Override
@@ -69,9 +72,23 @@ public class HotelDetailController implements Initializable {
         CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");
         CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/hoteldetail/makeorder");
 
+        //为渐入扩大动画做准备
+        rootNode.setOpacity(0);
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
+
     }
 
-    private void showComments() {
+    private void show() {
+        //渐入扩大动画
+        Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
+        fadeIn.play();
+        popIn.play();
+
+    }
+
+    private void loadComments() {
         try {
             commentBox.getChildren().clear();
             ArrayList<Node> ItemList = new ArrayList<>();
@@ -94,7 +111,7 @@ public class HotelDetailController implements Initializable {
         }
     }
 
-    private void showMyOrders() {
+    private void loadMyOrders() {
         try {
             myOrderBox.getChildren().clear();
 

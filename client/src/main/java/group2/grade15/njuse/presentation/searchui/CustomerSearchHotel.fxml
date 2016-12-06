@@ -78,7 +78,7 @@
                      <children>
                         <Label text="可选条件：" />
                         <Label text="酒店名称：" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="hotelNameField1" prefHeight="30.0" prefWidth="81.0" promptText="酒店名称关键字" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="hotelNameField1" prefHeight="30.0" prefWidth="81.0" promptText="酒店名关键字" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <Label text="房间类型：" GridPane.columnIndex="3" />
                         <ChoiceBox fx:id="roomTypeChoiceBox1" prefWidth="128.0" GridPane.columnIndex="4" />
                         <Label text="价格区间：" GridPane.columnIndex="5" />
@@ -94,24 +94,22 @@
                         <Label text="评分区间：" GridPane.columnIndex="7" />
                         <ChoiceBox fx:id="scoreRangeChoiceBox1" prefWidth="128.0" GridPane.columnIndex="8" />
                         <Label text="排序方式：" GridPane.rowIndex="3" />
-                        <Label text="价格：" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="星级：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Label text="评分：" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <Label text="条件：" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="顺序：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                         <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <ChoiceBox prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
                         <Label text="具体时间：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <ComboBox prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <ComboBox prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
                         <Label text="具体时间：" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="只限我预定过的酒店" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                        <CheckBox mnemonicParsing="false" text="只限我预订过的酒店" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
             </Pane>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1180.0">
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1180.0">
                <children>
-                  <Label onMouseClicked="#changeAdditionalPane" text="展开/收起按钮" />
+                  <Label fx:id="showOrHideLabel" onMouseClicked="#changeAdditionalPane" />
                </children>
             </HBox>
          </children>

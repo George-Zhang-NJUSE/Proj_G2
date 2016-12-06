@@ -57,6 +57,7 @@ public class MakeOrderController implements Initializable {
         //弹出式进入动画
         Fade fadeIn = new Fade(rootNode, 200, true);
         Pop popIn = new Pop(rootNode, 200, true);
+
         rootNode.setVisible(true);
         fadeIn.play();
         popIn.play();
@@ -74,5 +75,7 @@ public class MakeOrderController implements Initializable {
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.5);
         rootNode.setScaleY(0.5);
+        rootNode.setLayoutX(300);
+        rootNode.setLayoutY(50);
     }
 }
