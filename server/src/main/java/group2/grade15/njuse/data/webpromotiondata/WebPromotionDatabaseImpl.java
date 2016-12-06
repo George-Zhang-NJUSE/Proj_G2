@@ -2,7 +2,7 @@ package group2.grade15.njuse.data.webpromotiondata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.WebPromotionDataService;
+import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.utility.PromotionState;

@@ -1,6 +1,6 @@
 package group2.grade15.njuse.dataservice_driver;
 
-import group2.grade15.njuse.dataservice.WebPromotionDataService;
+import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 
 /**
  * Created by George on 2016/10/16.

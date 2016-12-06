@@ -57,7 +57,7 @@ public class OrderDatabaseTest {
 
     @Test
     public void modifyOrderTest() throws Exception {
-        assertEquals(ResultMessage.SUCCESS, orderDatabase.modifyOrder(2, OrderState.cancelled));
+        assertEquals(ResultMessage.SUCCESS, orderDatabase.modifyOrder(2, OrderState.revoked));
     }
 
 }
