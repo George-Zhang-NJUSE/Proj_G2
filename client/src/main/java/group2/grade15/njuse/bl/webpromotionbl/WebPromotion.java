@@ -10,10 +10,6 @@ import java.rmi.RemoteException;
 
 public class WebPromotion implements WebPromotionServ, WebPromotionBL {
 
-    public WebPromotionListVO getWebPromotionList() {
-        return null;
-    }
-
     public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
         ResultMessage result = ResultMessage.FAILED;
 
