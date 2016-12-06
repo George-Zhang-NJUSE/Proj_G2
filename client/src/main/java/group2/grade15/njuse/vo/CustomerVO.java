@@ -14,6 +14,7 @@ public class CustomerVO implements Serializable {
     private Date birthday;
     private final double credit;
     private MemberType type;
+    private String companyName;
 
     public CustomerVO(CustomerPO po) {
         this.id = po.getId();
@@ -23,9 +24,10 @@ public class CustomerVO implements Serializable {
         this.birthday = po.getBirthday();
         this.credit = po.getCredit();
         this.type = po.getType();
+        this.companyName = po.getCompanyName();
     }
 
-    public CustomerVO(int id, String name, String password, String contact, Date birthday, double credit, MemberType type) {
+    public CustomerVO(int id, String name, String password, String contact, Date birthday, double credit, MemberType type, String companyName) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -33,6 +35,7 @@ public class CustomerVO implements Serializable {
         this.birthday = birthday;
         this.credit = credit;
         this.type = type;
+        this.companyName = companyName;
     }
 
     public int getId() {
@@ -63,7 +66,12 @@ public class CustomerVO implements Serializable {
         return type;
     }
 
-    public CustomerPO toPO() {
-        return new CustomerPO(id, name, password, contact, birthday, credit, type);
+    public String getCompanyName() {
+        return companyName;
     }
+
+    public CustomerPO toPO() {
+        return new CustomerPO(id, name, password, contact, birthday, credit, type, companyName);
+    }
+
 }
