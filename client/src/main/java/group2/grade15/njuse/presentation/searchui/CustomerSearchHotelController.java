@@ -1,9 +1,11 @@
 package group2.grade15.njuse.presentation.searchui;
 
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
+import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +32,9 @@ public class CustomerSearchHotelController implements Initializable {
     private VBox searchItemBox;
 
     @FXML
+    private Pane additionalConditionPane;
+
+    @FXML
     private Node rootNode;
 
     @FXML
@@ -46,6 +51,31 @@ public class CustomerSearchHotelController implements Initializable {
     @FXML
     protected void search() {
         showSearchResult();
+    }
+
+    @FXML
+    private void changeAdditionalPane() {
+        if (additionalConditionPane.isVisible()) {
+            hideAdditionalPane();
+        } else {
+            showAdditionalPane();
+        }
+    }
+
+    private void showAdditionalPane() {
+        ChangeHeight grow=new ChangeHeight(additionalConditionPane,300,160);
+        Fade fadeIn = new Fade(additionalConditionPane, 300, true);
+        additionalConditionPane.setVisible(true);
+        grow.play();
+        fadeIn.play();
+    }
+
+    private void hideAdditionalPane() {
+        ChangeHeight shrink = new ChangeHeight(additionalConditionPane, 300, 0);
+        Fade fadeOut = new Fade(additionalConditionPane, 300, false);
+        fadeOut.setOnFinished((ActionEvent e) -> additionalConditionPane.setVisible(false));
+        shrink.play();
+        fadeOut.play();
     }
 
 
@@ -100,5 +130,11 @@ public class CustomerSearchHotelController implements Initializable {
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.9);
         rootNode.setScaleY(0.9);
+
+        //默认收起附加搜索条件面板
+        additionalConditionPane.setVisible(false);
+        additionalConditionPane.setOpacity(0);
+        additionalConditionPane.setPrefHeight(0);
+
     }
 }
