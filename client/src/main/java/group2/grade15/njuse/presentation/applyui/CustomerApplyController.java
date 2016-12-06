@@ -3,14 +3,13 @@ package group2.grade15.njuse.presentation.applyui;
 import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -45,13 +44,11 @@ public class CustomerApplyController implements Initializable {
     private CheckBox isEnterpriseCheckBox;
 
     @FXML
-    private Label extraInfoHint;
+    private Label extraInfoHint, confirmLabel, cancelLabel;
 
     @FXML
     private DatePicker birthdayPicker;
 
-    @FXML
-    private ImageView cancelIconImage, confirmIconImage;
 
     public void setStage(Stage stage) {
         currentStage = stage;
@@ -59,6 +56,11 @@ public class CustomerApplyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //加载按钮样式
+        CustomeButton.implButton(confirmLabel,"file:client/src/main/res/apply/confirm");
+        CustomeButton.implButton(cancelLabel,"file:client/src/main/res/apply/cancel");
+
         Fade applyFadeIn = new Fade(applyPane, 300, true);
         applyPane.setOpacity(0);
         applyFadeIn.play();
@@ -80,13 +82,13 @@ public class CustomerApplyController implements Initializable {
         }
     }
 
-
+    @FXML
     private void rollBackToLogin() {
         // TODO: 2016/11/25
 
         //使申请窗口退回右边,原面板淡出，加载登录面板
         ChangeWidth applyShrinkToRight = new ChangeWidth(applyPaneBack, 300, 220);
-        applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPanel());
+        applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPane());
 
         Fade loginFadeOut = new Fade(applyPane, 300, false);
         loginFadeOut.setOnFinished((ActionEvent e) -> applyShrinkToRight.play());
@@ -95,7 +97,7 @@ public class CustomerApplyController implements Initializable {
 
     }
 
-    private void loadLoginPanel() {
+    private void loadLoginPane() {
         try {
             FXMLLoader customerLoginLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
             currentStage.setScene(new Scene(customerLoginLoader.load()));
@@ -108,7 +110,7 @@ public class CustomerApplyController implements Initializable {
         }
     }
 
-
+    @FXML
     private void applyAccount() {
         username = usernameField.getText();
         password = passwordField.getText();
@@ -118,48 +120,6 @@ public class CustomerApplyController implements Initializable {
         extraInfo = (isEnterpriseCheckBox.isSelected()) ? enterpriseNameField.getText() : birthdayPicker.getEditor().getText();
         // TODO: 2016/11/25 apply with the info above
 
-    }
-
-    @FXML
-    protected void mouseEnterCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_movein.png"));
-    }
-
-    @FXML
-    protected void mouseExitCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon.png"));
-    }
-
-    @FXML
-    protected void mousePressCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_press.png"));
-    }
-
-    @FXML
-    protected void mouseReleaseCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_movein.png"));
-        rollBackToLogin();
-    }
-
-    @FXML
-    protected void mouseEnterConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_movein.png"));
-    }
-
-    @FXML
-    protected void mouseExitConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon.png"));
-    }
-
-    @FXML
-    protected void mousePressConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_press.png"));
-    }
-
-    @FXML
-    protected void mouseReleaseConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_movein.png"));
-//        applyAccount();
     }
 
 
