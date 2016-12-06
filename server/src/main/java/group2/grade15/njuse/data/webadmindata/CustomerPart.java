@@ -41,8 +41,9 @@ public class CustomerPart implements CustomerPartService {
                 double credit = resultSet.getDouble(5);
                 MemberType type = MemberType.values()[resultSet.getInt(6)];
                 Date birthday = resultSet.getDate(7);
+                String company=resultSet.getString(8);
 
-                CustomerPO customerPO = new CustomerPO(id, name, password, tel, birthday, credit, type);
+                CustomerPO customerPO = new CustomerPO(id, name, password, tel, birthday, credit, type,company);
                 list.add(customerPO);
             }
 
