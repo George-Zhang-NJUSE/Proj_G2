@@ -1,9 +1,12 @@
 package group2.grade15.njuse.presentation.searchui;
 
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
+import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
+import group2.grade15.njuse.presentation.myanimation.Rotate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,10 +33,13 @@ public class CustomerSearchHotelController implements Initializable {
     private VBox searchItemBox;
 
     @FXML
+    private Pane additionalConditionPane;
+
+    @FXML
     private Node rootNode;
 
     @FXML
-    private Label searchLabel;
+    private Label searchLabel, showOrHideLabel;
 
     @FXML
     private ChoiceBox provinceChoiceBox, cityChoiceBox, districtChoiceBox, cbdChoiceBox, roomTypeChoiceBox,
@@ -46,6 +52,39 @@ public class CustomerSearchHotelController implements Initializable {
     @FXML
     protected void search() {
         showSearchResult();
+    }
+
+    @FXML
+    private void changeAdditionalPane() {
+        if (additionalConditionPane.isVisible()) {
+            hideAdditionalPane();
+        } else {
+            showAdditionalPane();
+        }
+    }
+
+    private void showAdditionalPane() {
+        ChangeHeight grow=new ChangeHeight(additionalConditionPane,300,160);
+        Fade fadeIn = new Fade(additionalConditionPane, 300, true);
+        Rotate reverse = new Rotate(showOrHideLabel, 300, 180);
+
+        additionalConditionPane.setVisible(true);
+
+        grow.play();
+        fadeIn.play();
+        reverse.play();
+    }
+
+    private void hideAdditionalPane() {
+        ChangeHeight shrink = new ChangeHeight(additionalConditionPane, 300, 0);
+        Fade fadeOut = new Fade(additionalConditionPane, 300, false);
+        Rotate reverse = new Rotate(showOrHideLabel, 300, 0);
+
+        fadeOut.setOnFinished((ActionEvent e) -> additionalConditionPane.setVisible(false));
+
+        shrink.play();
+        fadeOut.play();
+        reverse.play();
     }
 
 
@@ -95,10 +134,17 @@ public class CustomerSearchHotelController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
+        CustomeButton.implButton(showOrHideLabel, "file:client/src/main/res/search/point");
 
         //为渐入扩大动画做准备
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.9);
         rootNode.setScaleY(0.9);
+
+        //默认收起附加搜索条件面板
+        additionalConditionPane.setVisible(false);
+        additionalConditionPane.setOpacity(0);
+        additionalConditionPane.setPrefHeight(0);
+
     }
 }

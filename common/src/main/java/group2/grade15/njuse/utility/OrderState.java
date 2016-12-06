@@ -4,5 +4,5 @@ public enum OrderState {
     unexecuted,
     executed,
     revoked,
-    abnormal;
+    abnormal
 }

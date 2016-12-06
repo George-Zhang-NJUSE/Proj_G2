@@ -2,6 +2,7 @@ package group2.grade15.njuse.data.webadmindata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.utility.ResultMessage;
 
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 public class HotelManagerPart implements HotelManagerPartService {
     private DatabaseMySql mySql = null;
     private Connection hotelManagerPartDatabase = null;
+    private Encrypt encrypt=null;
 
     public HotelManagerPart(DatabaseInfo info) {
         mySql = new DatabaseMySql(info);
         hotelManagerPartDatabase = mySql.init();
+        encrypt=new Encrypt();
     }
 
     @Override
@@ -34,10 +37,10 @@ public class HotelManagerPart implements HotelManagerPartService {
             ArrayList<HotelManagerPO> list = new ArrayList<HotelManagerPO>();
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
-                String password = resultSet.getString(2);
-                String name = resultSet.getString(3);
-                String tel = resultSet.getString(4);
-                int hotelID = resultSet.getInt(5);
+                String password = encrypt.decrypt(resultSet.getString(2));
+                String name = encrypt.decrypt(resultSet.getString(3));
+                String tel = encrypt.decrypt(resultSet.getString(4));
+                int hotelID = encrypt.decrypt(resultSet.getInt(5));
 
                 HotelManagerPO hotelManagerPO = new HotelManagerPO(id, password, name, tel, hotelID);
                 list.add(hotelManagerPO);
@@ -64,10 +67,10 @@ public class HotelManagerPart implements HotelManagerPartService {
         try {
             PreparedStatement modify = hotelManagerPartDatabase.prepareStatement("update hotelmanager set " +
                     "password = ?,name = ?,telnum = ?,hotelid = ? where hotelmanagerid = " + hotelManagerPO.getId());
-            modify.setString(1, hotelManagerPO.getPassword());
-            modify.setString(2, hotelManagerPO.getName());
-            modify.setString(3, hotelManagerPO.getContact());
-            modify.setInt(4, hotelManagerPO.getHotelID());
+            modify.setString(1, encrypt.encrypt(hotelManagerPO.getPassword()));
+            modify.setString(2, encrypt.encrypt(hotelManagerPO.getName()));
+            modify.setString(3, encrypt.encrypt(hotelManagerPO.getContact()));
+            modify.setInt(4, encrypt.encrypt(hotelManagerPO.getHotelID()));
             modify.executeUpdate();
 
             modify.close();
@@ -100,10 +103,10 @@ public class HotelManagerPart implements HotelManagerPartService {
             makeID.close();
 
             add.setInt(1, id);
-            add.setString(2, hotelManagerPO.getPassword());
-            add.setString(3, hotelManagerPO.getName());
-            add.setString(4, hotelManagerPO.getContact());
-            add.setInt(5, hotelManagerPO.getHotelID());
+            add.setString(2, encrypt.encrypt(hotelManagerPO.getPassword()));
+            add.setString(3, encrypt.encrypt(hotelManagerPO.getName()));
+            add.setString(4, encrypt.encrypt(hotelManagerPO.getContact()));
+            add.setInt(5, encrypt.encrypt(hotelManagerPO.getHotelID()));
 
             add.executeUpdate();
 

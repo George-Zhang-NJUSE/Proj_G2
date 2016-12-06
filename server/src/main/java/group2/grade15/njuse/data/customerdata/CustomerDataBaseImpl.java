@@ -3,6 +3,7 @@ package group2.grade15.njuse.data.customerdata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.utility.MemberType;
@@ -17,10 +18,12 @@ import java.sql.*;
 public class CustomerDataBaseImpl implements CustomerDataService {
     private DatabaseMySql mySql = null;
     private Connection customerConnection = null;
+    private Encrypt encrypt=null;
 
     public CustomerDataBaseImpl(DatabaseInfo info) throws RemoteException {
         mySql = new DatabaseMySql(info);
         customerConnection = mySql.init();
+        encrypt=new Encrypt();
     }
 
     /**
@@ -38,6 +41,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         Date birthday = null;
         double credit = 0.00;
         MemberType type = null;
+        String companyName=null;
         try {
             Statement getInfo = customerConnection.createStatement();
             /*if(getInfo==null){
@@ -47,12 +51,13 @@ public class CustomerDataBaseImpl implements CustomerDataService {
                     "select * from Customer where customerID = " + customerId);
             if (r.next()) {
                 id = customerId;
-                password = r.getString(2);
-                name = r.getString(3);
-                contact = r.getString(4);
+                password = encrypt.decrypt(r.getString(2));
+                name = encrypt.decrypt(r.getString(3));
+                contact = encrypt.decrypt(r.getString(4));
                 credit = r.getFloat(5);
                 type = MemberType.values()[r.getInt(6)];
                 birthday = r.getDate(7);
+                companyName=encrypt.decrypt(r.getString(8));
             }
             getInfo.close();
             customerConnection.close();
@@ -62,14 +67,14 @@ public class CustomerDataBaseImpl implements CustomerDataService {
             return null;
         }
 
-        CustomerPO customerInfo = new CustomerPO(id, name, password, contact, birthday, credit, type);
+        CustomerPO customerInfo = new CustomerPO(id, name, password, contact, birthday, credit, type,companyName);
         return customerInfo;
     }
 
     /**
      * @param po
      * @return ResultMessage
-     * @throws RemoteException 仅name，password，contact，birthday，type可进行添加，birthday和type一经添加不可修改
+     * @throws RemoteException 仅name，password，contact，birthday，type可进行添加，birthday,type,companyName一经添加不可修改
      */
     public CustomerPO add(CustomerPO po) throws RemoteException {
         if (customerConnection == null) {
@@ -81,6 +86,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         Date birthday = po.getBirthday();
         MemberType type = po.getType();
         double credit = 0.00;
+        String companyName=po.getCompanyName();
 
         try {
             Statement makeID = customerConnection.createStatement();
@@ -92,13 +98,14 @@ public class CustomerDataBaseImpl implements CustomerDataService {
             }
             makeID.close();
 
-            PreparedStatement addOne = customerConnection.prepareStatement("insert into customer values(?,?,?,?,DEFAULT,?,?)");
+            PreparedStatement addOne = customerConnection.prepareStatement("insert into customer values(?,?,?,?,DEFAULT,?,?,?)");
             addOne.setInt(1, id);
-            addOne.setString(2, password);
-            addOne.setString(3, name);
-            addOne.setString(4, contact);
+            addOne.setString(2, encrypt.encrypt(password));
+            addOne.setString(3, encrypt.encrypt(name));
+            addOne.setString(4, encrypt.encrypt(contact));
             addOne.setInt(5, type.ordinal());
             addOne.setDate(6, birthday);
+            addOne.setString(7,encrypt.encrypt(companyName));
             addOne.executeUpdate();
             addOne.close();
 
@@ -118,7 +125,7 @@ public class CustomerDataBaseImpl implements CustomerDataService {
             return null;
         }
 
-        CustomerPO newCustomer = new CustomerPO(id, name, password, contact, birthday, credit, type);
+        CustomerPO newCustomer = new CustomerPO(id, name, password, contact, birthday, credit, type,companyName);
         return newCustomer;
     }
 
@@ -135,9 +142,9 @@ public class CustomerDataBaseImpl implements CustomerDataService {
         try {
             PreparedStatement modify = customerConnection.prepareStatement("update customer set name = ?,password = ?,telnum= ? " +
                     "where customerid = " + po.getId());
-            modify.setString(1, po.getName());
-            modify.setString(2, po.getPassword());
-            modify.setString(3, po.getContact());
+            modify.setString(1, encrypt.encrypt(po.getName()));
+            modify.setString(2, encrypt.encrypt(po.getPassword()));
+            modify.setString(3, encrypt.encrypt(po.getContact()));
             modify.executeUpdate();
             modify.close();
 

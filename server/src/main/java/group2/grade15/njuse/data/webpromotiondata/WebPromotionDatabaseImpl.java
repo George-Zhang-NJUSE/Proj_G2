@@ -2,7 +2,7 @@ package group2.grade15.njuse.data.webpromotiondata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
-import group2.grade15.njuse.dataservice.WebPromotionDataService;
+import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.utility.PromotionState;
@@ -49,7 +49,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
                 PromotionState state = PromotionState.values()[resultSet.getInt(8)];
                 WebPromotionType promotionType = WebPromotionType.values()[resultSet.getInt(9)];
 
-                if (start.before(current) && state.equals(PromotionState.unlaunched)) {
+                if ((start!=null)&&start.before(current) && state.equals(PromotionState.unlaunched)) {
                     state = PromotionState.start;
                     PreparedStatement updateState = webPromotionDatabase.prepareStatement("update webpromotion set " +
                             "promotionstate = ? where promotionid = ?");
@@ -59,7 +59,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
                     updateState.executeUpdate();
 
                     updateState.close();
-                } else if (end.before(current) && state.equals(PromotionState.start)) {
+                } else if ((end!=null)&&end.before(current) && state.equals(PromotionState.start)) {
                     state = PromotionState.stop;
                     PreparedStatement updateState = webPromotionDatabase.prepareStatement("update webpromotion set " +
                             "promotionstate = ? where promotionid = ?");

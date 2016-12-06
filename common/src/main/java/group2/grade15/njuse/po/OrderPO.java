@@ -21,7 +21,7 @@ public class OrderPO implements Serializable {
     private boolean haveChild;
     private OrderState state;
 
-    public OrderPO(int orderID, int customerID, int hotelID, double amount, Date checkInTime, Date checkOutTime,
+    public OrderPO(int orderID, int customerID, int hotelID,double amount, Date checkInTime, Date checkOutTime,
                    Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
         this.orderID = orderID;
         this.customerID = customerID;

@@ -62,6 +62,8 @@ public class CommentController implements Initializable {
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.5);
         rootNode.setScaleY(0.5);
+        rootNode.setLayoutX(350);
+        rootNode.setLayoutY(150);
 
         //加载按钮变化样式
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");

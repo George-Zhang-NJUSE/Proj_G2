@@ -1,6 +1,5 @@
 package group2.grade15.njuse.bl.webmarketerbl;
 
-import group2.grade15.njuse.bl.promotionfactory.WebPromotionFactory;
 import group2.grade15.njuse.blservice.WebPromotionServ;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.WebPromotionListVO;
@@ -12,12 +11,12 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 public class WebPromotionProxy implements WebPromotionServ {
 
     @Override
-    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
-        return WebPromotionFactory.getInstance().createWebPromotion(promotionInfo);
+    public ResultMessage createWebPromotion(WebPromotionVO webPromotionInfo) {
+        return null;
     }
 
     @Override
-    public WebPromotionListVO getWebPromotionList(String hotelId) {
+    public WebPromotionListVO getWebPromotionList() {
         return null;
     }
 
@@ -27,7 +26,7 @@ public class WebPromotionProxy implements WebPromotionServ {
     }
 
     @Override
-    public ResultMessage changeState(WebPromotionVO PromotionVO) {
+    public ResultMessage changeState(WebPromotionVO promotion) {
         return null;
     }
 }
