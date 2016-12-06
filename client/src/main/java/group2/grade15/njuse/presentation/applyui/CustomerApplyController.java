@@ -27,7 +27,7 @@ public class CustomerApplyController implements Initializable {
 
     private Stage currentStage;
 
-    private String username, password, confirmPsw, idNum, phoneContact, extraInfo;
+    private String username, password, confirmPsw, phoneContact, extraInfo;
 
     @FXML
     private Pane applyPaneBack;
@@ -36,7 +36,7 @@ public class CustomerApplyController implements Initializable {
     private GridPane applyPane;
 
     @FXML
-    private TextField usernameField, phoneContactField, enterpriseNameField, idNumField;
+    private TextField usernameField, phoneContactField, enterpriseNameField;
 
     @FXML
     private PasswordField passwordField, confirmPswField;
@@ -114,7 +114,6 @@ public class CustomerApplyController implements Initializable {
         password = passwordField.getText();
         confirmPsw = confirmPswField.getText();
         phoneContact = phoneContactField.getText();
-        idNum = idNumField.getText();
 
         extraInfo = (isEnterpriseCheckBox.isSelected()) ? enterpriseNameField.getText() : birthdayPicker.getEditor().getText();
         // TODO: 2016/11/25 apply with the info above

@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/common/hotel_booking_system-common.iml" filepath="$PROJECT_DIR$/common/hotel_booking_system-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/hotel_booking_system-parent.iml" filepath="$PROJECT_DIR$/hotel_booking_system-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/hotel_booking_system-server.iml" filepath="$PROJECT_DIR$/server/hotel_booking_system-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/stubndriver/hotel_booking_system-stubndriver.iml" filepath="$PROJECT_DIR$/stubndriver/hotel_booking_system-stubndriver.iml" />
     </modules>
   </component>
 </project>
