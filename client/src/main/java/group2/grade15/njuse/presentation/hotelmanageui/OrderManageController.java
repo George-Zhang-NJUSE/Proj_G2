@@ -1,11 +1,15 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+import group2.grade15.njuse.bl.orderbl.Order;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.OrderVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -35,6 +39,8 @@ public class OrderManageController implements Initializable {
     private GridPane overtimeCheckinPane;
     @FXML
     private HBox optionBox;
+    @FXML
+    private TableView<OrderVO> unexeTable;
     private GridPane now;
     @FXML
     private Pane checkPane;
@@ -101,18 +107,24 @@ public class OrderManageController implements Initializable {
     }
     private void impleButton(Label label){
         label.setOnMouseEntered((MouseEvent e)->{
-            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 1");
+            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 2");
             //label.setStyle("-fx-text-fill: rgb(29,171,226)");
         });
         label.setOnMouseExited((Event)->{
-            label.setStyle("-fx-border-color: rgb(0,0,0);-fx-border-radius: 10; -fx-border-width: 1; -fx-text-fill: rgb(0,0,0)");
+            label.setStyle("-fx-border-color: rgb(0,0,0);-fx-border-radius: 10; -fx-border-width: 2; -fx-text-fill: rgb(0,0,0)");
         });
         label.setOnMousePressed((MouseEvent e)->{
             //label.setStyle("-fx-border-color: rgb(29,171,226)");
-            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 1; -fx-text-fill: rgb(29,171,226)");
+            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 2; -fx-text-fill: rgb(29,171,226)");
         });
         label.setOnMouseReleased((MouseEvent e)->{
-            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 1; -fx-text-fill: rgb(0,0,0)");
+            label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 2; -fx-text-fill: rgb(0,0,0)");
         });
+    }
+
+    //逻辑的数据处理部分
+    public OrderVO getOrderVO(){
+        int index=unexeTable.;
+        OrderVO result=unexeTable.getItems().get(index);
     }
 }

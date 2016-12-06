@@ -47,6 +47,10 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Pane checkPane;
 
+    //逻辑部分
+    private AddPromotionController addPromotionController;
+    private ModifyPromotionController modifyPromotionController;
+    private Boolean activatedMode=false;
 
 
     @Override
@@ -66,12 +70,14 @@ public class PromotionManageController implements Initializable{
 
     }
     public void switchToActivated(){
+        activatedMode=true;
         changeStateButton.setText("中止");
         ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/hotelmanage/stop.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/hotelmanage/stop");
     }
     public void switchToUnactivated(){
+        activatedMode=false;
         changeStateButton.setText("激活");
         ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/hotelmanage/play.png"));
@@ -84,6 +90,7 @@ public class PromotionManageController implements Initializable{
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/AddPromotion.fxml"));
+            addPromotionController=lodar.getController();
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -101,6 +108,7 @@ public class PromotionManageController implements Initializable{
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/DeletePromotionCheck.fxml"));
+
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -118,6 +126,7 @@ public class PromotionManageController implements Initializable{
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/ModifyPromotion.fxml"));
+            modifyPromotionController=lodar.getController();
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -127,6 +136,17 @@ public class PromotionManageController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void changeState(){
+        if(activatedMode){
+
+        }
+    }
+    public void addPromotion(){
+
+    }
+    public void modifyPromotion(){
+
     }
     public void closeOpPane(){
         checkPane.setVisible(false);
