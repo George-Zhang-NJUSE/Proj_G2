@@ -94,12 +94,10 @@
                         <Label text="评分区间：" GridPane.columnIndex="7" />
                         <ChoiceBox fx:id="scoreRangeChoiceBox1" prefWidth="128.0" GridPane.columnIndex="8" />
                         <Label text="排序方式：" GridPane.rowIndex="3" />
-                        <Label text="价格：" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="星级：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Label text="评分：" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <Label text="条件：" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="顺序：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                         <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <ChoiceBox prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
                         <Label text="具体时间：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <ComboBox prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <ComboBox prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />

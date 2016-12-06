@@ -66,6 +66,7 @@ public class MyOrderDetailController implements Initializable {
         //弹出式进入动画
         Fade fadeIn = new Fade(rootNode, 200, true);
         Pop popIn = new Pop(rootNode, 200, true);
+
         rootNode.setVisible(true);
         fadeIn.play();
         popIn.play();
@@ -82,6 +83,8 @@ public class MyOrderDetailController implements Initializable {
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.5);
         rootNode.setScaleY(0.5);
+        rootNode.setLayoutX(300);
+        rootNode.setLayoutY(50);
 
         //加载按钮变化样式
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
