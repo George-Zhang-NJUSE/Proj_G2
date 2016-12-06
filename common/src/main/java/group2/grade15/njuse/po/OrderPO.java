@@ -11,6 +11,7 @@ public class OrderPO implements Serializable {
     private int orderID;
     private int customerID;
     private int hotelID;
+    private int promotionID;
     private double amount;
     private Date checkInTime;
     private Date checkOutTime;
@@ -21,11 +22,12 @@ public class OrderPO implements Serializable {
     private boolean haveChild;
     private OrderState state;
 
-    public OrderPO(int orderID, int customerID, int hotelID, double amount, Date checkInTime, Date checkOutTime,
+    public OrderPO(int orderID, int customerID, int hotelID, int promotionID, double amount, Date checkInTime, Date checkOutTime,
                    Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.hotelID = hotelID;
+        this.promotionID = promotionID;
         this.amount = amount;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
@@ -83,5 +85,9 @@ public class OrderPO implements Serializable {
 
     public OrderState getState() {
         return state;
+    }
+
+    public int getPromotionID() {
+        return promotionID;
     }
 }
