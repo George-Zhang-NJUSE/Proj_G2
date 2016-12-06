@@ -1,11 +1,11 @@
 package group2.grade15.njuse.bl.webpromotionbl;
 
-import group2.grade15.njuse.bl.promotionfactory.PromotionBL;
+import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
 
 /**
- * Created by 果宝 on 2016/12/6.
+ * Created by Guo on 2016/12/6.
  */
-public class TimeWebPromotion implements PromotionBL {
+public class TimeWebPromotion implements WebPromotionBL {
     @Override
     public double countPrice(double originalPrice) {
         return 0;
