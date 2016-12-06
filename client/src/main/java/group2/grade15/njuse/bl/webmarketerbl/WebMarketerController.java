@@ -44,13 +44,13 @@ public class WebMarketerController implements WebMarketerServ {
     }
 
     @Override
-    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
+    public ResultMessage createWebPromotion(WebPromotionVO promotionInfo) {
         return webPromotionProxy.createWebPromotion(promotionInfo);
     }
 
     @Override
-    public WebPromotionListVO getWebPromotionList(String hotelId) {
-        return webPromotionProxy.getWebPromotionList(hotelId);
+    public WebPromotionListVO getWebPromotionList() {
+        return webPromotionProxy.getWebPromotionList();
     }
 
     @Override

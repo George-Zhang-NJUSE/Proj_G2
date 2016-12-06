@@ -7,9 +7,9 @@ import group2.grade15.njuse.vo.*;
 public interface WebMarketerServ {
     public WebMarketerVO getInfo(String webMarketerId);
 
-    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo);
+    public ResultMessage createWebPromotion(WebPromotionVO promotionInfo);
 
-    public WebPromotionListVO getWebPromotionList(String hotelId);
+    public WebPromotionListVO getWebPromotionList();
 
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion);
 
