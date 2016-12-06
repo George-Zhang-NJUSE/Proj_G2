@@ -30,6 +30,7 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
@@ -65,14 +66,14 @@
             </children>
         </HBox>
         <CheckBox mnemonicParsing="false" text="有儿童" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-        <Label text="订单总价：" GridPane.rowIndex="10" />
-        <Label text="Label" textFill="#bf1c1c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+        <Label text="订单总价：" GridPane.rowIndex="11" />
+        <Label text="Label" textFill="#bf1c1c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="11" />
-        <Label fx:id="confirmLabel" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="12" />
+        <Label fx:id="confirmLabel" GridPane.columnIndex="2" GridPane.rowIndex="12" />
         <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <Label text="房间数量：" GridPane.rowIndex="8" />
         <HBox alignment="CENTER" layoutX="160.0" layoutY="536.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
@@ -86,6 +87,8 @@
                 <Label text="增加房间数按钮" />
             </children>
         </HBox>
+      <Label text="所享优惠：" GridPane.rowIndex="10" />
+      <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
     </children>
     <effect>
         <DropShadow />
