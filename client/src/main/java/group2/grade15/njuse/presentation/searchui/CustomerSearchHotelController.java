@@ -38,7 +38,7 @@ public class CustomerSearchHotelController implements Initializable {
     private Node rootNode;
 
     @FXML
-    private Label searchLabel;
+    private Label searchLabel, showOrHideLabel;
 
     @FXML
     private ChoiceBox provinceChoiceBox, cityChoiceBox, districtChoiceBox, cbdChoiceBox, roomTypeChoiceBox,
@@ -125,6 +125,7 @@ public class CustomerSearchHotelController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
+        CustomeButton.implButton(showOrHideLabel, "file:client/src/main/res/search/point");
 
         //为渐入扩大动画做准备
         rootNode.setOpacity(0);
