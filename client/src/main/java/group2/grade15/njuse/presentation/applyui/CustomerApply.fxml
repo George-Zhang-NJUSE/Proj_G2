@@ -61,11 +61,11 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Label onMouseEntered="#mouseEnterCancel" onMouseExited="#mouseExitCancel" onMousePressed="#mousePressCancel" onMouseReleased="#mouseReleaseCancel" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+                        <Label fx:id="cancelLabel" onMouseClicked="#rollBackToLogin" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
                             <graphic>
-                                <ImageView fx:id="cancelIconImage" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/apply/cancelicon.png" />
+                                        <Image url="file:client/src/main/res/apply/cancel.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -73,11 +73,11 @@
                                 <Insets bottom="10.0" left="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label onMouseEntered="#mouseEnterConfirm" onMouseExited="#mouseExitConfirm" onMousePressed="#mousePressConfirm" onMouseReleased="#mouseReleaseConfirm" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+                        <Label fx:id="confirmLabel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
                             <graphic>
-                                <ImageView fx:id="confirmIconImage" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/apply/confirmicon.png" />
+                                        <Image url="file:client/src/main/res/apply/confirm.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
