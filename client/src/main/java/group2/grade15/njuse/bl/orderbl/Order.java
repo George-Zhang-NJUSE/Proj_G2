@@ -38,13 +38,17 @@ public class Order {
         }
     }
 
-    public ResultMessage createPO(OrderPO order) {
+    public ResultMessage savePO(OrderVO order) {
         try {
-            return RemoteHelper.getInstance().getOrderDataService().addOrder(order);
+            return RemoteHelper.getInstance().getOrderDataService().addOrder(order.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
             return ResultMessage.CONNECTION_EXCEPTION;
         }
+    }
+
+    public OrderVO createPO(OrderVO orderVO){
+        return null;
     }
 
 }

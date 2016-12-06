@@ -33,8 +33,14 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
         return order.modifyState(orderId, state);
     }
 
-    public ResultMessage addOrder(OrderVO vo) {
-        return order.createPO(vo.toPO());
+    @Override
+    public OrderVO createOrder(OrderVO vo) {
+        return order.createPO(vo);
+    }
+
+    @Override
+    public ResultMessage saveOrder(OrderVO vo) {
+        return order.savePO(vo);
     }
 
     @Override
