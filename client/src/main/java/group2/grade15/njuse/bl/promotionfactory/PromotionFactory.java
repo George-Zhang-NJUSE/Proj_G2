@@ -1,29 +1,14 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
-
-import group2.grade15.njuse.bl.hotelpromotionbl.BirthdayHotelPromotion;
-import group2.grade15.njuse.bl.hotelpromotionbl.MultipleHotelPromotion;
-import group2.grade15.njuse.bl.hotelpromotionbl.PartnerHotelPromotion;
-import group2.grade15.njuse.bl.hotelpromotionbl.TimeHotelPromotion;
-import group2.grade15.njuse.bl.webpromotionbl.AreaWebPromotion;
-import group2.grade15.njuse.bl.webpromotionbl.LevelWebPromotion;
-import group2.grade15.njuse.bl.webpromotionbl.TimeWebPromotion;
-
-
 /**
- * Created by Guo on 2016/11/30.
+ * 采用工厂模式+反射机制
+ * 需要生成对应的优惠策略的实例化对象时，只需要传入promotionType，接着就会由反射机制实例化对象
+ * 可以通过这个方法避免根据type而需要进行switch判断
+ * 同时，该方法保证了优惠策略的可修改性
+ * 当增加新的优惠策略时，只需要创建一个实现了对应PromotionBL接口的新类即可，不需要对工厂类进行任何修改
  */
 public class PromotionFactory {
     static PromotionFactory promotionFactory = null;
-
-    private BirthdayHotelPromotion birthdayHotelPromotion = null;
-    private MultipleHotelPromotion multipleHotelPromotion = null;
-    private PartnerHotelPromotion partnerHotelPromotion = null;
-    private TimeHotelPromotion timeHotelPromotion = null;
-
-    private AreaWebPromotion areaWebPromotion = null;
-    private LevelWebPromotion levelWebPromotion = null;
-    private TimeWebPromotion timeWebPromotion = null;
 
     private PromotionFactory(){}
 
@@ -34,53 +19,27 @@ public class PromotionFactory {
         return promotionFactory;
     }
 
-    public BirthdayHotelPromotion createBirthdayHotelPromotion(){
-        if(birthdayHotelPromotion == null){
-            birthdayHotelPromotion = new BirthdayHotelPromotion();
+    //利用反射生成具体的网站优惠策略
+    public WebPromotionBL getWebPromotion(String promotionType){
+        WebPromotionBL webPromotion;
+        try {
+            webPromotion = (WebPromotionBL) Class.forName("group2.grade15.njuse.bl.webpromotionbl." + promotionType + "Promotion").newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            webPromotion = null;
         }
-        return birthdayHotelPromotion;
+        return webPromotion;
     }
 
-    public MultipleHotelPromotion createMultipleHotelPromotion(){
-        if(multipleHotelPromotion == null){
-            multipleHotelPromotion = new MultipleHotelPromotion();
+    //利用反射生成具体的酒店优惠策略
+    public HotelPromotionBL getHotelPromotion(String promotionType){
+        HotelPromotionBL hotelPromotion;
+        try {
+            hotelPromotion = (HotelPromotionBL) Class.forName("group2.grade15.njuse.bl.hotelpromotionbl." + promotionType + "Promotion").newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            hotelPromotion = null;
         }
-        return multipleHotelPromotion;
-    }
-
-    public PartnerHotelPromotion createPartnerHotelPromotion(){
-        if(partnerHotelPromotion == null){
-            partnerHotelPromotion = new PartnerHotelPromotion();
-        }
-        return partnerHotelPromotion;
-    }
-
-    public TimeHotelPromotion createTimeHotelPromotion(){
-        if(timeHotelPromotion == null){
-            timeHotelPromotion = new TimeHotelPromotion();
-        }
-        return timeHotelPromotion;
-    }
-
-
-    public AreaWebPromotion createAreaWebPromotion(){
-        if(areaWebPromotion == null){
-            areaWebPromotion = new AreaWebPromotion();
-        }
-        return areaWebPromotion;
-    }
-
-    public LevelWebPromotion createLevelWebPromotion(){
-        if(levelWebPromotion == null){
-            levelWebPromotion = new LevelWebPromotion();
-        }
-        return levelWebPromotion;
-    }
-
-    public TimeWebPromotion createTimeWebPromotion(){
-        if(timeWebPromotion == null){
-            timeWebPromotion = new TimeWebPromotion();
-        }
-        return timeWebPromotion;
+        return hotelPromotion;
     }
 }

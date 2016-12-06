@@ -11,7 +11,7 @@ public class OrderVO implements Serializable {
     private int orderID;
     private int customerID;
     private int hotelID;
-    private int promotionID;
+    private int promotionID;                   //该订单采取的优惠策略，初次创建时从界面层传到逻辑层时请设为0，逻辑层返回时会设置好优惠策略的ID
     private double amount;
     private Date checkInTime;
     private Date checkOutTime;
@@ -26,7 +26,7 @@ public class OrderVO implements Serializable {
         orderID = po.getOrderID();
         customerID = po.getCustomerID();
         hotelID = po.getHotelID();
-        promotionID = po.getPromotionID();
+        promotionID = 0;
         amount = po.getAmount();
         checkInTime = po.getCheckInTime();
         checkOutTime = po.getCheckOutTime();
@@ -103,6 +103,6 @@ public class OrderVO implements Serializable {
     }
 
     public OrderPO toPO() {
-        return new OrderPO(orderID, customerID, hotelID, promotionID, amount, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
+        return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
     }
 }

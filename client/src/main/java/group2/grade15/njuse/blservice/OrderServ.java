@@ -19,7 +19,7 @@ public interface OrderServ {
 
     /**
      * 客户在创建订单的界面点击确定后才调用该方法
-     * 该方法会将数据通过数据层持久化保存
+     * 该方法会将订单通过数据层持久化保存
      */
     public ResultMessage saveOrder(OrderVO vo);
 }
