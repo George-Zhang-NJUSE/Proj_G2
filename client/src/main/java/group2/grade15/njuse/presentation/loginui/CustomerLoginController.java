@@ -164,7 +164,7 @@ public class CustomerLoginController implements Initializable {
             Stage customerStage = new Stage();
             customerStage.setScene(new Scene((Parent) customerMainLoader.load()));
 
-            CustomerMainController mainController = customerMainLoader.<CustomerMainController>getController();
+            CustomerMainController mainController = customerMainLoader.getController();
 //            mainController.initData(customerVO);
 
             currentStage.close();

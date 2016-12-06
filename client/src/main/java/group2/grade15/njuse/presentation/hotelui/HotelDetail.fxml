@@ -59,7 +59,10 @@
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin></Label>
-                <Label fx:id="makeOrderLabel" onMouseClicked="#showMakeOrderPane" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                <Label fx:id="makeOrderLabel" onMouseClicked="#showMakeOrderPane" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin></Label>
                 <Label text="顾客评价:" GridPane.columnIndex="2" GridPane.valignment="TOP" />
                 <ScrollPane hbarPolicy="NEVER" prefWidth="700.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="4">
                     <content>

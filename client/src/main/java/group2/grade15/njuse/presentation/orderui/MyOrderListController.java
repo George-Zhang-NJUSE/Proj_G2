@@ -1,7 +1,10 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +26,9 @@ public class MyOrderListController implements Initializable{
     private Pane parentPane;
 
     @FXML
+    private Node rootNode;
+
+    @FXML
     private VBox allOrderBox, unexecutedOrderBox, revokedOrderBox, abnormalOrderBox;
 
     @FXML
@@ -31,7 +37,7 @@ public class MyOrderListController implements Initializable{
         if (parentPane != null) {  //在loader.load()的过程中被调用时，不加载子界面
             try {
                 allOrderBox.getChildren().clear();
-                ArrayList<Node> ItemList = new ArrayList<>();
+
 
                 // TODO: 2016/12/2 需要更改为正确的逻辑
                 for (int i = 0; i < 15; ++i) {
@@ -41,10 +47,11 @@ public class MyOrderListController implements Initializable{
                     MyOrderItemController orderItemController = orderItemLoader.getController();
                     orderItemController.setParentPane(parentPane);
 
-                    ItemList.add(singleItemTemplate);
+                    allOrderBox.getChildren().add(singleItemTemplate);
+                    orderItemController.initDataAndShow(null);
                 }
 
-                allOrderBox.getChildren().addAll(ItemList);
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -74,6 +81,15 @@ public class MyOrderListController implements Initializable{
 
     }
 
+    public void initDataAndShow() {
+        // TODO: 2016/12/5  对传入的数据进行处理
+
+
+
+
+        showThePane();
+    }
+
     private void fillOrderItem(VBox container, OrderListVO listVO) {
         container.getChildren().clear();
         ArrayList<Node> itemList = new ArrayList<>();
@@ -94,6 +110,17 @@ public class MyOrderListController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //为渐入扩大动画做准备
+        rootNode.setOpacity(0);
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
+    }
 
+    private void showThePane() {
+        Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
+        popIn.setOnFinished((ActionEvent e) -> showAllOrder());
+        fadeIn.play();
+        popIn.play();
     }
 }

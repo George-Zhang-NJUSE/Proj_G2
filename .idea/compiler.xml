@@ -25,7 +25,6 @@
         <module name="hotel_booking_system-client" />
         <module name="hotel_booking_system-common" />
         <module name="hotel_booking_system-server" />
-        <module name="hotel_booking_system-stubndriver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">

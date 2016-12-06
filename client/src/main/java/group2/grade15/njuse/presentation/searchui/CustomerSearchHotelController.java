@@ -1,6 +1,8 @@
 package group2.grade15.njuse.presentation.searchui;
 
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
+import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,6 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -27,6 +28,9 @@ public class CustomerSearchHotelController implements Initializable {
 
     @FXML
     private VBox searchItemBox;
+
+    @FXML
+    private Node rootNode;
 
     @FXML
     private Label searchLabel;
@@ -48,7 +52,7 @@ public class CustomerSearchHotelController implements Initializable {
     private void showSearchResult() {
         try {
             searchItemBox.getChildren().clear();
-            ArrayList<Node> ItemList = new ArrayList<>();
+
 
             // TODO: 2016/12/2 需要更改为正确的逻辑
             for (int i = 0; i < 15; ++i) {
@@ -56,10 +60,10 @@ public class CustomerSearchHotelController implements Initializable {
                 Node singleItemTemplate = searchItemLoader.load();
                 HotelItemController hotelItemController = searchItemLoader.getController();
                 hotelItemController.setParentPane(parentPane);
-                ItemList.add(singleItemTemplate);
+                searchItemBox.getChildren().add(singleItemTemplate);
+                hotelItemController.initDataAndShow();
             }
 
-            searchItemBox.getChildren().addAll(ItemList);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -68,13 +72,33 @@ public class CustomerSearchHotelController implements Initializable {
         }
     }
 
+    private void showSearchPane() {
+        //渐入扩大动画
+        Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
+        fadeIn.play();
+        popIn.play();
+    }
+
     public void setParentPane(Pane parentPane) {
         this.parentPane = parentPane;
+    }
+
+    public void initDataAndShow() {
+        // TODO: 2016/12/5 加载数据
+
+
+        showSearchPane();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
+
+        //为渐入扩大动画做准备
+        rootNode.setOpacity(0);
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
     }
 }

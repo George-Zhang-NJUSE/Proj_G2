@@ -1,10 +1,14 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -17,8 +21,17 @@ import java.util.ResourceBundle;
  */
 public class MyOrderItemController implements Initializable{
 
-    private Pane parentPane;
+    private Pane parentPane; //实际值为customermain中的functionPane,用于弹出新界面
     private OrderVO orderVO;
+
+    @FXML
+    private Node rootNode;
+
+    @FXML
+    private Label showDetailLabel;
+
+    @FXML
+    private HBox hotelInfoBox;
 
 
     @FXML
@@ -38,17 +51,42 @@ public class MyOrderItemController implements Initializable{
         }
     }
 
-    public void initData(OrderVO vo) {
+    public void initDataAndShow(OrderVO vo) {
+        // TODO: 2016/12/5 数据处理
         orderVO = vo;
 
+
+        show();
     }
 
     public void setParentPane(Pane parentPane) {
         this.parentPane = parentPane;
     }
 
+    private void adaptToActualWidth() {
+        //宽度太窄时不显示部分内容
+        Pane container= (Pane)rootNode.getParent();
+        if (container.getWidth() < 900) {
+            hotelInfoBox.setVisible(false);
+            hotelInfoBox.setPrefWidth(0);
+        }
+    }
+
+    private void show() {
+        adaptToActualWidth();
+        Fade fadeIn = new Fade(rootNode, 300, true);
+        fadeIn.play();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //加载按钮变化样式
+        CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
+
+        //为渐入动画做准备
+        rootNode.setOpacity(0);
+
+
 
     }
 }
