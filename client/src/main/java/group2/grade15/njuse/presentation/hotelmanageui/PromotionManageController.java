@@ -1,12 +1,16 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
 import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.bl.promotionfactory.HotelPromotionBL;
+import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.blservice.HotelPromotionServ;
 import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.PromotionState;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionVO;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -61,6 +65,7 @@ public class PromotionManageController implements Initializable{
 
     private HotelPromotionServ hotelPromotionController=new HotelPromotionController();
     private OrderServ orderController=new OrderController();
+    private HotelManagerServ hotelManagerController=new HotelManagerController();
 
 
     @Override
@@ -147,17 +152,36 @@ public class PromotionManageController implements Initializable{
             e.printStackTrace();
         }
     }
+
+    //逻辑数据采集部分
+    private HotelPromotionVO getSelectedPromotion(){
+
+    }
+
+    //逻辑实现部分
     public void changeState(){
         if(activatedMode){
 
         }
     }
-    public void addPromotion(){
+
+    public ResultMessage addPromotion(){
         HotelPromotionVO promotionToAdd=addPromotionController.getVO();
 
-    }
-    public void modifyPromotion(){
+        return null;
 
+    }
+    public ResultMessage modifyPromotion(){
+        HotelPromotionVO promotionToModify=modifyPromotionController.getVO();
+        return hotelManagerController.modifyHotelPromotion(promotionToModify);
+    }
+    public ResultMessage deletePromotion(){
+        HotelPromotionVO promotionToDelete=getSelectedPromotion();
+        return hotelManagerController.deleteHotelPromotion(promotionToDelete);
+    }
+    public ResultMessage activatePromotion(){
+        HotelPromotionVO promotionToActivate=getSelectedPromotion();
+        return hotelManagerController.activateHotelPromotion(promotionToActivate);
     }
     public void closeOpPane(){
         checkPane.setVisible(false);
