@@ -30,7 +30,7 @@ public class HotelManagerController implements HotelManagerServ {
     }
 
     @Override
-    public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo) {
+    public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo) {
         return null;
     }
 
