@@ -1,81 +1,100 @@
 package group2.grade15.njuse.bl.hotelmanagerbl;
 
+import group2.grade15.njuse.bl.hotelbl.Hotel;
+import group2.grade15.njuse.bl.hotelbl.HotelBL;
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
+import group2.grade15.njuse.bl.orderbl.ModifyOrderStateBL;
+import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
 /**
- * Created by 果宝 on 2016/12/4.
+ * Created by Guo on 2016/12/4.
  */
 public class HotelManagerController implements HotelManagerServ {
-    @Override
-    public ResultMessage modifyInfo(HotelManagerVO hotelManager) {
-        return null;
+
+    private HotelManagerBL hotelManager;
+    private HotelBL hotel;
+    private HotelPromotionControllerBL hotelPromotionController;
+    private ModifyOrderStateBL modifyOrderState;
+
+    public HotelManagerController(){
+        hotel = new Hotel();
+        hotelManager = new HotelManager();
+        hotelPromotionController = new HotelPromotionController();
+        modifyOrderState = new OrderController();
     }
 
     @Override
-    public ResultMessage modifyHotelInfo(HotelVO hotel) {
-        return null;
+    public ResultMessage modifyInfo(HotelManagerVO hotelManagerVO) {
+        return hotelManager.modifyInfo(hotelManagerVO);
+    }
+
+    @Override
+    public ResultMessage modifyHotelInfo(HotelVO hotelVO) {
+        return hotel.modifyInfo(hotelVO);
     }
 
     @Override
     public HotelVO getHotelInfo(int hotelID) {
-        return null;
+        return hotel.getInfo(hotelID);
     }
 
     @Override
-    public ResultMessage modifyRoomInfo(RoomVO roomInfo) {
-        return null;
+    public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
+        return hotel.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
     public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo) {
-        return null;
+        return hotelPromotionController.createHotelPromotion(promotionInfo);
     }
 
     @Override
-    public HotelPromotionListVO getHotelPromotionList() {
-        return null;
+    public HotelPromotionListVO getHotelPromotionList(int hotelID) {
+        return hotelPromotionController.getHotelPromotionList(hotelID);
     }
 
     @Override
     public ResultMessage modifyHotelPromotion(HotelPromotionVO hotelPromotion) {
-        return null;
+        return hotelPromotionController.modifyHotelPromotion(hotelPromotion);
     }
 
     @Override
     public ResultMessage activateHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelManager.activateHotelPromotion(promotionVO);
     }
 
     @Override
     public ResultMessage stopHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelManager.stopHotelPromotion(promotionVO);
     }
 
     @Override
     public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelManager.deleteHotelPromotion(promotionVO);
     }
 
     @Override
     public ResultMessage modifyState(int orderID, OrderState s) {
-        return null;
+        return modifyOrderState.modifyState(orderID, s);
     }
 
     @Override
     public ResultMessage addCompany(int customerID) {
-        return null;
+        return hotelManager.addCompany(customerID);
     }
 
     @Override
     public ResultMessage deleteCompany(int customerID) {
-        return null;
+        return hotelManager.deleteCompany(customerID);
     }
 
     @Override
     public HotelManagerVO getInfo(int hotelManagerId) {
-        return null;
+        return hotelManager.getInfo(hotelManagerId);
     }
 }

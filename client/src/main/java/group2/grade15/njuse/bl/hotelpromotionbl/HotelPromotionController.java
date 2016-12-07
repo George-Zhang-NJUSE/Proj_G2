@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Guo on 2016/11/13.
  */
-public class HotelPromotionController implements GetHotelPromotionBL, HotelPromotionServ {
+public class HotelPromotionController implements HotelPromotionControllerBL, HotelPromotionServ {
 
     @Override
     public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo) {

@@ -20,9 +20,11 @@ import java.util.HashSet;
  */
 public class HotelController implements HotelServ, GetHotelListBL {
     HotelBL hotelBL;
+    OrderListBL orderListBL;
 
     public HotelController() {
         hotelBL = new Hotel();
+        orderListBL = new OrderList();
     }
 
     @Override
@@ -42,7 +44,6 @@ public class HotelController implements HotelServ, GetHotelListBL {
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
-        OrderListBL orderListBL = new OrderList();
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderList(customerID).getOrderList();
         ArrayList<HotelVO> hotelList = new ArrayList();
         HashSet<Integer> hotelIDSet = new HashSet();
