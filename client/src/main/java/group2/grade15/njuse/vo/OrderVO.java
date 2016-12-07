@@ -38,7 +38,7 @@ public class OrderVO implements Serializable {
         state = po.getState();
     }
 
-    //专用于在更新订单
+    //专用于在更新订单价格
     public OrderVO(OrderVO vo, double newAmount, int useDpromotionID) {
         orderID = vo.getOrderID();
         customerID = vo.getCustomerID();
@@ -121,5 +121,9 @@ public class OrderVO implements Serializable {
 
     public OrderPO toPO() {
         return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
+    }
+
+    public int getPromotionID() {
+        return promotionID;
     }
 }
