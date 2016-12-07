@@ -12,12 +12,14 @@ import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionVO;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,9 +65,7 @@ public class PromotionManageController implements Initializable{
     private ModifyPromotionController modifyPromotionController;
     private Boolean activatedMode=false;
 
-    private HotelPromotionServ hotelPromotionController=new HotelPromotionController();
-    private OrderServ orderController=new OrderController();
-    private HotelManagerServ hotelManagerController=new HotelManagerController();
+    private HotelManagerServ hotelManagerController;
 
 
     @Override
@@ -84,6 +84,11 @@ public class PromotionManageController implements Initializable{
         });
 
     }
+    public void setService(HotelManagerServ service){
+        this.hotelManagerController=service;
+    }
+
+    //界面跳转控制逻辑
     public void switchToActivated(){
         activatedMode=true;
         changeStateButton.setText("中止");
@@ -152,24 +157,39 @@ public class PromotionManageController implements Initializable{
             e.printStackTrace();
         }
     }
+    public void closeOpPane(){
+        checkPane.setVisible(false);
+        opPane.setVisible(false);
+    }
+
+
 
     //逻辑数据采集部分
+    //TODO test this function.
     private HotelPromotionVO getSelectedPromotion(){
-
+        if(activatedMode){
+            int index=activatedList.getSelectionModel().getSelectedIndex();
+            ObservableList<HotelPromotionVO> list=activatedList.getItems();
+            return list.get(index);
+        }else{
+            int index=unactivatedList.getSelectionModel().getSelectedIndex();
+            ObservableList<HotelPromotionVO> list= activatedList.getItems();
+            return list.get(index);
+        }
     }
 
     //逻辑实现部分
-    public void changeState(){
+    public ResultMessage changeState(){
         if(activatedMode){
-
+            return hotelManagerController.stopHotelPromotion(getSelectedPromotion());
+        }else{
+            return hotelManagerController.activateHotelPromotion(getSelectedPromotion());
         }
     }
 
     public ResultMessage addPromotion(){
         HotelPromotionVO promotionToAdd=addPromotionController.getVO();
-
-        return null;
-
+        return hotelManagerController.createHotelPromotion(promotionToAdd);
     }
     public ResultMessage modifyPromotion(){
         HotelPromotionVO promotionToModify=modifyPromotionController.getVO();
@@ -183,9 +203,6 @@ public class PromotionManageController implements Initializable{
         HotelPromotionVO promotionToActivate=getSelectedPromotion();
         return hotelManagerController.activateHotelPromotion(promotionToActivate);
     }
-    public void closeOpPane(){
-        checkPane.setVisible(false);
-        opPane.setVisible(false);
-    }
+
 
 }

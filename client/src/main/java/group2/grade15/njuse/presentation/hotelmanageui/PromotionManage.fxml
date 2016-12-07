@@ -41,7 +41,7 @@
                                        <children>
                                           <TableView fx:id="unactivatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="ID" />
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>

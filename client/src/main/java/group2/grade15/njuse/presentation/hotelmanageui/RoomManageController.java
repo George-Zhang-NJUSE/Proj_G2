@@ -1,7 +1,10 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
+import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.RoomVO;
 import javafx.fxml.FXML;
@@ -53,6 +56,9 @@ public class RoomManageController implements Initializable {
     @FXML
     private TextField restM;
 
+    //逻辑实现部分
+    private HotelManagerServ hotelManagerController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check,"file:client/src/main/res/hotelmanage/Check");
@@ -61,6 +67,10 @@ public class RoomManageController implements Initializable {
         CustomeButton.implButton(modifyButton,"file:client/src/main/res/hotelmanage/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/hotelmanage/delete");
 
+    }
+
+    public void setService(HotelManagerServ service) {
+        hotelManagerController=service;
     }
     public void toAdd(){
         now.setVisible(false);
@@ -98,6 +108,7 @@ public class RoomManageController implements Initializable {
     }
     //逻辑数据采集部分
 
+
     /**room表格里面的RoomVO的采集
      *
      * @return RoomVO, 在小栏中的输入的RoomVO
@@ -110,5 +121,14 @@ public class RoomManageController implements Initializable {
             result = new RoomVO(typeM.getValue(), Double.parseDouble(priceM.getText()), Integer.parseInt(countM.getText()), Integer.parseInt(restM.getText()));
         }
         return result;
+    }
+
+    public ResultMessage addRoom(){
+        RoomVO roomToAdd=getRoomVO();
+        return hotelManagerController.modifyRoomInfo(roomToAdd);
+    }
+    public ResultMessage modifyRoom(){
+        RoomVO roomToModify = getRoomVO();
+        return hotelManagerController.modifyRoomInfo(roomToModify);
     }
 }

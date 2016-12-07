@@ -1,5 +1,7 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
+import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.vo.HotelManagerVO;
 import group2.grade15.njuse.vo.HotelVO;
@@ -43,6 +45,9 @@ public class HotelManageMainController implements Initializable {
     //软件运行时的存储信息
     public static HotelVO hotelVO;
     public static HotelManagerVO hotelManagerVO;
+
+    //接口的实例化
+    private HotelManagerServ hotelManagerController=new HotelManagerController();
 
     //controller的初始化
     @Override
@@ -136,6 +141,8 @@ public class HotelManageMainController implements Initializable {
             Fade out = new Fade(opPane, 500, false);
             out.play();
             FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/PromotionManage.fxml"));
+            PromotionManageController promotionMnanageController=infoLoader.getController();
+            promotionMnanageController.setService(this.hotelManagerController);
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);

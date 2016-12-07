@@ -62,7 +62,7 @@
                     <graphic>
                         <ImageView fx:id="loginIconImage" fitHeight="44.0" fitWidth="113.0" scaleX="0.9" scaleY="0.9" smooth="true">
                             <image>
-                                <Image url="file:client/src/main/res/login/loginicon.png" />
+                                <Image url="file:client/src/main/res/login/login.png" />
                             </image>
                         </ImageView>
                     </graphic>

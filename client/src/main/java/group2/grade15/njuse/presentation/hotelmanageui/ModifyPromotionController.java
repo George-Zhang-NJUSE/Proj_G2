@@ -68,7 +68,7 @@ public class ModifyPromotionController implements Initializable {
         HotelPromotionType type=this.type.getValue();
         switch(type){
             case BirthdayHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), PromotionState.unlaunched,HotelManageMainController.getHotelID());
+                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
                 break;
             case TimeHotel:
                 Date sD,eD;
@@ -76,16 +76,16 @@ public class ModifyPromotionController implements Initializable {
                 String[] e = endDate.getEditor().getText().split("/");
                 sD=new Date(Integer.parseInt(s[2]),Integer.parseInt(s[0]),Integer.parseInt(s[1]));
                 eD=new Date(Integer.parseInt(e[2]),Integer.parseInt(e[0]),Integer.parseInt(e[1]));
-                result = new HotelPromotionVO(ID, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), PromotionState.unlaunched, HotelManageMainController.getHotelID());
+                result = new HotelPromotionVO(ID, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), PromotionState.unlaunched, HotelManageMainController.hotelVO.getId());
                 break;
             case PartnerHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.getHotelID());
+                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
                 break;
             case MultipleHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.getHotelID());
+                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
                 break;
             default:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.getHotelID());
+                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
         }
         return result;
     }
