@@ -2,14 +2,17 @@ package group2.grade15.njuse.presentation.hotelmanageui;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import group2.grade15.njuse.bl.orderbl.Order;
+import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.blservice.OrderListServ;
+import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -40,15 +43,59 @@ public class OrderManageController implements Initializable {
     @FXML
     private HBox optionBox;
     @FXML
-    private TableView<OrderVO> unexeTable;
+    private TableView<OrderVO> unexeList,checkinList,completeList,innormalList,cancelList;
+    @FXML
+    private Tab unexe;
+    @FXML
+    private Tab checkin;
+    @FXML
+    private Tab complete;
+    @FXML
+    private Tab innormal;
+    @FXML
+    private Tab canceled;
+    @FXML
+    private TextField orderID;
+    @FXML
+    private TextField customerID;
+    @FXML
+    private TextField checkInDate;
+    @FXML
+    private TextField checkOutDate;
+    @FXML
+    private TextField roomType;
+    @FXML
+    private TextField roomNum;
+    @FXML
+    private TextField totalPrice;
+    @FXML
+    private TextField orderState;
+
+
+    private Tab workingTab;
+
     private GridPane now;
+
     @FXML
     private Pane checkPane;
+    @FXML
+    private TabPane tabPane;
     @FXML
     private Label check;
     @FXML
     private Label cancel;
 
+
+
+
+    enum WorkingTab{
+        UNEXE,CHECKIN,COMPLETE,INNORMAL,CANCEL
+    }
+
+    //逻辑部分
+    private WorkingTab state;
+    public static OrderServ orderService=new OrderController();
+    public static OrderListServ orderListService=new OrderController();
 
 
     @Override
@@ -60,6 +107,23 @@ public class OrderManageController implements Initializable {
         CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
 
     }
+    public void tab1(){
+        OrderListVO list=orderListService.getUnexecutedOrderList(HotelManageMainController.hotelVO.getId());
+        state=WorkingTab.UNEXE;
+    }
+    public void tab2(){
+        state=WorkingTab.CHECKIN;
+    }
+    public void tab3(){
+        state=WorkingTab.COMPLETE;
+    }
+    public void tab4(){
+        state=WorkingTab.INNORMAL;
+    }
+    public void tab5(){
+        state=WorkingTab.CANCEL;
+    }
+
 
     public void toCheckin(){
         optionBox.setVisible(false);
@@ -96,18 +160,23 @@ public class OrderManageController implements Initializable {
         Fade in = new Fade(optionBox, 200, true);
         in.play();
     }
-    public void checkeAction(){
+
+    private void fillTbale(){
+        OrderVO vo=getSelectedOrderVO();
+        fillTable(vo);
+    }
+    private void fillTable(OrderVO vo){
+        orderID.setText(Integer.toString(vo.getOrderID()));
+        customerID.setText(Integer.toString(vo.getCustomerID()));
+        checkInDate.setText(vo.getCheckInTime().toString());
+        checkOutDate.setText(vo.getCheckOutTime().toString());
+        roomType.setText(vo.getType().toString());
+        roomNum.setText(Integer.toString(vo.getRoomSum()));
+        totalPrice.setText(Double.toString(vo.getAmount()));
+        orderState.setText(vo.getState().toString());
 
     }
-    public void checkin(){
-        //TODO
-    }
-    public void checkout(){
-        //TODO
-    }
-    public void overtimeCheckin(){
-        //TODO
-    }
+
     private void impleButton(Label label){
         label.setOnMouseEntered((MouseEvent e)->{
             label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 2");
@@ -125,10 +194,39 @@ public class OrderManageController implements Initializable {
         });
     }
 
+
     //逻辑的数据处理部分
-    public OrderVO getOrderVO(){
-        int index=0;
-        OrderVO result=unexeTable.getItems().get(index);
-        return null;
+    public OrderVO getSelectedOrderVO(){
+        switch (state) {
+            case UNEXE:
+                return getOrderVO(unexeList);
+            case CHECKIN:
+                return getOrderVO(checkinList);
+            case COMPLETE:
+                return getOrderVO(completeList);
+            case INNORMAL:
+                return getOrderVO(innormalList);
+            case CANCEL:
+                return getOrderVO(cancelList);
+            default:
+                return null;
+        }
+    }
+    private OrderVO getOrderVO(TableView<OrderVO> List){
+        int index= List.getSelectionModel().getSelectedIndex();
+        return List.getItems().get(index);
+    }
+
+    public void checkeAction(){
+
+    }
+    public void checkin(){
+        //TODO
+    }
+    public void checkout(){
+        //TODO
+    }
+    public void overtimeCheckin(){
+        //TODO
     }
 }

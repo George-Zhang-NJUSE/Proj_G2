@@ -47,7 +47,7 @@ public class HotelManageMainController implements Initializable {
     public static HotelManagerVO hotelManagerVO;
 
     //接口的实例化
-    private static HotelManagerServ hotelManagerController=new HotelManagerController();
+    public static HotelManagerServ hotelManagerController=new HotelManagerController();
 
     //controller的初始化
     @Override
@@ -141,8 +141,6 @@ public class HotelManageMainController implements Initializable {
             Fade out = new Fade(opPane, 500, false);
             out.play();
             FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/PromotionManage.fxml"));
-            PromotionManageController promotionMnanageController=infoLoader.getController();
-            promotionMnanageController.setService(this.hotelManagerController);
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);

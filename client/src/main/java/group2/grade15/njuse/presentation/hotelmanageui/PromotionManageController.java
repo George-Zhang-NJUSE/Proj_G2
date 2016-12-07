@@ -30,6 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
+
 /**
  * Created by ALIENWARE-PC on 2016/12/1.
  */
@@ -65,8 +67,6 @@ public class PromotionManageController implements Initializable{
     private ModifyPromotionController modifyPromotionController;
     private Boolean activatedMode=false;
 
-    private HotelManagerServ hotelManagerController;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,9 +83,6 @@ public class PromotionManageController implements Initializable{
             switchToActivated();
         });
 
-    }
-    public void setService(HotelManagerServ service){
-        this.hotelManagerController=service;
     }
 
     //界面跳转控制逻辑
