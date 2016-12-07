@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 /**
  * Created by George on 2016/11/13.
  */
-public class CustomerController implements CustomerBL, CustomerServ {
+public class CustomerController implements CustomerServ {
 
     private CustomerBL customerBL;
 

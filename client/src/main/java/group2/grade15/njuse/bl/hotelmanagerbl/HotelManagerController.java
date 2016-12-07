@@ -12,14 +12,14 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
 /**
- * Created by 果宝 on 2016/12/4.
+ * Created by Guo on 2016/12/4.
  */
 public class HotelManagerController implements HotelManagerServ {
 
-    HotelManagerBL hotelManager;
-    HotelBL hotel;
-    HotelPromotionControllerBL hotelPromotionController;
-    ModifyOrderStateBL modifyOrderState;
+    private HotelManagerBL hotelManager;
+    private HotelBL hotel;
+    private HotelPromotionControllerBL hotelPromotionController;
+    private ModifyOrderStateBL modifyOrderState;
 
     public HotelManagerController(){
         hotel = new Hotel();

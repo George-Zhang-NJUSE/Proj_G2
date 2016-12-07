@@ -1,5 +1,7 @@
 package group2.grade15.njuse.bl.hotelmanagerbl;
 
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
 import group2.grade15.njuse.po.HotelManagerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
@@ -12,6 +14,12 @@ import java.rmi.RemoteException;
  * Created by Guo on 2016/11/13.
  */
 public class HotelManager implements HotelManagerBL{
+
+    private HotelPromotionControllerBL hotelPromotionController;
+
+    public HotelManager(){
+        hotelPromotionController = new HotelPromotionController();
+    }
 
     @Override
     public HotelManagerVO getInfo(int hotelManagerId) {
@@ -43,17 +51,17 @@ public class HotelManager implements HotelManagerBL{
 
     @Override
     public ResultMessage activateHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelPromotionController.changeState(promotionVO);
     }
 
     @Override
     public ResultMessage stopHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelPromotionController.changeState(promotionVO);
     }
 
     @Override
     public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO) {
-        return null;
+        return hotelPromotionController.changeState(promotionVO);
     }
 
     @Override
