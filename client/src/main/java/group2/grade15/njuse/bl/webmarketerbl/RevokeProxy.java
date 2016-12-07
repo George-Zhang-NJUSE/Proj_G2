@@ -7,7 +7,8 @@ import group2.grade15.njuse.utility.ResultMessage;
 
 
 /**
- * Created by Guo on 2016/11/30.
+ * 取消异常订单职责的代理者
+ * 真正的任务通过层内接口ModifyOrderStateBL代理给OrderController完成
  */
 public class RevokeProxy {
 
