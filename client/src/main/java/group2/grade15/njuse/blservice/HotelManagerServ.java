@@ -11,11 +11,11 @@ public interface HotelManagerServ {
 
     public HotelVO getHotelInfo(int hotelID);
 
-    public ResultMessage modifyRoomInfo(RoomVO roomInfo);
+    public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo);
 
     public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo);
 
-    public HotelPromotionListVO getHotelPromotionList();
+    public HotelPromotionListVO getHotelPromotionList(int hotelID);
 
     public ResultMessage modifyHotelPromotion(HotelPromotionVO hotelPromotion);
 
