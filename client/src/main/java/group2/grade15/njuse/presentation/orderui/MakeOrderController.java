@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -42,10 +43,6 @@ public class MakeOrderController implements Initializable {
         fadeOut.play();
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
-    }
-
     public void initDataAndShow() {
         // TODO: 2016/12/4 初始化数据
 
@@ -77,5 +74,9 @@ public class MakeOrderController implements Initializable {
         rootNode.setScaleY(0.5);
         rootNode.setLayoutX(300);
         rootNode.setLayoutY(50);
+
+        //设置父界面
+        parentPane = CommonData.getInstance().getFunctionAreaPane();
+        parentPane.getChildren().add(rootNode);
     }
 }

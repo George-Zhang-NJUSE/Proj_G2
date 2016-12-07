@@ -1,15 +1,17 @@
 package group2.grade15.njuse.presentation.searchui;
 
-import group2.grade15.njuse.bl.searchbl.Search;
 import group2.grade15.njuse.blservice.SearchServ;
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
 import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.myanimation.Rotate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
-import group2.grade15.njuse.presentation.myliteral.LiteralList;
-import group2.grade15.njuse.vo.CustomerVO;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
+import group2.grade15.njuse.utility.RoomType;
+import group2.grade15.njuse.utility.SortMethod;
+import group2.grade15.njuse.vo.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -31,8 +37,10 @@ import java.util.ResourceBundle;
 public class CustomerSearchHotelController implements Initializable {
 
     private CustomerVO customer;
-    private Pane parentPane;
+
     private SearchServ searchServ;
+
+    private HotelListVO basicHotelListVO;
 
     @FXML
     private VBox searchItemBox;
@@ -45,6 +53,9 @@ public class CustomerSearchHotelController implements Initializable {
 
     @FXML
     private Label searchLabel, showOrHideLabel;
+
+    @FXML
+    private DatePicker checkInDatePicker, checkOutDatePicker;
 
     @FXML
     private CheckBox onlyOrderedHotelCheckBox;
@@ -62,12 +73,6 @@ public class CustomerSearchHotelController implements Initializable {
 
 
     @FXML
-    protected void search() {
-
-        showSearchResult();
-    }
-
-    @FXML
     private void changeAdditionalPane() {
         if (additionalConditionPane.isVisible()) {
             hideAdditionalPane();
@@ -75,6 +80,41 @@ public class CustomerSearchHotelController implements Initializable {
             showAdditionalPane();
         }
     }
+
+    @FXML
+    private void loadCityBox() {
+        ProvinceVO selectedProvince= (ProvinceVO) provinceBox.getValue();
+        ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
+        cityBox.setItems(FXCollections.observableArrayList(cityVOList));
+
+        districtBox.setItems(null);
+        cbdBox.setItems(null);
+    }
+
+    @FXML
+    private void loadDistrictBox() {
+        CityVO selectedCity = (CityVO) cityBox.getValue();
+        ArrayList<DistrictVO> districtVOList = searchServ.getDistrict(selectedCity.getCityNum()).getList();
+        districtBox.setItems(FXCollections.observableArrayList(districtVOList));
+
+        cbdBox.setItems(null);
+    }
+
+    @FXML
+    private void loadCbdBox() {
+        DistrictVO selectedDistrict = (DistrictVO) districtBox.getValue();
+        ArrayList<CbdVO> cbdVOList = searchServ.getCbd(selectedDistrict.getDistrictNum()).getList();
+        cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
+
+    }
+
+    //输入所有基础条件后自动调用，在后台加载
+    @FXML
+    private void loadHotelList() {
+        CbdVO selectedCbd = (CbdVO) cbdBox.getValue();
+        basicHotelListVO = searchServ.getHotel(selectedCbd.getCbdNum());
+    }
+
 
     private void showAdditionalPane() {
         ChangeHeight grow=new ChangeHeight(additionalConditionPane,300,160);
@@ -100,28 +140,115 @@ public class CustomerSearchHotelController implements Initializable {
         reverse.play();
     }
 
+    @FXML
+    private void search() {
 
-    private void showSearchResult() {
-        try {
-            searchItemBox.getChildren().clear();
+        if (basicHotelListVO != null) {
 
+            //抓取输入的搜索条件
+            int customerID = customer.getId();
+            SortMethod sortCondition = SortMethod.values()[sortConditionChoiceBox.getSelectionModel().getSelectedIndex()];
+            String hotelName = hotelNameField.getText();
+            RoomType roomType = RoomType.values()[roomTypeChoiceBox.getSelectionModel().getSelectedIndex()];
 
-            // TODO: 2016/12/2 需要更改为正确的逻辑
-            for (int i = 0; i < 15; ++i) {
-                FXMLLoader searchItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
-                Node singleItemTemplate = searchItemLoader.load();
-                HotelItemController hotelItemController = searchItemLoader.getController();
-                hotelItemController.setParentPane(parentPane);
-                searchItemBox.getChildren().add(singleItemTemplate);
-                hotelItemController.initDataAndShow();
+            double minPrice=0,maxPrice=0;
+            int priceRangeIndex = priceRangeChoiceBox.getSelectionModel().getSelectedIndex();
+            if(priceRangeIndex!=0){
+                if (priceRangeIndex == 6) {
+                    minPrice = 5000;
+                } else {
+                    String[] minAndMaxStr = LiteralList.priceRangeList[priceRangeIndex].split("-");
+                    minPrice = Double.parseDouble(minAndMaxStr[0]);
+                    maxPrice = Double.parseDouble(minAndMaxStr[1]);
+                }
             }
 
+            int freeRoomNum = freeRoomNumChoiceBox.getSelectionModel().getSelectedIndex();
+            int minStarLevel = minStarChoiceBox.getSelectionModel().getSelectedIndex();
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Date checkInDate=null, checkOutDate=null;
+            String checkInDateStr=checkInDatePicker.getEditor().getText();
+            String checkOutDateStr = checkOutDatePicker.getEditor().getText();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                checkInDate = checkInDateStr == null ? null : dateFormat.parse(checkInDateStr);
+                checkOutDate = checkOutDateStr == null ? null : dateFormat.parse(checkOutDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            double minScore=0, maxScore=10;
+            int scoreRangeIndex = scoreRangeChoiceBox.getSelectionModel().getSelectedIndex();
+            if (scoreRangeIndex != 0) {
+                maxScore = 2 * scoreRangeIndex;
+                minScore= maxScore-2;
+            }
+
+            boolean showBookedOnly = onlyOrderedHotelCheckBox.isSelected();
+
+            SearchConditionVO searchConditionVO = new SearchConditionVO(customerID, sortCondition, hotelName, roomType, minPrice, maxPrice, freeRoomNum,
+                    minStarLevel, checkInDate, checkOutDate, minScore, maxScore, showBookedOnly);
+
+            HotelListVO result = searchServ.getHotelBySearch(searchConditionVO, basicHotelListVO);
+            showSearchResult(result);
+
+        }else{
+
+            Alert basicConditionNotFilled = new Alert(Alert.AlertType.ERROR, "请先填写搜索基础条件！");
+            basicConditionNotFilled.showAndWait();
+
+            //本地测试用
+            showSearchResult(null);
+
         }
+
+    }
+
+
+    private void showSearchResult(HotelListVO hotelListVO) {
+        if (hotelListVO != null) {
+            ArrayList<HotelVO> hotelVOList = hotelListVO.getList();
+
+            try {
+
+                searchItemBox.getChildren().clear();
+                for (HotelVO hotelVO : hotelVOList) {
+                    FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
+                    Node singleNode = hotelItemLoader.load();
+                    HotelItemController hotelItemController = hotelItemLoader.getController();
+                    searchItemBox.getChildren().add(singleNode);
+                    hotelItemController.initData(hotelVO);
+                    hotelItemController.show();
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            //本地测试用
+            try {
+                searchItemBox.getChildren().clear();
+
+                for (int i = 0; i < 15; ++i) {
+                    FXMLLoader searchItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
+                    Node singleItemTemplate = searchItemLoader.load();
+                    HotelItemController hotelItemController = searchItemLoader.getController();
+                    searchItemBox.getChildren().add(singleItemTemplate);
+                    hotelItemController.initData(null);
+                    hotelItemController.show();
+                }
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void showSearchPane() {
@@ -132,20 +259,14 @@ public class CustomerSearchHotelController implements Initializable {
         popIn.play();
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
-    }
-
-    public void initDataAndShow() {
-        // TODO: 2016/12/5 加载数据
-
-
+    public void show() {
         showSearchPane();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        searchServ=new Search();
+
+        customer= CommonData.getInstance().getCustomerVO();
 
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
@@ -153,12 +274,25 @@ public class CustomerSearchHotelController implements Initializable {
 
         //加载不需要联网数据的选择框
         roomTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.roomTypeList));
+        roomTypeChoiceBox.getSelectionModel().select(3); //兼容服务器的下标设置
+
         priceRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.priceRangeList));
+        priceRangeChoiceBox.getSelectionModel().select(0);
+
         freeRoomNumChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.freeRoomNumList));
+        freeRoomNumChoiceBox.getSelectionModel().select(0);
+
         minStarChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.minStarList));
+        minStarChoiceBox.getSelectionModel().select(0);
+
         scoreRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.scoreRangeList));
+        scoreRangeChoiceBox.getSelectionModel().select(0);
+
         sortConditionChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortConditionList));
+        sortConditionChoiceBox.getSelectionModel().select(0);
+
         sortTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortTypeList));
+        sortTypeChoiceBox.getSelectionModel().select(0);
 
         //为渐入扩大动画做准备
         rootNode.setOpacity(0);
@@ -169,6 +303,12 @@ public class CustomerSearchHotelController implements Initializable {
         additionalConditionPane.setVisible(false);
         additionalConditionPane.setOpacity(0);
         additionalConditionPane.setPrefHeight(0);
+
+        //加载省份列表
+//        searchServ = new Search();
+//        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+//        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
+
 
     }
 }

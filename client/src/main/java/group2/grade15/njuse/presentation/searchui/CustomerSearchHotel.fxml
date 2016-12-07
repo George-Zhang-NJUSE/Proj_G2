@@ -48,10 +48,10 @@
                       <Label prefHeight="20.0" text="商圈：" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
                       <Label fx:id="searchLabel" onMouseClicked="#search" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowSpan="3" />
                       <Label text="基础条件：" />
-                  <ComboBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="2" />
-                  <ComboBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="4" />
-                  <ComboBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="6" />
-                  <ComboBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="8" />
+                  <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="2" />
+                  <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="4" />
+                  <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="6" />
+                  <ComboBox fx:id="cbdBox" onAction="#loadHotelList" prefWidth="150.0" GridPane.columnIndex="8" />
                   </children>
               </GridPane>
             <Pane fx:id="additionalConditionPane" prefHeight="160.0" prefWidth="1180.0">
@@ -89,8 +89,8 @@
                         <ChoiceBox fx:id="minStarChoiceBox" prefWidth="128.0" GridPane.columnIndex="2" />
                         <Label text="入住时间：" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="退房时间：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <DatePicker fx:id="checkInDatePicker" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <DatePicker fx:id="checkOutDatePicker" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="checkInDatePicker" editable="false" promptText="点击按钮" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="checkOutDatePicker" editable="false" promptText="点击按钮" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <Label text="评分区间：" GridPane.columnIndex="7" />
                         <ChoiceBox fx:id="scoreRangeChoiceBox" prefWidth="128.0" GridPane.columnIndex="8" />
                         <Label text="排序方式：" GridPane.rowIndex="3" />

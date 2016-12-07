@@ -38,6 +38,23 @@ public class OrderVO implements Serializable {
         state = po.getState();
     }
 
+    //专用于在更新订单
+    public OrderVO(OrderVO vo, double newAmount, int useDpromotionID) {
+        orderID = vo.getOrderID();
+        customerID = vo.getCustomerID();
+        hotelID = vo.getHotelID();
+        promotionID = useDpromotionID;
+        amount = newAmount;
+        checkInTime = vo.getCheckInTime();
+        checkOutTime = vo.getCheckOutTime();
+        finalExecuteTime = vo.getFinalExecuteTime();
+        roomSum = vo.getRoomSum();
+        type = vo.getType();
+        numOfCustomer = vo.getNumOfCustomer();
+        haveChild = vo.isHaveChild();
+        state = vo.getState();
+    }
+
     public OrderVO(int orderID, int customerID, int hotelID, int promotionID, int amount, Date checkInTime, Date checkOutTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
         this.orderID = orderID;
         this.customerID = customerID;
