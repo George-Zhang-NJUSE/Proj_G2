@@ -1,6 +1,7 @@
 package group2.grade15.njuse.bl.searchbl;
 
 import group2.grade15.njuse.bl.hotelbl.GetHotelListBL;
+import group2.grade15.njuse.bl.hotelbl.GetSpareRoomNumBL;
 import group2.grade15.njuse.bl.hotelbl.HotelController;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
@@ -10,10 +11,16 @@ import group2.grade15.njuse.utility.SortMethod;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Search implements SearchServ {
+
+    GetSpareRoomNumBL getSpareRoomNum;
+
+    public Search(){
+        getSpareRoomNum = new HotelController();
+    }
 
     @Override
     public HotelListVO getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO) {
@@ -39,16 +46,16 @@ public class Search implements SearchServ {
             hotelList = filterByScore(searchCondition.getMinScore(), searchCondition.getMaxScore(), hotelList);
         }
 
-        if (searchCondition.getCheckInTime() != null || searchCondition.getCheckOutTime() != null && hotelList != null) {
-            hotelList = filterByTime(searchCondition.getCheckInTime(), searchCondition.getCheckOutTime(), hotelList);
-        }
-
         if (searchCondition.getMinPrice() != 0 || searchCondition.getMaxPrice() != 0 && hotelList != null) {
             hotelList = filterByRoomPrice(searchCondition.getMinPrice(), searchCondition.getMaxPrice(), hotelList);
         }
 
         if (searchCondition.getFreeRoomNum() != 0 || searchCondition.getRoomType() != RoomType.all && hotelList != null) {
-            hotelList = filterByRoomInfo(searchCondition.getRoomType(), searchCondition.getFreeRoomNum(), hotelList);
+            hotelList = filterByRoomType(searchCondition.getRoomType(), hotelList);
+        }
+
+        if (searchCondition.getCheckInTime() != null || searchCondition.getCheckOutTime() != null && hotelList != null) {
+            hotelList = filterByTime(searchCondition.getCheckInTime(), searchCondition.getCheckOutTime(), searchCondition.getFreeRoomNum(), searchCondition.getRoomType(), hotelList);
         }
 
         return new HotelListVO(hotelList);
@@ -287,9 +294,9 @@ public class Search implements SearchServ {
     }
 
     /**
-     * 根据SearchCondition中的房间信息对获得的酒店列表进行一次筛选
+     * 根据SearchCondition中的房间类型对获得的酒店列表进行一次筛选
      */
-    private ArrayList<HotelVO> filterByRoomInfo(RoomType roomType, int freeRoomNum, ArrayList<HotelVO> hotelList) {
+    private ArrayList<HotelVO> filterByRoomType(RoomType roomType, ArrayList<HotelVO> hotelList) {
         ArrayList<HotelVO> newHotelList = new ArrayList();
         boolean isFit = false;
 
@@ -297,7 +304,7 @@ public class Search implements SearchServ {
 
             ArrayList<RoomVO> roomList = hotel.getRoomList();
             for(RoomVO room : roomList){
-                if( (room.getType() == roomType) && (room.getSpareRoomNum() >= freeRoomNum) ){
+                if( room.getType() == roomType ){
                     isFit = true;
                 }
             }
@@ -343,10 +350,22 @@ public class Search implements SearchServ {
     }
 
     /**
-     * 根据SearchCondition中的入住时间信息对获得的酒店列表进行一次筛选
+     * 根据SearchCondition中的入住时间信息和所需房间的所剩量对获得的酒店列表进行一次筛选
      */
-    private ArrayList<HotelVO> filterByTime(Date checkInTime, Date checkOutTime, ArrayList<HotelVO> hotelList) {
+    private ArrayList<HotelVO> filterByTime(java.util.Date checkInTime, java.util.Date checkOutTime, int needRoom, RoomType type, ArrayList<HotelVO> hotelList) {
+        ArrayList<HotelVO> newHotelList = new ArrayList();
 
-        return null;
+        for (HotelVO hotel : hotelList) {
+
+            Date checkIn = new Date(checkInTime.getTime());
+            Date checkOut = new Date(checkOutTime.getTime());
+            int spareRoomNum = getSpareRoomNum.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
+
+            if((spareRoomNum < 10000) && (spareRoomNum >= needRoom)){
+                newHotelList.add(hotel);
+            }
+
+        }
+        return newHotelList;
     }
 }

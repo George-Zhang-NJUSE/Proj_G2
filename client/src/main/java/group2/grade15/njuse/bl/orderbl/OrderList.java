@@ -138,6 +138,22 @@ public class OrderList implements OrderListBL {
     }
 
     public OrderListVO getAllOrderListByHotelID(int hotelID){
-        return null;
+        ArrayList<OrderPO> orderPOList = new ArrayList();
+        try {
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByHotel(hotelID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<OrderVO> orderList = new ArrayList();
+        for(OrderPO orderPO : orderPOList){
+            orderList.add(new OrderVO(orderPO));
+        }
+
+        if(orderPOList != null){
+            return new OrderListVO(orderList);
+        } else {
+            return null;
+        }
     }
 }

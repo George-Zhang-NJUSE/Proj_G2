@@ -23,7 +23,7 @@ public interface OrderDataService extends Remote {
 
     public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;
 
-    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type,int hotelID);
+    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type,int hotelID) throws RemoteException;
 
     public ResultMessage addOrder(OrderPO po) throws RemoteException;
 

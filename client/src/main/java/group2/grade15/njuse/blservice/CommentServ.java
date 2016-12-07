@@ -18,15 +18,10 @@ public interface CommentServ {
     /**
      * 通过评价ID获取单个评价
      */
-    public CommentVO getComment(int commentID);
+    public CommentVO getComment(int commentID, int customerID);
 
     /**
      * 根据酒店的ID获取酒店评价列表
      */
     public CommentListVO getHotelCommentList(int hotelId);
-
-    /**
-     * 根据顾客的ID获取顾客的评价列表
-     */
-    public CommentListVO getCustomerCommentList(int customerId);
 }
