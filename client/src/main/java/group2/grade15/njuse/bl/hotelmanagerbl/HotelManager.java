@@ -29,7 +29,7 @@ public class HotelManager {
         return null;
     }
 
-    public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo) {
+    public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo) {
         return null;
     }
 

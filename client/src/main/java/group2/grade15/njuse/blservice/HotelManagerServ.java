@@ -4,7 +4,6 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
-
 public interface HotelManagerServ {
     public ResultMessage modifyInfo(HotelManagerVO hotelManager);
 
@@ -14,7 +13,7 @@ public interface HotelManagerServ {
 
     public ResultMessage modifyRoomInfo(RoomVO roomInfo);
 
-    public HotelPromotionVO createHotelPromotion(HotelPromotionVO promotionInfo);
+    public ResultMessage createHotelPromotion(HotelPromotionVO promotionInfo);
 
     public HotelPromotionListVO getHotelPromotionList();
 
