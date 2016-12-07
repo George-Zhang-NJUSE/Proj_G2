@@ -47,7 +47,7 @@ public class HotelManageMainController implements Initializable {
     public static HotelManagerVO hotelManagerVO;
 
     //接口的实例化
-    private HotelManagerServ hotelManagerController=new HotelManagerController();
+    private static HotelManagerServ hotelManagerController=new HotelManagerController();
 
     //controller的初始化
     @Override
