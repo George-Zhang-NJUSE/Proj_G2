@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Guo on 2016/12/4.
  */
-public class Credit {
+public class Credit implements CreditBL{
 
     public ResultMessage modifyCredit(CreditVO credit) {
         ResultMessage result;
