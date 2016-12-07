@@ -10,8 +10,9 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class WebPromotionController implements WebPromotionServ, GetWebPromotionBL {
+public class WebPromotionController implements WebPromotionServ, GetWebPromotionBL, WebPromotionControllerBL {
 
+    @Override
     public ResultMessage createWebPromotion(WebPromotionVO promotionInfo) {
         ResultMessage result;
 
