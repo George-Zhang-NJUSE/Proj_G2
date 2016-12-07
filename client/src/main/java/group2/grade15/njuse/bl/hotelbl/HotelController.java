@@ -4,21 +4,24 @@ import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.po.HotelPO;
+import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.RoomVO;
 
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
  * Created by Guo on 2016/12/4.
  */
-public class HotelController implements HotelServ, GetHotelListBL {
+public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomNumBL {
     HotelBL hotelBL;
     OrderListBL orderListBL;
 
@@ -66,5 +69,36 @@ public class HotelController implements HotelServ, GetHotelListBL {
         }
 
         return new HotelListVO(hotelList);
+    }
+
+    @Override
+    public int getSpareRoomNumInTime(RoomType type, int hotelID, Date checkInTime, Date checkOutTime){
+        int nowSpareRoomNum;
+
+        try {
+            nowSpareRoomNum = RemoteHelper.getInstance().getOrderDataService().roomToBeAvailable(checkInTime, checkOutTime, type, hotelID);
+        } catch (RemoteException e) {
+            nowSpareRoomNum = 100000;
+            e.printStackTrace();
+        }
+
+        int lastSpareRoom = 0;
+        HotelPO hotel = null;
+        try {
+            hotel = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if(hotel != null) {
+            for (RoomPO room : hotel.getRoomList()) {
+                if (room.getType() == type) {
+                    lastSpareRoom = room.getSpareRoomNum();
+                }
+            }
+        }
+
+        int spareRoomNum = lastSpareRoom + nowSpareRoomNum;
+        return spareRoomNum;
     }
 }
