@@ -3,6 +3,7 @@ package group2.grade15.njuse.bl.orderbl;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.vo.CustomerVO;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 
@@ -15,7 +16,8 @@ import java.util.Date;
  */
 public class OrderList implements OrderListBL {
 
-    public OrderListVO getAllOrderList(int customerID) {
+
+    public OrderListVO getAllOrderListByCustomerID(int customerID) {
         ArrayList<OrderPO> orderPOList = new ArrayList();
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(customerID);
@@ -36,105 +38,52 @@ public class OrderList implements OrderListBL {
     }
 
     public OrderListVO getExecutedOrderList(int customerID) {
-        OrderListVO orderListVO = getAllOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> executedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.executed){
-                executedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(executedOrderList);
+        return filterOrderByState(customerID, OrderState.executed);
     }
 
     public OrderListVO getUnexecutedOrderList(int customerID) {
-        OrderListVO orderListVO = getAllOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> unexecutedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.unexecuted){
-                unexecutedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(unexecutedOrderList);
+        return filterOrderByState(customerID, OrderState.unexecuted);
     }
 
     public OrderListVO getNewOrderList(Date date) {
+        ArrayList<OrderPO> orderPOList = null;
+
+        try {
+            orderPOList =  RemoteHelper.getInstance().getOrderDataService().getUnexecutedList();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if(orderPOList != null){
+            for(OrderPO order : orderPOList){
+                //匹配日期
+            }
+        }
+
         return null;
     }
 
     public OrderListVO getRevokedOrderList(int customerID) {
-        OrderListVO orderListVO = getAllOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> revokedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.revoked){
-                revokedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(revokedOrderList);
+        return filterOrderByState(customerID, OrderState.revoked);
     }
 
     public OrderListVO getAbnormalOrderList(int customerID) {
-        OrderListVO orderListVO = getAllOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> abnormalOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.abnormal){
-                abnormalOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(abnormalOrderList);
+        return filterOrderByState(customerID, OrderState.abnormal);
     }
 
     public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID) {
         OrderListVO orderListVO = getExecutedOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> executedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                executedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(executedOrderList);
+        return filterOrderByHotelID(hotelID, orderListVO);
     }
 
     public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID) {
         OrderListVO orderListVO = getRevokedOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> RevokedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                RevokedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(RevokedOrderList);
+        return filterOrderByHotelID(hotelID, orderListVO);
     }
 
-    public OrderListVO getAbnormalOrderList(int customerID, int hotelID) {
+    public OrderListVO getAbnormalOrderListInHotel(int customerID, int hotelID) {
         OrderListVO orderListVO = getAbnormalOrderList(customerID);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> abnormalOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                abnormalOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(abnormalOrderList);
+        return filterOrderByHotelID(hotelID, orderListVO);
     }
 
     public OrderListVO getAllOrderListByHotelID(int hotelID){
@@ -155,5 +104,38 @@ public class OrderList implements OrderListBL {
         } else {
             return null;
         }
+    }
+
+    /**
+     * 根据所需状态对客户的订单进行筛选
+     */
+    private OrderListVO filterOrderByState(int customerID, OrderState state){
+        OrderListVO orderListVO = getAllOrderListByCustomerID(customerID);
+        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
+        ArrayList<OrderVO> filterOrderList = new ArrayList();
+
+        for(OrderVO orderVO : orderList){
+            if(orderVO.getState() == state){
+                filterOrderList.add(orderVO);
+            }
+        }
+
+        return new OrderListVO(filterOrderList);
+    }
+
+    /**
+     * 根据所需状态对客户在特定酒店的订单进行筛选
+     */
+    private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO){
+        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
+        ArrayList<OrderVO> filterOrderList = new ArrayList();
+
+        for(OrderVO orderVO : orderList){
+            if(orderVO.getHotelID() == hotelID){
+                filterOrderList.add(orderVO);
+            }
+        }
+
+        return new OrderListVO(filterOrderList);
     }
 }
