@@ -1,7 +1,13 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
+import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.promotionfactory.HotelPromotionBL;
+import group2.grade15.njuse.blservice.HotelPromotionServ;
+import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.HotelPromotionVO;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,10 +53,14 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Pane checkPane;
 
+
     //逻辑部分
     private AddPromotionController addPromotionController;
     private ModifyPromotionController modifyPromotionController;
     private Boolean activatedMode=false;
+
+    private HotelPromotionServ hotelPromotionController=new HotelPromotionController();
+    private OrderServ orderController=new OrderController();
 
 
     @Override
@@ -143,6 +153,7 @@ public class PromotionManageController implements Initializable{
         }
     }
     public void addPromotion(){
+        HotelPromotionVO promotionToAdd=addPromotionController.getVO();
 
     }
     public void modifyPromotion(){

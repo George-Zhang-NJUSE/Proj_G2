@@ -97,9 +97,14 @@ public class RoomManageController implements Initializable {
         checkPane.setVisible(false);
     }
     //逻辑数据采集部分
+
+    /**room表格里面的RoomVO的采集
+     *
+     * @return RoomVO, 在小栏中的输入的RoomVO
+     */
     public RoomVO getRoomVO(){
         RoomVO result=null;
-        if (addPane.isVisible()) {
+        if (addPane.isVisible()) {//判断是来自哪个表格的VO
             result = new RoomVO(typeA.getValue(),Double.parseDouble(priceA.getText()),Integer.parseInt(countA.getText()),Integer.parseInt(countA.getText()));
         }else{
             result = new RoomVO(typeM.getValue(), Double.parseDouble(priceM.getText()), Integer.parseInt(countM.getText()), Integer.parseInt(restM.getText()));

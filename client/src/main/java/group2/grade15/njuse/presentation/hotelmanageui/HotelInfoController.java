@@ -59,14 +59,13 @@ public class HotelInfoController implements Initializable {
     }
 
     //逻辑数据采集部分
-    public HotelVO getVO;
-
-    {
+    public HotelVO getVO(){
 
         int rank=Integer.parseInt(this.rank.getText());
         String introduction=describeEditor.getHtmlText();
-        HotelVO result = new HotelVO(HotelID, name.getText(), address.getText(), concreteAddress, contact,introduction, facility, roomList, promotionList, vipList,rank,score,picture);
-        int id = HotelID;
 
+        //TODO 从concreteAddress 到 address 的转换
+        HotelVO result = new HotelVO(HotelID, name.getText(), address.getText(), "null", contact.getText(),introduction, facility.getText(), roomList, vipList,rank,score,picture);
+        return result;
     }
 }
