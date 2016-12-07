@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.hotelui;
 
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -24,7 +25,7 @@ import java.util.ResourceBundle;
  */
 public class HotelDetailController implements Initializable {
 
-    private Pane parentPane;  //用来传递给子界面
+    private Pane parentPane;
 
     @FXML
     private Node rootNode;
@@ -44,20 +45,16 @@ public class HotelDetailController implements Initializable {
     protected void showMakeOrderPane() {
         try {
             FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
-            parentPane.getChildren().add(makeOrderLoader.load());
+            makeOrderLoader.load();
             MakeOrderController makeOrderController = makeOrderLoader.getController();
 
-            makeOrderController.setParentPane(parentPane);
+
             makeOrderController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
     }
 
     public void initDataAndShow() {
@@ -76,6 +73,10 @@ public class HotelDetailController implements Initializable {
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.9);
         rootNode.setScaleY(0.9);
+
+        //设置父界面
+        parentPane = CommonData.getInstance().getFunctionAreaPane();
+        parentPane.getChildren().add(rootNode);
 
     }
 

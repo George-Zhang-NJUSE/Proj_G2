@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -126,7 +125,7 @@ public class CustomerLoginController implements Initializable {
         try {
             FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerMain.fxml"));
             Stage customerStage = new Stage();
-            customerStage.setScene(new Scene((Parent) customerMainLoader.load()));
+            customerStage.setScene(new Scene(customerMainLoader.load()));
 
             CustomerMainController mainController = customerMainLoader.getController();
 //            mainController.initData(customerVO);
