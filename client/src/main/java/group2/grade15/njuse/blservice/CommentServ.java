@@ -16,6 +16,11 @@ public interface CommentServ {
     public ResultMessage modifyComment(CommentVO ModifyInfo);
 
     /**
+     * 通过评价ID获取单个评价
+     */
+    public CommentVO getComment(int commentID);
+
+    /**
      * 根据酒店的ID获取酒店评价列表
      */
     public CommentListVO getHotelCommentList(int hotelId);
