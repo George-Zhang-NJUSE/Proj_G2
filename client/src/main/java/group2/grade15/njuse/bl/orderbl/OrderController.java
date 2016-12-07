@@ -87,7 +87,7 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
 
     @Override
     public OrderListVO getAllOrderListByHotelID(int hotelID) {
-        return null;
+        return orderList.getAllOrderListByHotelID(hotelID);
     }
 
 }

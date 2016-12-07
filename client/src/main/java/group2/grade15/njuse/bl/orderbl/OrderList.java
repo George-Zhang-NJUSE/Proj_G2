@@ -15,10 +15,10 @@ import java.util.Date;
  */
 public class OrderList implements OrderListBL {
 
-    public OrderListVO getAllOrderList(int id) {
+    public OrderListVO getAllOrderList(int customerID) {
         ArrayList<OrderPO> orderPOList = new ArrayList();
         try {
-            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(id);
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -35,8 +35,8 @@ public class OrderList implements OrderListBL {
         }
     }
 
-    public OrderListVO getExecutedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    public OrderListVO getExecutedOrderList(int customerID) {
+        OrderListVO orderListVO = getAllOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> executedOrderList = new ArrayList();
 
@@ -49,8 +49,8 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(executedOrderList);
     }
 
-    public OrderListVO getUnexecutedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    public OrderListVO getUnexecutedOrderList(int customerID) {
+        OrderListVO orderListVO = getAllOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> unexecutedOrderList = new ArrayList();
 
@@ -67,8 +67,8 @@ public class OrderList implements OrderListBL {
         return null;
     }
 
-    public OrderListVO getRevokedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    public OrderListVO getRevokedOrderList(int customerID) {
+        OrderListVO orderListVO = getAllOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> revokedOrderList = new ArrayList();
 
@@ -81,8 +81,8 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(revokedOrderList);
     }
 
-    public OrderListVO getAbnormalOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    public OrderListVO getAbnormalOrderList(int customerID) {
+        OrderListVO orderListVO = getAllOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> abnormalOrderList = new ArrayList();
 
@@ -95,8 +95,8 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(abnormalOrderList);
     }
 
-    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID) {
-        OrderListVO orderListVO = getExecutedOrderList(id);
+    public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID) {
+        OrderListVO orderListVO = getExecutedOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> executedOrderList = new ArrayList();
 
@@ -109,8 +109,8 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(executedOrderList);
     }
 
-    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
-        OrderListVO orderListVO = getRevokedOrderList(id);
+    public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID) {
+        OrderListVO orderListVO = getRevokedOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> RevokedOrderList = new ArrayList();
 
@@ -123,8 +123,8 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(RevokedOrderList);
     }
 
-    public OrderListVO getAbnormalOrderList(int id, int hotelID) {
-        OrderListVO orderListVO = getAbnormalOrderList(id);
+    public OrderListVO getAbnormalOrderList(int customerID, int hotelID) {
+        OrderListVO orderListVO = getAbnormalOrderList(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> abnormalOrderList = new ArrayList();
 
@@ -137,4 +137,7 @@ public class OrderList implements OrderListBL {
         return new OrderListVO(abnormalOrderList);
     }
 
+    public OrderListVO getAllOrderListByHotelID(int hotelID){
+        return null;
+    }
 }
