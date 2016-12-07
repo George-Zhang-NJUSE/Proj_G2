@@ -48,10 +48,10 @@
                       <Label prefHeight="20.0" text="商圈：" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
                       <Label fx:id="searchLabel" onMouseClicked="#search" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowSpan="3" />
                       <Label text="基础条件：" />
-                  <ComboBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="2" />
-                  <ComboBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="4" />
-                  <ComboBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="6" />
-                  <ComboBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="8" />
+                  <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="2" />
+                  <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="4" />
+                  <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="6" />
+                  <ComboBox fx:id="cbdBox" onAction="#loadHotelList" prefWidth="150.0" GridPane.columnIndex="8" />
                   </children>
               </GridPane>
             <Pane fx:id="additionalConditionPane" prefHeight="160.0" prefWidth="1180.0">

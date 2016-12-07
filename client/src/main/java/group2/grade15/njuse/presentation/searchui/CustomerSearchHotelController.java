@@ -1,6 +1,5 @@
 package group2.grade15.njuse.presentation.searchui;
 
-import group2.grade15.njuse.bl.searchbl.Search;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
 import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
@@ -9,7 +8,7 @@ import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.myanimation.Rotate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.myliteral.LiteralList;
-import group2.grade15.njuse.vo.CustomerVO;
+import group2.grade15.njuse.vo.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +22,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -33,6 +33,7 @@ public class CustomerSearchHotelController implements Initializable {
     private CustomerVO customer;
     private Pane parentPane;
     private SearchServ searchServ;
+    private HotelListVO hotelListVO;
 
     @FXML
     private VBox searchItemBox;
@@ -62,12 +63,6 @@ public class CustomerSearchHotelController implements Initializable {
 
 
     @FXML
-    protected void search() {
-
-        showSearchResult();
-    }
-
-    @FXML
     private void changeAdditionalPane() {
         if (additionalConditionPane.isVisible()) {
             hideAdditionalPane();
@@ -75,6 +70,41 @@ public class CustomerSearchHotelController implements Initializable {
             showAdditionalPane();
         }
     }
+
+    @FXML
+    private void loadCityBox() {
+        ProvinceVO selectedProvince= (ProvinceVO) provinceBox.getValue();
+        ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
+        cityBox.setItems(FXCollections.observableArrayList(cityVOList));
+
+        districtBox.setItems(null);
+        cbdBox.setItems(null);
+    }
+
+    @FXML
+    private void loadDistrictBox() {
+        CityVO selectedCity = (CityVO) cityBox.getValue();
+        ArrayList<DistrictVO> districtVOList = searchServ.getDistrict(selectedCity.getCityNum()).getList();
+        districtBox.setItems(FXCollections.observableArrayList(districtVOList));
+
+        cbdBox.setItems(null);
+    }
+
+    @FXML
+    private void loadCbdBox() {
+        DistrictVO selectedDistrict = (DistrictVO) districtBox.getValue();
+        ArrayList<CbdVO> cbdVOList = searchServ.getCbd(selectedDistrict.getDistrictNum()).getList();
+        cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
+
+    }
+
+    //输入所有基础条件后自动调用，在后台加载
+    @FXML
+    private void loadHotelList() {
+        CbdVO selectedCbd = (CbdVO) cbdBox.getValue();
+        hotelListVO = searchServ.getHotel(selectedCbd.getCbdNum());
+    }
+
 
     private void showAdditionalPane() {
         ChangeHeight grow=new ChangeHeight(additionalConditionPane,300,160);
@@ -98,6 +128,12 @@ public class CustomerSearchHotelController implements Initializable {
         shrink.play();
         fadeOut.play();
         reverse.play();
+    }
+
+    @FXML
+    private void search() {
+        int customerID = customer.getId();
+
     }
 
 
@@ -145,7 +181,6 @@ public class CustomerSearchHotelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        searchServ=new Search();
 
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
@@ -153,12 +188,25 @@ public class CustomerSearchHotelController implements Initializable {
 
         //加载不需要联网数据的选择框
         roomTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.roomTypeList));
+        roomTypeChoiceBox.setValue(LiteralList.roomTypeList[0]);
+
         priceRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.priceRangeList));
+        priceRangeChoiceBox.setValue(LiteralList.priceRangeList[0]);
+
         freeRoomNumChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.freeRoomNumList));
+        freeRoomNumChoiceBox.setValue(LiteralList.freeRoomNumList[0]);
+
         minStarChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.minStarList));
+        minStarChoiceBox.setValue(LiteralList.minStarList[0]);
+
         scoreRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.scoreRangeList));
+        scoreRangeChoiceBox.setValue(LiteralList.scoreRangeList[0]);
+
         sortConditionChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortConditionList));
+        sortConditionChoiceBox.setValue(LiteralList.sortConditionList[0]);
+
         sortTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortTypeList));
+        sortTypeChoiceBox.setValue(LiteralList.sortTypeList[0]);
 
         //为渐入扩大动画做准备
         rootNode.setOpacity(0);
@@ -169,6 +217,12 @@ public class CustomerSearchHotelController implements Initializable {
         additionalConditionPane.setVisible(false);
         additionalConditionPane.setOpacity(0);
         additionalConditionPane.setPrefHeight(0);
+
+        //加载省份列表
+//        searchServ = new Search();
+//        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+//        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
+
 
     }
 }
