@@ -7,6 +7,7 @@ import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
 import group2.grade15.njuse.bl.orderbl.ModifyOrderStateBL;
 import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.HotelManagerServ;
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;

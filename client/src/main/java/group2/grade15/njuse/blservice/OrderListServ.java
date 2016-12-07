@@ -12,46 +12,50 @@ public interface OrderListServ {
     /**
      * 获取用户的全部订单
      */
-    public OrderListVO getAllOrderList(int id);
+    public OrderListVO getAllOrderListByCustomerID(int id);
 
     /**
      * 获取用户所有已执行订单
      */
-    public OrderListVO getExecutedOrderList(int id);
+    public OrderListVO getExecutedOrderListByCustomerID(int id);
 
     /**
      * 获取用户所有未执行订单
      */
-    public OrderListVO getUnexecutedOrderList(int id);
+    public OrderListVO getUnexecutedOrderListByCustomerID(int id);
 
     /**
      * 获取所有的新订单
      */
-    public OrderListVO getNewOrderList(Date date);
+    public OrderListVO getNewOrderListByDate(Date date);
 
     /**
      * 获取用户所有撤销订单
      */
-    public OrderListVO getRevokedOrderList(int id);
+    public OrderListVO getRevokedOrderListByCustomerID(int customerID);
 
     /**
      * 获取用户所有异常订单
      */
-    public OrderListVO getAbnormalOrderList(int id);
+    public OrderListVO getAbnormalOrderListByCustomerID(int customerID);
 
     /**
      * 获取用户在某家酒店的所有已执行订单
      */
-    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID);
+    public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID);
 
     /**
      * 获取用户在某家酒店的所有撤销订单
      */
-    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID);
+    public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID);
 
     /**
      * 获取用户在某家酒店的所有异常订单
      */
-    public OrderListVO getAbnormalOrderList(int id, int hotelID);
+    public OrderListVO getAbnormalOrderList(int customerID, int hotelID);
 
+    /**
+     * 获取某家酒店的所有订单
+     */
+    public OrderListVO getAllOrderListByHotelID(int hotelID);
 }
