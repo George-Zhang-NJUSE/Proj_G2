@@ -3,12 +3,13 @@ package group2.grade15.njuse.presentation.hotelui;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
+import group2.grade15.njuse.vo.HotelVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,24 +21,24 @@ import java.util.ResourceBundle;
  */
 public class HotelItemController implements Initializable {
 
-    private String hotelName;
-
-    private Pane parentPane;  //用来传递给子界面
+    private HotelVO hotelVO;
 
     @FXML
     private Node rootNode;
 
     @FXML
-    private Label showDetailLabel, makeOrderLabel;
+    private ImageView hotelImageView;
+
+    @FXML
+    private Label showDetailLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, scoreLabel;
+
 
     @FXML
     protected void showHotelDetail() {
         try {
             FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
-            parentPane.getChildren().add(hotelDetailLoader.load());
+            hotelDetailLoader.load();
             HotelDetailController detailController = hotelDetailLoader.getController();
-
-            detailController.setParentPane(parentPane);
             detailController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -50,10 +51,8 @@ public class HotelItemController implements Initializable {
     protected void showMakeOrderPane() {
         try {
             FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
-            parentPane.getChildren().add(makeOrderLoader.load());
+            makeOrderLoader.load();
             MakeOrderController makeOrderController = makeOrderLoader.getController();
-
-            makeOrderController.setParentPane(parentPane);
             makeOrderController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -62,18 +61,21 @@ public class HotelItemController implements Initializable {
         }
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
+
+    public void initData(HotelVO vo) {
+        if (vo != null) {
+            hotelVO=vo;
+//            hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture())));
+            hotelNameLabel.setText(hotelVO.getName());
+            starLabel.setText(Integer.toString(hotelVO.getRank()));
+            addressLabel.setText(hotelVO.getConcreteAddress());
+            scoreLabel.setText(Double.toString(hotelVO.getScore()));
+        }else{
+            System.out.println("没有联网数据");
+        }
     }
 
-    public void initDataAndShow() {
-        // TODO: 2016/12/6 加载数据
-
-
-        show();
-    }
-
-    private void show() {
+    public void show() {
         Fade fadeIn = new Fade(rootNode, 300, true);
         fadeIn.play();
     }
