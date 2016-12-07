@@ -115,6 +115,46 @@ public class OrderDatabaseImpl implements OrderDataService {
         }
     }
 
+    //还未添加加密算法
+    @Override
+    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) {
+        if(orderDatabase==null){
+            orderDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement availableRoom=orderDatabase.prepareStatement("select roomsum from orderinfo where " +
+                    "roomtype = ? and hotelID = ? and (state = 0 or state = 1) and checkouttime<?");
+            availableRoom.setInt(1,type.ordinal());
+            availableRoom.setInt(2,hotelID);
+            availableRoom.setDate(3,checkIn);
+            ResultSet resultSetA=availableRoom.executeQuery();
+
+            int available=0;
+            while (resultSetA.next()){
+                available+=resultSetA.getInt(1);
+            }
+
+            PreparedStatement unavailableRoom=orderDatabase.prepareStatement("select roomsum from orderinfo where " +
+                    "roomtype = ? and hotelID = ? and (state = 0 or state = 1) and checkintime<=? and checkouttime>=?");
+            unavailableRoom.setInt(1,type.ordinal());
+            unavailableRoom.setInt(2,hotelID);
+            unavailableRoom.setDate(3,checkOut);
+            unavailableRoom.setDate(4,checkIn);
+            ResultSet resultSetU=unavailableRoom.executeQuery();
+
+            int unavailable=0;
+            while (resultSetU.next()){
+                unavailable+=resultSetU.getInt(1);
+            }
+
+            return available-unavailable;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return 100000;
+        }
+    }
+
     /**
      * @param resultSet
      * @return ArrayList<OrderPO>

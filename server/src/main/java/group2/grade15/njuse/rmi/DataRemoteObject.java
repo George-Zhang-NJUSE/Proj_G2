@@ -21,6 +21,7 @@ import group2.grade15.njuse.utility.RoomType;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -96,6 +97,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     @Override
     public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException {
         return orderDataService.getListByHotel(hotelID);
+    }
+
+    @Override
+    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) {
+        return 0;
     }
 
     @Override

@@ -1,19 +1,22 @@
 package group2.grade15.njuse.presentation.searchui;
 
+import group2.grade15.njuse.bl.searchbl.Search;
+import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
 import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.myanimation.Rotate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.presentation.myliteral.LiteralList;
+import group2.grade15.njuse.vo.CustomerVO;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -27,7 +30,9 @@ import java.util.ResourceBundle;
  */
 public class CustomerSearchHotelController implements Initializable {
 
+    private CustomerVO customer;
     private Pane parentPane;
+    private SearchServ searchServ;
 
     @FXML
     private VBox searchItemBox;
@@ -42,8 +47,15 @@ public class CustomerSearchHotelController implements Initializable {
     private Label searchLabel, showOrHideLabel;
 
     @FXML
-    private ChoiceBox provinceChoiceBox, cityChoiceBox, districtChoiceBox, cbdChoiceBox, roomTypeChoiceBox,
-            priceRangeChoiceBox, freeRoomChoiceBox, minStarChoiceBox, scoreRangeChoiceBox;
+    private CheckBox onlyOrderedHotelCheckBox;
+
+    @FXML
+    private ComboBox provinceBox, cityBox, districtBox, cbdBox;
+
+    //以下选择框内容均不需要联网加载
+    @FXML
+    private ChoiceBox roomTypeChoiceBox, priceRangeChoiceBox, freeRoomNumChoiceBox, minStarChoiceBox,
+                    scoreRangeChoiceBox, sortConditionChoiceBox, sortTypeChoiceBox;
 
     @FXML
     private TextField hotelNameField;
@@ -51,6 +63,7 @@ public class CustomerSearchHotelController implements Initializable {
 
     @FXML
     protected void search() {
+
         showSearchResult();
     }
 
@@ -132,9 +145,20 @@ public class CustomerSearchHotelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        searchServ=new Search();
+
         //加载按钮变化样式
         CustomeButton.implButton(searchLabel, "file:client/src/main/res/search/search");
         CustomeButton.implButton(showOrHideLabel, "file:client/src/main/res/search/point");
+
+        //加载不需要联网数据的选择框
+        roomTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.roomTypeList));
+        priceRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.priceRangeList));
+        freeRoomNumChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.freeRoomNumList));
+        minStarChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.minStarList));
+        scoreRangeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.scoreRangeList));
+        sortConditionChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortConditionList));
+        sortTypeChoiceBox.setItems(FXCollections.observableArrayList(LiteralList.sortTypeList));
 
         //为渐入扩大动画做准备
         rootNode.setOpacity(0);
