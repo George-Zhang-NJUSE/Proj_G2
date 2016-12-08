@@ -45,24 +45,6 @@ public class OrderList implements OrderListBL {
         return filterOrderByState(customerID, OrderState.unexecuted);
     }
 
-    public OrderListVO getNewOrderList(Date date) {
-        ArrayList<OrderPO> orderPOList = null;
-
-        try {
-            orderPOList =  RemoteHelper.getInstance().getOrderDataService().getUnexecutedList();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(orderPOList != null){
-            for(OrderPO order : orderPOList){
-                //匹配日期
-            }
-        }
-
-        return null;
-    }
-
     public OrderListVO getRevokedOrderList(int customerID) {
         return filterOrderByState(customerID, OrderState.revoked);
     }
