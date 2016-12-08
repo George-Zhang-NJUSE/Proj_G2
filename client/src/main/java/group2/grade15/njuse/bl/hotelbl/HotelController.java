@@ -19,7 +19,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- * Created by Guo on 2016/12/4.
+ * HotelController的职责是接受酒店管理界面发来的请求
+ * 并转交给具体的酒店管理逻辑处理
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
  */
 public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomNumBL {
     HotelBL hotelBL;
@@ -47,7 +50,7 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
-        ArrayList<OrderVO> orderList = orderListBL.getAllOrderList(customerID).getOrderList();
+        ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
         ArrayList<HotelVO> hotelList = new ArrayList();
         HashSet<Integer> hotelIDSet = new HashSet();
 
