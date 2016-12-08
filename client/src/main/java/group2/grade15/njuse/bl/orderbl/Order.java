@@ -2,14 +2,20 @@ package group2.grade15.njuse.bl.orderbl;
 
 import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelBL;
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
+import group2.grade15.njuse.bl.promotionfactory.HotelPromotionBL;
+import group2.grade15.njuse.bl.promotionfactory.PromotionFactory;
+import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
+import group2.grade15.njuse.bl.webmarketerbl.WebPromotionProxy;
+import group2.grade15.njuse.bl.webpromotionbl.WebPromotionController;
+import group2.grade15.njuse.bl.webpromotionbl.WebPromotionControllerBL;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.OrderVO;
-import group2.grade15.njuse.vo.RoomVO;
+import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -20,9 +26,13 @@ import java.util.ArrayList;
 public class Order {
 
     private HotelBL hotel;
+    private WebPromotionControllerBL webPromotionController;
+    private HotelPromotionControllerBL hotelPromotionController;
 
     public Order(){
         hotel = new Hotel();
+        webPromotionController = new WebPromotionController();
+        hotelPromotionController = new HotelPromotionController();
     }
 
     public OrderVO getInfo(int orderID) {
@@ -74,13 +84,34 @@ public class Order {
         }
 
         double totalPrice = roomPrice * roomNum;
+        double minPrice = totalPrice;
+        int usedPromotionID = 0;
 
         //优惠策略的计算
+        WebPromotionListVO webPromotionListVO = webPromotionController.getWebPromotionList();
+        HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
+        ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
+        ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
 
-        int useDpromotionID = 0;
-        double newAmount = totalPrice;
+        for(WebPromotionVO webPromotionVO : webPromotionList){
+            String promotionType = webPromotionVO.getType().toString();
+            WebPromotionBL webPromoiton = PromotionFactory.getInstance().getWebPromotion(promotionType);
+            if(webPromoiton.countPrice(totalPrice, webPromotionVO) < minPrice){
+                minPrice = webPromoiton.countPrice(totalPrice, webPromotionVO);
+                usedPromotionID = webPromotionVO.getPromotionID();
+            }
+        }
 
-        return new OrderVO(orderVO, newAmount, useDpromotionID);
+        for(HotelPromotionVO hotelPromotionVO : hotelPromotionList){
+            String promotionType = hotelPromotionVO.getType().toString();
+            HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
+            if(hotelPromotion.countPrice(totalPrice, hotelPromotionVO) < minPrice){
+                minPrice = hotelPromotion.countPrice(totalPrice, hotelPromotionVO);
+                usedPromotionID = hotelPromotionVO.getPromotionID();
+            }
+        }
+
+        return new OrderVO(orderVO, minPrice, usedPromotionID);
     }
 
 }
