@@ -1,7 +1,12 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.bl.hotelbl.HotelController;
+import group2.grade15.njuse.blservice.HotelServ;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,29 +26,28 @@ import java.util.ResourceBundle;
  */
 public class MyOrderItemController implements Initializable{
 
-    private Pane parentPane; //实际值为customermain中的functionPane,用于弹出新界面
     private OrderVO orderVO;
 
     @FXML
     private Node rootNode;
 
     @FXML
-    private Label showDetailLabel;
+    private Label showDetailLabel, orderIDLabel, priceLabel, checkInTimeLabel, hotelNameLabel, addressLabel, orderStateLabel;
 
     @FXML
     private HBox hotelInfoBox;
 
 
     @FXML
-    protected void showMyOrderDetail() {
+    private void showMyOrderDetail() {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderDetail.fxml"));
-            Node childPane=loader.load();
-            parentPane.getChildren().add(childPane);
-            MyOrderDetailController orderDetailController = loader.getController();
+            FXMLLoader orderDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderDetail.fxml"));
+            orderDetailLoader.load();
+            MyOrderDetailController orderDetailController = orderDetailLoader.getController();
 
-            orderDetailController.setParentPane(parentPane);
-            orderDetailController.initDataAndShow();
+            orderDetailController.initData(orderVO, hotelNameLabel.getText(), addressLabel.getText());
+            orderDetailController.show();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -51,17 +55,21 @@ public class MyOrderItemController implements Initializable{
         }
     }
 
-    public void initDataAndShow(OrderVO vo) {
-        // TODO: 2016/12/5 数据处理
+    public void initData(OrderVO vo) {
+
+        HotelServ hotelServ = new HotelController();
         orderVO = vo;
+        orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
+        priceLabel.setText(Double.toString(orderVO.getAmount()));
+        checkInTimeLabel.setText(orderVO.getCheckInTime().toString());
 
+        HotelVO hotelVO=hotelServ.getInfo(orderVO.getHotelID());
+        hotelNameLabel.setText(hotelVO.getName());
+        addressLabel.setText(hotelVO.getConcreteAddress());
+        orderStateLabel.setText(LiteralList.orderStateList[orderVO.getState().ordinal()]);
 
-        show();
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
-    }
 
     private void adaptToActualWidth() {
         //宽度太窄时不显示部分内容
@@ -72,10 +80,14 @@ public class MyOrderItemController implements Initializable{
         }
     }
 
-    private void show() {
+    public void show() {
         adaptToActualWidth();
+        //渐入扩大动画
         Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
+
         fadeIn.play();
+        popIn.play();
     }
 
     @Override
@@ -83,9 +95,10 @@ public class MyOrderItemController implements Initializable{
         //加载按钮变化样式
         CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
 
-        //为渐入动画做准备
+        //为渐入扩大动画做准备
         rootNode.setOpacity(0);
-
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
 
 
     }

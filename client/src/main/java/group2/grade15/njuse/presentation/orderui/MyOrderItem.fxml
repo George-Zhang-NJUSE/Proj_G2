@@ -22,11 +22,11 @@
             </rowConstraints>
             <children>
                 <Label text="订单号：" />
-                <Label text="Label" GridPane.columnIndex="1" />
+                <Label fx:id="orderIDLabel" text="Label" GridPane.columnIndex="1" />
                 <Label text="订单总价：" GridPane.rowIndex="1" />
-                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="订单生成时间：" GridPane.rowIndex="2" />
-                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="入住时间：" GridPane.rowIndex="2" />
+                <Label fx:id="checkInTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
     </left>
@@ -39,13 +39,13 @@
                </HBox.margin>
                <children>
                       <Label text="酒店名：" />
-                      <Label text="Label" />
+                      <Label fx:id="hotelNameLabel" text="Label" />
                       <Label text="地址：">
                           <HBox.margin>
                               <Insets left="20.0" />
                           </HBox.margin>
                       </Label>
-                      <Label text="Label" />
+                      <Label fx:id="addressLabel" text="Label" />
                </children>
             </HBox>
                 <Label text="订单状态：">
@@ -53,7 +53,7 @@
                         <Insets left="20.0" />
                     </HBox.margin>
                 </Label>
-                <Label text="Label" />
+                <Label fx:id="orderStateLabel" text="Label" />
             </children>
         </HBox>
     </center>
