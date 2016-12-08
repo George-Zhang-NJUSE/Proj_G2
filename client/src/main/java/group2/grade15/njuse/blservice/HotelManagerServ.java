@@ -67,17 +67,66 @@ public interface HotelManagerServ {
      */
     public ResultMessage modifyHotelPromotion(HotelPromotionVO hotelPromotion);
 
+    /**
+     * 激活酒店优惠策略
+     * @param promotionVO HotelPromotionVO型，界面层传递来的含有修改酒店策略状态后的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
     public ResultMessage activateHotelPromotion(HotelPromotionVO promotionVO);
 
+    /**
+     * 停止酒店优惠策略
+     * @param promotionVO HotelPromotionVO型，界面层传递来的含有修改酒店策略状态后的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
     public ResultMessage stopHotelPromotion(HotelPromotionVO promotionVO);
 
+    /**
+     * 删除酒店优惠策略
+     * @param promotionVO HotelPromotionVO型，界面层传递来的含有修改酒店策略状态后的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
     public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO);
 
-    public ResultMessage modifyState(int orderID, OrderState s);
+    /**
+     * 修改订单状态
+     * @param orderID int型，界面层传递来的订单ID
+     * @param state OrderState型，界面层传递来的订单状态
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage modifyState(int orderID, OrderState state);
 
+    /**
+     * 添加客户为企业伙伴
+     * @param customerID int型，界面层传来的客户ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
     public ResultMessage addCompany(int customerID);
 
+    /**
+     * 将客户从企业伙伴删除
+     * @param customerID int型，界面层传来的客户ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
     public ResultMessage deleteCompany(int customerID);
 
+    /**
+     * 获取酒店经理的个人信息
+     * @param  hotelManagerId int型，界面层传来的酒店经理ID
+     * @return 成功返回含有该酒店经理个人信息的HotelManagerVO
+     *         失败返回null
+     */
     public HotelManagerVO getInfo(int hotelManagerId);
 }
