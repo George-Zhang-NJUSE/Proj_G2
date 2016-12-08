@@ -1,14 +1,9 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
-import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
-import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
-import group2.grade15.njuse.bl.orderbl.OrderController;
-import group2.grade15.njuse.bl.promotionfactory.HotelPromotionBL;
-import group2.grade15.njuse.blservice.HotelManagerServ;
-import group2.grade15.njuse.blservice.HotelPromotionServ;
-import group2.grade15.njuse.blservice.OrderServ;
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionVO;
@@ -33,6 +28,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -199,14 +195,57 @@ public class PromotionManageController implements Initializable{
         if(activatedMode){
             int index=activatedList.getSelectionModel().getSelectedIndex();
             ObservableList<Promotion> list=activatedList.getItems();
-            return list.get(index);
+            return makeVO(list.get(index));
         }else{
             int index=unactivatedList.getSelectionModel().getSelectedIndex();
             ObservableList<Promotion> list= activatedList.getItems();
-            return list.get(index);
+            return makeVO(list.get(index));
         }
     }
-
+    private HotelPromotionVO makeVO(Promotion promotion){
+        int id=promotion.id.get();
+        int hotelId= promotion.hotelId.get();
+        String name=promotion.name.get();
+        String sDate=promotion.startDate.get();
+        String eDate=promotion.endDate.get();
+        double discount=promotion.discount.get();
+        HotelPromotionType type;
+        switch(promotion.type.get()){
+            case "BirthdayHotel":
+                type=HotelPromotionType.BirthdayHotel;
+                break;
+            case "TimeHotel":
+                type=HotelPromotionType.TimeHotel;
+                break;
+            case "MultipleHotel":
+                type=HotelPromotionType.MultipleHotel;
+                break;
+            case "PartnerHotel":
+                type=HotelPromotionType.PartnerHotel;
+                break;
+            default:
+                type=null;
+                break;
+        }
+        PromotionState state;
+        switch (promotion.state.get()){
+            case "start":
+                state=PromotionState.start;
+                break;
+            case "stop":
+                state=PromotionState.stop;
+                break;
+            case "unlaunched":
+                state=PromotionState.unlaunched;
+                break;
+            default:
+                state=null;
+                break;
+        }
+        Date startDate = new Date(Long.parseLong(sDate));
+        Date endDate = new Date(Long.parseLong(eDate));
+        return new HotelPromotionVO(id,type,startDate,endDate,-1,discount,name,state,hotelId);
+    }
     //逻辑展示部分
     public void showPromotionList(){
         ArrayList<HotelPromotionVO> list=hotelManagerController.getHotelPromotionList(hotelVO.getId()).getHotelPromotionList();
@@ -219,6 +258,14 @@ public class PromotionManageController implements Initializable{
             }
         }
     }
+    public void addPromotionToList(HotelPromotionVO vo){
+        if (activatedMode){
+            activatedData.add(new Promotion(vo));
+        }else{
+            unactivatedData.add(new Promotion(vo));
+        }
+    }
+
     //逻辑实现部分
     public ResultMessage changeState(){
         if(activatedMode){
