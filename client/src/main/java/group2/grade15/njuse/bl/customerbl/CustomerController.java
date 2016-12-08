@@ -25,7 +25,11 @@ public class CustomerController implements CustomerServ {
     public CustomerVO addCustomer(CustomerVO newCustomerVO) {
         try {
             CustomerPO po = RemoteHelper.getInstance().getCustomerDataService().add(newCustomerVO.toPO());
-            return new CustomerVO(po);
+            if(po != null) {
+                return new CustomerVO(po);
+            } else {
+                return null;
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;

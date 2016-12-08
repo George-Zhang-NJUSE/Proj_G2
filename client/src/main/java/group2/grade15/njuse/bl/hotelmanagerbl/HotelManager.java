@@ -11,7 +11,9 @@ import group2.grade15.njuse.vo.*;
 import java.rmi.RemoteException;
 
 /**
- * Created by Guo on 2016/11/13.
+ * HoteManager的职责是处理单个酒店的业务逻辑
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
  */
 public class HotelManager implements HotelManagerBL{
 
