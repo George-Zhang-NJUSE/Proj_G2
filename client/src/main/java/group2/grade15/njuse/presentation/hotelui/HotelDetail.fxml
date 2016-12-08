@@ -20,7 +20,7 @@
         <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <Label fx:id="returnLabel" onMouseClicked="#goBack" />
-                <Label text="酒店名称">
+                <Label fx:id="hotelNameLabel" text="酒店名称">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -73,13 +73,13 @@
                         </VBox>
                     </content>
                 </ScrollPane>
-                <Label text="　　桔子酒店·精选（北京望京店）紧临城铁13号线——望京西站，毗邻鸟巢于水立方；更有京承高速、机场高速、四环路围绕周边，临近公交车站，交通非常便利。　　桔子酒店·精选（北京望京店）是全球连锁的外资商务型时尚酒店，系美国著名设计师设计，庭院式景观、花园式设计，风格独特时尚。店内全部房间均配置液晶电视、无线上网等现代设施，让宾客尽享舒适体验。" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="3" GridPane.valignment="TOP">
+                <Label fx:id="introLabel" text="　　桔子酒店·精选（北京望京店）紧临城铁13号线——望京西站，毗邻鸟巢于水立方；更有京承高速、机场高速、四环路围绕周边，临近公交车站，交通非常便利。　　桔子酒店·精选（北京望京店）是全球连锁的外资商务型时尚酒店，系美国著名设计师设计，庭院式景观、花园式设计，风格独特时尚。店内全部房间均配置液晶电视、无线上网等现代设施，让宾客尽享舒适体验。" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="3" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
                 </Label>
-                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="starLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <columns>
                         <TableColumn editable="false" prefWidth="130.0" resizable="false" text="房间类型" />
