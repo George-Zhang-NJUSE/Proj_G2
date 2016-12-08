@@ -56,11 +56,6 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
     }
 
     @Override
-    public OrderListVO getNewOrderListByDate(Date date) {
-        return orderList.getNewOrderList(date);
-    }
-
-    @Override
     public OrderListVO getRevokedOrderListByCustomerID(int id) {
         return orderList.getRevokedOrderList(id);
     }

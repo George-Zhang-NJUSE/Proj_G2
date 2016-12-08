@@ -10,6 +10,6 @@ public class TimeWebPromotion implements WebPromotionBL {
 
     @Override
     public double countPrice(double originalPrice, WebPromotionVO webPromotionVO) {
-        return 0;
+        return originalPrice * webPromotionVO.getDiscount();
     }
 }
