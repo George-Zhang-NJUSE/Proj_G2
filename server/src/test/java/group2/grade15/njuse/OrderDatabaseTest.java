@@ -67,4 +67,11 @@ public class OrderDatabaseTest {
         assertEquals(ResultMessage.SUCCESS, orderDatabase.modifyOrder(2, OrderState.revoked));
     }
 
+    @Test
+    public void updateTimeTest() throws Exception{
+        Date checkIn = Date.valueOf("2016-12-03");
+        Date checkOut = Date.valueOf("2016-12-04");
+        assertEquals(ResultMessage.SUCCESS,orderDatabase.updateTime(checkIn,checkOut,1));
+    }
+
 }
