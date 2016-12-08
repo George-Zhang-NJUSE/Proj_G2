@@ -3,6 +3,7 @@ package group2.grade15.njuse.bl.orderbl;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.vo.CustomerVO;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 
@@ -15,10 +16,11 @@ import java.util.Date;
  */
 public class OrderList implements OrderListBL {
 
-    public OrderListVO getAllOrderList(int id) {
+
+    public OrderListVO getAllOrderListByCustomerID(int customerID) {
         ArrayList<OrderPO> orderPOList = new ArrayList();
         try {
-            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(id);
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -35,106 +37,87 @@ public class OrderList implements OrderListBL {
         }
     }
 
-    public OrderListVO getExecutedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    public OrderListVO getExecutedOrderList(int customerID) {
+        return filterOrderByState(customerID, OrderState.executed);
+    }
+
+    public OrderListVO getUnexecutedOrderList(int customerID) {
+        return filterOrderByState(customerID, OrderState.unexecuted);
+    }
+
+    public OrderListVO getRevokedOrderList(int customerID) {
+        return filterOrderByState(customerID, OrderState.revoked);
+    }
+
+    public OrderListVO getAbnormalOrderList(int customerID) {
+        return filterOrderByState(customerID, OrderState.abnormal);
+    }
+
+    public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID) {
+        OrderListVO orderListVO = getExecutedOrderList(customerID);
+        return filterOrderByHotelID(hotelID, orderListVO);
+    }
+
+    public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID) {
+        OrderListVO orderListVO = getRevokedOrderList(customerID);
+        return filterOrderByHotelID(hotelID, orderListVO);
+    }
+
+    public OrderListVO getAbnormalOrderListInHotel(int customerID, int hotelID) {
+        OrderListVO orderListVO = getAbnormalOrderList(customerID);
+        return filterOrderByHotelID(hotelID, orderListVO);
+    }
+
+    public OrderListVO getAllOrderListByHotelID(int hotelID){
+        ArrayList<OrderPO> orderPOList = new ArrayList();
+        try {
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByHotel(hotelID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<OrderVO> orderList = new ArrayList();
+        for(OrderPO orderPO : orderPOList){
+            orderList.add(new OrderVO(orderPO));
+        }
+
+        if(orderPOList != null){
+            return new OrderListVO(orderList);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 根据所需状态对客户的订单进行筛选
+     */
+    private OrderListVO filterOrderByState(int customerID, OrderState state){
+        OrderListVO orderListVO = getAllOrderListByCustomerID(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> executedOrderList = new ArrayList();
+        ArrayList<OrderVO> filterOrderList = new ArrayList();
 
         for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.executed){
-                executedOrderList.add(orderVO);
+            if(orderVO.getState() == state){
+                filterOrderList.add(orderVO);
             }
         }
 
-        return new OrderListVO(executedOrderList);
+        return new OrderListVO(filterOrderList);
     }
 
-    public OrderListVO getUnexecutedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
+    /**
+     * 根据所需状态对客户在特定酒店的订单进行筛选
+     */
+    private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO){
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> unexecutedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.unexecuted){
-                unexecutedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(unexecutedOrderList);
-    }
-
-    public OrderListVO getNewOrderList(Date date) {
-        return null;
-    }
-
-    public OrderListVO getRevokedOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> revokedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.revoked){
-                revokedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(revokedOrderList);
-    }
-
-    public OrderListVO getAbnormalOrderList(int id) {
-        OrderListVO orderListVO = getAllOrderList(id);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> abnormalOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == OrderState.abnormal){
-                abnormalOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(abnormalOrderList);
-    }
-
-    public OrderListVO getExecutedOrderListInHotel(int id, int hotelID) {
-        OrderListVO orderListVO = getExecutedOrderList(id);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> executedOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                executedOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(executedOrderList);
-    }
-
-    public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
-        OrderListVO orderListVO = getRevokedOrderList(id);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> RevokedOrderList = new ArrayList();
+        ArrayList<OrderVO> filterOrderList = new ArrayList();
 
         for(OrderVO orderVO : orderList){
             if(orderVO.getHotelID() == hotelID){
-                RevokedOrderList.add(orderVO);
+                filterOrderList.add(orderVO);
             }
         }
 
-        return new OrderListVO(RevokedOrderList);
+        return new OrderListVO(filterOrderList);
     }
-
-    public OrderListVO getAbnormalOrderList(int id, int hotelID) {
-        OrderListVO orderListVO = getAbnormalOrderList(id);
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> abnormalOrderList = new ArrayList();
-
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                abnormalOrderList.add(orderVO);
-            }
-        }
-
-        return new OrderListVO(abnormalOrderList);
-    }
-
 }

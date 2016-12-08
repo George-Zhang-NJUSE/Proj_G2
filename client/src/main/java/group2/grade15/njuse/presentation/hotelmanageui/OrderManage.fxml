@@ -33,7 +33,7 @@
             </Label>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
               <tabs>
-                <Tab text="未执行订单">
+                <Tab fx:id="unexe" onSelectionChanged="#tab1" text="未执行订单">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="700.0">
                            <children>
@@ -55,24 +55,88 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="已入住订单">
+                <Tab fx:id="checkin" onSelectionChanged="#tab2" text="已入住订单">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="555.0" prefWidth="700.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="700.0">
+                                       <children>
+                                          <TableView fx:id="checkinList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="已完成完成">
+                  <Tab fx:id="complete" onSelectionChanged="#tab3" text="已完成完成">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="555.0" prefWidth="700.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="700.0">
+                                       <children>
+                                          <TableView fx:id="completeList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="异常订单">
+                  <Tab fx:id="innormal" onSelectionChanged="#tab4" text="异常订单">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="555.0" prefWidth="700.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="700.0">
+                                       <children>
+                                          <TableView fx:id="innormalList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="已撤销订单">
+                  <Tab fx:id="canceled" onSelectionChanged="#tab5" text="已撤销订单">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="555.0" prefWidth="700.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="700.0">
+                                       <children>
+                                          <TableView fx:id="cancelList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
@@ -90,7 +154,7 @@
                <children>
                   <GridPane style="-fx-background-color: rgb(255,255,255,0.3); -fx-background-radius: 10;">
                     <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -114,12 +178,12 @@
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <Label text="预住日期：" GridPane.rowIndex="2">
+                        <Label text="预期入住日期：" GridPane.rowIndex="2">
                            <font>
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <Label text="预住天数：" GridPane.rowIndex="3">
+                        <Label text="预计退房日期：" GridPane.rowIndex="3">
                            <font>
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
@@ -139,19 +203,19 @@
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="orderID" GridPane.columnIndex="1" editable="false"/>
+                        <TextField fx:id="customerID" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
+                        <TextField fx:id="checkInDate" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false"/>
+                        <TextField fx:id="checkOutDate" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false"/>
+                        <TextField fx:id="roomType" GridPane.columnIndex="1" GridPane.rowIndex="4" editable="false"/>
+                        <TextField fx:id="roomNum" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="5" editable="false"/>
+                        <TextField fx:id="totalPrice" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="6" editable="false"/>
                         <Label text="订单状态：" GridPane.rowIndex="7">
                            <font>
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <TextField maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="orderState" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                      <GridPane.margin>
                         <Insets left="5.0" />

@@ -12,7 +12,7 @@ public class WebPromotionListVO {
         this.promotionList = promotionList;
     }
 
-    public ArrayList<WebPromotionVO> getWebPromotion() {
+    public ArrayList<WebPromotionVO> getWebPromotionList() {
         return promotionList;
     }
 }

@@ -10,8 +10,15 @@ import group2.grade15.njuse.vo.CommentVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * CommentController的职责是接受评论界面发来的请求
+ * 并转交给具体的评论逻辑处理
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
+ */
 public class CommentController implements CommentServ, CommentBL {
 
+    @Override
     public ResultMessage createComment(CommentVO commentInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().add(commentInfo.toPO());
@@ -21,6 +28,7 @@ public class CommentController implements CommentServ, CommentBL {
         }
     }
 
+    @Override
     public ResultMessage modifyComment(CommentVO modifyInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().modify(modifyInfo.toPO());
@@ -30,9 +38,11 @@ public class CommentController implements CommentServ, CommentBL {
         }
     }
 
+    @Override
     public CommentListVO getHotelCommentList(int hotelId) {
         ArrayList<CommentPO> commentPOList = null;
         ArrayList<CommentVO> commentList = new ArrayList();
+
         try {
             commentPOList = RemoteHelper.getInstance().getCommentDataService().getHotelComments(hotelId);
         } catch (RemoteException e) {
@@ -48,21 +58,24 @@ public class CommentController implements CommentServ, CommentBL {
         return new CommentListVO(commentList);
     }
 
-    public CommentListVO getCustomerCommentList(int customerId) {
-        ArrayList<CommentPO> commentPOList = null;
-        ArrayList<CommentVO> commentList = new ArrayList();
+    @Override
+    public CommentVO getComment(int commentID, int customerID) {
+        ArrayList<CommentPO> commentPOList = new ArrayList();
+
         try {
-            commentPOList = RemoteHelper.getInstance().getCommentDataService().getCustomerComments(customerId);
+            commentPOList = RemoteHelper.getInstance().getCommentDataService().getCustomerComments(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        if (commentPOList != null) {
-            for (CommentPO comment : commentPOList) {
-                commentList.add(new CommentVO(comment));
+        CommentVO commentVO = null;
+
+        for (CommentPO comment : commentPOList) {
+            if(comment.getCommentID() == commentID){
+                commentVO = new CommentVO(comment);
             }
         }
 
-        return new CommentListVO(commentList);
+        return commentVO;
     }
 }

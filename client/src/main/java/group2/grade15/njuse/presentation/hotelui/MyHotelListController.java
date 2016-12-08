@@ -61,9 +61,9 @@ public class MyHotelListController implements Initializable {
                 Node singleItemTemplate = searchItemLoader.load();
                 HotelItemController hotelItemController = searchItemLoader.getController();
 
-                hotelItemController.setParentPane(parentPane);
+
                 hotelItemBox.getChildren().add(singleItemTemplate);
-                hotelItemController.initDataAndShow();
+                hotelItemController.initData(null);
             }
 
 

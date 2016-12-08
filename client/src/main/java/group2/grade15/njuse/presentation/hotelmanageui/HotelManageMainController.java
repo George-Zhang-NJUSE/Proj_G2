@@ -1,5 +1,7 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
+import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.vo.HotelManagerVO;
 import group2.grade15.njuse.vo.HotelVO;
@@ -43,6 +45,9 @@ public class HotelManageMainController implements Initializable {
     //软件运行时的存储信息
     public static HotelVO hotelVO;
     public static HotelManagerVO hotelManagerVO;
+
+    //接口的实例化
+    public static HotelManagerServ hotelManagerController=new HotelManagerController();
 
     //controller的初始化
     @Override

@@ -46,6 +46,13 @@ public class OrderDatabaseTest {
     }
 
     @Test
+    public void roomTest() throws Exception{
+        Date checkIn=Date.valueOf("2016-11-27");
+        Date checkOut=Date.valueOf("2016-11-28");
+        assertEquals(-1,orderDatabase.roomToBeAvailable(checkIn,checkOut,RoomType.stadardDoubleBed,1));
+    }
+
+    @Test
     public void addOrderTest() throws Exception {
         Date checkIn = Date.valueOf("2016-12-03");
         Date checkOut = Date.valueOf("2016-12-04");

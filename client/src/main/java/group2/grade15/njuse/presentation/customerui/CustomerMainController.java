@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.customerui;
 
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.hotelui.MyHotelListController;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MyOrderListController;
@@ -36,6 +37,7 @@ public class CustomerMainController implements Initializable{
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
 
+        CommonData.getInstance().setCustomerVO(userVO);
 
     }
 
@@ -47,9 +49,8 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
             CustomerSearchHotelController searchHotelController = loader.getController();//必须在load之后才能getController
+            searchHotelController.show();
 
-            searchHotelController.setParentPane(functionPane);
-            searchHotelController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -120,5 +121,7 @@ public class CustomerMainController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         //加载按钮变化样式
         CustomeButton.implButton(myHotelLabel, "file:client/src/main/res/customer/myhotel");
+
+        CommonData.getInstance().setFunctionAreaPane(functionPane);
     }
 }

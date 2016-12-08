@@ -42,12 +42,7 @@ public class HotelInfoController implements Initializable {
     @FXML
     private Label editButton;
 
-    private int HotelID;
-    private ArrayList<CustomerVO> vipList;
-    private ArrayList<RoomVO> roomList;
-    private ArrayList<HotelPromotionVO> promotionList;
-    private byte[][] picture;
-    private int score;
+
 
 
     @Override
@@ -57,16 +52,19 @@ public class HotelInfoController implements Initializable {
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
 
     }
-
     //逻辑数据采集部分
-    public HotelVO getVO;
+    public HotelVO getVO(){
+        int ID=HotelManageMainController.hotelVO.getId();
+        ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
 
-    {
 
         int rank=Integer.parseInt(this.rank.getText());
-        String introduction=describeEditor.getHtmlText();
-        HotelVO result = new HotelVO(HotelID, name.getText(), address.getText(), concreteAddress, contact,introduction, facility, roomList, promotionList, vipList,rank,score,picture);
-        int id = HotelID;
 
+        String introduction=describeEditor.getHtmlText();
+
+        //TODO 从concreteAddress 到 address 的转换
+        HotelVO result = new HotelVO(ID, name.getText(), address.getText(), "null", contact.getText(),introduction, facility.getText(), roomList,null,rank,HotelManageMainController.hotelVO.getScore(),HotelManageMainController.hotelVO.getPicture());
+        return result;
     }
+
 }
