@@ -349,4 +349,37 @@ public class OrderDatabaseImpl implements OrderDataService {
             return ResultMessage.FAILED;
         }
     }
+
+    /**
+     * @param checkIn
+     * @param checkOut
+     * @return ResultMessage
+     * @throws RemoteException
+     * 酒店管理人员更新实际入住，预计离开时间
+     */
+    @Override
+    public ResultMessage updateTime(Date checkIn, Date checkOut,int orderID) throws RemoteException {
+        if(orderDatabase==null){
+            orderDatabase=mySql.init();
+        }
+
+        try{
+            PreparedStatement update=orderDatabase.prepareStatement("update orderinfo set " +
+                    "checkintime = ?,checkouttime = ? where ordernum = ?");
+            update.setDate(1,checkIn);
+            update.setDate(2,checkOut);
+            update.setInt(3,orderID);
+
+            update.executeUpdate();
+
+            update.close();
+            orderDatabase.close();
+            orderDatabase=null;
+
+            return ResultMessage.SUCCESS;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
+    }
 }
