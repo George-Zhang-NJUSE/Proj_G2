@@ -9,8 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,12 +36,12 @@ public class HotelItemController implements Initializable {
 
 
     @FXML
-    protected void showHotelDetail() {
+    private void showHotelDetail() {
         try {
             FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
             hotelDetailLoader.load();
             HotelDetailController detailController = hotelDetailLoader.getController();
-            detailController.initDataAndShow();
+            detailController.initDataAndShow(hotelVO);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -48,7 +50,7 @@ public class HotelItemController implements Initializable {
     }
 
     @FXML
-    protected void showMakeOrderPane() {
+    private void showMakeOrderPane() {
         try {
             FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
             makeOrderLoader.load();
@@ -65,7 +67,7 @@ public class HotelItemController implements Initializable {
     public void initData(HotelVO vo) {
         if (vo != null) {
             hotelVO=vo;
-//            hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture())));
+            hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture()[0])));
             hotelNameLabel.setText(hotelVO.getName());
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());

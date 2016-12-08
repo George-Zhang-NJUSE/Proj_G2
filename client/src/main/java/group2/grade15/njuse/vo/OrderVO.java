@@ -38,11 +38,11 @@ public class OrderVO implements Serializable {
     }
 
     //专用于在更新订单价格
-    public OrderVO(OrderVO vo, double newAmount, int useDpromotionID) {
+    public OrderVO(OrderVO vo, double newAmount, int usedPromotionID) {
         orderID = vo.getOrderID();
         customerID = vo.getCustomerID();
         hotelID = vo.getHotelID();
-        promotionID = useDpromotionID;
+        promotionID = usedPromotionID;
         amount = newAmount;
         checkInTime = vo.getCheckInTime();
         checkOutTime = vo.getCheckOutTime();

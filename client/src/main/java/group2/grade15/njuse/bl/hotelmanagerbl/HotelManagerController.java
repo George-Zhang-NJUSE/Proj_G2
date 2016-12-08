@@ -13,7 +13,11 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
 /**
- * Created by Guo on 2016/12/4.
+ * HotelManagerController的职责是接受酒店经理界面传递来的请求
+ * 整个控制器采用代理者模式
+ * 将具体的业务转交持有的对应接口实现
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
  */
 public class HotelManagerController implements HotelManagerServ {
 

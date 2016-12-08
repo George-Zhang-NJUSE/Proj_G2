@@ -25,11 +25,6 @@ public interface OrderListServ {
     public OrderListVO getUnexecutedOrderListByCustomerID(int id);
 
     /**
-     * 获取所有的新订单
-     */
-    public OrderListVO getNewOrderListByDate(Date date);
-
-    /**
      * 获取用户所有撤销订单
      */
     public OrderListVO getRevokedOrderListByCustomerID(int customerID);

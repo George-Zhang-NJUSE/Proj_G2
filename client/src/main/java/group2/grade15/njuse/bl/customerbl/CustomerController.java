@@ -9,7 +9,10 @@ import group2.grade15.njuse.vo.CustomerVO;
 import java.rmi.RemoteException;
 
 /**
- * Created by George on 2016/11/13.
+ * CustomerController的职责是接客户界面发来的请求
+ * 并转交给具体的客户业务逻辑处理
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
  */
 public class CustomerController implements CustomerServ {
 
@@ -22,7 +25,11 @@ public class CustomerController implements CustomerServ {
     public CustomerVO addCustomer(CustomerVO newCustomerVO) {
         try {
             CustomerPO po = RemoteHelper.getInstance().getCustomerDataService().add(newCustomerVO.toPO());
-            return new CustomerVO(po);
+            if(po != null) {
+                return new CustomerVO(po);
+            } else {
+                return null;
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;
