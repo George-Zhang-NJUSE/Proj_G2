@@ -5,8 +5,8 @@ import group2.grade15.njuse.vo.CommentListVO;
 import group2.grade15.njuse.vo.CommentVO;
 
 /**
- * 酒店评论的层间接口
- * 供界面层层调用
+ * 酒店评论业务逻辑的层间接口
+ * 供界面层的酒店评价界面，订单评价查看界面调用
  * 职责是处理酒店评论相关的逻辑功能
  * @author Guo
  */
@@ -15,14 +15,18 @@ public interface CommentServ {
     /**
      * 创建新的酒店评论
      * @param commentInfo CommentVO型，界面层传递来的存有评论信息的数据对象
-     * @return 成功返回ResultMessage.success 失败返回ResultMessage.failed
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage createComment(CommentVO commentInfo);
 
     /**
      * 修改已有的酒店评论
      * @param  modifyInfo commentVO型，界面层传递来的存有修改后的评论信息的数据对象
-     * @return 成功返回ResultMessage.success 失败返回ResultMessage.failed
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage modifyComment(CommentVO modifyInfo);
 

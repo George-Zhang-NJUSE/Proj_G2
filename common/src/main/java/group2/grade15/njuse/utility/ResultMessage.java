@@ -6,5 +6,5 @@ public enum ResultMessage {
     NON_EXISTENT,               //不存在
     ILLEGAL,                    //非法
     FAILED,                     //失败
-    CONNECTION_EXCEPTION;        //网络连接异常
+    CONNECTION_EXCEPTION        //网络连接异常
 }
