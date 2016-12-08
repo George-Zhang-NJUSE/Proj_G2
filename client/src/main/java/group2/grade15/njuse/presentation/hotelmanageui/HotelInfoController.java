@@ -1,6 +1,8 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CustomerVO;
 import group2.grade15.njuse.vo.HotelPromotionVO;
 import group2.grade15.njuse.vo.HotelVO;
@@ -16,6 +18,8 @@ import javafx.scene.web.HTMLEditor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
 
 /**
  * Created by ALIENWARE-PC on 2016/12/3.
@@ -67,4 +71,9 @@ public class HotelInfoController implements Initializable {
         return result;
     }
 
+
+    //逻辑实现部分
+    public ResultMessage modifyInfo(){
+        return hotelManagerController.modifyHotelInfo(getVO());
+    }
 }

@@ -3,6 +3,7 @@ package group2.grade15.njuse.presentation.hotelmanageui;
 import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
 import group2.grade15.njuse.blservice.HotelManagerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelManagerVO;
 import group2.grade15.njuse.vo.HotelVO;
 import javafx.fxml.FXML;
@@ -41,6 +42,9 @@ public class HotelManageMainController implements Initializable {
     private Rectangle promotionManageRec;
     @FXML
     private Pane opPane;
+
+    //Controller的持有
+    HotelInfoController hotelInfoController;
 
     //软件运行时的存储信息
     public static HotelVO hotelVO;
@@ -165,13 +169,7 @@ public class HotelManageMainController implements Initializable {
 
     }
 
-    /**
-     *
-     * @param
-     */
-    public void modifyHotelInfo(){
 
-    }
 
 
     //轮子方法：
