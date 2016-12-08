@@ -1,13 +1,16 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.OrderVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -21,6 +24,8 @@ import java.util.ResourceBundle;
  */
 public class MyOrderDetailController implements Initializable {
 
+    private OrderVO orderVO;
+
     private Pane parentPane;
 
     @FXML
@@ -30,7 +35,14 @@ public class MyOrderDetailController implements Initializable {
     private Label cancelLabel, commentLabel, revokeOrderLabel;
 
     @FXML
-    protected void close() {
+    private CheckBox hasChildCheckBox;
+
+    @FXML
+    private Label orderIDLabel, hotelNameLabel, addressLabel, checkInTimeLabel, checkOutTimeLabel, finalExecuteTimeLabel,
+                roomTypeLabel, roomNumLabel, customerNumLabel, orderStateLabel, orderPriceLabel;
+
+    @FXML
+    private void close() {
         //退出动画
         Fade fadeOut = new Fade(rootNode, 200, false);
         Pop popOut = new Pop(rootNode, 200, false);
@@ -40,7 +52,7 @@ public class MyOrderDetailController implements Initializable {
     }
 
     @FXML
-    protected void showCommentPane() {
+    private void showCommentPane() {
         try {
             FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/Comment.fxml"));
             parentPane.getChildren().add(loader.load());
@@ -55,14 +67,14 @@ public class MyOrderDetailController implements Initializable {
         }
     }
 
-    public void initDataAndShow() {
+    public void initData(OrderVO vo, String hotelName, String address) {
         // TODO: 2016/12/4 初始化数据
+        orderVO = vo;
+        
 
-
-        show();
     }
 
-    private void show() {
+    public void show() {
         //弹出式进入动画
         Fade fadeIn = new Fade(rootNode, 200, true);
         Pop popIn = new Pop(rootNode, 200, true);
@@ -72,9 +84,6 @@ public class MyOrderDetailController implements Initializable {
         popIn.play();
     }
 
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,5 +99,9 @@ public class MyOrderDetailController implements Initializable {
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
         CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
         CustomeButton.implButton(revokeOrderLabel, "file:client/src/main/res/order/revokeorder");
+
+        //设置父界面
+        parentPane = CommonData.getInstance().getFunctionAreaPane();
+        parentPane.getChildren().add(rootNode);
     }
 }

@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/1.
  */
-public class CommentItemController implements Initializable{
+public class HotelCommentItemController implements Initializable{
 
     CustomerServ customerServ;
 
@@ -44,8 +44,6 @@ public class CommentItemController implements Initializable{
 
         fadeIn.play();
         popIn.play();
-
-
     }
 
     @Override

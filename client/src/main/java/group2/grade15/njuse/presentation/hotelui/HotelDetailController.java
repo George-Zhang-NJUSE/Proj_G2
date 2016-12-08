@@ -100,7 +100,31 @@ public class HotelDetailController implements Initializable {
         if (hotelVO != null) {
             ArrayList<CommentVO> commentVOList = commentServ.getHotelCommentList(hotelVO.getId()).getList();
 
+            try {
 
+                ArrayList<HotelCommentItemController> controllerList = new ArrayList<>();
+                //读入评价数据
+                for (CommentVO commentVO : commentVOList) {
+                    FXMLLoader commentItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
+
+                    Node singleItem = commentItemLoader.load();
+                    commentBox.getChildren().add(singleItem);
+
+                    HotelCommentItemController itemController = commentItemLoader.getController();
+                    itemController.initData(commentVO);
+                    controllerList.add(itemController);
+                }
+
+                //显示评价
+                for (HotelCommentItemController controller : controllerList) {
+                    controller.show();
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         } else {
@@ -113,9 +137,9 @@ public class HotelDetailController implements Initializable {
 
 
                 for (int i = 0; i < 15; ++i) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/CommentItem.fxml"));
+                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
                     Node singleItemTemplate = loader.load();
-                    CommentItemController commentItemController = loader.getController();
+                    HotelCommentItemController commentItemController = loader.getController();
 
                     ItemList.add(singleItemTemplate);
                 }
@@ -132,28 +156,37 @@ public class HotelDetailController implements Initializable {
     }
 
     private void loadMyOrders() {
-        try {
-            myOrderBox.getChildren().clear();
+        if (hotelVO != null) {
+            // TODO: 2016/12/8
 
 
-            // TODO: 2016/12/2 需要更改为正确的逻辑
-            for (int i = 0; i < 15; ++i) {
-                FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
-                Node singleItemTemplate = loader.load();
-                MyOrderItemController orderItemController = loader.getController();
-                orderItemController.setParentPane(parentPane);
+        }else {
 
-                myOrderBox.getChildren().add(singleItemTemplate);
-                orderItemController.initDataAndShow(null);
+            //用于本地测试
+            try {
+                myOrderBox.getChildren().clear();
+
+
+                // TODO: 2016/12/2 需要更改为正确的逻辑
+                for (int i = 0; i < 15; ++i) {
+                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                    Node singleItemTemplate = loader.load();
+                    MyOrderItemController orderItemController = loader.getController();
+
+                    myOrderBox.getChildren().add(singleItemTemplate);
+                    orderItemController.initData(null);
+                }
+
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+
     }
 
     @Override
