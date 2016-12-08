@@ -42,7 +42,12 @@
                                           <TableView fx:id="unactivatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="ID" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
+                                              <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -62,10 +67,15 @@
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="900.0">
                                        <children>
                                           <TableView fx:id="activatedList" prefHeight="450.0" prefWidth="900.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="ID" />
+                                                <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
+                                             </columns>
                                           </TableView>
                                        </children>
                                     </AnchorPane>

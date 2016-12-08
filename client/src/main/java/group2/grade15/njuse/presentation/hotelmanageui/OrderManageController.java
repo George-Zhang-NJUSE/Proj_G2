@@ -108,7 +108,7 @@ public class OrderManageController implements Initializable {
 
     }
     public void tab1(){
-        OrderListVO list=orderListService.getUnexecutedOrderList(HotelManageMainController.hotelVO.getId());
+        //OrderListVO list=orderListService.get;
         state=WorkingTab.UNEXE;
     }
     public void tab2(){

@@ -12,6 +12,10 @@ import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionVO;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -21,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -28,9 +33,11 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
+import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelVO;
 
 /**
  * Created by ALIENWARE-PC on 2016/12/1.
@@ -61,6 +68,8 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Pane checkPane;
 
+    private ObservableList<Promotion> unactivatedData,activatedData;
+
 
     //逻辑部分
     private AddPromotionController addPromotionController;
@@ -76,13 +85,36 @@ public class PromotionManageController implements Initializable{
         CustomeButton.implButton(addButton,"file:client/src/main/res/hotelmanage/add");
         CustomeButton.implButton(check,"file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
+        unactivatedData= FXCollections.observableArrayList();
+        activatedData=FXCollections.observableArrayList();
+
+
         unactivatedTab.setOnSelectionChanged((Event e)->{
             switchToUnactivated();
         });
+        ObservableList<TableColumn> uaCols=unactivatedList.getColumns();
+        uaCols.get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
+        uaCols.get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
+        uaCols.get(2).setCellValueFactory(new PropertyValueFactory<>("state"));
+        uaCols.get(3).setCellValueFactory(new PropertyValueFactory<>("type"));
+        uaCols.get(4).setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        uaCols.get(5).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        uaCols.get(6).setCellValueFactory(new PropertyValueFactory<>("discount"));
+        unactivatedList.setItems(unactivatedData);
+
+
         activatedTab.setOnSelectionChanged((Event e)->{
             switchToActivated();
         });
-
+        ObservableList<TableColumn> aCols=unactivatedList.getColumns();
+        aCols.get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
+        aCols.get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
+        aCols.get(2).setCellValueFactory(new PropertyValueFactory<>("state"));
+        aCols.get(3).setCellValueFactory(new PropertyValueFactory<>("type"));
+        aCols.get(4).setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        aCols.get(5).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        aCols.get(6).setCellValueFactory(new PropertyValueFactory<>("discount"));
+        activatedList.setItems(activatedData);
     }
 
     //界面跳转控制逻辑
@@ -166,18 +198,33 @@ public class PromotionManageController implements Initializable{
     private HotelPromotionVO getSelectedPromotion(){
         if(activatedMode){
             int index=activatedList.getSelectionModel().getSelectedIndex();
-            ObservableList<HotelPromotionVO> list=activatedList.getItems();
+            ObservableList<Promotion> list=activatedList.getItems();
             return list.get(index);
         }else{
             int index=unactivatedList.getSelectionModel().getSelectedIndex();
-            ObservableList<HotelPromotionVO> list= activatedList.getItems();
+            ObservableList<Promotion> list= activatedList.getItems();
             return list.get(index);
         }
     }
 
+    //逻辑展示部分
+    public void showPromotionList(){
+        ArrayList<HotelPromotionVO> list=hotelManagerController.getHotelPromotionList(hotelVO.getId()).getHotelPromotionList();
+        for(int i=0;i<list.size();i++) {
+            HotelPromotionVO vo = list.get(i);
+            if(vo.getState()==PromotionState.start){
+                activatedData.add(new Promotion(vo));
+            }else{
+                unactivatedData.add(new Promotion(vo));
+            }
+        }
+    }
     //逻辑实现部分
     public ResultMessage changeState(){
         if(activatedMode){
+            unactivatedData.add(new Promotion(getSelectedPromotion()));
+            activatedData.remove(activatedList.getSelectionModel().getSelectedIndex());
+
             return hotelManagerController.stopHotelPromotion(getSelectedPromotion());
         }else{
             return hotelManagerController.activateHotelPromotion(getSelectedPromotion());
@@ -201,5 +248,26 @@ public class PromotionManageController implements Initializable{
         return hotelManagerController.activateHotelPromotion(promotionToActivate);
     }
 
+    public static class Promotion{
+        private final SimpleStringProperty name;
+        private final SimpleIntegerProperty id;
+        private final SimpleIntegerProperty hotelId;
+        private final SimpleStringProperty state;
+        private final SimpleStringProperty startDate;
+        private final SimpleStringProperty endDate;
+        private final SimpleDoubleProperty discount;
+        private final SimpleStringProperty type;
 
+        private Promotion(HotelPromotionVO vo){
+            name=new SimpleStringProperty(vo.getName());
+            id = new SimpleIntegerProperty(vo.getPromotionID());
+            state=new SimpleStringProperty(vo.getState().toString());
+            startDate = new SimpleStringProperty(vo.getStart().toString());
+            endDate = new SimpleStringProperty(vo.getEnd().toString());
+            discount=new SimpleDoubleProperty(vo.getDiscount());
+            type=new SimpleStringProperty(vo.getType().toString());
+            hotelId=new SimpleIntegerProperty(vo.getHotelID());//TODO
+        }
+
+    }
 }
