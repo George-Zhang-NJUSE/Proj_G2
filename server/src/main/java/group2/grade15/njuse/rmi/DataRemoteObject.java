@@ -115,6 +115,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
+    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public ResultMessage modify(HotelPO po) throws RemoteException {
         return hotelDataService.modify(po);
     }
