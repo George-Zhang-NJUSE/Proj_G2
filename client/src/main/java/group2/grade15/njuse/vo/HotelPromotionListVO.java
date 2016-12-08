@@ -10,7 +10,7 @@ public class HotelPromotionListVO implements Serializable {
         this.promotionList = promotionList;
     }
 
-    public ArrayList<HotelPromotionVO> getHotelPromotion() {
+    public ArrayList<HotelPromotionVO> getHotelPromotionList() {
         return promotionList;
     }
 }

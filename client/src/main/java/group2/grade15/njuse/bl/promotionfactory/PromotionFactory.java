@@ -12,7 +12,7 @@ public class PromotionFactory {
 
     private PromotionFactory(){}
 
-    public PromotionFactory getInstance(){
+    public static PromotionFactory getInstance(){
         if(promotionFactory == null){
             promotionFactory = new PromotionFactory();
         }
