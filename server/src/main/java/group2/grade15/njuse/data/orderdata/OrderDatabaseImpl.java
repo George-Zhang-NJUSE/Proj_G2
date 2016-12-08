@@ -117,7 +117,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
     //还未添加加密算法
     @Override
-    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) {
+    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) throws RemoteException{
         if(orderDatabase==null){
             orderDatabase=mySql.init();
         }

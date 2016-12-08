@@ -42,7 +42,7 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
 
     @Override
     public OrderListVO getAllOrderListByCustomerID(int id) {
-        return orderList.getAllOrderList(id);
+        return orderList.getAllOrderListByCustomerID(id);
     }
 
     @Override
@@ -82,12 +82,12 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
 
     @Override
     public OrderListVO getAbnormalOrderList(int id, int hotelID) {
-        return orderList.getAbnormalOrderList(id, hotelID);
+        return orderList.getAbnormalOrderListInHotel(id, hotelID);
     }
 
     @Override
     public OrderListVO getAllOrderListByHotelID(int hotelID) {
-        return null;
+        return orderList.getAllOrderListByHotelID(hotelID);
     }
 
 }

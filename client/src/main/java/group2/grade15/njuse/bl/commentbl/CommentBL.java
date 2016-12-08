@@ -11,6 +11,4 @@ public interface CommentBL {
     public ResultMessage modifyComment(CommentVO ModifyInfo);
 
     public CommentListVO getHotelCommentList(int hotelId);
-
-    public CommentListVO getCustomerCommentList(int customerId);
 }

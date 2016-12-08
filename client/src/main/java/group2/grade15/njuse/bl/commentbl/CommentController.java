@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class CommentController implements CommentServ, CommentBL {
 
+    @Override
     public ResultMessage createComment(CommentVO commentInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().add(commentInfo.toPO());
@@ -21,6 +22,7 @@ public class CommentController implements CommentServ, CommentBL {
         }
     }
 
+    @Override
     public ResultMessage modifyComment(CommentVO modifyInfo) {
         try {
             return RemoteHelper.getInstance().getCommentDataService().modify(modifyInfo.toPO());
@@ -30,6 +32,7 @@ public class CommentController implements CommentServ, CommentBL {
         }
     }
 
+    @Override
     public CommentListVO getHotelCommentList(int hotelId) {
         ArrayList<CommentPO> commentPOList = null;
         ArrayList<CommentVO> commentList = new ArrayList();
@@ -48,21 +51,24 @@ public class CommentController implements CommentServ, CommentBL {
         return new CommentListVO(commentList);
     }
 
-    public CommentListVO getCustomerCommentList(int customerId) {
-        ArrayList<CommentPO> commentPOList = null;
-        ArrayList<CommentVO> commentList = new ArrayList();
+    @Override
+    public CommentVO getComment(int commentID, int customerID) {
+        ArrayList<CommentPO> commentPOList = new ArrayList();
+
         try {
-            commentPOList = RemoteHelper.getInstance().getCommentDataService().getCustomerComments(customerId);
+            commentPOList = RemoteHelper.getInstance().getCommentDataService().getCustomerComments(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        if (commentPOList != null) {
-            for (CommentPO comment : commentPOList) {
-                commentList.add(new CommentVO(comment));
+        CommentVO commentVO = null;
+
+        for (CommentPO comment : commentPOList) {
+            if(comment.getCommentID() == commentID){
+                commentVO = new CommentVO(comment);
             }
         }
 
-        return new CommentListVO(commentList);
+        return commentVO;
     }
 }

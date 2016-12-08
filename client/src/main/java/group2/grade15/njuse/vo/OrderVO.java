@@ -11,7 +11,7 @@ public class OrderVO implements Serializable {
     private int orderID;
     private int customerID;
     private int hotelID;
-    private int promotionID;                   //该订单采取的优惠策略，初次创建时从界面层传到逻辑层时请设为0，逻辑层返回时会设置好优惠策略的ID
+    private int promotionID = 0;                   //该订单采取的优惠策略，初次创建时从界面层传到逻辑层时自动为0，逻辑层返回时会设置好优惠策略的ID
     private double amount;
     private Date checkInTime;
     private Date checkOutTime;
@@ -26,7 +26,6 @@ public class OrderVO implements Serializable {
         orderID = po.getOrderID();
         customerID = po.getCustomerID();
         hotelID = po.getHotelID();
-        promotionID = 0;
         amount = po.getAmount();
         checkInTime = po.getCheckInTime();
         checkOutTime = po.getCheckOutTime();
@@ -38,7 +37,7 @@ public class OrderVO implements Serializable {
         state = po.getState();
     }
 
-    //专用于在更新订单
+    //专用于在更新订单价格
     public OrderVO(OrderVO vo, double newAmount, int useDpromotionID) {
         orderID = vo.getOrderID();
         customerID = vo.getCustomerID();
@@ -55,11 +54,10 @@ public class OrderVO implements Serializable {
         state = vo.getState();
     }
 
-    public OrderVO(int orderID, int customerID, int hotelID, int promotionID, int amount, Date checkInTime, Date checkOutTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
+    public OrderVO(int orderID, int customerID, int hotelID, int amount, Date checkInTime, Date checkOutTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.hotelID = hotelID;
-        this.promotionID = promotionID;
         this.amount = amount;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
@@ -81,6 +79,10 @@ public class OrderVO implements Serializable {
 
     public int getOrderID() {
         return orderID;
+    }
+
+    public int getPromotionID() {
+        return promotionID;
     }
 
     public double getAmount() {
