@@ -30,4 +30,8 @@ public class CityVO {
     public CityPO toPO() {
         return new CityPO(cityName, cityNum);
     }
+
+    public String toString(){
+        return cityName;
+    }
 }

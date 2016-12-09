@@ -24,35 +24,56 @@ public class Search implements SearchServ {
     public HotelListVO getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO) {
         ArrayList<HotelVO> hotelList = hotelListVO.getList();
 
-        if (hotelList != null) {
+        //将酒店搜索的判定条件简化成一系列新的布尔变量
+        boolean isListNull = (hotelList != null);
+        boolean isSort = (searchCondition.getSortBy() != SortMethod.DEFAULT) && isListNull;
+        boolean isFilterName = (searchCondition.getName() != null)
+                                && isListNull;
+        boolean isFilterStar = (searchCondition.getMinStarLevel() != 0)
+                                && isListNull;
+        boolean isFilterScore = (searchCondition.getMinScore() != 0
+                                 || searchCondition.getMaxScore() != 10)
+                                 && isListNull;
+        boolean isFilterPrice = (searchCondition.getMinPrice() != 0
+                                 || searchCondition.getMaxPrice() != 0)
+                                 && isListNull;
+        boolean isFilterRoom = (searchCondition.getFreeRoomNum() != 0
+                                || searchCondition.getRoomType() != RoomType.all)
+                                && isListNull;
+        boolean isFilterTime = (searchCondition.getCheckInTime() != null
+                                || searchCondition.getCheckOutTime() != null)
+                                && isListNull;
+
+        //根据搜索条件对酒店列表进行对应的筛选
+        if (isListNull) {
             hotelList = searchFilter.filterByBooked(searchCondition.getCsutomerID(), hotelList);
         }
 
-        if (searchCondition.getSortBy() != SortMethod.DEFAULT && hotelList != null) {
+        if (isSort) {
             hotelList = searchFilter.sort(searchCondition.getSortBy(), hotelList);
         }
 
-        if (searchCondition.getName() != null && hotelList != null) {
+        if (isFilterName) {
             hotelList = searchFilter.filterByName(searchCondition.getName(), hotelList);
         }
 
-        if (searchCondition.getMinStarLevel() != 0 && hotelList != null) {
+        if (isFilterStar) {
             hotelList = searchFilter.filterByStarLevel(searchCondition.getMinStarLevel(), hotelList);
         }
 
-        if (searchCondition.getMinScore() != 0 || searchCondition.getMaxScore() != 10 && hotelList != null) {
+        if (isFilterScore) {
             hotelList = searchFilter.filterByScore(searchCondition.getMinScore(), searchCondition.getMaxScore(), hotelList);
         }
 
-        if (searchCondition.getMinPrice() != 0 || searchCondition.getMaxPrice() != 0 && hotelList != null) {
+        if (isFilterPrice) {
             hotelList = searchFilter.filterByRoomPrice(searchCondition.getMinPrice(), searchCondition.getMaxPrice(), hotelList);
         }
 
-        if (searchCondition.getFreeRoomNum() != 0 || searchCondition.getRoomType() != RoomType.all && hotelList != null) {
+        if (isFilterRoom) {
             hotelList = searchFilter.filterByRoomType(searchCondition.getRoomType(), hotelList);
         }
 
-        if (searchCondition.getCheckInTime() != null || searchCondition.getCheckOutTime() != null && hotelList != null) {
+        if (isFilterTime) {
             hotelList = searchFilter.filterByTime(searchCondition.getCheckInTime(), searchCondition.getCheckOutTime(), searchCondition.getFreeRoomNum(), searchCondition.getRoomType(), hotelList);
         }
 
