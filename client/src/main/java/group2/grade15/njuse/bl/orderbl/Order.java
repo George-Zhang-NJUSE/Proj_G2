@@ -13,6 +13,7 @@ import group2.grade15.njuse.bl.webpromotionbl.WebPromotionControllerBL;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.*;
@@ -70,21 +71,9 @@ public class Order {
     }
 
     public OrderVO createPO(OrderVO orderVO){
-        RoomType roomType = orderVO.getType();
         int hotelID = orderVO.getHotelID();
-        int roomNum = orderVO.getRoomSum();
-        double roomPrice = -1;
 
-        HotelVO hotelVO = hotel.getInfo(hotelID);
-        ArrayList<RoomVO> roomList = hotelVO.getRoomList();
-        for(RoomVO room : roomList){
-            if(room.getType() == roomType){
-                roomPrice = room.getPrice();
-            }
-        }
-
-        double totalPrice = roomPrice * roomNum;
-        double minPrice = totalPrice;
+        double minPrice = -1;
         int usedPromotionID = 0;
 
         //优惠策略的计算
@@ -96,8 +85,8 @@ public class Order {
         for(WebPromotionVO webPromotionVO : webPromotionList){
             String promotionType = webPromotionVO.getType().toString();
             WebPromotionBL webPromoiton = PromotionFactory.getInstance().getWebPromotion(promotionType);
-            if(webPromoiton.countPrice(totalPrice, webPromotionVO) < minPrice){
-                minPrice = webPromoiton.countPrice(totalPrice, webPromotionVO);
+            if(minPrice == -1 || webPromotionVO.getState() == PromotionState.start && webPromoiton.countPrice(orderVO, webPromotionVO) < minPrice){
+                minPrice = webPromoiton.countPrice(orderVO, webPromotionVO);
                 usedPromotionID = webPromotionVO.getPromotionID();
             }
         }
@@ -105,8 +94,8 @@ public class Order {
         for(HotelPromotionVO hotelPromotionVO : hotelPromotionList){
             String promotionType = hotelPromotionVO.getType().toString();
             HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
-            if(hotelPromotion.countPrice(totalPrice, hotelPromotionVO) < minPrice){
-                minPrice = hotelPromotion.countPrice(totalPrice, hotelPromotionVO);
+            if(minPrice == -1 || hotelPromotionVO.getState() == PromotionState.start && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice){
+                minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
                 usedPromotionID = hotelPromotionVO.getPromotionID();
             }
         }
