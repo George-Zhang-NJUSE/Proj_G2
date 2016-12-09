@@ -68,6 +68,8 @@
         </Label>
         <Label fx:id="commentLabel" onMouseClicked="#showCommentPane" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
       <CheckBox fx:id="hasChildCheckBox" disable="true" mnemonicParsing="false" text="有儿童" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label text="订单生成时间：" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Label fx:id="createTimeLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
     </children>
     <effect>
         <DropShadow />
