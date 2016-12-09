@@ -30,6 +30,7 @@ public class MyOrderDetailController implements Initializable {
 
     private OrderVO orderVO;
     private CommentVO commentVO;
+    private int hotelID;
 
     private Pane parentPane;
 
@@ -62,7 +63,7 @@ public class MyOrderDetailController implements Initializable {
             FXMLLoader commentLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyComment.fxml"));
             commentLoader.load();
             MyCommentController myCommentController = commentLoader.getController();
-            myCommentController.initData(commentVO, createTimeLabel.getText(), hotelNameLabel.getText());
+            myCommentController.initData(commentVO,orderIDLabel.getText(), createTimeLabel.getText(), hotelNameLabel.getText(), hotelID);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -70,8 +71,8 @@ public class MyOrderDetailController implements Initializable {
         }
     }
 
-    public void initData(OrderVO vo, String hotelName, String address) {
-
+    public void initData(OrderVO vo, String hotelName, String address, int hotelId) {
+        hotelID = hotelId;
         orderVO = vo;
         orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
         hotelNameLabel.setText(hotelName);
@@ -91,6 +92,7 @@ public class MyOrderDetailController implements Initializable {
 
         CommentServ commentServ = new CommentController();
         commentVO=commentServ.getComment(orderVO.getOrderID());
+
         if(commentVO!=null){ //已经评价过
             CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/mycomment");
         }else{
@@ -98,6 +100,8 @@ public class MyOrderDetailController implements Initializable {
         }
 
     }
+
+
 
     public void show() {
         //弹出式进入动画
