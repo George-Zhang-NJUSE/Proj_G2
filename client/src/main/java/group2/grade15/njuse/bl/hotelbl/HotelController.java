@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * HotelController的职责是接受酒店管理界面发来的请求
@@ -52,11 +53,10 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
     public HotelListVO getBookedHotelList(int customerID) {
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
         ArrayList<HotelVO> hotelList = new ArrayList();
-        HashSet<Integer> hotelIDSet = new HashSet();
 
-        for (OrderVO order : orderList) {
-            hotelIDSet.add(order.getHotelID());
-        }
+        HashSet<Integer> hotelIDSet = orderList.stream()
+                                      .map(OrderVO::getHotelID)
+                                      .collect(Collectors.toCollection(HashSet::new));
 
         for (int hotelID : hotelIDSet) {
             HotelPO hotelPO = null;
