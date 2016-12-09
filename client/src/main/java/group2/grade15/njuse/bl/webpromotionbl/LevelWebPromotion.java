@@ -3,6 +3,7 @@ package group2.grade15.njuse.bl.webpromotionbl;
 import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
+import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.HotelVO;
@@ -10,6 +11,7 @@ import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.RoomVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -37,14 +39,27 @@ public class LevelWebPromotion implements WebPromotionBL {
 
         double totalPrice = roomPrice * roomNum;
 
-        if(isFit(orderVO, webPromotionVO)) {
-            return totalPrice * webPromotionVO.getDiscount();
-        } else {
-            return totalPrice;
-        }
+        return totalPrice;
     }
 
-    private boolean isFit(OrderVO orderVO, WebPromotionVO webPromotionVO){
+    private boolean gerRankDiscount(double totalPrice, int customerRank){
+        ArrayList<RankPO> rankPOList = null;
+        try {
+            rankPOList = RemoteHelper.getInstance().getWebPromotionDataService().getRank();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        int size = rankPOList.size();
+        double[] discount = new double[size];
+        double[] standard = new double[size];
+
+        for(int i = 0; i < size; i ++) {
+            discount[i] = rankPOList.get(i).getDiscount();
+            standard[i] = rankPOList.get(i).getStandard();
+        }
+
+//        for()
         return true;
     }
 }
