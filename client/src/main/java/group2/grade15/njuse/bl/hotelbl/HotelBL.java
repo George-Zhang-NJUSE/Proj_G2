@@ -12,6 +12,4 @@ public interface HotelBL {
     public ResultMessage modifyInfo(HotelVO hotel);
 
     public HotelVO getInfo(int hotelID);
-
-    public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo);
 }

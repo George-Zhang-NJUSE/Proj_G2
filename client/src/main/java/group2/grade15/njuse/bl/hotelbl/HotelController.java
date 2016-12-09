@@ -27,10 +27,12 @@ import java.util.stream.Collectors;
  */
 public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomNumBL {
     HotelBL hotelBL;
+    RoomBL roomBL;
     OrderListBL orderListBL;
 
     public HotelController() {
         hotelBL = new Hotel();
+        roomBL = new Room();
         orderListBL = new OrderList();
     }
 
@@ -46,7 +48,7 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
 
     @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        return hotelBL.modifyRoomInfo(hotelID, roomInfo);
+        return roomBL.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
@@ -76,32 +78,6 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
 
     @Override
     public int getSpareRoomNumInTime(RoomType type, int hotelID, Date checkInTime, Date checkOutTime){
-        int nowSpareRoomNum;
-
-        try {
-            nowSpareRoomNum = RemoteHelper.getInstance().getOrderDataService().roomToBeAvailable(checkInTime, checkOutTime, type, hotelID);
-        } catch (RemoteException e) {
-            nowSpareRoomNum = 100000;
-            e.printStackTrace();
-        }
-
-        int lastSpareRoom = 0;
-        HotelPO hotel = null;
-        try {
-            hotel = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(hotel != null) {
-            for (RoomPO room : hotel.getRoomList()) {
-                if (room.getType() == type) {
-                    lastSpareRoom = room.getSpareRoomNum();
-                }
-            }
-        }
-
-        int spareRoomNum = lastSpareRoom + nowSpareRoomNum;
-        return spareRoomNum;
+        return roomBL.getSpareRoomNumInTime(type, hotelID, checkInTime, checkOutTime);
     }
 }

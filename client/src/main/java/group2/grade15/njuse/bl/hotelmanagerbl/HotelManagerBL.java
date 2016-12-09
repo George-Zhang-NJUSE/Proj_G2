@@ -24,8 +24,4 @@ public interface HotelManagerBL {
 
     public ResultMessage deleteHotelPromotion(HotelPromotionVO promotionVO);
 
-    public ResultMessage addCompany(int customerID);
-
-    public ResultMessage deleteCompany(int customerID);
-
 }
