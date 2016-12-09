@@ -70,7 +70,7 @@ public class MyOrderDetailController implements Initializable {
     public void initData(OrderVO vo, String hotelName, String address) {
         // TODO: 2016/12/4 初始化数据
         orderVO = vo;
-        
+
 
     }
 
