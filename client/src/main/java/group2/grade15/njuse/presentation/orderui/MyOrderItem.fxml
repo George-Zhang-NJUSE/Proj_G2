@@ -25,8 +25,8 @@
                 <Label fx:id="orderIDLabel" text="Label" GridPane.columnIndex="1" />
                 <Label text="订单总价：" GridPane.rowIndex="1" />
                 <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="入住时间：" GridPane.rowIndex="2" />
-                <Label fx:id="checkInTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="订单生成时间：" GridPane.rowIndex="2" />
+                <Label fx:id="createTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
     </left>

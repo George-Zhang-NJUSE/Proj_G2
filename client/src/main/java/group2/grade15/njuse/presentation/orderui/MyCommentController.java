@@ -1,8 +1,10 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.CommentVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,15 +18,19 @@ import java.util.ResourceBundle;
 /**
  * Created by George on 2016/12/4.
  */
-public class CommentController implements Initializable {
+public class MyCommentController implements Initializable {
 
     private Pane parentPane;
+    private CommentVO commentVO;
 
     @FXML
     private Node rootNode;
 
     @FXML
-    private Label cancelLabel, confirmLabel, editLabel;
+    private Label cancelLabel, confirmLabel, editLabel, minusScoreLabel, addScoreLabel;
+
+    @FXML
+    private Label titleLabel, orderIDLabel, orderGenerateTimeLabel, hotelNameLabel, scoreLabel;
 
     @FXML
     protected void close() {
@@ -36,23 +42,31 @@ public class CommentController implements Initializable {
         fadeOut.play();
     }
 
-    public void initDataAndShow() {
+    public void initData(CommentVO vo, String orderGenerateTime, String hotelName) {
         // TODO: 2016/12/4 初始化数据
+        commentVO=vo;
 
-        show();
+        orderGenerateTimeLabel.setText(orderGenerateTime);
+        hotelNameLabel.setText(hotelName);
+
+        if (commentVO != null) {//已经评价过
+            titleLabel.setText("我的评价");
+            confirmLabel.setVisible(false);
+            minusScoreLabel.setDisable(true);
+            addScoreLabel.setDisable(true);
+//            orderIDLabel.setText(commentVO.get);
+        }
+
+
     }
 
-    private void show() {
+    public void show() {
         //弹出式进入动画
         Fade fadeIn = new Fade(rootNode, 200, true);
         Pop popIn = new Pop(rootNode, 200, true);
         rootNode.setVisible(true);
         fadeIn.play();
         popIn.play();
-    }
-
-    public void setParentPane(Pane parentPane) {
-        this.parentPane = parentPane;
     }
 
     @Override
@@ -69,5 +83,11 @@ public class CommentController implements Initializable {
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
         CustomeButton.implButton(confirmLabel, "file:client/src/main/res/customer/confirm");
         CustomeButton.implButton(editLabel, "file:client/src/main/res/customer/edit");
+        CustomeButton.implButton(addScoreLabel, "file:client/src/main/res/order/add");
+        CustomeButton.implButton(minusScoreLabel, "file:client/src/main/res/order/reduce");
+
+        //设置父界面
+        parentPane = CommonData.getInstance().getFunctionAreaPane();
+        parentPane.getChildren().add(rootNode);
     }
 }

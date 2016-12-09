@@ -32,7 +32,7 @@ public class MyOrderItemController implements Initializable{
     private Node rootNode;
 
     @FXML
-    private Label showDetailLabel, orderIDLabel, priceLabel, checkInTimeLabel, hotelNameLabel, addressLabel, orderStateLabel;
+    private Label showDetailLabel, orderIDLabel, priceLabel, createTimeLabel, hotelNameLabel, addressLabel, orderStateLabel;
 
     @FXML
     private HBox hotelInfoBox;
@@ -61,7 +61,7 @@ public class MyOrderItemController implements Initializable{
         orderVO = vo;
         orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
         priceLabel.setText(Double.toString(orderVO.getAmount()));
-        checkInTimeLabel.setText(orderVO.getCheckInTime().toString());
+        createTimeLabel.setText(orderVO.getCreateTime().toString());
 
         HotelVO hotelVO=hotelServ.getInfo(orderVO.getHotelID());
         hotelNameLabel.setText(hotelVO.getName());

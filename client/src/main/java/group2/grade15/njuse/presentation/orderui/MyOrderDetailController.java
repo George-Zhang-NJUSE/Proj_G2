@@ -1,9 +1,13 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.bl.commentbl.CommentController;
+import group2.grade15.njuse.blservice.CommentServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.CommentVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +29,7 @@ import java.util.ResourceBundle;
 public class MyOrderDetailController implements Initializable {
 
     private OrderVO orderVO;
+    private CommentVO commentVO;
 
     private Pane parentPane;
 
@@ -39,7 +44,7 @@ public class MyOrderDetailController implements Initializable {
 
     @FXML
     private Label orderIDLabel, hotelNameLabel, addressLabel, checkInTimeLabel, checkOutTimeLabel, finalExecuteTimeLabel,
-                roomTypeLabel, roomNumLabel, customerNumLabel, orderStateLabel, orderPriceLabel;
+                roomTypeLabel, roomNumLabel, customerNumLabel, orderStateLabel, orderPriceLabel, createTimeLabel;
 
     @FXML
     private void close() {
@@ -54,12 +59,10 @@ public class MyOrderDetailController implements Initializable {
     @FXML
     private void showCommentPane() {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/Comment.fxml"));
-            parentPane.getChildren().add(loader.load());
-            CommentController commentController = loader.getController();
-
-            commentController.setParentPane(parentPane);
-            commentController.initDataAndShow();
+            FXMLLoader commentLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyComment.fxml"));
+            commentLoader.load();
+            MyCommentController myCommentController = commentLoader.getController();
+            myCommentController.initData(commentVO, createTimeLabel.getText(), hotelNameLabel.getText());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -68,9 +71,31 @@ public class MyOrderDetailController implements Initializable {
     }
 
     public void initData(OrderVO vo, String hotelName, String address) {
-        // TODO: 2016/12/4 初始化数据
-        orderVO = vo;
 
+        orderVO = vo;
+        orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
+        hotelNameLabel.setText(hotelName);
+        addressLabel.setText(address);
+        createTimeLabel.setText(orderVO.getCreateTime().toString());
+        checkInTimeLabel.setText(orderVO.getCheckInTime().toString());
+        checkOutTimeLabel.setText(orderVO.getCheckOutTime().toString());
+        finalExecuteTimeLabel.setText(orderVO.getFinalExecuteTime().toString());
+        roomTypeLabel.setText(LiteralList.roomTypeList[orderVO.getType().ordinal()]);
+        roomNumLabel.setText(Integer.toString(orderVO.getRoomSum()));
+        customerNumLabel.setText(Integer.toString(orderVO.getNumOfCustomer()));
+        orderStateLabel.setText(LiteralList.orderStateList[orderVO.getState().ordinal()]);
+        orderPriceLabel.setText(Double.toString(orderVO.getAmount()));
+        hasChildCheckBox.setSelected(orderVO.isHaveChild());
+
+        //根据客户有没有评价订单来应用不同外观
+
+        CommentServ commentServ = new CommentController();
+        commentVO=commentServ.getComment(orderVO.getOrderID());
+        if(commentVO!=null){ //已经评价过
+            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/mycomment");
+        }else{
+            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
+        }
 
     }
 
@@ -97,7 +122,7 @@ public class MyOrderDetailController implements Initializable {
 
         //加载按钮变化样式
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
-        CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
+
         CustomeButton.implButton(revokeOrderLabel, "file:client/src/main/res/order/revokeorder");
 
         //设置父界面
