@@ -265,6 +265,10 @@ public class PromotionManageController implements Initializable{
             unactivatedData.add(new Promotion(vo));
         }
     }
+    public void fetchPromotion(){
+        HotelPromotionVO vo=getSelectedPromotion();
+
+    }
 
     //逻辑实现部分
     public ResultMessage changeState(){
