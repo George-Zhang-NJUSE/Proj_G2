@@ -94,7 +94,10 @@ public class RoomManageController implements Initializable {
                 //deleteRoom();
             }
         });
-
+        roomTable.setOnMouseClicked((MouseEvent e)->{
+            toModify();
+            showRoomOnModify();
+        });
         ObservableList colList=roomTable.getColumns();
         TableColumn[] cols=new TableColumn[colList.size()];
         for(int i=0;i<cols.length;i++) {
@@ -163,6 +166,34 @@ public class RoomManageController implements Initializable {
         return result;
     }
 
+    /**
+     * 从表格中获取选中的RoomVO
+     * @return RoomVO
+     */
+    public RoomVO getRoomFromList(){
+        int index=roomTable.getSelectionModel().getSelectedIndex();
+        Room room= roomTable.getItems().get(index);
+        return toRoomVO(room);
+    }
+    public RoomVO toRoomVO(Room room){
+        RoomType a;
+        switch (room.getType()) {
+            case "大床房":
+                a=RoomType.bigSingleBed;
+                break;
+            case "标准间":
+                a=RoomType.stadardDoubleBed;
+                break;
+            case "套房":
+                a=RoomType.suiteRoom;
+                break;
+            default:
+                a=RoomType.all;
+                break;
+        }
+        RoomVO vo = new RoomVO(a, room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
+        return vo;
+    }
     public ResultMessage addRoom(){
         RoomVO roomToAdd=getRoomVO();
         data.add(new Room(getRoomVO()));
@@ -174,6 +205,12 @@ public class RoomManageController implements Initializable {
         return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),roomToModify);
     }
     //逻辑实现的数据展示部分
+    public void showRoomOnModify(){
+        RoomVO vo=getRoomFromList();
+        typeM.setItems(FXCollections.observableArrayList(vo.getType()));
+        typeM.getEditor().setText(vo.getType().toString());
+        
+    }
     public void showRoomList(){
 
         //ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
@@ -194,7 +231,20 @@ public class RoomManageController implements Initializable {
         private final SimpleIntegerProperty spareRoomNum;
 
         private Room(RoomVO vo){
-            type=new SimpleStringProperty(vo.getType().toString());
+            switch(vo.getType()){
+                case bigSingleBed:
+                    type = new SimpleStringProperty("大床房");
+                    break;
+                case stadardDoubleBed:
+                    type = new SimpleStringProperty("双人间");
+                    break;
+                case suiteRoom:
+                    type = new SimpleStringProperty("套房");
+                    break;
+                default:
+                    type = new SimpleStringProperty("无定义");
+                    break;
+            }
             price = new SimpleDoubleProperty(vo.getPrice());
             totalRoomNum = new SimpleIntegerProperty(vo.getTotalRoomNum());
             spareRoomNum=new SimpleIntegerProperty(vo.getSpareRoomNum());
@@ -230,7 +280,20 @@ public class RoomManageController implements Initializable {
     public static class Type{
         private SimpleStringProperty name;
         private Type(RoomType type){
-            this.name=new SimpleStringProperty(type.toString());
+            switch(type){
+                case bigSingleBed:
+                    name = new SimpleStringProperty("大床房");
+                    break;
+                case stadardDoubleBed:
+                    name = new SimpleStringProperty("双人间");
+                    break;
+                case suiteRoom:
+                    name = new SimpleStringProperty("套房");
+                    break;
+                default:
+                    name = new SimpleStringProperty("无定义");
+                    break;
+            }
         }
     }
 }

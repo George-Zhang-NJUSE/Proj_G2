@@ -1,8 +1,17 @@
 package group2.grade15.njuse.presentation.webadminui;
 
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.*;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,10 +19,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 /**
  * Created by ALIENWARE-PC on 2016/11/19.
  */
-public class WebAdminController {
+public class WebAdminController implements Initializable{
 
 
     @FXML
@@ -43,8 +56,9 @@ public class WebAdminController {
     @FXML
     private ImageView addAccount;
     @FXML
-    private TableView accountList;
-
+    private TableView<Account> accountList;
+    @FXML
+    private TableView<Hotel> hotelList;
 
     @FXML
     private GridPane hotelManage;
@@ -67,6 +81,115 @@ public class WebAdminController {
     private ImageView accountImage;
     @FXML
     private ImageView hotelImage;
+
+
+//逻辑实现部分
+    private ObservableList<Hotel> hotelListData;
+    private ObservableList<Account> accountListData;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        hotelListData= FXCollections.observableArrayList();
+        accountListData = FXCollections.observableArrayList();
+
+        ObservableList acCols=accountList.getColumns();
+        ObservableList htCols=hotelList.getColumns();
+
+
+    }
+    public static class Account{
+        private final SimpleIntegerProperty id;
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty password;
+        private final SimpleStringProperty contact;
+        private final SimpleStringProperty birthday;
+        private final SimpleDoubleProperty credit;
+        private final SimpleStringProperty type;
+        private final SimpleStringProperty companyName;
+
+        private Account(CustomerVO vo){
+            id = new SimpleIntegerProperty(vo.getId());
+            name = new SimpleStringProperty(vo.getName());
+            password = new SimpleStringProperty(vo.getPassword());
+            contact = new SimpleStringProperty(vo.getContact());
+            birthday = new SimpleStringProperty(vo.getBirthday().toString());
+            credit = new SimpleDoubleProperty(vo.getCredit());
+            switch(vo.getType()){
+                case normal:
+                    type = new SimpleStringProperty("普通用户");
+                    break;
+                case vip:
+                    type = new SimpleStringProperty("VIP");
+                    break;
+                default:
+                    type = new SimpleStringProperty("未知");
+            }
+            companyName = new SimpleStringProperty(vo.getCompanyName());
+        }
+
+        private Account(HotelManagerVO vo) {
+            id = new SimpleIntegerProperty(vo.getId());
+            name = new SimpleStringProperty(vo.getName());
+            password = new SimpleStringProperty(vo.getPassword());
+            contact = new SimpleStringProperty(vo.getContact());
+            birthday = new SimpleStringProperty("None");
+            credit = new SimpleDoubleProperty(0);
+            type = new SimpleStringProperty("酒店管理");
+            companyName = new SimpleStringProperty("None");
+        }
+
+        private Account(WebMarketerVO vo) {
+            id=new SimpleIntegerProperty(Integer.parseInt(vo.getStaffID()));
+            password = new SimpleStringProperty(vo.getPassword());
+            name = new SimpleStringProperty("none");
+            contact = new SimpleStringProperty("none");
+            birthday = new SimpleStringProperty("none");
+            credit = new SimpleDoubleProperty(0);
+            type = new SimpleStringProperty("网站营销");
+            companyName = new SimpleStringProperty("none");
+        }
+
+        private Account(WebAdminVO vo) {
+            id=new SimpleIntegerProperty(Integer.parseInt(vo.getStaffID()));
+            password = new SimpleStringProperty(vo.getPassword());
+            name = new SimpleStringProperty("none");
+            contact = new SimpleStringProperty("none");
+            birthday = new SimpleStringProperty("none");
+            credit = new SimpleDoubleProperty(0);
+            type = new SimpleStringProperty("网站管理");
+            companyName = new SimpleStringProperty("none");
+        }
+    }
+    public static class Hotel{
+        private final SimpleIntegerProperty id;
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty address;
+        private final SimpleStringProperty concreteAddress;//具体地址
+        private final SimpleStringProperty contact;
+        private final SimpleStringProperty introduction;
+        private final SimpleStringProperty facility;
+        private final ArrayList<RoomVO> roomList;
+        private final SimpleIntegerProperty rank;
+        private final SimpleDoubleProperty score;
+        private final byte[][] picture;
+
+        private Hotel(HotelVO vo){
+            id = new SimpleIntegerProperty(vo.getId());
+            name = new SimpleStringProperty(vo.getName());
+            address = new SimpleStringProperty(vo.getAddress());
+            concreteAddress = new SimpleStringProperty(vo.getConcreteAddress());
+            contact = new SimpleStringProperty(vo.getContact());
+            introduction = new SimpleStringProperty(vo.getIntroduction());
+            facility = new SimpleStringProperty(vo.getFacility());
+            rank = new SimpleIntegerProperty(vo.getRank());
+            score = new SimpleDoubleProperty(vo.getScore());
+
+            roomList=vo.getRoomList();
+            picture=vo.getPicture();
+        }
+    }
+
+
+
 
 
     /*
@@ -366,4 +489,6 @@ public class WebAdminController {
         Fade fadeout = new Fade(hotelAddFrame, 200, false);
         hotelAddFrame.setVisible(false);
     }
+
+
 }
