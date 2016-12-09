@@ -1,7 +1,9 @@
 package group2.grade15.njuse.presentation.webadminui;
 
+import group2.grade15.njuse.blservice.WebAdminServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -20,6 +22,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.rmi.server.RemoteRef;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -83,19 +87,60 @@ public class WebAdminController implements Initializable{
     private ImageView hotelImage;
 
 
+
+
 //逻辑实现部分
     private ObservableList<Hotel> hotelListData;
     private ObservableList<Account> accountListData;
+
+    public static WebAdminServ webAdminService=new group2.grade15.njuse.bl.webadminbl.WebAdminController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hotelListData= FXCollections.observableArrayList();
         accountListData = FXCollections.observableArrayList();
-
+        accountList.setItems(accountListData);
+        hotelList.setItems(hotelListData);
         ObservableList acCols=accountList.getColumns();
         ObservableList htCols=hotelList.getColumns();
 
+    }
+
+    public ResultMessage addHotelToData(HotelVO vo) {
 
     }
+
+    //初始化承收并展示来自数据库的账号列表方法
+    public void showAllAccount() throws RemoteException{
+        accountListData.clear();
+        ArrayList<CustomerVO> customerVOs=webAdminService.getCustomerList().getList();
+        ArrayList<HotelManagerVO> hotelManagerVOs=webAdminService.getHotelManagerList().getList();
+        ArrayList<WebMarketerVO> webMarketerVOs=webAdminService.getWebMarketerList().getList();
+
+        for(int i=0;i<customerVOs.size();i++){
+            accountListData.add(new Account(customerVOs.get(i)));
+        }
+        for (int i=0;i<hotelManagerVOs.size();i++) {
+            accountListData.add(new Account(hotelManagerVOs.get(i)));
+        }
+        for (int i=0;i<webMarketerVOs.size();i++) {
+            accountListData.add(new Account(webMarketerVOs.get(i)));
+        }
+
+    }
+
+    //初始化承收并展示来自数据库的酒店列表方法
+    public void showAllHotel() throws RemoteException{
+        hotelListData.clear();
+
+        ArrayList<HotelVO> hotelVOs=webAdminService.getHotelList().getList();
+
+        for(int i=0;i<hotelVOs.size();i++) {
+            hotelListData.add(new Hotel(hotelVOs.get(i)));
+        }
+    }
+    /**
+     * Account的TableView的数据承载类，包括四种账户类型的构造函数
+     */
     public static class Account{
         private final SimpleIntegerProperty id;
         private final SimpleStringProperty name;
@@ -122,6 +167,7 @@ public class WebAdminController implements Initializable{
                     break;
                 default:
                     type = new SimpleStringProperty("未知");
+                    break;
             }
             companyName = new SimpleStringProperty(vo.getCompanyName());
         }
@@ -159,6 +205,7 @@ public class WebAdminController implements Initializable{
             companyName = new SimpleStringProperty("none");
         }
     }
+    //作为Hotel的TableView的数据承载类
     public static class Hotel{
         private final SimpleIntegerProperty id;
         private final SimpleStringProperty name;
@@ -189,7 +236,10 @@ public class WebAdminController implements Initializable{
     }
 
 
-
+    private HotelVO getherVO(){
+        HotelVO result;
+        result=new HotelVO(hotelListData.size(),)
+    }
 
 
     /*

@@ -85,21 +85,11 @@ public class ModifyPromotionController implements Initializable {
         }
     }
 
-    public void setEditable(){
-        boolean sw=true;
+    public void setEditable(boolean sw){
         name.setEditable(sw);
         cut.setEditable(sw);
         type.setEditable(sw);
 
-        companyString.setEditable(sw);
-        startDate.setEditable(sw);
-        endDate.setEditable(sw);
-    }
-    public void setUneditable(){
-        boolean sw=false;
-        name.setEditable(sw);
-        cut.setEditable(sw);
-        type.setEditable(sw);
         companyString.setEditable(sw);
         startDate.setEditable(sw);
         endDate.setEditable(sw);

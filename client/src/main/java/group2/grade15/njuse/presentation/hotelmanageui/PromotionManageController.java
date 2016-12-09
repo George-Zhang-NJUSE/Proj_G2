@@ -267,7 +267,7 @@ public class PromotionManageController implements Initializable{
     }
     public void fetchPromotion(){
         HotelPromotionVO vo=getSelectedPromotion();
-
+        modifyPromotionController.showPromotion(vo);
     }
 
     //逻辑实现部分
