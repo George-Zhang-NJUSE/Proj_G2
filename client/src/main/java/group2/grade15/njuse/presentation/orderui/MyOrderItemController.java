@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 public class MyOrderItemController implements Initializable{
 
     private OrderVO orderVO;
+    private HotelVO hotelVO;
+
 
     @FXML
     private Node rootNode;
@@ -45,7 +47,7 @@ public class MyOrderItemController implements Initializable{
             orderDetailLoader.load();
             MyOrderDetailController orderDetailController = orderDetailLoader.getController();
 
-            orderDetailController.initData(orderVO, hotelNameLabel.getText(), addressLabel.getText());
+            orderDetailController.initData(orderVO, hotelNameLabel.getText(), addressLabel.getText(), hotelVO.getId());
             orderDetailController.show();
 
         } catch (MalformedURLException e) {
@@ -63,7 +65,7 @@ public class MyOrderItemController implements Initializable{
         priceLabel.setText(Double.toString(orderVO.getAmount()));
         createTimeLabel.setText(orderVO.getCreateTime().toString());
 
-        HotelVO hotelVO=hotelServ.getInfo(orderVO.getHotelID());
+        hotelVO=hotelServ.getInfo(orderVO.getHotelID());
         hotelNameLabel.setText(hotelVO.getName());
         addressLabel.setText(hotelVO.getConcreteAddress());
         orderStateLabel.setText(LiteralList.orderStateList[orderVO.getState().ordinal()]);
