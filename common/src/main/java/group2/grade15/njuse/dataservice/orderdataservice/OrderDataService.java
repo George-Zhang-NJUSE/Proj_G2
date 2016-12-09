@@ -29,4 +29,6 @@ public interface OrderDataService extends Remote {
 
     public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException;
 
+    public ResultMessage updateTime(Date checkIn,Date checkOut,int orderID) throws RemoteException;
+
 }
