@@ -30,4 +30,8 @@ public class CbdVO {
     public CbdPO toPO() {
         return new CbdPO(cbdName, cbdNum);
     }
+
+    public String toString(){
+        return cbdName;
+    }
 }

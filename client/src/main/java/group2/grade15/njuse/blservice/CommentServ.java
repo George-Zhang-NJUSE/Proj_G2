@@ -31,12 +31,11 @@ public interface CommentServ {
     public ResultMessage modifyComment(CommentVO modifyInfo);
 
     /**
-     * 根据评价ID和客户ID获取单个评价
-     * @param  commentID int型，界面层传递来的评论ID
-     * @param  customerID int型，界面层传递来的客户ID
-     * @return 成功返回对应酒店的CommentListVO, 失败则返回null
+     * 根据订单ID获取对应的酒店评价
+     * @param  orderID int型，界面层传递来的酒店ID
+     * @return 成功返回对应订单的CommentVO, 失败则返回null
      */
-    public CommentVO getComment(int commentID, int customerID);
+    public CommentVO getComment(int orderID);
 
 
     /**

@@ -42,6 +42,10 @@ public class CommentVO implements Serializable {
         return userID;
     }
 
+    public int getOrderID(){
+        return orderID;
+    }
+
     public String getComment() {
         return comment;
     }

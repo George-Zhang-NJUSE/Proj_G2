@@ -10,15 +10,15 @@ import java.sql.Date;
  * Created by Guo on 2016/11/29.
  */
 public class HotelPromotionVO {
-    int promotionID;
-    HotelPromotionType type;
-    Date start;
-    Date end;
-    int vipID;
-    double discount;
-    String name;
-    PromotionState state;
-    int hotelID;
+    private int promotionID;
+    private HotelPromotionType type;
+    private Date start;
+    private Date end;
+    private int vipID;
+    private double discount;
+    private String name;
+    private PromotionState state;
+    private int hotelID;
 
     public HotelPromotionVO(HotelPromotionPO po) {
         promotionID = po.getPromotionID();
@@ -32,7 +32,8 @@ public class HotelPromotionVO {
         hotelID = po.getHotelID();
     }
 
-    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, int vipID, double discount, String name, PromotionState state, int hotelID) {
+    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, int vipID,
+                            double discount, String name, PromotionState state, int hotelID) {
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;
@@ -64,7 +65,7 @@ public class HotelPromotionVO {
         return end;
     }
 
-    public int getVipList() {
+    public int getVipID() {
         return vipID;
     }
 
@@ -78,6 +79,10 @@ public class HotelPromotionVO {
 
     public PromotionState getState() {
         return state;
+    }
+
+    public int getHotelID(){
+        return hotelID;
     }
 
     public HotelPromotionPO toPO() {

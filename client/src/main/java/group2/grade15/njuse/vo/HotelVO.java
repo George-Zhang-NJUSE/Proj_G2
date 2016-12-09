@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class HotelVO implements Serializable {
     private int id;
     private String name;
-    private String address;
-    private String concreteAddress;//具体地址
+    private String address;         //商圈地址
+    private String concreteAddress; //具体地址
     private String contact;
     private String introduction;
     private String facility;
@@ -41,7 +41,10 @@ public class HotelVO implements Serializable {
 
     }
 
-    public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture) {
+    public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction,
+                   String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score,
+                   byte[][] picture) {
+
         this.id = id;
         this.name = name;
         this.address = address;

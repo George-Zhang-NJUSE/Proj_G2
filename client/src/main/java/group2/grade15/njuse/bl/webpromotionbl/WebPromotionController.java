@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class WebPromotionController implements WebPromotionServ, GetWebPromotionBL, WebPromotionControllerBL {
 
@@ -28,7 +29,6 @@ public class WebPromotionController implements WebPromotionServ, GetWebPromotion
 
     @Override
     public WebPromotionListVO getWebPromotionList() {
-        ArrayList<WebPromotionVO> webPromotionList = new ArrayList();
         ArrayList<WebPromotionPO> webPromotionPOList = new ArrayList();
 
         try {
@@ -37,9 +37,10 @@ public class WebPromotionController implements WebPromotionServ, GetWebPromotion
             e.printStackTrace();
         }
 
-        for(WebPromotionPO webPromotionPO : webPromotionPOList){
-            webPromotionList.add(new WebPromotionVO(webPromotionPO));
-        }
+        ArrayList<WebPromotionVO> webPromotionList = new ArrayList();
+        webPromotionList.addAll(webPromotionPOList.stream()
+                                                  .map(WebPromotionVO::new)
+                                                  .collect(Collectors.toList()));
 
         return new WebPromotionListVO(webPromotionList);
     }

@@ -12,4 +12,6 @@ public interface CustomerBL {
 
     public ResultMessage modifyInfo(CustomerVO vo);
 
+    public int getRank(int customerID);
+
 }

@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * HotelController的职责是接受酒店管理界面发来的请求
@@ -24,12 +25,14 @@ import java.util.HashSet;
  * 具体的方法的定义可查看对应接口里的方法注释
  * @author Guo
  */
-public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomNumBL {
+public class HotelController implements HotelServ, GetHotelListBL{
     HotelBL hotelBL;
+    RoomBL roomBL;
     OrderListBL orderListBL;
 
     public HotelController() {
         hotelBL = new Hotel();
+        roomBL = new Room();
         orderListBL = new OrderList();
     }
 
@@ -45,18 +48,17 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
 
     @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        return hotelBL.modifyRoomInfo(hotelID, roomInfo);
+        return roomBL.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
         ArrayList<HotelVO> hotelList = new ArrayList();
-        HashSet<Integer> hotelIDSet = new HashSet();
 
-        for (OrderVO order : orderList) {
-            hotelIDSet.add(order.getHotelID());
-        }
+        HashSet<Integer> hotelIDSet = orderList.stream()
+                                      .map(OrderVO::getHotelID)
+                                      .collect(Collectors.toCollection(HashSet::new));
 
         for (int hotelID : hotelIDSet) {
             HotelPO hotelPO = null;
@@ -72,36 +74,5 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
         }
 
         return new HotelListVO(hotelList);
-    }
-
-    @Override
-    public int getSpareRoomNumInTime(RoomType type, int hotelID, Date checkInTime, Date checkOutTime){
-        int nowSpareRoomNum;
-
-        try {
-            nowSpareRoomNum = RemoteHelper.getInstance().getOrderDataService().roomToBeAvailable(checkInTime, checkOutTime, type, hotelID);
-        } catch (RemoteException e) {
-            nowSpareRoomNum = 100000;
-            e.printStackTrace();
-        }
-
-        int lastSpareRoom = 0;
-        HotelPO hotel = null;
-        try {
-            hotel = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(hotel != null) {
-            for (RoomPO room : hotel.getRoomList()) {
-                if (room.getType() == type) {
-                    lastSpareRoom = room.getSpareRoomNum();
-                }
-            }
-        }
-
-        int spareRoomNum = lastSpareRoom + nowSpareRoomNum;
-        return spareRoomNum;
     }
 }

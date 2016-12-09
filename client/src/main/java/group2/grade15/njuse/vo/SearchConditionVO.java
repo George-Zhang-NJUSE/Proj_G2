@@ -24,7 +24,10 @@ public class SearchConditionVO {
     private double maxScore;                //顾客所接受的酒店最高评分，若客户未填写，则设置为10
     private boolean isBooked;               //顾客选择是否在已预订过的酒店中搜索，若客户未填写，则设置为false
 
-    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice, double maxPrice, int freeRoomNum, int minStarLevel, Date checkInTime, Date checkOutTime, double minScore, double maxScore, boolean isBooked) {
+    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice,
+                             double maxPrice, int freeRoomNum, int minStarLevel, Date checkInTime, Date checkOutTime,
+                             double minScore, double maxScore, boolean isBooked) {
+
         this.customerID = customerID;
         this.sortBy = sortBy;
         this.name = name;

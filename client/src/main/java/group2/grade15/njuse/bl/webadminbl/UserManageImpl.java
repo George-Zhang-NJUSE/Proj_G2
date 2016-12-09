@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * 负责用户业务的管理
@@ -18,17 +19,17 @@ public class UserManageImpl implements UserManageBL {
 
     public CustomerListVO getCustomerList() {
         ArrayList<CustomerPO> customerPOList = null;
-        ArrayList<CustomerVO> customerList = new ArrayList();
         try {
             customerPOList = RemoteHelper.getInstance().getWebAdminDataService().getCustomerInfo();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
+        ArrayList<CustomerVO> customerList = new ArrayList();
         if (customerPOList != null) {
-            for (CustomerPO po : customerPOList) {
-                customerList.add(new CustomerVO(po));
-            }
+            customerList.addAll(customerPOList.stream()
+                                              .map(CustomerVO::new)
+                                              .collect(Collectors.toList()));
         }
 
         return new CustomerListVO(customerList);
@@ -36,17 +37,18 @@ public class UserManageImpl implements UserManageBL {
 
     public HotelManagerListVO getHotelManagerList() {
         ArrayList<HotelManagerPO> hotelManagerPOList = null;
-        ArrayList<HotelManagerVO> hotelManagerList = new ArrayList();
+
         try {
             hotelManagerPOList = RemoteHelper.getInstance().getWebAdminDataService().getHotelManagerInfo();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
+        ArrayList<HotelManagerVO> hotelManagerList = new ArrayList();
         if (hotelManagerPOList != null) {
-            for (HotelManagerPO po : hotelManagerPOList) {
-                hotelManagerList.add(new HotelManagerVO(po));
-            }
+            hotelManagerList.addAll(hotelManagerPOList.stream()
+                                                      .map(HotelManagerVO::new)
+                                                      .collect(Collectors.toList()));
         }
 
         return new HotelManagerListVO(hotelManagerList);
@@ -54,17 +56,18 @@ public class UserManageImpl implements UserManageBL {
 
     public WebMarketerListVO getWebMarketerList() {
         ArrayList<WebMarketerPO> webMarketerPOList = null;
-        ArrayList<WebMarketerVO> webMarketerList = new ArrayList();
+
         try {
             webMarketerPOList = RemoteHelper.getInstance().getWebAdminDataService().getWebMarketerInfo();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
+        ArrayList<WebMarketerVO> webMarketerList = new ArrayList();
         if (webMarketerPOList != null) {
-            for (WebMarketerPO po : webMarketerPOList) {
-                webMarketerList.add(new WebMarketerVO(po));
-            }
+            webMarketerList.addAll(webMarketerPOList.stream()
+                                                    .map(WebMarketerVO::new)
+                                                    .collect(Collectors.toList()));
         }
 
         return new WebMarketerListVO(webMarketerList);
