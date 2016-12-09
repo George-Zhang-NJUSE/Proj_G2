@@ -32,7 +32,9 @@ public class WebPromotionVO {
         state = po.getState();
     }
 
-    public WebPromotionVO(int promotionID, WebPromotionType type, Date start, Date end, String address, int level, double discount, String name, PromotionState state) {
+    public WebPromotionVO(int promotionID, WebPromotionType type, Date start, Date end, String address, int level,
+                          double discount, String name, PromotionState state) {
+
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;

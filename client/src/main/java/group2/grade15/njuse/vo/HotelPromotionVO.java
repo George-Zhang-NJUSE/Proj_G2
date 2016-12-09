@@ -32,7 +32,8 @@ public class HotelPromotionVO {
         hotelID = po.getHotelID();
     }
 
-    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, int vipID, double discount, String name, PromotionState state, int hotelID) {
+    public HotelPromotionVO(int promotionID, HotelPromotionType type, Date start, Date end, int vipID,
+                            double discount, String name, PromotionState state, int hotelID) {
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;
@@ -64,7 +65,7 @@ public class HotelPromotionVO {
         return end;
     }
 
-    public int getVipList() {
+    public int getVipID() {
         return vipID;
     }
 

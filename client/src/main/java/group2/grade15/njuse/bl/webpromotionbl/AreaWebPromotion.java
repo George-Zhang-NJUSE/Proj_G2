@@ -31,9 +31,9 @@ public class AreaWebPromotion implements WebPromotionBL {
         int customerRank = customer.getRank(orderVO.getCustomerID());
         double totalPrice = order.getOriginalPrice(orderVO);
 
-        boolean isFit = isFit(orderVO, webPromotionVO) && customerRank >= webPromotionVO.getLevel();
+        boolean isApply = isFit(orderVO, webPromotionVO) && customerRank >= webPromotionVO.getLevel();
 
-        if(isFit) {
+        if(isApply) {
             return totalPrice * webPromotionVO.getDiscount();
         } else {
             return totalPrice;
@@ -52,7 +52,7 @@ public class AreaWebPromotion implements WebPromotionBL {
             e.printStackTrace();
         }
 
-        String hoteAddress = hotelPO.getAddress();
-        return applicableAddress.equals(hoteAddress);
+        String hotelAddress = hotelPO.getAddress();
+        return applicableAddress.equals(hotelAddress);
     }
 }

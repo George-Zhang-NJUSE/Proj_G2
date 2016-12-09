@@ -32,24 +32,10 @@ public class PartnerHotelPromotion implements HotelPromotionBL {
     }
 
     private boolean isFit(OrderVO orderVO, HotelPromotionVO hotelPromotionVO){
-        String hotelName = hotelPromotionVO.getName();
-
-        //获取该客户企业合作单位
+        int vipID= hotelPromotionVO.getVipID();
         int customerID = orderVO.getCustomerID();
-        CustomerPO customerPO = null;
 
-        try {
-            customerPO = RemoteHelper.getInstance().getCustomerDataService().getCustomer(customerID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        String companyName = null;
-        if(customerPO != null) {
-            companyName = customerPO.getCompanyName();
-        }
-
-        if(companyName == null || !hotelName.equals(companyName)) {
+        if(vipID == customerID) {
             return false;
         } else {
             return true;

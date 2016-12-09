@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * 具体的方法的定义可查看对应接口里的方法注释
  * @author Guo
  */
-public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomNumBL {
+public class HotelController implements HotelServ, GetHotelListBL{
     HotelBL hotelBL;
     RoomBL roomBL;
     OrderListBL orderListBL;
@@ -74,10 +74,5 @@ public class HotelController implements HotelServ, GetHotelListBL, GetSpareRoomN
         }
 
         return new HotelListVO(hotelList);
-    }
-
-    @Override
-    public int getSpareRoomNumInTime(RoomType type, int hotelID, Date checkInTime, Date checkOutTime){
-        return roomBL.getSpareRoomNumInTime(type, hotelID, checkInTime, checkOutTime);
     }
 }
