@@ -10,6 +10,7 @@ import group2.grade15.njuse.vo.OrderVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Created by George on 2016/11/6.
@@ -25,10 +26,9 @@ public class OrderList implements OrderListBL {
             e.printStackTrace();
         }
 
-        ArrayList<OrderVO> orderList = new ArrayList();
-        for(OrderPO orderPO : orderPOList){
-            orderList.add(new OrderVO(orderPO));
-        }
+        ArrayList<OrderVO> orderList = orderPOList.stream()
+                                       .map(OrderVO::new)
+                                       .collect(Collectors.toCollection(ArrayList::new));
 
         if(orderPOList != null){
             return new OrderListVO(orderList);
@@ -76,10 +76,9 @@ public class OrderList implements OrderListBL {
             e.printStackTrace();
         }
 
-        ArrayList<OrderVO> orderList = new ArrayList();
-        for(OrderPO orderPO : orderPOList){
-            orderList.add(new OrderVO(orderPO));
-        }
+        ArrayList<OrderVO> orderList = orderPOList.stream()
+                                       .map(OrderVO::new)
+                                       .collect(Collectors.toCollection(ArrayList::new));
 
         if(orderPOList != null){
             return new OrderListVO(orderList);
@@ -94,13 +93,10 @@ public class OrderList implements OrderListBL {
     private OrderListVO filterOrderByState(int customerID, OrderState state){
         OrderListVO orderListVO = getAllOrderListByCustomerID(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> filterOrderList = new ArrayList();
 
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getState() == state){
-                filterOrderList.add(orderVO);
-            }
-        }
+        ArrayList<OrderVO> filterOrderList = orderList.stream()
+                                             .filter(orderVO -> orderVO.getState() == state)
+                                             .collect(Collectors.toCollection(ArrayList::new));
 
         return new OrderListVO(filterOrderList);
     }
@@ -110,13 +106,10 @@ public class OrderList implements OrderListBL {
      */
     private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO){
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-        ArrayList<OrderVO> filterOrderList = new ArrayList();
 
-        for(OrderVO orderVO : orderList){
-            if(orderVO.getHotelID() == hotelID){
-                filterOrderList.add(orderVO);
-            }
-        }
+        ArrayList<OrderVO> filterOrderList = orderList.stream()
+                                             .filter(orderVO -> orderVO.getHotelID() == hotelID)
+                                             .collect(Collectors.toCollection(ArrayList::new));
 
         return new OrderListVO(filterOrderList);
     }

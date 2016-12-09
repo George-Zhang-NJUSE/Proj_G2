@@ -2,6 +2,7 @@ package group2.grade15.njuse.bl.searchbl;
 
 import group2.grade15.njuse.bl.hotelbl.GetHotelListBL;
 import group2.grade15.njuse.bl.hotelbl.GetSpareRoomNumBL;
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelController;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.utility.SortMethod;
@@ -51,59 +52,15 @@ public class SearchFilter implements SearchFilterBL {
                 break;
 
             case PRICE:
-                newHotelList = hotelList;
-                for (int i = 1; i < newHotelList.size(); i++) {
-                    for (int j = 0; j < i; j++) {
-
-                        //计算出第一个酒店的最低房价
-                        double minRoomPrice1 = 0;
-                        for (RoomVO room : newHotelList.get(i).getRoomList()) {
-                            if (minRoomPrice1 > room.getPrice() || minRoomPrice1 == 0) {
-                                minRoomPrice1 = room.getPrice();
-                            }
-                        }
-
-                        //计算出第二个酒店的最低房价
-                        double minRoomPrice2 = 0;
-                        for (RoomVO room : newHotelList.get(j).getRoomList()) {
-                            if (minRoomPrice2 > room.getPrice() || minRoomPrice1 == 0) {
-                                minRoomPrice2 = room.getPrice();
-                            }
-                        }
-
-                        if (minRoomPrice1 < minRoomPrice2) {
-                            HotelVO temp = newHotelList.get(j);
-                            newHotelList.set(j, newHotelList.get(i));
-                            newHotelList.set(i, temp);
-                        }
-                    }
-                }
+                newHotelList = sortByPrice(hotelList);
                 break;
 
             case STAR_LEVEL:
-                newHotelList = hotelList;
-                for (int i = 1; i < newHotelList.size(); i++) {
-                    for (int j = 0; j < i; j++) {
-                        if (newHotelList.get(i).getRank() < newHotelList.get(j).getRank()) {
-                            HotelVO temp = newHotelList.get(j);
-                            newHotelList.set(j, newHotelList.get(i));
-                            newHotelList.set(i, temp);
-                        }
-                    }
-                }
+                newHotelList = sortByStarLevel(hotelList);
                 break;
 
             case SCORE:
-                newHotelList = hotelList;
-                for (int i = 1; i < newHotelList.size(); i++) {
-                    for (int j = 0; j < i; j++) {
-                        if (newHotelList.get(i).getScore() < newHotelList.get(j).getScore()) {
-                            HotelVO temp = newHotelList.get(j);
-                            newHotelList.set(j, newHotelList.get(i));
-                            newHotelList.set(i, temp);
-                        }
-                    }
-                }
+                newHotelList = sortByScore(hotelList);
                 break;
 
             default:
@@ -224,6 +181,71 @@ public class SearchFilter implements SearchFilterBL {
             }
 
         }
+        return newHotelList;
+    }
+
+    private ArrayList<HotelVO> sortByPrice(ArrayList<HotelVO> hotelList){
+        ArrayList<HotelVO> newHotelList = hotelList;
+
+        for (int i = 1; i < newHotelList.size(); i++) {
+            for (int j = 0; j < i; j++) {
+
+                //计算出第一个酒店的最低房价
+                double minRoomPrice1 = 0;
+                for (RoomVO room : newHotelList.get(i).getRoomList()) {
+                    if (minRoomPrice1 > room.getPrice() || minRoomPrice1 == 0) {
+                        minRoomPrice1 = room.getPrice();
+                    }
+                }
+
+                //计算出第二个酒店的最低房价
+                double minRoomPrice2 = 0;
+                for (RoomVO room : newHotelList.get(j).getRoomList()) {
+                    if (minRoomPrice2 > room.getPrice() || minRoomPrice1 == 0) {
+                        minRoomPrice2 = room.getPrice();
+                    }
+                }
+
+                if (minRoomPrice1 < minRoomPrice2) {
+                    HotelVO temp = newHotelList.get(j);
+                    newHotelList.set(j, newHotelList.get(i));
+                    newHotelList.set(i, temp);
+                }
+            }
+        }
+
+        return newHotelList;
+    }
+
+    private ArrayList<HotelVO> sortByStarLevel(ArrayList<HotelVO> hotelList){
+        ArrayList<HotelVO> newHotelList = hotelList;
+
+        for (int i = 1; i < newHotelList.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (newHotelList.get(i).getRank() < newHotelList.get(j).getRank()) {
+                    HotelVO temp = newHotelList.get(j);
+                    newHotelList.set(j, newHotelList.get(i));
+                    newHotelList.set(i, temp);
+                }
+            }
+        }
+
+        return newHotelList;
+    }
+
+    private ArrayList<HotelVO> sortByScore(ArrayList<HotelVO> hotelList){
+        ArrayList<HotelVO> newHotelList = hotelList;
+
+        for (int i = 1; i < newHotelList.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (newHotelList.get(i).getScore() < newHotelList.get(j).getScore()) {
+                    HotelVO temp = newHotelList.get(j);
+                    newHotelList.set(j, newHotelList.get(i));
+                    newHotelList.set(i, temp);
+                }
+            }
+        }
+
         return newHotelList;
     }
 }

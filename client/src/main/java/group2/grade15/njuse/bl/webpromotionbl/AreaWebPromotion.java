@@ -1,30 +1,39 @@
 package group2.grade15.njuse.bl.webpromotionbl;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
+import group2.grade15.njuse.bl.customerbl.CustomerBL;
 import group2.grade15.njuse.bl.orderbl.Order;
 import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
 import group2.grade15.njuse.po.HotelPO;
+import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by Guo on 2016/12/6.
  */
 public class AreaWebPromotion implements WebPromotionBL {
     public OrderBL order;
+    public CustomerBL customer;
 
     public AreaWebPromotion(){
         order = new Order();
+        customer = new Customer();
     }
 
     @Override
     public double countPrice(OrderVO orderVO, WebPromotionVO webPromotionVO) {
 
+        int customerRank = customer.getRank(orderVO.getCustomerID());
         double totalPrice = order.getOriginalPrice(orderVO);
 
-        if(isFit(orderVO, webPromotionVO)) {
+        boolean isFit = isFit(orderVO, webPromotionVO) && customerRank >= webPromotionVO.getLevel();
+
+        if(isFit) {
             return totalPrice * webPromotionVO.getDiscount();
         } else {
             return totalPrice;
