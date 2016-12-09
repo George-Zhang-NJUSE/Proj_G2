@@ -30,4 +30,8 @@ public class ProvinceVO {
     public ProvincePO toPO() {
         return new ProvincePO(provinceName, provinceID);
     }
+
+    public String toString(){
+        return provinceName;
+    }
 }
