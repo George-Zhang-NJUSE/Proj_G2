@@ -209,7 +209,7 @@ public class RoomManageController implements Initializable {
         RoomVO vo=getRoomFromList();
         typeM.setItems(FXCollections.observableArrayList(vo.getType()));
         typeM.getEditor().setText(vo.getType().toString());
-        
+
     }
     public void showRoomList(){
 

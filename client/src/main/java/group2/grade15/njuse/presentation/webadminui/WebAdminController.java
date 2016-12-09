@@ -15,11 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -86,6 +88,20 @@ public class WebAdminController implements Initializable{
     @FXML
     private ImageView hotelImage;
 
+    @FXML
+    private TextField hotelName;
+    @FXML
+    private TextField hotelAddress;
+    @FXML
+    private TextField hotelRank;
+    @FXML
+    private TextField hotelAccountName;
+    @FXML
+    private TextField hotelAccountPW;
+    @FXML
+    private TextField hotelID;
+
+
 
 
 
@@ -105,8 +121,8 @@ public class WebAdminController implements Initializable{
 
     }
 
-    public ResultMessage addHotelToData(HotelVO vo) {
-
+    public ResultMessage addHotelToData(HotelVO vo) throws RemoteException {
+        return webAdminService.createHotel(vo);
     }
 
     //初始化承收并展示来自数据库的账号列表方法
@@ -238,7 +254,8 @@ public class WebAdminController implements Initializable{
 
     private HotelVO getherVO(){
         HotelVO result;
-        result=new HotelVO(hotelListData.size(),)
+        result = new HotelVO(0, hotelName.getText(), "", hotelAddress.getText(), "", "", "", null, null, Integer.parseInt(hotelRank.getText()), 0, null);
+        return result;
     }
 
 
