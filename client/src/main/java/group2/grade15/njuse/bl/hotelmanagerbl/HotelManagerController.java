@@ -2,6 +2,8 @@ package group2.grade15.njuse.bl.hotelmanagerbl;
 
 import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelBL;
+import group2.grade15.njuse.bl.hotelbl.Room;
+import group2.grade15.njuse.bl.hotelbl.RoomBL;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
 import group2.grade15.njuse.bl.orderbl.ModifyOrderStateBL;
@@ -22,11 +24,13 @@ import group2.grade15.njuse.vo.*;
 public class HotelManagerController implements HotelManagerServ {
 
     private HotelManagerBL hotelManager;
+    private RoomBL room;
     private HotelBL hotel;
     private HotelPromotionControllerBL hotelPromotionController;
     private ModifyOrderStateBL modifyOrderState;
 
     public HotelManagerController(){
+        room = new Room();
         hotel = new Hotel();
         hotelManager = new HotelManager();
         hotelPromotionController = new HotelPromotionController();
@@ -50,7 +54,7 @@ public class HotelManagerController implements HotelManagerServ {
 
     @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        return hotel.modifyRoomInfo(hotelID, roomInfo);
+        return room.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
@@ -86,16 +90,6 @@ public class HotelManagerController implements HotelManagerServ {
     @Override
     public ResultMessage modifyState(int orderID, OrderState s) {
         return modifyOrderState.modifyState(orderID, s);
-    }
-
-    @Override
-    public ResultMessage addCompany(int customerID) {
-        return hotelManager.addCompany(customerID);
-    }
-
-    @Override
-    public ResultMessage deleteCompany(int customerID) {
-        return hotelManager.deleteCompany(customerID);
     }
 
     @Override

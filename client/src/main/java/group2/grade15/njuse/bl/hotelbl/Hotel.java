@@ -42,16 +42,4 @@ public class Hotel implements HotelBL {
         }
     }
 
-    public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        ResultMessage result;
-        try {
-            result = RemoteHelper.getInstance().getHotelDataService().modifyRoom(hotelID, roomInfo.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
-        }
-
-        return result;
-    }
-
 }

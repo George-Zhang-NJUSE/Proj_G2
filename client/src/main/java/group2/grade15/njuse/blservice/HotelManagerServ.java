@@ -105,24 +105,6 @@ public interface HotelManagerServ {
     public ResultMessage modifyState(int orderID, OrderState state);
 
     /**
-     * 添加客户为企业伙伴
-     * @param customerID int型，界面层传来的客户ID
-     * @return 成功返回ResultMessage.SUCCESS
-     *         失败返回ResultMessage.FAILED
-     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
-     */
-    public ResultMessage addCompany(int customerID);
-
-    /**
-     * 将客户从企业伙伴删除
-     * @param customerID int型，界面层传来的客户ID
-     * @return 成功返回ResultMessage.SUCCESS
-     *         失败返回ResultMessage.FAILED
-     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
-     */
-    public ResultMessage deleteCompany(int customerID);
-
-    /**
      * 获取酒店经理的个人信息
      * @param  hotelManagerId int型，界面层传来的酒店经理ID
      * @return 成功返回含有该酒店经理个人信息的HotelManagerVO
