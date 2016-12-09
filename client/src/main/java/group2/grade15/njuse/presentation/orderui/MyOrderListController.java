@@ -45,7 +45,7 @@ public class MyOrderListController implements Initializable{
                     Node singleItemTemplate = orderItemLoader.load();
 
                     MyOrderItemController orderItemController = orderItemLoader.getController();
-                    
+
 
                     allOrderBox.getChildren().add(singleItemTemplate);
                     orderItemController.initData(null);
