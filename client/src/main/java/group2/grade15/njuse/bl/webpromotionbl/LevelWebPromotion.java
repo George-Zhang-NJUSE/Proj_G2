@@ -2,17 +2,14 @@ package group2.grade15.njuse.bl.webpromotionbl;
 
 import group2.grade15.njuse.bl.customerbl.Customer;
 import group2.grade15.njuse.bl.customerbl.CustomerBL;
-import group2.grade15.njuse.bl.hotelbl.Hotel;
-import group2.grade15.njuse.bl.hotelbl.HotelBL;
+import group2.grade15.njuse.bl.orderbl.Order;
+import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
-import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
-import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -20,29 +17,22 @@ import java.util.ArrayList;
  */
 public class LevelWebPromotion implements WebPromotionBL {
 
-    @Override
-    public double countPrice(OrderVO orderVO, WebPromotionVO webPromotionVO) {
-        int roomNum = orderVO.getRoomSum();
-        int hotelID = orderVO.getHotelID();
-        RoomType roomType = orderVO.getType();
+    public OrderBL order;
 
-        HotelBL hotel = new Hotel();
-        double roomPrice = -1;
-
-        HotelVO hotelVO = hotel.getInfo(hotelID);
-        ArrayList<RoomVO> roomList = hotelVO.getRoomList();
-        for (RoomVO room : roomList) {
-            if (room.getType() == roomType) {
-                roomPrice = room.getPrice();
-            }
-        }
-
-        double totalPrice = roomPrice * roomNum;
-
-        return totalPrice;
+    public LevelWebPromotion(){
+        order = new Order();
     }
 
-    private double gerRankDiscount(double totalPrice, int customerID){
+    @Override
+    public double countPrice(OrderVO orderVO, WebPromotionVO webPromotionVO) {
+
+        int customerID = orderVO.getCustomerID();
+        double totalPrice = order.getOriginalPrice(orderVO);
+
+        return getRankDiscount(totalPrice, customerID);
+    }
+
+    private double getRankDiscount(double totalPrice, int customerID){
         //根据ID获取客户的信用值，用于后面的信用等级判定
         CustomerBL customer = new Customer();
         CustomerVO customerVO = customer.getInfo(customerID);

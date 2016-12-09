@@ -103,4 +103,24 @@ public class Order implements OrderBL{
         return new OrderVO(orderVO, minPrice, usedPromotionID);
     }
 
+    public double getOriginalPrice(OrderVO orderVO){
+        int roomNum = orderVO.getRoomSum();
+        int hotelID = orderVO.getHotelID();
+        RoomType roomType = orderVO.getType();
+
+        HotelBL hotel = new Hotel();
+        double roomPrice = -1;
+
+        HotelVO hotelVO = hotel.getInfo(hotelID);
+        ArrayList<RoomVO> roomList = hotelVO.getRoomList();
+        for (RoomVO room : roomList) {
+            if (room.getType() == roomType) {
+                roomPrice = room.getPrice();
+            }
+        }
+
+        double originalPrice = roomPrice * roomNum;
+
+        return originalPrice;
+    }
 }
