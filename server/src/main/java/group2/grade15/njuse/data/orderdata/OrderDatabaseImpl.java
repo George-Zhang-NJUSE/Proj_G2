@@ -176,6 +176,7 @@ public class OrderDatabaseImpl implements OrderDataService {
                 boolean hasChild = resultSet.getBoolean(10);
                 RoomType type = RoomType.values()[resultSet.getInt(11)];
                 OrderState state = OrderState.values()[resultSet.getInt(12)];//需要即时确定并更新
+                Date createTime=resultSet.getDate(13);
 
                 java.util.Date current = new java.util.Date();
                 Date now = new Date(current.getTime());
@@ -187,15 +188,16 @@ public class OrderDatabaseImpl implements OrderDataService {
                     modifyState.setInt(2, orderNum);
                     modifyState.executeUpdate();
 
-                    CreditPO creditPO = new CreditPO(customerID, orderNum, 0, 0.00, -amount, null, ChangeReason.orderAbnormal);
+                    CreditPO creditPO = new CreditPO(customerID, orderNum, 0, 0.00, -amount,
+                            null, ChangeReason.orderAbnormal);
                     CreditDatabaseImpl creditDatabase = new CreditDatabaseImpl(info);
                     if (!creditDatabase.add(creditPO).equals(ResultMessage.SUCCESS)) {
                         throw new Exception();
                     }
                 }
 
-                OrderPO orderPO = new OrderPO(orderNum, customerID, hotelID, amount, checkIn, checkOut, execute, roomSum, type,
-                        peopleSum, hasChild, state);
+                OrderPO orderPO = new OrderPO(orderNum, customerID, hotelID, amount, createTime,checkIn, checkOut, execute,
+                        roomSum, type, peopleSum, hasChild, state);
                 list.add(orderPO);
             }
         } catch (Exception e) {
@@ -250,6 +252,7 @@ public class OrderDatabaseImpl implements OrderDataService {
             int hotelID = encrypt.encrypt(po.getHotelID());
             int customerID = encrypt.encrypt(po.getCustomerID());
             double total = po.getAmount();
+            Date createTime=po.getCreateTime();
             Date checkIn = po.getCheckInTime();
             Date checkOut = po.getCheckOutTime();
             Date execute = po.getFinalExecuteTime();
@@ -271,6 +274,7 @@ public class OrderDatabaseImpl implements OrderDataService {
             addOrder.setBoolean(10, hasChild);
             addOrder.setInt(11, type);
             addOrder.setInt(12, state);
+            addOrder.setDate(13,createTime);
 
             addOrder.executeUpdate();
 
@@ -335,7 +339,8 @@ public class OrderDatabaseImpl implements OrderDataService {
                 java.util.Date instant = new java.util.Date();
                 Date now = new Date(instant.getTime());
                 if (execute.getTime() - now.getTime() < 21600000) {
-                    CreditPO creditPO = new CreditPO(customerID, orderID, 0, 0, -sum / 2.0, null, ChangeReason.orderCancelled);
+                    CreditPO creditPO = new CreditPO(customerID, orderID, 0, 0, -sum / 2.0,
+                            null, ChangeReason.orderCancelled);
                     CreditDatabaseImpl creditDatabase = new CreditDatabaseImpl(info);
                     if (creditDatabase.add(creditPO).equals(ResultMessage.FAILED)) {
                         throw new Exception();

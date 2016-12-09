@@ -27,7 +27,9 @@ public class CustomerVO implements Serializable {
         this.companyName = po.getCompanyName();
     }
 
-    public CustomerVO(int id, String name, String password, String contact, Date birthday, double credit, MemberType type, String companyName) {
+    public CustomerVO(int id, String name, String password, String contact, Date birthday, double credit,
+                      MemberType type, String companyName) {
+
         this.id = id;
         this.name = name;
         this.password = password;

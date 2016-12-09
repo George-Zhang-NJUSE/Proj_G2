@@ -55,7 +55,10 @@ public class OrderVO implements Serializable {
         state = vo.getState();
     }
 
-    public OrderVO(int orderID, int customerID, int hotelID, int amount, Date checkInTime, Date checkOutTime, Date createTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer, boolean haveChild, OrderState state) {
+    public OrderVO(int orderID, int customerID, int hotelID, int amount, Date checkInTime, Date checkOutTime,
+                   Date createTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer,
+                   boolean haveChild, OrderState state) {
+
         this.orderID = orderID;
         this.customerID = customerID;
         this.hotelID = hotelID;
@@ -128,7 +131,7 @@ public class OrderVO implements Serializable {
     }
 
     public OrderPO toPO() {
-        return new OrderPO(orderID, customerID, hotelID, amount, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
+        return new OrderPO(orderID, customerID, hotelID, amount, createTime, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
     }
 
 }

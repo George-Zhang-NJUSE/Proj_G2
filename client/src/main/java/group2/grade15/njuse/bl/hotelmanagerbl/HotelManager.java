@@ -66,14 +66,5 @@ public class HotelManager implements HotelManagerBL{
         return hotelPromotionController.changeState(promotionVO);
     }
 
-    @Override
-    public ResultMessage addCompany(int customerID) {
-        return null;
-    }
-
-    @Override
-    public ResultMessage deleteCompany(int customerID) {
-        return null;
-    }
 
 }
