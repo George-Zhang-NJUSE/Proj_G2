@@ -41,11 +41,11 @@ public class TimeWebPromotion implements WebPromotionBL {
     }
 
     private boolean isFit(OrderVO orderVO, WebPromotionVO webPromotionVO){
-        Date bookedTime = orderVO.getCreateTime();
+        Date createTime = orderVO.getCreateTime();
 
         Date startTime = webPromotionVO.getStart();
         Date endTime = webPromotionVO.getEnd();
 
-        return bookedTime.after(startTime) && bookedTime.before(endTime);
+        return createTime.after(startTime) && createTime.before(endTime);
     }
 }

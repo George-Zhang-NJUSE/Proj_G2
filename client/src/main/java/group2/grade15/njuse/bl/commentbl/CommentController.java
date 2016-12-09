@@ -1,11 +1,14 @@
 package group2.grade15.njuse.bl.commentbl;
 
+import group2.grade15.njuse.bl.orderbl.Order;
+import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.blservice.CommentServ;
 import group2.grade15.njuse.po.CommentPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CommentListVO;
 import group2.grade15.njuse.vo.CommentVO;
+import group2.grade15.njuse.vo.OrderVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -17,6 +20,12 @@ import java.util.ArrayList;
  * @author Guo
  */
 public class CommentController implements CommentServ, CommentBL {
+
+    OrderBL order;
+
+    public CommentController(){
+        order = new Order();
+    }
 
     @Override
     public ResultMessage createComment(CommentVO commentInfo) {
@@ -59,7 +68,11 @@ public class CommentController implements CommentServ, CommentBL {
     }
 
     @Override
-    public CommentVO getComment(int commentID, int customerID) {
+    public CommentVO getComment(int orderID) {
+
+        OrderVO orderVO = order.getInfo(orderID);
+        int customerID = orderVO.getCustomerID();
+
         ArrayList<CommentPO> commentPOList = new ArrayList();
 
         try {
@@ -71,7 +84,7 @@ public class CommentController implements CommentServ, CommentBL {
         CommentVO commentVO = null;
 
         for (CommentPO comment : commentPOList) {
-            if(comment.getCommentID() == commentID){
+            if(comment.getOrderID() == orderID){
                 commentVO = new CommentVO(comment);
             }
         }
