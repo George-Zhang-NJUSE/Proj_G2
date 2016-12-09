@@ -1,15 +1,15 @@
 package group2.grade15.njuse.bl.webpromotionbl;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
+import group2.grade15.njuse.bl.customerbl.CustomerBL;
 import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
+import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.RoomType;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.OrderVO;
-import group2.grade15.njuse.vo.RoomVO;
-import group2.grade15.njuse.vo.WebPromotionVO;
+import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
@@ -42,7 +42,12 @@ public class LevelWebPromotion implements WebPromotionBL {
         return totalPrice;
     }
 
-    private boolean gerRankDiscount(double totalPrice, int customerRank){
+    private double gerRankDiscount(double totalPrice, int customerID){
+        //根据ID获取客户的信用值，用于后面的信用等级判定
+        CustomerBL customer = new Customer();
+        CustomerVO customerVO = customer.getInfo(customerID);
+        double coustomerCredit = customerVO.getCredit();
+
         ArrayList<RankPO> rankPOList = null;
         try {
             rankPOList = RemoteHelper.getInstance().getWebPromotionDataService().getRank();
@@ -50,16 +55,22 @@ public class LevelWebPromotion implements WebPromotionBL {
             e.printStackTrace();
         }
 
+        //进行客户信用等级的判断
         int size = rankPOList.size();
         double[] discount = new double[size];
-        double[] standard = new double[size];
+        int discountRank = -1;
 
         for(int i = 0; i < size; i ++) {
+            if(coustomerCredit > rankPOList.get(i).getStandard()){
+                coustomerCredit ++;
+            }
             discount[i] = rankPOList.get(i).getDiscount();
-            standard[i] = rankPOList.get(i).getStandard();
         }
 
-//        for()
-        return true;
+        if(discountRank == -1) {
+            return totalPrice;
+        } else {
+            return totalPrice * discount[discountRank];
+        }
     }
 }
