@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by George on 2016/11/6.
  */
-public class Order {
+public class Order implements OrderBL{
 
     private HotelBL hotel;
     private WebPromotionControllerBL webPromotionController;

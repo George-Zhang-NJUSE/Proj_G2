@@ -45,7 +45,7 @@ public class AreaWebPromotion implements WebPromotionBL {
 
     private boolean isFit(OrderVO orderVO, WebPromotionVO webPromotionVO){
         String applicableAddress = webPromotionVO.getAddress();
-        //获取酒店的地址
+        //获取酒店的商圈地址
         HotelPO hotelPO = null;
         int hotelID = orderVO.getHotelID();
 
@@ -55,7 +55,7 @@ public class AreaWebPromotion implements WebPromotionBL {
             e.printStackTrace();
         }
 
-        String hoteAddress = hotelPO.getConcreteAddress();
+        String hoteAddress = hotelPO.getAddress();
         return applicableAddress.equals(hoteAddress);
     }
 }
