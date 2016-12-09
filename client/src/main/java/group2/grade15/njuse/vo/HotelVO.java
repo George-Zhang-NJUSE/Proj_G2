@@ -41,7 +41,10 @@ public class HotelVO implements Serializable {
 
     }
 
-    public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction, String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score, byte[][] picture) {
+    public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction,
+                   String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score,
+                   byte[][] picture) {
+
         this.id = id;
         this.name = name;
         this.address = address;

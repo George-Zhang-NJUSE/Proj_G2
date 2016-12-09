@@ -1,9 +1,9 @@
 package group2.grade15.njuse.bl.searchbl;
 
 import group2.grade15.njuse.bl.hotelbl.GetHotelListBL;
-import group2.grade15.njuse.bl.hotelbl.GetSpareRoomNumBL;
-import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelController;
+import group2.grade15.njuse.bl.hotelbl.Room;
+import group2.grade15.njuse.bl.hotelbl.RoomBL;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.utility.SortMethod;
 import group2.grade15.njuse.vo.HotelListVO;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
  * Created by Guo on 2016/12/8.
  */
 public class SearchFilter implements SearchFilterBL {
-    GetSpareRoomNumBL getSpareRoomNum;
+    RoomBL roomBL;
 
     public SearchFilter(){
-        getSpareRoomNum = new HotelController();
+        roomBL = new Room();
     }
 
     @Override
@@ -174,7 +174,7 @@ public class SearchFilter implements SearchFilterBL {
 
             Date checkIn = new Date(checkInTime.getTime());
             Date checkOut = new Date(checkOutTime.getTime());
-            int spareRoomNum = getSpareRoomNum.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
+            int spareRoomNum = roomBL.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
 
             if((spareRoomNum < 10000) && (spareRoomNum >= needRoom)){
                 newHotelList.add(hotel);
