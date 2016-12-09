@@ -30,4 +30,8 @@ public class DistrictVO {
     public DistrictPO toPO() {
         return new DistrictPO(districtName, districtNum);
     }
+
+    public String toString(){
+        return districtName;
+    }
 }

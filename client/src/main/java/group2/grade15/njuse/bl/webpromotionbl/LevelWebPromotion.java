@@ -16,11 +16,12 @@ import java.util.ArrayList;
  * Created by Guo on 2016/12/6.
  */
 public class LevelWebPromotion implements WebPromotionBL {
-
     public OrderBL order;
+    public CustomerBL customer;
 
     public LevelWebPromotion(){
         order = new Order();
+        customer = new Customer();
     }
 
     @Override
@@ -33,10 +34,7 @@ public class LevelWebPromotion implements WebPromotionBL {
     }
 
     private double getRankDiscount(double totalPrice, int customerID){
-        //根据ID获取客户的信用值，用于后面的信用等级判定
-        CustomerBL customer = new Customer();
-        CustomerVO customerVO = customer.getInfo(customerID);
-        double coustomerCredit = customerVO.getCredit();
+        int discountRank = customer.getRank(customerID);
 
         ArrayList<RankPO> rankPOList = null;
         try {
@@ -45,22 +43,17 @@ public class LevelWebPromotion implements WebPromotionBL {
             e.printStackTrace();
         }
 
-        //进行客户信用等级的判断
         int size = rankPOList.size();
         double[] discount = new double[size];
-        int discountRank = -1;
 
         for(int i = 0; i < size; i ++) {
-            if(coustomerCredit > rankPOList.get(i).getStandard()){
-                coustomerCredit ++;
-            }
             discount[i] = rankPOList.get(i).getDiscount();
         }
 
-        if(discountRank == -1) {
+        if(discountRank == 0) {
             return totalPrice;
         } else {
-            return totalPrice * discount[discountRank];
+            return totalPrice * discount[discountRank-1];
         }
     }
 }
