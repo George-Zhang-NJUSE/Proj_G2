@@ -54,11 +54,12 @@ public class OrderDatabaseTest {
 
     @Test
     public void addOrderTest() throws Exception {
+        Date createTime=Date.valueOf("2016-11-20");
         Date checkIn = Date.valueOf("2016-12-03");
         Date checkOut = Date.valueOf("2016-12-04");
         Date execute = Date.valueOf("2016-12-03");
-        OrderPO orderPO = new OrderPO(0, 1, 1, 100, checkIn, checkOut, execute, 1,
-                RoomType.stadardDoubleBed, 2, true, OrderState.unexecuted);
+        OrderPO orderPO = new OrderPO(0, 1, 1, 100, createTime,checkIn, checkOut,
+                execute, 1, RoomType.stadardDoubleBed, 2, true, OrderState.unexecuted);
         assertEquals(ResultMessage.SUCCESS, orderDatabase.addOrder(orderPO));
     }
 
