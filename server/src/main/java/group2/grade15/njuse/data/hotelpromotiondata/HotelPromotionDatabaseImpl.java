@@ -159,7 +159,7 @@ public class HotelPromotionDatabaseImpl implements HotelPromotionDataService {
             ResultSet resultSet = makeID.executeQuery("select max(promotionid) from hotelpromotion");
             int promotionID;
             if (resultSet.next()) {
-                promotionID = resultSet.getInt(1) + 1;
+                promotionID = resultSet.getInt(1) + 2;
             } else {
                 throw new SQLException();
             }
