@@ -25,16 +25,16 @@
          <children>
               <GridPane prefHeight="40.0">
                   <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="110.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="120.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="80.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="90.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="165.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="90.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="165.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="90.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="165.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="90.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="165.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
                   </columnConstraints>
                   <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -48,26 +48,26 @@
                       <Label prefHeight="20.0" text="商圈：" GridPane.columnIndex="7" GridPane.halignment="RIGHT" />
                       <Label fx:id="searchLabel" onMouseClicked="#search" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowSpan="3" />
                       <Label text="基础条件：" />
-                  <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="2" />
-                  <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="4" />
-                  <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="6" />
-                  <ComboBox fx:id="cbdBox" onAction="#loadHotelList" prefWidth="150.0" GridPane.columnIndex="8" />
+                  <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150165.0" GridPane.columnIndex="2" />
+                  <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="165.0" GridPane.columnIndex="4" />
+                  <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="165.0" GridPane.columnIndex="6" />
+                  <ComboBox fx:id="cbdBox" onAction="#loadHotelList" prefWidth="165.0" GridPane.columnIndex="8" />
                   </children>
               </GridPane>
             <Pane fx:id="additionalConditionPane" prefHeight="160.0" prefWidth="1180.0">
                <children>
                   <GridPane prefWidth="1180.0">
                      <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="110.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="120.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="165.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="165.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="165.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="165.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -80,24 +80,24 @@
                         <Label text="酒店名称：" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                         <TextField fx:id="hotelNameField" prefHeight="30.0" prefWidth="81.0" promptText="酒店名关键字" GridPane.columnIndex="6" GridPane.rowIndex="1" />
                         <Label text="房间类型：" GridPane.columnIndex="3" />
-                        <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="128.0" GridPane.columnIndex="4" />
+                        <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="165.0" GridPane.columnIndex="4" />
                         <Label text="价格区间：" GridPane.columnIndex="5" />
-                        <ChoiceBox fx:id="priceRangeChoiceBox" prefWidth="128.0" GridPane.columnIndex="6" />
+                        <ChoiceBox fx:id="priceRangeChoiceBox" prefWidth="165.0" GridPane.columnIndex="6" />
                         <Label text="空房数量：" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                        <ChoiceBox fx:id="freeRoomNumChoiceBox" prefHeight="30.0" prefWidth="128.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="freeRoomNumChoiceBox" prefWidth="165.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
                         <Label text="星级：" GridPane.columnIndex="1" />
-                        <ChoiceBox fx:id="minStarChoiceBox" prefWidth="128.0" GridPane.columnIndex="2" />
+                        <ChoiceBox fx:id="minStarChoiceBox" prefWidth="165.0" GridPane.columnIndex="2" />
                         <Label text="入住时间：" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="退房时间：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <DatePicker fx:id="checkInDatePicker" editable="false" promptText="点击按钮" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <DatePicker fx:id="checkOutDatePicker" editable="false" promptText="点击按钮" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <Label text="评分区间：" GridPane.columnIndex="7" />
-                        <ChoiceBox fx:id="scoreRangeChoiceBox" prefWidth="128.0" GridPane.columnIndex="8" />
+                        <ChoiceBox fx:id="scoreRangeChoiceBox" prefWidth="165.0" GridPane.columnIndex="8" />
                         <Label text="排序方式：" GridPane.rowIndex="3" />
                         <Label text="条件：" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="顺序：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <ChoiceBox fx:id="sortConditionChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <ChoiceBox fx:id="sortTypeChoiceBox" prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <ChoiceBox fx:id="sortConditionChoiceBox" prefWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <ChoiceBox fx:id="sortTypeChoiceBox" prefWidth="165.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                         <CheckBox fx:id="onlyOrderedHotelCheckBox" mnemonicParsing="false" text="只限我预订过的酒店" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
