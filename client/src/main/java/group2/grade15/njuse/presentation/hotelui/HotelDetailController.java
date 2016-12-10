@@ -12,6 +12,7 @@ import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import group2.grade15.njuse.presentation.orderui.MyOrderItemController;
 import group2.grade15.njuse.vo.CommentVO;
 import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.OrderVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,7 @@ public class HotelDetailController implements Initializable {
     private CommentServ commentServ;
     private OrderListServ orderListServ;
     private Image[] imageList;
+    private ArrayList<OrderVO> myOrders;
 
 
     @FXML
@@ -75,13 +77,14 @@ public class HotelDetailController implements Initializable {
         }
     }
 
-    public void initDataAndShow(HotelVO vo) {
+    public void initDataAndShow(HotelVO vo, ArrayList<OrderVO> myOrderList) {
         hotelVO = vo;
         if (hotelVO != null) {
             hotelNameLabel.setText(hotelVO.getName());
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());
             introLabel.setText(hotelVO.getIntroduction());
+            myOrders = myOrderList;
 
             byte[][] pictures=hotelVO.getPicture();
             imageList = new Image[pictures.length];
@@ -175,8 +178,30 @@ public class HotelDetailController implements Initializable {
     }
 
     private void loadMyOrders() {
+
         if (hotelVO != null) {
-            // TODO: 2016/12/8
+
+            myOrderBox.getChildren().clear();
+            ArrayList<MyOrderItemController> myOrderItemControllers=new ArrayList<>();
+
+            try {
+                for (OrderVO orderVO:myOrders) {
+                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                    Node single = loader.load();
+                    MyOrderItemController orderItemController = loader.getController();
+
+                    myOrderBox.getChildren().add(single);
+                    orderItemController.initData(orderVO);
+                    myOrderItemControllers.add(orderItemController);
+                }
+
+                myOrderItemControllers.forEach(MyOrderItemController::show);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }else {
 
@@ -201,7 +226,6 @@ public class HotelDetailController implements Initializable {
                 e.printStackTrace();
             }
         }
-
 
     }
 

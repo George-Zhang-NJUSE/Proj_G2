@@ -1,4 +1,4 @@
-8<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
     <resourceExtensions />
@@ -17,22 +17,6 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
-      <profile default="false" name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="hotel_booking_system-client" />
-        <module name="hotel_booking_system-common" />
-        <module name="hotel_booking_system-server" />
-      </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="hotel_booking_system-client" target="1.8" />
-      <module name="hotel_booking_system-common" target="1.8" />
-      <module name="hotel_booking_system-parent" target="1.8" />
-      <module name="hotel_booking_system-server" target="1.8" />
-      <module name="Proj_G2" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
