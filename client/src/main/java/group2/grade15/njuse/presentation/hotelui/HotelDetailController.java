@@ -4,6 +4,7 @@ import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.CommentServ;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
+import group2.grade15.njuse.presentation.myanimation.ChangeImage;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -17,9 +18,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,6 +39,7 @@ public class HotelDetailController implements Initializable {
     private Pane parentPane;
     private CommentServ commentServ;
     private OrderListServ orderListServ;
+    private Image[] imageList;
 
 
     @FXML
@@ -42,6 +47,9 @@ public class HotelDetailController implements Initializable {
 
     @FXML
     private VBox commentBox, myOrderBox;
+
+    @FXML
+    private ImageView hotelImageView;
 
     @FXML
     private Label returnLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, introLabel;
@@ -74,6 +82,13 @@ public class HotelDetailController implements Initializable {
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());
             introLabel.setText(hotelVO.getIntroduction());
+
+            byte[][] pictures=hotelVO.getPicture();
+            imageList = new Image[pictures.length];
+            for(int a=0;a<imageList.length;a++) {
+                imageList[a]=new Image(new ByteArrayInputStream(pictures[a]));
+            }
+
         }else{
             System.out.println("没有酒店数据");
         }
@@ -85,9 +100,14 @@ public class HotelDetailController implements Initializable {
         //渐入扩大动画
         Fade fadeIn = new Fade(rootNode, 300, true);
         Pop popIn = new Pop(rootNode, 300, true);
+
+        //切换图片动画
+        ChangeImage changeImage = new ChangeImage(hotelImageView, 5000, imageList);
+
         popIn.setOnFinished((ActionEvent e) -> {
             loadComments();
             loadMyOrders();
+            changeImage.play();
         });
 
         fadeIn.play();
@@ -135,13 +155,12 @@ public class HotelDetailController implements Initializable {
                 commentBox.getChildren().clear();
                 ArrayList<Node> ItemList = new ArrayList<>();
 
-
                 for (int i = 0; i < 15; ++i) {
                     FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
                     Node singleItemTemplate = loader.load();
                     HotelCommentItemController commentItemController = loader.getController();
-
                     ItemList.add(singleItemTemplate);
+                    commentItemController.show();
                 }
 
                 commentBox.getChildren().addAll(ItemList);
@@ -159,13 +178,11 @@ public class HotelDetailController implements Initializable {
         if (hotelVO != null) {
             // TODO: 2016/12/8
 
-
         }else {
 
             //用于本地测试
             try {
                 myOrderBox.getChildren().clear();
-
 
                 // TODO: 2016/12/2 需要更改为正确的逻辑
                 for (int i = 0; i < 15; ++i) {
@@ -176,7 +193,6 @@ public class HotelDetailController implements Initializable {
                     myOrderBox.getChildren().add(singleItemTemplate);
                     orderItemController.initData(null);
                 }
-
 
 
             } catch (MalformedURLException e) {

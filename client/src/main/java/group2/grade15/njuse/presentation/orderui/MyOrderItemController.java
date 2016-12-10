@@ -29,7 +29,6 @@ public class MyOrderItemController implements Initializable{
     private OrderVO orderVO;
     private HotelVO hotelVO;
 
-
     @FXML
     private Node rootNode;
 
@@ -38,7 +37,6 @@ public class MyOrderItemController implements Initializable{
 
     @FXML
     private HBox hotelInfoBox;
-
 
     @FXML
     private void showMyOrderDetail() {
@@ -72,7 +70,6 @@ public class MyOrderItemController implements Initializable{
 
     }
 
-
     private void adaptToActualWidth() {
         //宽度太窄时不显示部分内容
         Pane container= (Pane)rootNode.getParent();
@@ -101,7 +98,6 @@ public class MyOrderItemController implements Initializable{
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.9);
         rootNode.setScaleY(0.9);
-
 
     }
 }

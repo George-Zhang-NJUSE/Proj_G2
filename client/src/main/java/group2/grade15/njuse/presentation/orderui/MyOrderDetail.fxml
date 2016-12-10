@@ -57,7 +57,7 @@
         <Label fx:id="customerNumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <Label text="订单号：" GridPane.rowIndex="1" />
         <Label fx:id="orderIDLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label fx:id="revokeOrderLabel" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+        <Label fx:id="revokeOrderLabel" onMouseClicked="#requestRevokeOrder" GridPane.columnIndex="3" GridPane.rowIndex="10" />
         <Label fx:id="checkOutTimeLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
         <Label text="最晚订单执行时间：" GridPane.rowIndex="5" />
         <Label text="订单状态：" GridPane.rowIndex="8" />
