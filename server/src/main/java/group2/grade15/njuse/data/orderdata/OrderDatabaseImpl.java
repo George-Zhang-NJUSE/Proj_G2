@@ -255,7 +255,7 @@ public class OrderDatabaseImpl implements OrderDataService {
             Date createTime=po.getCreateTime();
             Date checkIn = po.getCheckInTime();
             Date checkOut = po.getCheckOutTime();
-            Date execute = po.getFinalExecuteTime();
+            Date execute = new Date(po.getCheckInTime().getTime()+14400000);
             int room = po.getRoomSum();
             int people = po.getNumOfCustomer();
             boolean hasChild = po.isHaveChild();
