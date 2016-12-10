@@ -1,23 +1,30 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
+import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.RoomVO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -27,8 +34,10 @@ public class MakeOrderController implements Initializable {
 
     private int hotelID;
     private Pane parentPane;
-    private ArrayList<RoomVO> availableRoomList;
+    private ArrayList<RoomVO> availableRoomList;//和roomTypeComboBox内容对应
     private int maxRoomNum, maxCustomerNum;
+    private OrderServ orderServ;
+    private OrderVO completedOrder;
 
     @FXML
     private Node rootNode;
@@ -41,7 +50,10 @@ public class MakeOrderController implements Initializable {
     private DatePicker checkInDatePicker, checkOutDatePicker;
 
     @FXML
-    private ComboBox CheckInHourComboBox, checkOutHourComboBox, roomTypeComboBox;
+    private ComboBox checkInHourComboBox, checkOutHourComboBox, roomTypeComboBox;
+
+    @FXML
+    private CheckBox hasChildCheckBox;
 
     @FXML
     private void close() {
@@ -67,6 +79,8 @@ public class MakeOrderController implements Initializable {
             actualRoomNum--;
             roomNumLabel.setText(Integer.toString(actualRoomNum));
         }
+
+        updateOrderInfo();
     }
 
     @FXML
@@ -76,6 +90,8 @@ public class MakeOrderController implements Initializable {
             actualCustomerNum--;
             customerNumLabel.setText(Integer.toString(actualCustomerNum));
         }
+
+        updateOrderInfo();
     }
 
     @FXML
@@ -85,6 +101,8 @@ public class MakeOrderController implements Initializable {
             actualRoomNum++;
             roomNumLabel.setText(Integer.toString(actualRoomNum));
         }
+
+        updateOrderInfo();
     }
 
     @FXML
@@ -94,6 +112,8 @@ public class MakeOrderController implements Initializable {
             actualCustomerNum++;
             customerNumLabel.setText(Integer.toString(actualCustomerNum));
         }
+
+        updateOrderInfo();
     }
 
     @FXML
@@ -109,11 +129,91 @@ public class MakeOrderController implements Initializable {
         if (Integer.parseInt(customerNumLabel.getText()) > maxCustomerNum) {
             customerNumLabel.setText(Integer.toString(maxCustomerNum));
         }
+
+        updateOrderInfo();
     }
 
     @FXML
-    private void getTotalPrice() {
-        // TODO: 2016/12/10  
+    private void updateOrderInfo() { //每一次界面信息更新都被调用
+
+        String checkInDateStr = checkInDatePicker.getEditor().getText();
+        String checkOutDateStr = checkOutDatePicker.getEditor().getText();
+
+        if (checkInDateStr != null && checkOutDateStr != null) {
+
+            if (checkOutDateStr.compareTo(checkInDateStr) > 0) {//退房日期必须晚于入住日期
+
+                Date checkInDate = null, checkOutDate = null;
+
+                //扩展至完全格式
+                String checkInTimeStr = (String) checkInHourComboBox.getValue();
+                checkInTimeStr = checkInTimeStr.substring(0, 2) + ":00:00";
+                String checkOutTimeStr = (String) checkOutHourComboBox.getValue();
+                checkOutTimeStr = checkOutTimeStr.substring(0, 2) + ":00:00";
+
+                //设置精确到小时的入住、退房时间
+                checkInDateStr = checkInDateStr + " " + checkInTimeStr;
+                checkOutDateStr = checkOutDateStr + " " + checkOutTimeStr;
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    checkInDate = checkInDateStr == null ? null : dateFormat.parse(checkInDateStr);
+                    checkOutDate = checkOutDateStr == null ? null : dateFormat.parse(checkOutDateStr);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                java.sql.Date checkInSqlDate = new java.sql.Date(checkInDate.getTime());
+                java.sql.Date checkOutSqlDate = new java.sql.Date(checkOutDate.getTime());
+
+                //抓取其他信息
+                RoomType roomType = availableRoomList.get(roomTypeComboBox.getSelectionModel().getSelectedIndex()).getType();
+                int roomNum = Integer.parseInt(roomNumLabel.getText());
+                int customerNum = Integer.parseInt(customerNumLabel.getText());
+                boolean hasChild = hasChildCheckBox.isSelected();
+                int customerID = CommonData.getInstance().getCustomerVO().getId();
+
+                //获得总价及促销策略
+                completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
+                        null, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
+                totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
+                // TODO: 2016/12/10 获得相应促销策略的名字
+                int promotionID = completedOrder.getPromotionID();
+
+            } else {
+                Alert incorrectTimeAlert = new Alert(Alert.AlertType.ERROR, "退房日期必须晚于入住日期！");
+                incorrectTimeAlert.showAndWait();
+            }
+
+        }
+
+
+    }
+
+    @FXML
+    private void submitOrder() {
+
+        if (totalPriceLabel.getText().equals("0") || customerNumLabel.getText().equals("0") || roomNumLabel.getText().equals("0")) {
+            Alert uncompletedInfoAlert = new Alert(Alert.AlertType.ERROR, "请完善订单信息！");
+            uncompletedInfoAlert.showAndWait();
+        }else{
+            ResultMessage result = orderServ.saveOrder(completedOrder);
+            switch (result) {
+                case SUCCESS:
+                    Alert successInfo=new Alert(Alert.AlertType.INFORMATION,"提交成功！");
+                    successInfo.setOnCloseRequest((DialogEvent e)->close());
+                    successInfo.showAndWait();
+                    break;
+                case FAILED:
+                    Alert failInfo = new Alert(Alert.AlertType.ERROR, "由于服务器的原因，提交失败！");
+                    failInfo.showAndWait();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    Alert netError = new Alert(Alert.AlertType.ERROR, "网络连接出现错误，提交失败！");
+                    netError.showAndWait();
+                    break;
+            }
+        }
     }
 
 
@@ -122,10 +222,6 @@ public class MakeOrderController implements Initializable {
         this.hotelID = hotelID;
         hotelNameLabel.setText(hotelName);
         addressLabel.setText(address);
-
-        roomNumLabel.setText("0");
-        customerNumLabel.setText("0");
-        totalPriceLabel.setText("0");
 
         //设置可订房间列表
         availableRoomList = new ArrayList<>();
@@ -158,6 +254,14 @@ public class MakeOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        orderServ = new OrderController();
+
+        //加载非联网数据
+        checkInHourComboBox.setItems(FXCollections.observableArrayList(LiteralList.hourList));
+        checkInHourComboBox.getSelectionModel().select(0);
+        checkOutHourComboBox.setItems(FXCollections.observableArrayList(LiteralList.hourList));
+        checkOutHourComboBox.getSelectionModel().select(0);
 
         //加载按钮变化样式
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
