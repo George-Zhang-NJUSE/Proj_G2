@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
  */
 public class OrderList implements OrderListBL {
 
-
     public OrderListVO getAllOrderListByCustomerID(int customerID) {
         ArrayList<OrderPO> orderPOList = new ArrayList();
         try {
@@ -55,6 +54,11 @@ public class OrderList implements OrderListBL {
 
     public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID) {
         OrderListVO orderListVO = getExecutedOrderList(customerID);
+        return filterOrderByHotelID(hotelID, orderListVO);
+    }
+
+    public OrderListVO getUnexecutedOrderListInHotel(int customerID, int hotelID){
+        OrderListVO orderListVO = getUnexecutedOrderList(customerID);
         return filterOrderByHotelID(hotelID, orderListVO);
     }
 

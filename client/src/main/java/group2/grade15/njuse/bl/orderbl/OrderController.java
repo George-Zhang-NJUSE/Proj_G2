@@ -71,6 +71,11 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
     }
 
     @Override
+    public OrderListVO getUnexecutedOrderListInHotel(int id, int hotelID) {
+        return orderList.getUnexecutedOrderListInHotel(id, hotelID);
+    }
+
+    @Override
     public OrderListVO getRevokedOrderListInHotel(int id, int hotelID) {
         return orderList.getRevokedOrderListInHotel(id, hotelID);
     }

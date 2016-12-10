@@ -15,6 +15,8 @@ public interface HotelPromotionServ {
 
     public ResultMessage createHotelPromotion(HotelPromotionVO HotelPromotionInfo);
 
+    public HotelPromotionVO getHotelPromotion(int hotelID, int hotelPromotionID);
+
     public HotelPromotionListVO getHotelPromotionList(int hotelId);
 
     public ResultMessage modifyHotelPromotion(HotelPromotionVO promotion);

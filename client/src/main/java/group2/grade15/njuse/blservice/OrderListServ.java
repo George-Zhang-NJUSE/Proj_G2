@@ -40,6 +40,11 @@ public interface OrderListServ {
     public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID);
 
     /**
+     * 获取用户在某家酒店的所有已执行订单
+     */
+    public OrderListVO getUnexecutedOrderListInHotel(int customerID, int hotelID);
+
+    /**
      * 获取用户在某家酒店的所有撤销订单
      */
     public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID);
