@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * Created by ALIENWARE-PC on 2016/12/1.
  */
-public class PromotionManageController implements Initializable {
+public class PromotionManageController implements Initializable{
     @FXML
     private Label changeStateButton;
     @FXML
@@ -40,41 +40,50 @@ public class PromotionManageController implements Initializable {
     private Tab unactivatedTab;
     @FXML
     private Pane opPane;
+    @FXML
+    private Pane checkPane;
+    @FXML
+    private Label check;
+    @FXML
+    private Label cancel;
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
         CustomeButton.implButton(modifyButton, "file:client/src/main/res/webmarketer/modify");
-        CustomeButton.implButton(deleteButton, "file:client/src/main/res/webmarketer/delete");
-        CustomeButton.implButton(addButton, "file:client/src/main/res/webmarketer/add");
-        unactivatedTab.setOnSelectionChanged((Event e) -> {
+        CustomeButton.implButton(deleteButton,"file:client/src/main/res/webmarketer/delete");
+        CustomeButton.implButton(addButton,"file:client/src/main/res/webmarketer/add");
+        CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
+        CustomeButton.implButton(cancel,"file:client/src/main/res/webmarketer/Cancel");
+
+        unactivatedTab.setOnSelectionChanged((Event e)->{
             switchToUnactivated();
         });
-        activatedTab.setOnSelectionChanged((Event e) -> {
+        activatedTab.setOnSelectionChanged((Event e)->{
             switchToActivated();
         });
 
     }
-
-    public void switchToActivated() {
+    public void switchToActivated(){
         changeStateButton.setText("中止");
-        ImageView a = (ImageView) changeStateButton.getGraphic();
+        ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/webmarketer/stop.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/stop");
     }
-
-    public void switchToUnactivated() {
+    public void switchToUnactivated(){
         changeStateButton.setText("激活");
-        ImageView a = (ImageView) changeStateButton.getGraphic();
+        ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/webmarketer/play.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
     }
-
-    public void toAdd() {
+    public void toAdd(){
         try {
-            Fade out = new Fade(opPane, 200, false);
-            out.play();
+            checkPane.setVisible(true);
+            Fade cin = new Fade(checkPane, 200, true);
+            cin.play();
+            opPane.setVisible(true);
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/AddPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
@@ -86,11 +95,14 @@ public class PromotionManageController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public void toDelete() {
+    public void toDelete(){
         try {
+            checkPane.setVisible(true);
+            Fade cin = new Fade(checkPane, 200, true);
+            cin.play();
             Fade out = new Fade(opPane, 200, false);
             out.play();
+            opPane.setVisible(true);
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/DeletePromotionCheck.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
@@ -102,11 +114,14 @@ public class PromotionManageController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public void toModify() {
+    public void toModify(){
         try {
+            checkPane.setVisible(true);
+            Fade cin = new Fade(checkPane, 200, true);
+            cin.play();
             Fade out = new Fade(opPane, 200, false);
             out.play();
+            opPane.setVisible(true);
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/ModifyPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
@@ -117,5 +132,9 @@ public class PromotionManageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void back(){
+        opPane.setVisible(false);
+        checkPane.setVisible(false);
     }
 }
