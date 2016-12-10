@@ -92,7 +92,7 @@ public class MyCommentController implements Initializable {
                 Alert failInfo=new Alert(Alert.AlertType.ERROR, "修改失败！");
                 failInfo.showAndWait();
             } else if (result == ResultMessage.CONNECTION_EXCEPTION) {
-                Alert netError = new Alert(Alert.AlertType.ERROR, "修改失败，网络连接出现错误。");
+                Alert netError = new Alert(Alert.AlertType.ERROR, "由于网络连接出现错误，修改失败！");
                 netError.showAndWait();
             }
 

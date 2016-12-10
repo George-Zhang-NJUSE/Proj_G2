@@ -1,12 +1,16 @@
 package group2.grade15.njuse.presentation.orderui;
 
 import group2.grade15.njuse.bl.commentbl.CommentController;
+import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.CommentServ;
+import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CommentVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.event.ActionEvent;
@@ -14,13 +18,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -71,6 +75,54 @@ public class MyOrderDetailController implements Initializable {
         }
     }
 
+    @FXML
+    private void requestRevokeOrder() {
+        Alert confirmRevokeAlert = new Alert(Alert.AlertType.CONFIRMATION, "确定要撤销该订单吗？", ButtonType.NO, ButtonType.YES);
+        Optional<ButtonType> confirm = confirmRevokeAlert.showAndWait();
+        if (confirm.isPresent() && confirm.get() == ButtonType.YES) {
+            revokeOrder();
+        }
+    }
+
+    private void revokeOrder() {
+        OrderServ orderServ = new OrderController();
+        ResultMessage result=orderServ.modifyState(orderVO.getOrderID(), OrderState.revoked);
+        switch (result) {
+            case SUCCESS:
+                Alert successInfo=new Alert(Alert.AlertType.INFORMATION, "撤销成功！");
+                successInfo.showAndWait();
+                successInfo.setOnCloseRequest((DialogEvent e)->close());
+                break;
+            case FAILED:
+                Alert failInfo=new Alert(Alert.AlertType.ERROR, "撤销失败！");
+                failInfo.showAndWait();
+                break;
+            case CONNECTION_EXCEPTION:
+                Alert netError = new Alert(Alert.AlertType.ERROR, "撤销失败，网络连接出现错误。");
+                netError.showAndWait();
+                break;
+        }
+    }
+
+    private void adaptCommentLabel() {
+        //根据客户有没有评价订单来应用不同外观
+        CommentServ commentServ = new CommentController();
+        commentVO=commentServ.getComment(orderVO.getOrderID());
+
+        if(commentVO!=null){ //已经评价过
+            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/mycomment");
+        }else{
+            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
+        }
+    }
+
+    private void adaptRevokeOrderLabel() {
+        //根据订单状态决定是否显示撤销订单按钮
+        if (orderVO.getState() != OrderState.unexecuted) {
+            revokeOrderLabel.setDisable(true);
+        }
+    }
+
     public void initData(OrderVO vo, String hotelName, String address, int hotelId) {
         hotelID = hotelId;
         orderVO = vo;
@@ -88,19 +140,9 @@ public class MyOrderDetailController implements Initializable {
         orderPriceLabel.setText(Double.toString(orderVO.getAmount()));
         hasChildCheckBox.setSelected(orderVO.isHaveChild());
 
-        //根据客户有没有评价订单来应用不同外观
-
-        CommentServ commentServ = new CommentController();
-        commentVO=commentServ.getComment(orderVO.getOrderID());
-
-        if(commentVO!=null){ //已经评价过
-            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/mycomment");
-        }else{
-            CustomeButton.implButton(commentLabel, "file:client/src/main/res/order/comment");
-        }
-
+        adaptCommentLabel();
+        adaptRevokeOrderLabel();
     }
-
 
 
     public void show() {
@@ -126,11 +168,11 @@ public class MyOrderDetailController implements Initializable {
 
         //加载按钮变化样式
         CustomeButton.implButton(cancelLabel, "file:client/src/main/res/customer/cancel");
-
         CustomeButton.implButton(revokeOrderLabel, "file:client/src/main/res/order/revokeorder");
 
         //设置父界面
         parentPane = CommonData.getInstance().getFunctionAreaPane();
         parentPane.getChildren().add(rootNode);
+
     }
 }

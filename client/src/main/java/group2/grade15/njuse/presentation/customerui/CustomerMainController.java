@@ -67,8 +67,6 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             MyOrderListController orderListController = loader.getController();
-            orderListController.setParentPane(functionPane);
-
 
             orderListController.initDataAndShow();
 
@@ -89,7 +87,6 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             MyHotelListController hotelListController = loader.getController();
-            hotelListController.setParentPane(functionPane);
             hotelListController.initDataAndShow(); //show必须在setParentPane之后，不能将其放在initialize方法里
         } catch (MalformedURLException e) {
             e.printStackTrace();

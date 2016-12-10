@@ -73,7 +73,7 @@
                                 <Insets bottom="10.0" left="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label fx:id="confirmLabel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+                        <Label fx:id="confirmLabel" onMouseClicked="#applyAccount" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
                             <graphic>
                                 <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
