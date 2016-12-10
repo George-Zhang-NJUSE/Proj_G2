@@ -32,8 +32,7 @@
       <module name="hotel_booking_system-common" target="1.8" />
       <module name="hotel_booking_system-parent" target="1.8" />
       <module name="hotel_booking_system-server" target="1.8" />
-      <module name="hotel_booking_system-stubndriver" target="1.8" />
-      <module name="Proj_G2" target="1.5" />
+
     </bytecodeTargetLevel>
   </component>
 </project>
