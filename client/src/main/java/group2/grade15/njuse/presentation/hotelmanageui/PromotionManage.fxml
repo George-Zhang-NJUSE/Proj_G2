@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.layout.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
 
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.PromotionManageController">
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.PromotionManageController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
       <GridPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0">
@@ -38,8 +41,13 @@
                                        <children>
                                           <TableView fx:id="unactivatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
+                                              <TableColumn prefWidth="75.0" text="ID" />
+                                              <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -59,10 +67,15 @@
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="900.0">
                                        <children>
                                           <TableView fx:id="activatedList" prefHeight="450.0" prefWidth="900.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="ID" />
+                                                <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
+                                             </columns>
                                           </TableView>
                                        </children>
                                     </AnchorPane>
@@ -74,7 +87,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Label text="网站促销管理" GridPane.columnIndex="1">
+            <Label text="酒店促销管理" GridPane.columnIndex="1">
                <font>
                   <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
                </font>
@@ -85,7 +98,7 @@
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                              <image>
-                                 <Image url="file:client/src/main/res/webmarketer/play.png" />
+                                 <Image url="file:client/src/main/res/hotelmanage/play.png" />
                              </image>
                           </ImageView>
                       </graphic>
@@ -97,7 +110,7 @@
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                               <Image url="file:client/src/main/res/webmarketer/modify.png" />
+                               <Image url="file:client/src/main/res/hotelmanage/modify.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -109,7 +122,7 @@
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                              <image>
-                                 <Image url="file:client/src/main/res/webmarketer/delete.png" />
+                                 <Image url="file:client/src/main/res/hotelmanage/delete.png" />
                              </image>
                           </ImageView>
                       </graphic>
@@ -127,7 +140,7 @@
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:client/src/main/res/webmarketer/add.png" />
+                              <Image url="file:client/src/main/res/hotelmanage/add.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -140,20 +153,20 @@
             <Pane fx:id="opPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             <Pane fx:id="checkPane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="check" layoutX="10.0" layoutY="10.0">
+                  <Label fx:id="check" layoutX="20.0" layoutY="20.0">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                              <image>
-                                 <Image url="file:client/src/main/res/webmarketer/Check.png" />
+                                 <Image url="file:client/src/main/res/hotelmanage/Check.png" />
                              </image>
                           </ImageView>
                       </graphic>
                   </Label>
-                  <Label fx:id="cancel" layoutX="10.0" layoutY="80.0" onMouseClicked="#back">
+                  <Label fx:id="cancel" layoutX="20.0" layoutY="100.0" onMouseClicked="#closeOpPane">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                              <image>
-                                 <Image url="file:client/src/main/res/webmarketer/Cancel.png" />
+                                 <Image url="file:client/src/main/res/hotelmanage/Cancel.png" />
                              </image>
                           </ImageView>
                       </graphic>
