@@ -56,10 +56,10 @@ public class HotelDetailController implements Initializable {
         try {
             FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
             makeOrderLoader.load();
+
             MakeOrderController makeOrderController = makeOrderLoader.getController();
-
-
-            makeOrderController.initDataAndShow();
+            makeOrderController.initData(hotelVO.getId(),hotelVO.getName(),hotelVO.getConcreteAddress(),hotelVO.getRoomList());
+            makeOrderController.show();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
