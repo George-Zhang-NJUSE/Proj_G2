@@ -1,7 +1,11 @@
 package group2.grade15.njuse.presentation.orderui;
 
+import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
 import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.webpromotionbl.WebPromotionController;
+import group2.grade15.njuse.blservice.HotelPromotionServ;
 import group2.grade15.njuse.blservice.OrderServ;
+import group2.grade15.njuse.blservice.WebPromotionServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.Fade;
@@ -177,8 +181,15 @@ public class MakeOrderController implements Initializable {
                 completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
                         null, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
                 totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
-                // TODO: 2016/12/10 获得相应促销策略的名字
+
                 int promotionID = completedOrder.getPromotionID();
+                if (promotionID % 2 == 0) {//是酒店促销策略
+                    HotelPromotionServ hotelPromotionServ = new HotelPromotionController();
+                    promotionLabel.setText(hotelPromotionServ.getHotelPromotion(hotelID,promotionID).getName());
+                }else{//是网站促销策略
+                    WebPromotionServ webPromotionServ = new WebPromotionController();
+                    promotionLabel.setText(webPromotionServ.getWebPromotion(promotionID).getName());
+                }
 
             } else {
                 Alert incorrectTimeAlert = new Alert(Alert.AlertType.ERROR, "退房日期必须晚于入住日期！");
@@ -186,7 +197,6 @@ public class MakeOrderController implements Initializable {
             }
 
         }
-
 
     }
 
