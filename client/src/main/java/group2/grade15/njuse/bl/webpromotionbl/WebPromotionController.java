@@ -4,6 +4,8 @@ import group2.grade15.njuse.blservice.WebPromotionServ;
 import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.HotelPromotionListVO;
+import group2.grade15.njuse.vo.HotelPromotionVO;
 import group2.grade15.njuse.vo.WebPromotionListVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 
@@ -25,6 +27,20 @@ public class WebPromotionController implements WebPromotionServ, GetWebPromotion
         }
 
         return result;
+    }
+
+    @Override
+    public WebPromotionVO getWebPromotion(int webPromotionID) {
+        WebPromotionListVO webPromotionListVO = getWebPromotionList();
+        ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
+
+        for(WebPromotionVO webPromotionVO : webPromotionList){
+            if(webPromotionVO.getPromotionID() == webPromotionID){
+                return webPromotionVO;
+            }
+        }
+
+        return null;
     }
 
     @Override

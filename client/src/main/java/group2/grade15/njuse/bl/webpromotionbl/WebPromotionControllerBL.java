@@ -17,6 +17,8 @@ public interface WebPromotionControllerBL {
 
     public WebPromotionListVO getWebPromotionList();
 
+    public WebPromotionVO getWebPromotion(int webPromotionID);
+
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion);
 
     public ResultMessage changeState(WebPromotionVO promotionVO);

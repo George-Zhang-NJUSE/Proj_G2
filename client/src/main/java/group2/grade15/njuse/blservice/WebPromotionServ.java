@@ -7,6 +7,8 @@ import group2.grade15.njuse.vo.WebPromotionVO;
 public interface WebPromotionServ {
     public ResultMessage createWebPromotion(WebPromotionVO webPromotionInfo);
 
+    public WebPromotionVO getWebPromotion(int webPromotionID);
+
     public WebPromotionListVO getWebPromotionList();
 
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion);
