@@ -67,8 +67,6 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             MyOrderListController orderListController = loader.getController();
-            orderListController.setParentPane(functionPane);
-
 
             orderListController.initDataAndShow();
 

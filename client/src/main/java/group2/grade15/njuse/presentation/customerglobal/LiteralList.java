@@ -5,7 +5,7 @@ package group2.grade15.njuse.presentation.customerglobal;
  */
 public class LiteralList {
 
-    public static final String[] hourList={"0时","1时","2时","3时","4时","5时","6时","7时","8时","9时","10时","11时",
+    public static final String[] hourList={"00时","01时","02时","03时","04时","05时","06时","07时","08时","09时","10时","11时",
             "12时","13时","14时","15时","16时","17时","18时","19时","20时","21时","22时","23时"},
             sortConditionList={"默认","价格","星级","评分"},
             sortTypeList={"升序","降序"},

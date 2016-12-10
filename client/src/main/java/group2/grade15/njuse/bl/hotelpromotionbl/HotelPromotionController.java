@@ -29,6 +29,20 @@ public class HotelPromotionController implements HotelPromotionControllerBL, Hot
     }
 
     @Override
+    public HotelPromotionVO getHotelPromotion(int hotelID, int hotelPromotionID) {
+        HotelPromotionListVO hotelPromotionListVO = getHotelPromotionList(hotelID);
+        ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
+
+        for(HotelPromotionVO hotelPromotionVO : hotelPromotionList){
+            if(hotelPromotionVO.getPromotionID() == hotelPromotionID){
+                return hotelPromotionVO;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public HotelPromotionListVO getHotelPromotionList(int hotelID) {
         ArrayList<HotelPromotionVO> hotelPromotionList = new ArrayList();
         ArrayList<HotelPromotionPO> hotelPromotionPOList = new ArrayList();

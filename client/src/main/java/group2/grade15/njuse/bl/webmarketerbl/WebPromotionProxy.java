@@ -30,6 +30,11 @@ public class WebPromotionProxy implements WebPromotionServ {
     }
 
     @Override
+    public WebPromotionVO getWebPromotion(int webPromotionID) {
+        return webPromotionController.getWebPromotion(webPromotionID);
+    }
+
+    @Override
     public WebPromotionListVO getWebPromotionList() {
         return webPromotionController.getWebPromotionList();
     }
