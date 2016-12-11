@@ -60,7 +60,8 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Label message;
 
-    String[] contents = {
+
+    private String[] contents = {
             "id","name","state","discount","type","level","address","startDate","endDate"
     };
 
@@ -69,6 +70,7 @@ public class PromotionManageController implements Initializable{
 
     public AddPromotionController addPromotionController;
     public ModifyPromotionController modifyPromotionController;
+    public DeletePromotionCheckController deletePromotionCheckController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -140,7 +142,7 @@ public class PromotionManageController implements Initializable{
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((DeletePromotionCheckController)lodar.getController()).promotionManageController=this;
-            modifyPromotionController=lodar.getController();
+            deletePromotionCheckController=lodar.getController();
             Fade in = new Fade(opPane, 200, true);
             in.play();
         } catch (MalformedURLException e) {
@@ -286,9 +288,30 @@ public class PromotionManageController implements Initializable{
         WebMarketerMainController.webMarketerService.modifyWebPromotion(vo);
     }
     public void activatePromotion(){
-        Promotion promotion = getSelectedPromotion();
-        WebPromotionVO vo = promotionToVO(promotion);
-        WebMarketerMainController.webMarketerService.changeState(vo);
+        try {
+            Promotion promotion = getSelectedPromotion();
+            if (promotion.getState() == "start")
+                return;
+            promotion.setState("start");
+            WebPromotionVO vo = promotionToVO(promotion);
+            WebMarketerMainController.webMarketerService.changeState(vo);
+            message.setText("操作成功");
+        }catch (Exception e){
+            message.setText("操作未成功");
+        }
+    }
+    public void stopPromotion(){
+        try {
+            Promotion promotion = getSelectedPromotion();
+            if (promotion.getState() == "stop" || promotion.getState() == "start")
+                return;
+            promotion.setState("stop");
+            WebPromotionVO vo = promotionToVO(promotion);
+            WebMarketerMainController.webMarketerService.changeState(vo);
+            message.setText("操作成功");
+        } catch (Exception e) {
+            message.setText("操作未成功");
+        }
     }
     public void deletePromotion(){
         Promotion promotion=getSelectedPromotion();
@@ -354,5 +377,8 @@ public class PromotionManageController implements Initializable{
             return address.get();
         }
 
+        public void setState(String string) {
+            state.set(string);
+        }
     }
 }

@@ -153,6 +153,7 @@
             </VBox>
             <Pane fx:id="opPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             <Label fx:id="message" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+            <Label fx:id="message" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

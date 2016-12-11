@@ -9,6 +9,10 @@ import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -228,5 +232,83 @@ public class OrderManageController implements Initializable {
     }
     public void overtimeCheckin(){
         //TODO
+    }
+
+
+
+
+
+    public static class Order{
+        private final SimpleIntegerProperty orderId;
+        private final SimpleIntegerProperty customerId;
+        private final SimpleIntegerProperty hotelId;
+        private final SimpleIntegerProperty promotionId;
+        private final SimpleDoubleProperty amount;
+        private final SimpleStringProperty inDate;
+        private final SimpleStringProperty outDate;
+        private final SimpleStringProperty finalDate;
+        private final SimpleIntegerProperty roomNum;
+        private final SimpleStringProperty roomType;
+        private final SimpleIntegerProperty numOfCustomer;
+        private final SimpleBooleanProperty haveKid;
+        private final SimpleStringProperty state;
+
+        public Order(OrderVO vo){
+            orderId = new SimpleIntegerProperty(vo.getOrderID());
+            customerId = new SimpleIntegerProperty(vo.getCustomerID());
+            hotelId = new SimpleIntegerProperty(vo.getHotelID());
+            promotionId = new SimpleIntegerProperty(vo.getPromotionID());
+            amount = new SimpleDoubleProperty(vo.getAmount());
+            inDate = new SimpleStringProperty(vo.getCheckInTime().toString());
+            outDate = new SimpleStringProperty(vo.getCheckOutTime().toString());
+            finalDate = new SimpleStringProperty(vo.getFinalExecuteTime().toString());
+            roomNum = new SimpleIntegerProperty(vo.getRoomSum());
+            roomType = new SimpleStringProperty(vo.getType().toString());
+            numOfCustomer = new SimpleIntegerProperty(vo.getNumOfCustomer());
+            haveKid = new SimpleBooleanProperty(vo.isHaveChild());
+            state = new SimpleStringProperty(vo.getState().toString());
+
+
+        }
+        public int getOrderId(){
+            return orderId.get();
+        }
+        public int getCustomerId(){
+            return customerId.get();
+        }
+        public int getHotelId(){
+            return hotelId.get();
+        }
+        public int getPromotionId(){
+            return promotionId.get();
+        }
+        public double getAmount(){
+            return amount.get();
+        }
+        public String getInDate(){
+            return inDate.get();
+        }
+        public String getOutDate(){
+            return outDate.get();
+        }
+        public String getFinalDate(){
+            return finalDate.get();
+        }
+        public int getRoomNum(){
+            return roomNum.get();
+        }
+        public String getRoomType(){
+            return roomType.get();
+        }
+        public int getNumOfCustomer(){
+            return numOfCustomer.get();
+        }
+        public boolean getHaveKid(){
+            return haveKid.get();
+        }
+        public String getState(){
+            return state.get();
+        }
+
     }
 }
