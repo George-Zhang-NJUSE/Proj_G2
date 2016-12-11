@@ -1,7 +1,7 @@
 package group2.grade15.njuse.bl.webmarketerbl;
 
-import group2.grade15.njuse.bl.orderbl.ModifyOrderStateBL;
-import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.orderbl.Order;
+import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 
@@ -12,13 +12,13 @@ import group2.grade15.njuse.utility.ResultMessage;
  */
 public class RevokeProxy {
 
-    private ModifyOrderStateBL modifyOrderStateBL;
+    private OrderBL orderBL;
 
     public RevokeProxy() {
-        modifyOrderStateBL = new OrderController();
+        orderBL = new Order();
     }
 
     public ResultMessage modifyState(int orderId, OrderState state) {
-        return modifyOrderStateBL.modifyState(orderId, state);
+        return orderBL.modifyState(orderId, state);
     }
 }

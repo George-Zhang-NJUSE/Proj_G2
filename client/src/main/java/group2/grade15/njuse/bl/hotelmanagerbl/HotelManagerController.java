@@ -6,13 +6,14 @@ import group2.grade15.njuse.bl.hotelbl.Room;
 import group2.grade15.njuse.bl.hotelbl.RoomBL;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
-import group2.grade15.njuse.bl.orderbl.ModifyOrderStateBL;
-import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.orderbl.Order;
+import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.blservice.HotelManagerServ;
-import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
+
+import java.sql.Date;
 
 /**
  * HotelManagerController的职责是接受酒店经理界面传递来的请求
@@ -27,14 +28,14 @@ public class HotelManagerController implements HotelManagerServ {
     private RoomBL room;
     private HotelBL hotel;
     private HotelPromotionControllerBL hotelPromotionController;
-    private ModifyOrderStateBL modifyOrderState;
+    private OrderBL order;
 
     public HotelManagerController(){
         room = new Room();
         hotel = new Hotel();
         hotelManager = new HotelManager();
         hotelPromotionController = new HotelPromotionController();
-        modifyOrderState = new OrderController();
+        order = new Order();
     }
 
     @Override
@@ -89,11 +90,16 @@ public class HotelManagerController implements HotelManagerServ {
 
     @Override
     public ResultMessage modifyState(int orderID, OrderState s) {
-        return modifyOrderState.modifyState(orderID, s);
+        return order.modifyState(orderID, s);
     }
 
     @Override
     public HotelManagerVO getInfo(int hotelManagerId) {
         return hotelManager.getInfo(hotelManagerId);
+    }
+
+    @Override
+    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) {
+        return order.updateTime(checkIn, checkOut, orderID);
     }
 }

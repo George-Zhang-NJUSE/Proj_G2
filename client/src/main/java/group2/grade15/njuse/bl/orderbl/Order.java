@@ -19,6 +19,7 @@ import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -122,5 +123,18 @@ public class Order implements OrderBL{
         double originalPrice = roomPrice * roomNum;
 
         return originalPrice;
+    }
+
+    @Override
+    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) {
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getOrderDataService().updateTime(checkIn, checkOut, orderID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            result = ResultMessage.CONNECTION_EXCEPTION;
+        }
+
+        return result;
     }
 }
