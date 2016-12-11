@@ -7,6 +7,7 @@ import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditVO;
 import group2.grade15.njuse.vo.CustomerVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -29,6 +31,7 @@ import java.util.ResourceBundle;
 public class CustomerInfoController implements Initializable{
 
     private CustomerVO customerVO;
+    private CustomerServ customerServ;
 
     @FXML
     private Node rootNode;
@@ -58,13 +61,12 @@ public class CustomerInfoController implements Initializable{
 
     @FXML
     private void saveEdition() {
-        
+
         String newUserName = userNameField.getText();
         String newPhoneNum = phoneNumberField.getText();
         CustomerVO modifiedVO = new CustomerVO(customerVO.getId(), newUserName, customerVO.getPassword(), newPhoneNum,
                         customerVO.getBirthday(), customerVO.getCredit(), customerVO.getType(), customerVO.getCompanyName());
 
-        CustomerServ customerServ = new CustomerController();
         ResultMessage result = customerServ.modifyInfo(modifiedVO);
         switch (result) {
             case SUCCESS:
@@ -121,19 +123,20 @@ public class CustomerInfoController implements Initializable{
 
     private void loadCreditHistory() {
         try {
+            ArrayList<CreditVO> creditList = customerServ.getCreditHistory(customerVO.getId()).getCreditList();
             creditRecordBox.getChildren().clear();
 
+            ArrayList<CreditRecordItemController> controllerList = new ArrayList<>();
 
-            // TODO: 2016/12/2 需要更改为正确的逻辑
-            for (int i = 0; i < 15; ++i) {
+            for (CreditVO creditVO:creditList) {
                 FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CreditRecordItem.fxml"));
-                Node singleItemTemplate = loader.load();
+                Node single = loader.load();
                 CreditRecordItemController creditRecordItemController = loader.getController();
-
-
+                creditRecordItemController.initData(creditVO);
+                controllerList.add(creditRecordItemController);
             }
 
-
+            controllerList.forEach(CreditRecordItemController::show);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -157,6 +160,8 @@ public class CustomerInfoController implements Initializable{
     }
 
     public void initDataAndShow() {
+        customerServ = new CustomerController();
+
         customerVO = CommonData.getInstance().getCustomerVO();
         userNameField.setText(customerVO.getName());
         phoneNumberField.setText(customerVO.getContact());

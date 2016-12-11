@@ -104,7 +104,7 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             CustomerInfoController infoController = loader.getController();
-            infoController.initDataAndShow(null);
+            infoController.initDataAndShow();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

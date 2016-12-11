@@ -36,6 +36,7 @@ public class CreditRecordItemController implements Initializable{
         //渐入扩大动画
         Fade fadeIn = new Fade(rootNode, 300, true);
         Pop popIn = new Pop(rootNode, 300, true);
+        rootNode.setVisible(true);
 
         fadeIn.play();
         popIn.play();
@@ -44,6 +45,7 @@ public class CreditRecordItemController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //为渐入扩大动画做准备
+        rootNode.setVisible(false);
         rootNode.setOpacity(0);
         rootNode.setScaleX(0.9);
         rootNode.setScaleY(0.9);
