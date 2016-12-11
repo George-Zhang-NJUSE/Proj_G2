@@ -1,29 +1,28 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import group2.grade15.njuse.bl.orderbl.Order;
+import com.sun.org.apache.regexp.internal.RE;
 import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
-import group2.grade15.njuse.vo.OrderListVO;
+import group2.grade15.njuse.utility.OrderState;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,8 +45,20 @@ public class OrderManageController implements Initializable {
     private GridPane overtimeCheckinPane;
     @FXML
     private HBox optionBox;
+
+
     @FXML
-    private TableView<OrderVO> unexeList,checkinList,completeList,innormalList,cancelList;
+    private TableView<Order> unexeList;
+    @FXML
+    private TableView<Order> checkinList;
+    @FXML
+    private TableView<Order> completeList;
+    @FXML
+    private TableView<Order> innormalList;
+    @FXML
+    private TableView<Order> cancelList;
+
+
     @FXML
     private Tab unexe;
     @FXML
@@ -75,9 +86,6 @@ public class OrderManageController implements Initializable {
     @FXML
     private TextField orderState;
 
-
-    private Tab workingTab;
-
     private GridPane now;
 
     @FXML
@@ -89,15 +97,19 @@ public class OrderManageController implements Initializable {
     @FXML
     private Label cancel;
 
+    @FXML
+    private Label message;
 
 
 
     enum WorkingTab{
         UNEXE,CHECKIN,COMPLETE,INNORMAL,CANCEL
     }
+    private ObservableList<Order> unexeListData,checkinListData,completeListData,innormalListData,cancelListData;
+    private String[] properties={"orderId","customerId","promotionId","amount","inDate","outDate","createTime","finalDate"};
 
     //逻辑部分
-    private WorkingTab state;
+    private WorkingTab workingTab;
     public static OrderServ orderService=new OrderController();
     public static OrderListServ orderListService=new OrderController();
 
@@ -109,23 +121,41 @@ public class OrderManageController implements Initializable {
         impleButton(overtimeButton);
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
+        for(int i=0;i<properties.length;i++) {
+            ((TableColumn)unexeList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
+            ((TableColumn)checkinList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
+            ((TableColumn)completeList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
+            ((TableColumn)innormalList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
+            ((TableColumn)cancelList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
+        }
+        unexeListData= FXCollections.observableArrayList();
+        unexeList.setItems(unexeListData);
+        checkinListData= FXCollections.observableArrayList();
+        checkinList.setItems(checkinListData);
+        completeListData= FXCollections.observableArrayList();
+        completeList.setItems(completeListData);
+        innormalListData= FXCollections.observableArrayList();
+        innormalList.setItems(innormalListData);
+        cancelListData= FXCollections.observableArrayList();
+        cancelList.setItems(cancelListData);
+
 
     }
     public void tab1(){
         //OrderListVO list=orderListService.get;
-        state=WorkingTab.UNEXE;
+        workingTab =WorkingTab.UNEXE;
     }
     public void tab2(){
-        state=WorkingTab.CHECKIN;
+        workingTab =WorkingTab.CHECKIN;
     }
     public void tab3(){
-        state=WorkingTab.COMPLETE;
+        workingTab =WorkingTab.COMPLETE;
     }
     public void tab4(){
-        state=WorkingTab.INNORMAL;
+        workingTab =WorkingTab.INNORMAL;
     }
     public void tab5(){
-        state=WorkingTab.CANCEL;
+        workingTab =WorkingTab.CANCEL;
     }
 
 
@@ -201,7 +231,7 @@ public class OrderManageController implements Initializable {
 
     //逻辑的数据处理部分
     public OrderVO getSelectedOrderVO(){
-        switch (state) {
+        switch (workingTab) {
             case UNEXE:
                 return getOrderVO(unexeList);
             case CHECKIN:
@@ -216,9 +246,12 @@ public class OrderManageController implements Initializable {
                 return null;
         }
     }
-    private OrderVO getOrderVO(TableView<OrderVO> List){
+    private OrderVO getOrderVO(TableView<Order> List){
         int index= List.getSelectionModel().getSelectedIndex();
-        return List.getItems().get(index);
+        Order order=  List.getItems().get(index);
+
+        OrderVO orderVO=order.vo;
+        return orderVO;
     }
 
     public void checkeAction(){
@@ -226,12 +259,34 @@ public class OrderManageController implements Initializable {
     }
     public void checkin(){
         //TODO
+
+        OrderVO vo=getSelectedOrderVO();
+        if(vo.getState()==OrderState.unexecuted){
+            if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
+                message.setText("操作成功");
+            }else{
+                message.setText("操作失败");
+            };
+        }else{
+            message.setText("该订单不是未执行订单");
+        }
     }
     public void checkout(){
         //TODO
     }
     public void overtimeCheckin(){
         //TODO
+        OrderVO vo=getSelectedOrderVO();
+        if (vo.getState() == OrderState.abnormal) {
+            if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
+                message.setText("操作成功");
+            }else{
+                message.setText("操作失败");
+            }
+        }else{
+            message.setText("该订单不是异常订单");
+        }
+
     }
 
 
@@ -247,11 +302,13 @@ public class OrderManageController implements Initializable {
         private final SimpleStringProperty inDate;
         private final SimpleStringProperty outDate;
         private final SimpleStringProperty finalDate;
+        private final SimpleStringProperty createTime;
         private final SimpleIntegerProperty roomNum;
         private final SimpleStringProperty roomType;
         private final SimpleIntegerProperty numOfCustomer;
         private final SimpleBooleanProperty haveKid;
         private final SimpleStringProperty state;
+        private final OrderVO vo;
 
         public Order(OrderVO vo){
             orderId = new SimpleIntegerProperty(vo.getOrderID());
@@ -262,12 +319,13 @@ public class OrderManageController implements Initializable {
             inDate = new SimpleStringProperty(vo.getCheckInTime().toString());
             outDate = new SimpleStringProperty(vo.getCheckOutTime().toString());
             finalDate = new SimpleStringProperty(vo.getFinalExecuteTime().toString());
+            createTime = new SimpleStringProperty(vo.getCreateTime().toString());
             roomNum = new SimpleIntegerProperty(vo.getRoomSum());
             roomType = new SimpleStringProperty(vo.getType().toString());
             numOfCustomer = new SimpleIntegerProperty(vo.getNumOfCustomer());
             haveKid = new SimpleBooleanProperty(vo.isHaveChild());
             state = new SimpleStringProperty(vo.getState().toString());
-
+            this.vo=vo;
 
         }
         public int getOrderId(){

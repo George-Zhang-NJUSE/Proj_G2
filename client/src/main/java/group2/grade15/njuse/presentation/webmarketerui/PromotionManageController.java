@@ -316,6 +316,8 @@ public class PromotionManageController implements Initializable{
     public void deletePromotion(){
         Promotion promotion=getSelectedPromotion();
         removePromotionFromList(promotion.state.get() == "start");
+        //WebMarketerMainController.webMarketerService.deletePromotion();
+        back();
     }
     public static class Promotion{
         private final SimpleStringProperty name;

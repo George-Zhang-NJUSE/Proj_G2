@@ -22,9 +22,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="hotel_booking_system-client" />
-        <module name="hotel_booking_system-common" />
-        <module name="hotel_booking_system-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

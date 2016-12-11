@@ -151,28 +151,7 @@
                </GridPane.margin>
             </VBox>
             <Pane fx:id="opPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <Pane fx:id="checkPane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <children>
-                  <Label fx:id="check" layoutX="20.0" layoutY="20.0">
-                      <graphic>
-                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                             <image>
-                                 <Image url="file:client/src/main/res/hotelmanage/Check.png" />
-                             </image>
-                          </ImageView>
-                      </graphic>
-                  </Label>
-                  <Label fx:id="cancel" layoutX="20.0" layoutY="100.0" onMouseClicked="#closeOpPane">
-                      <graphic>
-                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                             <image>
-                                 <Image url="file:client/src/main/res/hotelmanage/Cancel.png" />
-                             </image>
-                          </ImageView>
-                      </graphic>
-                  </Label>
-               </children>
-            </Pane>
+            <Label fx:id="message" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

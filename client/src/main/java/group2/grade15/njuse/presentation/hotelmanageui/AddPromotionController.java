@@ -142,6 +142,11 @@ public class AddPromotionController implements Initializable {
     }
     public void commitAddition(){
         promotionManageController.addPromotion();
+        clean();
+
+    }
+    private void clean(){
+        promotionManageController.closeOpPane();
     }
     public void closeOpPane(){
         promotionManageController.closeOpPane();
