@@ -1,6 +1,7 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.CreditVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -46,6 +47,7 @@ public class CreditChargeController implements Initializable {
 
     public void charge(){
         //TODO
+
         //WebMarketerMainController.webMarketerService.modifyCredit()
     }
 }

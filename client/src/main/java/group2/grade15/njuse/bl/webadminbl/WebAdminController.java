@@ -25,7 +25,7 @@ public class WebAdminController implements WebAdminServ, HotelManageBL, UserMana
         userManage = new UserManageImpl();
     }
 
-    public WebAdminVO getInfo(String webAdminId) {
+    public WebAdminVO getInfo(String  webAdminId) {
 
         WebAdminPO po = null;
         try {

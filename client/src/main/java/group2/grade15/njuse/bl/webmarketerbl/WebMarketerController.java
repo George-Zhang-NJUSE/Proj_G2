@@ -32,10 +32,10 @@ public class WebMarketerController implements WebMarketerServ {
     }
 
     @Override
-    public WebMarketerVO getInfo(int webMarketerId) {
+    public WebMarketerVO getInfo(String webMarketerId) {
         WebMarketerPO po = null;
         try {
-            po = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(""+webMarketerId);
+            po = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(webMarketerId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
