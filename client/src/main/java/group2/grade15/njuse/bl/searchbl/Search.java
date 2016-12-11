@@ -51,8 +51,7 @@ public class Search implements SearchServ {
         System.out.println(isFilterPrice);
         System.out.println(isFilterRoom);
         System.out.println(isFilterTime);
-
-
+        
 
         //根据搜索条件对酒店列表进行对应的筛选
         if (isListNull) {
