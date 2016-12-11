@@ -165,7 +165,11 @@ public class Search implements SearchServ {
                                     .map(HotelVO::new)
                                     .collect(Collectors.toList()));
 
-        return new HotelListVO(hotelList);
+        if( hotelList.size() == 0) {
+            return null;
+        } else {
+            return new HotelListVO(hotelList);
+        }
     }
 
 }
