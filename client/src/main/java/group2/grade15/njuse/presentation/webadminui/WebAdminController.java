@@ -382,7 +382,8 @@ public class WebAdminController implements Initializable{
             case "酒店管理用户":
                 HotelManagerVO hmvo=gatherHotelManagerVO();
                 try {
-                    webAdminService.createHotelManager(hmvo);accountListData.add(new Account(hmvo));
+                    webAdminService.createHotelManager(hmvo);
+                    accountListData.add(new Account(hmvo));
                     aaInfo.setText("添加成功");
                     AAClear();
                 }catch (NullPointerException e){
@@ -393,7 +394,8 @@ public class WebAdminController implements Initializable{
             case "网站营销用户":
                 WebMarketerVO wmvo=gatherWebMarketerVO();
                 try {
-                    webAdminService.createWebMarketer(wmvo);accountListData.add(new Account(wmvo));
+                    webAdminService.createWebMarketer(wmvo);
+                    accountListData.add(new Account(wmvo));
                     aaInfo.setText("添加成功");
                     AAClear();
                 }catch(NullPointerException e){

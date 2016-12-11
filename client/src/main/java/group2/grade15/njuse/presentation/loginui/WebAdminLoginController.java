@@ -71,7 +71,7 @@ public class WebAdminLoginController {
 
         switch (loginServ.login(id,password)){
             case SUCCESS:
-                jumpToMain(webAdminService.);
+                jumpToMain(webAdminService.getInfo(String.valueOf(id)));
                 break;
             case FAILED:
                 Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
