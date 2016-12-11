@@ -48,7 +48,7 @@ public class WebMarketerLoginController implements Initializable {
         String id = (accoutField.getText());
         String password = passwordField.getText();
 
-        switch (loginServ.login(0,password)){
+        switch (loginServ.login(id,password)){
             case SUCCESS:
                 jumpToMain(webMarketerServ.getInfo(id));
                 break;
