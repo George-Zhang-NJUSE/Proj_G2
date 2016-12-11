@@ -4,6 +4,7 @@ import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.CommentServ;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.ChangeImage;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
@@ -13,12 +14,15 @@ import group2.grade15.njuse.presentation.orderui.MyOrderItemController;
 import group2.grade15.njuse.vo.CommentVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.OrderVO;
+import group2.grade15.njuse.vo.RoomVO;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -57,6 +61,9 @@ public class HotelDetailController implements Initializable {
     private Label returnLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, introLabel;
 
     @FXML
+    private ListView<String> roomInfoListView;
+
+    @FXML
     protected void goBack() {
         parentPane.getChildren().remove(rootNode);
     }
@@ -86,11 +93,26 @@ public class HotelDetailController implements Initializable {
             introLabel.setText(hotelVO.getIntroduction());
             myOrders = myOrderList;
 
+            //加载图片
             byte[][] pictures=hotelVO.getPicture();
             imageList = new Image[pictures.length];
             for(int a=0;a<imageList.length;a++) {
                 imageList[a]=new Image(new ByteArrayInputStream(pictures[a]));
             }
+
+            //加载剩余房间列表
+            roomInfoListView = new ListView<>();
+            ArrayList<RoomVO> roomVOList = hotelVO.getRoomList();
+            ArrayList<String> roomInfoStrings = new ArrayList<>();
+            for (RoomVO roomVO : roomVOList) {
+                String roomType = LiteralList.roomTypeList[roomVO.getType().ordinal()];
+                String price = Double.toString(roomVO.getPrice())+"元/天";
+                String totalNum = "共有"+Integer.toString(roomVO.getTotalRoomNum())+"间";
+                String leftNum = "剩余"+Integer.toString(roomVO.getSpareRoomNum())+"间";
+                roomInfoStrings.add(roomType + "  " + price + "  " + totalNum + "  "+leftNum);
+            }
+
+            roomInfoListView.setItems(FXCollections.observableList(roomInfoStrings));
 
         }else{
             System.out.println("没有酒店数据");
@@ -149,30 +171,6 @@ public class HotelDetailController implements Initializable {
                 e.printStackTrace();
             }
 
-
-        } else {
-
-            //用于本地测试
-
-            try {
-                commentBox.getChildren().clear();
-                ArrayList<Node> ItemList = new ArrayList<>();
-
-                for (int i = 0; i < 15; ++i) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
-                    Node singleItemTemplate = loader.load();
-                    HotelCommentItemController commentItemController = loader.getController();
-                    ItemList.add(singleItemTemplate);
-                    commentItemController.show();
-                }
-
-                commentBox.getChildren().addAll(ItemList);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }
@@ -203,28 +201,6 @@ public class HotelDetailController implements Initializable {
                 e.printStackTrace();
             }
 
-        }else {
-
-            //用于本地测试
-            try {
-                myOrderBox.getChildren().clear();
-
-                // TODO: 2016/12/2 需要更改为正确的逻辑
-                for (int i = 0; i < 15; ++i) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
-                    Node singleItemTemplate = loader.load();
-                    MyOrderItemController orderItemController = loader.getController();
-
-                    myOrderBox.getChildren().add(singleItemTemplate);
-                    orderItemController.initData(null);
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }

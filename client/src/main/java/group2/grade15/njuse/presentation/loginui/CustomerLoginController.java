@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -99,24 +100,26 @@ public class CustomerLoginController implements Initializable {
         LoginControllerServ loginServ = new CustomerLoginImpl();
         CustomerServ customerServ = new CustomerController();
 
-//        int id = Integer.parseInt(accoutField.getText());
-//        String password = passwordField.getText();
+        int id = Integer.parseInt(accoutField.getText());
+        String password = passwordField.getText();
 
-//        switch (loginServ.login(id,password)){
-//            case SUCCESS:
-//                jumpToMain(customerServ.getInfo(id));
-//                break;
-//            case FAILED:
-//                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误");
-//                wrongPswAlert.showAndWait();
-//                break;
-//            case NON_EXISTENT:
-//                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在");
-//                invalidAccountAlert.showAndWait();
-//                break;
-//        }
-
-        jumpToMain(null);
+        switch (loginServ.login(id,password)){
+            case SUCCESS:
+                jumpToMain(customerServ.getInfo(id));
+                break;
+            case FAILED:
+                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
+                wrongPswAlert.showAndWait();
+                break;
+            case NON_EXISTENT:
+                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在!");
+                invalidAccountAlert.showAndWait();
+                break;
+            case CONNECTION_EXCEPTION:
+                Alert netErrorInfo = new Alert(Alert.AlertType.ERROR, "网络连接错误!");
+                netErrorInfo.showAndWait();
+                break;
+        }
 
     }
 
@@ -128,7 +131,7 @@ public class CustomerLoginController implements Initializable {
             customerStage.setScene(new Scene(customerMainLoader.load()));
 
             CustomerMainController mainController = customerMainLoader.getController();
-//            mainController.initData(customerVO);
+            mainController.initData(customerVO);
 
             currentStage.close();
 

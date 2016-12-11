@@ -5,57 +5,93 @@ import group2.grade15.njuse.vo.OrderListVO;
 import java.util.Date;
 
 /**
- * Created by George on 2016/11/13.
+ * 订单列表的层间接口
+ * 供界面层的管理人员管理订单界面调用
+ * 职责是处理订单列表相关的逻辑功能
+ * @author Guo
  */
 public interface OrderListServ {
-
     /**
      * 获取用户的全部订单
+     * @param customerID int型，界面层传来的用户ID
+     * @return 成功返回含有全部订单的OrderListVO
+     *         失败返回null
      */
-    public OrderListVO getAllOrderListByCustomerID(int id);
+    public OrderListVO getAllOrderListByCustomerID(int customerID);
 
     /**
-     * 获取用户所有已执行订单
+     * 获取用户的全部已执行订单
+     * @param customerID int型，界面层传来的用户ID
+     * @return 成功返回含有全部已执行订单的OrderListVO
+     *         失败返回null
      */
-    public OrderListVO getExecutedOrderListByCustomerID(int id);
+    public OrderListVO getExecutedOrderListByCustomerID(int customerID);
 
     /**
-     * 获取用户所有未执行订单
+     * 获取用户的全部未执行订单
+     * @param customerID int型，界面层传来的用户ID
+     * @return 成功返回含有全部未执行订单的OrderListVO
+     *         失败返回null
      */
-    public OrderListVO getUnexecutedOrderListByCustomerID(int id);
+    public OrderListVO getUnexecutedOrderListByCustomerID(int customerID);
 
     /**
-     * 获取用户所有撤销订单
+     * 获取用户的全部撤销订单
+     * @param customerID int型，界面层传来的用户ID
+     * @return 成功返回含有全部撤销订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getRevokedOrderListByCustomerID(int customerID);
 
     /**
-     * 获取用户所有异常订单
+     * 获取用户的全部异常订单
+     * @param customerID int型，界面层传来的用户ID
+     * @return 成功返回含有全部异常订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getAbnormalOrderListByCustomerID(int customerID);
 
     /**
-     * 获取用户在某家酒店的所有已执行订单
+     ** 获取用户在某家酒店的所有已执行订单
+     * @param customerID int型，界面层传来的用户ID
+     * @param hotelID int型，界面层传来的酒店ID
+     * @return 成功返回该客户在对应酒店的含有全部已执行订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID);
 
     /**
-     * 获取用户在某家酒店的所有已执行订单
+     ** 获取用户在某家酒店的所有未执行订单
+     * @param customerID int型，界面层传来的用户ID
+     * @param hotelID int型，界面层传来的酒店ID
+     * @return 成功返回该客户在对应酒店的含有全部未执行订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getUnexecutedOrderListInHotel(int customerID, int hotelID);
 
     /**
-     * 获取用户在某家酒店的所有撤销订单
+     ** 获取用户在某家酒店的所有撤销订单
+     * @param customerID int型，界面层传来的用户ID
+     * @param hotelID int型，界面层传来的酒店ID
+     * @return 成功返回该客户在对应酒店的含有全部撤销订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getRevokedOrderListInHotel(int customerID, int hotelID);
 
     /**
-     * 获取用户在某家酒店的所有异常订单
+     ** 获取用户在某家酒店的所有异常订单
+     * @param customerID int型，界面层传来的用户ID
+     * @param hotelID int型，界面层传来的酒店ID
+     * @return 成功返回该客户在对应酒店的含有全部异常订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getAbnormalOrderList(int customerID, int hotelID);
 
     /**
-     * 获取某家酒店的所有订单
+     ** 获取某家酒店的所有订单
+     * @param hotelID int型，界面层传来的酒店ID
+     * @return 成功返回含有对应酒店的全部订单的OrderListVO
+     *         失败返回null
      */
     public OrderListVO getAllOrderListByHotelID(int hotelID);
 }

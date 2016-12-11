@@ -86,4 +86,19 @@ public class WebPromotionController implements WebPromotionServ, GetWebPromotion
 
         return result;
     }
+
+    @Override
+    public ResultMessage deleteWebPromotion(int webPromotionID) {
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getWebPromotionDataService().remove(webPromotionID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            result = ResultMessage.CONNECTION_EXCEPTION;
+        }
+
+        return result;
+    }
+
+
 }

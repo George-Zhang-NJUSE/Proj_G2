@@ -2,9 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -80,16 +79,6 @@
                 </Label>
                 <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label fx:id="starLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                    <columns>
-                        <TableColumn editable="false" prefWidth="130.0" resizable="false" text="房间类型" />
-                        <TableColumn editable="false" prefWidth="130.0" resizable="false" text="单价" />
-                        <TableColumn editable="false" prefWidth="130.0" resizable="false" text="剩余间数" />
-                    </columns>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-                </TableView>
             <Label text="我在该酒店下的订单：" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <ScrollPane hbarPolicy="NEVER" prefWidth="700.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.rowSpan="3">
                <content>
@@ -100,6 +89,10 @@
                   </VBox>
                </content>
             </ScrollPane>
+            <ListView fx:id="roomInfoListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <padding>
+                  <Insets right="5.0" top="5.0" />
+               </padding></ListView>
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
