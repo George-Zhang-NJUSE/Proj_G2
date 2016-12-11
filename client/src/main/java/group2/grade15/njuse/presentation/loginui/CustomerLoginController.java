@@ -100,12 +100,12 @@ public class CustomerLoginController implements Initializable {
         LoginControllerServ loginServ = new CustomerLoginImpl();
         CustomerServ customerServ = new CustomerController();
 
-        int id = Integer.parseInt(accoutField.getText());
+        String id = accoutField.getText();
         String password = passwordField.getText();
 
         switch (loginServ.login(id,password)){
             case SUCCESS:
-                jumpToMain(customerServ.getInfo(id));
+                jumpToMain(customerServ.getInfo(Integer.parseInt(id)));
                 break;
             case FAILED:
                 Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
