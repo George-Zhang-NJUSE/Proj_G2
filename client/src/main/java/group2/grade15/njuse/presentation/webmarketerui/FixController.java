@@ -103,11 +103,15 @@ public class FixController implements Initializable {
                 exception.printStackTrace();
             }
         });
+        showAllOrder();
 
     }
     public void showAllOrder(){
         //TODO 从网站营销这边拿到的列表应该不需要ID
-        //ArrayList<OrderVO> un=orderListServ.get
+        ArrayList<OrderVO> un=orderListServ.getAbnormalOrderList().getOrderList();
+        for(int i=0;i<un.size();i++) {
+            unsolvedListData.add(new Order(un.get(i)));
+        }
     }
 
     public void clear() {
@@ -146,8 +150,12 @@ public class FixController implements Initializable {
             kidCheck.setSelected(false);
         }
     }
+    public OrderVO getSelectedOrderVO(){
+        int index=unsolvedList.getSelectionModel().getSelectedIndex();
+        return unsolvedListData.get(index).vo;
+    }
     public void fixCommit(){
-
+        fixCommit(getSelectedOrderVO());
     }
     public void fixCommit(OrderVO vo) {
         //TODO implement the function of committing an order fixing.
@@ -183,6 +191,7 @@ public class FixController implements Initializable {
         private final SimpleIntegerProperty numOfCustomer;
         private final SimpleBooleanProperty haveKid;
         private final SimpleStringProperty state;
+        private OrderVO vo;
 
         public Order(OrderVO vo){
             orderId = new SimpleIntegerProperty(vo.getOrderID());
@@ -199,7 +208,7 @@ public class FixController implements Initializable {
             numOfCustomer = new SimpleIntegerProperty(vo.getNumOfCustomer());
             haveKid = new SimpleBooleanProperty(vo.isHaveChild());
             state = new SimpleStringProperty(vo.getState().toString());
-
+            this.vo=vo;
 
         }
         public int getOrderId(){
