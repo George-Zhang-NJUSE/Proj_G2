@@ -55,29 +55,13 @@
                                 <Insets bottom="5.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label prefHeight="24.0" prefWidth="91.0" text="会员等级：" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                            <GridPane.margin>
-                                <Insets bottom="10.0" left="10.0" />
-                            </GridPane.margin>
-                        </Label>
-                        <Label fx:id="memberLevelLabel" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                            <GridPane.margin>
-                                <Insets bottom="10.0" />
-                            </GridPane.margin>
-                        </Label>
                     </children>
                 </GridPane>
             </top>
             <center>
                 <VBox prefHeight="200.0" prefWidth="127.0" spacing="10.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Label onMouseClicked="#showSearchHotelPane">
+                        <Label fx:id="bookHotelLabel" onMouseClicked="#showSearchHotelPane">
                             <graphic>
                                 <ImageView fitHeight="57.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -89,7 +73,7 @@
                                 <Insets />
                             </VBox.margin>
                         </Label>
-                        <Label onMouseClicked="#showMyOrderListPane">
+                        <Label fx:id="myOrderLabel" onMouseClicked="#showMyOrderListPane">
                             <graphic>
                                 <ImageView fitHeight="64.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -102,7 +86,7 @@
                             </VBox.margin>
                         </Label>
                         <Label fx:id="myHotelLabel" onMouseClicked="#showMyHotelListPane" />
-                        <Label onMouseClicked="#showPersonalInfoPane">
+                        <Label fx:id="personalInfoLabel" onMouseClicked="#showPersonalInfoPane">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>

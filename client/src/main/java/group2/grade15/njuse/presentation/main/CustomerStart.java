@@ -1,6 +1,7 @@
 package group2.grade15.njuse.presentation.main;
 
 import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
+import group2.grade15.njuse.runner.ClientRunner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class CustomerStart extends Application {
             loginController.setStage(primaryStage);
 
             primaryStage.show();
-//            ClientRunner clientRunner = new ClientRunner();
+            ClientRunner clientRunner = new ClientRunner();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
