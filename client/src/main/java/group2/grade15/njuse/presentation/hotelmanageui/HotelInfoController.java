@@ -38,7 +38,7 @@ public class HotelInfoController implements Initializable {
     @FXML
     private ListView company;
     @FXML
-    private HTMLEditor describeEditor;
+    private TextArea describeEditor;
     @FXML
     private Label check;
     @FXML
@@ -56,6 +56,16 @@ public class HotelInfoController implements Initializable {
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
 
     }
+    private void show(){
+        HotelVO vo=HotelManageMainController.hotelVO;
+        name.setText(vo.getName());
+        address.setText(vo.getConcreteAddress());
+        rank.setText(String.valueOf(vo.getRank()));
+        contact.setText(vo.getContact());
+        facility.setText(vo.getFacility());
+        describeEditor.setText(vo.getIntroduction());
+
+    }
     //逻辑数据采集部分
     public HotelVO getVO(){
         int ID=HotelManageMainController.hotelVO.getId();
@@ -64,7 +74,7 @@ public class HotelInfoController implements Initializable {
 
         int rank=Integer.parseInt(this.rank.getText());
 
-        String introduction=describeEditor.getHtmlText();
+        String introduction=describeEditor.getText();
 
         //TODO 从concreteAddress 到 address 的转换
         HotelVO result = new HotelVO(ID, name.getText(), address.getText(), "null", contact.getText(),introduction, facility.getText(), roomList,null,rank,HotelManageMainController.hotelVO.getScore(),HotelManageMainController.hotelVO.getPicture());
