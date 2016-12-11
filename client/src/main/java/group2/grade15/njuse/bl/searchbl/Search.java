@@ -42,6 +42,7 @@ public class Search implements SearchServ {
                                 || searchCondition.getCheckOutTime() != null)
                                 && isListNotNull;
 
+        
         //测试代码
         System.out.println(isListNotNull);
         System.out.println(isSort);
