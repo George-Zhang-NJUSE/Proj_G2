@@ -4,6 +4,8 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 
+import java.sql.Date;
+
 /**
  * 订单业务的层间接口
  * 供界面层的酒店的订单界面调用
@@ -50,4 +52,15 @@ public interface OrderServ {
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage saveOrder(OrderVO orderVO);
+
+    /**
+     * 更新房间的实际入住时间和实际退出时间
+     * @param checkIn Date型，实际入住时间
+     * @param checkOut Date型，实际退房时间
+     * @param  orderID int型，界面层传来的订单ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID);
 }

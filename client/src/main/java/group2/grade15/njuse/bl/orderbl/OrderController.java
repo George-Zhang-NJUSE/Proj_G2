@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by George on 2016/11/13.
  */
-public class OrderController implements ModifyOrderStateBL, OrderServ, OrderListServ {
+public class OrderController implements OrderServ, OrderListServ {
 
     private Order order;
     private OrderList orderList;
@@ -38,6 +38,11 @@ public class OrderController implements ModifyOrderStateBL, OrderServ, OrderList
     @Override
     public ResultMessage saveOrder(OrderVO vo) {
         return order.savePO(vo);
+    }
+
+    @Override
+    public ResultMessage updateTime(java.sql.Date checkIn, java.sql.Date checkOut, int orderID) {
+        return order.updateTime(checkIn, checkOut, orderID);
     }
 
     @Override
