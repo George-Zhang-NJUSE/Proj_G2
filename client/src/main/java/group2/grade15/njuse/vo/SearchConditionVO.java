@@ -12,7 +12,7 @@ import java.util.Date;
 public class SearchConditionVO {
     private int customerID;                 //顾客的ID，用于获取顾客入住过的酒店列表
     private SortMethod sortBy;              //酒店列表的排序方式，若客户未选，则设置为DEFAULT
-    private String name;                    //酒店的名字（可以是关键字），若客户未填写，则设置为null
+    private String name;                    //酒店的名字（可以是关键字），若客户未填写，则设置为""
     private RoomType roomType;              //顾客所需要的房间类型，若客户未选，则设置为all
     private double minPrice;                //顾客所接受的房间最低价格，若客户未填写，则设置为0
     private double maxPrice;                //顾客所接受的房间最大价格，若客户未填写，则设置为0
