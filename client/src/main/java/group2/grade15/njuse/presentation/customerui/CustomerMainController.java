@@ -28,11 +28,11 @@ public class CustomerMainController implements Initializable{
     private Pane functionPane;
 
     @FXML
-    private Label usernameLabel, creditLabel, myHotelLabel;
+    private Label usernameLabel, creditLabel,bookHotelLabel,myOrderLabel, myHotelLabel, personalInfoLabel;
 
 
     public void initData(CustomerVO vo) {
-        // TODO: 2016/12/1  
+
         userVO = vo;
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
@@ -104,7 +104,7 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             CustomerInfoController infoController = loader.getController();
-            infoController.initDataAndShow(null);
+            infoController.initDataAndShow();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -116,6 +116,7 @@ public class CustomerMainController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TODO: 2016/12/11
         //加载按钮变化样式
         CustomeButton.implButton(myHotelLabel, "file:client/src/main/res/customer/myhotel");
 
