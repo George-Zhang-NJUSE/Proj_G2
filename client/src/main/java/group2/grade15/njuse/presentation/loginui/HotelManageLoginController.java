@@ -40,12 +40,12 @@ public class HotelManageLoginController implements Initializable{
         LoginControllerServ loginServ = new HotelManagerLoginImpl();
         HotelManagerServ hotelManagerServ = new HotelManagerController();
 
-        int id = Integer.parseInt(accoutField.getText());
+        String id = (accoutField.getText());
         String password = PWField.getText();
 
         switch (loginServ.login(id,password)){
             case SUCCESS:
-                jumpToMain(hotelManagerServ.getInfo(id));
+                jumpToMain(hotelManagerServ.getInfo(Integer.parseInt(id)));
                 break;
             case FAILED:
                 Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
