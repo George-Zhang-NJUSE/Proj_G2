@@ -20,7 +20,7 @@ public class RemoteHelper {
         try {
             dataRemoteObject = new DataRemoteObject();
             LocateRegistry.createRegistry(2333);
-            Naming.bind("rmi://202.119.46.186:2333/DataRemoteObject", dataRemoteObject);
+            Naming.bind("rmi://localhost:2333/DataRemoteObject", dataRemoteObject);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
