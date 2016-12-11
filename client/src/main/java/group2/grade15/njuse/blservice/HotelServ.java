@@ -17,7 +17,7 @@ public interface HotelServ {
      * @param hotel HotelVO型，界面层传递来的存有修改信息的数据对象
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
-     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     *         网络问题返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage modifyInfo(HotelVO hotel);
 

@@ -16,7 +16,7 @@ public interface HotelPromotionServ {
      * @param  hotelPromotionInfo HotelPromotionVO型，界面层传递来的酒店优惠策略信息的数据对象
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
-     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     *         网络问题返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage createHotelPromotion(HotelPromotionVO hotelPromotionInfo);
 

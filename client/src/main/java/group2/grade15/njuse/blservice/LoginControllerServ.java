@@ -9,13 +9,12 @@ import group2.grade15.njuse.utility.ResultMessage;
  * 职责是处理酒店相关的逻辑功能
  * @author Guo
  */
-
 public interface LoginControllerServ {
     /**
      * 用户登录
      * @param id int型，界面层传递来的用户ID
      * @param password String型，界面层传来的用户密码
-     * @return 根据返回的ResultMessage不同分为四种情况：
+     * @return 根据返回ResultMessage不同分为四种情况：
      *         ResultMessage.SUCCESS ：登录成功
      *         ResultMessage.FAILED ：密码错误
      *         ResultMessage.NON_EXISTENT ：账号不存在

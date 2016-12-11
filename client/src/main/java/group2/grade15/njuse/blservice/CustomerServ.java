@@ -7,11 +7,10 @@ import group2.grade15.njuse.vo.CustomerVO;
 /**
  * 客户业务逻辑的层间接口
  * 供界面层层调用
- * 职责是处理酒店评论相关的逻辑功能
+ * 职责是处理客户相关的逻辑功能
  * @author Guo
  */
 public interface CustomerServ {
-
     /**
      * 添加新的客户账号
      * @param newCustomerVO CustomerVO型，界面层传递来的存有注册信息的数据对象

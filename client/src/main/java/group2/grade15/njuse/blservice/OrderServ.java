@@ -22,7 +22,7 @@ public interface OrderServ {
     /**
      * 修改订单状态
      * @param orderID int型，界面层传递来的需要修改的订单ID
-     * @param state OrderState型，界面层传递来的需要修改的订单状态
+     * @param state OrderState型，界面层传递来的需要修改为的订单状态
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
