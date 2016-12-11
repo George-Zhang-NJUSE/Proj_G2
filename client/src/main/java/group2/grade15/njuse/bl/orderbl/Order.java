@@ -27,12 +27,10 @@ import java.util.ArrayList;
  */
 public class Order implements OrderBL{
 
-    private HotelBL hotel;
     private WebPromotionControllerBL webPromotionController;
     private HotelPromotionControllerBL hotelPromotionController;
 
     public Order(){
-        hotel = new Hotel();
         webPromotionController = new WebPromotionController();
         hotelPromotionController = new HotelPromotionController();
     }

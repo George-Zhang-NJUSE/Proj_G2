@@ -26,10 +26,10 @@ public class OrderList implements OrderListBL {
         }
 
         ArrayList<OrderVO> orderList = orderPOList.stream()
-                                       .map(OrderVO::new)
-                                       .collect(Collectors.toCollection(ArrayList::new));
+                .map(OrderVO::new)
+                .collect(Collectors.toCollection(ArrayList::new));
 
-        if(orderPOList != null){
+        if (orderPOList != null) {
             return new OrderListVO(orderList);
         } else {
             return null;
@@ -57,7 +57,7 @@ public class OrderList implements OrderListBL {
         return filterOrderByHotelID(hotelID, orderListVO);
     }
 
-    public OrderListVO getUnexecutedOrderListInHotel(int customerID, int hotelID){
+    public OrderListVO getUnexecutedOrderListInHotel(int customerID, int hotelID) {
         OrderListVO orderListVO = getUnexecutedOrderList(customerID);
         return filterOrderByHotelID(hotelID, orderListVO);
     }
@@ -72,7 +72,7 @@ public class OrderList implements OrderListBL {
         return filterOrderByHotelID(hotelID, orderListVO);
     }
 
-    public OrderListVO getAllOrderListByHotelID(int hotelID){
+    public OrderListVO getAllOrderListByHotelID(int hotelID) {
         ArrayList<OrderPO> orderPOList = new ArrayList();
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByHotel(hotelID);
@@ -81,10 +81,10 @@ public class OrderList implements OrderListBL {
         }
 
         ArrayList<OrderVO> orderList = orderPOList.stream()
-                                       .map(OrderVO::new)
-                                       .collect(Collectors.toCollection(ArrayList::new));
+                .map(OrderVO::new)
+                .collect(Collectors.toCollection(ArrayList::new));
 
-        if(orderPOList != null){
+        if (orderPOList != null) {
             return new OrderListVO(orderList);
         } else {
             return null;
@@ -94,13 +94,13 @@ public class OrderList implements OrderListBL {
     /**
      * 根据所需状态对客户的订单进行筛选
      */
-    private OrderListVO filterOrderByState(int customerID, OrderState state){
+    private OrderListVO filterOrderByState(int customerID, OrderState state) {
         OrderListVO orderListVO = getAllOrderListByCustomerID(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
 
         ArrayList<OrderVO> filterOrderList = orderList.stream()
-                                             .filter(orderVO -> orderVO.getState() == state)
-                                             .collect(Collectors.toCollection(ArrayList::new));
+                .filter(orderVO -> orderVO.getState() == state)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return new OrderListVO(filterOrderList);
     }
@@ -108,13 +108,17 @@ public class OrderList implements OrderListBL {
     /**
      * 根据所需状态对客户在特定酒店的订单进行筛选
      */
-    private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO){
+    private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO) {
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
 
         ArrayList<OrderVO> filterOrderList = orderList.stream()
-                                             .filter(orderVO -> orderVO.getHotelID() == hotelID)
-                                             .collect(Collectors.toCollection(ArrayList::new));
+                .filter(orderVO -> orderVO.getHotelID() == hotelID)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return new OrderListVO(filterOrderList);
+    }
+
+    public OrderListVO getAbnormalOrderList() {
+        return null;
     }
 }
