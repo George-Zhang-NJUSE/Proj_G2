@@ -22,9 +22,9 @@ public class HotelManagerLoginImpl implements LoginControllerServ {
     ResultMessage result;
 
     @Override
-    public ResultMessage login(int id, String password) {
+    public ResultMessage login(String id, String password) {
         try {
-            hotelManagerPO = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(id);
+            hotelManagerPO = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(Integer.parseInt(id));
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();

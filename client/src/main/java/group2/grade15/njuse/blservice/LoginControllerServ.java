@@ -12,7 +12,7 @@ import group2.grade15.njuse.utility.ResultMessage;
 public interface LoginControllerServ {
     /**
      * 用户登录
-     * @param id int型，界面层传递来的用户ID
+     * @param id String型，界面层传递来的用户ID
      * @param password String型，界面层传来的用户密码
      * @return 根据返回ResultMessage不同分为四种情况：
      *         ResultMessage.SUCCESS ：登录成功
@@ -20,5 +20,5 @@ public interface LoginControllerServ {
      *         ResultMessage.NON_EXISTENT ：账号不存在
      *         ResultMessage.CONNECTION_EXCEPTION ：网络异常
      */
-    public ResultMessage login(int id, String password);
+    public ResultMessage login(String id, String password);
 }
