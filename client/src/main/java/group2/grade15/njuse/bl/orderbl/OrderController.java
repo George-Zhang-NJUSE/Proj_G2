@@ -95,4 +95,9 @@ public class OrderController implements OrderServ, OrderListServ {
         return orderList.getAllOrderListByHotelID(hotelID);
     }
 
+    @Override
+    public OrderListVO getAbnormalOrderList() {
+        return orderList.getAbnormalOrderList();
+    }
+
 }
