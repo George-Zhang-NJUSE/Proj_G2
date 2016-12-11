@@ -94,4 +94,12 @@ public interface OrderListServ {
      *         失败返回null
      */
     public OrderListVO getAllOrderListByHotelID(int hotelID);
+
+    /**
+     ** 获取该网站的所有异常订单
+     * @return 成功返回该网站的含有全部异常订单的OrderListVO
+     *         失败返回null
+     */
+    public OrderListVO getAbnormalOrderList();
+
 }
