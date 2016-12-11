@@ -1,10 +1,13 @@
 package group2.grade15.njuse.presentation.applyui;
 
+import group2.grade15.njuse.bl.customerbl.CustomerController;
+import group2.grade15.njuse.blservice.CustomerServ;
 import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.MemberType;
+import group2.grade15.njuse.vo.CustomerVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +32,7 @@ import java.util.ResourceBundle;
 public class CustomerApplyController implements Initializable {
 
     private Stage currentStage;
+    private CustomerVO newCustomer;
 
     @FXML
     private Pane applyPaneBack;
@@ -86,7 +90,6 @@ public class CustomerApplyController implements Initializable {
 
     @FXML
     private void rollBackToLogin() {
-        // TODO: 2016/11/25
 
         //使申请窗口退回右边,原面板淡出，加载登录面板
         ChangeWidth applyShrinkToRight = new ChangeWidth(applyPaneBack, 300, 220);
@@ -118,15 +121,20 @@ public class CustomerApplyController implements Initializable {
         String password = passwordField.getText();
         String phoneContact = phoneContactField.getText();
         MemberType memberType;
+        String enterpriseName=null;
+        Date birthday=null;
+        java.sql.Date sqlBirthday = null;
+
         if (isEnterpriseCheckBox.isSelected()) {
             memberType = MemberType.vip;
-            String enterpriseName = enterpriseNameField.getText();
+            enterpriseName = enterpriseNameField.getText();
         }else{
             memberType = MemberType.normal;
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date birthday;
+
             try {
                 birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
+                sqlBirthday = new java.sql.Date(birthday.getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -134,7 +142,16 @@ public class CustomerApplyController implements Initializable {
         }
 
         // TODO: 2016/11/25 apply with the info above
-
+        CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
+        CustomerServ customerServ = new CustomerController();
+        newCustomer=customerServ.addCustomer(customerVO);
+        if (newCustomer != null) {
+            Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+            successInfo.showAndWait();
+        } else {
+            Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
+            failInfo.showAndWait();
+        }
     }
 
 
