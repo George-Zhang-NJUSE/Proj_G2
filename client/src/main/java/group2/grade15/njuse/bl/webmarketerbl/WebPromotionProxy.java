@@ -48,4 +48,9 @@ public class WebPromotionProxy implements WebPromotionServ {
     public ResultMessage changeState(WebPromotionVO promotion) {
         return webPromotionController.changeState(promotion);
     }
+
+    @Override
+    public ResultMessage deleteWebPromotion(int webPromotionID) {
+        return webPromotionController.deleteWebPromotion(webPromotionID);
+    }
 }
