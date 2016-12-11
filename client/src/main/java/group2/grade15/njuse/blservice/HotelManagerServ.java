@@ -29,6 +29,12 @@ public interface HotelManagerServ {
      */
     public ResultMessage modifyHotelInfo(HotelVO hotel);
 
+    /**
+     * 获取酒店的信息
+     * @param hotelID int型，界面层传递来的需要获取的酒店ID
+     * @return 成功返回对应的HotelID
+     *         失败或者不存在返回Rnull
+     */
     public HotelVO getHotelInfo(int hotelID);
 
     /**
