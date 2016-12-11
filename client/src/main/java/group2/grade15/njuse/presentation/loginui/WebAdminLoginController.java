@@ -69,7 +69,7 @@ public class WebAdminLoginController {
         String id = accoutField.getText();
         String password = passwordField.getText();
 
-        switch (loginServ.login(id,password)){
+        switch (loginServ.login(0,password)){
             case SUCCESS:
                 jumpToMain(webAdminService.getInfo((id)));
                 break;

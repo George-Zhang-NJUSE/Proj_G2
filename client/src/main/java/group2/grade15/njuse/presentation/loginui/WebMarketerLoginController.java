@@ -1,10 +1,14 @@
 package group2.grade15.njuse.presentation.loginui;
 
+import group2.grade15.njuse.bl.customerbl.CustomerController;
+import group2.grade15.njuse.bl.loginbl.CustomerLoginImpl;
 import group2.grade15.njuse.bl.loginbl.WebMarketerLoginImpl;
 import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
+import group2.grade15.njuse.blservice.CustomerServ;
 import group2.grade15.njuse.blservice.LoginControllerServ;
 import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.WebMarketerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,27 +40,34 @@ public class WebMarketerLoginController implements Initializable {
     LoginControllerServ loginServ = new WebMarketerLoginImpl();
     WebMarketerServ webmarketerServ = new WebMarketerController();
 
-    int id = Integer.parseInt(accoutField.getText());
-    String password = passwordField.getText();
+    private void login() {
 
-        switch (loginServ.login(id,password)){
-        case SUCCESS:
-            jumpToMain(customerServ.getInfo(id));
-            break;
-        case FAILED:
-            Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
-            wrongPswAlert.showAndWait();
-            break;
-        case NON_EXISTENT:
-            Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在!");
-            invalidAccountAlert.showAndWait();
-            break;
-        case CONNECTION_EXCEPTION:
-            Alert netErrorInfo = new Alert(Alert.AlertType.ERROR, "网络连接错误!");
-            netErrorInfo.showAndWait();
-            break;
+        LoginControllerServ loginServ = new WebMarketerLoginImpl();
+        WebMarketerServ webMarketerServ = new WebMarketerController();
+
+        String id = (accoutField.getText());
+        String password = passwordField.getText();
+
+        switch (loginServ.login(0,password)){
+            case SUCCESS:
+                jumpToMain(webMarketerServ.getInfo(id));
+                break;
+            case FAILED:
+                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
+                wrongPswAlert.showAndWait();
+                break;
+            case NON_EXISTENT:
+                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在!");
+                invalidAccountAlert.showAndWait();
+                break;
+            case CONNECTION_EXCEPTION:
+                Alert netErrorInfo = new Alert(Alert.AlertType.ERROR, "网络连接错误!");
+                netErrorInfo.showAndWait();
+                break;
+        }
+
     }
-    private void jumpToMain() {
+    private void jumpToMain(WebMarketerVO vo) {
         try {
             FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/WebMarketerMain.fxml"));
             Stage webMarketerMainStage = new Stage();
@@ -81,7 +92,7 @@ public class WebMarketerLoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(login, "file:client/src/main/res/login/login");
         login.setOnMouseClicked((MouseEvent e) -> {
-            jumpToMain();
+            login();
         });
     }
 
