@@ -4,6 +4,7 @@ import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.CommentServ;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.ChangeImage;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
@@ -13,12 +14,15 @@ import group2.grade15.njuse.presentation.orderui.MyOrderItemController;
 import group2.grade15.njuse.vo.CommentVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.OrderVO;
+import group2.grade15.njuse.vo.RoomVO;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -57,6 +61,9 @@ public class HotelDetailController implements Initializable {
     private Label returnLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, introLabel;
 
     @FXML
+    private ListView<String> roomInfoListView;
+
+    @FXML
     protected void goBack() {
         parentPane.getChildren().remove(rootNode);
     }
@@ -86,11 +93,26 @@ public class HotelDetailController implements Initializable {
             introLabel.setText(hotelVO.getIntroduction());
             myOrders = myOrderList;
 
+            //加载图片
             byte[][] pictures=hotelVO.getPicture();
             imageList = new Image[pictures.length];
             for(int a=0;a<imageList.length;a++) {
                 imageList[a]=new Image(new ByteArrayInputStream(pictures[a]));
             }
+
+            //加载剩余房间列表
+            roomInfoListView = new ListView<>();
+            ArrayList<RoomVO> roomVOList = hotelVO.getRoomList();
+            ArrayList<String> roomInfoStrings = new ArrayList<>();
+            for (RoomVO roomVO : roomVOList) {
+                String roomType = LiteralList.roomTypeList[roomVO.getType().ordinal()];
+                String price = Double.toString(roomVO.getPrice())+"元/天";
+                String totalNum = "共有"+Integer.toString(roomVO.getTotalRoomNum())+"间";
+                String leftNum = "剩余"+Integer.toString(roomVO.getSpareRoomNum())+"间";
+                roomInfoStrings.add(roomType + "  " + price + "  " + totalNum + "  "+leftNum);
+            }
+
+            roomInfoListView.setItems(FXCollections.observableList(roomInfoStrings));
 
         }else{
             System.out.println("没有酒店数据");
