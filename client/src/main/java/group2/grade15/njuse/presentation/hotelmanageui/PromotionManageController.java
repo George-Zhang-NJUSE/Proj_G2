@@ -6,6 +6,7 @@ import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.HotelManagerVO;
 import group2.grade15.njuse.vo.HotelPromotionVO;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -48,6 +49,8 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Label addButton;
 
+    @FXML
+    private Label message;
     @FXML
     private TableView<Promotion> activatedList;
     @FXML
@@ -126,8 +129,6 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            Fade cin = new Fade(checkPane, 200, true);
-            cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/AddPromotion.fxml"));
 
 
@@ -146,13 +147,11 @@ public class PromotionManageController implements Initializable{
     public void toDelete(){
         try {
             opPane.setVisible(true);
-            checkPane.setVisible(true);
-            Fade cin = new Fade(checkPane, 200, true);
-            cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/DeletePromotionCheck.fxml"));
 
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
+            ((DeletePromotionCheckController)lodar.getController()).promotionManageController=this;
             Fade in = new Fade(opPane, 200, true);
             in.play();
         } catch (MalformedURLException e) {
@@ -164,13 +163,11 @@ public class PromotionManageController implements Initializable{
     public void toModify(){
         try {
             opPane.setVisible(true);
-            checkPane.setVisible(true);
-            Fade cin = new Fade(checkPane, 200, true);
-            cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/ModifyPromotion.fxml"));
             modifyPromotionController=(ModifyPromotionController)lodar.getController();
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
+            ((ModifyPromotionController) lodar.getController()).promotionManageController=this;
             Fade in = new Fade(opPane, 200, true);
             in.play();
         } catch (MalformedURLException e) {
@@ -180,7 +177,6 @@ public class PromotionManageController implements Initializable{
         }
     }
     public void closeOpPane(){
-        checkPane.setVisible(false);
         opPane.setVisible(false);
     }
 
@@ -268,36 +264,66 @@ public class PromotionManageController implements Initializable{
     }
 
     //逻辑实现部分
-    public ResultMessage changeState(){
+    public void changeState(){
         if(activatedMode){
-            unactivatedData.add(new Promotion(getSelectedPromotion()));
-            activatedData.remove(activatedList.getSelectionModel().getSelectedIndex());
 
-            return hotelManagerController.stopHotelPromotion(getSelectedPromotion());
+
+            if(ResultMessage.SUCCESS==hotelManagerController.stopHotelPromotion(getSelectedPromotion())){
+                unactivatedData.add(new Promotion(getSelectedPromotion()));
+                activatedData.remove(activatedList.getSelectionModel().getSelectedIndex());
+                message.setText("操作成功");
+            }else{
+                message.setText("操作失败");
+            }
         }else{
-            return hotelManagerController.activateHotelPromotion(getSelectedPromotion());
+            if(ResultMessage.SUCCESS==hotelManagerController.activateHotelPromotion(getSelectedPromotion())){
+                unactivatedData.add(new Promotion(getSelectedPromotion()));
+                activatedData.remove(activatedList.getSelectionModel().getSelectedIndex());
+                message.setText("操作成功");
+            }else{
+                message.setText("操作失败");
+            }
         }
     }
-
+//TODO 酒店管理新增促销
     public ResultMessage addPromotion(){
         HotelPromotionVO promotionToAdd=addPromotionController.getVO();
         unactivatedData.add(new Promotion(promotionToAdd));
         //return hotelManagerController.createHotelPromotion(promotionToAdd);
         return ResultMessage.SUCCESS;
     }
+    //TODO 酒店管理修改促销
+
     public ResultMessage modifyPromotion(){
         HotelPromotionVO promotionToModify=modifyPromotionController.getVO();
         return hotelManagerController.modifyHotelPromotion(promotionToModify);
     }
+    //TODO 酒店管理删除促销
+
     public ResultMessage deletePromotion(){
         HotelPromotionVO promotionToDelete=getSelectedPromotion();
+        removePromotionFromList(promotionToDelete.getType().toString()=="start");
         return hotelManagerController.deleteHotelPromotion(promotionToDelete);
     }
+    //TODO 酒店管理激活策略
+
     public ResultMessage activatePromotion(){
         HotelPromotionVO promotionToActivate=getSelectedPromotion();
         return hotelManagerController.activateHotelPromotion(promotionToActivate);
     }
+    //TODO 酒店管理终止策略
+    public ResultMessage stopPromotion(){
+        HotelPromotionVO promotionToStop=getSelectedPromotion();
+        return hotelManagerController.stopHotelPromotion(promotionToStop);
+    }
 
+    public void removePromotionFromList(boolean isFromActivatedList){
+        if (isFromActivatedList){
+            activatedData.remove(activatedList.getSelectionModel().getSelectedIndex());
+        }else{
+            unactivatedData.remove(unactivatedList.getSelectionModel().getSelectedIndex());
+        }
+    }
     public static class Promotion{
         private final SimpleStringProperty name;
         private final SimpleIntegerProperty id;
@@ -312,8 +338,13 @@ public class PromotionManageController implements Initializable{
             name=new SimpleStringProperty(vo.getName());
             id = new SimpleIntegerProperty(vo.getPromotionID());
             state=new SimpleStringProperty(vo.getState().toString());
-            startDate = new SimpleStringProperty(vo.getStart().toString());
-            endDate = new SimpleStringProperty(vo.getEnd().toString());
+            if(vo.getType()==HotelPromotionType.TimeHotel){
+                startDate = new SimpleStringProperty(vo.getStart().toString());
+                endDate = new SimpleStringProperty(vo.getEnd().toString());
+            }else{
+                startDate=new SimpleStringProperty("none");
+                endDate = new SimpleStringProperty("none");
+            }
             discount=new SimpleDoubleProperty(vo.getDiscount());
             type=new SimpleStringProperty(vo.getType().toString());
             hotelId=new SimpleIntegerProperty(vo.getHotelID());//TODO

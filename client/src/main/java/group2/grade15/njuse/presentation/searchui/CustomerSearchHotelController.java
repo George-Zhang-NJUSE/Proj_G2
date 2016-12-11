@@ -146,6 +146,9 @@ public class CustomerSearchHotelController implements Initializable {
 
         if (basicHotelListVO != null) {
 
+            //debug
+            System.out.println("界面后台："+basicHotelListVO.getList().get(0).getName());
+
             //抓取输入的搜索条件
             int customerID = customer.getId();
             SortMethod sortCondition = SortMethod.values()[sortConditionChoiceBox.getSelectionModel().getSelectedIndex()];
@@ -172,8 +175,14 @@ public class CustomerSearchHotelController implements Initializable {
             String checkOutDateStr = checkOutDatePicker.getEditor().getText();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                checkInDate = checkInDateStr == null ? null : dateFormat.parse(checkInDateStr);
-                checkOutDate = checkOutDateStr == null ? null : dateFormat.parse(checkOutDateStr);
+                if (checkInDateStr.length() > 0) {
+                    checkInDate=dateFormat.parse(checkInDateStr);
+                }
+
+                if(checkOutDateStr.length()>0){
+                    checkOutDate=dateFormat.parse(checkOutDateStr);
+                }
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -204,7 +213,10 @@ public class CustomerSearchHotelController implements Initializable {
 
 
     private void showSearchResult(HotelListVO hotelListVO) {
+
+
         if (hotelListVO != null) {
+            System.out.println("界面前段筛选后："+hotelListVO.getList().get(0).getName());
             ArrayList<HotelVO> hotelVOList = hotelListVO.getList();
 
             try {

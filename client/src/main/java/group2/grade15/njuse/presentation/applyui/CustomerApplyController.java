@@ -141,7 +141,6 @@ public class CustomerApplyController implements Initializable {
 
         }
 
-        // TODO: 2016/11/25 apply with the info above
         CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
         CustomerServ customerServ = new CustomerController();
         newCustomer=customerServ.addCustomer(customerVO);

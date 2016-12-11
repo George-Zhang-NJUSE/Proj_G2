@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.vo.HotelPromotionVO;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -40,9 +42,17 @@ public class ModifyPromotionController implements Initializable {
     @FXML
     private DatePicker endDate;
 
+    @FXML
+    private Label check;
+    @FXML
+    private Label cancel;
+
+    public PromotionManageController promotionManageController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
+        CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
         ObservableList<HotelPromotionType> promotionTypes=FXCollections.observableArrayList(
                 HotelPromotionType.BirthdayHotel,
                 HotelPromotionType.MultipleHotel,
@@ -54,6 +64,9 @@ public class ModifyPromotionController implements Initializable {
             switchPane(type.getValue());
         });
 
+    }
+    public void back(){
+        promotionManageController.closeOpPane();
     }
     private void switchPane(HotelPromotionType type){
         time.setVisible(false);

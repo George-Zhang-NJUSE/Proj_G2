@@ -3,6 +3,7 @@ package group2.grade15.njuse.presentation.webmarketerui;
 import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
 import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.vo.WebMarketerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,6 +39,7 @@ public class WebMarketerMainController implements Initializable {
 
     public static WebMarketerServ webMarketerService=new WebMarketerController();
 
+    private static WebMarketerVO vo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +49,9 @@ public class WebMarketerMainController implements Initializable {
 
     }
 
+    public void setVo(WebMarketerVO vo) {
+        this.vo=vo;
+    }
     public boolean toCreditCharge() {
 
         if (creditChargeTag.isVisible())

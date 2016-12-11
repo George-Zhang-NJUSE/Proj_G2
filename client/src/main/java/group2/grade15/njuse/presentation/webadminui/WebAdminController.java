@@ -154,8 +154,12 @@ public class WebAdminController implements Initializable{
         ((TableColumn)htCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
         ((TableColumn)htCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("concreteAddress"));
         ((TableColumn)htCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("rank"));
-
-
+        try{
+            showAllAccount();
+            showAllHotel();
+        }catch (RemoteException e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -378,7 +382,8 @@ public class WebAdminController implements Initializable{
             case "酒店管理用户":
                 HotelManagerVO hmvo=gatherHotelManagerVO();
                 try {
-                    webAdminService.createHotelManager(hmvo);accountListData.add(new Account(hmvo));
+                    webAdminService.createHotelManager(hmvo);
+                    accountListData.add(new Account(hmvo));
                     aaInfo.setText("添加成功");
                     AAClear();
                 }catch (NullPointerException e){
@@ -389,7 +394,8 @@ public class WebAdminController implements Initializable{
             case "网站营销用户":
                 WebMarketerVO wmvo=gatherWebMarketerVO();
                 try {
-                    webAdminService.createWebMarketer(wmvo);accountListData.add(new Account(wmvo));
+                    webAdminService.createWebMarketer(wmvo);
+                    accountListData.add(new Account(wmvo));
                     aaInfo.setText("添加成功");
                     AAClear();
                 }catch(NullPointerException e){
@@ -402,7 +408,7 @@ public class WebAdminController implements Initializable{
     public void addHotel(){
         HotelVO vo=gatherHotelVO();
         try{
-            //webAdminService.createHotel(vo);
+            webAdminService.createHotel(vo);
             hotelListData.add(new Hotel(vo));
 
             haInfo.setText("添加成功");
@@ -431,6 +437,9 @@ public class WebAdminController implements Initializable{
     }
 
 
+    public void setAdminVO(WebAdminVO vo){
+
+    }
 
 /*
 //TODO 有空的话 把这里搞成用CustomeButton.implementButton()的方法来减少复用；

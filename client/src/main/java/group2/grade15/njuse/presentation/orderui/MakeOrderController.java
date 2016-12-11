@@ -143,7 +143,7 @@ public class MakeOrderController implements Initializable {
         String checkInDateStr = checkInDatePicker.getEditor().getText();
         String checkOutDateStr = checkOutDatePicker.getEditor().getText();
 
-        if (checkInDateStr != null && checkOutDateStr != null) {
+        if (checkInDateStr.length()>0 && checkOutDateStr.length()>0) {
 
             if (checkOutDateStr.compareTo(checkInDateStr) > 0) {//退房日期必须晚于入住日期
 
@@ -161,8 +161,8 @@ public class MakeOrderController implements Initializable {
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    checkInDate = checkInDateStr == null ? null : dateFormat.parse(checkInDateStr);
-                    checkOutDate = checkOutDateStr == null ? null : dateFormat.parse(checkOutDateStr);
+                    checkInDate = dateFormat.parse(checkInDateStr);
+                    checkOutDate = dateFormat.parse(checkOutDateStr);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

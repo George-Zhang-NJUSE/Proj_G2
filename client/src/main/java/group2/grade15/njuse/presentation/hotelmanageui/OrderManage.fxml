@@ -41,11 +41,17 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="700.0">
                                        <children>
-                                          <TableView fx:id="unexeTable" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
+                                          <TableView fx:id="unexeList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="订单ID" />
+                                                <TableColumn prefWidth="75.0" text="用户ID" />
+                                                <TableColumn prefWidth="75.0" text="适用优惠" />
+                                                <TableColumn prefWidth="75.0" text="订单总价值" />
+                                                <TableColumn prefWidth="75.0" text="入住时间" />
+                                                <TableColumn prefWidth="75.0" text="退房时间" />
+                                                <TableColumn prefWidth="75.0" text="创建时间" />
+                                                <TableColumn prefWidth="111.0" text="最晚执行时间" />
+                                             </columns>
                                           </TableView>
                                        </children>
                                     </AnchorPane>
@@ -65,8 +71,14 @@
                                        <children>
                                           <TableView fx:id="checkinList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="订单ID" />
+                                                <TableColumn prefWidth="75.0" text="用户ID" />
+                                                <TableColumn prefWidth="75.0" text="适用优惠" />
+                                                <TableColumn prefWidth="75.0" text="订单总价值" />
+                                                <TableColumn prefWidth="75.0" text="入住时间" />
+                                                <TableColumn prefWidth="75.0" text="退房时间" />
+                                                <TableColumn prefWidth="75.0" text="创建时间" />
+                                                <TableColumn prefWidth="111.0" text="最晚执行时间" />
                                              </columns>
                                           </TableView>
                                        </children>
@@ -86,8 +98,14 @@
                                        <children>
                                           <TableView fx:id="completeList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="订单ID" />
+                                                <TableColumn prefWidth="75.0" text="用户ID" />
+                                                <TableColumn prefWidth="75.0" text="适用优惠" />
+                                                <TableColumn prefWidth="75.0" text="订单总价值" />
+                                                <TableColumn prefWidth="75.0" text="入住时间" />
+                                                <TableColumn prefWidth="75.0" text="退房时间" />
+                                                <TableColumn prefWidth="75.0" text="创建时间" />
+                                                <TableColumn prefWidth="111.0" text="最晚执行时间" />
                                              </columns>
                                           </TableView>
                                        </children>
@@ -107,8 +125,14 @@
                                        <children>
                                           <TableView fx:id="innormalList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="订单ID" />
+                                                <TableColumn prefWidth="75.0" text="用户ID" />
+                                                <TableColumn prefWidth="75.0" text="适用优惠" />
+                                                <TableColumn prefWidth="75.0" text="订单总价值" />
+                                                <TableColumn prefWidth="75.0" text="入住时间" />
+                                                <TableColumn prefWidth="75.0" text="退房时间" />
+                                                <TableColumn prefWidth="75.0" text="创建时间" />
+                                                <TableColumn prefWidth="111.0" text="最晚执行时间" />
                                              </columns>
                                           </TableView>
                                        </children>
@@ -128,8 +152,14 @@
                                        <children>
                                           <TableView fx:id="cancelList" prefHeight="555.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
-                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="订单ID" />
+                                                <TableColumn prefWidth="75.0" text="用户ID" />
+                                                <TableColumn prefWidth="75.0" text="适用优惠" />
+                                                <TableColumn prefWidth="75.0" text="订单总价值" />
+                                                <TableColumn prefWidth="75.0" text="入住时间" />
+                                                <TableColumn prefWidth="75.0" text="退房时间" />
+                                                <TableColumn prefWidth="75.0" text="创建时间" />
+                                                <TableColumn prefWidth="111.0" text="最晚执行时间" />
                                              </columns>
                                           </TableView>
                                        </children>
@@ -203,13 +233,13 @@
                               <Font name="Microsoft YaHei Light" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="orderID" GridPane.columnIndex="1" editable="false"/>
-                        <TextField fx:id="customerID" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
-                        <TextField fx:id="checkInDate" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false"/>
-                        <TextField fx:id="checkOutDate" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false"/>
-                        <TextField fx:id="roomType" GridPane.columnIndex="1" GridPane.rowIndex="4" editable="false"/>
-                        <TextField fx:id="roomNum" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="5" editable="false"/>
-                        <TextField fx:id="totalPrice" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="6" editable="false"/>
+                        <TextField fx:id="orderID" editable="false" GridPane.columnIndex="1" />
+                        <TextField fx:id="customerID" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="checkInDate" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="checkOutDate" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="roomType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="roomNum" editable="false" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="totalPrice" editable="false" maxWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="订单状态：" GridPane.rowIndex="7">
                            <font>
                               <Font name="Microsoft YaHei Light" size="16.0" />
@@ -367,6 +397,7 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </Pane>
+                  <Label fx:id="message" GridPane.rowIndex="2" GridPane.valignment="TOP" />
                </children>
             </GridPane>
          </children>
