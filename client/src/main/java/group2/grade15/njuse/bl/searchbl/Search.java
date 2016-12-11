@@ -24,7 +24,10 @@ public class Search implements SearchServ {
 
         //将酒店搜索的判定条件简化成一系列新的布尔变量
         boolean isListNotNull = (hotelList != null);
-        boolean isSort = (searchCondition.getSortBy() != SortMethod.DEFAULT) && isListNotNull;
+        boolean isBooked = (searchCondition.isBooked()
+                            && isListNotNull);
+        boolean isSort = (searchCondition.getSortBy() != SortMethod.DEFAULT)
+                         && isListNotNull;
         boolean isFilterName = (searchCondition.getName().length() > 0)
                                 && isListNotNull;
         boolean isFilterStar = (searchCondition.getMinStarLevel() != 0)
@@ -42,9 +45,10 @@ public class Search implements SearchServ {
                                 || searchCondition.getCheckOutTime() != null)
                                 && isListNotNull;
 
-        
+
         //测试代码
         System.out.println(isListNotNull);
+        System.out.println(isBooked);
         System.out.println(isSort);
         System.out.println(isFilterName);
         System.out.println(isFilterStar);
@@ -52,10 +56,9 @@ public class Search implements SearchServ {
         System.out.println(isFilterPrice);
         System.out.println(isFilterRoom);
         System.out.println(isFilterTime);
-
-
+        
         //根据搜索条件对酒店列表进行对应的筛选
-        if (isListNotNull) {
+        if (isBooked) {
             hotelList = searchFilter.filterByBooked(searchCondition.getCsutomerID(), hotelList);
         }
 
