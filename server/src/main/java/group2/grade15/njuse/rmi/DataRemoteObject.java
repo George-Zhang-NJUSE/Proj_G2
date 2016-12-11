@@ -117,7 +117,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) throws RemoteException {
-        return null;
+        return orderDataService.updateTime(checkIn,checkOut,orderID);
     }
 
     @Override
@@ -182,12 +182,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ArrayList<RankPO> getRank() throws RemoteException {
-        return null;
+        return webPromotionDataService.getRank();
     }
 
     @Override
     public ResultMessage modifyRank(RankPO rankPO) throws RemoteException {
-        return null;
+        return webPromotionDataService.modifyRank(rankPO);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ResultMessage remove(int promotionID) throws RemoteException {
-        return null;
+        return hotelPromotionDataService.remove(promotionID);
     }
 
     @Override
