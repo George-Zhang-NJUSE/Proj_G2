@@ -42,6 +42,18 @@ public class Search implements SearchServ {
                                 || searchCondition.getCheckOutTime() != null)
                                 && isListNull;
 
+        //测试代码
+        System.out.println(isListNull);
+        System.out.println(isSort);
+        System.out.println(isFilterName);
+        System.out.println(isFilterStar);
+        System.out.println(isFilterScore);
+        System.out.println(isFilterPrice);
+        System.out.println(isFilterRoom);
+        System.out.println(isFilterTime);
+
+
+
         //根据搜索条件对酒店列表进行对应的筛选
         if (isListNull) {
             hotelList = searchFilter.filterByBooked(searchCondition.getCsutomerID(), hotelList);
