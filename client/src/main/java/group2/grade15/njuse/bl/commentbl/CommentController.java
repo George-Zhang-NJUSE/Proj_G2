@@ -12,6 +12,7 @@ import group2.grade15.njuse.vo.OrderVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * CommentController的职责是接受评论界面发来的请求
@@ -59,9 +60,9 @@ public class CommentController implements CommentServ, CommentBL {
         }
 
         if (commentPOList != null) {
-            for (CommentPO comment : commentPOList) {
-                commentList.add(new CommentVO(comment));
-            }
+            commentList.addAll(commentPOList.stream()
+                                            .map(CommentVO::new)
+                                            .collect(Collectors.toList()));
         }
 
         return new CommentListVO(commentList);
