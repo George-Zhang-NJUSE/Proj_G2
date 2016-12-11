@@ -1,6 +1,7 @@
 package group2.grade15.njuse.bl.customerbl;
 
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditListVO;
 import group2.grade15.njuse.vo.CustomerVO;
 
 /**
@@ -13,5 +14,7 @@ public interface CustomerBL {
     public ResultMessage modifyInfo(CustomerVO vo);
 
     public int getRank(int customerID);
+
+    public CreditListVO getCreditHistory(int customerID);
 
 }

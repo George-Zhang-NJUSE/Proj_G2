@@ -1,6 +1,7 @@
 package group2.grade15.njuse.blservice;
 
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditListVO;
 import group2.grade15.njuse.vo.CustomerVO;
 
 /**
@@ -27,11 +28,19 @@ public interface CustomerServ {
 
     /**
      * 负责修改客户信息
-     * @param customerVO VO包含修改后的客户信息，由界面层传入逻辑层处理
+     * @param customerVO CustomerVO型，VO包含修改后的客户信息，由界面层传入逻辑层处理
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage modifyInfo(CustomerVO customerVO);
+
+    /**
+     * 负责获取用户所有的信用变化记录
+     * @param customerID int型，由界面层传入逻辑层的客户ID
+     * @return 成功返回该客户的CreditListVO
+     *         失败返回null
+     */
+    public CreditListVO getCreditHistory(int customerID);
 
 }

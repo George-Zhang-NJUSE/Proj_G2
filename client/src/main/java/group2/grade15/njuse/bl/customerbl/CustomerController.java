@@ -4,6 +4,7 @@ import group2.grade15.njuse.blservice.CustomerServ;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditListVO;
 import group2.grade15.njuse.vo.CustomerVO;
 
 import java.rmi.RemoteException;
@@ -42,5 +43,10 @@ public class CustomerController implements CustomerServ {
 
     public ResultMessage modifyInfo(CustomerVO vo) {
         return customerBL.modifyInfo(vo);
+    }
+
+    @Override
+    public CreditListVO getCreditHistory(int customerID) {
+        return customerBL.getCreditHistory(customerID);
     }
 }

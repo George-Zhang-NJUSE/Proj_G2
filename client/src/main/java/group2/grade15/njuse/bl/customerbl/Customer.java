@@ -1,14 +1,18 @@
 package group2.grade15.njuse.bl.customerbl;
 
 
+import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.RankPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditListVO;
+import group2.grade15.njuse.vo.CreditVO;
 import group2.grade15.njuse.vo.CustomerVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Customer的职责是处理单个客户相关的业务逻辑
@@ -66,6 +70,22 @@ public class Customer implements CustomerBL {
         }
 
         return discountRank;
+    }
+
+    @Override
+    public CreditListVO getCreditHistory(int customerID) {
+        ArrayList<CreditPO> creditPOs = new ArrayList();
+        try {
+           creditPOs = RemoteHelper.getInstance().getCreditDataService().getHistory(customerID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<CreditVO> creditVOs = creditPOs.stream()
+                                                 .map(CreditVO::new)
+                                                 .collect(Collectors.toCollection(ArrayList::new));
+
+        return new CreditListVO(creditVOs);
     }
 
 }
