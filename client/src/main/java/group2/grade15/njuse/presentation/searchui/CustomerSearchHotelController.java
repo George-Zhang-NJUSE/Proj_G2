@@ -1,14 +1,15 @@
 package group2.grade15.njuse.presentation.searchui;
 
+import group2.grade15.njuse.bl.searchbl.Search;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
+import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.hotelui.HotelItemController;
 import group2.grade15.njuse.presentation.myanimation.ChangeHeight;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.myanimation.Rotate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
-import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.utility.SortMethod;
 import group2.grade15.njuse.vo.*;
@@ -197,9 +198,6 @@ public class CustomerSearchHotelController implements Initializable {
             Alert basicConditionNotFilled = new Alert(Alert.AlertType.ERROR, "请先填写搜索基础条件！");
             basicConditionNotFilled.showAndWait();
 
-            //本地测试用
-            showSearchResult(null);
-
         }
 
     }
@@ -227,26 +225,6 @@ public class CustomerSearchHotelController implements Initializable {
                 e.printStackTrace();
             }
 
-        } else {
-            //本地测试用
-            try {
-                searchItemBox.getChildren().clear();
-
-                for (int i = 0; i < 15; ++i) {
-                    FXMLLoader searchItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
-                    Node singleItemTemplate = searchItemLoader.load();
-                    HotelItemController hotelItemController = searchItemLoader.getController();
-                    searchItemBox.getChildren().add(singleItemTemplate);
-                    hotelItemController.initData(null);
-                    hotelItemController.show();
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }
@@ -305,10 +283,9 @@ public class CustomerSearchHotelController implements Initializable {
         additionalConditionPane.setPrefHeight(0);
 
         //加载省份列表
-//        searchServ = new Search();
-//        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
-//        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
-
-
+        searchServ = new Search();
+        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
+        
     }
 }

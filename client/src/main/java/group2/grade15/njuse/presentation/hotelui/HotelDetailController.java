@@ -149,30 +149,6 @@ public class HotelDetailController implements Initializable {
                 e.printStackTrace();
             }
 
-
-        } else {
-
-            //用于本地测试
-
-            try {
-                commentBox.getChildren().clear();
-                ArrayList<Node> ItemList = new ArrayList<>();
-
-                for (int i = 0; i < 15; ++i) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
-                    Node singleItemTemplate = loader.load();
-                    HotelCommentItemController commentItemController = loader.getController();
-                    ItemList.add(singleItemTemplate);
-                    commentItemController.show();
-                }
-
-                commentBox.getChildren().addAll(ItemList);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }
@@ -203,28 +179,6 @@ public class HotelDetailController implements Initializable {
                 e.printStackTrace();
             }
 
-        }else {
-
-            //用于本地测试
-            try {
-                myOrderBox.getChildren().clear();
-
-                // TODO: 2016/12/2 需要更改为正确的逻辑
-                for (int i = 0; i < 15; ++i) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
-                    Node singleItemTemplate = loader.load();
-                    MyOrderItemController orderItemController = loader.getController();
-
-                    myOrderBox.getChildren().add(singleItemTemplate);
-                    orderItemController.initData(null);
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
     }
