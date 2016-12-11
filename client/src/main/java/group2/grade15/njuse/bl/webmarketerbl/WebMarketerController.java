@@ -81,4 +81,5 @@ public class WebMarketerController implements WebMarketerServ {
     public ResultMessage modifyState(int orderId, OrderState state) {
         return revokeProxy.modifyState(orderId, state);
     }
+
 }
