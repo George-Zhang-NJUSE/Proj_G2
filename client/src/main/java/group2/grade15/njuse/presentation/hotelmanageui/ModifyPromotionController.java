@@ -1,8 +1,10 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.HotelPromotionType;
 import group2.grade15.njuse.utility.PromotionState;
+import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelPromotionVO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,9 +65,12 @@ public class ModifyPromotionController implements Initializable {
         type.setOnAction((ActionEvent e)->{
             switchPane(type.getValue());
         });
+        setEditable(false);
 
     }
+
     public void back(){
+        setEditable(false);
         promotionManageController.closeOpPane();
     }
     private void switchPane(HotelPromotionType type){
@@ -106,6 +111,9 @@ public class ModifyPromotionController implements Initializable {
         companyString.setEditable(sw);
         startDate.setEditable(sw);
         endDate.setEditable(sw);
+
+        check.setVisible(sw);
+        cancel.setVisible(sw);
     }
     public HotelPromotionVO getVO(){
         int id=ID;
@@ -134,5 +142,9 @@ public class ModifyPromotionController implements Initializable {
                 result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
         }
         return result;
+    }
+    public ResultMessage commitModify(){
+        HotelPromotionVO toModify=getVO();
+        return promotionManageController.modifyPromotion(toModify);
     }
 }

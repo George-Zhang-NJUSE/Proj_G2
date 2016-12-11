@@ -61,7 +61,10 @@ public class ModifyPromotionController implements Initializable {
         setEditable(false);
     }
     public void back(){
+        setEditable(false);
+        showCheck(false);
         promotionManageController.back();
+
     }
 
     public WebPromotionVO gatherVO(){
@@ -110,8 +113,14 @@ public class ModifyPromotionController implements Initializable {
     }
     public void commitModify(){
         WebMarketerMainController.webMarketerService.modifyWebPromotion(gatherVO());
+        setEditable(false);
+        showCheck(false);
     }
-    public void showPromotion(group2.grade15.njuse.presentation.webmarketerui.PromotionManageController.Promotion promotion) {
+    public void showCheck(boolean a){
+        check.setVisible(a);
+        cancel.setVisible(a);
+    }
+    public void showPromotion(PromotionManageController.Promotion promotion) {
         name.setText(promotion.getName());
         cut.setText(String.valueOf(promotion.getDiscount()));
         type.setValue(promotion.getType());

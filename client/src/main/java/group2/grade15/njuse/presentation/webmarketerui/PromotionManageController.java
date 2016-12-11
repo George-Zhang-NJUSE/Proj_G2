@@ -187,6 +187,7 @@ public class PromotionManageController implements Initializable{
     }
     public void setModify(){
         modifyPromotionController.setEditable(true);
+        modifyPromotionController.showCheck(true);
     }
     public void addPromotionToList(Promotion promotion,boolean isToActivatedList){
         if (isToActivatedList){
@@ -285,7 +286,16 @@ public class PromotionManageController implements Initializable{
 
     }
     public void modifyPromotion(WebPromotionVO vo){
-        WebMarketerMainController.webMarketerService.modifyWebPromotion(vo);
+        try {
+            if (vo.getState() == PromotionState.start) {
+                message.setText("不能更改适用中的促销策略");
+                return;
+            }
+            WebMarketerMainController.webMarketerService.modifyWebPromotion(vo);
+            message.setText("操作成功");
+        }catch (Exception e){
+            message.setText("操作未成功");
+        }
     }
     public void activatePromotion(){
         try {
@@ -293,6 +303,8 @@ public class PromotionManageController implements Initializable{
             if (promotion.getState() == "start")
                 return;
             promotion.setState("start");
+            removePromotionFromList(false);
+            activatedListData.add(promotion);
             WebPromotionVO vo = promotionToVO(promotion);
             WebMarketerMainController.webMarketerService.changeState(vo);
             message.setText("操作成功");
@@ -303,8 +315,11 @@ public class PromotionManageController implements Initializable{
     public void stopPromotion(){
         try {
             Promotion promotion = getSelectedPromotion();
-            if (promotion.getState() == "stop" || promotion.getState() == "start")
+            if (promotion.getState() == "stop" || promotion.getState() == "start"){
                 return;
+            }
+            removePromotionFromList(true);
+            unactivatedListData.add(promotion);
             promotion.setState("stop");
             WebPromotionVO vo = promotionToVO(promotion);
             WebMarketerMainController.webMarketerService.changeState(vo);
@@ -315,8 +330,12 @@ public class PromotionManageController implements Initializable{
     }
     public void deletePromotion(){
         Promotion promotion=getSelectedPromotion();
+        if(promotion.getState()=="start"){
+            message.setText("激活中的促销策略不能删除");
+            return;
+        }
         removePromotionFromList(promotion.state.get() == "start");
-        //WebMarketerMainController.webMarketerService.deletePromotion();
+        WebMarketerMainController.webMarketerService.deleteWebPromotion(promotion.getId());
         back();
     }
     public static class Promotion{

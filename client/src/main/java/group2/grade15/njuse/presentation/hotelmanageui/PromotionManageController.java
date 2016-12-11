@@ -285,7 +285,10 @@ public class PromotionManageController implements Initializable{
     }
 
     //逻辑实现部分
-    public void changeState(){
+    public void setModify(){
+        modifyPromotionController.setEditable(true);
+    }
+    public void changePromotionState(){
         if(activatedMode){
 
 
@@ -315,16 +318,36 @@ public class PromotionManageController implements Initializable{
     }
     //TODO 酒店管理修改促销
 
-    public ResultMessage modifyPromotion(){
-        HotelPromotionVO promotionToModify=modifyPromotionController.getVO();
-        return hotelManagerController.modifyHotelPromotion(promotionToModify);
+    public ResultMessage modifyPromotion(HotelPromotionVO vo){
+        try {
+            HotelPromotionVO promotionToModify = modifyPromotionController.getVO();
+
+            ResultMessage re= hotelManagerController.modifyHotelPromotion(vo);
+            message.setText("操作成功");
+            return re;
+        } catch (Exception e) {
+            e.printStackTrace();
+            message.setText("操作失败");
+            return ResultMessage.FAILED;
+        }
     }
     //TODO 酒店管理删除促销
 
     public ResultMessage deletePromotion(){
         HotelPromotionVO promotionToDelete=getSelectedPromotion();
-        removePromotionFromList(promotionToDelete.getType().toString()=="start");
-        return hotelManagerController.deleteHotelPromotion(promotionToDelete);
+        if(promotionToDelete.getState()==PromotionState.start){
+            message.setText("不能删除已激活的促销策略");
+            return ResultMessage.FAILED;
+        }try {
+            removePromotionFromList(promotionToDelete.getType().toString() == "start");
+            ResultMessage re= hotelManagerController.deleteHotelPromotion(promotionToDelete);
+            message.setText("操作成功");
+            return re;
+        }catch (Exception e){
+            e.printStackTrace();
+            message.setText("操作失败");
+            return ResultMessage.FAILED;
+        }
     }
     //TODO 酒店管理激活策略
 

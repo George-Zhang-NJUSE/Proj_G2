@@ -194,15 +194,27 @@ public class RoomManageController implements Initializable {
         RoomVO vo = new RoomVO(a, room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         return vo;
     }
-    public ResultMessage addRoom(){
-        RoomVO roomToAdd=getRoomVO();
-        data.add(new Room(getRoomVO()));
-        // ResultMessage.SUCCESS;
-        return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),roomToAdd);
+    public ResultMessage addRoom() {
+        RoomVO roomToAdd = getRoomVO();
+        try {
+
+
+            data.add(new Room(roomToAdd));
+            // ResultMessage.SUCCESS;
+            return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
     public ResultMessage modifyRoom(){
         RoomVO roomToModify = getRoomVO();
-        return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),roomToModify);
+        try {
+            return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToModify);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultMessage.FAILED;
+        }
     }
     //逻辑实现的数据展示部分
     public void showRoomOnModify(){
@@ -221,9 +233,7 @@ public class RoomManageController implements Initializable {
         }
         roomTable.setItems(data);
     }
-    private void addRoomToTable(){
-        data.add(new Room(getRoomVO()));
-    }
+
     public static class Room{
         private final SimpleStringProperty type;
         private final SimpleDoubleProperty price;

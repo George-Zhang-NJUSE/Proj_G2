@@ -71,7 +71,7 @@
         </Group>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <Label fx:id="check">
+            <Label fx:id="check" onMouseClicked="#commitModify">
                 <graphic>
                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                        <image>

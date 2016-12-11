@@ -1,5 +1,7 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
+import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -64,6 +66,7 @@ public class FixController implements Initializable {
     private ObservableList<Order> solvedListData;
     private String[] properties = {"orderId", "customerId", "hotelId", "promotionId", "amount", "inDate", "outDate", "createTime", "finalDate", "RoomNum", "roomType"};
 
+    public OrderListServ orderListServ=new OrderController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
@@ -104,7 +107,7 @@ public class FixController implements Initializable {
     }
     public void showAllOrder(){
         //TODO 从网站营销这边拿到的列表应该不需要ID
-        //ArrayList<OrderVO> un=WebMarketerMainController.webMarketerService.getAbnomalOrderList().getOrderList();
+        //ArrayList<OrderVO> un=orderListServ.get
     }
 
     public void clear() {

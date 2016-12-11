@@ -23,8 +23,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -86,6 +88,27 @@ public class OrderManageController implements Initializable {
     private TextField totalPrice;
     @FXML
     private TextField orderState;
+
+    @FXML
+    private DatePicker timeCI;
+    @FXML
+    private TextField adultCI;
+    @FXML
+    private TextField kidCI;
+
+    @FXML
+    private DatePicker timeCO;
+
+    @FXML
+    private DatePicker timeOC;
+    @FXML
+    private TextField adultOC;
+    @FXML
+    private TextField kidOC;
+    @FXML
+    private TextField restoreCredit;
+
+
 
     private GridPane now;
 
@@ -191,6 +214,7 @@ public class OrderManageController implements Initializable {
                     break;
             }
         }
+
     }
     public void toCheckin(){
         optionBox.setVisible(false);
@@ -294,6 +318,10 @@ public class OrderManageController implements Initializable {
         //TODO
 
         OrderVO vo=getSelectedOrderVO();
+        Order order = new Order(vo);
+        order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
+        order.inDate.set(timeCI.getEditor().getText());
+        ;
         if(vo.getState()==OrderState.unexecuted){
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
@@ -312,7 +340,12 @@ public class OrderManageController implements Initializable {
     public void overtimeCheckin(){
         //TODO
         OrderVO vo=getSelectedOrderVO();
+        Order order = new Order(vo);
+        order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
+        order.inDate.set(timeCI.getEditor().getText());
         if (vo.getState() == OrderState.abnormal) {
+            Order order=new Order(vo);
+            order.numOfCustomer.set(Integer.parseInt(adultCI.getText()));
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
                 message.setText("操作成功");
                 removeSelectedOrderFromList(innormalList);
@@ -326,7 +359,25 @@ public class OrderManageController implements Initializable {
 
     }
 
-
+    public OrderVO toVO(Order order) {
+        String[] s = order.getInDate().split("-");
+        Date indate=new Date(Integer.parseInt(s[0])-1900,Integer.parseInt(s[1])-1,Integer.parseInt(s[2]));
+        OrderVO vo=new OrderVO(
+                order.getOrderId(),
+                order.getCustomerId(),
+                order.getHotelId(),
+                order.getAmount(),
+                null,//inDate
+                order.vo.getCheckOutTime(),//oDate
+                order.vo.getCreateTime(),
+                order.vo.getFinalExecuteTime(),
+                order.getRoomNum(),
+                order.vo.getType(),
+                order.getNumOfCustomer(),
+                order.getHaveKid(),
+                order.vo.getState()
+        )
+    }
 
 
 
