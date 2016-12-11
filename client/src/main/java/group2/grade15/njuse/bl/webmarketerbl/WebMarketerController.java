@@ -63,6 +63,11 @@ public class WebMarketerController implements WebMarketerServ {
     }
 
     @Override
+    public ResultMessage deleteWebPromotion(int webPromotionID) {
+        return webPromotionProxy.deleteWebPromotion(webPromotionID);
+    }
+
+    @Override
     public ResultMessage changeState(WebPromotionVO promotion) {
         return webPromotionProxy.changeState(promotion);
     }

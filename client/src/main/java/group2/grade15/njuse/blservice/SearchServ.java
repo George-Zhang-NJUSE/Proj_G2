@@ -11,7 +11,6 @@ import group2.grade15.njuse.vo.*;
  * @author Guo
  */
 public interface SearchServ {
-
     /**
      * 根据搜索条件返回酒店列表的方法
      * 搜索条件包含在SearchConditionVO中
