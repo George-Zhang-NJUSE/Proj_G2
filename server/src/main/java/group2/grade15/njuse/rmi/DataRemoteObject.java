@@ -86,6 +86,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
+    public ArrayList<OrderPO> getAbnormalList() throws RemoteException {
+        return orderDataService.getAbnormalList();
+    }
+
+    @Override
     public OrderPO getOrder(int orderId) throws RemoteException {
         return orderDataService.getOrder(orderId);
     }

@@ -17,6 +17,8 @@ public interface OrderDataService extends Remote {
 
     public ArrayList<OrderPO> getUnexecutedList() throws RemoteException;
 
+    public ArrayList<OrderPO> getAbnormalList() throws RemoteException;
+
     public OrderPO getOrder(int orderID) throws RemoteException;
 
     public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException;
