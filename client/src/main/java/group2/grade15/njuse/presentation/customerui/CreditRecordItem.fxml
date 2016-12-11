@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.customerui.CreditRecordItemController">
+<GridPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.customerui.CreditRecordItemController">
     <columnConstraints>
         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
@@ -22,12 +22,13 @@
         <Label text="订单号：" />
         <Label text="动作：" GridPane.rowIndex="2" />
         <Label text="时间：" GridPane.rowIndex="1" />
-        <Label text="Label" GridPane.columnIndex="1" />
-        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label fx:id="orderIDLabel" text="Label" GridPane.columnIndex="1" />
+        <Label fx:id="timeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label fx:id="actionLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label text="信用度变化：" GridPane.columnIndex="2" />
-        <Label text="Label" GridPane.columnIndex="3" />
+        <Label fx:id="creditChangeLabel" text="Label" GridPane.columnIndex="3" />
         <Label text="信用度结果：" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label fx:id="creditResultLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
     </children>
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
