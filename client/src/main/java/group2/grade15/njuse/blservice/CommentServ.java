@@ -11,7 +11,6 @@ import group2.grade15.njuse.vo.CommentVO;
  * @author Guo
  */
 public interface CommentServ {
-
     /**
      * 创建新的酒店评论
      * @param commentInfo CommentVO型，界面层传递来的存有评论信息的数据对象

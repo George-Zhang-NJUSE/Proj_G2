@@ -22,4 +22,6 @@ public interface WebPromotionControllerBL {
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion);
 
     public ResultMessage changeState(WebPromotionVO promotionVO);
+
+    public ResultMessage deleteWebPromotion(int webPromotionID);
 }

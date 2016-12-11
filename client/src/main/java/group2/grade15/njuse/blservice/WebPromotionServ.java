@@ -52,4 +52,13 @@ public interface WebPromotionServ {
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage changeState(WebPromotionVO promotion);
+
+    /**
+     * 删除网站优惠策略的状态
+     * @param  webPromotionID int型，界面层传递来的需要删除的网站优惠策略的ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage deleteWebPromotion(int webPromotionID);
 }
