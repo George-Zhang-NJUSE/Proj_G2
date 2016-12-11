@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -30,9 +31,9 @@ public class HotelManageLoginController implements Initializable{
     @FXML
     private Label login;
     @FXML
-    private Label accoutField;
+    private TextField accoutField;
     @FXML
-    private Label PWField;
+    private TextField PWField;
     private Stage currentStage;
 
     private void login() {
