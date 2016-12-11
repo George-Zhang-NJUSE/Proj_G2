@@ -25,11 +25,11 @@ public class WebAdminController implements WebAdminServ, HotelManageBL, UserMana
         userManage = new UserManageImpl();
     }
 
-    public WebAdminVO getInfo(int webAdminId) {
+    public WebAdminVO getInfo(String  webAdminId) {
 
         WebAdminPO po = null;
         try {
-            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin("" + webAdminId);
+            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(webAdminId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
