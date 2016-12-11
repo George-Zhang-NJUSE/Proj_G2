@@ -25,6 +25,17 @@ public class CreditVO implements Serializable {
         reason = po.getReason();
     }
 
+    public CreditVO(int customerID, int orderID, int creditID, double creditLeft, double creditChange,
+                    java.sql.Date time, ChangeReason reason) {
+        this.customerID = customerID;
+        this.orderID = orderID;
+        this.creditID = creditID;
+        this.creditLeft = creditLeft;
+        this.creditChange = creditChange;
+        this.time = time;
+        this.reason = reason;
+    }
+
     public int getOrderID() {
         return orderID;
     }

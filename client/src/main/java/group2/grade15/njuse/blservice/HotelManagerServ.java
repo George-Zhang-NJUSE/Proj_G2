@@ -16,7 +16,7 @@ public interface HotelManagerServ {
      * @param hotelManager HotelManagerVO型，界面层传递来的存有修改信息的数据对象
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
-     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     *         网络问题返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage modifyInfo(HotelManagerVO hotelManager);
 
@@ -29,6 +29,12 @@ public interface HotelManagerServ {
      */
     public ResultMessage modifyHotelInfo(HotelVO hotel);
 
+    /**
+     * 获取酒店的信息
+     * @param hotelID int型，界面层传递来的需要获取的酒店ID
+     * @return 成功返回对应的HotelID
+     *         失败或者不存在返回Rnull
+     */
     public HotelVO getHotelInfo(int hotelID);
 
     /**
