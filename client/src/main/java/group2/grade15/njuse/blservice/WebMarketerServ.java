@@ -18,7 +18,7 @@ public interface WebMarketerServ {
      * @return 成功含有酒店管理人员信息的WebAdminVO
      *         失败返回null
      */
-    public WebMarketerVO getInfo(String webMarketerId);
+    public WebMarketerVO getInfo(int webMarketerId);
 
     /**
      * 创建新的网站优惠策略

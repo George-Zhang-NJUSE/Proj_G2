@@ -172,8 +172,8 @@ public class CustomerSearchHotelController implements Initializable {
             String checkOutDateStr = checkOutDatePicker.getEditor().getText();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                checkInDate = checkInDateStr == null ? null : dateFormat.parse(checkInDateStr);
-                checkOutDate = checkOutDateStr == null ? null : dateFormat.parse(checkOutDateStr);
+                checkInDate = checkInDateStr.length()>0 ? null : dateFormat.parse(checkInDateStr);
+                checkOutDate = checkOutDateStr.length()>0 ? null : dateFormat.parse(checkOutDateStr);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
