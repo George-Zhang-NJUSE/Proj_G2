@@ -22,9 +22,9 @@ public class WebMarketerLoginImpl implements LoginControllerServ {
     ResultMessage result;
 
     @Override
-    public ResultMessage login(int id, String password) {
+    public ResultMessage login(String id, String password) {
         try {
-            webMarketerPO = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(String.valueOf(id));
+            webMarketerPO = RemoteHelper.getInstance().getWebMarketerDataService().getWebMarketer(id);
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
