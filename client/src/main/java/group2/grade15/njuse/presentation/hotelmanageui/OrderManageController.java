@@ -344,8 +344,6 @@ public class OrderManageController implements Initializable {
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
         order.inDate.set(timeCI.getEditor().getText());
         if (vo.getState() == OrderState.abnormal) {
-            Order order=new Order(vo);
-            order.numOfCustomer.set(Integer.parseInt(adultCI.getText()));
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
                 message.setText("操作成功");
                 removeSelectedOrderFromList(innormalList);
@@ -367,7 +365,7 @@ public class OrderManageController implements Initializable {
                 order.getCustomerId(),
                 order.getHotelId(),
                 order.getAmount(),
-                null,//inDate
+                indate,//inDate
                 order.vo.getCheckOutTime(),//oDate
                 order.vo.getCreateTime(),
                 order.vo.getFinalExecuteTime(),
