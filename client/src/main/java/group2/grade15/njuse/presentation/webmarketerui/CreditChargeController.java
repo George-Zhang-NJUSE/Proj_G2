@@ -16,10 +16,7 @@ import java.util.ResourceBundle;
  */
 public class CreditChargeController implements Initializable {
     public Pane motherPane;
-    @FXML
-    private Label check;
-    @FXML
-    private Label cancel;
+
     @FXML
     private TextField accountField;
     @FXML
@@ -30,6 +27,10 @@ public class CreditChargeController implements Initializable {
     private TextField PWField;
     @FXML
     private Label backInfo;
+    @FXML
+    private Label check;
+    @FXML
+    private Label cancel;
 
 
     @Override
@@ -42,14 +43,9 @@ public class CreditChargeController implements Initializable {
         });
     }
 
-    private void toPromotionManage() {
-        //TODO 从充值到促销管理的界面
 
+    public void charge(){
+        //TODO
+        //WebMarketerMainController.webMarketerService.modifyCredit()
     }
-
-    private void toFix() {
-        //TODO 从充值到订单申诉的界面
-    }
-
-    ;
 }

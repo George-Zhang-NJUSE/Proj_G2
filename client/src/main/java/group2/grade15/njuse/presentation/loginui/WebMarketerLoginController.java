@@ -45,7 +45,7 @@ public class WebMarketerLoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CustomeButton.implButton(login, "file:client/src/main/res/login/loginicon");
+        CustomeButton.implButton(login, "file:client/src/main/res/login/login");
         login.setOnMouseClicked((MouseEvent e) -> {
             jumpToMain();
         });

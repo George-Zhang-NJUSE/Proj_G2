@@ -1,8 +1,10 @@
 package group2.grade15.njuse.presentation.webadminui;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
 import group2.grade15.njuse.blservice.WebAdminServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -12,10 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteRef;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,11 @@ import java.util.ResourceBundle;
  * Created by ALIENWARE-PC on 2016/11/19.
  */
 public class WebAdminController implements Initializable{
+
+    @FXML
+    private Label aaInfo;
+    @FXML
+    private Label haInfo;
 
 
     @FXML
@@ -101,7 +107,12 @@ public class WebAdminController implements Initializable{
     @FXML
     private TextField hotelID;
 
-
+    @FXML
+    private TextField userName;
+    @FXML
+    private TextField userPW;
+    @FXML
+    private ComboBox<String> userType;
 
 
 
@@ -112,18 +123,42 @@ public class WebAdminController implements Initializable{
     public static WebAdminServ webAdminService=new group2.grade15.njuse.bl.webadminbl.WebAdminController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         hotelListData= FXCollections.observableArrayList();
         accountListData = FXCollections.observableArrayList();
         accountList.setItems(accountListData);
         hotelList.setItems(hotelListData);
+
+        ObservableList<String> types=FXCollections.observableArrayList(
+                new String("酒店管理用户"),
+                new String("网站营销用户")
+        );
+        userType.setItems(types);
+
         ObservableList acCols=accountList.getColumns();
+
+        ((TableColumn)acCols.get(0)).setCellValueFactory(new PropertyValueFactory<>("id"));
+        ((TableColumn)acCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
+        ((TableColumn)acCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("password"));
+        ((TableColumn)acCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("type"));
+        ((TableColumn)acCols.get(4)).setCellValueFactory(new PropertyValueFactory<>("contact"));
+        ((TableColumn)acCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        ((TableColumn)acCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("credit"));
+        ((TableColumn)acCols.get(7)).setCellValueFactory(new PropertyValueFactory<>("company"));
+
+
+
         ObservableList htCols=hotelList.getColumns();
 
+        ((TableColumn)htCols.get(0)).setCellValueFactory(new PropertyValueFactory<>("id"));
+        ((TableColumn)htCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
+        ((TableColumn)htCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("concreteAddress"));
+        ((TableColumn)htCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("rank"));
+
+
     }
 
-    public ResultMessage addHotelToData(HotelVO vo) throws RemoteException {
-        return webAdminService.createHotel(vo);
-    }
+
 
     //初始化承收并展示来自数据库的账号列表方法
     public void showAllAccount() throws RemoteException{
@@ -220,6 +255,30 @@ public class WebAdminController implements Initializable{
             type = new SimpleStringProperty("网站管理");
             companyName = new SimpleStringProperty("none");
         }
+        public int getId(){
+            return id.get();
+        }
+        public String getName(){
+            return name.get();
+        }
+        public String getPassword(){
+            return password.get();
+        }
+        public String getContact(){
+            return contact.get();
+        }
+        public String getBithday(){
+            return birthday.get();
+        }
+        public double getCredit(){
+            return credit.get();
+        }
+        public String getType(){
+            return type.get();
+        }
+        public String getCompanyName(){
+            return companyName.get();
+        }
     }
     //作为Hotel的TableView的数据承载类
     public static class Hotel{
@@ -249,16 +308,133 @@ public class WebAdminController implements Initializable{
             roomList=vo.getRoomList();
             picture=vo.getPicture();
         }
+        public int getId(){
+            return id.get();
+        }
+        public String getName(){
+            return name.get();
+        }
+        public String getAddress(){
+            return address.get();
+        }
+        public String getConcreteAddress(){
+            return concreteAddress.get();
+        }
+        public String getContact(){
+            return contact.get();
+        }
+        public String getIntroduction(){
+            return introduction.get();
+        }
+        public String getFacility(){
+            return facility.get();
+        }
+        public int getRank(){
+            return rank.get();
+        }
+        public double getScore(){
+            return score.get();
+        }
+
     }
 
+    private HotelManagerVO gatherHotelManagerVO(){
+        String name=userName.getText();
+        String pw=userPW.getText();
+        HotelManagerVO vo=new HotelManagerVO(0,userPW.getText(),userName.getText(),"",0);
+        return vo;
+    }
+    private WebMarketerVO gatherWebMarketerVO(){
+        String name=userName.getText();
+        String pw=userPW.getText();
+        WebMarketerVO vo = new WebMarketerVO(userPW.getText(),userName.getText());
+        return vo;
+    }
 
-    private HotelVO getherVO(){
+    private HotelVO gatherHotelVO(){
         HotelVO result;
-        result = new HotelVO(0, hotelName.getText(), "", hotelAddress.getText(), "", "", "", null, null, Integer.parseInt(hotelRank.getText()), 0, null);
+        result = new HotelVO(
+                0,//id
+                hotelName.getText(),//name
+                "",//address
+                hotelAddress.getText(),//concretAddress
+                "",//contact
+                "", //introduction
+                "",//facility
+                new ArrayList<RoomVO>(),//roomList
+                new ArrayList<CustomerVO>(),//vipList
+                Integer.parseInt(hotelRank.getText()),//rank
+                0,//score
+                null//picture
+        );
         return result;
     }
+    public ResultMessage addHotelToData(HotelVO vo) throws RemoteException {
+        return webAdminService.createHotel(vo);
+    }
+
+    public void addAccount(){
+        switch(userType.getValue()){
+            case "酒店管理用户":
+                HotelManagerVO hmvo=gatherHotelManagerVO();
+                try {
+                    webAdminService.createHotelManager(hmvo);accountListData.add(new Account(hmvo));
+                    aaInfo.setText("添加成功");
+                    AAClear();
+                }catch (NullPointerException e){
+                    aaInfo.setText("添加失败");
+                }
+
+                break;
+            case "网站营销用户":
+                WebMarketerVO wmvo=gatherWebMarketerVO();
+                try {
+                    webAdminService.createWebMarketer(wmvo);accountListData.add(new Account(wmvo));
+                    aaInfo.setText("添加成功");
+                    AAClear();
+                }catch(NullPointerException e){
+                    aaInfo.setText("添加失败");
+                }
+
+                break;
+        }
+    }
+    public void addHotel(){
+        HotelVO vo=gatherHotelVO();
+        try{
+            //webAdminService.createHotel(vo);
+            hotelListData.add(new Hotel(vo));
+
+            haInfo.setText("添加成功");
+            HAClear();
+        }catch(NullPointerException e){
+            haInfo.setText("添加失败");
+        }
+
+    }
+    private void AAClear(){
+        userName.setText("");
+        userType.setValue("");
+        userPW.setText("");
+    }
+    private void HAClear(){
+        hotelName.setText("");
+        hotelAddress.setText("");
+        hotelRank.setText("");
+    }
 
 
+
+
+    public void  deleteAccount(int id){
+
+    }
+
+
+
+/*
+//TODO 有空的话 把这里搞成用CustomeButton.implementButton()的方法来减少复用；
+ */
     /*
     以下均为按钮实现
      */
@@ -486,6 +662,7 @@ public class WebAdminController implements Initializable{
 
     public void AAcheck_action(MouseEvent event) {
         //TODO to implement the function of add an account to the database.
+        addAccount();
 
     }
 
@@ -531,6 +708,7 @@ public class WebAdminController implements Initializable{
 
     public void HAcheck_action(MouseEvent event) {
         //TODO to implement the function of add an account to the database.
+        addHotel();
 
     }
 

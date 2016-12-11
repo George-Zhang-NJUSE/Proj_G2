@@ -47,14 +47,11 @@ public class PromotionManageController implements Initializable{
     private Label deleteButton;
     @FXML
     private Label addButton;
+
     @FXML
-    private Label check;
+    private TableView<Promotion> activatedList;
     @FXML
-    private Label cancel;
-    @FXML
-    private TableView activatedList;
-    @FXML
-    private TableView unactivatedList;
+    private TableView<Promotion> unactivatedList;
     @FXML
     private Tab activatedTab;
     @FXML
@@ -68,8 +65,8 @@ public class PromotionManageController implements Initializable{
 
 
     //逻辑部分
-    private AddPromotionController addPromotionController;
-    private ModifyPromotionController modifyPromotionController;
+    public AddPromotionController addPromotionController;
+    public ModifyPromotionController modifyPromotionController;
     private Boolean activatedMode=false;
 
 
@@ -79,8 +76,6 @@ public class PromotionManageController implements Initializable{
         CustomeButton.implButton(modifyButton, "file:client/src/main/res/hotelmanage/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/hotelmanage/delete");
         CustomeButton.implButton(addButton,"file:client/src/main/res/hotelmanage/add");
-        CustomeButton.implButton(check,"file:client/src/main/res/hotelmanage/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
         unactivatedData= FXCollections.observableArrayList();
         activatedData=FXCollections.observableArrayList();
 
@@ -88,28 +83,28 @@ public class PromotionManageController implements Initializable{
         unactivatedTab.setOnSelectionChanged((Event e)->{
             switchToUnactivated();
         });
-        ObservableList<TableColumn> uaCols=unactivatedList.getColumns();
-        uaCols.get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
-        uaCols.get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
-        uaCols.get(2).setCellValueFactory(new PropertyValueFactory<>("state"));
-        uaCols.get(3).setCellValueFactory(new PropertyValueFactory<>("type"));
-        uaCols.get(4).setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        uaCols.get(5).setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        uaCols.get(6).setCellValueFactory(new PropertyValueFactory<>("discount"));
+        ObservableList uaCols=unactivatedList.getColumns();
+        ((TableColumn)uaCols.get(0)).setCellValueFactory(new PropertyValueFactory<>("id"));
+        ((TableColumn)uaCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
+        ((TableColumn)uaCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("state"));
+        ((TableColumn)uaCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("type"));
+        ((TableColumn)uaCols.get(4)).setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        ((TableColumn)uaCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        ((TableColumn)uaCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("discount"));
         unactivatedList.setItems(unactivatedData);
 
 
         activatedTab.setOnSelectionChanged((Event e)->{
             switchToActivated();
         });
-        ObservableList<TableColumn> aCols=unactivatedList.getColumns();
-        aCols.get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
-        aCols.get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
-        aCols.get(2).setCellValueFactory(new PropertyValueFactory<>("state"));
-        aCols.get(3).setCellValueFactory(new PropertyValueFactory<>("type"));
-        aCols.get(4).setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        aCols.get(5).setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        aCols.get(6).setCellValueFactory(new PropertyValueFactory<>("discount"));
+        ObservableList aCols=activatedList.getColumns();
+        ((TableColumn)aCols.get(0)).setCellValueFactory(new PropertyValueFactory<>("id"));
+        ((TableColumn)aCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
+        ((TableColumn)aCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("state"));
+        ((TableColumn)aCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("type"));
+        ((TableColumn)aCols.get(4)).setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        ((TableColumn)aCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        ((TableColumn)aCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("discount"));
         activatedList.setItems(activatedData);
     }
 
@@ -131,15 +126,17 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            checkPane.setVisible(true);
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/AddPromotion.fxml"));
-            addPromotionController=lodar.getController();
+
+
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
+            addPromotionController=lodar.getController();
             Fade in = new Fade(opPane, 200, true);
             in.play();
+            addPromotionController.setMainController(this);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -171,7 +168,7 @@ public class PromotionManageController implements Initializable{
             Fade cin = new Fade(checkPane, 200, true);
             cin.play();
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/ModifyPromotion.fxml"));
-            modifyPromotionController=lodar.getController();
+            modifyPromotionController=(ModifyPromotionController)lodar.getController();
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             Fade in = new Fade(opPane, 200, true);
@@ -284,7 +281,9 @@ public class PromotionManageController implements Initializable{
 
     public ResultMessage addPromotion(){
         HotelPromotionVO promotionToAdd=addPromotionController.getVO();
-        return hotelManagerController.createHotelPromotion(promotionToAdd);
+        unactivatedData.add(new Promotion(promotionToAdd));
+        //return hotelManagerController.createHotelPromotion(promotionToAdd);
+        return ResultMessage.SUCCESS;
     }
     public ResultMessage modifyPromotion(){
         HotelPromotionVO promotionToModify=modifyPromotionController.getVO();
@@ -318,6 +317,30 @@ public class PromotionManageController implements Initializable{
             discount=new SimpleDoubleProperty(vo.getDiscount());
             type=new SimpleStringProperty(vo.getType().toString());
             hotelId=new SimpleIntegerProperty(vo.getHotelID());//TODO
+        }
+        public String getName(){
+            return name.get();
+        }
+        public int getId(){
+            return id.get();
+        }
+        public int getHotelId(){
+            return hotelId.get();
+        }
+        public String getState(){
+            return state.get();
+        }
+        public String getStartDate(){
+            return startDate.get();
+        }
+        public String getEndDate(){
+            return endDate.get();
+        }
+        public double getDiscount(){
+            return discount.get();
+        }
+        public String getType(){
+            return type.get();
         }
 
     }

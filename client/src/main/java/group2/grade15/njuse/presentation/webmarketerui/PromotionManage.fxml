@@ -38,8 +38,15 @@
                                        <children>
                                           <TableView fx:id="unactivatedList" prefHeight="450.0" prefWidth="900.0">
                                             <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
+                                              <TableColumn prefWidth="75.0" text="ID" />
+                                              <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="需求等级" />
+                                                <TableColumn prefWidth="75.0" text="促销商圈" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -59,10 +66,17 @@
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="900.0">
                                        <children>
                                           <TableView fx:id="activatedList" prefHeight="450.0" prefWidth="900.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="ID" />
+                                                <TableColumn prefWidth="75.0" text="促销名称" />
+                                                <TableColumn prefWidth="75.0" text="促销状态" />
+                                                <TableColumn prefWidth="75.0" text="折扣力度" />
+                                                <TableColumn prefWidth="75.0" text="促销类型" />
+                                                <TableColumn prefWidth="75.0" text="需求等级" />
+                                                <TableColumn prefWidth="75.0" text="促销商圈" />
+                                                <TableColumn prefWidth="75.0" text="开始日期" />
+                                                <TableColumn prefWidth="75.0" text="结束日期" />
+                                             </columns>
                                           </TableView>
                                        </children>
                                     </AnchorPane>
@@ -93,7 +107,7 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="modifyButton" onMouseClicked="#toModify" text="修改">
+                  <Label fx:id="modifyButton" onMouseClicked="#setModify" text="修改">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -138,28 +152,7 @@
                </GridPane.margin>
             </VBox>
             <Pane fx:id="opPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <Pane fx:id="checkPane" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <children>
-                  <Label fx:id="check" layoutX="10.0" layoutY="10.0">
-                      <graphic>
-                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                             <image>
-                                 <Image url="file:client/src/main/res/webmarketer/Check.png" />
-                             </image>
-                          </ImageView>
-                      </graphic>
-                  </Label>
-                  <Label fx:id="cancel" layoutX="10.0" layoutY="80.0" onMouseClicked="#back">
-                      <graphic>
-                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                             <image>
-                                 <Image url="file:client/src/main/res/webmarketer/Cancel.png" />
-                             </image>
-                          </ImageView>
-                      </graphic>
-                  </Label>
-               </children>
-            </Pane>
+            <Label fx:id="message" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

@@ -37,22 +37,22 @@ public class WebAdminLoginController {
 
     @FXML
     protected void mouseInLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_enter.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/login_enter.png"));
     }
 
     @FXML
     protected void mouseExitLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/login.png"));
     }
 
     @FXML
     protected void mousePressLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_press.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/login_press.png"));
     }
 
     @FXML
     protected void mouseReleaseLogin() {
-        loginIconImage.setImage(new Image("file:client/src/main/res/login/loginicon_enter.png"));
+        loginIconImage.setImage(new Image("file:client/src/main/res/login/login_enter.png"));
         login();
     }
 

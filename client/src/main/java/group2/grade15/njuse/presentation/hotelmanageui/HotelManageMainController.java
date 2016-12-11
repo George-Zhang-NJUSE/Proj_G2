@@ -47,7 +47,7 @@ public class HotelManageMainController implements Initializable {
     HotelInfoController hotelInfoController;
 
     //软件运行时的存储信息
-    public static HotelVO hotelVO;
+    public static HotelVO hotelVO=new HotelVO(12,"hotel","aabbcc","aaccvvdd","123-4567","introductions","facility",null,null,5,1200,null);
     public static HotelManagerVO hotelManagerVO;
 
     //接口的实例化

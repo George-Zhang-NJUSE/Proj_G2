@@ -1,5 +1,7 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
+import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
+import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +35,9 @@ public class WebMarketerMainController implements Initializable {
     private Rectangle creditChargeTag;
     @FXML
     private Rectangle fixTag;
+
+    public static WebMarketerServ webMarketerService=new WebMarketerController();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

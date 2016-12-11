@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
@@ -7,23 +12,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-       fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
+
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3"
-                   stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0"/>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="260.0" layoutY="540.0" opacity="0.5"
-                   stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0"/>
-        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                  prefHeight="800.0" prefWidth="1200.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="260.0" layoutY="540.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
             <children>
                 <Label text="异常订单管理" GridPane.columnIndex="1">
                     <font>
-                        <Font name="MFYueHei_Noncommercial-Regular" size="40.0"/>
+                        <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
                     </font>
                 </Label>
-                <TabPane maxWidth="1015.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
-                         GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <TabPane maxWidth="1015.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <tabs>
                         <Tab text="未解决异常">
                             <content>
@@ -31,13 +32,12 @@
                                     <children>
                                         <ScrollPane prefHeight="400.0" prefWidth="1015.0">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0"
-                                                            prefWidth="1017.0">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1017.0">
                                                     <children>
-                                                        <TableView prefHeight="400.0" prefWidth="1025.0">
+                                                        <TableView fx:id="unsolvedList" prefHeight="400.0" prefWidth="1025.0">
                                                             <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1"/>
-                                                                <TableColumn prefWidth="75.0" text="C2"/>
+                                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                                <TableColumn prefWidth="75.0" text="C2" />
                                                             </columns>
                                                         </TableView>
                                                     </children>
@@ -50,18 +50,16 @@
                         </Tab>
                         <Tab text="已解决异常">
                             <content>
-                                <AnchorPane maxHeight="400.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                            prefWidth="200.0">
+                                <AnchorPane maxHeight="400.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
                                         <ScrollPane prefHeight="400.0" prefWidth="1015.0">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0"
-                                                            prefWidth="1017.0">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1017.0">
                                                     <children>
-                                                        <TableView prefHeight="400.0" prefWidth="1025.0">
+                                                        <TableView fx:id="solvedList" prefHeight="400.0" prefWidth="1025.0">
                                                             <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1"/>
-                                                                <TableColumn prefWidth="75.0" text="C2"/>
+                                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                                <TableColumn prefWidth="75.0" text="C2" />
                                                             </columns>
                                                         </TableView>
                                                     </children>
@@ -74,31 +72,27 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0"
-                      GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT"
-                      GridPane.valignment="CENTER">
+                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                     <children>
                         <Label>
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/webmarketer/search.png"/>
+                                        <Image url="file:client/src/main/res/webmarketer/search.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Label>
-                        <TextField fx:id="searchID" prefWidth="140.0"
-                                   style="-fx-background-color: white; -fx-background-radius: 20;"/>
+                        <TextField fx:id="searchID" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
                     </children>
                 </HBox>
-                <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
-                      GridPane.columnIndex="3" GridPane.rowIndex="2">
+                <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <children>
                         <Label fx:id="check" onMouseClicked="#fixCommit">
                             <graphic>
                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/webmarketer/Check.png"/>
+                                        <Image url="file:client/src/main/res/webmarketer/Check.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -107,7 +101,7 @@
                             <graphic>
                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/webmarketer/Cancel.png"/>
+                                        <Image url="file:client/src/main/res/webmarketer/Cancel.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -116,85 +110,75 @@
                 </VBox>
                 <GridPane hgap="5.0" vgap="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0"
-                                           prefWidth="80.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0"
-                                           prefWidth="80.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0"
-                                           prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TextArea fx:id="fixReason" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5"
-                                  GridPane.rowIndex="2" GridPane.rowSpan="4"/>
-                        <Label text="当前状态：" GridPane.rowIndex="1"/>
-                        <Label text="订单号："/>
-                        <Label text="酒店：" GridPane.rowIndex="2"/>
-                        <Label text="地址：" GridPane.rowIndex="3"/>
-                        <Label text="房间：" GridPane.rowIndex="4"/>
-                        <Label text="入住人：" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                        <TextField fx:id="orderID" editable="false" GridPane.columnIndex="1"/>
-                        <TextField fx:id="currentState" editable="false" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="1"/>
-                        <TextField fx:id="hotelName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <TextField fx:id="address" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <Label text="预计入住时间：" GridPane.columnIndex="2"/>
-                        <Label text="预计退房时间：" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                        <TextField fx:id="prefCheckInTime" editable="false" GridPane.columnIndex="3"/>
-                        <TextField fx:id="prefCheckOutTime" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="1"/>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4"
-                                    GridPane.rowSpan="2">
+                        <TextArea fx:id="fixReason" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.rowSpan="4" />
+                        <Label text="当前状态：" GridPane.rowIndex="1" />
+                        <Label text="订单号：" />
+                        <Label text="酒店：" GridPane.rowIndex="2" />
+                        <Label text="地址：" GridPane.rowIndex="3" />
+                        <Label text="房间：" GridPane.rowIndex="4" />
+                        <Label text="入住人：" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField fx:id="orderID" editable="false" GridPane.columnIndex="1" />
+                        <TextField fx:id="currentState" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="hotelName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="address" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="预计入住时间：" GridPane.columnIndex="2" />
+                        <Label text="预计退房时间：" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="prefCheckInTime" editable="false" GridPane.columnIndex="3" />
+                        <TextField fx:id="prefCheckOutTime" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <ListView fx:id="roomList" prefHeight="200.0" prefWidth="200.0"/>
+                                        <ListView fx:id="roomList" prefHeight="200.0" prefWidth="200.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4"
-                                    GridPane.rowSpan="2">
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <ListView fx:id="customerList" prefHeight="200.0" prefWidth="200.0"/>
+                                        <ListView fx:id="customerList" prefHeight="200.0" prefWidth="200.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </ScrollPane>
-                        <Label text="申诉理由：" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                        <Label text="恢复信用：" GridPane.columnIndex="4"/>
-                        <TextField fx:id="restoredCredit" GridPane.columnIndex="5"/>
+                        <Label text="申诉理由：" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label text="恢复信用：" GridPane.columnIndex="4" />
+                        <TextField fx:id="restoredCredit" GridPane.columnIndex="5" />
                     </children>
                 </GridPane>
             </children>
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="920.0" minWidth="10.0" prefWidth="880.0"/>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0"
-                                   prefWidth="140.0"/>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0"
-                                   prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="920.0" minWidth="10.0" prefWidth="880.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
             </columnConstraints>
             <padding>
-                <Insets bottom="10.0" right="10.0"/>
+                <Insets bottom="10.0" right="10.0" />
             </padding>
             <rowConstraints>
-                <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="450.0" minHeight="10.0" prefHeight="450.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="450.0" minHeight="10.0" prefHeight="450.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
     </children>
