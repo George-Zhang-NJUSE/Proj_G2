@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -109,6 +110,14 @@ public class PromotionManageController implements Initializable{
         ((TableColumn)aCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("endDate"));
         ((TableColumn)aCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("discount"));
         activatedList.setItems(activatedData);
+
+        activatedList.setOnMouseClicked((MouseEvent e)->{
+            fetchPromotion();
+        });
+        unactivatedList.setOnMouseClicked((MouseEvent e)->{
+            fetchPromotion();
+        });
+        showPromotionList();
     }
 
     //界面跳转控制逻辑
@@ -258,9 +267,21 @@ public class PromotionManageController implements Initializable{
             unactivatedData.add(new Promotion(vo));
         }
     }
+    public void removeSelectedPromotionFromList(){
+        if(activatedMode){
+            int index=activatedList.getSelectionModel().getSelectedIndex();
+            activatedData.remove(index);
+        }else{
+            int index=unactivatedList.getSelectionModel().getSelectedIndex();
+            unactivatedData.remove(index);
+        }
+
+    }
     public void fetchPromotion(){
         HotelPromotionVO vo=getSelectedPromotion();
+        toModify();
         modifyPromotionController.showPromotion(vo);
+
     }
 
     //逻辑实现部分
@@ -289,8 +310,8 @@ public class PromotionManageController implements Initializable{
     public ResultMessage addPromotion(){
         HotelPromotionVO promotionToAdd=addPromotionController.getVO();
         unactivatedData.add(new Promotion(promotionToAdd));
-        //return hotelManagerController.createHotelPromotion(promotionToAdd);
-        return ResultMessage.SUCCESS;
+        return hotelManagerController.createHotelPromotion(promotionToAdd);
+        //return ResultMessage.SUCCESS;
     }
     //TODO 酒店管理修改促销
 

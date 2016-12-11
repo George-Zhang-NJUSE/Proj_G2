@@ -1,7 +1,11 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
+import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.blservice.HotelManagerServ;
+import group2.grade15.njuse.blservice.OrderListServ;
+import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.HotelManagerVO;
@@ -52,6 +56,7 @@ public class HotelManageMainController implements Initializable {
 
     //接口的实例化
     public static HotelManagerServ hotelManagerController=new HotelManagerController();
+    public static OrderListServ hotelOrderController=new OrderController();
 
     //controller的初始化
     @Override

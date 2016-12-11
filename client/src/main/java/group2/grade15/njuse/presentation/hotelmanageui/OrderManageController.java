@@ -25,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -139,7 +140,7 @@ public class OrderManageController implements Initializable {
         cancelListData= FXCollections.observableArrayList();
         cancelList.setItems(cancelListData);
 
-
+        showAllOrder();
     }
     public void tab1(){
         //OrderListVO list=orderListService.get;
@@ -159,6 +160,38 @@ public class OrderManageController implements Initializable {
     }
 
 
+    private void removeSelectedOrderFromList(TableView table){
+        int index=table.getSelectionModel().getSelectedIndex();
+        table.getItems().remove(index);
+    }
+
+    private void addOrderToList(TableView table, OrderVO vo) {
+        table.getItems().add(new Order(vo));
+    }
+    private void showAllOrder(){
+        unexeList.getItems().clear();
+        checkinList.getItems().clear();
+        innormalListData.clear();
+        cancelListData.clear();
+        ArrayList<OrderVO> orderVOs=HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId()).getOrderList();
+        for(int i=0;i<orderVOs.size();i++) {
+            OrderVO vo = orderVOs.get(i);
+            switch (vo.getState()) {
+                case unexecuted:
+                    unexeListData.add(new Order(vo));
+                    break;
+                case executed:
+                    checkinListData.add(new Order(vo));
+                    break;
+                case abnormal:
+                    innormalListData.add(new Order(vo));
+                    break;
+                case revoked:
+                    cancelListData.add(new Order(vo));
+                    break;
+            }
+        }
+    }
     public void toCheckin(){
         optionBox.setVisible(false);
         checkinPane.setVisible(true);
@@ -195,7 +228,7 @@ public class OrderManageController implements Initializable {
         in.play();
     }
 
-    private void fillTbale(){
+    private void fillTable(){
         OrderVO vo=getSelectedOrderVO();
         fillTable(vo);
     }
@@ -264,6 +297,8 @@ public class OrderManageController implements Initializable {
         if(vo.getState()==OrderState.unexecuted){
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
+                removeSelectedOrderFromList(unexeList);
+                addOrderToList(checkinList,vo);
             }else{
                 message.setText("操作失败");
             };
@@ -280,6 +315,8 @@ public class OrderManageController implements Initializable {
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
                 message.setText("操作成功");
+                removeSelectedOrderFromList(innormalList);
+                addOrderToList(checkinList, vo);
             }else{
                 message.setText("操作失败");
             }

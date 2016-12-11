@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -100,12 +101,11 @@ public class WebAdminController implements Initializable{
     private TextField hotelAddress;
     @FXML
     private TextField hotelRank;
+
     @FXML
-    private TextField hotelAccountName;
+    private TextField hotelIdField;
     @FXML
-    private TextField hotelAccountPW;
-    @FXML
-    private TextField hotelID;
+    private Label hotelIdLabel;
 
     @FXML
     private TextField userName;
@@ -115,7 +115,8 @@ public class WebAdminController implements Initializable{
     private ComboBox<String> userType;
 
 
-
+    @FXML
+    private WebAdminVO webAdminVO;
 //逻辑实现部分
     private ObservableList<Hotel> hotelListData;
     private ObservableList<Account> accountListData;
@@ -160,6 +161,18 @@ public class WebAdminController implements Initializable{
         }catch (RemoteException e){
             e.printStackTrace();
         }
+        userType.setOnAction((ActionEvent e)->{
+            switch (userType.getValue()) {
+                case "酒店管理用户":
+                    hotelIdLabel.setVisible(true);
+                    hotelIdField.setVisible(true);
+                    break;
+                default:
+                    hotelIdField.setVisible(false);
+                    hotelIdLabel.setVisible(false);
+                    break;
+            }
+        });
     }
 
 
@@ -345,7 +358,8 @@ public class WebAdminController implements Initializable{
     private HotelManagerVO gatherHotelManagerVO(){
         String name=userName.getText();
         String pw=userPW.getText();
-        HotelManagerVO vo=new HotelManagerVO(0,userPW.getText(),userName.getText(),"",0);
+        int hotelId= Integer.parseInt(hotelIdField.getText());
+        HotelManagerVO vo=new HotelManagerVO(0,pw,name,"",hotelId);
         return vo;
     }
     private WebMarketerVO gatherWebMarketerVO(){
@@ -438,7 +452,7 @@ public class WebAdminController implements Initializable{
 
 
     public void setAdminVO(WebAdminVO vo){
-
+        webAdminVO=vo;
     }
 
 /*
