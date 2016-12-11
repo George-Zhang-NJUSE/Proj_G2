@@ -13,11 +13,11 @@ public interface WebAdminServ {
     /**
      * 根据ID获取网站管理人员的VO
      * VO中包含网站管理人员的账户信息
-     * @param webAdminId int型，界面层传递的酒店管理人员
+     * @param webAdminId String型，界面层传递的酒店管理人员
      * @return 成功含有酒店管理人员信息的WebAdminVO
      *         失败返回null
      */
-    public WebAdminVO getInfo(int webAdminId);
+    public WebAdminVO getInfo(String webAdminId);
 
     /**
      * 创建酒店
