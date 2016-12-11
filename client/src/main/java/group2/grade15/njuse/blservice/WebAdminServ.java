@@ -17,7 +17,7 @@ public interface WebAdminServ {
      * @return 成功含有酒店管理人员信息的WebAdminVO
      *         失败返回null
      */
-    public WebAdminVO getInfo(String webAdminId);
+    public WebAdminVO getInfo(int webAdminId);
 
     /**
      * 创建酒店
