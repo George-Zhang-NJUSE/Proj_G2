@@ -57,13 +57,35 @@ public class OrderDatabaseImpl implements OrderDataService {
                 list.remove(temp);
             }
 
-
             unexecuted.close();
             orderDatabase.close();
             orderDatabase = null;
 
             return list;
         } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<OrderPO> getAbnormalList() throws RemoteException {
+        if (orderDatabase == null) {
+            orderDatabase = mySql.init();
+        }
+
+        try{
+            Statement abnormal=orderDatabase.createStatement();
+            ResultSet resultSet=abnormal.executeQuery("select * from orderinfo where state = 3");
+
+            ArrayList<OrderPO> list = readResult(resultSet);
+
+            abnormal.close();
+            orderDatabase.close();
+            orderDatabase=null;
+
+            return list;
+        }catch (SQLException e) {
             e.printStackTrace();
             return null;
         }

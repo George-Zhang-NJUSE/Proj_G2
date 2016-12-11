@@ -45,18 +45,6 @@ public class Search implements SearchServ {
                                 || searchCondition.getCheckOutTime() != null)
                                 && isListNotNull;
 
-
-        //测试代码
-        System.out.println(isListNotNull);
-        System.out.println(isBooked);
-        System.out.println(isSort);
-        System.out.println(isFilterName);
-        System.out.println(isFilterStar);
-        System.out.println(isFilterScore);
-        System.out.println(isFilterPrice);
-        System.out.println(isFilterRoom);
-        System.out.println(isFilterTime);
-        
         //根据搜索条件对酒店列表进行对应的筛选
         if (isBooked) {
             hotelList = searchFilter.filterByBooked(searchCondition.getCsutomerID(), hotelList);
@@ -95,7 +83,6 @@ public class Search implements SearchServ {
 
     @Override
     public ProvinceListVO getProvince() {
-        System.out.println("我到省啦");
         ArrayList<ProvincePO> provincePOList = new ArrayList();
 
         try {
@@ -115,7 +102,6 @@ public class Search implements SearchServ {
     @Override
     public CityListVO getCity(String provinceNum) {
         ArrayList<CityPO> cityPOList = new ArrayList();
-        System.out.println("我到市啦");
 
         try {
             cityPOList = RemoteHelper.getInstance().getAreaDataService().getCity(provinceNum);
@@ -134,7 +120,6 @@ public class Search implements SearchServ {
     @Override
     public DistrictListVO getDistrict(String cityNum) {
         ArrayList<DistrictPO> districtPOList = new ArrayList();
-        System.out.println("我到区啦");
 
         try {
             districtPOList = RemoteHelper.getInstance().getAreaDataService().getDistrict(cityNum);
@@ -153,7 +138,6 @@ public class Search implements SearchServ {
     @Override
     public CbdListVO getCbd(String districtNum) {
         ArrayList<CbdPO> cbdPOList = new ArrayList();
-        System.out.println("我到商圈啦");
 
         try {
             cbdPOList = RemoteHelper.getInstance().getAreaDataService().getCbd(districtNum);
@@ -171,7 +155,6 @@ public class Search implements SearchServ {
 
     @Override
     public HotelListVO getHotel(String address) {
-        System.out.println("我到getHotel啦");
         ArrayList<HotelPO> hotelPOList = new ArrayList();
 
         try {
