@@ -6,8 +6,10 @@ import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -124,7 +126,7 @@ public class OrderManageController implements Initializable {
     @FXML
     private Label message;
 
-
+    private int stage;//0= checkin 1=checkout 2=overtimecheckin
 
     enum WorkingTab{
         UNEXE,CHECKIN,COMPLETE,INNORMAL,CANCEL
@@ -162,6 +164,16 @@ public class OrderManageController implements Initializable {
         innormalList.setItems(innormalListData);
         cancelListData= FXCollections.observableArrayList();
         cancelList.setItems(cancelListData);
+        check.setOnMouseClicked((MouseEvent e)->{
+            switch (stage) {
+                case 0:
+                    checkin();break;
+                case 1:
+                    checkout();break;
+                case 2:
+                    overtimeCheckin();break;
+            }
+        });
 
         showAllOrder();
     }
@@ -217,6 +229,7 @@ public class OrderManageController implements Initializable {
 
     }
     public void toCheckin(){
+        stage=0;
         optionBox.setVisible(false);
         checkinPane.setVisible(true);
         checkPane.setVisible(true);
@@ -226,6 +239,7 @@ public class OrderManageController implements Initializable {
         in.play();
     }
     public void toCheckout(){
+        stage=1;
         optionBox.setVisible(false);
         checkoutPane.setVisible(true);
         checkPane.setVisible(true);
@@ -235,6 +249,7 @@ public class OrderManageController implements Initializable {
         in.play();
     }
     public void toOvertimeCheckin(){
+        stage=2;
         optionBox.setVisible(false);
         overtimeCheckinPane.setVisible(true);
         checkPane.setVisible(true);
@@ -321,7 +336,7 @@ public class OrderManageController implements Initializable {
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
         order.inDate.set(timeCI.getEditor().getText());
-        ;
+        vo = toVO(order);
         if(vo.getState()==OrderState.unexecuted){
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
@@ -343,8 +358,13 @@ public class OrderManageController implements Initializable {
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
         order.inDate.set(timeCI.getEditor().getText());
+        vo = toVO(order);
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
+
+                //TODO 加信用充值的部分（总感觉VO有点不协调）
+                //CreditVO creditVO=new CreditVO(vo.getCustomerID(),vo.getOrderID(),vo.);
+                //WebMarketerMainController.webMarketerService.
                 message.setText("操作成功");
                 removeSelectedOrderFromList(innormalList);
                 addOrderToList(checkinList, vo);
@@ -374,7 +394,8 @@ public class OrderManageController implements Initializable {
                 order.getNumOfCustomer(),
                 order.getHaveKid(),
                 order.vo.getState()
-        )
+        );
+        return vo;
     }
 
 
