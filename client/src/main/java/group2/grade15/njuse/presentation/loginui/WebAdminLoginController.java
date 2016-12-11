@@ -66,12 +66,12 @@ public class WebAdminLoginController {
         LoginControllerServ loginServ = new WebAdminLoginImpl();
         WebAdminServ webAdminService=new group2.grade15.njuse.bl.webadminbl.WebAdminController();
 
-        int id = Integer.parseInt(accoutField.getText());
+        String id = accoutField.getText();
         String password = passwordField.getText();
 
         switch (loginServ.login(id,password)){
             case SUCCESS:
-                jumpToMain(webAdminService.getInfo(String.valueOf(id)));
+                jumpToMain(webAdminService.getInfo((id)));
                 break;
             case FAILED:
                 Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
