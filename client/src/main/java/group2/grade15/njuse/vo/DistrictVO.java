@@ -14,7 +14,7 @@ public class DistrictVO {
         districtNum = po.getDistrictNum();
     }
 
-    public DistrictVO(String districtName, String districtNum){
+    public DistrictVO(String districtName, String districtNum) {
         this.districtName = districtName;
         this.districtNum = districtNum;
     }
@@ -27,7 +27,11 @@ public class DistrictVO {
         return districtNum;
     }
 
-    public DistrictPO toPO(){
+    public DistrictPO toPO() {
         return new DistrictPO(districtName, districtNum);
+    }
+
+    public String toString(){
+        return districtName;
     }
 }

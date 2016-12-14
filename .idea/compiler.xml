@@ -22,18 +22,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="hotel_booking_system-client" />
-        <module name="hotel_booking_system-common" />
-        <module name="hotel_booking_system-server" />
-        <module name="hotel_booking_system-stubndriver" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel>
       <module name="hotel_booking_system-client" target="1.8" />
       <module name="hotel_booking_system-common" target="1.8" />
       <module name="hotel_booking_system-parent" target="1.5" />
       <module name="hotel_booking_system-server" target="1.8" />
-      <module name="hotel_booking_system-stubndriver" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

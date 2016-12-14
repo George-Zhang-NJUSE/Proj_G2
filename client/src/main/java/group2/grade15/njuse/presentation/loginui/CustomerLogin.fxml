@@ -53,21 +53,21 @@
                         </font>
                     </PasswordField>
 
-                    <Label onMouseEntered="#mouseInLogin" onMouseExited="#mouseExitLogin" onMousePressed="#mousePressLogin" onMouseReleased="#mouseReleaseLogin">
+                    <Label fx:id="loginLabel" onMouseClicked="#login">
                         <graphic>
-                            <ImageView fx:id="loginIconImage" fitHeight="52.0" fitWidth="124.0" scaleX="0.9" scaleY="0.9" smooth="true">
-                                <Image url="file:client/src/main/res/login/loginicon.png" />
+                            <ImageView fitHeight="52.0" fitWidth="124.0" scaleX="0.9" scaleY="0.9" smooth="true">
+                                <Image url="file:client/src/main/res/login/login.png" />
                             </ImageView>
                         </graphic>
                         <VBox.margin>
                             <Insets left="5.0" top="10.0" />
                         </VBox.margin>
                     </Label>
-                    <Label onMouseEntered="#mouseInApply" onMouseExited="#mouseExitApply" onMousePressed="#mousePressApply" onMouseReleased="#mouseReleaseApply">
+                    <Label fx:id="applyLabel" onMouseClicked="#showApplyPane">
                         <graphic>
-                            <ImageView fx:id="applyIconImage" fitHeight="52.0" fitWidth="124.0" scaleX="0.9" scaleY="0.9">
+                            <ImageView fitHeight="52.0" fitWidth="124.0" scaleX="0.9" scaleY="0.9">
                                 <image>
-                                    <Image url="file:client/src/main/res/login/applyicon.png" />
+                                    <Image url="file:client/src/main/res/login/apply.png" />
                                 </image>
                             </ImageView>
                         </graphic>

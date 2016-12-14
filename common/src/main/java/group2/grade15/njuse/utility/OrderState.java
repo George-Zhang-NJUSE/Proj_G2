@@ -1,8 +1,8 @@
 package group2.grade15.njuse.utility;
 
 public enum OrderState {
-	unexecuted,
-	executed,
-	cancelled,
-	abnormal;
+    unexecuted,
+    executed,
+    revoked,
+    abnormal
 }

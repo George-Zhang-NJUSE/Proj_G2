@@ -7,5 +7,5 @@ public enum SortMethod {
     DEFAULT,
     PRICE,
     STAR_LEVEL,
-    SCORE;
+    SCORE
 }

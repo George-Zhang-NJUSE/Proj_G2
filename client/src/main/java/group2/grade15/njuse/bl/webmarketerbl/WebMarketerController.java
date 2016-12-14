@@ -5,7 +5,6 @@ import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
-import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
@@ -13,15 +12,19 @@ import group2.grade15.njuse.vo.*;
 import java.rmi.RemoteException;
 
 /**
- * Created by Guo on 2016/11/30.
+ * 网站营销人员的Controller
+ * 使用控制器的目的在于将网站营销人员的众多职责集合在一个类中，方便管理和调用
+ * 该控制器实现了网站营销人员的接口，供界面层调用
+ * 网站营销人员的方法除了getInfo外都由其他接口实现
+ * 其中chargeProxy,revokeProxy,webPromotionProxy三个类都采用代理者模式，将任务进一步委托给真正的执行者
  */
-public class WebMarketerController implements WebMarketerServ{
+public class WebMarketerController implements WebMarketerServ {
     private ChargeProxy chargeProxy;
     private RevokeProxy revokeProxy;
     private WebPromotionProxy webPromotionProxy;
     private OrderListBL orderList;
 
-    public WebMarketerController(){
+    public WebMarketerController() {
         chargeProxy = new ChargeProxy();
         revokeProxy = new RevokeProxy();
         webPromotionProxy = new WebPromotionProxy();
@@ -37,7 +40,7 @@ public class WebMarketerController implements WebMarketerServ{
             e.printStackTrace();
         }
 
-        if(po != null){
+        if (po != null) {
             return new WebMarketerVO(po);
         } else {
             return null;
@@ -45,18 +48,23 @@ public class WebMarketerController implements WebMarketerServ{
     }
 
     @Override
-    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
+    public ResultMessage createWebPromotion(WebPromotionVO promotionInfo) {
         return webPromotionProxy.createWebPromotion(promotionInfo);
     }
 
     @Override
-    public WebPromotionListVO getWebPromotionList(String hotelId) {
-        return webPromotionProxy.getWebPromotionList(hotelId);
+    public WebPromotionListVO getWebPromotionList() {
+        return webPromotionProxy.getWebPromotionList();
     }
 
     @Override
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion) {
         return webPromotionProxy.modifyWebPromotion(promotion);
+    }
+
+    @Override
+    public ResultMessage deleteWebPromotion(int webPromotionID) {
+        return webPromotionProxy.deleteWebPromotion(webPromotionID);
     }
 
     @Override
@@ -66,7 +74,7 @@ public class WebMarketerController implements WebMarketerServ{
 
     @Override
     public OrderListVO getAbnomalOrderList(int customerId) {
-        return orderList.getAbnormalOrderList(customerId, IDType.customer);
+        return orderList.getAbnormalOrderList(customerId);
     }
 
     @Override
@@ -78,4 +86,5 @@ public class WebMarketerController implements WebMarketerServ{
     public ResultMessage modifyState(int orderId, OrderState state) {
         return revokeProxy.modifyState(orderId, state);
     }
+
 }

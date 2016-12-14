@@ -1,11 +1,12 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
+import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
+import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
-import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.WebMarketerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * Created by ALIENWARE-PC on 2016/11/26.
  */
-public class WebMarketerMainController implements Initializable{
+public class WebMarketerMainController implements Initializable {
     public Pane motherPane;
     @FXML
     private Pane opPane;
@@ -36,6 +37,10 @@ public class WebMarketerMainController implements Initializable{
     @FXML
     private Rectangle fixTag;
 
+    public static WebMarketerServ webMarketerService=new WebMarketerController();
+
+    private static WebMarketerVO vo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addSwither(promotionSwitcher);
@@ -44,6 +49,9 @@ public class WebMarketerMainController implements Initializable{
 
     }
 
+    public void setVo(WebMarketerVO vo) {
+        this.vo=vo;
+    }
     public boolean toCreditCharge() {
 
         if (creditChargeTag.isVisible())
@@ -66,7 +74,8 @@ public class WebMarketerMainController implements Initializable{
         }
         return true;
     }
-    public boolean toPromotion(){
+
+    public boolean toPromotion() {
         //TODO 到promotion管理的跳转
 
         if (promotionTag.isVisible())
@@ -88,7 +97,8 @@ public class WebMarketerMainController implements Initializable{
         }
         return true;
     }
-    public boolean toFix(){
+
+    public boolean toFix() {
         //TODO 到fix的跳转
 
         if (fixTag.isVisible())
@@ -110,21 +120,23 @@ public class WebMarketerMainController implements Initializable{
         }
         return true;
     }
-    public void motherPaneFadeout(){
+
+    public void motherPaneFadeout() {
         Fade fadeout = new Fade(motherPane, 300, false);
         fadeout.play();
     }
-    public void addSwither(FlowPane pane){
-        pane.setOnMouseEntered((MouseEvent e)->{
+
+    public void addSwither(FlowPane pane) {
+        pane.setOnMouseEntered((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
-        pane.setOnMouseExited((MouseEvent e)->{
+        pane.setOnMouseExited((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: inherit");
         });
-        pane.setOnMousePressed((MouseEvent e)->{
+        pane.setOnMousePressed((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(210,210,210)");
         });
-        pane.setOnMouseReleased((MouseEvent e)->{
+        pane.setOnMouseReleased((MouseEvent e) -> {
             pane.setStyle("-fx-background-color: rgb(230,230,230)");
         });
     }

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class HotelPromotionListVO implements Serializable {
-	private ArrayList<WebPromotionVO> promotionList;
+    private ArrayList<HotelPromotionVO> promotionList;
 
-	public HotelPromotionListVO (ArrayList<WebPromotionVO> promotionList){
-		this.promotionList = promotionList;
-	}
+    public HotelPromotionListVO(ArrayList<HotelPromotionVO> promotionList) {
+        this.promotionList = promotionList;
+    }
 
-	public ArrayList<WebPromotionVO> getHotelPromotion() {
-		return promotionList;
-	}
+    public ArrayList<HotelPromotionVO> getHotelPromotionList() {
+        return promotionList;
+    }
 }

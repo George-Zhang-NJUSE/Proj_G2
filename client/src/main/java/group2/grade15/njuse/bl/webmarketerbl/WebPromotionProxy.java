@@ -1,33 +1,56 @@
 package group2.grade15.njuse.bl.webmarketerbl;
 
-import group2.grade15.njuse.bl.promotionfactory.WebPromotionFactory;
+import group2.grade15.njuse.bl.webpromotionbl.WebPromotionController;
+import group2.grade15.njuse.bl.webpromotionbl.WebPromotionControllerBL;
 import group2.grade15.njuse.blservice.WebPromotionServ;
+import group2.grade15.njuse.po.WebPromotionPO;
+import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.WebPromotionListVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 /**
- * Created by Guo on 2016/11/30.
+ * 网站优惠策略职责的代理者
+ * 真正的任务通过层内接口WebPromotionControllerBL代理给WebPromotionController完成
  */
 public class WebPromotionProxy implements WebPromotionServ {
 
-    @Override
-    public WebPromotionVO createWebPromotion(WebPromotionVO promotionInfo) {
-        return WebPromotionFactory.getInstance().createWebPromotion(promotionInfo);
+    WebPromotionControllerBL webPromotionController;
+
+    public WebPromotionProxy(){
+        webPromotionController = new WebPromotionController();
     }
 
     @Override
-    public WebPromotionListVO getWebPromotionList(String hotelId) {
-        return null;
+    public ResultMessage createWebPromotion(WebPromotionVO webPromotionInfo) {
+        return webPromotionController.createWebPromotion(webPromotionInfo);
+    }
+
+    @Override
+    public WebPromotionVO getWebPromotion(int webPromotionID) {
+        return webPromotionController.getWebPromotion(webPromotionID);
+    }
+
+    @Override
+    public WebPromotionListVO getWebPromotionList() {
+        return webPromotionController.getWebPromotionList();
     }
 
     @Override
     public ResultMessage modifyWebPromotion(WebPromotionVO promotion) {
-        return null;
+        return webPromotionController.modifyWebPromotion(promotion);
     }
 
     @Override
-    public ResultMessage changeState(WebPromotionVO PromotionVO) {
-        return null;
+    public ResultMessage changeState(WebPromotionVO promotion) {
+        return webPromotionController.changeState(promotion);
+    }
+
+    @Override
+    public ResultMessage deleteWebPromotion(int webPromotionID) {
+        return webPromotionController.deleteWebPromotion(webPromotionID);
     }
 }

@@ -1,24 +1,38 @@
 package group2.grade15.njuse.po;
 
+import group2.grade15.njuse.utility.PromotionState;
+
 import java.io.Serializable;
 
 /**
  * Created by dell on 2016/12/1.
  */
-public class RankPO implements Serializable{
-    int levelSum;//总共有几级（不超过6级）
-    int[] standard;//每个级别的最低信用值标准
+public class RankPO implements Serializable {
+    int level;
+    int standard;//达到该等级的最低信用
+    double discount;
+    PromotionState state;
 
-    public RankPO(int levelSum, int[] standard) {
-        this.levelSum = levelSum;
+    public RankPO(int level, int standard, double discount, PromotionState state) {
+        this.level = level;
         this.standard = standard;
+        this.discount = discount;
+        this.state = state;
     }
 
-    public int getLevelSum() {
-        return levelSum;
+    public int getLevel() {
+        return level;
     }
 
-    public int[] getStandard() {
+    public int getStandard() {
         return standard;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public PromotionState getState() {
+        return state;
     }
 }

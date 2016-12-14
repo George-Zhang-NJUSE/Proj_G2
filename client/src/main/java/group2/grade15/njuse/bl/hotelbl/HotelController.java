@@ -1,73 +1,78 @@
 package group2.grade15.njuse.bl.hotelbl;
 
+import group2.grade15.njuse.bl.orderbl.OrderList;
+import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.po.HotelPO;
+import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.RoomVO;
 
 import java.rmi.RemoteException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
- * Created by 果宝 on 2016/12/4.
+ * HotelController的职责是接受酒店管理界面发来的请求
+ * 并转交给具体的酒店管理逻辑处理
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
  */
-public class HotelController  implements HotelServ, GetHotelListBL {
+public class HotelController implements HotelServ, GetHotelListBL{
+    HotelBL hotelBL;
+    RoomBL roomBL;
+    OrderListBL orderListBL;
+
+    public HotelController() {
+        hotelBL = new Hotel();
+        roomBL = new Room();
+        orderListBL = new OrderList();
+    }
+
     @Override
     public ResultMessage modifyInfo(HotelVO hotel) {
-        ResultMessage result = ResultMessage.FAILED;
-        try {
-            result = RemoteHelper.getInstance().getHotelDataService().modify(hotel.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
-        }
-
-        return result;
+        return hotelBL.modifyInfo(hotel);
     }
 
     @Override
     public HotelVO getInfo(int hotelID) {
-        HotelPO hotel = null;
-        try {
-            hotel = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        if(hotel != null) {
-            return new HotelVO(hotel);
-        } else {
-            return null;
-        }
+        return hotelBL.getInfo(hotelID);
     }
 
     @Override
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo) {
-        ResultMessage result = ResultMessage.FAILED;
-        try {
-            result = RemoteHelper.getInstance().getHotelDataService().modifyRoom(hotelID, roomInfo.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
-        }
-
-        return result;
-    }
-
-    @Override
-    public ResultMessage addCompany(int customerID) {
-        return null;
-    }
-
-    @Override
-    public ResultMessage deleteCompany(int customerID) {
-        return null;
+        return roomBL.modifyRoomInfo(hotelID, roomInfo);
     }
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
-        return null;
+        ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
+        ArrayList<HotelVO> hotelList = new ArrayList();
+
+        HashSet<Integer> hotelIDSet = orderList.stream()
+                                      .map(OrderVO::getHotelID)
+                                      .collect(Collectors.toCollection(HashSet::new));
+
+        for (int hotelID : hotelIDSet) {
+            HotelPO hotelPO = null;
+            try {
+                hotelPO = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            if (hotelPO != null) {
+                hotelList.add(new HotelVO(hotelPO));
+            }
+        }
+
+        return new HotelListVO(hotelList);
     }
 }

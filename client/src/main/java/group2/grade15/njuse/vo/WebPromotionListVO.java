@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class WebPromotionListVO {
     private ArrayList<WebPromotionVO> promotionList;
 
-    public WebPromotionListVO (ArrayList<WebPromotionVO> promotionList){
+    public WebPromotionListVO(ArrayList<WebPromotionVO> promotionList) {
         this.promotionList = promotionList;
     }
 
-    public ArrayList<WebPromotionVO> getWebPromotion() {
+    public ArrayList<WebPromotionVO> getWebPromotionList() {
         return promotionList;
     }
 }

@@ -2,7 +2,6 @@ package group2.grade15.njuse.bl.loginbl;
 
 import group2.grade15.njuse.blservice.LoginControllerServ;
 import group2.grade15.njuse.po.WebAdminPO;
-import group2.grade15.njuse.po.WebMarketerPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 
@@ -22,17 +21,17 @@ public class WebAdminLoginImpl implements LoginControllerServ {
     ResultMessage result;
 
     @Override
-    public ResultMessage login(int id, String password) {
+    public ResultMessage login(String id, String password) {
         WebAdminPO po = null;
         try {
-            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(String.valueOf(id));
+            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(id);
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(po != null){
-            if(po.getPassword().equals(password)){
+        if (po != null) {
+            if (po.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

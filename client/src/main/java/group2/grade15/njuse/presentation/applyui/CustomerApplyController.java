@@ -1,16 +1,19 @@
 package group2.grade15.njuse.presentation.applyui;
 
+import group2.grade15.njuse.bl.customerbl.CustomerController;
+import group2.grade15.njuse.blservice.CustomerServ;
 import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.MemberType;
+import group2.grade15.njuse.vo.CustomerVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,6 +21,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -26,8 +32,7 @@ import java.util.ResourceBundle;
 public class CustomerApplyController implements Initializable {
 
     private Stage currentStage;
-
-    private String username, password, confirmPsw, idNum, phoneContact, extraInfo;
+    private CustomerVO newCustomer;
 
     @FXML
     private Pane applyPaneBack;
@@ -36,7 +41,7 @@ public class CustomerApplyController implements Initializable {
     private GridPane applyPane;
 
     @FXML
-    private TextField usernameField, phoneContactField, enterpriseNameField, idNumField;
+    private TextField usernameField, phoneContactField, enterpriseNameField;
 
     @FXML
     private PasswordField passwordField, confirmPswField;
@@ -45,13 +50,11 @@ public class CustomerApplyController implements Initializable {
     private CheckBox isEnterpriseCheckBox;
 
     @FXML
-    private Label extraInfoHint;
+    private Label extraInfoHint, confirmLabel, cancelLabel;
 
     @FXML
     private DatePicker birthdayPicker;
 
-    @FXML
-    private ImageView cancelIconImage, confirmIconImage;
 
     public void setStage(Stage stage) {
         currentStage = stage;
@@ -59,6 +62,11 @@ public class CustomerApplyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //加载按钮样式
+        CustomeButton.implButton(confirmLabel,"file:client/src/main/res/apply/confirm");
+        CustomeButton.implButton(cancelLabel,"file:client/src/main/res/apply/cancel");
+
         Fade applyFadeIn = new Fade(applyPane, 300, true);
         applyPane.setOpacity(0);
         applyFadeIn.play();
@@ -80,13 +88,12 @@ public class CustomerApplyController implements Initializable {
         }
     }
 
-
+    @FXML
     private void rollBackToLogin() {
-        // TODO: 2016/11/25
 
         //使申请窗口退回右边,原面板淡出，加载登录面板
         ChangeWidth applyShrinkToRight = new ChangeWidth(applyPaneBack, 300, 220);
-        applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPanel());
+        applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPane());
 
         Fade loginFadeOut = new Fade(applyPane, 300, false);
         loginFadeOut.setOnFinished((ActionEvent e) -> applyShrinkToRight.play());
@@ -95,7 +102,7 @@ public class CustomerApplyController implements Initializable {
 
     }
 
-    private void loadLoginPanel() {
+    private void loadLoginPane() {
         try {
             FXMLLoader customerLoginLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
             currentStage.setScene(new Scene(customerLoginLoader.load()));
@@ -108,59 +115,42 @@ public class CustomerApplyController implements Initializable {
         }
     }
 
-
+    @FXML
     private void applyAccount() {
-        username = usernameField.getText();
-        password = passwordField.getText();
-        confirmPsw = confirmPswField.getText();
-        phoneContact = phoneContactField.getText();
-        idNum = idNumField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String phoneContact = phoneContactField.getText();
+        MemberType memberType;
+        String enterpriseName=null;
+        Date birthday=null;
+        java.sql.Date sqlBirthday = null;
 
-        extraInfo = (isEnterpriseCheckBox.isSelected()) ? enterpriseNameField.getText() : birthdayPicker.getEditor().getText();
-        // TODO: 2016/11/25 apply with the info above
+        if (isEnterpriseCheckBox.isSelected()) {
+            memberType = MemberType.vip;
+            enterpriseName = enterpriseNameField.getText();
+        }else{
+            memberType = MemberType.normal;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    }
+            try {
+                birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
+                sqlBirthday = new java.sql.Date(birthday.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-    @FXML
-    protected void mouseEnterCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_movein.png"));
-    }
+        }
 
-    @FXML
-    protected void mouseExitCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon.png"));
-    }
-
-    @FXML
-    protected void mousePressCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_press.png"));
-    }
-
-    @FXML
-    protected void mouseReleaseCancel() {
-        cancelIconImage.setImage(new Image("file:client/src/main/res/apply/cancelicon_movein.png"));
-        rollBackToLogin();
-    }
-
-    @FXML
-    protected void mouseEnterConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_movein.png"));
-    }
-
-    @FXML
-    protected void mouseExitConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon.png"));
-    }
-
-    @FXML
-    protected void mousePressConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_press.png"));
-    }
-
-    @FXML
-    protected void mouseReleaseConfirm() {
-        confirmIconImage.setImage(new Image("file:client/src/main/res/apply/confirmicon_movein.png"));
-//        applyAccount();
+        CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
+        CustomerServ customerServ = new CustomerController();
+        newCustomer=customerServ.addCustomer(customerVO);
+        if (newCustomer != null) {
+            Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+            successInfo.showAndWait();
+        } else {
+            Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
+            failInfo.showAndWait();
+        }
     }
 
 

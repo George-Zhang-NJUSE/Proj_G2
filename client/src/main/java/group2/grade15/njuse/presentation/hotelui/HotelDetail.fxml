@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,51 +14,84 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url(file:client/src/main/res/customer/bc.jpg); -fx-background-size: contain;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelui.HotelDetailController">
-   <top>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label onMouseClicked="#goBack" text="返回按钮" />
-            <Label text="酒店名称">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-   </top>
-   <center>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="200.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="800.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="returnLabel" onMouseClicked="#goBack" />
+                <Label fx:id="hotelNameLabel" text="酒店名称">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="80.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="400.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="985.0" minWidth="10.0" prefWidth="700.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.rowSpan="2">
-               <image>
-                  <Image url="file:client/src/main/cache/hotelimage/hotel1.jpg" />
-               </image></ImageView>
-            <Label text="地址：" GridPane.rowIndex="3" />
-            <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="5" />
-            <Label text="简介：" GridPane.rowIndex="4" />
-            <Label onMouseClicked="#showMakeOrderPane" text="预订按钮" GridPane.rowIndex="6" />
-            <Label text="顾客评价" GridPane.columnIndex="2" />
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="6">
+                <RowConstraints minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="hotelImageView" fitHeight="190.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+                <Label text="地址：" GridPane.rowIndex="3" />
+                <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="2" />
+                <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="7" />
+                <Label text="简介：" GridPane.rowIndex="4" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin></Label>
+                <Label fx:id="makeOrderLabel" onMouseClicked="#showMakeOrderPane" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin></Label>
+                <Label text="顾客评价:" GridPane.columnIndex="2" GridPane.valignment="TOP" />
+                <ScrollPane hbarPolicy="NEVER" prefWidth="700.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="4">
+                    <content>
+                        <VBox fx:id="commentBox" prefWidth="680.0" spacing="10.0">
+                            <padding>
+                                <Insets left="10.0" right="10.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                <Label fx:id="introLabel" text="　　桔子酒店·精选（北京望京店）紧临城铁13号线——望京西站，毗邻鸟巢于水立方；更有京承高速、机场高速、四环路围绕周边，临近公交车站，交通非常便利。　　桔子酒店·精选（北京望京店）是全球连锁的外资商务型时尚酒店，系美国著名设计师设计，庭院式景观、花园式设计，风格独特时尚。店内全部房间均配置液晶电视、无线上网等现代设施，让宾客尽享舒适体验。" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="3" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+                </Label>
+                <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="starLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="我在该酒店下的订单：" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ScrollPane hbarPolicy="NEVER" prefWidth="700.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.rowSpan="3">
                <content>
-                  <VBox fx:id="commentBox" prefWidth="800.0" />
+                  <VBox fx:id="myOrderBox" prefWidth="680.0" spacing="10.0">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </VBox>
                </content>
             </ScrollPane>
-         </children>
-      </GridPane>
-   </center>
+            <ListView fx:id="roomInfoListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <padding>
+                  <Insets right="5.0" top="5.0" />
+               </padding></ListView>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </GridPane>
+    </center>
 </BorderPane>

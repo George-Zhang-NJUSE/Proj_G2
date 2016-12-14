@@ -16,22 +16,22 @@ import java.rmi.RemoteException;
  * ResultMessage.NON_EXISTENT ：账号不存在
  * ResultMessage.CONNECTION_EXCEPTION ：网络异常
  */
-public class HotelManagerLoginImpl implements LoginControllerServ{
+public class HotelManagerLoginImpl implements LoginControllerServ {
 
     HotelManagerPO hotelManagerPO;
     ResultMessage result;
 
     @Override
-    public ResultMessage login(int id, String password) {
+    public ResultMessage login(String id, String password) {
         try {
-            hotelManagerPO = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(id);
+            hotelManagerPO = RemoteHelper.getInstance().getHotelManagerDataService().getHotelManager(Integer.parseInt(id));
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(hotelManagerPO != null){
-            if(hotelManagerPO.getPassword().equals(password)){
+        if (hotelManagerPO != null) {
+            if (hotelManagerPO.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

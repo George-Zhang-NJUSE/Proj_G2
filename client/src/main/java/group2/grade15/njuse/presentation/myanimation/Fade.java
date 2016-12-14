@@ -17,7 +17,7 @@ public class Fade {
     private Timeline timeline;
 
     /**
-     * @param node  要渐变的节点
+     * @param node     要渐变的节点
      * @param duration 以毫秒计的持续时间长度，正数
      * @param fadeIn   true表示由不可见到可见，false表示由可见到不可见
      **/

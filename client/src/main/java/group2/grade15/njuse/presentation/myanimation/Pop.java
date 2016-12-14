@@ -17,15 +17,16 @@ public class Pop {
 
     /**
      * 实现节点大小变化的动画
-     * @param node 要变化的节点
+     *
+     * @param node     要变化的节点
      * @param duration 毫秒计的动画持续时间
-     * @param toBigger true表示由小到大，false表示由大到小
+     * @param toBigger true表示由小（当前缩放，小于1）到大，false表示由大到小
      */
     public Pop(Node node, int duration, boolean toBigger) {
         timeline = new Timeline();
         timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, new KeyValue(node.scaleXProperty(), node.getScaleX() )),
-                new KeyFrame(Duration.ZERO, new KeyValue(node.scaleYProperty(), node.getScaleY() )),
+                new KeyFrame(Duration.ZERO, new KeyValue(node.scaleXProperty(), node.getScaleX())),
+                new KeyFrame(Duration.ZERO, new KeyValue(node.scaleYProperty(), node.getScaleY())),
                 new KeyFrame(new Duration(duration), new KeyValue(node.scaleXProperty(), toBigger ? 1 : 0.5)),
                 new KeyFrame(new Duration(duration), new KeyValue(node.scaleYProperty(), toBigger ? 1 : 0.5))
         );

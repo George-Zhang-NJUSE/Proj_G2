@@ -1,6 +1,5 @@
 package group2.grade15.njuse.bl.orderbl;
 
-import group2.grade15.njuse.utility.IDType;
 import group2.grade15.njuse.vo.OrderListVO;
 
 /**
@@ -8,6 +7,9 @@ import group2.grade15.njuse.vo.OrderListVO;
  */
 public interface OrderListBL {
 
-    public OrderListVO getAbnormalOrderList(int id, IDType type);
+    public OrderListVO getAllOrderListByCustomerID(int id);
+
+
+    public OrderListVO getAbnormalOrderList(int id);
 
 }

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class CityListVO {
     ArrayList<CityVO> list;
 
-    public CityListVO(ArrayList<CityVO> list){
-        this.list=list;
+    public CityListVO(ArrayList<CityVO> list) {
+        this.list = list;
     }
 
     public ArrayList<CityVO> getList() {

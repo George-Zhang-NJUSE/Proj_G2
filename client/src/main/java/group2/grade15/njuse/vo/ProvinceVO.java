@@ -9,12 +9,12 @@ public class ProvinceVO {
     private String provinceName;
     private String provinceID;
 
-    public ProvinceVO(ProvincePO po){
+    public ProvinceVO(ProvincePO po) {
         provinceName = po.getProvinceName();
         provinceID = po.getProvinceID();
     }
 
-    public ProvinceVO(String provinceName, String id){
+    public ProvinceVO(String provinceName, String id) {
         this.provinceName = provinceName;
         this.provinceID = id;
     }
@@ -27,7 +27,11 @@ public class ProvinceVO {
         return provinceName;
     }
 
-    public ProvincePO toPO(){
+    public ProvincePO toPO() {
         return new ProvincePO(provinceName, provinceID);
+    }
+
+    public String toString(){
+        return provinceName;
     }
 }

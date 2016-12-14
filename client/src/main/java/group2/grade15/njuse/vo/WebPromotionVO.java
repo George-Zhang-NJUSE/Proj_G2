@@ -1,6 +1,5 @@
 package group2.grade15.njuse.vo;
 
-import group2.grade15.njuse.po.HotelPromotionPO;
 import group2.grade15.njuse.po.WebPromotionPO;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.WebPromotionType;
@@ -21,7 +20,7 @@ public class WebPromotionVO {
     String name;
     PromotionState state;
 
-    public WebPromotionVO(WebPromotionPO po){
+    public WebPromotionVO(WebPromotionPO po) {
         promotionID = po.getPromotionID();
         type = po.getType();
         start = po.getStart();
@@ -33,7 +32,9 @@ public class WebPromotionVO {
         state = po.getState();
     }
 
-    public WebPromotionVO(int promotionID, WebPromotionType type, Date start, Date end, String address, int level, double discount, String name, PromotionState state) {
+    public WebPromotionVO(int promotionID, WebPromotionType type, Date start, Date end, String address, int level,
+                          double discount, String name, PromotionState state) {
+
         this.promotionID = promotionID;
         this.type = type;
         this.start = start;
@@ -45,8 +46,8 @@ public class WebPromotionVO {
         this.state = state;
     }
 
-    public double count(double price){
-        return discount*price;
+    public double count(double price) {
+        return discount * price;
     }
 
     public int getPromotionID() {
@@ -85,7 +86,7 @@ public class WebPromotionVO {
         return state;
     }
 
-    public WebPromotionPO toPO(){
+    public WebPromotionPO toPO() {
         return new WebPromotionPO(promotionID, type, start, end, address, level, discount, name, state);
     }
 }

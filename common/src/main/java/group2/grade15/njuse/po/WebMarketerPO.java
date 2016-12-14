@@ -1,22 +1,24 @@
 package group2.grade15.njuse.po;
 
-import java.io.Serializable;;
+import java.io.Serializable;
 
-public class WebMarketerPO implements Serializable{
-	private String password;
-	private String staffID;
-	
-	public WebMarketerPO(String password,String staffID){
-		this.password=password;
-		this.staffID=staffID;
-	}
+;
 
-	public String getPassword() {
-		return password;
-	}
+public class WebMarketerPO implements Serializable {
+    private String password;
+    private String staffID;
 
-	public String getStaffID() {
-		return staffID;
-	}
+    public WebMarketerPO(String password, String staffID) {
+        this.password = password;
+        this.staffID = staffID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getStaffID() {
+        return staffID;
+    }
 
 }

@@ -5,13 +5,14 @@ import group2.grade15.njuse.utility.SortMethod;
 
 import java.util.Date;
 
+
 /**
  * Created by Guo on 2016/11/30.
  */
 public class SearchConditionVO {
     private int customerID;                 //顾客的ID，用于获取顾客入住过的酒店列表
     private SortMethod sortBy;              //酒店列表的排序方式，若客户未选，则设置为DEFAULT
-    private String name;                    //酒店的名字（可以是关键字），若客户未填写，则设置为null
+    private String name;                    //酒店的名字（可以是关键字），若客户未填写，则设置为""
     private RoomType roomType;              //顾客所需要的房间类型，若客户未选，则设置为all
     private double minPrice;                //顾客所接受的房间最低价格，若客户未填写，则设置为0
     private double maxPrice;                //顾客所接受的房间最大价格，若客户未填写，则设置为0
@@ -23,7 +24,10 @@ public class SearchConditionVO {
     private double maxScore;                //顾客所接受的酒店最高评分，若客户未填写，则设置为10
     private boolean isBooked;               //顾客选择是否在已预订过的酒店中搜索，若客户未填写，则设置为false
 
-    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice, double maxPrice, int freeRoomNum, int minStarLevel, Date checkInTime, Date checkOutTime, double minScore, double maxScore, boolean isBooked) {
+    public SearchConditionVO(int customerID, SortMethod sortBy, String name, RoomType roomType, double minPrice,
+                             double maxPrice, int freeRoomNum, int minStarLevel, Date checkInTime, Date checkOutTime,
+                             double minScore, double maxScore, boolean isBooked) {
+
         this.customerID = customerID;
         this.sortBy = sortBy;
         this.name = name;
@@ -39,7 +43,7 @@ public class SearchConditionVO {
         this.isBooked = isBooked;
     }
 
-    public int getCsutomerID(){
+    public int getCsutomerID() {
         return customerID;
     }
 

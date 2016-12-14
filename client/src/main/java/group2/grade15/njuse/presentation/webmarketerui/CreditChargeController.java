@@ -1,7 +1,7 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
-import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.vo.CreditVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,10 +17,7 @@ import java.util.ResourceBundle;
  */
 public class CreditChargeController implements Initializable {
     public Pane motherPane;
-    @FXML
-    private Label check;
-    @FXML
-    private Label cancel;
+
     @FXML
     private TextField accountField;
     @FXML
@@ -31,24 +28,26 @@ public class CreditChargeController implements Initializable {
     private TextField PWField;
     @FXML
     private Label backInfo;
-
-
+    @FXML
+    private Label check;
+    @FXML
+    private Label cancel;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
-        CustomeButton.implButton(cancel,"file:client/src/main/res/webmarketer/Cancel");
-        cancel.setOnMouseClicked((MouseEvent event)->{
+        CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
+        CustomeButton.implButton(cancel, "file:client/src/main/res/webmarketer/Cancel");
+        cancel.setOnMouseClicked((MouseEvent event) -> {
 
         });
     }
-    private void toPromotionManage(){
-        //TODO 从充值到促销管理的界面
 
+
+    public void charge(){
+        //TODO
+
+        //WebMarketerMainController.webMarketerService.modifyCredit()
     }
-    private void toFix(){
-        //TODO 从充值到订单申诉的界面
-    };
 }

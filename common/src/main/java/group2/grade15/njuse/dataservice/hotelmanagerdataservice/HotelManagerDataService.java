@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 /**
  * Created by George on 2016/10/16.
  */
-public interface HotelManagerDataService extends Remote{
+public interface HotelManagerDataService extends Remote {
     //这里删掉的add和remove方法将在WebAdmin里实现
 
     public HotelManagerPO getHotelManager(int hotelManagerId) throws RemoteException;

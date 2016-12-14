@@ -1,7 +1,7 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
-import group2.grade15.njuse.dataservice.*;
+import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -9,24 +9,27 @@ import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
-import group2.grade15.njuse.dataservice.webadmindataservice.*;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
  * Created by Guo on 2016/11/26.
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService,CustomerDataService, HotelManagerDataService,
-        WebAdminDataService,WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
+public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService, CustomerDataService, HotelManagerDataService,
+        WebAdminDataService, WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
         OrderDataService, WebPromotionDataService, Remote {
 
     private DataFactory dataFactory;
@@ -48,9 +51,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         hotelManagerDataService = dataFactory.getHotelManagerDataService();
         webMarketerDataService = dataFactory.getWebMarketerDataService();
         webAdminDataService = dataFactory.getWebAdminDataService();
-        commentDataService=dataFactory.getCommentDataService();
-        creditDataService=dataFactory.getCreditDataService();
-        areaDataService=dataFactory.getAreaDataService();
+        commentDataService = dataFactory.getCommentDataService();
+        creditDataService = dataFactory.getCreditDataService();
+        areaDataService = dataFactory.getAreaDataService();
+        hotelDataService = dataFactory.getHotelDataService();
+        orderDataService = dataFactory.getOrderDataService();
+        hotelPromotionDataService = dataFactory.getHotelPromotionDataService();
+        webPromotionDataService = dataFactory.getWebPromotionDataService();
     }
 
     @Override
@@ -70,258 +77,273 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public HotelPO getHotel(int hotelId) throws RemoteException {
-        return null;
+        return hotelDataService.getHotel(hotelId);
     }
 
     @Override
     public ArrayList<OrderPO> getUnexecutedList() throws RemoteException {
-        return null;
+        return orderDataService.getUnexecutedList();
+    }
+
+    @Override
+    public ArrayList<OrderPO> getAbnormalList() throws RemoteException {
+        return orderDataService.getAbnormalList();
     }
 
     @Override
     public OrderPO getOrder(int orderId) throws RemoteException {
-        return null;
+        return orderDataService.getOrder(orderId);
     }
 
     @Override
     public ArrayList<OrderPO> getListByCustomer(int customerID) throws RemoteException {
-        return null;
+        return orderDataService.getListByCustomer(customerID);
     }
 
     @Override
     public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException {
-        return null;
+        return orderDataService.getListByHotel(hotelID);
+    }
+
+    @Override
+    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) {
+        return 0;
     }
 
     @Override
     public ResultMessage addOrder(OrderPO po) throws RemoteException {
-        return null;
+        return orderDataService.addOrder(po);
     }
 
     @Override
     public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException {
-        return null;
+        return orderDataService.modifyOrder(orderID, state);
+    }
+
+    @Override
+    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) throws RemoteException {
+        return orderDataService.updateTime(checkIn,checkOut,orderID);
     }
 
     @Override
     public ResultMessage modify(HotelPO po) throws RemoteException {
-        return null;
+        return hotelDataService.modify(po);
     }
 
     @Override
     public ResultMessage modifyRoom(int hotelId, RoomPO po) throws RemoteException {
-        return null;
+        return hotelDataService.modifyRoom(hotelId, po);
     }
 
     @Override
     public ResultMessage addRoomType(int hotelID, RoomPO po) throws RemoteException {
-        return null;
+        return hotelDataService.addRoomType(hotelID, po);
     }
 
     @Override
     public ResultMessage deleteRoomType(int hotelID, RoomType type) throws RemoteException {
-        return null;
+        return hotelDataService.deleteRoomType(hotelID, type);
     }
 
     @Override
     public ResultMessage uploadPic(byte[][] picList, int hotelID) throws RemoteException {
-        return null;
+        return hotelDataService.uploadPic(picList, hotelID);
     }
 
     @Override
     public ResultMessage deletePic(int picNum, int hotelID) throws RemoteException {
-        return null;
+        return hotelDataService.deletePic(picNum, hotelID);
     }
 
     @Override
     public ArrayList<CreditPO> getHistory(int customerId) throws RemoteException {
-        return null;
+        return creditDataService.getHistory(customerId);
     }
 
     @Override
     public ResultMessage add(CreditPO po) throws RemoteException {
-        return null;
+        return creditDataService.add(po);
     }
 
     @Override
     public WebAdminPO getWebAdmin(String webAdminId) throws RemoteException {
-        return null;
+        return webAdminDataService.getWebAdmin(webAdminId);
     }
 
     @Override
     public ArrayList<WebPromotionPO> getList() throws RemoteException {
-        return null;
+        return webPromotionDataService.getList();
     }
 
     @Override
     public ResultMessage modify(WebPromotionPO po) throws RemoteException {
-        return null;
-    }
-
-    @Override
-    public ResultMessage remove(WebPromotionPO po) throws RemoteException {
-        return null;
+        return webPromotionDataService.modify(po);
     }
 
     @Override
     public ResultMessage add(WebPromotionPO po) throws RemoteException {
-        return null;
+        return webPromotionDataService.add(po);
     }
 
     @Override
-    public RankPO getRank() throws RemoteException {
-        return null;
+    public ArrayList<RankPO> getRank() throws RemoteException {
+        return webPromotionDataService.getRank();
+    }
+
+    @Override
+    public ResultMessage modifyRank(RankPO rankPO) throws RemoteException {
+        return webPromotionDataService.modifyRank(rankPO);
     }
 
     @Override
     public ArrayList<HotelPromotionPO> getList(int hotelId) throws RemoteException {
-        return null;
+        return hotelPromotionDataService.getList(hotelId);
     }
 
     @Override
     public ResultMessage modify(HotelPromotionPO po) throws RemoteException {
-        return null;
+        return hotelPromotionDataService.modify(po);
     }
 
     @Override
-    public ResultMessage remove(HotelPromotionPO po) throws RemoteException {
-        return null;
+    public ResultMessage remove(int promotionID) throws RemoteException {
+        return hotelPromotionDataService.remove(promotionID);
     }
 
     @Override
     public ResultMessage add(HotelPromotionPO po) throws RemoteException {
-        return null;
+        return hotelPromotionDataService.add(po);
     }
 
 
     @Override
     public HotelManagerPO getHotelManager(int hotelManagerId) throws RemoteException {
-        return null;
+        return hotelManagerDataService.getHotelManager(hotelManagerId);
     }
 
     @Override
     public ResultMessage modify(HotelManagerPO po) throws RemoteException {
-        return null;
+        return hotelManagerDataService.modify(po);
     }
 
     @Override
     public WebMarketerPO getWebMarketer(String webMarketerId) throws RemoteException {
-        return null;
+        return webMarketerDataService.getWebMarketer(webMarketerId);
     }
 
     @Override
     public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
-        return null;
+        return webAdminDataService.addWebMarketerInfo(webMarketerPO);
     }
 
     @Override
     public ArrayList<WebMarketerPO> getWebMarketerInfo() throws RemoteException {
-        return null;
+        return webAdminDataService.getWebMarketerInfo();
     }
 
     @Override
     public ResultMessage modifyWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
-        return null;
+        return webAdminDataService.modifyWebMarketerInfo(webMarketerPO);
     }
 
     @Override
     public ResultMessage deleteWebMarketer(String webMarketerID) throws RemoteException {
-        return null;
+        return webAdminDataService.deleteWebMarketer(webMarketerID);
     }
 
     @Override
     public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
-        return null;
+        return webAdminDataService.getCustomerInfo();
     }
 
     @Override
     public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
-        return null;
+        return webAdminDataService.modifyCustomerInfo(customerPO);
     }
 
     @Override
     public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
-        return null;
+        return webAdminDataService.getHotelManagerInfo();
     }
 
     @Override
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
-        return null;
+        return webAdminDataService.modifyHotelManagerInfo(hotelManagerPO);
     }
 
     @Override
     public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
-        return null;
+        return webAdminDataService.addHotelManagerInfo(hotelManagerPO);
     }
 
     @Override
     public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
-        return null;
+        return webAdminDataService.addHotel(hotelPO);
     }
 
     @Override
     public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
-        return null;
+        return webAdminDataService.getHotelInfo();
     }
 
     @Override
     public ResultMessage modifyHotelInfo(HotelPO hotelPO) throws RemoteException {
-        return null;
+        return webAdminDataService.modifyHotelInfo(hotelPO);
     }
 
     @Override
     public ResultMessage deleteHotelInfo(int hotelId) throws RemoteException {
-        return null;
+        return webAdminDataService.deleteHotelInfo(hotelId);
     }
 
     @Override
     public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
-        return null;
+        return commentDataService.getCustomerComments(customerID);
     }
 
     @Override
     public ResultMessage add(CommentPO po) throws RemoteException {
-        return null;
+        return commentDataService.add(po);
     }
 
     @Override
     public ResultMessage modify(CommentPO po) throws RemoteException {
-        return null;
+        return commentDataService.modify(po);
     }
 
     @Override
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
-        return null;
+        return commentDataService.getHotelComments(hotelID);
     }
 
     @Override
-    public ArrayList<ProvincePO> getProvince() {
-        return null;
+    public ArrayList<ProvincePO> getProvince() throws RemoteException {
+        return areaDataService.getProvince();
     }
 
     @Override
-    public ArrayList<CityPO> getCity(String provinceNum) {
-        return null;
+    public ArrayList<CityPO> getCity(String provinceNum) throws RemoteException {
+        return areaDataService.getCity(provinceNum);
     }
 
     @Override
-    public ArrayList<DistrictPO> getDistrict(String cityNum) {
-        return null;
+    public ArrayList<DistrictPO> getDistrict(String cityNum) throws RemoteException {
+        return areaDataService.getDistrict(cityNum);
     }
 
     @Override
-    public ArrayList<CbdPO> getCbd(String districtNum) {
-        return null;
+    public ArrayList<CbdPO> getCbd(String districtNum) throws RemoteException {
+        return areaDataService.getCbd(districtNum);
     }
 
     @Override
-    public ArrayList<HotelPO> getHotelByAddress(String address) {
-        return null;
+    public ArrayList<HotelPO> getHotelByAddress(String address) throws RemoteException {
+        return areaDataService.getHotelByAddress(address);
     }
 
     @Override
-    public ArrayList<HotelPO> getHotelByName(String name) {
-        return null;
+    public ArrayList<HotelPO> getHotelByName(String name) throws RemoteException {
+        return areaDataService.getHotelByName(name);
     }
 
     /*@Override

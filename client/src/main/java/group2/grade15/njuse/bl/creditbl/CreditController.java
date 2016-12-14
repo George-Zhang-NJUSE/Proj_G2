@@ -1,64 +1,35 @@
 package group2.grade15.njuse.bl.creditbl;
 
-import group2.grade15.njuse.po.CreditPO;
-import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CreditListVO;
 import group2.grade15.njuse.vo.CreditVO;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
+/**
+ * CreditController的职责是接受信用界面发来的请求
+ * 并转交给具体的信用处理逻辑
+ * 具体的方法的定义可查看对应接口里的方法注释
+ * @author Guo
+ */
+public class CreditController implements CreditModificationBL, CreditHistoryBL {
+    Credit credit;
 
-public class CreditController implements CreditModificationBL,CreditHistoryBL{
+    public CreditController() {
+        credit = new Credit();
+    }
 
-	@Override
-	public ResultMessage modifyCredit(CreditVO credit) {
-		ResultMessage result;
-		try {
-			result = RemoteHelper.getInstance().getCreditDataService().add(credit.toPO());
-		} catch (RemoteException e) {
-			result = ResultMessage.CONNECTION_EXCEPTION;
-			e.printStackTrace();
-		}
-		return result;
-	}
+    @Override
+    public ResultMessage modifyCredit(CreditVO creditVO) {
+        return credit.modifyCredit(creditVO);
+    }
 
-	@Override
-	public CreditVO getCredit(int customerId) {
-		ArrayList<CreditPO> creditPOList = null;
+    @Override
+    public CreditVO getCredit(int customerId) {
+        return credit.getCredit(customerId);
+    }
 
-		try {
-			creditPOList = RemoteHelper.getInstance().getCreditDataService().getHistory(customerId);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-
-		if(creditPOList != null) {
-			CreditPO po = creditPOList.get(0);
-			return new CreditVO(po);
-		} else {
-			return null;
-		}
-	}
-
-	@Override
-	public CreditListVO getCreditHistory(int customerId) {
-		ArrayList<CreditPO> creditPOList = null;
-		ArrayList<CreditVO> creditList = new ArrayList();
-
-		try {
-			creditPOList = RemoteHelper.getInstance().getCreditDataService().getHistory(customerId);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-
-		if(creditPOList != null){
-			for(CreditPO po : creditPOList){
-				creditList.add(new CreditVO(po));
-			}
-		}
-
-		return new CreditListVO(creditList);
-	}
+    @Override
+    public CreditListVO getCreditHistory(int customerId) {
+        return credit.getCreditHistory(customerId);
+    }
 
 }

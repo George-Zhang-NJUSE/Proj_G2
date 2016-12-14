@@ -22,16 +22,16 @@ public class CustomerLoginImpl implements LoginControllerServ {
     ResultMessage result;
 
     @Override
-    public ResultMessage login(int id, String password) {
+    public ResultMessage login(String id, String password) {
         try {
-            customerPO = RemoteHelper.getInstance().getCustomerDataService().getCustomer(id);
+            customerPO = RemoteHelper.getInstance().getCustomerDataService().getCustomer(Integer.parseInt(id));
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if(customerPO != null){
-            if(customerPO.getPassword().equals(password)){
+        if (customerPO != null) {
+            if (customerPO.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

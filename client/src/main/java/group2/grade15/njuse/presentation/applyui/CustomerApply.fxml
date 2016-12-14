@@ -31,7 +31,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="261.0" minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -57,40 +56,41 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Label fx:id="extraInfoHint" text="生日" textFill="WHITE" GridPane.rowIndex="7">
+                        <Label fx:id="extraInfoHint" text="生日" textFill="WHITE" GridPane.rowIndex="6">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Label onMouseEntered="#mouseEnterCancel" onMouseExited="#mouseExitCancel" onMousePressed="#mousePressCancel" onMouseReleased="#mouseReleaseCancel" GridPane.halignment="LEFT" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
-                     <graphic>
-                              <ImageView fx:id="cancelIconImage" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="file:client/src/main/res/apply/cancelicon.png" />
-                                  </image>
-                              </ImageView>
-                     </graphic>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" />
-                     </GridPane.margin></Label>
-                        <Label onMouseEntered="#mouseEnterConfirm" onMouseExited="#mouseExitConfirm" onMousePressed="#mousePressConfirm" onMouseReleased="#mouseReleaseConfirm" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
+                        <Label fx:id="cancelLabel" onMouseClicked="#rollBackToLogin" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
                             <graphic>
-                                <ImageView fx:id="confirmIconImage" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/apply/confirmicon.png" />
+                                        <Image url="file:client/src/main/res/apply/cancel.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" right="10.0" />
-                     </GridPane.margin>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label fx:id="confirmLabel" onMouseClicked="#applyAccount" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="file:client/src/main/res/apply/confirm.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" right="10.0" />
+                            </GridPane.margin>
                         </Label>
                         <Label text="申请一个新的账号" textFill="WHITE" GridPane.columnIndex="1">
                             <font>
                                 <Font size="35.0" />
                             </font>
                         </Label>
-                        <CheckBox fx:id="isEnterpriseCheckBox" mnemonicParsing="false" onAction="#changeAdditionalInfo" text="我是企业用户" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <CheckBox fx:id="isEnterpriseCheckBox" mnemonicParsing="false" onAction="#changeAdditionalInfo" text="我是企业用户" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -127,8 +127,8 @@
                                 <Insets left="10.0" right="10.0" />
                             </GridPane.margin>
                         </TextField>
-                        <DatePicker fx:id="birthdayPicker" editable="false" prefHeight="36.0" prefWidth="313.0" promptText="点击右边按钮选择您的生日" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField fx:id="enterpriseNameField" promptText="您所在企业的中文名称" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <DatePicker fx:id="birthdayPicker" editable="false" prefHeight="36.0" prefWidth="313.0" promptText="点击右边按钮选择您的生日" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="enterpriseNameField" promptText="您所在企业的中文名称" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -136,19 +136,6 @@
                                 <Insets left="10.0" right="10.0" />
                             </GridPane.margin>
                         </TextField>
-                  <Label text="身份证号码" textFill="WHITE" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="idNumField" layoutX="204.0" layoutY="328.0" promptText="您的身份证号码（18位）" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </TextField>
                     </children>
                 </GridPane>
             </children>

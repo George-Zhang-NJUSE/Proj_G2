@@ -5,14 +5,45 @@ import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.RoomVO;
 
+/**
+ * 酒店业务逻辑的层间接口
+ * 供界面层的酒店界面调用
+ * 职责是处理酒店相关的逻辑功能
+ * @author Guo
+ */
 public interface HotelServ {
-	public ResultMessage modifyInfo (HotelVO hotel);
+    /**
+     * 修改酒店的信息
+     * @param hotel HotelVO型，界面层传递来的存有修改信息的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage modifyInfo(HotelVO hotel);
 
-	public HotelVO getInfo (int hotelID); 
+    /**
+     * 获取酒店的信息
+     * @param hotelID int型，界面层传递来的酒店ID
+     * @return 成功返回对应的HotelVO
+     *         失败返回null
+     */
+    public HotelVO getInfo(int hotelID);
 
-	public ResultMessage modifyRoomInfo (int hotelID, RoomVO roomInfo);
+    /**
+     * 修改酒店的房间信息
+     * @param hotelID HotelManagerVO型，界面层传递来需要修改房间信息的酒店ID
+     * @param roomInfo RoomVO型，界面层传来包含修改后的房间信息的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo);
 
-	public ResultMessage addCompany(int customerID);
-
-	public ResultMessage deleteCompany(int customerID);
+    /**
+     * 获取用户预订过的酒店列表
+     * @param customerID int型，界面层传递来的需要获取列表的客户ID
+     * @return 成功返回对应的HotelListVO
+     *         失败返回null
+     */
+    public HotelListVO getBookedHotelList(int customerID);
 }

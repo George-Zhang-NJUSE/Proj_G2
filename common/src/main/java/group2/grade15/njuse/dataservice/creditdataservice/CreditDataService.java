@@ -1,7 +1,6 @@
 package group2.grade15.njuse.dataservice.creditdataservice;
 
 import group2.grade15.njuse.po.CreditPO;
-
 import group2.grade15.njuse.utility.ResultMessage;
 
 import java.rmi.Remote;
