@@ -45,7 +45,7 @@ public class HotelItemController implements Initializable {
     @FXML
     private void showHotelDetail() {
         try {
-            FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelDetail.fxml"));
+            FXMLLoader hotelDetailLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelDetail.fxml"));
             hotelDetailLoader.load();
             HotelDetailController detailController = hotelDetailLoader.getController();
             detailController.initDataAndShow(hotelVO, myOrders);
@@ -59,7 +59,7 @@ public class HotelItemController implements Initializable {
     @FXML
     private void showMakeOrderPane() {
         try {
-            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
+            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MakeOrder.fxml"));
             makeOrderLoader.load();
 
             MakeOrderController makeOrderController = makeOrderLoader.getController();

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane fx:id="rootNode" prefHeight="100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.orderui.MyOrderItemController">
+    <left>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="订单号：" />
+                <Label fx:id="orderIDLabel" text="Label" GridPane.columnIndex="1" />
+                <Label text="订单总价：" GridPane.rowIndex="1" />
+                <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="订单生成时间：" GridPane.rowIndex="2" />
+                <Label fx:id="createTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
+    </left>
+    <center>
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" BorderPane.alignment="CENTER_LEFT">
+            <children>
+            <HBox fx:id="hotelInfoBox" alignment="CENTER_LEFT">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                      <Label text="酒店名：" />
+                      <Label fx:id="hotelNameLabel" text="Label" />
+                      <Label text="地址：">
+                          <HBox.margin>
+                              <Insets left="20.0" />
+                          </HBox.margin>
+                      </Label>
+                      <Label fx:id="addressLabel" text="Label" />
+               </children>
+            </HBox>
+                <Label text="订单状态：">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="orderStateLabel" text="Label" />
+            </children>
+        </HBox>
+    </center>
+    <right>
+        <Label fx:id="showDetailLabel" onMouseClicked="#showMyOrderDetail" BorderPane.alignment="CENTER" />
+    </right>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</BorderPane>

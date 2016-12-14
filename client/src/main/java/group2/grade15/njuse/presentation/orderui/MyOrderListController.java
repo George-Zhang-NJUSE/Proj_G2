@@ -92,7 +92,7 @@ public class MyOrderListController implements Initializable{
             try {
 
                 for (OrderVO orderVO : orderList) {
-                    FXMLLoader orderItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                    FXMLLoader orderItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MyOrderItem.fxml"));
                     Node singleItem = orderItemLoader.load();
 
                     MyOrderItemController orderItemController = orderItemLoader.getController();

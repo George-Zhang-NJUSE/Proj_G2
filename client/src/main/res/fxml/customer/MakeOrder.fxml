@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.orderui.MakeOrderController">
+    <columnConstraints>
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label text="酒店名称：" GridPane.rowIndex="1" />
+        <Label fx:id="hotelNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="地址：" GridPane.rowIndex="2" />
+        <Label fx:id="addressLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="预计入住日期：" GridPane.rowIndex="3" />
+        <DatePicker fx:id="checkInDatePicker" editable="false" onAction="#updateOrderInfo" prefWidth="200.0" promptText="点击按钮选择日期" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="预计入住时间：" GridPane.rowIndex="4" />
+        <ComboBox fx:id="checkInHourComboBox" onAction="#updateOrderInfo" prefHeight="30.0" prefWidth="200.0" promptText="一天内具体时间" visibleRowCount="8" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="预计退房日期：" GridPane.rowIndex="5" />
+        <Label text="房间种类：" GridPane.rowIndex="7" />
+        <Label text="下单预订房间" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label text="入住顾客数：" GridPane.rowIndex="9" />
+        <DatePicker fx:id="checkOutDatePicker" editable="false" layoutX="138.0" layoutY="230.0" onAction="#updateOrderInfo" prefWidth="200.0" promptText="点击按钮选择日期" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label layoutX="33.0" layoutY="315.0" text="预计退房时间：" GridPane.rowIndex="6" />
+        <ComboBox fx:id="checkOutHourComboBox" layoutX="138.0" layoutY="310.0" onAction="#updateOrderInfo" prefHeight="30.0" prefWidth="200.0" promptText="一天内具体时间" visibleRowCount="8" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <children>
+                <Label fx:id="minusCustomerLabel" onMouseClicked="#minusCustomerNum" />
+                <Label fx:id="customerNumLabel" text="0">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="addCustomerLabel" onMouseClicked="#addCustomerNum" />
+            </children>
+        </HBox>
+        <CheckBox fx:id="hasChildCheckBox" mnemonicParsing="false" onAction="#updateOrderInfo" text="有儿童" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+        <Label text="订单总价：" GridPane.rowIndex="11" />
+        <Label fx:id="totalPriceLabel" text="0" textFill="#bf1c1c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="12" />
+        <Label fx:id="confirmLabel" onMouseClicked="#submitOrder" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+        <Label text="房间数量：" GridPane.rowIndex="8" />
+        <HBox alignment="CENTER_LEFT" layoutX="160.0" layoutY="536.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <children>
+                <Label fx:id="minusRoomLabel" onMouseClicked="#minusRoomNum" />
+                <Label fx:id="roomNumLabel" text="0">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="addRoomLabel" onMouseClicked="#addRoomNum" />
+            </children>
+        </HBox>
+      <Label text="所享优惠：" GridPane.rowIndex="10">
+         <GridPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </GridPane.margin></Label>
+      <Label fx:id="promotionLabel" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
+         <GridPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </GridPane.margin></Label>
+      <ComboBox fx:id="roomTypeComboBox" onAction="#updateMaxNum" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    </children>
+    <effect>
+        <DropShadow />
+    </effect>
+</GridPane>

@@ -43,7 +43,7 @@ public class CustomerMainController implements Initializable{
 
     @FXML
     private void showSearchHotelPane() {
-        String searchPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/searchui/CustomerSearchHotel.fxml";
+        String searchPaneUrl = "file:client/src/main/res/fxml/customer/CustomerSearchHotel.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(new URL(searchPaneUrl));
             functionPane.getChildren().clear();
@@ -60,7 +60,7 @@ public class CustomerMainController implements Initializable{
 
     @FXML
     private void showMyOrderListPane() {
-        String myOrderPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderList.fxml";
+        String myOrderPaneUrl = "file:client/src/main/res/fxml/customer/MyOrderList.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(new URL(myOrderPaneUrl));
             functionPane.getChildren().clear();
@@ -80,7 +80,7 @@ public class CustomerMainController implements Initializable{
 
     @FXML
     private void showMyHotelListPane() {
-        String myHotelListPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/MyHotelList.fxml";
+        String myHotelListPaneUrl = "file:client/src/main/res/fxml/customer/MyHotelList.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(new URL(myHotelListPaneUrl));
             functionPane.getChildren().clear();
@@ -97,7 +97,7 @@ public class CustomerMainController implements Initializable{
 
     @FXML
     private void showPersonalInfoPane() {
-        String personalPaneUrl = "file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerInfo.fxml";
+        String personalPaneUrl = "file:client/src/main/res/fxml/customer/CustomerInfo.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(new URL(personalPaneUrl));
             functionPane.getChildren().clear();
@@ -119,6 +119,10 @@ public class CustomerMainController implements Initializable{
         // TODO: 2016/12/11
         //加载按钮变化样式
         CustomeButton.implButton(myHotelLabel, "file:client/src/main/res/customer/myhotel");
+        CustomeButton.implButton(bookHotelLabel, "file:client/src/main/res/customer/makeorder");
+        CustomeButton.implButton(myOrderLabel, "file:client/src/main/res/customer/myorder");
+        CustomeButton.implButton(personalInfoLabel, "file:client/src/main/res/customer/accountinfo");
+
 
         CommonData.getInstance().setFunctionAreaPane(functionPane);
     }
