@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -27,11 +26,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <ImageView fx:id="hotelImageView" fitHeight="90.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="3">
-            <image>
-                <Image url="file:client/src/main/cache/hotelimage/hotel1.jpg" />
-            </image>
-        </ImageView>
+        <ImageView fx:id="hotelImageView" fitHeight="90.0" fitWidth="130.0" pickOnBounds="true" GridPane.rowSpan="3" />
         <Label fx:id="hotelNameLabel" text="label" wrapText="true" GridPane.columnIndex="1" GridPane.rowSpan="3">
             <font>
                 <Font size="20.0" />

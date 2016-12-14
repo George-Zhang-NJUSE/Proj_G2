@@ -45,7 +45,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="hotelImageView" fitHeight="190.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+                <ImageView fx:id="hotelImageView" fitHeight="210.0" fitWidth="350.0" pickOnBounds="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="TOP" />
                 <Label text="地址：" GridPane.rowIndex="3" />
                 <Label layoutX="10.0" layoutY="675.0" text="星级：" GridPane.rowIndex="2" />
                 <Label layoutX="10.0" layoutY="225.0" text="剩余房间：" GridPane.rowIndex="7" />

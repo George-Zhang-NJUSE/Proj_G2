@@ -127,7 +127,7 @@ public class HotelDetailController implements Initializable {
         Pop popIn = new Pop(rootNode, 300, true);
 
         //切换图片动画
-        ChangeImage changeImage = new ChangeImage(hotelImageView, 5000, imageList);
+        ChangeImage changeImage = new ChangeImage(hotelImageView, 2000, imageList);
 
         popIn.setOnFinished((ActionEvent e) -> {
             loadComments();
