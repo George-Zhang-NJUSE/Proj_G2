@@ -100,7 +100,7 @@ public class HotelDetailController implements Initializable {
                 imageList[a]=new Image(new ByteArrayInputStream(pictures[a]));
             }
 
-            //加载剩余房间列表
+            //加载房间列表
             roomInfoListView = new ListView<>();
             ArrayList<RoomVO> roomVOList = hotelVO.getRoomList();
             ArrayList<String> roomInfoStrings = new ArrayList<>();
