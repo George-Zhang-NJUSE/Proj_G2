@@ -71,7 +71,7 @@ public class HotelDetailController implements Initializable {
     @FXML
     protected void showMakeOrderPane() {
         try {
-            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MakeOrder.fxml"));
+            FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MakeOrder.fxml"));
             makeOrderLoader.load();
 
             MakeOrderController makeOrderController = makeOrderLoader.getController();
@@ -150,7 +150,7 @@ public class HotelDetailController implements Initializable {
                 ArrayList<HotelCommentItemController> controllerList = new ArrayList<>();
                 //读入评价数据
                 for (CommentVO commentVO : commentVOList) {
-                    FXMLLoader commentItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelCommentItem.fxml"));
+                    FXMLLoader commentItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelCommentItem.fxml"));
 
                     Node singleItem = commentItemLoader.load();
                     commentBox.getChildren().add(singleItem);
@@ -184,7 +184,7 @@ public class HotelDetailController implements Initializable {
 
             try {
                 for (OrderVO orderVO:myOrders) {
-                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderItem.fxml"));
+                    FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MyOrderItem.fxml"));
                     Node single = loader.load();
                     MyOrderItemController orderItemController = loader.getController();
 

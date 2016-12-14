@@ -104,7 +104,7 @@ public class CustomerApplyController implements Initializable {
 
     private void loadLoginPane() {
         try {
-            FXMLLoader customerLoginLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
+            FXMLLoader customerLoginLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerLogin.fxml"));
             currentStage.setScene(new Scene(customerLoginLoader.load()));
             CustomerLoginController loginController = customerLoginLoader.getController();
             loginController.setStage(currentStage);

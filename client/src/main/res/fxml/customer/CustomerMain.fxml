@@ -63,7 +63,7 @@
                     <children>
                         <Label fx:id="bookHotelLabel" onMouseClicked="#showSearchHotelPane">
                             <graphic>
-                                <ImageView fitHeight="57.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="41.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="file:client/src/main/res/customer/makeorder.png" />
                                     </image>
@@ -75,9 +75,9 @@
                         </Label>
                         <Label fx:id="myOrderLabel" onMouseClicked="#showMyOrderListPane">
                             <graphic>
-                                <ImageView fitHeight="64.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="41.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:client/src/main/res/customer/order.png" />
+                                        <Image url="file:client/src/main/res/customer/myorder.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -85,13 +85,20 @@
                                 <Insets />
                             </VBox.margin>
                         </Label>
-                        <Label fx:id="myHotelLabel" onMouseClicked="#showMyHotelListPane" />
+                        <Label fx:id="myHotelLabel" onMouseClicked="#showMyHotelListPane">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:client/src/main/res/customer/myhotel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Label>
                         <Label fx:id="personalInfoLabel" onMouseClicked="#showPersonalInfoPane">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
                      <graphic>
-                                <ImageView fitHeight="51.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="41.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="file:client/src/main/res/customer/accountinfo.png" />
                                     </image>

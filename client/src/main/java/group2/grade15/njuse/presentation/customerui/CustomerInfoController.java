@@ -129,8 +129,9 @@ public class CustomerInfoController implements Initializable{
             ArrayList<CreditRecordItemController> controllerList = new ArrayList<>();
 
             for (CreditVO creditVO:creditList) {
-                FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CreditRecordItem.fxml"));
+                FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CreditRecordItem.fxml"));
                 Node single = loader.load();
+                creditRecordBox.getChildren().add(single);
                 CreditRecordItemController creditRecordItemController = loader.getController();
                 creditRecordItemController.initData(creditVO);
                 controllerList.add(creditRecordItemController);

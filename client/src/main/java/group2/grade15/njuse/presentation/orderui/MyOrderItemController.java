@@ -41,7 +41,7 @@ public class MyOrderItemController implements Initializable{
     @FXML
     private void showMyOrderDetail() {
         try {
-            FXMLLoader orderDetailLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyOrderDetail.fxml"));
+            FXMLLoader orderDetailLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MyOrderDetail.fxml"));
             orderDetailLoader.load();
             MyOrderDetailController orderDetailController = orderDetailLoader.getController();
 

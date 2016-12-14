@@ -83,7 +83,7 @@ public class CustomerLoginController implements Initializable {
 
     private void loadApplyPanel() {
         try {
-            FXMLLoader customerApplyLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/applyui/CustomerApply.fxml"));
+            FXMLLoader customerApplyLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerApply.fxml"));
             currentStage.setScene(new Scene(customerApplyLoader.load()));
             CustomerApplyController applyController = customerApplyLoader.getController();
             applyController.setStage(currentStage);
@@ -126,7 +126,7 @@ public class CustomerLoginController implements Initializable {
     private void jumpToMain(CustomerVO customerVO) {
 
         try {
-            FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/customerui/CustomerMain.fxml"));
+            FXMLLoader customerMainLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerMain.fxml"));
             Stage customerStage = new Stage();
             customerStage.setScene(new Scene(customerMainLoader.load()));
 

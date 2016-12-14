@@ -64,7 +64,7 @@ public class MyOrderDetailController implements Initializable {
     @FXML
     private void showCommentPane() {
         try {
-            FXMLLoader commentLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/orderui/MyComment.fxml"));
+            FXMLLoader commentLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MyComment.fxml"));
             commentLoader.load();
             MyCommentController myCommentController = commentLoader.getController();
             myCommentController.initData(commentVO,orderIDLabel.getText(), createTimeLabel.getText(), hotelNameLabel.getText(), hotelID);

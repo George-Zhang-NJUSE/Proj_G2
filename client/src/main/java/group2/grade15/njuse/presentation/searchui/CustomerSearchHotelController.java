@@ -223,7 +223,7 @@ public class CustomerSearchHotelController implements Initializable {
 
                 searchItemBox.getChildren().clear();
                 for (HotelVO hotelVO : hotelVOList) {
-                    FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelui/HotelItem.fxml"));
+                    FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelItem.fxml"));
                     Node singleNode = hotelItemLoader.load();
                     HotelItemController hotelItemController = hotelItemLoader.getController();
                     searchItemBox.getChildren().add(singleNode);

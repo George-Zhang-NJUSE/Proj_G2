@@ -19,7 +19,7 @@ public class CustomerStart extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/CustomerLogin.fxml"));
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerLogin.fxml"));
 
             primaryStage.setTitle("酒店预订系统——客户端");
             primaryStage.setScene(new Scene(loader.load()));
