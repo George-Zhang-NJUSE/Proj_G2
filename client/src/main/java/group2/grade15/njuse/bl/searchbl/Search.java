@@ -96,7 +96,11 @@ public class Search implements SearchServ {
                                           .map(ProvinceVO::new)
                                           .collect(Collectors.toList()));
 
-        return new ProvinceListVO(provinceList);
+        if(provinceList.size() != 0){
+            return new ProvinceListVO(provinceList);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -114,7 +118,11 @@ public class Search implements SearchServ {
                                   .map(CityVO::new)
                                   .collect(Collectors.toList()));
 
-        return new CityListVO(cityList);
+        if(cityList.size() != 0) {
+            return new CityListVO(cityList);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -132,7 +140,11 @@ public class Search implements SearchServ {
                                           .map(DistrictVO::new)
                                           .collect(Collectors.toList()));
 
-        return new DistrictListVO(districtList);
+        if(districtList.size() != 0) {
+            return new DistrictListVO(districtList);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -150,7 +162,11 @@ public class Search implements SearchServ {
                                 .map(CbdVO::new)
                                 .collect(Collectors.toList()));
 
-        return new CbdListVO(cbdList);
+        if(cbdList.size() != 0) {
+            return new CbdListVO(cbdList);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -168,10 +184,10 @@ public class Search implements SearchServ {
                                     .map(HotelVO::new)
                                     .collect(Collectors.toList()));
 
-        if( hotelList.size() == 0) {
-            return null;
-        } else {
+        if( hotelList.size() != 0) {
             return new HotelListVO(hotelList);
+        } else {
+            return null;
         }
     }
 

@@ -115,10 +115,28 @@ public class OrderList implements OrderListBL {
                 .filter(orderVO -> orderVO.getHotelID() == hotelID)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        return new OrderListVO(filterOrderList);
+        if (filterOrderList != null) {
+            return new OrderListVO(filterOrderList);
+        } else {
+            return null;
+        }
     }
 
     public OrderListVO getAbnormalOrderList() {
-        return null;
+        ArrayList<OrderPO> orderPOList = null;
+        try {
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getAbnormalList();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if (orderPOList != null) {
+            ArrayList<OrderVO> orderList = orderPOList.stream()
+                                                      .map(OrderVO::new)
+                                                      .collect(Collectors.toCollection(ArrayList::new));
+            return new OrderListVO(orderList);
+        } else {
+            return null;
+        }
     }
 }

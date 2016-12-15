@@ -59,8 +59,9 @@ public class Credit implements CreditBL{
 
         if (creditPOList != null) {
             creditList.addAll(creditPOList.stream().map(CreditVO::new).collect(Collectors.toList()));
+            return new CreditListVO(creditList);
+        } else {
+            return null;
         }
-
-        return new CreditListVO(creditList);
     }
 }

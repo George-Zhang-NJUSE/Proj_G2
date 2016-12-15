@@ -73,6 +73,10 @@ public class HotelController implements HotelServ, GetHotelListBL{
             }
         }
 
-        return new HotelListVO(hotelList);
+        if(hotelList.size() != 0) {
+            return new HotelListVO(hotelList);
+        } else {
+            return null;
+        }
     }
 }

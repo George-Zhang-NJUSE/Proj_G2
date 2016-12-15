@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.HotelPromotionVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by Guo on 2016/11/13.
@@ -53,11 +54,15 @@ public class HotelPromotionController implements HotelPromotionControllerBL, Hot
             e.printStackTrace();
         }
 
-        for(HotelPromotionPO hotelPromotionPO : hotelPromotionPOList){
-            hotelPromotionList.add(new HotelPromotionVO(hotelPromotionPO));
-        }
+        hotelPromotionList.addAll(hotelPromotionPOList.stream()
+                                                      .map(HotelPromotionVO::new)
+                                                      .collect(Collectors.toList()));
 
-        return new HotelPromotionListVO(hotelPromotionList);
+        if(hotelPromotionList.size() != 0) {
+            return new HotelPromotionListVO(hotelPromotionList);
+        } else {
+            return null;
+        }
     }
 
     @Override
