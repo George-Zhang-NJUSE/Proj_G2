@@ -58,7 +58,11 @@ public class WebPromotionController implements WebPromotionServ, GetWebPromotion
                                                   .map(WebPromotionVO::new)
                                                   .collect(Collectors.toList()));
 
-        return new WebPromotionListVO(webPromotionList);
+        if(webPromotionList.size() != 0) {
+            return new WebPromotionListVO(webPromotionList);
+        } else {
+            return null;
+        }
     }
 
     @Override
