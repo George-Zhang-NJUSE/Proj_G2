@@ -19,7 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -40,7 +40,7 @@ public class CustomerLoginController implements Initializable {
     }
 
     @FXML
-    private Pane loginVBoxBack;
+    private StackPane operateArea;
 
     @FXML
     private VBox loginVBox;
@@ -71,11 +71,14 @@ public class CustomerLoginController implements Initializable {
     private void showApplyPane() {
 
         //使申请窗口从右边推出，原面板淡出，加载申请账号面板
-        ChangeWidth loginExtendFromRight = new ChangeWidth(loginVBoxBack, 300, 700);
-        loginExtendFromRight.setOnFinished((ActionEvent e) -> loadApplyPanel());
+        ChangeWidth applyExtendFromRight = new ChangeWidth(operateArea, 300, 700);
+        applyExtendFromRight.setOnFinished((ActionEvent e) -> loadApplyPanel());
 
         Fade loginFadeOut = new Fade(loginVBox, 300, false);
-        loginFadeOut.setOnFinished((ActionEvent e) -> loginExtendFromRight.play());
+        loginFadeOut.setOnFinished((ActionEvent e) -> {
+            loginVBox.setVisible(false);
+            applyExtendFromRight.play();
+        });
 
         loginFadeOut.play();
 
@@ -84,9 +87,9 @@ public class CustomerLoginController implements Initializable {
     private void loadApplyPanel() {
         try {
             FXMLLoader customerApplyLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerApply.fxml"));
-            currentStage.setScene(new Scene(customerApplyLoader.load()));
+            operateArea.getChildren().add(customerApplyLoader.load());
             CustomerApplyController applyController = customerApplyLoader.getController();
-            applyController.setStage(currentStage);
+            applyController.initData(operateArea,loginVBox);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
