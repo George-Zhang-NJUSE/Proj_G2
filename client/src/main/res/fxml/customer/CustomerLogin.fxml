@@ -4,20 +4,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url(file:client/src/main/res/login/loginback.jpg); -fx-background-size: contain;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.loginui.CustomerLoginController">
     <right>
-        <Pane fx:id="loginVBoxBack" opacity="0.7" prefHeight="600.0" prefWidth="220.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
-            <children>
+      <StackPane fx:id="operateArea" prefHeight="600.0" prefWidth="220.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="220.0" style="-fx-background-image: url(file:client/src/main/res/login/loginback.jpg); -fx-background-size: 900,600; -fx-background-position: right;">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Pane>
+            <Pane opacity="0.5" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: black;" />
                 <VBox fx:id="loginVBox" prefHeight="600.0" prefWidth="220.0">
 
-                    <Label text="账号" textFill="WHITE">
+                                <Label text="账号" textFill="WHITE">
                         <VBox.margin>
                             <Insets left="10.0" top="200.0" />
                         </VBox.margin>
@@ -26,7 +34,7 @@
                         </font>
                     </Label>
 
-                    <TextField fx:id="accoutField" prefHeight="30.0" prefWidth="130.0">
+                                <TextField fx:id="accoutField" prefHeight="30.0" prefWidth="130.0">
                         <VBox.margin>
                             <Insets left="10.0" right="10.0" />
                         </VBox.margin>
@@ -35,7 +43,7 @@
                         </font>
                     </TextField>
 
-                    <Label text="密码" textFill="WHITE">
+                                <Label text="密码" textFill="WHITE">
                         <VBox.margin>
                             <Insets left="10.0" />
                         </VBox.margin>
@@ -44,7 +52,7 @@
                         </font>
                     </Label>
 
-                    <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="130.0">
+                                <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="130.0">
                         <VBox.margin>
                             <Insets left="10.0" right="10.0" />
                         </VBox.margin>
@@ -53,7 +61,7 @@
                         </font>
                     </PasswordField>
 
-                    <Label fx:id="loginLabel" onMouseClicked="#login">
+                                <Label fx:id="loginLabel" onMouseClicked="#login">
                         <graphic>
                             <ImageView fitHeight="52.0" fitWidth="124.0" scaleX="0.9" scaleY="0.9" smooth="true">
                                 <Image url="file:client/src/main/res/login/login.png" />
@@ -76,9 +84,9 @@
                         </VBox.margin>
                     </Label>
 
-                </VBox>
-            </children>
-        </Pane>
+                            </VBox>
+         </children>
+      </StackPane>
     </right>
 
 </BorderPane>

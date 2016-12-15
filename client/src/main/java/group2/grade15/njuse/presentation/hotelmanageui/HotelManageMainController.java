@@ -84,7 +84,7 @@ public class HotelManageMainController implements Initializable {
         try{
             Fade out = new Fade(opPane, 500, false);
             out.play();
-            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/HotelInfo.fxml"));
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelInfo.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
