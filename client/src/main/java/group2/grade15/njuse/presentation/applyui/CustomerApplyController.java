@@ -2,7 +2,6 @@ package group2.grade15.njuse.presentation.applyui;
 
 import group2.grade15.njuse.bl.customerbl.CustomerController;
 import group2.grade15.njuse.blservice.CustomerServ;
-import group2.grade15.njuse.presentation.loginui.CustomerLoginController;
 import group2.grade15.njuse.presentation.myanimation.ChangeWidth;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -10,16 +9,12 @@ import group2.grade15.njuse.utility.MemberType;
 import group2.grade15.njuse.vo.CustomerVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,11 +26,9 @@ import java.util.ResourceBundle;
  */
 public class CustomerApplyController implements Initializable {
 
-    private Stage currentStage;
     private CustomerVO newCustomer;
-
-    @FXML
-    private Pane applyPaneBack;
+    private StackPane applyPaneBack;
+    private VBox loginPane;
 
     @FXML
     private GridPane applyPane;
@@ -55,11 +48,6 @@ public class CustomerApplyController implements Initializable {
     @FXML
     private DatePicker birthdayPicker;
 
-
-    public void setStage(Stage stage) {
-        currentStage = stage;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -74,7 +62,7 @@ public class CustomerApplyController implements Initializable {
 
 
     @FXML
-    protected void changeAdditionalInfo() {
+    private void changeAdditionalInfo() {
         if (isEnterpriseCheckBox.isSelected()) {
             extraInfoHint.setText("企业名称");
             enterpriseNameField.setVisible(true);
@@ -92,27 +80,27 @@ public class CustomerApplyController implements Initializable {
     private void rollBackToLogin() {
 
         //使申请窗口退回右边,原面板淡出，加载登录面板
+        Fade loginFadeIn = new Fade(loginPane, 300, true);
+
         ChangeWidth applyShrinkToRight = new ChangeWidth(applyPaneBack, 300, 220);
-        applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPane());
+        applyShrinkToRight.setOnFinished((ActionEvent e) -> {
+            loginPane.setVisible(true);
+            loginFadeIn.play();
+        });
 
         Fade applyFadeOut = new Fade(applyPane, 300, false);
-        applyFadeOut.setOnFinished((ActionEvent e) -> applyShrinkToRight.play());
+        applyFadeOut.setOnFinished((ActionEvent e) -> {
+            applyPaneBack.getChildren().remove(applyPane);
+            applyShrinkToRight.play();
+        });
 
         applyFadeOut.play();
 
     }
 
-    private void loadLoginPane() {
-        try {
-            FXMLLoader customerLoginLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/CustomerLogin.fxml"));
-            currentStage.setScene(new Scene(customerLoginLoader.load()));
-            CustomerLoginController loginController = customerLoginLoader.getController();
-            loginController.setStage(currentStage);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void initData(StackPane backPane, VBox loginBox){
+        applyPaneBack = backPane;
+        loginPane = loginBox;
     }
 
     @FXML
