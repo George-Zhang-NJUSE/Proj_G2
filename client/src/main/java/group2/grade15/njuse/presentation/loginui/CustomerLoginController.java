@@ -106,22 +106,31 @@ public class CustomerLoginController implements Initializable {
         String id = accoutField.getText();
         String password = passwordField.getText();
 
-        switch (loginServ.login(id,password)){
-            case SUCCESS:
-                jumpToMain(customerServ.getInfo(Integer.parseInt(id)));
-                break;
-            case FAILED:
-                Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
-                wrongPswAlert.showAndWait();
-                break;
-            case NON_EXISTENT:
-                Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在!");
-                invalidAccountAlert.showAndWait();
-                break;
-            case CONNECTION_EXCEPTION:
-                Alert netErrorInfo = new Alert(Alert.AlertType.ERROR, "网络连接错误!");
-                netErrorInfo.showAndWait();
-                break;
+
+        try{
+            Integer.parseInt(id);
+
+            switch (loginServ.login(id,password)){
+                case SUCCESS:
+                    jumpToMain(customerServ.getInfo(Integer.parseInt(id)));
+                    break;
+                case FAILED:
+                    Alert wrongPswAlert = new Alert(Alert.AlertType.ERROR, "密码错误!");
+                    wrongPswAlert.showAndWait();
+                    break;
+                case NON_EXISTENT:
+                    Alert invalidAccountAlert = new Alert(Alert.AlertType.ERROR, "账号不存在!");
+                    invalidAccountAlert.showAndWait();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    Alert netErrorInfo = new Alert(Alert.AlertType.ERROR, "网络连接错误!");
+                    netErrorInfo.showAndWait();
+                    break;
+            }
+
+        }catch (NumberFormatException e){
+            Alert wrongIdFormat = new Alert(Alert.AlertType.ERROR, "账号只能为数字！");
+            wrongIdFormat.showAndWait();
         }
 
     }

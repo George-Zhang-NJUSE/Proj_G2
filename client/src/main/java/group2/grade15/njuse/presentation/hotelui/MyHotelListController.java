@@ -5,6 +5,7 @@ import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.myanimation.Pop;
+import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,29 +36,34 @@ public class MyHotelListController implements Initializable {
         HotelServ hotelServ = new HotelController();
         int customerID = CommonData.getInstance().getCustomerVO().getId();
 
-        ArrayList<HotelVO> myHotels = hotelServ.getBookedHotelList(customerID).getList();
-        ArrayList<HotelItemController> itemControllers = new ArrayList<>();
+        HotelListVO hotelListVO=hotelServ.getBookedHotelList(customerID);
 
-        try {
-            hotelItemBox.getChildren().clear();
+        if (hotelListVO != null) {
+            ArrayList<HotelVO> myHotels = hotelListVO.getList();
+            ArrayList<HotelItemController> itemControllers = new ArrayList<>();
 
-            for (HotelVO hotelVO:myHotels) {
-                FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelItem.fxml"));
-                Node single = hotelItemLoader.load();
+            try {
+                hotelItemBox.getChildren().clear();
 
-                HotelItemController hotelItemController = hotelItemLoader.getController();
-                hotelItemController.initData(hotelVO);
-                itemControllers.add(hotelItemController);
-                hotelItemBox.getChildren().add(single);
+                for (HotelVO hotelVO:myHotels) {
+                    FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelItem.fxml"));
+                    Node single = hotelItemLoader.load();
+
+                    HotelItemController hotelItemController = hotelItemLoader.getController();
+                    hotelItemController.initData(hotelVO);
+                    itemControllers.add(hotelItemController);
+                    hotelItemBox.getChildren().add(single);
+                }
+
+                itemControllers.forEach(HotelItemController::show);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            itemControllers.forEach(HotelItemController::show);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
     private void showContainer() {
