@@ -119,38 +119,46 @@ public class CustomerApplyController implements Initializable {
     private void applyAccount() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String confirmPsw = confirmPswField.getText();
         String phoneContact = phoneContactField.getText();
         MemberType memberType;
         String enterpriseName=null;
         Date birthday=null;
         java.sql.Date sqlBirthday = null;
 
-        if (isEnterpriseCheckBox.isSelected()) {
-            memberType = MemberType.vip;
-            enterpriseName = enterpriseNameField.getText();
-        }else{
-            memberType = MemberType.normal;
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(confirmPsw.equals(password)){
 
-            try {
-                birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
-                sqlBirthday = new java.sql.Date(birthday.getTime());
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (isEnterpriseCheckBox.isSelected()) {
+                memberType = MemberType.vip;
+                enterpriseName = enterpriseNameField.getText();
+            }else{
+                memberType = MemberType.normal;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                try {
+                    birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
+                    sqlBirthday = new java.sql.Date(birthday.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
+            CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
+            CustomerServ customerServ = new CustomerController();
+            newCustomer=customerServ.addCustomer(customerVO);
+            if (newCustomer != null) {
+                Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+                successInfo.showAndWait();
+            } else {
+                Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
+                failInfo.showAndWait();
+            }
+
+        }else{
+            Alert contradictoryPsw=new Alert(Alert.AlertType.ERROR,"注册失败，确认密码与密码不一致！");
+            contradictoryPsw.showAndWait();
         }
 
-        CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
-        CustomerServ customerServ = new CustomerController();
-        newCustomer=customerServ.addCustomer(customerVO);
-        if (newCustomer != null) {
-            Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
-            successInfo.showAndWait();
-        } else {
-            Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
-            failInfo.showAndWait();
-        }
     }
 
 
