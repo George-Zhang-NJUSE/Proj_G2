@@ -1,6 +1,7 @@
 package group2.grade15.njuse.bl.loginbl;
 
 import group2.grade15.njuse.blservice.LoginControllerServ;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 import group2.grade15.njuse.po.WebAdminPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;

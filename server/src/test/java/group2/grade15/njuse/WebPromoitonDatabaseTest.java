@@ -29,7 +29,7 @@ public class WebPromoitonDatabaseTest {
 
     @Test
     public void getListTest() throws RemoteException {
-        assertEquals("双十二预热", webPromotionDatabase.getList().get(0).getName());
+        assertEquals("回馈顾客", webPromotionDatabase.getList().get(0).getName());
     }
 
     @Test

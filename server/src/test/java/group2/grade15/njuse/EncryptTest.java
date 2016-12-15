@@ -4,6 +4,8 @@ import group2.grade15.njuse.data.encrypt.Encrypt;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -19,11 +21,14 @@ public class EncryptTest {
 
     @Test
     public void encryptTest(){
+        System.out.print(encrypt.encrypt("wa00000000"));
+        System.out.print(encrypt.encrypt("12345"));
         assertEquals(")*+,",encrypt.encrypt("1234"));
     }
 
     @Test
     public void decryptTest(){
+        System.out.print(encrypt.decrypt("oY(((((((("));
         assertEquals("1234",encrypt.decrypt(")*+,"));
     }
 
