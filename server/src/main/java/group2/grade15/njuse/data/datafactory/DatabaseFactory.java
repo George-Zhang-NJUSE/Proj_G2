@@ -194,7 +194,7 @@ public class DatabaseFactory implements DataFactory {
                 return null;
             }
         }
-        return null;
+        return webPromotionDataService;
     }
 
 

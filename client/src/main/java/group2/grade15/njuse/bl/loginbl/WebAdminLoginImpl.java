@@ -18,20 +18,20 @@ import java.rmi.RemoteException;
  */
 public class WebAdminLoginImpl implements LoginControllerServ {
 
+    WebAdminPO webAdminPO;
     ResultMessage result;
 
     @Override
     public ResultMessage login(String id, String password) {
-        WebAdminPO po = null;
         try {
-            po = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(id);
+            webAdminPO = RemoteHelper.getInstance().getWebAdminDataService().getWebAdmin(id);
         } catch (RemoteException e) {
             result = ResultMessage.CONNECTION_EXCEPTION;
             e.printStackTrace();
         }
 
-        if (po != null) {
-            if (po.getPassword().equals(password)) {
+        if (webAdminPO != null) {
+            if (webAdminPO.getPassword().equals(password)) {
                 //登录成功
                 result = ResultMessage.SUCCESS;
             } else {

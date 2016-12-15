@@ -138,7 +138,7 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/AddPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/AddPromotion.fxml"));
 
 
             opPane.getChildren().clear();
