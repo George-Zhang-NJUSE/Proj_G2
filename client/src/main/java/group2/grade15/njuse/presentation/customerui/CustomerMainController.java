@@ -30,16 +30,14 @@ public class CustomerMainController implements Initializable{
     @FXML
     private Label usernameLabel, creditLabel,bookHotelLabel,myOrderLabel, myHotelLabel, personalInfoLabel;
 
-
-    public void initData(CustomerVO vo) {
-
-        userVO = vo;
+    private void refreshData() {
+        userVO=CommonData.getInstance().getCustomerVO();
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
-
-        CommonData.getInstance().setCustomerVO(userVO);
-
     }
+
+
+
 
     @FXML
     private void showSearchHotelPane() {
@@ -49,8 +47,9 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().clear();
             functionPane.getChildren().add(loader.load());
             CustomerSearchHotelController searchHotelController = loader.getController();//必须在load之后才能getController
-            searchHotelController.show();
 
+            refreshData();
+            searchHotelController.show();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -68,8 +67,8 @@ public class CustomerMainController implements Initializable{
 
             MyOrderListController orderListController = loader.getController();
 
+            refreshData();
             orderListController.initDataAndShow();
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -87,6 +86,8 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             MyHotelListController hotelListController = loader.getController();
+
+            refreshData();
             hotelListController.initDataAndShow(); //show必须在setParentPane之后，不能将其放在initialize方法里
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -104,8 +105,9 @@ public class CustomerMainController implements Initializable{
             functionPane.getChildren().add(loader.load());
 
             CustomerInfoController infoController = loader.getController();
-            infoController.initDataAndShow();
 
+            refreshData();
+            infoController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -113,6 +115,15 @@ public class CustomerMainController implements Initializable{
         }
     }
 
+    public void initData(CustomerVO vo) {
+
+        userVO = vo;
+        usernameLabel.setText(userVO.getName());
+        creditLabel.setText(Double.toString(userVO.getCredit()));
+
+        CommonData.getInstance().setCustomerVO(userVO);
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

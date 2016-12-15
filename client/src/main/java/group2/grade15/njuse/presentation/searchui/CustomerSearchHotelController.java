@@ -147,7 +147,7 @@ public class CustomerSearchHotelController implements Initializable {
         if (basicHotelListVO != null) {
 
             //debug
-            System.out.println("界面后台："+basicHotelListVO.getList().get(0).getName());
+//            System.out.println("界面后台："+basicHotelListVO.getList().get(0).getName());
 
             //抓取输入的搜索条件
             int customerID = customer.getId();
@@ -216,7 +216,7 @@ public class CustomerSearchHotelController implements Initializable {
 
 
         if (hotelListVO != null) {
-            System.out.println("界面前段筛选后："+hotelListVO.getList().get(0).getName());
+//            System.out.println("界面前段筛选后："+hotelListVO.getList().get(0).getName());
             ArrayList<HotelVO> hotelVOList = hotelListVO.getList();
 
             try {
