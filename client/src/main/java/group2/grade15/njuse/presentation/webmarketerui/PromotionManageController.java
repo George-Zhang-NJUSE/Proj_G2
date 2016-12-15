@@ -121,7 +121,7 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/AddPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/AddPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((AddPromotionController)lodar.getController()).promotionManageController=this;
@@ -138,7 +138,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/DeletePromotionCheck.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((DeletePromotionCheckController)lodar.getController()).promotionManageController=this;
@@ -156,7 +156,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/ModifyPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/ModifyPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((ModifyPromotionController)lodar.getController()).promotionManageController=this;
