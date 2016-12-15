@@ -74,18 +74,22 @@ public class Customer implements CustomerBL {
 
     @Override
     public CreditListVO getCreditHistory(int customerID) {
-        ArrayList<CreditPO> creditPOs = new ArrayList();
+        ArrayList<CreditPO> creditPOs = null;
         try {
-           creditPOs = RemoteHelper.getInstance().getCreditDataService().getHistory(customerID);
+            creditPOs = RemoteHelper.getInstance().getCreditDataService().getHistory(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        ArrayList<CreditVO> creditVOs = creditPOs.stream()
-                                                 .map(CreditVO::new)
-                                                 .collect(Collectors.toCollection(ArrayList::new));
+        if (creditPOs != null){
+            ArrayList<CreditVO> creditVOs = creditPOs.stream()
+                    .map(CreditVO::new)
+                    .collect(Collectors.toCollection(ArrayList::new));
 
-        return new CreditListVO(creditVOs);
+            return new CreditListVO(creditVOs);
+        } else {
+            return null;
+        }
     }
 
 }

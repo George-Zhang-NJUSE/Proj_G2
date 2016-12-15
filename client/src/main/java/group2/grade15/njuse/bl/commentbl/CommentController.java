@@ -63,9 +63,10 @@ public class CommentController implements CommentServ, CommentBL {
             commentList.addAll(commentPOList.stream()
                                             .map(CommentVO::new)
                                             .collect(Collectors.toList()));
+            return new CommentListVO(commentList);
+        } else {
+            return null;
         }
-
-        return new CommentListVO(commentList);
     }
 
     @Override

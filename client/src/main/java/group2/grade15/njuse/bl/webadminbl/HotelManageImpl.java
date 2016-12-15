@@ -46,9 +46,11 @@ public class HotelManageImpl implements HotelManageBL {
             hotelList.add(hotel);
         }
 
-        hotelListVO = new HotelListVO(hotelList);
-
-        return hotelListVO;
+        if(hotelList.size() != 0) {
+            return new HotelListVO(hotelList);
+        } else {
+            return null;
+        }
     }
 
     public HotelListVO modifyHotel(HotelVO hotel) {
