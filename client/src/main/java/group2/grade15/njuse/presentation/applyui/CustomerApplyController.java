@@ -95,10 +95,10 @@ public class CustomerApplyController implements Initializable {
         ChangeWidth applyShrinkToRight = new ChangeWidth(applyPaneBack, 300, 220);
         applyShrinkToRight.setOnFinished((ActionEvent e) -> loadLoginPane());
 
-        Fade loginFadeOut = new Fade(applyPane, 300, false);
-        loginFadeOut.setOnFinished((ActionEvent e) -> applyShrinkToRight.play());
+        Fade applyFadeOut = new Fade(applyPane, 300, false);
+        applyFadeOut.setOnFinished((ActionEvent e) -> applyShrinkToRight.play());
 
-        loginFadeOut.play();
+        applyFadeOut.play();
 
     }
 
@@ -148,7 +148,9 @@ public class CustomerApplyController implements Initializable {
             newCustomer=customerServ.addCustomer(customerVO);
             if (newCustomer != null) {
                 Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+                successInfo.setOnCloseRequest((DialogEvent e)->rollBackToLogin());
                 successInfo.showAndWait();
+
             } else {
                 Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
                 failInfo.showAndWait();
