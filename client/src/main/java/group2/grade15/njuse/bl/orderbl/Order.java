@@ -77,23 +77,34 @@ public class Order implements OrderBL{
 
         //优惠策略的计算
         WebPromotionListVO webPromotionListVO = webPromotionController.getWebPromotionList();
-        HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
         ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
-        ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
 
         for(WebPromotionVO webPromotionVO : webPromotionList){
             String promotionType = webPromotionVO.getType().toString();
-            WebPromotionBL webPromoiton = PromotionFactory.getInstance().getWebPromotion(promotionType);
-            if(minPrice == -1 || webPromotionVO.getState() == PromotionState.start && webPromoiton.countPrice(orderVO, webPromotionVO) < minPrice){
-                minPrice = webPromoiton.countPrice(orderVO, webPromotionVO);
+            WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
+
+            boolean isMin = (minPrice == -1)
+                            || webPromotionVO.getState() == PromotionState.start
+                            && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
+
+            if(isMin){
+                minPrice = webPromotion.countPrice(orderVO, webPromotionVO);
                 usedPromotionID = webPromotionVO.getPromotionID();
             }
         }
 
+        HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
+        ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
+
         for(HotelPromotionVO hotelPromotionVO : hotelPromotionList){
             String promotionType = hotelPromotionVO.getType().toString();
             HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
-            if(minPrice == -1 || hotelPromotionVO.getState() == PromotionState.start && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice){
+
+            boolean isMin = (minPrice == -1)
+                            || hotelPromotionVO.getState() == PromotionState.start
+                            && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
+
+            if(isMin){
                 minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
                 usedPromotionID = hotelPromotionVO.getPromotionID();
             }
@@ -134,5 +145,9 @@ public class Order implements OrderBL{
         }
 
         return result;
+    }
+
+    private void countPriceInWebPro(){
+
     }
 }
