@@ -41,10 +41,10 @@
         <Label fx:id="showDetailLabel" onMouseClicked="#showHotelDetail" GridPane.columnIndex="7" GridPane.rowSpan="3" />
         <Label fx:id="makeOrderLabel" onMouseClicked="#showMakeOrderPane" GridPane.columnIndex="8" GridPane.rowSpan="3" />
         <Label text="我的订单记录：" GridPane.columnIndex="4" GridPane.halignment="RIGHT" />
-        <Label fx:id="unexecutedNumLabel" text="未执行*5" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-        <Label fx:id="revokedNumLabel" text="已撤销*3" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-        <Label fx:id="executedNumLabel" text="已执行*3" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-        <Label fx:id="abnormalNumLabel" text="异常*3" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+        <Label fx:id="unexecutedNumLabel" text="未执行*0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+        <Label fx:id="revokedNumLabel" text="已撤销*0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+        <Label fx:id="executedNumLabel" text="已执行*0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+        <Label fx:id="abnormalNumLabel" text="异常*0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
     </children>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

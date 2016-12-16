@@ -72,41 +72,43 @@ public class Order implements OrderBL{
     public OrderVO createPO(OrderVO orderVO){
         int hotelID = orderVO.getHotelID();
 
-        double minPrice = -1;
+        double minPrice = getOriginalPrice(orderVO);
         int usedPromotionID = 0;
 
         //优惠策略的计算
         WebPromotionListVO webPromotionListVO = webPromotionController.getWebPromotionList();
-        ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
 
-        for(WebPromotionVO webPromotionVO : webPromotionList){
-            String promotionType = webPromotionVO.getType().toString();
-            WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
+        if(webPromotionListVO != null) {
+            ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
+            for (WebPromotionVO webPromotionVO : webPromotionList) {
+                String promotionType = webPromotionVO.getType().toString();
+                WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
 
-            boolean isMin = (minPrice == -1)
-                            || webPromotionVO.getState() == PromotionState.start
-                            && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
+                boolean isMin = webPromotionVO.getState() == PromotionState.start
+                                && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
 
-            if(isMin){
-                minPrice = webPromotion.countPrice(orderVO, webPromotionVO);
-                usedPromotionID = webPromotionVO.getPromotionID();
+                if (isMin) {
+                    minPrice = webPromotion.countPrice(orderVO, webPromotionVO);
+                    usedPromotionID = webPromotionVO.getPromotionID();
+                }
             }
         }
 
         HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
-        ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
 
-        for(HotelPromotionVO hotelPromotionVO : hotelPromotionList){
-            String promotionType = hotelPromotionVO.getType().toString();
-            HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
+        if(hotelPromotionListVO != null) {
+            ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
+            for (HotelPromotionVO hotelPromotionVO : hotelPromotionList) {
+                String promotionType = hotelPromotionVO.getType().toString();
+                HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
 
-            boolean isMin = (minPrice == -1)
-                            || hotelPromotionVO.getState() == PromotionState.start
-                            && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
+                boolean isMin = hotelPromotionVO.getState() == PromotionState.start
+                                && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
 
-            if(isMin){
-                minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
-                usedPromotionID = hotelPromotionVO.getPromotionID();
+                if (isMin) {
+                    minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
+                    usedPromotionID = hotelPromotionVO.getPromotionID();
+                }
             }
         }
 
@@ -145,9 +147,5 @@ public class Order implements OrderBL{
         }
 
         return result;
-    }
-
-    private void countPriceInWebPro(){
-
     }
 }

@@ -18,18 +18,17 @@ import java.util.stream.Collectors;
 public class OrderList implements OrderListBL {
 
     public OrderListVO getAllOrderListByCustomerID(int customerID) {
-        ArrayList<OrderPO> orderPOList = new ArrayList();
+        ArrayList<OrderPO> orderPOList = null;
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        ArrayList<OrderVO> orderList = orderPOList.stream()
-                .map(OrderVO::new)
-                .collect(Collectors.toCollection(ArrayList::new));
-
         if (orderPOList != null) {
+            ArrayList<OrderVO> orderList = orderPOList.stream()
+                                                      .map(OrderVO::new)
+                                                      .collect(Collectors.toCollection(ArrayList::new));
             return new OrderListVO(orderList);
         } else {
             return null;
@@ -73,18 +72,18 @@ public class OrderList implements OrderListBL {
     }
 
     public OrderListVO getAllOrderListByHotelID(int hotelID) {
-        ArrayList<OrderPO> orderPOList = new ArrayList();
+        ArrayList<OrderPO> orderPOList = null;
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByHotel(hotelID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        ArrayList<OrderVO> orderList = orderPOList.stream()
-                .map(OrderVO::new)
-                .collect(Collectors.toCollection(ArrayList::new));
 
         if (orderPOList != null) {
+            ArrayList<OrderVO> orderList = orderPOList.stream()
+                                                      .map(OrderVO::new)
+                                                      .collect(Collectors.toCollection(ArrayList::new));
             return new OrderListVO(orderList);
         } else {
             return null;
@@ -98,24 +97,36 @@ public class OrderList implements OrderListBL {
         OrderListVO orderListVO = getAllOrderListByCustomerID(customerID);
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
 
-        ArrayList<OrderVO> filterOrderList = orderList.stream()
-                .filter(orderVO -> orderVO.getState() == state)
-                .collect(Collectors.toCollection(ArrayList::new));
+        if(orderListVO == null){
+            return null;
+        }
 
-        return new OrderListVO(filterOrderList);
+        ArrayList<OrderVO> filterOrderList = orderList.stream()
+                                                      .filter(orderVO -> orderVO.getState() == state)
+                                                      .collect(Collectors.toCollection(ArrayList::new));
+
+        if(filterOrderList.size() != 0){
+            return new OrderListVO(filterOrderList);
+        } else {
+            return null;
+        }
     }
 
     /**
      * 根据所需状态对客户在特定酒店的订单进行筛选
      */
     private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO) {
+
+        if(orderListVO == null){
+            return null;
+        }
+
         ArrayList<OrderVO> orderList = orderListVO.getOrderList();
-
         ArrayList<OrderVO> filterOrderList = orderList.stream()
-                .filter(orderVO -> orderVO.getHotelID() == hotelID)
-                .collect(Collectors.toCollection(ArrayList::new));
+                                                      .filter(orderVO -> orderVO.getHotelID() == hotelID)
+                                                      .collect(Collectors.toCollection(ArrayList::new));
 
-        if (filterOrderList != null) {
+        if (filterOrderList.size() != 0) {
             return new OrderListVO(filterOrderList);
         } else {
             return null;

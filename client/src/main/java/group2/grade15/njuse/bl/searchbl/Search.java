@@ -78,7 +78,11 @@ public class Search implements SearchServ {
             hotelList = searchFilter.filterByTime(searchCondition.getCheckInTime(), searchCondition.getCheckOutTime(), searchCondition.getFreeRoomNum(), searchCondition.getRoomType(), hotelList);
         }
 
-        return new HotelListVO(hotelList);
+        if(hotelList == null || hotelList.size() == 0) {
+            return null;
+        } else {
+            return new HotelListVO(hotelList);
+        }
     }
 
     @Override
