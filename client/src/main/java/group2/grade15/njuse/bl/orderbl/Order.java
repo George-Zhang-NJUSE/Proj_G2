@@ -120,6 +120,17 @@ public class Order implements OrderBL{
         int hotelID = orderVO.getHotelID();
         RoomType roomType = orderVO.getType();
 
+        Date checkIn = orderVO.getCheckInTime();
+        Date checkOut = orderVO.getCheckOutTime();
+        int seconds = (60 * 60 * 24 * 1000);
+        long stayDays = 0;
+        long sub = (checkOut.getTime() - checkIn.getTime());
+        if(sub % seconds == 0) {
+            stayDays = sub / seconds;
+        } else {
+            stayDays = sub / seconds + 1;
+        }
+
         HotelBL hotel = new Hotel();
         double roomPrice = -1;
 
@@ -131,7 +142,7 @@ public class Order implements OrderBL{
             }
         }
 
-        double originalPrice = roomPrice * roomNum;
+        double originalPrice = roomPrice * roomNum * stayDays;
 
         return originalPrice;
     }
