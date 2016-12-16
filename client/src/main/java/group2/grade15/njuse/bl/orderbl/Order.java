@@ -146,8 +146,4 @@ public class Order implements OrderBL{
 
         return result;
     }
-
-    private void countPriceInWebPro(){
-
-    }
 }
