@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.FileChooser;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class HotelInfoController implements Initializable {
     @FXML
     private Label editButton;
 
-
+    FileChooser fileChooser=new FileChooser();
 
 
     @Override
@@ -54,6 +55,8 @@ public class HotelInfoController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
+        fileChooser.setTitle("选择图片文件");
+
 
     }
     private void show(){

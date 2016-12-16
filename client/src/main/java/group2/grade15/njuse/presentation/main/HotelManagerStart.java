@@ -2,6 +2,7 @@ package group2.grade15.njuse.presentation.main;
 
 
 import group2.grade15.njuse.presentation.loginui.HotelManageLoginController;
+import group2.grade15.njuse.runner.ClientRunner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class HotelManagerStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/loginui/HotelManageLogin.fxml"));
+        FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/res/hotelmanager/HotelManageLogin.fxml"));
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
@@ -24,6 +25,8 @@ public class HotelManagerStart extends Application {
         HotelManageLoginController controller=loader.getController();
         controller.setStage(primaryStage);
         primaryStage.show();
+
+        ClientRunner clientRunner = new ClientRunner();
     }
 
     public static void main(String[] args) {
