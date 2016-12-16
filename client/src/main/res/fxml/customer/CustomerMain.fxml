@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.customerui.CustomerMainController">
@@ -59,7 +60,7 @@
                 </GridPane>
             </top>
             <center>
-                <VBox prefHeight="200.0" prefWidth="127.0" spacing="10.0" BorderPane.alignment="CENTER">
+                <VBox prefHeight="711.0" prefWidth="166.0" spacing="10.0">
                     <children>
                         <Label fx:id="bookHotelLabel" onMouseClicked="#showSearchHotelPane">
                             <graphic>
@@ -92,7 +93,8 @@
                               <Image url="file:client/src/main/res/customer/myhotel.png" />
                            </image>
                         </ImageView>
-                     </graphic></Label>
+                     </graphic>
+                  </Label>
                         <Label fx:id="personalInfoLabel" onMouseClicked="#showPersonalInfoPane">
                             <VBox.margin>
                                 <Insets />
@@ -111,6 +113,16 @@
                     </padding>
                 </VBox>
             </center>
+         <right>
+            <Pane prefHeight="200.0" prefWidth="20.0" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <children>
+                  <Rectangle fx:id="indicator" arcHeight="5.0" arcWidth="5.0" fill="#1fa7ff" height="41.0" layoutX="5.0" layoutY="10.0" stroke="#1fa7ff" strokeType="INSIDE" width="10.0" />
+               </children>
+            </Pane>
+         </right>
         </BorderPane>
     </left>
     <bottom>

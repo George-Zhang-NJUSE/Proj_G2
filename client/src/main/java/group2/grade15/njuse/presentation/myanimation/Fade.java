@@ -30,6 +30,13 @@ public class Fade {
     }
 
     /**
+     * 仅供其他动画类调用
+    * */
+    protected Timeline getTimeline() {
+        return timeline;
+    }
+
+    /**
      * 设置动画结束时执行的操作
      *
      * @param handler 动画结束事件的监听器，为匿名类，建议用lambda表达式
@@ -42,4 +49,5 @@ public class Fade {
     public void play() {
         timeline.play();
     }
+
 }
