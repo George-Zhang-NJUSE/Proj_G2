@@ -100,7 +100,7 @@ public class CustomerMainController implements Initializable{
             Translate translate = new Translate(indicator, 300, myHotelLabelY, false);
 
             translate.play();
-            hotelListController.initDataAndShow(); //show必须在setParentPane之后，不能将其放在initialize方法里
+            hotelListController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
