@@ -29,7 +29,7 @@ public class SearchFilter implements SearchFilterBL {
         GetHotelListBL getHotelListBL = new HotelController();
         HotelListVO hotelListVO = getHotelListBL.getBookedHotelList(customerID);
 
-        if(hotelListVO != null) {
+        if(hotelListVO != null ) {
             ArrayList<HotelVO> bookedHotelList = hotelListVO.getList();
             ArrayList<HotelVO> newHotelList = new ArrayList();
 
