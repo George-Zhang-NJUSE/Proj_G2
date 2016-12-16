@@ -116,12 +116,12 @@ public class OrderList implements OrderListBL {
      * 根据所需状态对客户在特定酒店的订单进行筛选
      */
     private OrderListVO filterOrderByHotelID(int hotelID, OrderListVO orderListVO) {
-        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
 
-        if(orderList == null){
+        if(orderListVO == null){
             return null;
         }
 
+        ArrayList<OrderVO> orderList = orderListVO.getOrderList();
         ArrayList<OrderVO> filterOrderList = orderList.stream()
                                                       .filter(orderVO -> orderVO.getHotelID() == hotelID)
                                                       .collect(Collectors.toCollection(ArrayList::new));
