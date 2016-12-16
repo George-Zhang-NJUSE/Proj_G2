@@ -122,7 +122,7 @@ public class Order implements OrderBL{
 
         Date checkIn = orderVO.getCheckInTime();
         Date checkOut = orderVO.getCheckOutTime();
-        int seconds = (60 * 60 * 24);
+        int seconds = (60 * 60 * 24 * 1000);
         long stayDays = 0;
         long sub = (checkOut.getTime() - checkIn.getTime());
         if(sub % seconds == 0) {
