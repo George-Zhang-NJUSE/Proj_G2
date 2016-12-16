@@ -59,6 +59,9 @@ public class CustomerDataBaseImpl implements CustomerDataService {
                 birthday = r.getDate(7);
                 companyName=encrypt.decrypt(r.getString(8));
             }
+            else{
+                throw new SQLException();
+            }
             getInfo.close();
             customerConnection.close();
             customerConnection = null;
