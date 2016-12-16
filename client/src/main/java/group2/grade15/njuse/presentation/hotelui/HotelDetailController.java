@@ -47,6 +47,8 @@ public class HotelDetailController implements Initializable {
     private Image[] imageList;
     private ArrayList<OrderVO> myOrders;
 
+    private ChangeImage changeImage; //无限循环的动画要在退出时手动删除
+
 
     @FXML
     private Node rootNode;
@@ -65,6 +67,7 @@ public class HotelDetailController implements Initializable {
 
     @FXML
     protected void goBack() {
+        changeImage.destroy();
         parentPane.getChildren().remove(rootNode);
     }
 
@@ -127,7 +130,7 @@ public class HotelDetailController implements Initializable {
         Pop popIn = new Pop(rootNode, 300, true);
 
         //切换图片动画
-        ChangeImage changeImage = new ChangeImage(hotelImageView, 2000, imageList);
+        changeImage = new ChangeImage(hotelImageView, 2000, imageList);
 
         popIn.setOnFinished((ActionEvent e) -> {
             loadComments();
