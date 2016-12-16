@@ -14,8 +14,8 @@
 
 <GridPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.orderui.MakeOrderController">
     <columnConstraints>
-        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
     </columnConstraints>
     <rowConstraints>
@@ -44,7 +44,7 @@
         <ComboBox fx:id="checkInHourComboBox" onAction="#updateOrderInfo" prefHeight="30.0" prefWidth="200.0" promptText="一天内具体时间" visibleRowCount="8" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="预计退房日期：" GridPane.rowIndex="5" />
         <Label text="房间种类：" GridPane.rowIndex="7" />
-        <Label text="下单预订房间" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+        <Label text="下单预订房间" GridPane.columnSpan="3" GridPane.halignment="CENTER">
             <font>
                 <Font size="24.0" />
             </font>
@@ -71,8 +71,14 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.rowIndex="12" />
-        <Label fx:id="confirmLabel" onMouseClicked="#submitOrder" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+        <Label fx:id="cancelLabel" onMouseClicked="#close" GridPane.halignment="LEFT" GridPane.rowIndex="12">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin></Label>
+        <Label fx:id="confirmLabel" onMouseClicked="#submitOrder" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="12">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin></Label>
         <Label text="房间数量：" GridPane.rowIndex="8" />
         <HBox alignment="CENTER_LEFT" layoutX="160.0" layoutY="536.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
             <children>
