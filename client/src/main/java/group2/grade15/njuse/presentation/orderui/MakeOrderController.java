@@ -147,7 +147,7 @@ public class MakeOrderController implements Initializable {
         SimpleDateFormat dayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date(System.currentTimeMillis());
 
-        if (dayDateFormat.format(currentDate).compareTo(checkInDateStr) >= 0) {
+        if (!checkInDateStr.isEmpty() && dayDateFormat.format(currentDate).compareTo(checkInDateStr) >= 0) {
 
             Alert tooEarlyDate = new Alert(Alert.AlertType.ERROR, "入住时间必须晚于今天！");
             tooEarlyDate.showAndWait();
