@@ -42,9 +42,6 @@ public class CustomerMainController implements Initializable{
         creditLabel.setText(Double.toString(userVO.getCredit()));
     }
 
-
-
-
     @FXML
     private void showSearchHotelPane() {
         String searchPaneUrl = "file:client/src/main/res/fxml/customer/CustomerSearchHotel.fxml";
