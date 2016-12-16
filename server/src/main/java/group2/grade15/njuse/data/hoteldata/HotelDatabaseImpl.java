@@ -74,17 +74,17 @@ public class HotelDatabaseImpl implements HotelDataService {
                 if (room.next()) {
                     if (room.getBoolean(2)) {
                         RoomPO roomPO1 = new RoomPO(RoomType.bigSingleBed, room.getDouble(5),
-                                room.getInt(4), room.getInt(3));
+                                room.getInt(4),room.getInt(4)- room.getInt(3));
                         roomList.add(roomPO1);
                     }
                     if (room.getBoolean(6)) {
                         RoomPO roomPO2 = new RoomPO(RoomType.stadardDoubleBed, room.getDouble(9),
-                                room.getInt(8), room.getInt(7));
+                                room.getInt(8), room.getInt(8)-room.getInt(7));
                         roomList.add(roomPO2);
                     }
                     if (room.getBoolean(10)) {
                         RoomPO roomPO3 = new RoomPO(RoomType.suiteRoom, room.getDouble(13),
-                                room.getInt(12), room.getInt(11));
+                                room.getInt(12), room.getInt(12)-room.getInt(11));
                         roomList.add(roomPO3);
                     }
                 } else {

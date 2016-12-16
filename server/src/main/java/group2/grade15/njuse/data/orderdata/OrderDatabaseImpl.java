@@ -259,7 +259,7 @@ public class OrderDatabaseImpl implements OrderDataService {
         }
 
         try {
-            PreparedStatement addOrder = orderDatabase.prepareStatement("insert into orderinfo values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement addOrder = orderDatabase.prepareStatement("insert into orderinfo values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             Statement makeID = orderDatabase.createStatement();
             ResultSet id = makeID.executeQuery("select max(ordernum) from orderinfo");
 
