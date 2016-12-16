@@ -21,7 +21,7 @@ public class EncryptTest {
 
     @Test
     public void encryptTest(){
-        System.out.print(encrypt.encrypt("wa00000000"));
+        System.out.print(encrypt.encrypt(1));
         System.out.print(encrypt.encrypt("12345"));
         assertEquals(")*+,",encrypt.encrypt("1234"));
     }
