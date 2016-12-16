@@ -210,7 +210,7 @@ public class WebAdminController implements Initializable{
      * Account的TableView的数据承载类，包括四种账户类型的构造函数
      */
     public static class Account{
-        private final SimpleIntegerProperty id;
+        private final SimpleStringProperty id;
         private final SimpleStringProperty name;
         private final SimpleStringProperty password;
         private final SimpleStringProperty contact;
@@ -220,7 +220,7 @@ public class WebAdminController implements Initializable{
         private final SimpleStringProperty companyName;
 
         private Account(CustomerVO vo){
-            id = new SimpleIntegerProperty(vo.getId());
+            id = new SimpleStringProperty(String.valueOf(vo.getId()));
             name = new SimpleStringProperty(vo.getName());
             password = new SimpleStringProperty(vo.getPassword());
             contact = new SimpleStringProperty(vo.getContact());
@@ -241,7 +241,7 @@ public class WebAdminController implements Initializable{
         }
 
         private Account(HotelManagerVO vo) {
-            id = new SimpleIntegerProperty(vo.getId());
+            id = new SimpleStringProperty(String.valueOf(vo.getId()));
             name = new SimpleStringProperty(vo.getName());
             password = new SimpleStringProperty(vo.getPassword());
             contact = new SimpleStringProperty(vo.getContact());
@@ -252,7 +252,7 @@ public class WebAdminController implements Initializable{
         }
 
         private Account(WebMarketerVO vo) {
-            id=new SimpleIntegerProperty(Integer.parseInt(vo.getStaffID()));
+            id=new SimpleStringProperty((vo.getStaffID()));
             password = new SimpleStringProperty(vo.getPassword());
             name = new SimpleStringProperty("none");
             contact = new SimpleStringProperty("none");
@@ -263,7 +263,7 @@ public class WebAdminController implements Initializable{
         }
 
         private Account(WebAdminVO vo) {
-            id=new SimpleIntegerProperty(Integer.parseInt(vo.getStaffID()));
+            id=new SimpleStringProperty((vo.getStaffID()));
             password = new SimpleStringProperty(vo.getPassword());
             name = new SimpleStringProperty("none");
             contact = new SimpleStringProperty("none");
@@ -272,7 +272,7 @@ public class WebAdminController implements Initializable{
             type = new SimpleStringProperty("网站管理");
             companyName = new SimpleStringProperty("none");
         }
-        public int getId(){
+        public String getId(){
             return id.get();
         }
         public String getName(){
