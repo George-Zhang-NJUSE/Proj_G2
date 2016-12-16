@@ -1,97 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.HTMLEditor?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-          prefWidth="1200.0" style="-fx-background-color: rgb(255,255,255,0.3);" xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelInfoController">
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: rgb(255,255,255,0.3);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelInfoController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextArea fx:id="describeEditor" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2"/>
+        <TextArea fx:id="describeEditor" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
         <GridPane vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0"
-                                   prefWidth="40.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="40.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="30.0" valignment="TOP"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="酒店名称：">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
                 <Label text="酒店地址：" GridPane.rowIndex="1">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
                 <Label text="酒店星级：" GridPane.rowIndex="2">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
                 <Label text="联系方式：" GridPane.rowIndex="3">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextField fx:id="name" GridPane.columnIndex="1"/>
-                <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <TextField fx:id="rank" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <TextField fx:id="contact" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <TextField fx:id="name" GridPane.columnIndex="1" />
+                <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="rank" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="contact" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="设施描述：" GridPane.rowIndex="4">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="facility" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="4"/>
+                <TextArea fx:id="facility" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Label text="合作企业：" GridPane.rowIndex="5">
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <ListView fx:id="company" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="5"/>
+                <ListView fx:id="company" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ListView fx:id="picturePathList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
+               <children>
+                  <Label text="添加图片：">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="callFileChooserButton" mnemonicParsing="false" text="..." />
+                  <Label fx:id="fileNumber">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
             </children>
         </GridPane>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
             <GridPane.margin>
-                <Insets left="10.0" top="10.0"/>
+                <Insets left="10.0" top="10.0" />
             </GridPane.margin>
             <children>
                 <Label fx:id="check">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="file:client/src/main/res/hotelmanage/check.png"/>
+                                <Image url="file:client/src/main/res/hotelmanage/check.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -100,7 +112,7 @@
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="file:client/src/main/res/hotelmanage/cancel.png"/>
+                                <Image url="file:client/src/main/res/hotelmanage/cancel.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -109,25 +121,25 @@
         </VBox>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
             <GridPane.margin>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </GridPane.margin>
             <children>
                 <Label fx:id="editButton" graphicTextGap="10.0" text="编辑">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true"/>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
                     </graphic>
                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0"/>
+                        <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                 </Label>
             </children>
         </VBox>
         <Label text="酒店信息管理" GridPane.columnIndex="1">
             <font>
-                <Font name="Microsoft YaHei Light" size="36.0"/>
+                <Font name="Microsoft YaHei Light" size="36.0" />
             </font>
         </Label>
     </children>

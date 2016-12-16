@@ -368,7 +368,6 @@ public class WebAdminController implements Initializable{
         WebMarketerVO vo = new WebMarketerVO(userPW.getText(),userName.getText());
         return vo;
     }
-
     private HotelVO gatherHotelVO(){
         HotelVO result;
         result = new HotelVO(

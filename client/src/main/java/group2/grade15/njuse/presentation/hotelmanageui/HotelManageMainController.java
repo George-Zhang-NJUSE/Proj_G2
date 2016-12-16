@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -47,6 +48,7 @@ public class HotelManageMainController implements Initializable {
     @FXML
     private Pane opPane;
 
+    public Stage stage;
     //Controller的持有
     HotelInfoController hotelInfoController;
 
@@ -88,6 +90,8 @@ public class HotelManageMainController implements Initializable {
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
+            HotelInfoController controller = (HotelInfoController)infoLoader.getController();
+            controller.ownerStage=stage;
             in.play();
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -69,15 +69,16 @@ public class HotelManageLoginController implements Initializable{
     private void jumpToMain(HotelManagerVO vo){
         try{
             FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelManageMain.fxml"));
-            Stage webMarketerMainStage=new Stage();
-            webMarketerMainStage.setScene(new Scene(loader.load()));
+            Stage hotelManagerMainStage=new Stage();
+            hotelManagerMainStage.setScene(new Scene(loader.load()));
             HotelManageMainController hotelManageMainController=loader.getController();
             hotelManageMainController.setHotelManagerVO(vo);
+            hotelManageMainController.stage=hotelManagerMainStage;
             currentStage.close();
-            webMarketerMainStage.sizeToScene();
-            webMarketerMainStage.setResizable(false);
-            webMarketerMainStage.setTitle("酒店预订系统——网站营销人员端");
-            webMarketerMainStage.show();
+            hotelManagerMainStage.sizeToScene();
+            hotelManagerMainStage.setResizable(false);
+            hotelManagerMainStage.setTitle("酒店预订系统——网站营销人员端");
+            hotelManagerMainStage.show();
         }catch (MalformedURLException e){
             e.printStackTrace();
         }catch (Exception e){
