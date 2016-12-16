@@ -12,6 +12,7 @@ import group2.grade15.njuse.vo.RoomVO;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by Guo on 2016/12/8.
@@ -27,19 +28,24 @@ public class SearchFilter implements SearchFilterBL {
     public ArrayList<HotelVO> filterByBooked(int customerID, ArrayList<HotelVO> hotelList) {
         GetHotelListBL getHotelListBL = new HotelController();
         HotelListVO hotelListVO = getHotelListBL.getBookedHotelList(customerID);
-        ArrayList<HotelVO> bookedHotelList = hotelListVO.getList();
-        ArrayList<HotelVO> newHotelList = new ArrayList();
 
-        for (HotelVO hotel : hotelList) {
-            for (HotelVO bookedHotel : bookedHotelList) {
-                if (hotel.getId() == bookedHotel.getId()) {
-                    newHotelList.add(hotel);
-                    break;
+        if(hotelListVO != null) {
+            ArrayList<HotelVO> bookedHotelList = hotelListVO.getList();
+            ArrayList<HotelVO> newHotelList = new ArrayList();
+
+            for (HotelVO hotel : hotelList) {
+                for (HotelVO bookedHotel : bookedHotelList) {
+                    if (hotel.getId() == bookedHotel.getId()) {
+                        newHotelList.add(hotel);
+                        break;
+                    }
                 }
             }
-        }
 
-        return newHotelList;
+            return newHotelList;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -142,13 +148,9 @@ public class SearchFilter implements SearchFilterBL {
 
     @Override
     public ArrayList<HotelVO> filterByStarLevel(int minStarLevel, ArrayList<HotelVO> hotelList) {
-        ArrayList<HotelVO> newHotelList = new ArrayList();
-
-        for (HotelVO hotelVO : hotelList) {
-            if (hotelVO.getRank() >= minStarLevel) {
-                newHotelList.add(hotelVO);
-            }
-        }
+        ArrayList<HotelVO> newHotelList = hotelList.stream().
+                                          filter(hotelVO -> hotelVO.getRank() >= minStarLevel)
+                                          .collect(Collectors.toCollection(ArrayList::new));
 
         return newHotelList;
     }
@@ -158,7 +160,9 @@ public class SearchFilter implements SearchFilterBL {
         ArrayList<HotelVO> newHotelList = new ArrayList();
 
         for (HotelVO hotelVO : hotelList) {
-            if ((hotelVO.getScore() >= minScore) && (hotelVO.getScore() <= maxScore)) {
+            boolean isFit = (hotelVO.getScore() >= minScore)
+                            && (hotelVO.getScore() <= maxScore);
+            if (isFit) {
                 newHotelList.add(hotelVO);
             }
         }
