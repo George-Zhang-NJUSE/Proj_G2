@@ -54,6 +54,11 @@ public class HotelController implements HotelServ, GetHotelListBL{
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
+
+        if(orderList == null) {
+            return null;
+        }
+
         ArrayList<HotelVO> hotelList = new ArrayList();
 
         HashSet<Integer> hotelIDSet = orderList.stream()
