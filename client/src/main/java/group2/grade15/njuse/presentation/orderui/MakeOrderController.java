@@ -169,6 +169,7 @@ public class MakeOrderController implements Initializable {
 
                 java.sql.Date checkInSqlDate = new java.sql.Date(checkInDate.getTime());
                 java.sql.Date checkOutSqlDate = new java.sql.Date(checkOutDate.getTime());
+                java.sql.Date createSqlDate = new java.sql.Date(System.currentTimeMillis());
 
                 //抓取其他信息
                 RoomType roomType = availableRoomList.get(roomTypeComboBox.getSelectionModel().getSelectedIndex()).getType();
@@ -179,7 +180,7 @@ public class MakeOrderController implements Initializable {
 
                 //获得总价及促销策略
                 completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
-                        null, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
+                        createSqlDate, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
                 totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
 
                 int promotionID = completedOrder.getPromotionID();
