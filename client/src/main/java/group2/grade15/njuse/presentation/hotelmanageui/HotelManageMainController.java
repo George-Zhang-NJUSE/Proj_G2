@@ -107,7 +107,7 @@ public class HotelManageMainController implements Initializable {
         try{
             Fade out = new Fade(opPane, 500, false);
             out.play();
-            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/OrderManage.fxml"));
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/OrderManage.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
@@ -130,7 +130,7 @@ public class HotelManageMainController implements Initializable {
         try{
             Fade out = new Fade(opPane, 500, false);
             out.play();
-            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/RoomManage.fxml"));
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/RoomManage.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
@@ -153,7 +153,7 @@ public class HotelManageMainController implements Initializable {
         try{
             Fade out = new Fade(opPane, 500, false);
             out.play();
-            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/PromotionManage.fxml"));
+            FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/PromotionManage.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
