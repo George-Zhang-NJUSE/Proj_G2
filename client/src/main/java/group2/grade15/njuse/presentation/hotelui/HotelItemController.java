@@ -7,6 +7,7 @@ import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import group2.grade15.njuse.vo.HotelVO;
+import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,21 +81,37 @@ public class HotelItemController implements Initializable {
 
             int customerID = CommonData.getInstance().getCustomerVO().getId();
             int hotelID = hotelVO.getId();
-            ArrayList<OrderVO> unexecutedOrders = orderListServ.getUnexecutedOrderListInHotel(customerID, hotelID).getOrderList();
-            ArrayList<OrderVO> executedOrders = orderListServ.getExecutedOrderListInHotel(customerID, hotelID).getOrderList();
-            ArrayList<OrderVO> revokedOrders = orderListServ.getRevokedOrderListInHotel(customerID, hotelID).getOrderList();
-            ArrayList<OrderVO> abnormalOrders = orderListServ.getAbnormalOrderList(customerID, hotelID).getOrderList();
 
-            unexecutedNumLabel.setText("未执行*" + unexecutedOrders.size());
-            executedNumLabel.setText("已执行*" + executedOrders.size());
-            revokedNumLabel.setText("已撤销*" + revokedOrders.size());
-            abnormalNumLabel.setText("异常*" + abnormalOrders.size());
+            OrderListVO unexecutedListVO = orderListServ.getUnexecutedOrderListInHotel(customerID, hotelID);
+            OrderListVO executedListVO = orderListServ.getExecutedOrderListInHotel(customerID, hotelID);
+            OrderListVO revokedListVO = orderListServ.getRevokedOrderListInHotel(customerID, hotelID);
+            OrderListVO abnormalListVO = orderListServ.getAbnormalOrderList(customerID, hotelID);
 
             myOrders = new ArrayList<>();
-            myOrders.addAll(unexecutedOrders);
-            myOrders.addAll(executedOrders);
-            myOrders.addAll(revokedOrders);
-            myOrders.addAll(abnormalOrders);
+
+            if(unexecutedListVO!=null){
+                ArrayList<OrderVO> unexecutedOrders = unexecutedListVO.getOrderList();
+                unexecutedNumLabel.setText("未执行*" + unexecutedOrders.size());
+                myOrders.addAll(unexecutedOrders);
+            }
+
+            if (executedListVO != null) {
+                ArrayList<OrderVO> executedOrders = executedListVO.getOrderList();
+                executedNumLabel.setText("已执行*" + executedOrders.size());
+                myOrders.addAll(executedOrders);
+            }
+
+            if (revokedListVO != null) {
+                ArrayList<OrderVO> revokedOrders = revokedListVO.getOrderList();
+                revokedNumLabel.setText("已撤销*" + revokedOrders.size());
+                myOrders.addAll(revokedOrders);
+            }
+
+            if (abnormalListVO != null) {
+                ArrayList<OrderVO> abnormalOrders = abnormalListVO.getOrderList();
+                abnormalNumLabel.setText("异常*" + abnormalOrders.size());
+                myOrders.addAll(abnormalOrders);
+            }
 
             hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture()[0])));
             hotelNameLabel.setText(hotelVO.getName());

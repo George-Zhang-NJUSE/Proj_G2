@@ -237,6 +237,8 @@ public class CustomerSearchHotelController implements Initializable {
                 e.printStackTrace();
             }
 
+        }else{
+            searchItemBox.getChildren().clear();
         }
 
     }
