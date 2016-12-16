@@ -42,6 +42,7 @@ public class MakeOrderController implements Initializable {
     private int maxRoomNum, maxCustomerNum;
     private OrderServ orderServ;
     private OrderVO completedOrder;
+    private boolean isValidOrder=false;
 
     @FXML
     private Node rootNode;
@@ -149,6 +150,7 @@ public class MakeOrderController implements Initializable {
         if (dayDateFormat.format(currentDate).compareTo(checkInDateStr) >= 0) {
 
             Alert tooEarlyDate = new Alert(Alert.AlertType.ERROR, "入住时间必须晚于今天！");
+            tooEarlyDate.showAndWait();
 
         } else {
 
@@ -206,6 +208,7 @@ public class MakeOrderController implements Initializable {
                         promotionLabel.setText("本订单没有享受优惠");
                     }
 
+                    isValidOrder=true;
 
                 } else {
                     Alert incorrectTimeAlert = new Alert(Alert.AlertType.ERROR, "退房日期必须晚于入住日期！");
@@ -224,7 +227,7 @@ public class MakeOrderController implements Initializable {
         if (totalPriceLabel.getText().equals("0") || customerNumLabel.getText().equals("0") || roomNumLabel.getText().equals("0")) {
             Alert uncompletedInfoAlert = new Alert(Alert.AlertType.ERROR, "请完善订单信息！");
             uncompletedInfoAlert.showAndWait();
-        }else{
+        }else if(isValidOrder){
             ResultMessage result = orderServ.saveOrder(completedOrder);
             switch (result) {
                 case SUCCESS:
@@ -241,6 +244,9 @@ public class MakeOrderController implements Initializable {
                     netError.showAndWait();
                     break;
             }
+        }else {
+            Alert wrongDateAlert = new Alert(Alert.AlertType.ERROR, "请填写正确的日期！");
+            wrongDateAlert.showAndWait();
         }
     }
 
