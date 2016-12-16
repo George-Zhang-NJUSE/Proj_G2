@@ -140,7 +140,6 @@ public class MakeOrderController implements Initializable {
 
     @FXML
     private void updateOrderInfo() { //每一次界面信息更新都被调用
-        // TODO: 2016/12/16
 
         String checkInDateStr = checkInDatePicker.getEditor().getText();
         String checkOutDateStr = checkOutDatePicker.getEditor().getText();
@@ -148,76 +147,79 @@ public class MakeOrderController implements Initializable {
         SimpleDateFormat dayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date(System.currentTimeMillis());
 
-        if ( (!checkInDateStr.isEmpty()) && dayDateFormat.format(currentDate).compareTo(checkInDateStr) >= 0) {
+        try {
 
-            Alert tooEarlyDate = new Alert(Alert.AlertType.ERROR, "入住时间必须晚于今天！");
-            tooEarlyDate.showAndWait();
+            if ( checkInDateStr.length()>0 && currentDate.compareTo(dayDateFormat.parse(checkInDateStr)) >= 0) {
 
-        } else {
+                Alert tooEarlyDate = new Alert(Alert.AlertType.ERROR, "入住时间必须晚于今天！");
+                tooEarlyDate.showAndWait();
 
-            if (checkInDateStr.length()>0 && checkOutDateStr.length()>0) {
+            } else {
 
-                if (checkOutDateStr.compareTo(checkInDateStr) > 0) {//退房日期必须晚于入住日期
+                if (checkInDateStr.length()>0 && checkOutDateStr.length()>0) {
 
-                    Date checkInDate = null, checkOutDate = null;
+                    if (checkOutDateStr.compareTo(checkInDateStr) > 0) {//退房日期必须晚于入住日期
 
-                    //扩展至完全格式
-                    String checkInTimeStr = (String) checkInHourComboBox.getValue();
-                    checkInTimeStr = checkInTimeStr.substring(0, 2) + ":00:00";
-                    String checkOutTimeStr = (String) checkOutHourComboBox.getValue();
-                    checkOutTimeStr = checkOutTimeStr.substring(0, 2) + ":00:00";
+                        Date checkInDateFull = null, checkOutDateFull = null;
 
-                    //设置精确到小时的入住、退房时间
-                    checkInDateStr = checkInDateStr + " " + checkInTimeStr;
-                    checkOutDateStr = checkOutDateStr + " " + checkOutTimeStr;
+                        //扩展至完全格式
+                        String checkInTimeStr = (String) checkInHourComboBox.getValue();
+                        checkInTimeStr = checkInTimeStr.substring(0, 2) + ":00:00";
+                        String checkOutTimeStr = (String) checkOutHourComboBox.getValue();
+                        checkOutTimeStr = checkOutTimeStr.substring(0, 2) + ":00:00";
 
-                    SimpleDateFormat fullDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    try {
-                        checkInDate = fullDateFormat.parse(checkInDateStr);
-                        checkOutDate = fullDateFormat.parse(checkOutDateStr);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                        //设置精确到小时的入住、退房时间
+                        checkInDateStr = checkInDateStr + " " + checkInTimeStr;
+                        checkOutDateStr = checkOutDateStr + " " + checkOutTimeStr;
 
-                    java.sql.Date checkInSqlDate = new java.sql.Date(checkInDate.getTime());
-                    java.sql.Date checkOutSqlDate = new java.sql.Date(checkOutDate.getTime());
-                    java.sql.Date createSqlDate = new java.sql.Date(System.currentTimeMillis());
+                        SimpleDateFormat fullDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                    //抓取其他信息
-                    RoomType roomType = availableRoomList.get(roomTypeComboBox.getSelectionModel().getSelectedIndex()).getType();
-                    int roomNum = Integer.parseInt(roomNumLabel.getText());
-                    int customerNum = Integer.parseInt(customerNumLabel.getText());
-                    boolean hasChild = hasChildCheckBox.isSelected();
-                    int customerID = CommonData.getInstance().getCustomerVO().getId();
+                        checkInDateFull = fullDateFormat.parse(checkInDateStr);
+                        checkOutDateFull = fullDateFormat.parse(checkOutDateStr);
 
-                    //获得总价及促销策略
-                    completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
-                            createSqlDate, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
-                    totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
+                        java.sql.Date checkInSqlDate = new java.sql.Date(checkInDateFull.getTime());
+                        java.sql.Date checkOutSqlDate = new java.sql.Date(checkOutDateFull.getTime());
+                        java.sql.Date createSqlDate = new java.sql.Date(System.currentTimeMillis());
 
-                    int promotionID = completedOrder.getPromotionID();
+                        //抓取其他信息
+                        RoomType roomType = availableRoomList.get(roomTypeComboBox.getSelectionModel().getSelectedIndex()).getType();
+                        int roomNum = Integer.parseInt(roomNumLabel.getText());
+                        int customerNum = Integer.parseInt(customerNumLabel.getText());
+                        boolean hasChild = hasChildCheckBox.isSelected();
+                        int customerID = CommonData.getInstance().getCustomerVO().getId();
 
-                    if (promotionID != 0) {
-                        if (promotionID % 2 == 0) {//是酒店促销策略
-                            HotelPromotionServ hotelPromotionServ = new HotelPromotionController();
-                            promotionLabel.setText(hotelPromotionServ.getHotelPromotion(hotelID,promotionID).getName());
-                        }else{//是网站促销策略
-                            WebPromotionServ webPromotionServ = new WebPromotionController();
-                            promotionLabel.setText(webPromotionServ.getWebPromotion(promotionID).getName());
+                        //获得总价及促销策略
+                        completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
+                                createSqlDate, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
+                        totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
+
+                        int promotionID = completedOrder.getPromotionID();
+
+                        if (promotionID != 0) {
+                            if (promotionID % 2 == 0) {//是酒店促销策略
+                                HotelPromotionServ hotelPromotionServ = new HotelPromotionController();
+                                promotionLabel.setText(hotelPromotionServ.getHotelPromotion(hotelID,promotionID).getName());
+                            }else{//是网站促销策略
+                                WebPromotionServ webPromotionServ = new WebPromotionController();
+                                promotionLabel.setText(webPromotionServ.getWebPromotion(promotionID).getName());
+                            }
+                        }else{//没有享受任何促销策略
+                            promotionLabel.setText("本订单没有享受优惠");
                         }
-                    }else{//没有享受任何促销策略
-                        promotionLabel.setText("本订单没有享受优惠");
+
+                        isValidOrder=true;
+
+                    } else {
+                        Alert incorrectTimeAlert = new Alert(Alert.AlertType.ERROR, "退房日期必须晚于入住日期！");
+                        incorrectTimeAlert.showAndWait();
                     }
 
-                    isValidOrder=true;
-
-                } else {
-                    Alert incorrectTimeAlert = new Alert(Alert.AlertType.ERROR, "退房日期必须晚于入住日期！");
-                    incorrectTimeAlert.showAndWait();
                 }
 
             }
 
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
     }
