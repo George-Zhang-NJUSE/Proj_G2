@@ -54,7 +54,9 @@ public class CommentController implements CommentServ, CommentBL {
         ArrayList<CommentVO> commentList = new ArrayList();
 
         try {
+            System.out.println("酒店ID：" + hotelId);
             commentPOList = RemoteHelper.getInstance().getCommentDataService().getHotelComments(hotelId);
+            System.out.println("评论条数：" + commentPOList.size());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -63,6 +65,7 @@ public class CommentController implements CommentServ, CommentBL {
             commentList.addAll(commentPOList.stream()
                                             .map(CommentVO::new)
                                             .collect(Collectors.toList()));
+            System.out.println("评论条数：" + commentList.size());
             return new CommentListVO(commentList);
         } else {
             return null;

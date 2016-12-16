@@ -2,6 +2,7 @@ package group2.grade15.njuse.presentation.customerui;
 
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.hotelui.MyHotelListController;
+import group2.grade15.njuse.presentation.myanimation.Translate;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MyOrderListController;
 import group2.grade15.njuse.presentation.searchui.CustomerSearchHotelController;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,6 +25,7 @@ import java.util.ResourceBundle;
 public class CustomerMainController implements Initializable{
 
     private CustomerVO userVO;
+    private int bookHotelLabelY, myOrderLabelY, myHotelLabelY, personalInfoY;
 
     @FXML
     private Pane functionPane;
@@ -30,14 +33,14 @@ public class CustomerMainController implements Initializable{
     @FXML
     private Label usernameLabel, creditLabel,bookHotelLabel,myOrderLabel, myHotelLabel, personalInfoLabel;
 
+    @FXML
+    private Rectangle indicator;
+
     private void refreshData() {
         userVO=CommonData.getInstance().getCustomerVO();
         usernameLabel.setText(userVO.getName());
         creditLabel.setText(Double.toString(userVO.getCredit()));
     }
-
-
-
 
     @FXML
     private void showSearchHotelPane() {
@@ -49,6 +52,9 @@ public class CustomerMainController implements Initializable{
             CustomerSearchHotelController searchHotelController = loader.getController();//必须在load之后才能getController
 
             refreshData();
+            Translate translate = new Translate(indicator, 300, bookHotelLabelY, false);
+
+            translate.play();
             searchHotelController.show();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -68,6 +74,9 @@ public class CustomerMainController implements Initializable{
             MyOrderListController orderListController = loader.getController();
 
             refreshData();
+            Translate translate = new Translate(indicator, 300, myOrderLabelY, false);
+
+            translate.play();
             orderListController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -88,7 +97,10 @@ public class CustomerMainController implements Initializable{
             MyHotelListController hotelListController = loader.getController();
 
             refreshData();
-            hotelListController.initDataAndShow(); //show必须在setParentPane之后，不能将其放在initialize方法里
+            Translate translate = new Translate(indicator, 300, myHotelLabelY, false);
+
+            translate.play();
+            hotelListController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -107,6 +119,9 @@ public class CustomerMainController implements Initializable{
             CustomerInfoController infoController = loader.getController();
 
             refreshData();
+            Translate translate = new Translate(indicator, 300, personalInfoY, false);
+
+            translate.play();
             infoController.initDataAndShow();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -123,17 +138,22 @@ public class CustomerMainController implements Initializable{
 
         CommonData.getInstance().setCustomerVO(userVO);
 
+        showSearchHotelPane();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO: 2016/12/11
         //加载按钮变化样式
         CustomeButton.implButton(myHotelLabel, "file:client/src/main/res/customer/myhotel");
         CustomeButton.implButton(bookHotelLabel, "file:client/src/main/res/customer/makeorder");
         CustomeButton.implButton(myOrderLabel, "file:client/src/main/res/customer/myorder");
         CustomeButton.implButton(personalInfoLabel, "file:client/src/main/res/customer/accountinfo");
 
+        //初始化指示条不同位置坐标
+        bookHotelLabelY=0;
+        myOrderLabelY=51;
+        myHotelLabelY=51*2;
+        personalInfoY=51*3;
 
         CommonData.getInstance().setFunctionAreaPane(functionPane);
     }

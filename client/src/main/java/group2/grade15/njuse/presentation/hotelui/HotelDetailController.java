@@ -1,8 +1,6 @@
 package group2.grade15.njuse.presentation.hotelui;
 
-import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.CommentServ;
-import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.customerglobal.LiteralList;
 import group2.grade15.njuse.presentation.myanimation.ChangeImage;
@@ -43,10 +41,10 @@ public class HotelDetailController implements Initializable {
     private HotelVO hotelVO;
     private Pane parentPane;
     private CommentServ commentServ;
-    private OrderListServ orderListServ;
     private Image[] imageList;
     private ArrayList<OrderVO> myOrders;
 
+    private ChangeImage changeImage; //无限循环的动画要在退出时手动删除
 
     @FXML
     private Node rootNode;
@@ -65,6 +63,7 @@ public class HotelDetailController implements Initializable {
 
     @FXML
     protected void goBack() {
+        changeImage.destroy();
         parentPane.getChildren().remove(rootNode);
     }
 
@@ -101,7 +100,6 @@ public class HotelDetailController implements Initializable {
             }
 
             //加载房间列表
-            roomInfoListView = new ListView<>();
             ArrayList<RoomVO> roomVOList = hotelVO.getRoomList();
             ArrayList<String> roomInfoStrings = new ArrayList<>();
             for (RoomVO roomVO : roomVOList) {
@@ -127,7 +125,7 @@ public class HotelDetailController implements Initializable {
         Pop popIn = new Pop(rootNode, 300, true);
 
         //切换图片动画
-        ChangeImage changeImage = new ChangeImage(hotelImageView, 2000, imageList);
+        changeImage = new ChangeImage(hotelImageView, 2000, imageList);
 
         popIn.setOnFinished((ActionEvent e) -> {
             loadComments();
@@ -144,6 +142,9 @@ public class HotelDetailController implements Initializable {
 
         if (hotelVO != null) {
             ArrayList<CommentVO> commentVOList = commentServ.getHotelCommentList(hotelVO.getId()).getList();
+
+            //debug
+            System.out.println("评价条数："+commentVOList.size());
 
             try {
 
@@ -209,7 +210,6 @@ public class HotelDetailController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         commentServ = new group2.grade15.njuse.bl.commentbl.CommentController();
-        orderListServ = new OrderController();
 
         //加载按钮变化样式
         CustomeButton.implButton(returnLabel, "file:client/src/main/res/customer/back");

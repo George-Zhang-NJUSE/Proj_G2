@@ -3,6 +3,7 @@ package group2.grade15.njuse.presentation.myanimation;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /**
  * 无限循环的图片切换动画
@@ -37,14 +38,10 @@ public class ChangeImage {
             int outIndex=inIndex+1;
             int nextImageIndex = (a==imageList.length-1)? 0:a+1;
             fades[inIndex].setOnFinished((ActionEvent e)->{
-                try {
-                    Thread.currentThread().sleep(cycleLength);
                     fades[outIndex].play();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
             });
 
+            fades[outIndex].getTimeline().setDelay(new Duration(cycleLength));
             fades[outIndex].setOnFinished((ActionEvent e)->{
                 view.setImage(imageList[nextImageIndex]);
                 fades[nextImageIndex*2].play();  //下一张图片的fadeIn
@@ -56,5 +53,11 @@ public class ChangeImage {
 
     public void play() {
         fades[0].play();
+    }
+
+    public void destroy() {
+        for (Fade fade : fades) {
+            fade.getTimeline().stop();
+        }
     }
 }
