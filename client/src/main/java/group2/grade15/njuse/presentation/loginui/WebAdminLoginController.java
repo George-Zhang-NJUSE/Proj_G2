@@ -91,7 +91,7 @@ public class WebAdminLoginController {
 
     private void jumpToMain(WebAdminVO info) {
         try {
-            FXMLLoader webAdminMainLoader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webadminui/WebAdminMain.fxml"));
+            FXMLLoader webAdminMainLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webadmin/WebAdminMain.fxml"));
             Stage webAdminStage = new Stage();
             webAdminStage.setScene(new Scene((Parent) webAdminMainLoader.load()));
 

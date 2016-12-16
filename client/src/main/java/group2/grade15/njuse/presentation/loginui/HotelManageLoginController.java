@@ -44,6 +44,9 @@ public class HotelManageLoginController implements Initializable{
         String id = (accoutField.getText());
         String password = PWField.getText();
 
+        jumpToMain(hotelManagerServ.getInfo(Integer.parseInt(id)));
+
+
         switch (loginServ.login(id,password)){
             case SUCCESS:
                 jumpToMain(hotelManagerServ.getInfo(Integer.parseInt(id)));
@@ -65,7 +68,7 @@ public class HotelManageLoginController implements Initializable{
     }
     private void jumpToMain(HotelManagerVO vo){
         try{
-            FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/HotelManageMain.fxml"));
+            FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelManageMain.fxml"));
             Stage webMarketerMainStage=new Stage();
             webMarketerMainStage.setScene(new Scene(loader.load()));
             HotelManageMainController hotelManageMainController=loader.getController();

@@ -15,7 +15,7 @@ import java.net.URL;
 public class WebMarketerStart extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/webmarketer/WebMarketerLogin.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/WebMarketerLogin.fxml"));
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
@@ -27,7 +27,7 @@ public class WebMarketerStart extends Application {
         ClientRunner clientRunner = new ClientRunner();
     }
 
-    public static void mian(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 }

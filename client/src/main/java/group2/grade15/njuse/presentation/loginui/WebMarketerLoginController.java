@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -31,9 +32,9 @@ public class WebMarketerLoginController implements Initializable {
     @FXML
     private Label login;
     @FXML
-    private Label accoutField;
+    private TextField accoutField;
     @FXML
-    private Label passwordField;
+    private TextField passwordField;
 
     private Stage currentStage;
 
@@ -69,7 +70,7 @@ public class WebMarketerLoginController implements Initializable {
     }
     private void jumpToMain(WebMarketerVO vo) {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/webmarketerui/WebMarketerMain.fxml"));
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/WebMarketerMain.fxml"));
             Stage webMarketerMainStage = new Stage();
             webMarketerMainStage.setScene(new Scene(loader.load()));
             currentStage.close();

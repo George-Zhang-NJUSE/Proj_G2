@@ -17,7 +17,7 @@ public class HotelManagerStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/res/hotelmanager/HotelManageLogin.fxml"));
+        FXMLLoader loader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelManageLogin.fxml"));
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
