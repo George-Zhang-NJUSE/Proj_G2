@@ -105,6 +105,7 @@ public class CustomerApplyController implements Initializable {
 
     @FXML
     private void applyAccount() {
+        // TODO: 2016/12/16 联系方式位数判断
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPsw = confirmPswField.getText();

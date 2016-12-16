@@ -140,6 +140,7 @@ public class MakeOrderController implements Initializable {
 
     @FXML
     private void updateOrderInfo() { //每一次界面信息更新都被调用
+        // TODO: 2016/12/16
 
         String checkInDateStr = checkInDatePicker.getEditor().getText();
         String checkOutDateStr = checkOutDatePicker.getEditor().getText();
