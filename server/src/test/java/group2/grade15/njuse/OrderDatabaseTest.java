@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,7 +33,7 @@ public class OrderDatabaseTest {
 
     @Test
     public void getListByCustomerTest() throws Exception {
-        assertEquals(2, orderDatabase.getListByCustomer(1).size());
+        assertEquals(1, orderDatabase.getListByCustomer(1).size());
     }
 
     @Test
@@ -42,22 +43,22 @@ public class OrderDatabaseTest {
 
     @Test
     public void getOrderTest() throws Exception {
-        assertEquals(1, orderDatabase.getOrder(1).getCustomerID());
+        assertEquals(1, orderDatabase.getOrder(1).getRoomSum());
     }
 
     @Test
     public void roomTest() throws Exception{
-        Date checkIn=Date.valueOf("2016-11-27");
-        Date checkOut=Date.valueOf("2016-11-28");
-        assertEquals(-1,orderDatabase.roomToBeAvailable(checkIn,checkOut,RoomType.stadardDoubleBed,1));
+        Timestamp checkIn=Timestamp.valueOf("2016-11-27 00:00:00");
+        Timestamp checkOut=Timestamp.valueOf("2016-11-28 00:00:00");
+        assertEquals(0,orderDatabase.roomToBeAvailable(checkIn,checkOut,RoomType.stadardDoubleBed,1));
     }
 
     @Test
     public void addOrderTest() throws Exception {
-        Date createTime=Date.valueOf("2016-11-20");
-        Date checkIn = Date.valueOf("2016-12-03");
-        Date checkOut = Date.valueOf("2016-12-04");
-        Date execute = Date.valueOf("2016-12-03");
+        Timestamp createTime=Timestamp.valueOf("2016-12-02 01:01:01");
+        Timestamp checkIn = Timestamp.valueOf("2016-12-03 01:01:01");
+        Timestamp checkOut = Timestamp.valueOf("2016-12-04 01:01:01");
+        Timestamp execute = Timestamp.valueOf("2016-12-03 01:01:01");
         OrderPO orderPO = new OrderPO(0, 1, 1, 100, createTime,checkIn, checkOut,
                 execute, 1, RoomType.stadardDoubleBed, 2, true, OrderState.unexecuted);
         assertEquals(ResultMessage.SUCCESS, orderDatabase.addOrder(orderPO));
@@ -70,8 +71,8 @@ public class OrderDatabaseTest {
 
     @Test
     public void updateTimeTest() throws Exception{
-        Date checkIn = Date.valueOf("2016-12-03");
-        Date checkOut = Date.valueOf("2016-12-04");
+        Timestamp checkIn = Timestamp.valueOf("2016-12-03 00:00:00");
+        Timestamp checkOut = Timestamp.valueOf("2016-12-04 01:01:01");
         assertEquals(ResultMessage.SUCCESS,orderDatabase.updateTime(checkIn,checkOut,1));
     }
 

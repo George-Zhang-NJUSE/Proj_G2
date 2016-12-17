@@ -23,6 +23,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -106,7 +107,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) {
+    public int roomToBeAvailable(Timestamp checkIn, Timestamp checkOut, RoomType type, int hotelID) throws RemoteException {
         return 0;
     }
 
@@ -121,8 +122,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     }
 
     @Override
-    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) throws RemoteException {
-        return orderDataService.updateTime(checkIn,checkOut,orderID);
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID) throws RemoteException {
+        return null;
     }
 
     @Override

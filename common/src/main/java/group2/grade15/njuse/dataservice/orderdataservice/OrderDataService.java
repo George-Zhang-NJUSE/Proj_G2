@@ -8,6 +8,7 @@ import group2.grade15.njuse.utility.RoomType;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -25,12 +26,12 @@ public interface OrderDataService extends Remote {
 
     public ArrayList<OrderPO> getListByHotel(int hotelID) throws RemoteException;
 
-    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type,int hotelID) throws RemoteException;
+    public int roomToBeAvailable(Timestamp checkIn, Timestamp checkOut, RoomType type, int hotelID) throws RemoteException;
 
     public ResultMessage addOrder(OrderPO po) throws RemoteException;
 
     public ResultMessage modifyOrder(int orderID, OrderState state) throws RemoteException;
 
-    public ResultMessage updateTime(Date checkIn,Date checkOut,int orderID) throws RemoteException;
+    public ResultMessage updateTime(Timestamp checkIn,Timestamp checkOut,int orderID) throws RemoteException;
 
 }

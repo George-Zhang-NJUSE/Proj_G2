@@ -5,6 +5,7 @@ import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class OrderPO implements Serializable {
@@ -12,18 +13,18 @@ public class OrderPO implements Serializable {
     private int customerID;
     private int hotelID;
     private double amount;
-    private Date createTime;
-    private Date checkInTime;
-    private Date checkOutTime;
-    private Date finalExecuteTime;
+    private Timestamp createTime;
+    private Timestamp checkInTime;
+    private Timestamp checkOutTime;
+    private Timestamp finalExecuteTime;
     private int roomSum;
     private RoomType type;
     private int numOfCustomer;
     private boolean haveChild;
     private OrderState state;
 
-    public OrderPO(int orderID, int customerID, int hotelID, double amount, Date createTime, Date checkInTime,
-                   Date checkOutTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer,
+    public OrderPO(int orderID, int customerID, int hotelID, double amount, Timestamp createTime, Timestamp checkInTime,
+                   Timestamp checkOutTime, Timestamp finalExecuteTime, int roomSum, RoomType type, int numOfCustomer,
                    boolean haveChild, OrderState state) {
         this.orderID = orderID;
         this.customerID = customerID;
@@ -56,15 +57,15 @@ public class OrderPO implements Serializable {
         return amount;
     }
 
-    public Date getCheckInTime() {
+    public Timestamp getCheckInTime() {
         return checkInTime;
     }
 
-    public Date getCheckOutTime() {
+    public Timestamp getCheckOutTime() {
         return checkOutTime;
     }
 
-    public Date getFinalExecuteTime() {
+    public Timestamp getFinalExecuteTime() {
         return finalExecuteTime;
     }
 
@@ -88,7 +89,7 @@ public class OrderPO implements Serializable {
         return state;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 }

@@ -139,7 +139,7 @@ public class OrderDatabaseImpl implements OrderDataService {
 
     //还未添加加密算法
     @Override
-    public int roomToBeAvailable(Date checkIn, Date checkOut, RoomType type, int hotelID) throws RemoteException{
+    public int roomToBeAvailable(Timestamp checkIn, Timestamp checkOut, RoomType type, int hotelID) throws RemoteException{
         if(orderDatabase==null){
             orderDatabase=mySql.init();
         }
@@ -149,7 +149,7 @@ public class OrderDatabaseImpl implements OrderDataService {
                     "roomtype = ? and hotelID = ? and (state = 0 or state = 1) and checkouttime<?");
             availableRoom.setInt(1,type.ordinal());
             availableRoom.setInt(2,hotelID);
-            availableRoom.setDate(3,checkIn);
+            availableRoom.setTimestamp(3,checkIn);
             ResultSet resultSetA=availableRoom.executeQuery();
 
             int available=0;
@@ -161,8 +161,8 @@ public class OrderDatabaseImpl implements OrderDataService {
                     "roomtype = ? and hotelID = ? and (state = 0 or state = 1) and checkintime<=? and checkouttime>=?");
             unavailableRoom.setInt(1,type.ordinal());
             unavailableRoom.setInt(2,hotelID);
-            unavailableRoom.setDate(3,checkOut);
-            unavailableRoom.setDate(4,checkIn);
+            unavailableRoom.setTimestamp(3,checkOut);
+            unavailableRoom.setTimestamp(4,checkIn);
             ResultSet resultSetU=unavailableRoom.executeQuery();
 
             int unavailable=0;
@@ -190,18 +190,18 @@ public class OrderDatabaseImpl implements OrderDataService {
                 int customerID = encrypt.decrypt(resultSet.getInt(2));
                 int hotelID = encrypt.decrypt(resultSet.getInt(3));
                 double amount = resultSet.getDouble(4);
-                Date checkIn = resultSet.getDate(5);
-                Date checkOut = resultSet.getDate(6);
-                Date execute = resultSet.getDate(7);
+                Timestamp checkIn = resultSet.getTimestamp(5);
+                Timestamp checkOut = resultSet.getTimestamp(6);
+                Timestamp execute = resultSet.getTimestamp(7);
                 int roomSum = resultSet.getInt(8);
                 int peopleSum = resultSet.getInt(9);
                 boolean hasChild = resultSet.getBoolean(10);
                 RoomType type = RoomType.values()[resultSet.getInt(11)];
                 OrderState state = OrderState.values()[resultSet.getInt(12)];//需要即时确定并更新
-                Date createTime=resultSet.getDate(13);
+                Timestamp createTime=resultSet.getTimestamp(13);
 
                 java.util.Date current = new java.util.Date();
-                Date now = new Date(current.getTime());
+                Timestamp now = new Timestamp(current.getTime());
                 if (state == OrderState.unexecuted && execute.before(now)) {
                     state = OrderState.abnormal;
 
@@ -274,10 +274,10 @@ public class OrderDatabaseImpl implements OrderDataService {
             int hotelID = encrypt.encrypt(po.getHotelID());
             int customerID = encrypt.encrypt(po.getCustomerID());
             double total = po.getAmount();
-            Date createTime=po.getCreateTime();
-            Date checkIn = po.getCheckInTime();
-            Date checkOut = po.getCheckOutTime();
-            Date execute = new Date(po.getCheckInTime().getTime()+14400000);
+            Timestamp createTime=po.getCreateTime();
+            Timestamp checkIn = po.getCheckInTime();
+            Timestamp checkOut = po.getCheckOutTime();
+            Timestamp execute = new Timestamp(po.getCheckInTime().getTime()+14400000);
             int room = po.getRoomSum();
             int people = po.getNumOfCustomer();
             boolean hasChild = po.isHaveChild();
@@ -288,15 +288,15 @@ public class OrderDatabaseImpl implements OrderDataService {
             addOrder.setInt(2, customerID);
             addOrder.setInt(3, hotelID);
             addOrder.setDouble(4, total);
-            addOrder.setDate(5, checkIn);
-            addOrder.setDate(6, checkOut);
-            addOrder.setDate(7, execute);
+            addOrder.setTimestamp(5, checkIn);
+            addOrder.setTimestamp(6, checkOut);
+            addOrder.setTimestamp(7, execute);
             addOrder.setInt(8, room);
             addOrder.setInt(9, people);
             addOrder.setBoolean(10, hasChild);
             addOrder.setInt(11, type);
             addOrder.setInt(12, state);
-            addOrder.setDate(13,createTime);
+            addOrder.setTimestamp(13,createTime);
 
             addOrder.executeUpdate();
 
@@ -329,12 +329,12 @@ public class OrderDatabaseImpl implements OrderDataService {
             OrderState current;
             double sum;
             int customerID;
-            Date execute;
+            Timestamp execute;
             if (resultSet.next()) {
                 current = OrderState.values()[resultSet.getInt(1)];
                 sum = resultSet.getDouble(2);
                 customerID = encrypt.decrypt(resultSet.getInt(3));
-                execute = resultSet.getDate(4);
+                execute = resultSet.getTimestamp(4);
             } else {
                 throw new SQLException();
             }
@@ -359,7 +359,7 @@ public class OrderDatabaseImpl implements OrderDataService {
                 }
             } else if (current.equals(OrderState.unexecuted) && state.equals(OrderState.revoked)) {
                 java.util.Date instant = new java.util.Date();
-                Date now = new Date(instant.getTime());
+                Timestamp now = new Timestamp(instant.getTime());
                 if (execute.getTime() - now.getTime() < 21600000) {
                     CreditPO creditPO = new CreditPO(customerID, orderID, 0, 0, -sum / 2.0,
                             null, ChangeReason.orderCancelled);
@@ -385,7 +385,7 @@ public class OrderDatabaseImpl implements OrderDataService {
      * 酒店管理人员更新实际入住，预计离开时间
      */
     @Override
-    public ResultMessage updateTime(Date checkIn, Date checkOut,int orderID) throws RemoteException {
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut,int orderID) throws RemoteException {
         if(orderDatabase==null){
             orderDatabase=mySql.init();
         }
@@ -393,8 +393,8 @@ public class OrderDatabaseImpl implements OrderDataService {
         try{
             PreparedStatement update=orderDatabase.prepareStatement("update orderinfo set " +
                     "checkintime = ?,checkouttime = ? where ordernum = ?");
-            update.setDate(1,checkIn);
-            update.setDate(2,checkOut);
+            update.setTimestamp(1,checkIn);
+            update.setTimestamp(2,checkOut);
             update.setInt(3,orderID);
 
             update.executeUpdate();
