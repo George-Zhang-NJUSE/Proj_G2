@@ -310,10 +310,19 @@ public class PromotionManageController implements Initializable{
         }
     }
 //TODO 酒店管理新增促销
-    public ResultMessage addPromotion(){
-        HotelPromotionVO promotionToAdd=addPromotionController.getVO();
+    public void addPromotion(HotelPromotionVO promotionToAdd){
         unactivatedData.add(new Promotion(promotionToAdd));
-        return hotelManagerController.createHotelPromotion(promotionToAdd);
+        switch (hotelManagerController.createHotelPromotion(promotionToAdd)) {
+            case SUCCESS:
+                message.setText("添加成功");
+                break;
+            case CONNECTION_EXCEPTION:
+                message.setText("未连接到服务器");
+                break;
+            case FAILED:
+                message.setText("添加失败");
+                break;
+        };
         //return ResultMessage.SUCCESS;
     }
     //TODO 酒店管理修改促销

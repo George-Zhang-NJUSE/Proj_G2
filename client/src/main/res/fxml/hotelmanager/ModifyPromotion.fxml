@@ -63,7 +63,7 @@
       </Group>
       <Pane fx:id="checkPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <Label fx:id="check" layoutX="20.0" layoutY="20.0" >
+            <Label fx:id="check" layoutX="20.0" layoutY="20.0" onMouseClicked="#commitModify">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -83,6 +83,11 @@
             </Label>
          </children>
       </Pane>
+      <Label fx:id="message" text="" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="10.0" top="20.0" />
+         </GridPane.margin>
+      </Label>
    </children>
    <columnConstraints>
       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />

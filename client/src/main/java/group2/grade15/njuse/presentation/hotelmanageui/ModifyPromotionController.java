@@ -48,6 +48,8 @@ public class ModifyPromotionController implements Initializable {
     private Label check;
     @FXML
     private Label cancel;
+    @FXML
+    private Label message;
 
     public PromotionManageController promotionManageController;
 
@@ -143,8 +145,28 @@ public class ModifyPromotionController implements Initializable {
         }
         return result;
     }
-    public ResultMessage commitModify(){
+    private boolean checkEmpty(){
+        boolean result =
+                name.getText() == "" ||
+                        cut.getText() == "" ||
+                        type.getEditor().getText() == ""
+                ;
+
+        switch (type.getValue()) {
+            case TimeHotel:
+                result = result || (startDate.getEditor().getText() == "") || (endDate.getEditor().getText() == "");
+                break;
+        }
+        return result;
+    }
+    public void commitModify(){
+        if (checkEmpty()) {
+            message.setText("填写部分不能为空");
+            return;
+        }
+        message.setText("");
+
         HotelPromotionVO toModify=getVO();
-        return promotionManageController.modifyPromotion(toModify);
+        promotionManageController.modifyPromotion(toModify);
     }
 }

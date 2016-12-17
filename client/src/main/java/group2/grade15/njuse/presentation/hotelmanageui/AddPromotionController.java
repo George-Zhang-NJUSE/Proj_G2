@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -32,6 +33,8 @@ public class AddPromotionController implements Initializable {
     private Label check;
     @FXML
     private Label cancel;
+    @FXML
+    private Label message;
     @FXML
     private ComboBox<HotelPromotionType> type;
     @FXML
@@ -140,8 +143,28 @@ public class AddPromotionController implements Initializable {
         }
         return result;
     }
+    private boolean checkEmpty(){
+        boolean result =
+                        name.getText() == "" ||
+                        cut.getText() == "" ||
+                        type.getEditor().getText() == ""
+                ;
+
+        switch (type.getValue()) {
+            case TimeHotel:
+                result = result || (startDate.getEditor().getText() == "") || (endDate.getEditor().getText() == "");
+                break;
+        }
+        return result;
+    }
     public void commitAddition(){
-        promotionManageController.addPromotion();
+        if(checkEmpty()){
+            message.setText("填写部分不能为空");
+            return;
+        }
+        message.setText("");
+        HotelPromotionVO toAdd=getVO();
+        promotionManageController.addPromotion(toAdd);
         clean();
 
     }

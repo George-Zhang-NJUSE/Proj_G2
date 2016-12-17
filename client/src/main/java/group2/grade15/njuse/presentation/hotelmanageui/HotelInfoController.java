@@ -135,6 +135,7 @@ public class HotelInfoController implements Initializable {
             byte[] buf;
             for (int i = 0; i < paths.size(); i++) {
                 buf = new byte[800000];
+                File f = new File(paths.get(i));
                 input = new FileImageInputStream(new File(paths.get(i)));
                 int numByteRead = 0;
                 while((numByteRead = input.read(buf))!=-1){
