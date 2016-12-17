@@ -197,11 +197,9 @@ public class RoomManageController implements Initializable {
     public ResultMessage addRoom() {
         RoomVO roomToAdd = getRoomVO();
         try {
-
-
+            ResultMessage re = hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd);
             data.add(new Room(roomToAdd));
-            // ResultMessage.SUCCESS;
-            return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd);
+            return re;
         }catch (Exception e){
             e.printStackTrace();
             return ResultMessage.FAILED;
