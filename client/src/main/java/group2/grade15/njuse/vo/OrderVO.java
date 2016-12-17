@@ -6,6 +6,7 @@ import group2.grade15.njuse.utility.RoomType;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class OrderVO implements Serializable {
     private int orderID;
@@ -13,10 +14,10 @@ public class OrderVO implements Serializable {
     private int hotelID;
     private int promotionID = 0;                   //该订单采取的优惠策略，初次创建时从界面层传到逻辑层时自动为0，逻辑层返回时会设置好优惠策略的ID
     private double amount;
-    private Date checkInTime;
-    private Date checkOutTime;
-    private Date createTime;
-    private Date finalExecuteTime;
+    private Timestamp createTime;
+    private Timestamp checkInTime;
+    private Timestamp checkOutTime;
+    private Timestamp finalExecuteTime;
     private int roomSum;
     private RoomType type;
     private int numOfCustomer;
@@ -55,8 +56,8 @@ public class OrderVO implements Serializable {
         state = vo.getState();
     }
 
-    public OrderVO(int orderID, int customerID, int hotelID, double amount, Date checkInTime, Date checkOutTime,
-                   Date createTime, Date finalExecuteTime, int roomSum, RoomType type, int numOfCustomer,
+    public OrderVO(int orderID, int customerID, int hotelID, double amount, Timestamp createTime, Timestamp checkInTime,
+                   Timestamp checkOutTime, Timestamp finalExecuteTime, int roomSum, RoomType type, int numOfCustomer,
                    boolean haveChild, OrderState state) {
 
         this.orderID = orderID;
@@ -94,19 +95,19 @@ public class OrderVO implements Serializable {
         return amount;
     }
 
-    public Date getCheckInTime() {
+    public Timestamp getCheckInTime() {
         return checkInTime;
     }
 
-    public Date getCheckOutTime() {
+    public Timestamp getCheckOutTime() {
         return checkOutTime;
     }
 
-    public Date getFinalExecuteTime() {
+    public Timestamp getFinalExecuteTime() {
         return finalExecuteTime;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 

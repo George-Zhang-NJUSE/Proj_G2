@@ -4,6 +4,8 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 
+import java.sql.Timestamp;
+
 
 public interface OrderBL {
     public OrderVO getInfo(int orderID);
@@ -12,6 +14,5 @@ public interface OrderBL {
 
     public ResultMessage modifyState(int orderId, OrderState state);
 
-
-    public ResultMessage updateTime(java.sql.Date checkIn, java.sql.Date checkOut, int orderID);
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID);
 }

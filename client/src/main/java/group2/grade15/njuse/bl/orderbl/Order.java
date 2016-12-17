@@ -20,6 +20,7 @@ import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -120,8 +121,8 @@ public class Order implements OrderBL{
         int hotelID = orderVO.getHotelID();
         RoomType roomType = orderVO.getType();
 
-        Date checkIn = orderVO.getCheckInTime();
-        Date checkOut = orderVO.getCheckOutTime();
+        Timestamp checkIn = orderVO.getCheckInTime();
+        Timestamp checkOut = orderVO.getCheckOutTime();
         int seconds = (60 * 60 * 24 * 1000);
         long stayDays = 0;
         long sub = (checkOut.getTime() - checkIn.getTime());
@@ -148,7 +149,7 @@ public class Order implements OrderBL{
     }
 
     @Override
-    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) {
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID) {
         ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getOrderDataService().updateTime(checkIn, checkOut, orderID);
