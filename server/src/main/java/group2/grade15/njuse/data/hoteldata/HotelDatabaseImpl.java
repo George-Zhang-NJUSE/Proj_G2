@@ -2,6 +2,7 @@ package group2.grade15.njuse.data.hoteldata;
 
 import group2.grade15.njuse.data.databaseimpl.DatabaseInfo;
 import group2.grade15.njuse.data.databaseimpl.DatabaseMySql;
+import group2.grade15.njuse.data.encrypt.Encrypt;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
@@ -23,11 +24,13 @@ import java.util.ArrayList;
 public class HotelDatabaseImpl implements HotelDataService {
     private DatabaseMySql mySql = null;
     private Connection hotelDatabase = null;
+    private Encrypt encrypt=null;
     private String[] roomName = {"singlebed", "doublebed", "suiteroom"};
 
     public HotelDatabaseImpl(DatabaseInfo info) throws RemoteException {
         mySql = new DatabaseMySql(info);
         hotelDatabase = mySql.init();
+        encrypt=new Encrypt();
     }
 
     public HotelPO getHotel(int hotelId) throws RemoteException {
@@ -93,7 +96,8 @@ public class HotelDatabaseImpl implements HotelDataService {
                 getRoom.close();
 
                 Statement getScore = hotelDatabase.createStatement();
-                ResultSet score = getScore.executeQuery("select avg(score) from comment where hotelid = " + id);
+                ResultSet score = getScore.executeQuery("select avg(score) from comment where hotelid = " +
+                        encrypt.encrypt(hotelId));
                 hotelScore = 0.00;
                 if (score.next()) {
                     hotelScore = score.getDouble(1);

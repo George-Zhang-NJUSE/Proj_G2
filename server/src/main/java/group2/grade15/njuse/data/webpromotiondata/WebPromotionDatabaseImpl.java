@@ -100,7 +100,8 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
 
         try {
             PreparedStatement modify = webPromotionDatabase.prepareStatement("update webpromotion set " +
-                    "starttime = ?,overtime = ?,address = ?,discount = ?,promotionname = ?,viplevel = ?,promotionstate = ?");
+                    "starttime = ?,overtime = ?,address = ?,discount = ?,promotionname = ?,viplevel = ?,promotionstate = ? " +
+                    "where promotionid = ?");
             modify.setDate(1, po.getStart());
             modify.setDate(2, po.getEnd());
             modify.setString(3, po.getAddress());
@@ -108,6 +109,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
             modify.setString(5, po.getName());
             modify.setInt(6, po.getLevel());
             modify.setInt(7, po.getState().ordinal());
+            modify.setInt(8,po.getPromotionID());
 
             modify.executeUpdate();
 

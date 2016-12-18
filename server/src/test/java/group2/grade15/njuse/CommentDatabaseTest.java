@@ -35,7 +35,7 @@ public class CommentDatabaseTest {
 
     @Test
     public void addTest() throws RemoteException {
-        CommentPO commentPO = new CommentPO(1, 1, null, "Bad!", 0, 50.5, 2);
+        CommentPO commentPO = new CommentPO(1, 1, null, "Bad!", 0, 7, 2);
         assertEquals(ResultMessage.SUCCESS, commentDatabase.add(commentPO));
     }
 
