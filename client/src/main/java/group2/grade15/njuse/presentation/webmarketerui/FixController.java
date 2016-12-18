@@ -19,6 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -169,11 +171,16 @@ public class FixController implements Initializable {
 
     public ResultMessage showUnfixed() {
         //TODO implements the function to show the unnormal orders which are not fixed yet;
+        ArrayList<OrderVO> abnormalList = orderListServ.getAbnormalOrderList().getOrderList();
+        for(int i=0;i<abnormalList.size();i++) {
+            unsolvedListData.add(new Order(abnormalList.get(i)));
+        }
         return null;
     }
 
     public ResultMessage showFixed() {
         //TODO implements the function to show the unnormal orders which are fixed;
+        //maybe this is not necessary.
         return null;
     }
     public static class Order{
@@ -199,10 +206,15 @@ public class FixController implements Initializable {
             hotelId = new SimpleIntegerProperty(vo.getHotelID());
             promotionId = new SimpleIntegerProperty(vo.getPromotionID());
             amount = new SimpleDoubleProperty(vo.getAmount());
-            inDate = new SimpleStringProperty(vo.getCheckInTime().toString());
-            outDate = new SimpleStringProperty(vo.getCheckOutTime().toString());
-            finalDate = new SimpleStringProperty(vo.getFinalExecuteTime().toString());
-            createTime = new SimpleStringProperty(vo.getCreateTime().toString());
+
+            DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            inDate = new SimpleStringProperty(df.format(vo.getCheckInTime()));
+            outDate = new SimpleStringProperty(df.format(vo.getCheckOutTime()));
+            finalDate = new SimpleStringProperty(df.format(vo.getFinalExecuteTime()));
+            createTime = new SimpleStringProperty(df.format(vo.getCreateTime()));
+
+
             roomNum = new SimpleIntegerProperty(vo.getRoomSum());
             roomType = new SimpleStringProperty(vo.getType().toString());
             numOfCustomer = new SimpleIntegerProperty(vo.getNumOfCustomer());

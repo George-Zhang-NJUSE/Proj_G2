@@ -166,6 +166,9 @@ public class RoomManageController implements Initializable {
         return result;
     }
 
+    public RoomVO gatherVO(){
+        
+    }
     /**
      * 从表格中获取选中的RoomVO
      * @return RoomVO
@@ -191,6 +194,7 @@ public class RoomManageController implements Initializable {
                 a=RoomType.all;
                 break;
         }
+
         RoomVO vo = new RoomVO(a, room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         return vo;
     }
