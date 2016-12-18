@@ -62,13 +62,13 @@ public class HotelDetailController implements Initializable {
     private ListView<String> roomInfoListView;
 
     @FXML
-    protected void goBack() {
+    private void goBack() {
         changeImage.destroy();
         parentPane.getChildren().remove(rootNode);
     }
 
     @FXML
-    protected void showMakeOrderPane() {
+    private void showMakeOrderPane() {
         try {
             FXMLLoader makeOrderLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/MakeOrder.fxml"));
             makeOrderLoader.load();
