@@ -169,21 +169,6 @@ public class FixController implements Initializable {
         }
 
     }
-
-    public ResultMessage showUnfixed() {
-        //TODO implements the function to show the unnormal orders which are not fixed yet;
-        ArrayList<OrderVO> abnormalList = orderListServ.getAbnormalOrderList().getOrderList();
-        for(int i=0;i<abnormalList.size();i++) {
-            unsolvedListData.add(new Order(abnormalList.get(i)));
-        }
-        return null;
-    }
-
-    public ResultMessage showFixed() {
-        //TODO implements the function to show the unnormal orders which are fixed;
-        //maybe this is not necessary.
-        return null;
-    }
     public static class Order{
         private final SimpleIntegerProperty orderId;
         private final SimpleIntegerProperty customerId;

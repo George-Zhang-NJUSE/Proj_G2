@@ -73,7 +73,9 @@ public class HotelManageMainController implements Initializable {
         hotelManagerVO=vo;
         hotelVO=hotelManagerController.getHotelInfo(vo.getHotelID());
     }
-
+    public void upDateHotelVO(){
+        hotelVO = hotelManagerController.getHotelInfo(hotelVO.getId());
+    }
     //用于界面跳转的方法
     @FXML
     private boolean toInfo(){
@@ -114,6 +116,7 @@ public class HotelManageMainController implements Initializable {
             FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/OrderManage.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
+            ((OrderManageController)infoLoader.getController()).hotelManageMainController=this;
             Fade in=new Fade(opPane,500,true);
             in.play();
         } catch (MalformedURLException e) {
@@ -139,6 +142,8 @@ public class HotelManageMainController implements Initializable {
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
             in.play();
+            ((RoomManageController) infoLoader.getController()).setService(hotelManagerController);
+            ((RoomManageController) infoLoader.getController()).hotelManageMainController=this;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

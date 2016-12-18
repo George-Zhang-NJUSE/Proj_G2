@@ -71,6 +71,7 @@ public class RoomManageController implements Initializable {
 
     //逻辑实现部分
     private HotelManagerServ hotelManagerController;
+    public HotelManageMainController hotelManageMainController;
     private ObservableList<Room> data;
 
     @Override
@@ -110,6 +111,8 @@ public class RoomManageController implements Initializable {
         cols[1].setCellValueFactory(new PropertyValueFactory<>("price"));
         cols[2].setCellValueFactory(new PropertyValueFactory<>("totalRoomNum"));
         cols[3].setCellValueFactory(new PropertyValueFactory<>("spareRoomNum"));
+
+
         showRoomList();
 
     }
@@ -176,11 +179,18 @@ public class RoomManageController implements Initializable {
      * @return RoomVO
      */
     public RoomVO getRoomFromList(){
-        int index=roomTable.getSelectionModel().getSelectedIndex();
-        Room room= roomTable.getItems().get(index);
-        return toRoomVO(room);
+        try{
+            int index=roomTable.getSelectionModel().getSelectedIndex();
+            Room room = roomTable.getItems().get(index);
+            return toRoomVO(room);
+        }catch (ArrayIndexOutOfBoundsException e){
+            return null;
+        }
     }
     public RoomVO toRoomVO(Room room){
+        if (room == null) {
+            return null;
+        }
         RoomType a;
         switch (room.getType()) {
             case "大床房":
@@ -200,15 +210,24 @@ public class RoomManageController implements Initializable {
         RoomVO vo = new RoomVO(a, room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         return vo;
     }
-    public ResultMessage addRoom() {
+    public void addRoom() {
         RoomVO roomToAdd = getRoomVO();
         try {
-            ResultMessage re = hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd);
-            data.add(new Room(roomToAdd));
-            return re;
+            switch(hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd)){
+                case SUCCESS:
+                    message.setText("添加成功");
+                    hotelManageMainController.upDateHotelVO();
+                    showRoomList();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("添加失败");
+                    break;
+            }
         }catch (Exception e){
             e.printStackTrace();
-            return ResultMessage.FAILED;
         }
     }
     public void  modifyRoom(){
@@ -219,9 +238,12 @@ public class RoomManageController implements Initializable {
         room.setTotalRoomNum(Integer.parseInt(countM.getText()));
         RoomVO roomToModify = new RoomVO(typeM.getValue(), room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         try {
-            switch (hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToModify)) {
+            switch (hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),
+                    roomToModify)) {
                 case SUCCESS:
                     message.setText("修改成功");
+                    hotelManageMainController.upDateHotelVO();
+                    showRoomList();
                     break;
                 case CONNECTION_EXCEPTION:
                     message.setText("未连接到服务器");
@@ -238,15 +260,23 @@ public class RoomManageController implements Initializable {
     //逻辑实现的数据展示部分
     public void showRoomOnModify(){
         RoomVO vo=getRoomFromList();
+        if (vo == null) {
+            return;
+        }
         typeM.setItems(FXCollections.observableArrayList(vo.getType()));
+        countM.setText(String.valueOf(vo.getTotalRoomNum()));
+        priceM.setText(String.valueOf(vo.getPrice()));
+        restM.setText(String.valueOf(vo.getSpareRoomNum()));
         typeM.getEditor().setText(vo.getType().toString());
 
     }
     public void showRoomList(){
+        ObservableList<Room> temp=null;
+        roomTable.setItems(temp);
+        data=FXCollections.observableArrayList();
+        data.remove(0,data.size());
 
-        //ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
-        ArrayList<RoomVO> roomList=new ArrayList<RoomVO>();
-        data= FXCollections.observableArrayList();
+        ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
         for(int i=0;i<roomList.size();i++) {
             data.add(new Room(roomList.get(i)));
         }

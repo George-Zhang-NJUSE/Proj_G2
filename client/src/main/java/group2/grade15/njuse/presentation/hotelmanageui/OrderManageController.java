@@ -88,6 +88,8 @@ public class OrderManageController implements Initializable {
     @FXML
     private TextField checkOutDate;
     @FXML
+    private TextField finalDate;
+    @FXML
     private TextField roomType;
     @FXML
     private TextField roomNum;
@@ -143,7 +145,7 @@ public class OrderManageController implements Initializable {
     private WorkingTab workingTab;
     public static OrderServ orderService=new OrderController();
     public static OrderListServ orderListService=new OrderController();
-
+    public HotelManageMainController hotelManageMainController;
 
 
     @Override
@@ -352,8 +354,8 @@ public class OrderManageController implements Initializable {
         if(vo.getState()==OrderState.unexecuted){
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
-                removeSelectedOrderFromList(unexeList);
-                addOrderToList(checkinList,vo);
+                hotelManageMainController.upDateHotelVO();
+                showAllOrder();
             }else{
                 message.setText("操作失败");
             };
@@ -361,11 +363,31 @@ public class OrderManageController implements Initializable {
             message.setText("该订单不是未执行订单");
         }
     }
+    private void showFromClick(){
+        DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        OrderVO vo=getSelectedOrderVO();
+        orderID.setText(String.valueOf(vo.getOrderID()));
+        customerID.setText(String.valueOf(vo.getCustomerID()));
+        checkInDate.setText(df.format(vo.getCheckInTime()));
+        checkOutDate.setText(df.format(vo.getCheckOutTime()));
+        finalDate.setText(df.format(vo.getFinalExecuteTime()));
+        roomType.setText(vo.getType().toString());
+        roomNum.setText(String.valueOf(vo.getRoomSum()));
+        totalPrice.setText(String.valueOf(vo.getAmount()));
+        orderState.setText(vo.getState().toString());
+
+    }
     public void checkout(){
         //TODO
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
-        order.inDate.set(timeCO.getEditor().getText());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(timeCO.getEditor().getText()==""){
+            message.setText("不能为空");
+            return;
+        }
+        order.inDate.set(df.format(timeCO.getValue()));
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -375,8 +397,8 @@ public class OrderManageController implements Initializable {
         if(vo.getState()==OrderState.executed){
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
-                removeSelectedOrderFromList(checkinList);
-                addOrderToList(completeList,vo);
+                hotelManageMainController.upDateHotelVO();
+                showAllOrder();
             }else{
                 message.setText("操作失败");
             };
@@ -384,6 +406,9 @@ public class OrderManageController implements Initializable {
             message.setText("该订单不是已入住订单");
         }
 
+    }
+    private void updateList(){
+        showAllOrder();
     }
     public void overtimeCheckin(){
         //TODO
@@ -395,8 +420,8 @@ public class OrderManageController implements Initializable {
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
                 message.setText("操作成功");
-                removeSelectedOrderFromList(innormalList);
-                addOrderToList(checkinList, vo);
+                hotelManageMainController.upDateHotelVO();
+                showAllOrder();
             }else{
                 message.setText("操作失败");
             }
@@ -497,6 +522,9 @@ public class OrderManageController implements Initializable {
         }
         public String getFinalDate(){
             return finalDate.get();
+        }
+        public String getCreateTime(){
+            return createTime.get();
         }
         public int getRoomNum(){
             return roomNum.get();
