@@ -31,7 +31,7 @@ public class HotelDatabaseTest {
 
     @Test
     public void getHotelTest() throws RemoteException {
-        assertEquals(90, hotelDatabase.getHotel(1).getScore(), 0.001);
+        assertEquals(6, hotelDatabase.getHotel(1).getScore(),0.00001);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class HotelDatabaseTest {
     @Test
     public void addRoomTest() throws RemoteException {
         RoomPO roomPO = new RoomPO(RoomType.stadardDoubleBed, 700.00, 200, 200);
-        assertEquals(ResultMessage.SUCCESS, hotelDatabase.modifyRoom(1, roomPO));
+        assertEquals(ResultMessage.SUCCESS, hotelDatabase.addRoomType(1, roomPO));
     }
 
     @Test

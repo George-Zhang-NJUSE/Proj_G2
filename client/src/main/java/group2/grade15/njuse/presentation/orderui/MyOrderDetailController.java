@@ -68,6 +68,8 @@ public class MyOrderDetailController implements Initializable {
             commentLoader.load();
             MyCommentController myCommentController = commentLoader.getController();
             myCommentController.initData(commentVO,orderIDLabel.getText(), createTimeLabel.getText(), hotelNameLabel.getText(), hotelID);
+            myCommentController.show();
+            close();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
