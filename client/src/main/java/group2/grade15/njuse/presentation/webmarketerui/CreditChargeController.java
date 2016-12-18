@@ -41,15 +41,31 @@ public class CreditChargeController implements Initializable {
 
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/webmarketer/Cancel");
-        cancel.setOnMouseClicked((MouseEvent event) -> {
+        check.setOnMouseClicked((MouseEvent event) -> {
             charge();
         });
     }
 
-
+    private void clean(){
+        accountField.setText("");
+        accountCheckField.setText("");
+        amountField.setText("");
+        PWField.setText("");
+    }
     public void charge(){
         //TODO
         CreditVO creditVO=new CreditVO(Integer.parseInt(accountField.getText()),0,0,0,Double.parseDouble(amountField.getText()),null, ChangeReason.charge);
-        WebMarketerMainController.webMarketerService.modifyCredit(creditVO);
+        switch (WebMarketerMainController.webMarketerService.modifyCredit(creditVO)) {
+            case SUCCESS:
+                backInfo.setText("充值完成");
+                clean();
+                break;
+            case CONNECTION_EXCEPTION:
+                backInfo.setText("未连接到服务器");
+                break;
+            case FAILED:
+                backInfo.setText("充值失败");
+                break;
+        }
     }
 }

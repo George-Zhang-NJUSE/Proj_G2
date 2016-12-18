@@ -32,8 +32,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
+
+import static group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController.webMarketerService;
 
 /**
  * Created by ALIENWARE-PC on 2016/12/1.
@@ -114,6 +117,17 @@ public class PromotionManageController implements Initializable{
                     activatePromotion();
                 }
         });
+        showAllPromotion();
+    }
+    public void showAllPromotion(){
+        ArrayList<WebPromotionVO> list = webMarketerService.getWebPromotionList().getWebPromotionList();
+        for(int i=0;i<list.size();i++) {
+            WebPromotionVO vo = list.get(i);
+            if(vo.getState()==PromotionState.start)
+                activatedListData.add(new Promotion(vo));
+            else
+                unactivatedListData.add(new Promotion(vo));
+        }
     }
     public void switchToActivated(){
         changeStateButton.setText("中止");
@@ -286,7 +300,7 @@ public class PromotionManageController implements Initializable{
     }
     public void addPromotion(WebPromotionVO vo){
         try {
-            switch(WebMarketerMainController.webMarketerService.createWebPromotion(vo)){
+            switch(webMarketerService.createWebPromotion(vo)){
                 case SUCCESS:
                     unactivatedListData.add(new Promotion(vo));
                     message.setText("添加成功");
@@ -310,7 +324,7 @@ public class PromotionManageController implements Initializable{
                 message.setText("不能更改适用中的促销策略");
                 return;
             }
-            WebMarketerMainController.webMarketerService.modifyWebPromotion(vo);
+            webMarketerService.modifyWebPromotion(vo);
             message.setText("操作成功");
         }catch (Exception e){
             message.setText("操作未成功");
@@ -325,7 +339,7 @@ public class PromotionManageController implements Initializable{
             removePromotionFromList(false);
             activatedListData.add(promotion);
             WebPromotionVO vo = promotionToVO(promotion);
-            WebMarketerMainController.webMarketerService.changeState(vo);
+            webMarketerService.changeState(vo);
             message.setText("操作成功");
         }catch (Exception e){
             message.setText("操作未成功");
@@ -341,7 +355,7 @@ public class PromotionManageController implements Initializable{
             unactivatedListData.add(promotion);
             promotion.setState("stop");
             WebPromotionVO vo = promotionToVO(promotion);
-            WebMarketerMainController.webMarketerService.changeState(vo);
+            webMarketerService.changeState(vo);
             message.setText("操作成功");
         } catch (Exception e) {
             message.setText("操作未成功");
@@ -354,7 +368,7 @@ public class PromotionManageController implements Initializable{
             return;
         }
         removePromotionFromList(promotion.state.get() == "start");
-        WebMarketerMainController.webMarketerService.deleteWebPromotion(promotion.getId());
+        webMarketerService.deleteWebPromotion(promotion.getId());
         back();
     }
 
