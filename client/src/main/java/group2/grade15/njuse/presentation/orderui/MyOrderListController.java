@@ -62,6 +62,7 @@ public class MyOrderListController implements Initializable{
     }
 
     private void showThePane() {
+        initialized = true;
         Fade fadeIn = new Fade(rootNode, 300, true);
         Pop popIn = new Pop(rootNode, 300, true);
         popIn.setOnFinished((ActionEvent e) -> showAllOrder());
