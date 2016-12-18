@@ -1,9 +1,11 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import group2.grade15.njuse.bl.hotelbl.HotelController;
 import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
 import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.blservice.HotelManagerServ;
+import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.blservice.OrderServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
@@ -58,6 +60,7 @@ public class HotelManageMainController implements Initializable {
 
     //接口的实例化
     public static HotelManagerServ hotelManagerController=new HotelManagerController();
+    public static HotelServ hotelController=new HotelController();
     public static OrderListServ hotelOrderController=new OrderController();
 
     //controller的初始化
@@ -144,6 +147,7 @@ public class HotelManageMainController implements Initializable {
             in.play();
             ((RoomManageController) infoLoader.getController()).setService(hotelManagerController);
             ((RoomManageController) infoLoader.getController()).hotelManageMainController=this;
+            ((RoomManageController) infoLoader.getController()).hotelServ=hotelController;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

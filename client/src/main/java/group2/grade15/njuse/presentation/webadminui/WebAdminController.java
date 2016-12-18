@@ -379,7 +379,6 @@ public class WebAdminController implements Initializable{
                 "", //introduction
                 "",//facility
                 new ArrayList<RoomVO>(),//roomList
-                new ArrayList<CustomerVO>(),//vipList
                 Integer.parseInt(hotelRank.getText()),//rank
                 0,//score
                 null//picture

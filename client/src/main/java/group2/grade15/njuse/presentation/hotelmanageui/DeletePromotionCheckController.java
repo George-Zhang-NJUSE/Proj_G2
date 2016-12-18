@@ -4,6 +4,7 @@ import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,9 @@ public class DeletePromotionCheckController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/webmarketer/Cancel");
+        check.setOnMouseClicked((MouseEvent e)->{
+            delete();
+        });
     }
 
     public void delete(){

@@ -130,13 +130,12 @@ public class HotelInfoController implements Initializable {
         HotelVO result = new HotelVO(
                 ID,
                 name.getText(),
-                address.getText(),
                 "null",
+                address.getText(),
                 contact.getText(),
                 introduction,
                 facility.getText(),
                 roomList,
-                null,
                 rank,
                 HotelManageMainController.hotelVO.getScore(),
                 pictureToByte(picturePathList.getItems())

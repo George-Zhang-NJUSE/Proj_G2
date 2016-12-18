@@ -2,6 +2,7 @@ package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
 import group2.grade15.njuse.blservice.HotelManagerServ;
+import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -72,6 +73,7 @@ public class RoomManageController implements Initializable {
     //逻辑实现部分
     private HotelManagerServ hotelManagerController;
     public HotelManageMainController hotelManageMainController;
+    public HotelServ hotelServ;
     private ObservableList<Room> data;
 
     @Override
@@ -93,8 +95,8 @@ public class RoomManageController implements Initializable {
 
             }else if(modifyPane.isVisible()){
                 modifyRoom();
-            }else{
-                //deleteRoom();
+            }else if(deletePane.isVisible()){
+                deleteRoom();
             }
         });
         roomTable.setOnMouseClicked((MouseEvent e)->{
@@ -213,7 +215,7 @@ public class RoomManageController implements Initializable {
     public void addRoom() {
         RoomVO roomToAdd = getRoomVO();
         try {
-            switch(hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToAdd)){
+            switch(hotelServ.addRoomType(HotelManageMainController.hotelVO.getId(),roomToAdd)){
                 case SUCCESS:
                     message.setText("添加成功");
                     hotelManageMainController.upDateHotelVO();
@@ -257,6 +259,44 @@ public class RoomManageController implements Initializable {
             message.setText("修改失败");
         }
     }
+    public void deleteRoom(){
+        int index=roomTable.getSelectionModel().getSelectedIndex();
+        Room room = roomTable.getItems().get(index);
+        RoomType type;
+        switch (room.getType()) {
+            case "bigSingleBed":
+                type=RoomType.bigSingleBed;
+                break;
+            case"stadardDoubleBed":
+                type=RoomType.stadardDoubleBed;
+                break;
+            case "suiteRoom":
+                type=RoomType.suiteRoom;
+                break;
+            default:
+                type=RoomType.all;
+                break;
+        }
+        try {
+            switch (hotelServ.deleteRoomType(HotelManageMainController.hotelVO.getId(), type)) {
+                case SUCCESS:
+                    message.setText("房间已删除");
+                    hotelManageMainController.upDateHotelVO();
+                    showRoomList();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("删除失败");
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            message.setText("删除失败");
+
+        }
+    }
     //逻辑实现的数据展示部分
     public void showRoomOnModify(){
         RoomVO vo=getRoomFromList();
@@ -264,10 +304,10 @@ public class RoomManageController implements Initializable {
             return;
         }
         typeM.setItems(FXCollections.observableArrayList(vo.getType()));
+        typeM.setValue(vo.getType());
         countM.setText(String.valueOf(vo.getTotalRoomNum()));
         priceM.setText(String.valueOf(vo.getPrice()));
         restM.setText(String.valueOf(vo.getSpareRoomNum()));
-        typeM.getEditor().setText(vo.getType().toString());
 
     }
     public void showRoomList(){
