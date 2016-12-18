@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.RoomVO;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Room implements RoomBL{
 
@@ -26,7 +27,7 @@ public class Room implements RoomBL{
     }
 
     @Override
-    public int getSpareRoomNumInTime(RoomType type, int hotelID, Date checkInTime, Date checkOutTime){
+    public int getSpareRoomNumInTime(RoomType type, int hotelID, Timestamp checkInTime, Timestamp checkOutTime){
         int nowSpareRoomNum;
 
         try {
