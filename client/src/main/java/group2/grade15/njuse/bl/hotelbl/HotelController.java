@@ -52,6 +52,16 @@ public class HotelController implements HotelServ, GetHotelListBL{
     }
 
     @Override
+    public ResultMessage addRoomType(int hotelID, RoomVO roomVO) {
+        return roomBL.addRoomType(hotelID, roomVO);
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) {
+        return roomBL.deleteRoomType(hotelID, type);
+    }
+
+    @Override
     public HotelListVO getBookedHotelList(int customerID) {
         ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
 
