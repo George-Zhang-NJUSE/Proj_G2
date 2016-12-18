@@ -60,6 +60,8 @@ public class PromotionManageController implements Initializable{
     @FXML
     private Label message;
 
+    private boolean inActivated=false;
+
 
     private String[] contents = {
             "id","name","state","discount","type","level","address","startDate","endDate"
@@ -105,15 +107,24 @@ public class PromotionManageController implements Initializable{
         unactivatedList.setOnMouseClicked((MouseEvent e)->{
             showPromotion();
         });
+        changeStateButton.setOnMouseClicked((MouseEvent e)->{
+                if(inActivated){
+                    stopPromotion();
+                }else{
+                    activatePromotion();
+                }
+        });
     }
     public void switchToActivated(){
         changeStateButton.setText("中止");
+        inActivated=true;
         ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/webmarketer/stop.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/stop");
     }
     public void switchToUnactivated(){
         changeStateButton.setText("激活");
+        inActivated=false;
         ImageView a=(ImageView) changeStateButton.getGraphic();
         a.setImage(new Image("file:client/src/main/res/webmarketer/play.png"));
         CustomeButton.implButton(changeStateButton, "file:client/src/main/res/webmarketer/play");
@@ -121,7 +132,7 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/AddPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/AddPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((AddPromotionController)lodar.getController()).promotionManageController=this;
@@ -138,7 +149,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/DeletePromotionCheck.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((DeletePromotionCheckController)lodar.getController()).promotionManageController=this;
@@ -156,7 +167,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/ModifyPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/ModifyPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((ModifyPromotionController)lodar.getController()).promotionManageController=this;
@@ -275,9 +286,17 @@ public class PromotionManageController implements Initializable{
     }
     public void addPromotion(WebPromotionVO vo){
         try {
-            //WebMarketerMainController.webMarketerService.createWebPromotion(vo);
-            unactivatedListData.add(new Promotion(vo));
-            message.setText("添加成功");
+            switch(WebMarketerMainController.webMarketerService.createWebPromotion(vo)){
+                case SUCCESS:
+                    unactivatedListData.add(new Promotion(vo));
+                    message.setText("添加成功");
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+
+            }
+
         }catch (NullPointerException e){
             message.setText("添加失败");
         }
@@ -338,6 +357,7 @@ public class PromotionManageController implements Initializable{
         WebMarketerMainController.webMarketerService.deleteWebPromotion(promotion.getId());
         back();
     }
+
     public static class Promotion{
         private final SimpleStringProperty name;
         private final SimpleIntegerProperty id;

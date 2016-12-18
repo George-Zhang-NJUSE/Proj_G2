@@ -8,6 +8,7 @@ import group2.grade15.njuse.blservice.CustomerServ;
 import group2.grade15.njuse.blservice.LoginControllerServ;
 import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController;
 import group2.grade15.njuse.vo.WebMarketerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,6 +74,8 @@ public class WebMarketerLoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/WebMarketerMain.fxml"));
             Stage webMarketerMainStage = new Stage();
             webMarketerMainStage.setScene(new Scene(loader.load()));
+            ((WebMarketerMainController)loader.getController()).vo=vo;
+            ((WebMarketerMainController)loader.getController()).workingNumber.setText(vo.getStaffID());
             currentStage.close();
             webMarketerMainStage.sizeToScene();
             webMarketerMainStage.setResizable(false);

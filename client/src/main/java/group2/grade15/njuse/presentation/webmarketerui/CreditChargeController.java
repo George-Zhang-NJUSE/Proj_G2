@@ -1,6 +1,7 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.ChangeReason;
 import group2.grade15.njuse.vo.CreditVO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -40,14 +42,14 @@ public class CreditChargeController implements Initializable {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/webmarketer/Cancel");
         cancel.setOnMouseClicked((MouseEvent event) -> {
-
+            charge();
         });
     }
 
 
     public void charge(){
         //TODO
-
-        //WebMarketerMainController.webMarketerService.modifyCredit()
+        CreditVO creditVO=new CreditVO(Integer.parseInt(accountField.getText()),0,0,0,Double.parseDouble(amountField.getText()),null, ChangeReason.charge);
+        WebMarketerMainController.webMarketerService.modifyCredit(creditVO);
     }
 }
