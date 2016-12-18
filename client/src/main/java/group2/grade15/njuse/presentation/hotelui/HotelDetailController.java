@@ -56,7 +56,7 @@ public class HotelDetailController implements Initializable {
     private ImageView hotelImageView;
 
     @FXML
-    private Label returnLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, introLabel;
+    private Label returnLabel, makeOrderLabel, hotelNameLabel, starLabel, addressLabel, introLabel, facilityLabel;
 
     @FXML
     private ListView<String> roomInfoListView;
@@ -89,6 +89,7 @@ public class HotelDetailController implements Initializable {
             hotelNameLabel.setText(hotelVO.getName());
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());
+            facilityLabel.setText(hotelVO.getFacility());
             introLabel.setText(hotelVO.getIntroduction());
             myOrders = myOrderList;
 

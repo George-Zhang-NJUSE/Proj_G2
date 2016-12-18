@@ -34,7 +34,7 @@ public class WebMarketerDatabaseImpl implements WebMarketerDataService {
         }
 
         try {
-            PreparedStatement getInfo = hotelManagerConnection.prepareStatement("select * from webmarketer where" +
+            PreparedStatement getInfo = hotelManagerConnection.prepareStatement("select * from webmarketer where " +
                     "employeeid = ?");
             getInfo.setString(1, encrypt.encrypt(webMarketerId));
             ResultSet rs = getInfo.executeQuery();
