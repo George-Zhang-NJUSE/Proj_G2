@@ -167,7 +167,7 @@ public class RoomManageController implements Initializable {
     }
 
     public RoomVO gatherVO(){
-        
+        return null;
     }
     /**
      * 从表格中获取选中的RoomVO
