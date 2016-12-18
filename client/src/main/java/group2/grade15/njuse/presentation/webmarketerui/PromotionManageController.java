@@ -121,7 +121,7 @@ public class PromotionManageController implements Initializable{
     public void toAdd(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/AddPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/AddPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((AddPromotionController)lodar.getController()).promotionManageController=this;
@@ -138,7 +138,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/DeletePromotionCheck.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((DeletePromotionCheckController)lodar.getController()).promotionManageController=this;
@@ -156,7 +156,7 @@ public class PromotionManageController implements Initializable{
             Fade out = new Fade(opPane, 200, false);
             out.play();
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/ModifyPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/ModifyPromotion.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((ModifyPromotionController)lodar.getController()).promotionManageController=this;
@@ -338,6 +338,7 @@ public class PromotionManageController implements Initializable{
         WebMarketerMainController.webMarketerService.deleteWebPromotion(promotion.getId());
         back();
     }
+
     public static class Promotion{
         private final SimpleStringProperty name;
         private final SimpleIntegerProperty id;

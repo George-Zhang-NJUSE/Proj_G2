@@ -107,6 +107,7 @@ public class FixController implements Initializable {
         });
         showAllOrder();
 
+
     }
     public void showAllOrder(){
         //TODO 从网站营销这边拿到的列表应该不需要ID

@@ -156,7 +156,7 @@ public class PromotionManageController implements Initializable{
     public void toDelete(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/hotelmanager/DeletePromotionCheck.fxml"));
 
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
@@ -172,7 +172,7 @@ public class PromotionManageController implements Initializable{
     public void toModify(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/java/group2/grade15/njuse/presentation/hotelmanageui/ModifyPromotion.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/ModifyPromotion.fxml"));
             modifyPromotionController=(ModifyPromotionController)lodar.getController();
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
