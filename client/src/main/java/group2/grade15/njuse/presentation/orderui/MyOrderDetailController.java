@@ -129,10 +129,13 @@ public class MyOrderDetailController implements Initializable {
         orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
         hotelNameLabel.setText(hotelName);
         addressLabel.setText(address);
-        createTimeLabel.setText(orderVO.getCreateTime().toString());
-        checkInTimeLabel.setText(orderVO.getCheckInTime().toString());
-        checkOutTimeLabel.setText(orderVO.getCheckOutTime().toString());
-        finalExecuteTimeLabel.setText(orderVO.getFinalExecuteTime().toString());
+
+        //时间精确到秒
+        createTimeLabel.setText(orderVO.getCreateTime().toString().split("\\.")[0]);
+        checkInTimeLabel.setText(orderVO.getCheckInTime().toString().split("\\.")[0]);
+        checkOutTimeLabel.setText(orderVO.getCheckOutTime().toString().split("\\.")[0]);
+        finalExecuteTimeLabel.setText(orderVO.getFinalExecuteTime().toString().split("\\.")[0]);
+
         roomTypeLabel.setText(LiteralList.roomTypeList[orderVO.getType().ordinal()]);
         roomNumLabel.setText(Integer.toString(orderVO.getRoomSum()));
         customerNumLabel.setText(Integer.toString(orderVO.getNumOfCustomer()));
