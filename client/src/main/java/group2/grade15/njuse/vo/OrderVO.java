@@ -29,6 +29,7 @@ public class OrderVO implements Serializable {
         customerID = po.getCustomerID();
         hotelID = po.getHotelID();
         amount = po.getAmount();
+        createTime = po.getCreateTime();
         checkInTime = po.getCheckInTime();
         checkOutTime = po.getCheckOutTime();
         finalExecuteTime = po.getFinalExecuteTime();
@@ -46,6 +47,7 @@ public class OrderVO implements Serializable {
         hotelID = vo.getHotelID();
         promotionID = usedPromotionID;
         amount = newAmount;
+        createTime = vo.getCreateTime();
         checkInTime = vo.getCheckInTime();
         checkOutTime = vo.getCheckOutTime();
         finalExecuteTime = vo.getFinalExecuteTime();

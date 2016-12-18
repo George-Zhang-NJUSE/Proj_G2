@@ -1,5 +1,7 @@
 package group2.grade15.njuse.bl.orderbl;
 
+import group2.grade15.njuse.bl.customerbl.Customer;
+import group2.grade15.njuse.bl.customerbl.CustomerBL;
 import group2.grade15.njuse.bl.hotelbl.Hotel;
 import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
@@ -28,10 +30,12 @@ import java.util.ArrayList;
  */
 public class Order implements OrderBL{
 
+    private CustomerBL customer;
     private WebPromotionControllerBL webPromotionController;
     private HotelPromotionControllerBL hotelPromotionController;
 
     public Order(){
+        customer = new Customer();
         webPromotionController = new WebPromotionController();
         hotelPromotionController = new HotelPromotionController();
     }
@@ -62,11 +66,18 @@ public class Order implements OrderBL{
     }
 
     public ResultMessage savePO(OrderVO order) {
-        try {
-            return RemoteHelper.getInstance().getOrderDataService().addOrder(order.toPO());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            return ResultMessage.CONNECTION_EXCEPTION;
+        int ID = order.getCustomerID();
+        double credit = customer.getInfo(ID).getCredit();
+
+        if(credit > 0) {
+            try {
+                return RemoteHelper.getInstance().getOrderDataService().addOrder(order.toPO());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return ResultMessage.CONNECTION_EXCEPTION;
+            }
+        } else {
+            return ResultMessage.ILLEGAL;
         }
     }
 
