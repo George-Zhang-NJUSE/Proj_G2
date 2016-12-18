@@ -8,7 +8,7 @@ import group2.grade15.njuse.vo.CustomerVO;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CustomerServTest {
     CustomerServ customer;
