@@ -150,8 +150,8 @@ public class SearchFilter implements SearchFilterBL {
 
     @Override
     public ArrayList<HotelVO> filterByStarLevel(int minStarLevel, ArrayList<HotelVO> hotelList) {
-        ArrayList<HotelVO> newHotelList = hotelList.stream().
-                                          filter(hotelVO -> hotelVO.getRank() >= minStarLevel)
+        ArrayList<HotelVO> newHotelList = hotelList.stream()
+                                          .filter(hotelVO -> hotelVO.getRank() >= minStarLevel)
                                           .collect(Collectors.toCollection(ArrayList::new));
 
         return newHotelList;
@@ -173,8 +173,10 @@ public class SearchFilter implements SearchFilterBL {
     }
 
     @Override
-    public ArrayList<HotelVO> filterByTime(Timestamp checkIn, Timestamp checkOut, int needRoom, RoomType type, ArrayList<HotelVO> hotelList) {
+    public ArrayList<HotelVO> filterByTime(java.util.Date checkInTime, java.util.Date checkOutTime, int needRoom, RoomType type, ArrayList<HotelVO> hotelList) {
         ArrayList<HotelVO> newHotelList = new ArrayList();
+        Timestamp checkIn = new Timestamp(checkInTime.getTime());
+        Timestamp checkOut = new Timestamp(checkOutTime.getTime());
 
         for (HotelVO hotel : hotelList) {
             int spareRoomNum = roomBL.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
