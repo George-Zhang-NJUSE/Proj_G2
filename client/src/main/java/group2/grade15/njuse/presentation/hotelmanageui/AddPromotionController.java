@@ -145,14 +145,14 @@ public class AddPromotionController implements Initializable {
     }
     private boolean checkEmpty(){
         boolean result =
-                (name.getText() == "" )||
-                        (cut.getText() == "" )||
-                        (type.getEditor().getText() == "")
+                (name.getText().length()==0 )||
+                        (cut.getText().length()==0 )||
+                        (type.getEditor().getText().length()==0)
                 ;
 
         switch (type.getValue()) {
             case TimeHotel:
-                result = result || (startDate.getEditor().getText() == "") || (endDate.getEditor().getText() == "");
+                result = result || (startDate.getEditor().getText().length()==0) || (endDate.getEditor().getText().length()==0);
                 break;
         }
         return result;

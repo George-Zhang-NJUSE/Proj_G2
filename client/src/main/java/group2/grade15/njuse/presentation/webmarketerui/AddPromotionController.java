@@ -142,19 +142,19 @@ public class AddPromotionController implements Initializable {
     }
     public boolean checkEmpty(){
         boolean result=
-                name.getText()==""||
-                        cut.getText()==""||
-                        type.getEditor().getText()=="";
+                name.getText().length()==0||
+                        cut.getText().length()==0||
+                        type.getEditor().getText().length()==0;
         if(type.getEditor().getText()=="TimeWeb"){
-            if (startDate.getEditor().getText() == "" || endDate.getEditor().getText() == "") {
+            if (startDate.getEditor().getText().length()==0 || endDate.getEditor().getText().length()==0) {
                 result=true;
             }
         } else if (type.getEditor().getText() == "LevelWeb") {
-            if (requiredRank.getEditor().getText() == "") {
+            if (requiredRank.getEditor().getText().length()==0) {
                 result=true;
             }
-        } else if (type.getEditor().getText() == "") {
-            if (CBD.getText() == "") {
+        } else if (type.getEditor().getText().length()==0) {
+            if (CBD.getText().length()==0) {
                 result = true;
             }
         }

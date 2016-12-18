@@ -60,6 +60,10 @@ public class FixController implements Initializable {
     @FXML
     private TextArea fixReason;
     @FXML
+    private Label searchMessage;
+    @FXML
+    private Label searchButton;
+    @FXML
     private TableView<Order> unsolvedList;
     @FXML
     private TableView<Order> solvedList;
@@ -111,6 +115,9 @@ public class FixController implements Initializable {
                 exception.printStackTrace();
             }
         });
+        searchButton.setOnMouseClicked((MouseEvent e)->{
+            openFromID();
+        });
         showAllOrder();
 
 
@@ -139,7 +146,22 @@ public class FixController implements Initializable {
 
     public void openFromID() {
         //TODO
+        try {
+            int id = Integer.parseInt(searchID.getText());
 
+            ArrayList<OrderVO> list=orderListServ.getAbnormalOrderList().getOrderList();
+                for(int i=0;i<list.size();i++) {
+                    if (list.get(i).getOrderID() == id) {
+                        openFromClick(new Order(list.get(i)));
+                        return;
+                    }
+                }
+            searchMessage.setText("未找到该订单");
+            return;
+        } catch (Exception e) {
+            searchMessage.setText("输入ID无效");
+            return;
+        }
     }
 
     public void openFromClick(Order order) {

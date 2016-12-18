@@ -92,7 +92,7 @@
                 </TabPane>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                     <children>
-                        <Label>
+                        <Label fx:id="searchButton">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -169,6 +169,7 @@
                   <Label text="最晚执行时间：" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
+            <Label fx:id="searchMessage" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             </children>
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
