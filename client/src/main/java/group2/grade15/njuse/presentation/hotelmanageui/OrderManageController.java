@@ -29,8 +29,13 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
 
 /**
  * Created by ALIENWARE-PC on 2016/12/4.
@@ -138,6 +143,7 @@ public class OrderManageController implements Initializable {
     private WorkingTab workingTab;
     public static OrderServ orderService=new OrderController();
     public static OrderListServ orderListService=new OrderController();
+
 
 
     @Override
@@ -303,6 +309,7 @@ public class OrderManageController implements Initializable {
 
     //逻辑的数据处理部分
     public OrderVO getSelectedOrderVO(){
+
         switch (workingTab) {
             case UNEXE:
                 return getOrderVO(unexeList);
@@ -336,9 +343,14 @@ public class OrderManageController implements Initializable {
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
         order.inDate.set(timeCI.getEditor().getText());
-        vo = toVO(order);
+        try{
+            vo = toVO(order);
+        }catch(Exception e){
+            message.setText("未按照格式输入数据");
+            return;
+        }
         if(vo.getState()==OrderState.unexecuted){
-            if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
+            if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
                 message.setText("操作成功");
                 removeSelectedOrderFromList(unexeList);
                 addOrderToList(checkinList,vo);
@@ -351,6 +363,27 @@ public class OrderManageController implements Initializable {
     }
     public void checkout(){
         //TODO
+        OrderVO vo=getSelectedOrderVO();
+        Order order = new Order(vo);
+        order.inDate.set(timeCO.getEditor().getText());
+        try{
+            vo = toVO(order);
+        }catch(Exception e){
+            message.setText("未按照格式输入数据");
+            return;
+        }
+        if(vo.getState()==OrderState.executed){
+            if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
+                message.setText("操作成功");
+                removeSelectedOrderFromList(checkinList);
+                addOrderToList(completeList,vo);
+            }else{
+                message.setText("操作失败");
+            };
+        }else{
+            message.setText("该订单不是已入住订单");
+        }
+
     }
     public void overtimeCheckin(){
         //TODO
@@ -360,11 +393,7 @@ public class OrderManageController implements Initializable {
         order.inDate.set(timeCI.getEditor().getText());
         vo = toVO(order);
         if (vo.getState() == OrderState.abnormal) {
-            if(ResultMessage.SUCCESS==HotelManageMainController.hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
-
-                //TODO 加信用充值的部分（总感觉VO有点不协调）
-                //CreditVO creditVO=new CreditVO(vo.getCustomerID(),vo.getOrderID(),vo.);
-                //WebMarketerMainController.webMarketerService.
+            if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
                 message.setText("操作成功");
                 removeSelectedOrderFromList(innormalList);
                 addOrderToList(checkinList, vo);
@@ -377,18 +406,19 @@ public class OrderManageController implements Initializable {
 
     }
 
-    public OrderVO toVO(Order order) {
-        String[] s = order.getInDate().split("-");
-        Date indate=new Date(Integer.parseInt(s[0])-1900,Integer.parseInt(s[1])-1,Integer.parseInt(s[2]));
+    public static OrderVO toVO(Order order) {
+        Timestamp indate=Timestamp.valueOf(order.getInDate());
+        Timestamp outdate = Timestamp.valueOf(order.getOutDate());
+        Timestamp finaldate = Timestamp.valueOf(order.getFinalDate());
         OrderVO vo=new OrderVO(
                 order.getOrderId(),
                 order.getCustomerId(),
                 order.getHotelId(),
                 order.getAmount(),
                 indate,//inDate
-                order.vo.getCheckOutTime(),//oDate
+                outdate,//oDate
                 order.vo.getCreateTime(),
-                order.vo.getFinalExecuteTime(),
+                finaldate,//finalDate
                 order.getRoomNum(),
                 order.vo.getType(),
                 order.getNumOfCustomer(),
@@ -415,7 +445,7 @@ public class OrderManageController implements Initializable {
         private final SimpleIntegerProperty numOfCustomer;
         private final SimpleBooleanProperty haveKid;
         private final SimpleStringProperty state;
-        private final OrderVO vo;
+        private  OrderVO vo;
 
         public Order(OrderVO vo){
             orderId = new SimpleIntegerProperty(vo.getOrderID());
@@ -423,10 +453,16 @@ public class OrderManageController implements Initializable {
             hotelId = new SimpleIntegerProperty(vo.getHotelID());
             promotionId = new SimpleIntegerProperty(vo.getPromotionID());
             amount = new SimpleDoubleProperty(vo.getAmount());
-            inDate = new SimpleStringProperty(vo.getCheckInTime().toString());
-            outDate = new SimpleStringProperty(vo.getCheckOutTime().toString());
-            finalDate = new SimpleStringProperty(vo.getFinalExecuteTime().toString());
-            createTime = new SimpleStringProperty(vo.getCreateTime().toString());
+
+            //
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            inDate = new SimpleStringProperty(df.format(vo.getCheckInTime()));
+            outDate = new SimpleStringProperty(df.format(vo.getCheckOutTime()));
+            finalDate = new SimpleStringProperty(df.format(vo.getFinalExecuteTime()));
+            createTime = new SimpleStringProperty(df.format(vo.getCreateTime()));
+
+            //
             roomNum = new SimpleIntegerProperty(vo.getRoomSum());
             roomType = new SimpleStringProperty(vo.getType().toString());
             numOfCustomer = new SimpleIntegerProperty(vo.getNumOfCustomer());
@@ -434,6 +470,9 @@ public class OrderManageController implements Initializable {
             state = new SimpleStringProperty(vo.getState().toString());
             this.vo=vo;
 
+        }
+        public void refreshVO(){
+            this.vo = toVO(this);
         }
         public int getOrderId(){
             return orderId.get();

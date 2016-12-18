@@ -142,6 +142,14 @@
                 <Font name="Microsoft YaHei Light" size="36.0" />
             </font>
         </Label>
+      <Label fx:id="message" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="5.0" top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Microsoft YaHei Light" size="13.0" />
+         </font>
+      </Label>
     </children>
 
 </GridPane>

@@ -58,6 +58,8 @@ public class HotelInfoController implements Initializable {
     private Button callFileChooserButton;
     @FXML
     private ListView<String> picturePathList;
+    @FXML
+    private Label message;
 
     private FileChooser fileChooser=new FileChooser();
 
@@ -75,6 +77,7 @@ public class HotelInfoController implements Initializable {
         fileChooser.setTitle("选择图片文件");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG", "*.jpg"));
 
+        showInfo();
         callFileChooserButton.setOnAction((ActionEvent e)->{
             showFileChooser();
         });
@@ -89,7 +92,7 @@ public class HotelInfoController implements Initializable {
         picturePathList.setItems(list);
         fileNumber.setText("选择了"+String.valueOf(files.size())+"张图片");
     }
-    private void show(){
+    private void showInfo(){
         HotelVO vo=HotelManageMainController.hotelVO;
         name.setText(vo.getName());
         address.setText(vo.getConcreteAddress());
@@ -100,7 +103,17 @@ public class HotelInfoController implements Initializable {
 
     }
     //逻辑数据采集部分
+    private boolean checkEmpty(){
+        boolean result=
+                name.getText()==""||
+                address.getText()==""||
+                rank.getText()==""||
+                contact.getText()==""||
+                facility.getText()=="";
+        return result;
+    }
     public HotelVO getVO(){
+
         int ID=HotelManageMainController.hotelVO.getId();
         ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
 
@@ -159,7 +172,20 @@ public class HotelInfoController implements Initializable {
     }
 
     //逻辑实现部分
-    public ResultMessage modifyInfo(){
-        return hotelManagerController.modifyHotelInfo(getVO());
+    public void modifyInfo() {
+        if (checkEmpty()){
+            message.setText("必填信息不能为空");
+            return;
+        }
+        switch(hotelManagerController.modifyHotelInfo(getVO())){
+            case SUCCESS:
+                message.setText("信息更新成功");
+                break;
+            case CONNECTION_EXCEPTION:
+                message.setText("与服务器失去连接");
+                break;
+            case FAILED:
+                message.setText("更新信息失败");
+        };
     }
 }
