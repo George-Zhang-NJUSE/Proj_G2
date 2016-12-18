@@ -254,7 +254,7 @@
                               </Label>
                               <TextField fx:id="adultCI" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="kidCI" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <DatePicker fx:id="timeCI" GridPane.columnIndex="1" />
+                              <TextField fx:id="timeCI" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="checkoutPane" visible="false">
@@ -272,7 +272,7 @@
                                  <font>
                                     <Font name="Microsoft YaHei Light" size="14.0" />
                                  </font></Label>
-                              <DatePicker fx:id="timeCO" GridPane.columnIndex="1" />
+                              <TextField fx:id="timeCO" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="overtimeCheckinPane" visible="false">
@@ -309,7 +309,7 @@
                               <TextField fx:id="adultOC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="kidOC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="restoreCredit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <DatePicker promptText="timeOC" GridPane.columnIndex="1" />
+                              <TextField fx:id="timeOC" promptText="timeOC" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <HBox fx:id="optionBox" prefHeight="100.0" prefWidth="300.0" spacing="10.0">

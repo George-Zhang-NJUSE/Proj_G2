@@ -99,17 +99,17 @@ public class OrderManageController implements Initializable {
     private TextField orderState;
 
     @FXML
-    private DatePicker timeCI;
+    private TextField timeCI;
     @FXML
     private TextField adultCI;
     @FXML
     private TextField kidCI;
 
     @FXML
-    private DatePicker timeCO;
+    private TextField timeCO;
 
     @FXML
-    private DatePicker timeOC;
+    private TextField timeOC;
     @FXML
     private TextField adultOC;
     @FXML
@@ -344,7 +344,7 @@ public class OrderManageController implements Initializable {
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
-        order.inDate.set(timeCI.getEditor().getText());
+        order.inDate.set(timeCI.getText());
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -383,11 +383,11 @@ public class OrderManageController implements Initializable {
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if(timeCO.getEditor().getText()==""){
+        if(timeCO.getText()==""){
             message.setText("不能为空");
             return;
         }
-        order.inDate.set(df.format(timeCO.getValue()));
+        order.inDate.set(timeCO.getText());
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -414,8 +414,8 @@ public class OrderManageController implements Initializable {
         //TODO
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
-        order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
-        order.inDate.set(timeCI.getEditor().getText());
+        order.numOfCustomer.set(Integer.parseInt(adultOC.getText())+Integer.parseInt(kidOC.getText()));
+        order.inDate.set(timeOC.getText());
         vo = toVO(order);
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
