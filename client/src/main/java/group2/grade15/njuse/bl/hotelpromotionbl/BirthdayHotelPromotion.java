@@ -9,6 +9,8 @@ import group2.grade15.njuse.vo.OrderVO;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * Created by Guo on 2016/12/6.
@@ -33,7 +35,7 @@ public class BirthdayHotelPromotion implements HotelPromotionBL{
     }
 
     private boolean isFit(OrderVO orderVO, HotelPromotionVO hotelPromotionVO){
-        Date checkInTime = orderVO.getCheckInTime();
+        Timestamp checkInTime = orderVO.getCheckInTime();
 
         //获取客户的生日
         int customerID = orderVO.getCustomerID();
@@ -48,7 +50,10 @@ public class BirthdayHotelPromotion implements HotelPromotionBL{
             return false;
         }
 
-        if(checkInTime.compareTo(birthday) == 0){
+        long dayTime = 60 * 60 * 24 * 1000;
+        boolean isCorrect = ((checkInTime.getTime() - birthday.getTime()) < dayTime);
+
+        if(isCorrect){
             return true;
         } else {
             return false;

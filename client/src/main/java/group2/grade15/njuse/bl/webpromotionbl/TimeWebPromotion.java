@@ -6,6 +6,7 @@ import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
 import group2.grade15.njuse.vo.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Guo on 2016/12/6.
@@ -30,7 +31,7 @@ public class TimeWebPromotion implements WebPromotionBL {
     }
 
     private boolean isFit(OrderVO orderVO, WebPromotionVO webPromotionVO){
-        Date createTime = orderVO.getCreateTime();
+        Timestamp createTime = orderVO.getCreateTime();
 
         Date startTime = webPromotionVO.getStart();
         Date endTime = webPromotionVO.getEnd();

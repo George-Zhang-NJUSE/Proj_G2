@@ -4,7 +4,7 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 订单业务的层间接口
@@ -63,5 +63,6 @@ public interface OrderServ {
      *         失败返回ResultMessage.FAILED
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
-    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID);
+
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID);
 }
