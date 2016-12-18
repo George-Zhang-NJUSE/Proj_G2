@@ -7,6 +7,7 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.RoomVO;
 
+import javax.xml.transform.Result;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -25,6 +26,31 @@ public class Room implements RoomBL{
 
         return result;
     }
+
+    @Override
+    public ResultMessage addRoomType(int hotelID, RoomVO roomVO) {
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getHotelDataService().addRoomType(hotelID, roomVO.toPO());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            result = ResultMessage.CONNECTION_EXCEPTION;
+        }
+        return result;
+    }
+
+    @Override
+    public ResultMessage deleteRoomType(int hotelID, RoomType type) {
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getHotelDataService().deleteRoomType(hotelID, type);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            result = ResultMessage.CONNECTION_EXCEPTION;
+        }
+        return result;
+    }
+
 
     @Override
     public int getSpareRoomNumInTime(RoomType type, int hotelID, Timestamp checkInTime, Timestamp checkOutTime){
