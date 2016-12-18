@@ -6,6 +6,7 @@ import group2.grade15.njuse.po.RoomPO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class HotelVO implements Serializable {
     private int id;
@@ -42,7 +43,7 @@ public class HotelVO implements Serializable {
     }
 
     public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction,
-                   String facility, ArrayList<RoomVO> roomList, ArrayList<CustomerVO> vipList, int rank, double score,
+                   String facility, ArrayList<RoomVO> roomList, int rank, double score,
                    byte[][] picture) {
 
         this.id = id;
@@ -103,12 +104,9 @@ public class HotelVO implements Serializable {
     }
 
     public HotelPO toPO() {
-        ArrayList<RoomPO> roomPOList = new ArrayList();
-        for (RoomVO vo : roomList) {
-            roomPOList.add(vo.toPO());
-        }
-
-        ArrayList<CustomerPO> vipPOList = new ArrayList();
+        ArrayList<RoomPO> roomPOList = roomList.stream()
+                                               .map(RoomVO::toPO)
+                                               .collect(Collectors.toCollection(ArrayList::new));
 
         return new HotelPO(id, name, address, concreteAddress, contact, introduction, facility, roomPOList, rank, score, picture);
     }
