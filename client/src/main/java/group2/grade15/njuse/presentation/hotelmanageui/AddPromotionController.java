@@ -44,7 +44,7 @@ public class AddPromotionController implements Initializable {
 
 
     @FXML
-    private TextField companyString;
+    private TextField companyID;
     @FXML
     private DatePicker startDate;
     @FXML
@@ -120,7 +120,7 @@ public class AddPromotionController implements Initializable {
                         type,
                         null,
                         null,
-                        -1,
+                        Integer.parseInt(companyID.getText()),
                         Double.parseDouble(cut.getText()),
                         name.getText(),
                         PromotionState.unlaunched,
@@ -145,9 +145,9 @@ public class AddPromotionController implements Initializable {
     }
     private boolean checkEmpty(){
         boolean result =
-                        name.getText() == "" ||
-                        cut.getText() == "" ||
-                        type.getEditor().getText() == ""
+                (name.getText() == "" )||
+                        (cut.getText() == "" )||
+                        (type.getEditor().getText() == "")
                 ;
 
         switch (type.getValue()) {
@@ -162,8 +162,21 @@ public class AddPromotionController implements Initializable {
             message.setText("填写部分不能为空");
             return;
         }
-        message.setText("");
+        if(type.getValue()==HotelPromotionType.TimeHotel)
+            if(startDate.getValue().compareTo(endDate.getValue())!=-1){
+                message.setText("开始日期不能早于结束日期");
+                return;
+            }
+        if (type.getValue() == HotelPromotionType.PartnerHotel) {
+            try {
+                Integer.parseInt(companyID.getText());
+            } catch (Exception e) {
+                message.setText("请输出有效数字");
+                return;
+            }
+            }
         HotelPromotionVO toAdd=getVO();
+
         promotionManageController.addPromotion(toAdd);
         clean();
 

@@ -64,8 +64,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="合作企业" />
-                  <TextField fx:id="companyString" GridPane.columnIndex="1" />
+                  <Label text="合作企业ID" />
+                  <TextField fx:id="companyID" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

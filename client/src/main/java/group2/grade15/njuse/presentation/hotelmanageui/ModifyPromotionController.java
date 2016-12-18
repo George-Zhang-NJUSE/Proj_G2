@@ -28,7 +28,7 @@ import static group2.grade15.njuse.utility.HotelPromotionType.TimeHotel;
  * Created by luoy on 2016/12/3.
  */
 public class ModifyPromotionController implements Initializable {
-    private int ID;
+    public  int ID;
     @FXML
     private TextField name;
     @FXML
@@ -89,13 +89,14 @@ public class ModifyPromotionController implements Initializable {
     }
 
     public void showPromotion(HotelPromotionVO vo){
+        ID=vo.getHotelID();
         name.setText(vo.getName());
         type.setText(vo.getType().toString());
         cut.setText(String.valueOf(vo.getDiscount()));
         switch(vo.getType()){
             case PartnerHotel:
                 company.setVisible(true);
-
+                companyString.setText(String.valueOf(vo.getVipID()));
                 break;
             case TimeHotel:
                 time.setVisible(true);
@@ -117,7 +118,7 @@ public class ModifyPromotionController implements Initializable {
         cancel.setVisible(sw);
     }
     public HotelPromotionVO getVO(){
-        int id=ID;
+        int id=promotionManageController.getSelected().getId();
         HotelPromotionVO result;
         HotelPromotionType type;
         switch(this.type.getText()){
@@ -135,25 +136,24 @@ public class ModifyPromotionController implements Initializable {
         }
         switch(type){
             case BirthdayHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
+                result=new HotelPromotionVO(id,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), promotionManageController.getSelectedPromotion().getState(),HotelManageMainController.hotelVO.getId());
                 break;
             case TimeHotel:
                 //TODO 确认这些地方没问题
                 Date sD,eD;
-                String[] s=startDate.getEditor().getText().split("-");
-                String[] e = endDate.getEditor().getText().split("-");
-                sD=new Date(Integer.parseInt(s[2]),Integer.parseInt(s[0]),Integer.parseInt(s[1]));
-                eD=new Date(Integer.parseInt(e[2]),Integer.parseInt(e[0]),Integer.parseInt(e[1]));
-                result = new HotelPromotionVO(ID, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), PromotionState.unlaunched, HotelManageMainController.hotelVO.getId());
+
+                sD = Date.valueOf(endDate.getValue());
+                eD = Date.valueOf(startDate.getValue());
+                result = new HotelPromotionVO(id, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), promotionManageController.getSelectedPromotion().getState(), HotelManageMainController.hotelVO.getId());
                 break;
             case PartnerHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
+                result=new HotelPromotionVO(id,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),promotionManageController.getSelectedPromotion().getState(),HotelManageMainController.hotelVO.getId());
                 break;
             case MultipleHotel:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
+                result=new HotelPromotionVO(id,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),promotionManageController.getSelectedPromotion().getState(),HotelManageMainController.hotelVO.getId());
                 break;
             default:
-                result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
+                result=new HotelPromotionVO(id,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(),promotionManageController.getSelectedPromotion().getState(),HotelManageMainController.hotelVO.getId());
         }
         return result;
     }
@@ -176,7 +176,11 @@ public class ModifyPromotionController implements Initializable {
             message.setText("填写部分不能为空");
             return;
         }
-        message.setText("");
+        if(type.getText()=="TimeHotel")
+        if(startDate.getValue().compareTo(endDate.getValue())!=-1){
+            message.setText("开始日期不能早于结束日期");
+            return;
+        }
 
         HotelPromotionVO toModify=getVO();
         promotionManageController.modifyPromotion(toModify);

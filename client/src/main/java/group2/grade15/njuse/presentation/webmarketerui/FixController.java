@@ -88,9 +88,13 @@ public class FixController implements Initializable {
         unsolvedList.setOnMouseClicked((MouseEvent e)->{
             try {
                 int index = unsolvedList.getSelectionModel().getSelectedIndex();
+                if(index>=unsolvedListData.size())
+                    return;
                 openFromClick(unsolvedListData.get(index));
                 check.setVisible(true);
                 clear.setVisible(true);
+            }catch (ArrayIndexOutOfBoundsException e2){
+                return;
             }catch (Exception exception){
                 exception.printStackTrace();
             }
@@ -101,6 +105,8 @@ public class FixController implements Initializable {
                 openFromClick(solvedListData.get(index));
                 check.setVisible(false);
                 clear.setVisible(false);
+            }catch (ArrayIndexOutOfBoundsException e2){
+                return;
             }catch (Exception exception){
                 exception.printStackTrace();
             }

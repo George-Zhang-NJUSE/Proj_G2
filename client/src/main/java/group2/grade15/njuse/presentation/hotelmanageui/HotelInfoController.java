@@ -110,11 +110,11 @@ public class HotelInfoController implements Initializable {
     //逻辑数据采集部分
     private boolean checkEmpty(){
         boolean result=
-                name.getText().isEmpty()||
-                address.getText().isEmpty()||
-                rank.getText().isEmpty()||
-                contact.getText().isEmpty()||
-                facility.getText().isEmpty();
+                name.getText()==""||
+                address.getText()==""||
+                rank.getText()==""||
+                contact.getText()==""||
+                facility.getText()=="";
         return result;
     }
     public HotelVO getVO(){

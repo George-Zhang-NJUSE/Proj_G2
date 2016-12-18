@@ -100,7 +100,7 @@ public class ModifyPromotionController implements Initializable {
             rerank=0;
         }
         WebPromotionVO vo=new WebPromotionVO(
-                0,
+                promotionManageController.getSelectedPromotion().getId(),
                 typeOfVO,
                 sD,
                 eD,

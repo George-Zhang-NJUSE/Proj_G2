@@ -172,6 +172,24 @@ public class OrderManageController implements Initializable {
         innormalList.setItems(innormalListData);
         cancelListData= FXCollections.observableArrayList();
         cancelList.setItems(cancelListData);
+        unexeList.setOnMouseClicked((MouseEvent e)->{
+            showFromClick();
+        });
+        checkinList.setOnMouseClicked((MouseEvent e)->{
+            showFromClick();
+        });
+        completeList.setOnMouseClicked((MouseEvent e)->{
+            showFromClick();
+        });
+        innormalList.setOnMouseClicked((MouseEvent e)->{
+            showFromClick();
+        });
+        cancelList.setOnMouseClicked((MouseEvent e)->{
+            showFromClick();
+        });
+
+
+
         check.setOnMouseClicked((MouseEvent e)->{
             switch (stage) {
                 case 0:
@@ -365,8 +383,12 @@ public class OrderManageController implements Initializable {
     }
     private void showFromClick(){
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        OrderVO vo=getSelectedOrderVO();
+        OrderVO vo;
+        try {
+            vo = getSelectedOrderVO();
+        }catch (Exception e){
+            return;
+        }
         orderID.setText(String.valueOf(vo.getOrderID()));
         customerID.setText(String.valueOf(vo.getCustomerID()));
         checkInDate.setText(df.format(vo.getCheckInTime()));

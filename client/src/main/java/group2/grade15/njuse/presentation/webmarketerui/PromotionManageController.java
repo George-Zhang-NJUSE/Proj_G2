@@ -213,6 +213,8 @@ public class PromotionManageController implements Initializable{
             Promotion promotion=getSelectedPromotion();
             modifyPromotionController.showPromotion(promotion);
 
+        }catch (ArrayIndexOutOfBoundsException e2){
+            return;
         }catch (Exception e){
             e.printStackTrace();
         }

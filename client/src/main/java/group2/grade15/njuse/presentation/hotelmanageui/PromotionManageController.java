@@ -205,7 +205,7 @@ public class PromotionManageController implements Initializable{
 
     //逻辑数据采集部分
     //TODO test this function.
-    private HotelPromotionVO getSelectedPromotion(){
+    public HotelPromotionVO getSelectedPromotion(){
         if(activatedMode){
             int index=activatedList.getSelectionModel().getSelectedIndex();
             ObservableList<Promotion> list=activatedList.getItems();
@@ -214,6 +214,17 @@ public class PromotionManageController implements Initializable{
             int index=unactivatedList.getSelectionModel().getSelectedIndex();
             ObservableList<Promotion> list= unactivatedList.getItems();
             return makeVO(list.get(index));
+        }
+    }
+    public Promotion getSelected(){
+        if(activatedMode){
+            int index=activatedList.getSelectionModel().getSelectedIndex();
+            ObservableList<Promotion> list=activatedList.getItems();
+            return (list.get(index));
+        }else{
+            int index=unactivatedList.getSelectionModel().getSelectedIndex();
+            ObservableList<Promotion> list= unactivatedList.getItems();
+            return (list.get(index));
         }
     }
     private HotelPromotionVO makeVO(Promotion promotion){
@@ -351,6 +362,7 @@ public class PromotionManageController implements Initializable{
                     message.setText("修改成功");
                     hotelManageMainController.upDateHotelVO();
                     showPromotionList();
+                    modifyPromotionController.setEditable(false);
                     break;
                 case CONNECTION_EXCEPTION:
                     message.setText("未连接到服务器");
@@ -373,6 +385,7 @@ public class PromotionManageController implements Initializable{
             message.setText("不能删除已激活的促销策略");
             return;
         }try {
+            System.out.println(promotionToDelete.getPromotionID());
             switch (hotelManagerController.deleteHotelPromotion(promotionToDelete)) {
                 case SUCCESS:
                     message.setText("已删除促销策略");
