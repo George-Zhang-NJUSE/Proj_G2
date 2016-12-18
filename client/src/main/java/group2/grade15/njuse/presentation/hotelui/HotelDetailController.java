@@ -144,9 +144,6 @@ public class HotelDetailController implements Initializable {
         if (hotelVO != null) {
             ArrayList<CommentVO> commentVOList = commentServ.getHotelCommentList(hotelVO.getId()).getList();
 
-            //debug
-            System.out.println("评价条数："+commentVOList.size());
-
             try {
 
                 ArrayList<HotelCommentItemController> controllerList = new ArrayList<>();
