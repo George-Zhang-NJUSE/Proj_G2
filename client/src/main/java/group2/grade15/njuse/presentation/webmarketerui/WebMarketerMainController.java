@@ -61,7 +61,7 @@ public class WebMarketerMainController implements Initializable {
         creditChargeTag.setVisible(true);
         creditChargeSwitcher.setStyle("-fx-background-color: rgb(210,210,210)");
         try {
-            FXMLLoader creditChargeLoader = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/CreditCharge.fxml"));
+            FXMLLoader creditChargeLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/CreditCharge.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(creditChargeLoader.load());
             motherPaneFadeout();
@@ -85,7 +85,7 @@ public class WebMarketerMainController implements Initializable {
         fixTag.setVisible(false);
         creditChargeTag.setVisible(false);
         try {
-            FXMLLoader promotionLoader = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/PromotionManage.fxml"));
+            FXMLLoader promotionLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/PromotionManage.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(promotionLoader.load());
             Fade fadein = new Fade(motherPane, 500, true);
@@ -108,7 +108,7 @@ public class WebMarketerMainController implements Initializable {
         fixTag.setVisible(true);
         creditChargeTag.setVisible(false);
         try {
-            FXMLLoader fixLoader = new FXMLLoader(new URL("file:client/src/res/fxml/webmarketer/Fix.fxml"));
+            FXMLLoader fixLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/Fix.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(fixLoader.load());
             Fade fadein = new Fade(motherPane, 500, true);

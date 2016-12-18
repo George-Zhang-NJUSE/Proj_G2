@@ -57,6 +57,8 @@ public class RoomManageController implements Initializable {
     @FXML
     private Group opGroup;
     private GridPane now=new GridPane();
+    @FXML
+    private Label message;
 
     @FXML
     private ComboBox<RoomType> typeA,typeM;
@@ -166,6 +168,9 @@ public class RoomManageController implements Initializable {
         return result;
     }
 
+    public RoomVO gatherVO(){
+        return null;
+    }
     /**
      * 从表格中获取选中的RoomVO
      * @return RoomVO
@@ -191,6 +196,7 @@ public class RoomManageController implements Initializable {
                 a=RoomType.all;
                 break;
         }
+
         RoomVO vo = new RoomVO(a, room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         return vo;
     }
@@ -205,13 +211,28 @@ public class RoomManageController implements Initializable {
             return ResultMessage.FAILED;
         }
     }
-    public ResultMessage modifyRoom(){
-        RoomVO roomToModify = getRoomVO();
+    public void  modifyRoom(){
+        int index=roomTable.getSelectionModel().getSelectedIndex();
+        Room room= roomTable.getItems().get(index);
+        room.setPrice(Double.parseDouble(priceM.getText()));
+        room.setSpareRoomNum(Integer.parseInt(restM.getText()));
+        room.setTotalRoomNum(Integer.parseInt(countM.getText()));
+        RoomVO roomToModify = new RoomVO(typeM.getValue(), room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         try {
-            return hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToModify);
+            switch (hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(), roomToModify)) {
+                case SUCCESS:
+                    message.setText("修改成功");
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("修改失败");
+                    break;
+            }
         }catch (Exception e){
             e.printStackTrace();
-            return ResultMessage.FAILED;
+            message.setText("修改失败");
         }
     }
     //逻辑实现的数据展示部分
