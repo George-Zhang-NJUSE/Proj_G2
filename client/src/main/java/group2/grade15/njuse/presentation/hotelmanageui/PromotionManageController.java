@@ -31,8 +31,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
 import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelVO;
@@ -71,6 +74,7 @@ public class PromotionManageController implements Initializable{
     //逻辑部分
     public AddPromotionController addPromotionController;
     public ModifyPromotionController modifyPromotionController;
+    public HotelManageMainController hotelManageMainController;
     private Boolean activatedMode=false;
 
 
@@ -117,6 +121,13 @@ public class PromotionManageController implements Initializable{
         unactivatedList.setOnMouseClicked((MouseEvent e)->{
             fetchPromotion();
         });
+        changeStateButton.setOnMouseClicked((MouseEvent e)->{
+            if(activatedMode){
+                stopPromotion();
+            }else{
+                activatePromotion();
+            }
+        });
         showPromotionList();
     }
 
@@ -156,7 +167,7 @@ public class PromotionManageController implements Initializable{
     public void toDelete(){
         try {
             opPane.setVisible(true);
-            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/hotelmanager/DeletePromotionCheck.fxml"));
+            FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/DeletePromotionCheck.fxml"));
 
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
@@ -173,10 +184,11 @@ public class PromotionManageController implements Initializable{
         try {
             opPane.setVisible(true);
             FXMLLoader lodar = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/ModifyPromotion.fxml"));
-            modifyPromotionController=(ModifyPromotionController)lodar.getController();
+
             opPane.getChildren().clear();
             opPane.getChildren().add(lodar.load());
             ((ModifyPromotionController) lodar.getController()).promotionManageController=this;
+            modifyPromotionController=(ModifyPromotionController)lodar.getController();
             Fade in = new Fade(opPane, 200, true);
             in.play();
         } catch (MalformedURLException e) {
@@ -200,7 +212,7 @@ public class PromotionManageController implements Initializable{
             return makeVO(list.get(index));
         }else{
             int index=unactivatedList.getSelectionModel().getSelectedIndex();
-            ObservableList<Promotion> list= activatedList.getItems();
+            ObservableList<Promotion> list= unactivatedList.getItems();
             return makeVO(list.get(index));
         }
     }
@@ -244,12 +256,23 @@ public class PromotionManageController implements Initializable{
                 state=null;
                 break;
         }
-        Date startDate = new Date(Long.parseLong(sDate));
-        Date endDate = new Date(Long.parseLong(eDate));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDate;
+        Date endDate;
+        if(sDate!="none"){
+            startDate = Date.valueOf(sDate);
+            endDate = Date.valueOf(eDate);
+        }else{
+            startDate = Date.valueOf("1900-1-1");
+            endDate = Date.valueOf("1900-1-1");
+        }
         return new HotelPromotionVO(id,type,startDate,endDate,-1,discount,name,state,hotelId);
     }
     //逻辑展示部分
     public void showPromotionList(){
+        activatedData.remove(0, activatedData.size());
+        unactivatedData.remove(0, unactivatedData.size());
+
         ArrayList<HotelPromotionVO> list=hotelManagerController.getHotelPromotionList(hotelVO.getId()).getHotelPromotionList();
         for(int i=0;i<list.size();i++) {
             HotelPromotionVO vo = list.get(i);
@@ -260,23 +283,7 @@ public class PromotionManageController implements Initializable{
             }
         }
     }
-    public void addPromotionToList(HotelPromotionVO vo){
-        if (activatedMode){
-            activatedData.add(new Promotion(vo));
-        }else{
-            unactivatedData.add(new Promotion(vo));
-        }
-    }
-    public void removeSelectedPromotionFromList(){
-        if(activatedMode){
-            int index=activatedList.getSelectionModel().getSelectedIndex();
-            activatedData.remove(index);
-        }else{
-            int index=unactivatedList.getSelectionModel().getSelectedIndex();
-            unactivatedData.remove(index);
-        }
 
-    }
     public void fetchPromotion(){
         HotelPromotionVO vo=getSelectedPromotion();
         toModify();
@@ -311,10 +318,11 @@ public class PromotionManageController implements Initializable{
     }
 //TODO 酒店管理新增促销
     public void addPromotion(HotelPromotionVO promotionToAdd){
-        unactivatedData.add(new Promotion(promotionToAdd));
         switch (hotelManagerController.createHotelPromotion(promotionToAdd)) {
             case SUCCESS:
                 message.setText("添加成功");
+                hotelManageMainController.upDateHotelVO();
+                showPromotionList();
                 break;
             case CONNECTION_EXCEPTION:
                 message.setText("未连接到服务器");
@@ -327,47 +335,100 @@ public class PromotionManageController implements Initializable{
     }
     //TODO 酒店管理修改促销
 
-    public ResultMessage modifyPromotion(HotelPromotionVO vo){
+    public void modifyPromotion(HotelPromotionVO vo){
+        if (vo.getState() == PromotionState.start) {
+            message.setText("不能修改已激活的促销策略");
+            return;
+        }
         try {
             HotelPromotionVO promotionToModify = modifyPromotionController.getVO();
 
-            ResultMessage re= hotelManagerController.modifyHotelPromotion(vo);
-            message.setText("操作成功");
-            return re;
+            switch(hotelManagerController.modifyHotelPromotion(promotionToModify)){
+                case SUCCESS:
+                    message.setText("修改成功");
+                    hotelManageMainController.upDateHotelVO();
+                    showPromotionList();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("修改失败");
+                    break;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             message.setText("操作失败");
-            return ResultMessage.FAILED;
         }
     }
     //TODO 酒店管理删除促销
 
-    public ResultMessage deletePromotion(){
+    public void deletePromotion(){
         HotelPromotionVO promotionToDelete=getSelectedPromotion();
         if(promotionToDelete.getState()==PromotionState.start){
             message.setText("不能删除已激活的促销策略");
-            return ResultMessage.FAILED;
+            return;
         }try {
-            removePromotionFromList(promotionToDelete.getType().toString() == "start");
-            ResultMessage re= hotelManagerController.deleteHotelPromotion(promotionToDelete);
-            message.setText("操作成功");
-            return re;
+            switch (hotelManagerController.deleteHotelPromotion(promotionToDelete)) {
+                case SUCCESS:
+                    message.setText("已删除促销策略");
+                    hotelManageMainController.upDateHotelVO();
+                    showPromotionList();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("删除失败");
+                    break;
+            }
         }catch (Exception e){
             e.printStackTrace();
             message.setText("操作失败");
-            return ResultMessage.FAILED;
         }
     }
     //TODO 酒店管理激活策略
 
-    public ResultMessage activatePromotion(){
+    public void activatePromotion(){
         HotelPromotionVO promotionToActivate=getSelectedPromotion();
-        return hotelManagerController.activateHotelPromotion(promotionToActivate);
+        if (promotionToActivate.getState() == PromotionState.start) {
+            message.setText("该促销策略已经处在激活状态");
+            return;
+        }
+        switch (hotelManagerController.activateHotelPromotion(promotionToActivate)){
+            case SUCCESS:
+                message.setText("已激活");
+                hotelManageMainController.upDateHotelVO();
+                showPromotionList();
+                break;
+            case CONNECTION_EXCEPTION:
+                message.setText("未连接到服务器");
+                break;
+            case FAILED:
+                message.setText("激活失败");
+        }
     }
     //TODO 酒店管理终止策略
-    public ResultMessage stopPromotion(){
-        HotelPromotionVO promotionToStop=getSelectedPromotion();
-        return hotelManagerController.stopHotelPromotion(promotionToStop);
+    public void stopPromotion(){
+        HotelPromotionVO promotionToStop = getSelectedPromotion();
+        if (promotionToStop.getState() != PromotionState.start) {
+            message.setText("该促销策略并未激活");
+            return;
+        }
+        switch (hotelManagerController.stopHotelPromotion(promotionToStop)) {
+            case SUCCESS:
+                message.setText("已停止");
+                hotelManageMainController.upDateHotelVO();
+                showPromotionList();
+                break;
+            case CONNECTION_EXCEPTION:
+                message.setText("未连接到服务器");
+                break;
+            case FAILED:
+                message.setText("停止失败");
+                break;
+        }
     }
 
     public void removePromotionFromList(boolean isFromActivatedList){

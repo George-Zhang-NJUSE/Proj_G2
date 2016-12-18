@@ -73,6 +73,7 @@ public class PromotionManageController implements Initializable{
     private ObservableList<Promotion> activatedListData;
     private ObservableList<Promotion> unactivatedListData;
 
+    public WebMarketerMainController webMarketerMainController;
     public AddPromotionController addPromotionController;
     public ModifyPromotionController modifyPromotionController;
     public DeletePromotionCheckController deletePromotionCheckController;
@@ -121,6 +122,8 @@ public class PromotionManageController implements Initializable{
     }
     public void showAllPromotion(){
         ArrayList<WebPromotionVO> list = webMarketerService.getWebPromotionList().getWebPromotionList();
+        activatedListData.remove(0,activatedListData.size());
+        unactivatedListData.remove(0,unactivatedListData.size());
         for(int i=0;i<list.size();i++) {
             WebPromotionVO vo = list.get(i);
             if(vo.getState()==PromotionState.start)
@@ -214,21 +217,6 @@ public class PromotionManageController implements Initializable{
         modifyPromotionController.setEditable(true);
         modifyPromotionController.showCheck(true);
     }
-    public void addPromotionToList(Promotion promotion,boolean isToActivatedList){
-        if (isToActivatedList){
-            activatedListData.add(promotion);
-        }else{
-            unactivatedListData.add(promotion);
-        }
-    }
-    public void addPromotionToList(WebPromotionVO vo,boolean isToActivatedList){
-        Promotion promotion = new Promotion(vo);
-        if (isToActivatedList){
-            activatedListData.add(promotion);
-        }else{
-            unactivatedListData.add(promotion);
-        }
-    }
     public void removePromotionFromList(boolean isFromActivatedList){
         if (isFromActivatedList){
             activatedListData.remove(activatedList.getSelectionModel().getSelectedIndex());
@@ -308,6 +296,7 @@ public class PromotionManageController implements Initializable{
                         unactivatedListData.add(new Promotion(vo));
                     }
                     message.setText("添加成功");
+                    showAllPromotion();
                     break;
                 case CONNECTION_EXCEPTION:
                     message.setText("未连接到服务器");
@@ -331,8 +320,8 @@ public class PromotionManageController implements Initializable{
             }
             switch (webMarketerService.modifyWebPromotion(vo)){
                 case SUCCESS:
-                    updatePromotion(new Promotion(vo));
                     message.setText("操作成功");
+                    showAllPromotion();
                     break;
                 case CONNECTION_EXCEPTION:
                     message.setText("未连接到服务器");
@@ -364,12 +353,12 @@ public class PromotionManageController implements Initializable{
             if (promotion.getState() == "stop" || promotion.getState() == "start"){
                 return;
             }
-            removePromotionFromList(true);
-            unactivatedListData.add(promotion);
             promotion.setState("stop");
             WebPromotionVO vo = promotionToVO(promotion);
             webMarketerService.changeState(vo);
             message.setText("操作成功");
+
+            showAllPromotion();
         } catch (Exception e) {
             message.setText("操作未成功");
         }
@@ -380,9 +369,20 @@ public class PromotionManageController implements Initializable{
             message.setText("激活中的促销策略不能删除");
             return;
         }
-        removePromotionFromList(promotion.state.get() == "start");
-        webMarketerService.deleteWebPromotion(promotion.getId());
-        back();
+        switch (webMarketerService.deleteWebPromotion(promotion.getId())) {
+            case SUCCESS:
+                message.setText("已删除促销策略");
+                showAllPromotion();
+                back();
+                break;
+            case CONNECTION_EXCEPTION:
+                message.setText("未连接到服务器");
+                break;
+            case FAILED:
+                message.setText("删除失败");
+                break;
+        }
+
     }
 
     public static class Promotion{

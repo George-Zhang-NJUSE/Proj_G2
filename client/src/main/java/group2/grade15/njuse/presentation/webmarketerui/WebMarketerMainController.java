@@ -93,6 +93,7 @@ public class WebMarketerMainController implements Initializable {
             FXMLLoader promotionLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/PromotionManage.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(promotionLoader.load());
+            ((PromotionManageController)promotionLoader.getController()).webMarketerMainController=this;
             Fade fadein = new Fade(motherPane, 500, true);
             fadein.play();
         } catch (MalformedURLException e) {

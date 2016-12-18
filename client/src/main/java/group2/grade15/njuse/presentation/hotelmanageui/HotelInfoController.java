@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -80,6 +81,9 @@ public class HotelInfoController implements Initializable {
         showInfo();
         callFileChooserButton.setOnAction((ActionEvent e)->{
             showFileChooser();
+        });
+        check.setOnMouseClicked((MouseEvent e)->{
+            modifyInfo();
         });
 
     }
@@ -158,7 +162,8 @@ public class HotelInfoController implements Initializable {
                 bytes.add(buffer);
             }
             output.close();
-            input.close();
+            if(input!=null)
+                input.close();
             buf=null;
             System.gc();
         }catch (IOException e){

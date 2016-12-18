@@ -165,6 +165,7 @@ public class HotelManageMainController implements Initializable {
             FXMLLoader infoLoader=new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/PromotionManage.fxml"));
             opPane.getChildren().clear();
             opPane.getChildren().add(infoLoader.load());
+            ((PromotionManageController)infoLoader.getController()).hotelManageMainController=this;
             Fade in=new Fade(opPane,500,true);
             in.play();
         } catch (MalformedURLException e) {

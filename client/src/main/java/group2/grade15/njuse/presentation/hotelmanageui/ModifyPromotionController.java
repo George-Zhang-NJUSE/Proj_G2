@@ -22,6 +22,8 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
+import static group2.grade15.njuse.utility.HotelPromotionType.TimeHotel;
+
 /**
  * Created by luoy on 2016/12/3.
  */
@@ -32,7 +34,7 @@ public class ModifyPromotionController implements Initializable {
     @FXML
     private TextField cut;
     @FXML
-    private ComboBox<HotelPromotionType> type;
+    private TextField type;
     @FXML
     private GridPane company;
     @FXML
@@ -57,16 +59,16 @@ public class ModifyPromotionController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
-        ObservableList<HotelPromotionType> promotionTypes=FXCollections.observableArrayList(
+        /*ObservableList<HotelPromotionType> promotionTypes=FXCollections.observableArrayList(
                 HotelPromotionType.BirthdayHotel,
                 HotelPromotionType.MultipleHotel,
                 HotelPromotionType.PartnerHotel,
-                HotelPromotionType.TimeHotel
+                TimeHotel
         );
         type.setItems(promotionTypes);
         type.setOnAction((ActionEvent e)->{
             switchPane(type.getValue());
-        });
+        });*/
         setEditable(false);
 
     }
@@ -79,7 +81,7 @@ public class ModifyPromotionController implements Initializable {
         time.setVisible(false);
         company.setVisible(false);
 
-        if(type==HotelPromotionType.TimeHotel){
+        if(type== TimeHotel){
             time.setVisible(true);
         }else if(type==HotelPromotionType.PartnerHotel){
             company.setVisible(true);
@@ -88,9 +90,7 @@ public class ModifyPromotionController implements Initializable {
 
     public void showPromotion(HotelPromotionVO vo){
         name.setText(vo.getName());
-        type.setItems(FXCollections.observableArrayList(
-                vo.getType()
-        ));
+        type.setText(vo.getType().toString());
         cut.setText(String.valueOf(vo.getDiscount()));
         switch(vo.getType()){
             case PartnerHotel:
@@ -108,7 +108,6 @@ public class ModifyPromotionController implements Initializable {
     public void setEditable(boolean sw){
         name.setEditable(sw);
         cut.setEditable(sw);
-        type.setEditable(sw);
 
         companyString.setEditable(sw);
         startDate.setEditable(sw);
@@ -120,7 +119,20 @@ public class ModifyPromotionController implements Initializable {
     public HotelPromotionVO getVO(){
         int id=ID;
         HotelPromotionVO result;
-        HotelPromotionType type=this.type.getValue();
+        HotelPromotionType type;
+        switch(this.type.getText()){
+            case"BirthdayHotel":
+                type=HotelPromotionType.BirthdayHotel;
+                break;
+            case "PartnerHotel":
+                type = HotelPromotionType.PartnerHotel;
+                break;
+            case "MultipleHotel":
+                type = HotelPromotionType.MultipleHotel;
+                break;
+            default:
+                type = TimeHotel;
+        }
         switch(type){
             case BirthdayHotel:
                 result=new HotelPromotionVO(ID,type,null,null,-1,Double.parseDouble(cut.getText()),name.getText(), PromotionState.unlaunched,HotelManageMainController.hotelVO.getId());
@@ -149,11 +161,11 @@ public class ModifyPromotionController implements Initializable {
         boolean result =
                 name.getText() == "" ||
                         cut.getText() == "" ||
-                        type.getEditor().getText() == ""
+                        type.getText() == ""
                 ;
 
-        switch (type.getValue()) {
-            case TimeHotel:
+        switch (type.getText()) {
+            case "TimeHotel":
                 result = result || (startDate.getEditor().getText() == "") || (endDate.getEditor().getText() == "");
                 break;
         }
