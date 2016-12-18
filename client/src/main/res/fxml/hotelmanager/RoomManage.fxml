@@ -212,6 +212,11 @@
                   </Label>
                </children>
             </HBox>
+            <Label fx:id="message" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>
