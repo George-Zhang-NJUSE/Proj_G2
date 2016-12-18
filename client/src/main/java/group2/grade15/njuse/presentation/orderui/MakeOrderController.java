@@ -247,6 +247,10 @@ public class MakeOrderController implements Initializable {
                     Alert netError = new Alert(Alert.AlertType.ERROR, "网络连接出现错误，提交失败！");
                     netError.showAndWait();
                     break;
+                case ILLEGAL:
+                    Alert creditProblem = new Alert(Alert.AlertType.ERROR, "您的信用值太低，无法提交订单，请在线下工作人员处充值以恢复信用");
+                    creditProblem.showAndWait();
+                    break;
             }
         }else {
             Alert wrongDateAlert = new Alert(Alert.AlertType.ERROR, "请填写正确的日期！");
