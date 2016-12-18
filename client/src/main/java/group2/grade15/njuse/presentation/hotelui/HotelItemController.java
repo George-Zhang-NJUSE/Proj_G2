@@ -4,6 +4,7 @@ import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.OrderListServ;
 import group2.grade15.njuse.presentation.customerglobal.CommonData;
 import group2.grade15.njuse.presentation.myanimation.Fade;
+import group2.grade15.njuse.presentation.myanimation.Pop;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.presentation.orderui.MakeOrderController;
 import group2.grade15.njuse.vo.HotelVO;
@@ -125,8 +126,12 @@ public class HotelItemController implements Initializable {
     }
 
     public void show() {
+        //渐入扩大动画
         Fade fadeIn = new Fade(rootNode, 300, true);
+        Pop popIn = new Pop(rootNode, 300, true);
+
         fadeIn.play();
+        popIn.play();
     }
 
     @Override
@@ -136,8 +141,10 @@ public class HotelItemController implements Initializable {
         CustomeButton.implButton(showDetailLabel, "file:client/src/main/res/customer/more");
         CustomeButton.implButton(makeOrderLabel, "file:client/src/main/res/search/makeorder");
 
-        //为渐入动画做准备
+        //为渐入扩大动画做准备
         rootNode.setOpacity(0);
+        rootNode.setScaleX(0.9);
+        rootNode.setScaleY(0.9);
 
     }
 }
