@@ -179,7 +179,14 @@ public class SearchFilter implements SearchFilterBL {
         Timestamp checkOut = new Timestamp(checkOutTime.getTime());
 
         for (HotelVO hotel : hotelList) {
-            int spareRoomNum = roomBL.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
+            int spareRoomNum = 0;
+            if(type != RoomType.all) {
+                spareRoomNum = roomBL.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
+            } else {
+                spareRoomNum += roomBL.getSpareRoomNumInTime(RoomType.bigSingleBed, hotel.getId(), checkIn, checkOut);
+                spareRoomNum += roomBL.getSpareRoomNumInTime(RoomType.stadardDoubleBed, hotel.getId(), checkIn, checkOut);
+                spareRoomNum += roomBL.getSpareRoomNumInTime(RoomType.suiteRoom, hotel.getId(), checkIn, checkOut);
+            }
 
             if((spareRoomNum < 10000) && (spareRoomNum >= needRoom)){
                 newHotelList.add(hotel);

@@ -132,12 +132,17 @@ public class Order implements OrderBL{
         int hotelID = orderVO.getHotelID();
         RoomType roomType = orderVO.getType();
 
+        //计算入住天数
         Timestamp checkIn = orderVO.getCheckInTime();
         Timestamp checkOut = orderVO.getCheckOutTime();
         int seconds = (60 * 60 * 24 * 1000);
         long stayDays = 0;
         long sub = (checkOut.getTime() - checkIn.getTime());
-        if(sub % seconds == 0) {
+        if(sub < seconds)
+        {
+            stayDays = 1;
+        }
+        else if(sub % seconds == 0) {
             stayDays = sub / seconds;
         } else {
             stayDays = sub / seconds + 1;
