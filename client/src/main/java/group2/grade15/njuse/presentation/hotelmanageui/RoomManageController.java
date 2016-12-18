@@ -239,6 +239,10 @@ public class RoomManageController implements Initializable {
         room.setSpareRoomNum(Integer.parseInt(restM.getText()));
         room.setTotalRoomNum(Integer.parseInt(countM.getText()));
         RoomVO roomToModify = new RoomVO(typeM.getValue(), room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
+        if (roomToModify.getSpareRoomNum() > roomToModify.getTotalRoomNum()) {
+            message.setText("空闲房间不能多于总房间数");
+            return;
+        }
         try {
             switch (hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),
                     roomToModify)) {

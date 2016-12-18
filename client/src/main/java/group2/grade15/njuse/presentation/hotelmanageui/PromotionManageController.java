@@ -272,15 +272,18 @@ public class PromotionManageController implements Initializable{
     public void showPromotionList(){
         activatedData.remove(0, activatedData.size());
         unactivatedData.remove(0, unactivatedData.size());
-
-        ArrayList<HotelPromotionVO> list=hotelManagerController.getHotelPromotionList(hotelVO.getId()).getHotelPromotionList();
-        for(int i=0;i<list.size();i++) {
-            HotelPromotionVO vo = list.get(i);
-            if(vo.getState()==PromotionState.start){
-                activatedData.add(new Promotion(vo));
-            }else{
-                unactivatedData.add(new Promotion(vo));
+        try {
+            ArrayList<HotelPromotionVO> list = hotelManagerController.getHotelPromotionList(hotelVO.getId()).getHotelPromotionList();
+            for(int i=0;i<list.size();i++) {
+                HotelPromotionVO vo = list.get(i);
+                if(vo.getState()==PromotionState.start){
+                    activatedData.add(new Promotion(vo));
+                }else{
+                    unactivatedData.add(new Promotion(vo));
+                }
             }
+        } catch (NullPointerException e) {
+            return;
         }
     }
 

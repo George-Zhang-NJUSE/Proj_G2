@@ -69,6 +69,7 @@ public class HotelInfoController implements Initializable {
     @FXML
     public Stage ownerStage;
 
+    public HotelManageMainController hotelManageMainController;
     @Override
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -109,11 +110,11 @@ public class HotelInfoController implements Initializable {
     //逻辑数据采集部分
     private boolean checkEmpty(){
         boolean result=
-                name.getText()==""||
-                address.getText()==""||
-                rank.getText()==""||
-                contact.getText()==""||
-                facility.getText()=="";
+                name.getText().isEmpty()||
+                address.getText().isEmpty()||
+                rank.getText().isEmpty()||
+                contact.getText().isEmpty()||
+                facility.getText().isEmpty();
         return result;
     }
     public HotelVO getVO(){
@@ -184,6 +185,7 @@ public class HotelInfoController implements Initializable {
         switch(hotelManagerController.modifyHotelInfo(getVO())){
             case SUCCESS:
                 message.setText("信息更新成功");
+                hotelManageMainController.upDateHotelVO();
                 break;
             case CONNECTION_EXCEPTION:
                 message.setText("与服务器失去连接");

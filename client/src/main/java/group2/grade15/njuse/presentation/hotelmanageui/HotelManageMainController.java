@@ -96,6 +96,7 @@ public class HotelManageMainController implements Initializable {
             opPane.getChildren().add(infoLoader.load());
             Fade in=new Fade(opPane,500,true);
             HotelInfoController controller = (HotelInfoController)infoLoader.getController();
+            controller.hotelManageMainController=this;
             controller.ownerStage=stage;
             in.play();
         } catch (MalformedURLException e) {

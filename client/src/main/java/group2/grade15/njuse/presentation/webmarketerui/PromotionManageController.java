@@ -121,15 +121,19 @@ public class PromotionManageController implements Initializable{
         showAllPromotion();
     }
     public void showAllPromotion(){
-        ArrayList<WebPromotionVO> list = webMarketerService.getWebPromotionList().getWebPromotionList();
-        activatedListData.remove(0,activatedListData.size());
-        unactivatedListData.remove(0,unactivatedListData.size());
-        for(int i=0;i<list.size();i++) {
-            WebPromotionVO vo = list.get(i);
-            if(vo.getState()==PromotionState.start)
-                activatedListData.add(new Promotion(vo));
-            else
-                unactivatedListData.add(new Promotion(vo));
+        try {
+            ArrayList<WebPromotionVO> list = webMarketerService.getWebPromotionList().getWebPromotionList();
+            activatedListData.remove(0, activatedListData.size());
+            unactivatedListData.remove(0, unactivatedListData.size());
+            for (int i = 0; i < list.size(); i++) {
+                WebPromotionVO vo = list.get(i);
+                if (vo.getState() == PromotionState.start)
+                    activatedListData.add(new Promotion(vo));
+                else
+                    unactivatedListData.add(new Promotion(vo));
+            }
+        } catch (NullPointerException e) {
+            return;
         }
     }
     public void switchToActivated(){
@@ -290,11 +294,6 @@ public class PromotionManageController implements Initializable{
         try {
             switch(webMarketerService.createWebPromotion(vo)){
                 case SUCCESS:
-                    if(vo.getType()==WebPromotionType.TimeWeb){
-                        activatedListData.add(new Promotion(vo));
-                    }else{
-                        unactivatedListData.add(new Promotion(vo));
-                    }
                     message.setText("添加成功");
                     showAllPromotion();
                     break;
@@ -308,9 +307,12 @@ public class PromotionManageController implements Initializable{
             message.setText("添加失败");
         }
     }
-    public void updatePromotion(Promotion promotion){
-        removePromotionFromList(false);
-        unactivatedListData.add(promotion);
+
+    public void getPromotionFromID(int id) {
+        ArrayList<WebPromotionVO> list=webMarketerService.getWebPromotionList().getWebPromotionList();
+        for(int i=0;i<list.size();i++) {
+
+        }
     }
     public void modifyPromotion(WebPromotionVO vo){
         try {
@@ -335,14 +337,26 @@ public class PromotionManageController implements Initializable{
     public void activatePromotion(){
         try {
             Promotion promotion = getSelectedPromotion();
-            if (promotion.getState() == "start")
+            if (promotion.getState() == "start"){
+                message.setText("已经被激活");
+
                 return;
+            }
+
             promotion.setState("start");
-            removePromotionFromList(false);
-            activatedListData.add(promotion);
             WebPromotionVO vo = promotionToVO(promotion);
-            webMarketerService.changeState(vo);
-            message.setText("操作成功");
+            switch (webMarketerService.changeState(vo)){
+                case SUCCESS:
+                    message.setText("已激活");
+                    showAllPromotion();
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+                case FAILED:
+                    message.setText("激活失败");
+                    break;
+            }
         }catch (Exception e){
             message.setText("操作未成功");
         }
@@ -350,7 +364,7 @@ public class PromotionManageController implements Initializable{
     public void stopPromotion(){
         try {
             Promotion promotion = getSelectedPromotion();
-            if (promotion.getState() == "stop" || promotion.getState() == "start"){
+            if (promotion.getState() == "stop"){
                 return;
             }
             promotion.setState("stop");

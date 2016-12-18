@@ -105,5 +105,10 @@
             </Label>
          </children>
       </Pane>
+      <Label fx:id="message" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="10.0" />
+         </GridPane.margin>
+      </Label>
     </children>
 </GridPane>

@@ -49,6 +49,8 @@ public class AddPromotionController implements Initializable {
     private Label check;
     @FXML
     private Label cancel;
+    @FXML
+    private Label message;
 
 
     public PromotionManageController promotionManageController;
@@ -132,6 +134,31 @@ public class AddPromotionController implements Initializable {
         promotionManageController.back();
     }
     public void add() {
+        if (checkEmpty()) {
+            message.setText("填写内容不能为空");
+            return;
+        }
         promotionManageController.addPromotion(gatherVO());
+    }
+    public boolean checkEmpty(){
+        boolean result=
+                name.getText()==""||
+                        cut.getText()==""||
+                        type.getEditor().getText()=="";
+        if(type.getEditor().getText()=="TimeWeb"){
+            if (startDate.getEditor().getText() == "" || endDate.getEditor().getText() == "") {
+                result=true;
+            }
+        } else if (type.getEditor().getText() == "LevelWeb") {
+            if (requiredRank.getEditor().getText() == "") {
+                result=true;
+            }
+        } else if (type.getEditor().getText() == "") {
+            if (CBD.getText() == "") {
+                result = true;
+            }
+        }
+
+        return result;
     }
 }

@@ -121,6 +121,40 @@ public class ModifyPromotionController implements Initializable {
         check.setVisible(a);
         cancel.setVisible(a);
     }
+
+    public void showPromotion(WebPromotionVO vo) {
+        name.setText(vo.getName());
+        cut.setText(String.valueOf(vo.getDiscount()));
+        switch (vo.getType()) {
+            case LevelWeb:
+                type.setValue("会员优惠");
+                break;
+            case AreaWeb:
+                type.setValue("特定商区优惠");
+                break;
+            case TimeWeb:
+                type.setValue("特定时间优惠");
+                break;
+        }
+        startDate.getEditor().setText(vo.getStart().toString());
+        endDate.getEditor().setText(vo.getEnd().toString());
+        CBD.setText(vo.getAddress());
+        requiredRank.setValue(vo.getLevel());
+        VIP.setVisible(false);
+        time.setVisible(false);
+        rank.setVisible(false);
+        switch(type.getValue()){
+            case "特定商区优惠":
+                VIP.setVisible(true);
+                break;
+            case "特定时间优惠":
+                time.setVisible(true);
+                break;
+            default:
+                rank.setVisible(true);
+                break;
+        }
+    }
     public void showPromotion(PromotionManageController.Promotion promotion) {
         name.setText(promotion.getName());
         cut.setText(String.valueOf(promotion.getDiscount()));
