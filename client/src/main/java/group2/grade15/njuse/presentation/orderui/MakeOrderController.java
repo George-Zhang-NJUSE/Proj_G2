@@ -190,8 +190,8 @@ public class MakeOrderController implements Initializable {
                         int customerID = CommonData.getInstance().getCustomerVO().getId();
 
                         //获得总价及促销策略
-                        completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInTimestamp, checkOutTimestamp,
-                                createTimestamp, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
+                        completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0,  createTimestamp, checkInTimestamp, checkOutTimestamp,
+                                null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
                         totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
 
                         int promotionID = completedOrder.getPromotionID();
