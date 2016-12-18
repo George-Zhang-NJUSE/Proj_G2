@@ -7,6 +7,8 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -41,7 +43,7 @@ public class OrderController implements OrderServ, OrderListServ {
     }
 
     @Override
-    public ResultMessage updateTime(java.sql.Date checkIn, java.sql.Date checkOut, int orderID) {
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID) {
         return order.updateTime(checkIn, checkOut, orderID);
     }
 

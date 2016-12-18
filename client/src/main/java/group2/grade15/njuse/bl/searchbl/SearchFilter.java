@@ -11,6 +11,8 @@ import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.RoomVO;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -171,13 +173,10 @@ public class SearchFilter implements SearchFilterBL {
     }
 
     @Override
-    public ArrayList<HotelVO> filterByTime(java.util.Date checkInTime, java.util.Date checkOutTime, int needRoom, RoomType type, ArrayList<HotelVO> hotelList) {
+    public ArrayList<HotelVO> filterByTime(Timestamp checkIn, Timestamp checkOut, int needRoom, RoomType type, ArrayList<HotelVO> hotelList) {
         ArrayList<HotelVO> newHotelList = new ArrayList();
 
         for (HotelVO hotel : hotelList) {
-
-            Date checkIn = new Date(checkInTime.getTime());
-            Date checkOut = new Date(checkOutTime.getTime());
             int spareRoomNum = roomBL.getSpareRoomNumInTime(type, hotel.getId(), checkIn, checkOut);
 
             if((spareRoomNum < 10000) && (spareRoomNum >= needRoom)){

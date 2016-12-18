@@ -25,6 +25,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -177,9 +178,9 @@ public class MakeOrderController implements Initializable {
                         checkInDateFull = fullDateFormat.parse(checkInDateStr);
                         checkOutDateFull = fullDateFormat.parse(checkOutDateStr);
 
-                        java.sql.Date checkInSqlDate = new java.sql.Date(checkInDateFull.getTime());
-                        java.sql.Date checkOutSqlDate = new java.sql.Date(checkOutDateFull.getTime());
-                        java.sql.Date createSqlDate = new java.sql.Date(System.currentTimeMillis());
+                        Timestamp checkInTimestamp = new Timestamp(checkInDateFull.getTime());
+                        Timestamp checkOutTimestamp = new Timestamp(checkOutDateFull.getTime());
+                        Timestamp createTimestamp = new Timestamp(System.currentTimeMillis());
 
                         //抓取其他信息
                         RoomType roomType = availableRoomList.get(roomTypeComboBox.getSelectionModel().getSelectedIndex()).getType();
@@ -189,8 +190,8 @@ public class MakeOrderController implements Initializable {
                         int customerID = CommonData.getInstance().getCustomerVO().getId();
 
                         //获得总价及促销策略
-                        completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInSqlDate, checkOutSqlDate,
-                                createSqlDate, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
+                        completedOrder = orderServ.createOrder(new OrderVO(0, customerID, hotelID, 0, checkInTimestamp, checkOutTimestamp,
+                                createTimestamp, null, roomNum, roomType, customerNum, hasChild, OrderState.unexecuted));
                         totalPriceLabel.setText(Double.toString(completedOrder.getAmount()));
 
                         int promotionID = completedOrder.getPromotionID();
@@ -245,6 +246,10 @@ public class MakeOrderController implements Initializable {
                 case CONNECTION_EXCEPTION:
                     Alert netError = new Alert(Alert.AlertType.ERROR, "网络连接出现错误，提交失败！");
                     netError.showAndWait();
+                    break;
+                case ILLEGAL:
+                    Alert creditProblem = new Alert(Alert.AlertType.ERROR, "您的信用值太低，无法提交订单，请在线下工作人员处充值以恢复信用");
+                    creditProblem.showAndWait();
                     break;
             }
         }else {

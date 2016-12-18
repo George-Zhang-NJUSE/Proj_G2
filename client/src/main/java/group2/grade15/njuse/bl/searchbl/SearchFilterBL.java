@@ -9,6 +9,7 @@ import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.RoomVO;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -51,6 +52,6 @@ public interface SearchFilterBL {
     /**
      * 根据SearchCondition中的入住时间信息和所需房间的所剩量对获得的酒店列表进行一次筛选
      */
-    public ArrayList<HotelVO> filterByTime(java.util.Date checkInTime, java.util.Date checkOutTime, int needRoom, RoomType type, ArrayList<HotelVO> hotelList);
+    public ArrayList<HotelVO> filterByTime(Timestamp checkInTime, Timestamp checkOutTime, int needRoom, RoomType type, ArrayList<HotelVO> hotelList);
 
 }

@@ -4,7 +4,7 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.OrderVO;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 订单业务的层间接口
@@ -49,6 +49,7 @@ public interface OrderServ {
      * @param  orderVO OrderVO型，界面层传递来的存储有订单信息的数据对象
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
+     *         信用值非法返回ResultMessage.ILLEGAL
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage saveOrder(OrderVO orderVO);
@@ -62,5 +63,6 @@ public interface OrderServ {
      *         失败返回ResultMessage.FAILED
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
-    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID);
+
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID);
 }
