@@ -30,7 +30,7 @@ public class MyCommentController implements Initializable {
     private boolean isModifying;
     private CommentServ commentServ;
     private int hotelID;
-
+    private double score;
 
     @FXML
     private Node rootNode;
@@ -43,6 +43,16 @@ public class MyCommentController implements Initializable {
 
     @FXML
     private TextArea commentArea;
+
+    @FXML
+    private void minusScore() {
+        scoreLabel.setText(Double.toString(score == 0 ? 0 : --score));
+    }
+
+    @FXML
+    private void addScore() {
+        scoreLabel.setText(Double.toString(score == 10 ? 10 : ++score));
+    }
 
     @FXML
     private void close() {
@@ -111,7 +121,7 @@ public class MyCommentController implements Initializable {
                     case SUCCESS:
                         Alert successInfo=new Alert(Alert.AlertType.INFORMATION, "评价成功！");
                         successInfo.showAndWait();
-                        successInfo.setOnCloseRequest((DialogEvent e)->close());
+                        close();
                         break;
                     case FAILED:
                         Alert failInfo=new Alert(Alert.AlertType.ERROR, "评价失败！");
@@ -152,7 +162,7 @@ public class MyCommentController implements Initializable {
         } else {//没有评价过
             titleLabel.setText("评价订单");
             modifyLabel.setDisable(true);
-            scoreLabel.setText("0");
+            scoreLabel.setText(Double.toString(score));
         }
 
     }
@@ -170,6 +180,7 @@ public class MyCommentController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         commentServ = new CommentController();
+        score=0;
 
         //为弹出式动画做准备
         rootNode.setVisible(false);
