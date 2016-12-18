@@ -61,7 +61,8 @@ public class MyOrderItemController implements Initializable{
         orderVO = vo;
         orderIDLabel.setText(Integer.toString(orderVO.getOrderID()));
         priceLabel.setText(Double.toString(orderVO.getAmount()));
-        createTimeLabel.setText(orderVO.getCreateTime().toString());
+
+        createTimeLabel.setText(orderVO.getCreateTime().toString().split("\\.")[0]);
 
         hotelVO=hotelServ.getInfo(orderVO.getHotelID());
         hotelNameLabel.setText(hotelVO.getName());
