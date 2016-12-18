@@ -88,49 +88,58 @@ public class MyCommentController implements Initializable {
 
     @FXML
     private void saveEdition() {
-        if (isModifying) {
-            //修改已有的评价
-            ResultMessage result= commentServ.modifyComment(new CommentVO(commentVO.getHotelID(),commentVO.getUserID(),commentArea.getText(),commentVO.getCommentID(),
-                                new Date(System.currentTimeMillis()), commentVO.getScore(), commentVO.getOrderID()));
 
+        if (commentArea.getText().trim().isEmpty()) {
 
-            if (result == ResultMessage.SUCCESS) {
-                Alert successInfo=new Alert(Alert.AlertType.INFORMATION, "修改成功！");
-                successInfo.showAndWait();
-                exitModify();
-            } else if (result == ResultMessage.FAILED) {
-                Alert failInfo=new Alert(Alert.AlertType.ERROR, "修改失败！");
-                failInfo.showAndWait();
-            } else if (result == ResultMessage.CONNECTION_EXCEPTION) {
-                Alert netError = new Alert(Alert.AlertType.ERROR, "由于网络连接出现错误，修改失败！");
-                netError.showAndWait();
-            }
+            Alert emptyComment = new Alert(Alert.AlertType.ERROR, "评论不能为空！");
+            emptyComment.showAndWait();
 
         } else {
-            //新建评价
-            int userID = CommonData.getInstance().getCustomerVO().getId();
-            Alert confirmScore=new Alert(Alert.AlertType.CONFIRMATION,"评分一旦确定，便不可修改，请问这是您确认后的评分吗？",ButtonType.NO, ButtonType.YES);
-            Optional<ButtonType> confirm=confirmScore.showAndWait();
 
-            if (confirm.isPresent() && confirm.get() == ButtonType.YES) {
+            if (isModifying) {
+                //修改已有的评价
+                ResultMessage result = commentServ.modifyComment(new CommentVO(commentVO.getHotelID(), commentVO.getUserID(), commentArea.getText(), commentVO.getCommentID(),
+                        new Date(System.currentTimeMillis()), commentVO.getScore(), commentVO.getOrderID()));
 
-                ResultMessage result = commentServ.createComment(new CommentVO(hotelID, userID, commentArea.getText(), 0,
-                        new Date(System.currentTimeMillis()), Double.parseDouble(scoreLabel.getText()), Integer.parseInt(orderIDLabel.getText())));
+                if (result == ResultMessage.SUCCESS) {
+                    Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "修改成功！");
+                    successInfo.showAndWait();
+                    exitModify();
+                } else if (result == ResultMessage.FAILED) {
+                    Alert failInfo = new Alert(Alert.AlertType.ERROR, "修改失败！");
+                    failInfo.showAndWait();
+                } else if (result == ResultMessage.CONNECTION_EXCEPTION) {
+                    Alert netError = new Alert(Alert.AlertType.ERROR, "由于网络连接出现错误，修改失败！");
+                    netError.showAndWait();
+                }
 
-                switch (result) {
-                    case SUCCESS:
-                        Alert successInfo=new Alert(Alert.AlertType.INFORMATION, "评价成功！");
-                        successInfo.showAndWait();
-                        close();
-                        break;
-                    case FAILED:
-                        Alert failInfo=new Alert(Alert.AlertType.ERROR, "评价失败！");
-                        failInfo.showAndWait();
-                        break;
-                    case CONNECTION_EXCEPTION:
-                        Alert netError = new Alert(Alert.AlertType.ERROR, "评价失败，网络连接出现错误。");
-                        netError.showAndWait();
-                        break;
+            } else {
+                //新建评价
+                int userID = CommonData.getInstance().getCustomerVO().getId();
+                Alert confirmScore = new Alert(Alert.AlertType.CONFIRMATION, "评分一旦确定，便不可修改，请问这是您确认后的评分吗？", ButtonType.NO, ButtonType.YES);
+                Optional<ButtonType> confirm = confirmScore.showAndWait();
+
+                if (confirm.isPresent() && confirm.get() == ButtonType.YES) {
+
+                    ResultMessage result = commentServ.createComment(new CommentVO(hotelID, userID, commentArea.getText(), 0,
+                            new Date(System.currentTimeMillis()), Double.parseDouble(scoreLabel.getText()), Integer.parseInt(orderIDLabel.getText())));
+
+                    switch (result) {
+                        case SUCCESS:
+                            Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "评价成功！");
+                            successInfo.showAndWait();
+                            close();
+                            break;
+                        case FAILED:
+                            Alert failInfo = new Alert(Alert.AlertType.ERROR, "评价失败！");
+                            failInfo.showAndWait();
+                            break;
+                        case CONNECTION_EXCEPTION:
+                            Alert netError = new Alert(Alert.AlertType.ERROR, "评价失败，网络连接出现错误。");
+                            netError.showAndWait();
+                            break;
+                    }
+
                 }
 
             }
