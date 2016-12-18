@@ -29,15 +29,15 @@ public class WebPromoitonDatabaseTest {
 
     @Test
     public void getListTest() throws RemoteException {
-        assertEquals("回馈顾客", webPromotionDatabase.getList().get(0).getName());
+        assertEquals("1212", webPromotionDatabase.getList().get(0).getName());
     }
 
     @Test
     public void modifyTest() throws RemoteException {
         Date start = Date.valueOf("2016-12-05");
         Date end = Date.valueOf("2016-12-06");
-        WebPromotionPO webPromotionPO = new WebPromotionPO(1, null, start, end, null, 0,
-                0.2, "回馈顾客", PromotionState.stop);
+        WebPromotionPO webPromotionPO = new WebPromotionPO(4, null, start, end, null, 0,
+                0.2, "回馈顾客", PromotionState.start);
         assertEquals(ResultMessage.SUCCESS, webPromotionDatabase.modify(webPromotionPO));
     }
 
