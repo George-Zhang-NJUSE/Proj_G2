@@ -44,7 +44,7 @@ public class HotelManageLoginController implements Initializable{
         String id = (accoutField.getText());
         String password = PWField.getText();
 
-        jumpToMain(hotelManagerServ.getInfo(Integer.parseInt(id)));
+        //jumpToMain(hotelManagerServ.getInfo(Integer.parseInt(id)));
 
 
         switch (loginServ.login(id,password)){
