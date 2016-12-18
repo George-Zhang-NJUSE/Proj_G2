@@ -302,7 +302,11 @@ public class PromotionManageController implements Initializable{
         try {
             switch(webMarketerService.createWebPromotion(vo)){
                 case SUCCESS:
-                    unactivatedListData.add(new Promotion(vo));
+                    if(vo.getType()==WebPromotionType.TimeWeb){
+                        activatedListData.add(new Promotion(vo));
+                    }else{
+                        unactivatedListData.add(new Promotion(vo));
+                    }
                     message.setText("添加成功");
                     break;
                 case CONNECTION_EXCEPTION:
@@ -315,8 +319,9 @@ public class PromotionManageController implements Initializable{
             message.setText("添加失败");
         }
     }
-    public void updatePromotion(){
-
+    public void updatePromotion(Promotion promotion){
+        removePromotionFromList(false);
+        unactivatedListData.add(promotion);
     }
     public void modifyPromotion(WebPromotionVO vo){
         try {
@@ -324,8 +329,16 @@ public class PromotionManageController implements Initializable{
                 message.setText("不能更改适用中的促销策略");
                 return;
             }
-            webMarketerService.modifyWebPromotion(vo);
-            message.setText("操作成功");
+            switch (webMarketerService.modifyWebPromotion(vo)){
+                case SUCCESS:
+                    updatePromotion(new Promotion(vo));
+                    message.setText("操作成功");
+                    break;
+                case CONNECTION_EXCEPTION:
+                    message.setText("未连接到服务器");
+                    break;
+            }
+
         }catch (Exception e){
             message.setText("操作未成功");
         }

@@ -51,6 +51,7 @@ public class ModifyPromotionController implements Initializable {
 
     public PromotionManageController promotionManageController;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check,"file:client/src/main/res/webmarketer/Check");
@@ -112,7 +113,7 @@ public class ModifyPromotionController implements Initializable {
         return vo;
     }
     public void commitModify(){
-        WebMarketerMainController.webMarketerService.modifyWebPromotion(gatherVO());
+        promotionManageController.modifyPromotion(gatherVO());
         setEditable(false);
         showCheck(false);
     }
