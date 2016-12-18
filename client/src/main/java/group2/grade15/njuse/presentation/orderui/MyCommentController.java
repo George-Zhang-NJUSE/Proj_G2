@@ -61,6 +61,7 @@ public class MyCommentController implements Initializable {
             Optional<ButtonType> result=giveUpModify.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
                 exitModify();
+                close();
             }
 
         }else{
