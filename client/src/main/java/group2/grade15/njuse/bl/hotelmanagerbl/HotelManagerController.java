@@ -14,6 +14,7 @@ import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * HotelManagerController的职责是接受酒店经理界面传递来的请求
@@ -99,7 +100,7 @@ public class HotelManagerController implements HotelManagerServ {
     }
 
     @Override
-    public ResultMessage updateTime(Date checkIn, Date checkOut, int orderID) {
+    public ResultMessage updateTime(Timestamp checkIn, Timestamp checkOut, int orderID) {
         return order.updateTime(checkIn, checkOut, orderID);
     }
 }

@@ -7,6 +7,7 @@ import group2.grade15.njuse.vo.HotelPromotionVO;
 import group2.grade15.njuse.vo.OrderVO;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Guo on 2016/12/6.
@@ -31,8 +32,8 @@ public class TimeHotelPromotion implements HotelPromotionBL{
     }
 
     private boolean isFit(OrderVO orderVO, HotelPromotionVO hotelPromotionVO){
-        Date checkInTime = orderVO.getCheckInTime();
-        Date checkOutTime = orderVO.getCheckOutTime();
+        Timestamp checkInTime = orderVO.getCheckInTime();
+        Timestamp checkOutTime = orderVO.getCheckOutTime();
 
         Date startTime = hotelPromotionVO.getStart();
         Date endTime = hotelPromotionVO.getEnd();
