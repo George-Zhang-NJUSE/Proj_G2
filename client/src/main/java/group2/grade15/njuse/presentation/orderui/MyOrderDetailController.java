@@ -105,6 +105,11 @@ public class MyOrderDetailController implements Initializable {
     }
 
     private void adaptCommentLabel() {
+        //只有已执行的订单可以评价
+        if(orderVO.getState()!=OrderState.executed){
+            commentLabel.setDisable(true);
+        }
+
         //根据客户有没有评价订单来应用不同外观
         CommentServ commentServ = new CommentController();
         commentVO=commentServ.getComment(orderVO.getOrderID());
