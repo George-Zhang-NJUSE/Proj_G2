@@ -115,46 +115,55 @@ public class CustomerApplyController implements Initializable {
         Date birthday=null;
         java.sql.Date sqlBirthday = null;
 
-        if(!confirmPsw.equals(password)){
+        if (!(password.length() >= 6 && password.length() <= 20)) {
 
-            Alert contradictoryPsw=new Alert(Alert.AlertType.ERROR,"注册失败，确认密码与密码不一致！");
-            contradictoryPsw.showAndWait();
+            Alert wrongPswLength = new Alert(Alert.AlertType.ERROR, "注册失败，密码长度只能为6到20位！");
+            wrongPswLength.showAndWait();
 
         }else{
 
-            if (phoneContact.length() != 11) {
+            if(!confirmPsw.equals(password)){
 
-                Alert wrongPhoneLen = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式位数不对！");
-                wrongPhoneLen.showAndWait();
+                Alert contradictoryPsw=new Alert(Alert.AlertType.ERROR,"注册失败，确认密码与密码不一致！");
+                contradictoryPsw.showAndWait();
 
-            } else {
+            }else{
 
-                if (isEnterpriseCheckBox.isSelected()) {
-                    memberType = MemberType.vip;
-                    enterpriseName = enterpriseNameField.getText();
-                }else{
-                    memberType = MemberType.normal;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                if (phoneContact.length() != 11) {
 
-                    try {
-                        birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
-                        sqlBirthday = new java.sql.Date(birthday.getTime());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
+                    Alert wrongPhoneLen = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式位数不对！");
+                    wrongPhoneLen.showAndWait();
 
-                CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
-                CustomerServ customerServ = new CustomerController();
-                newCustomer=customerServ.addCustomer(customerVO);
-
-                if (newCustomer != null) {
-                    Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
-                    successInfo.setOnCloseRequest((DialogEvent e)->rollBackToLogin());
-                    successInfo.showAndWait();
                 } else {
-                    Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
-                    failInfo.showAndWait();
+
+                    if (isEnterpriseCheckBox.isSelected()) {
+                        memberType = MemberType.vip;
+                        enterpriseName = enterpriseNameField.getText();
+                    }else{
+                        memberType = MemberType.normal;
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                        try {
+                            birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
+                            sqlBirthday = new java.sql.Date(birthday.getTime());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
+                    CustomerServ customerServ = new CustomerController();
+                    newCustomer=customerServ.addCustomer(customerVO);
+
+                    if (newCustomer != null) {
+                        Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+                        successInfo.setOnCloseRequest((DialogEvent e)->rollBackToLogin());
+                        successInfo.showAndWait();
+                    } else {
+                        Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
+                        failInfo.showAndWait();
+                    }
+
                 }
 
             }
@@ -162,6 +171,5 @@ public class CustomerApplyController implements Initializable {
         }
 
     }
-
 
 }
