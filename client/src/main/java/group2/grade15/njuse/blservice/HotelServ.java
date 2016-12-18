@@ -1,6 +1,7 @@
 package group2.grade15.njuse.blservice;
 
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
 import group2.grade15.njuse.vo.RoomVO;
@@ -31,13 +32,33 @@ public interface HotelServ {
 
     /**
      * 修改酒店的房间信息
-     * @param hotelID HotelManagerVO型，界面层传递来需要修改房间信息的酒店ID
+     * @param hotelID int型，界面层传递来需要修改房间信息的酒店ID
      * @param roomInfo RoomVO型，界面层传来包含修改后的房间信息的数据对象
      * @return 成功返回ResultMessage.SUCCESS
      *         失败返回ResultMessage.FAILED
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage modifyRoomInfo(int hotelID, RoomVO roomInfo);
+
+    /**
+     * 增加酒店的房间种类
+     * @param hotelID int型，界面层传递来需要增加房间种类的酒店ID
+     * @param roomVO RoomVO型，界面层传来需要增添的房类信息的数据对象
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage addRoomType(int hotelID, RoomVO roomVO);
+
+    /**
+     * 删除酒店的房间种类
+     * @param hotelID int型，界面层传递来需要删除房间种类的酒店ID
+     * @param type RoomType型，界面层传来需要删除的房型
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage deleteRoomType(int hotelID, RoomType type);
 
     /**
      * 获取用户预订过的酒店列表
