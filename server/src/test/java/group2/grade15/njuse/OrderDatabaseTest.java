@@ -33,7 +33,7 @@ public class OrderDatabaseTest {
 
     @Test
     public void getListByCustomerTest() throws Exception {
-        assertEquals(1, orderDatabase.getListByCustomer(1).size());
+        assertEquals(1, orderDatabase.getListByCustomer(3).size());
     }
 
     @Test
