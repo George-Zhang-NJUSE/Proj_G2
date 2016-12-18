@@ -7,6 +7,7 @@ import group2.grade15.njuse.vo.WebMarketerVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -37,9 +38,12 @@ public class WebMarketerMainController implements Initializable {
     @FXML
     private Rectangle fixTag;
 
+    @FXML
+    public Label workingNumber;
+
     public static WebMarketerServ webMarketerService=new WebMarketerController();
 
-    private static WebMarketerVO vo;
+    public WebMarketerVO vo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,6 +76,7 @@ public class WebMarketerMainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return true;
     }
 
