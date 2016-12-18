@@ -260,6 +260,7 @@ public class OrderManageController implements Initializable {
         checkinPane.setVisible(true);
         checkPane.setVisible(true);
         now=checkinPane;
+        timeCI.setText(new Timestamp(System.currentTimeMillis()).toString());
         Fade cin=new Fade(checkPane,200,true);cin.play();
         Fade in = new Fade(checkinPane, 200, true);
         in.play();
@@ -270,6 +271,7 @@ public class OrderManageController implements Initializable {
         checkoutPane.setVisible(true);
         checkPane.setVisible(true);
         now=checkoutPane;
+        timeCO.setText(new Timestamp(System.currentTimeMillis()).toString());
         Fade cin=new Fade(checkPane,200,true);cin.play();
         Fade in = new Fade(checkoutPane, 200, true);
         in.play();
@@ -280,6 +282,7 @@ public class OrderManageController implements Initializable {
         overtimeCheckinPane.setVisible(true);
         checkPane.setVisible(true);
         now=overtimeCheckinPane;
+        timeOC.setText(new Timestamp(System.currentTimeMillis()).toString());
         Fade cin=new Fade(checkPane,200,true);cin.play();
         Fade in = new Fade(overtimeCheckinPane, 200, true);
         in.play();
@@ -362,7 +365,7 @@ public class OrderManageController implements Initializable {
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
-        order.inDate.set(timeCI.getText());
+        order.inDate.set(new Timestamp(System.currentTimeMillis()).toString());
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -409,7 +412,7 @@ public class OrderManageController implements Initializable {
             message.setText("不能为空");
             return;
         }
-        order.inDate.set(timeCO.getText());
+        order.inDate.set(new Timestamp(System.currentTimeMillis()).toString());
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -437,7 +440,7 @@ public class OrderManageController implements Initializable {
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultOC.getText())+Integer.parseInt(kidOC.getText()));
-        order.inDate.set(timeOC.getText());
+        order.inDate.set(new Timestamp(System.currentTimeMillis()).toString());
         vo = toVO(order);
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
