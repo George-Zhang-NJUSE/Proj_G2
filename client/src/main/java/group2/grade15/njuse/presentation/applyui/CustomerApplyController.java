@@ -66,13 +66,13 @@ public class CustomerApplyController implements Initializable {
         if (isEnterpriseCheckBox.isSelected()) {
             extraInfoHint.setText("企业名称");
             enterpriseNameField.setVisible(true);
-            enterpriseNameField.setText(null);
+            enterpriseNameField.setText("");
             birthdayPicker.setVisible(false);
         } else {
             extraInfoHint.setText("生日");
             enterpriseNameField.setVisible(false);
             birthdayPicker.setVisible(true);
-            birthdayPicker.getEditor().setText(null);
+            birthdayPicker.getEditor().setText("");
         }
     }
 
@@ -115,53 +115,92 @@ public class CustomerApplyController implements Initializable {
         Date birthday=null;
         java.sql.Date sqlBirthday = null;
 
-        if (!(password.length() >= 6 && password.length() <= 20)) {
+        if(! (username.length()>0 && username.length()<=20)){
 
-            Alert wrongPswLength = new Alert(Alert.AlertType.ERROR, "注册失败，密码长度只能为6到20位！");
-            wrongPswLength.showAndWait();
+            Alert emptyUserName=new Alert(Alert.AlertType.ERROR,"注册失败，用户名不能为空且长度不能超过20个字符！");
+            emptyUserName.showAndWait();
 
-        }else{
+        }else {
 
-            if(!confirmPsw.equals(password)){
+            if (!(password.length() >= 6 && password.length() <= 20)) {
 
-                Alert contradictoryPsw=new Alert(Alert.AlertType.ERROR,"注册失败，确认密码与密码不一致！");
-                contradictoryPsw.showAndWait();
+                Alert wrongPswLength = new Alert(Alert.AlertType.ERROR, "注册失败，密码长度只能为6到20位！");
+                wrongPswLength.showAndWait();
 
-            }else{
+            } else {
 
-                if (phoneContact.length() != 11) {
+                if (!confirmPsw.equals(password)) {
 
-                    Alert wrongPhoneLen = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式位数不对！");
-                    wrongPhoneLen.showAndWait();
+                    Alert contradictoryPsw = new Alert(Alert.AlertType.ERROR, "注册失败，确认密码与密码不一致！");
+                    contradictoryPsw.showAndWait();
 
                 } else {
 
-                    if (isEnterpriseCheckBox.isSelected()) {
-                        memberType = MemberType.vip;
-                        enterpriseName = enterpriseNameField.getText();
-                    }else{
-                        memberType = MemberType.normal;
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    if (phoneContact.length() != 11) {
 
-                        try {
-                            birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
-                            sqlBirthday = new java.sql.Date(birthday.getTime());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                        Alert wrongPhoneLen = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式位数不对！");
+                        wrongPhoneLen.showAndWait();
 
-                    CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
-                    CustomerServ customerServ = new CustomerController();
-                    newCustomer=customerServ.addCustomer(customerVO);
-
-                    if (newCustomer != null) {
-                        Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
-                        successInfo.setOnCloseRequest((DialogEvent e)->rollBackToLogin());
-                        successInfo.showAndWait();
                     } else {
-                        Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
-                        failInfo.showAndWait();
+
+                        boolean isValidEnterpriseName = true, isValidBirthday = true;
+
+                        if (isEnterpriseCheckBox.isSelected()) {
+
+                            memberType = MemberType.vip;
+                            enterpriseName = enterpriseNameField.getText();
+                            //检查企业名长度
+                            if (!(enterpriseName.length() > 0 && enterpriseName.length() <= 20)) {
+                                isValidEnterpriseName = false;
+                                Alert wrongNameLength = new Alert(Alert.AlertType.ERROR, "注册失败，企业名不能为空且长度不能超过20个字符！");
+                                wrongNameLength.showAndWait();
+                            }
+
+                        } else {
+
+                            memberType = MemberType.normal;
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                            try {
+
+                                birthday = dateFormat.parse(birthdayPicker.getEditor().getText());
+                                Date today = new Date(System.currentTimeMillis());
+
+                                if (today.compareTo(birthday) >= 0) {
+                                    sqlBirthday = new java.sql.Date(birthday.getTime());
+                                } else {
+                                    isValidBirthday = false;
+                                    Alert tooLateBirthday = new Alert(Alert.AlertType.ERROR, "注册失败，生日不能晚于今天！");
+                                    tooLateBirthday.showAndWait();
+                                }
+
+                            } catch (ParseException e) {
+                                //生日为空
+                                isValidBirthday = false;
+                                Alert emptyBirthday = new Alert(Alert.AlertType.ERROR, "注册失败，生日不能为空！");
+                                emptyBirthday.showAndWait();
+                            }
+
+                        }
+
+
+                        if (isValidEnterpriseName && isValidBirthday) {
+
+                            CustomerVO customerVO = new CustomerVO(0, username, password, phoneContact, sqlBirthday, 100, memberType, enterpriseName);
+                            CustomerServ customerServ = new CustomerController();
+                            newCustomer = customerServ.addCustomer(customerVO);
+
+                            if (newCustomer != null) {
+                                Alert successInfo = new Alert(Alert.AlertType.INFORMATION, "注册成功，您的账号为：" + newCustomer.getId());
+                                successInfo.setOnCloseRequest((DialogEvent e) -> rollBackToLogin());
+                                successInfo.showAndWait();
+                            } else {
+                                Alert failInfo = new Alert(Alert.AlertType.ERROR, "注册失败，联系方式已被使用！");
+                                failInfo.showAndWait();
+                            }
+
+                        }
+
                     }
 
                 }
