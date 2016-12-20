@@ -150,7 +150,6 @@
                         <Label text="酒店：" GridPane.rowIndex="2" />
                         <Label text="房间类型：" GridPane.rowIndex="3" />
                         <Label text="房间数量：" GridPane.rowIndex="4" />
-                        <Label text="入住人数：" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                         <TextField fx:id="orderID" editable="false" GridPane.columnIndex="1" />
                         <TextField fx:id="currentState" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="hotelID" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -161,12 +160,10 @@
                         <TextField fx:id="prefCheckOutTime" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <Label text="申诉理由：" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <Label text="恢复信用：" GridPane.columnIndex="4" />
-                        <TextField fx:id="restoredCredit" GridPane.columnIndex="5" />
-                  <TextField fx:id="nunOfCustomer" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <CheckBox fx:id="kidCheck" mnemonicParsing="false" text="有儿童" GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.valignment="TOP" />
                   <TextField fx:id="roomNum" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="finalExeTime" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label text="最晚执行时间：" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="creditRestore" prefWidth="150.0" GridPane.columnIndex="5" />
                     </children>
                 </GridPane>
             <Label fx:id="searchMessage" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
