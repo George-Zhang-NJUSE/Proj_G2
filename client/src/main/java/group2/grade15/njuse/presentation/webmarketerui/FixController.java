@@ -1,7 +1,9 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
 import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
 import group2.grade15.njuse.blservice.OrderListServ;
+import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.ChangeReason;
 import group2.grade15.njuse.utility.OrderState;
@@ -72,6 +74,7 @@ public class FixController implements Initializable {
     private String[] properties = {"orderId", "customerId", "hotelId", "promotionId", "amount", "inDate", "outDate", "createTime", "finalDate", "RoomNum", "roomType"};
 
     public OrderListServ orderListServ=new OrderController();
+    public WebMarketerServ webMarketerServ = new WebMarketerController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
@@ -191,7 +194,9 @@ public class FixController implements Initializable {
                 change=change/2;
             }
             CreditVO creditVO = new CreditVO(vo.getCustomerID(), vo.getOrderID(), 0, 0, change, new Date(System.currentTimeMillis()), ChangeReason.orderCancelled);
+            webMarketerServ.modifyCredit(creditVO);
             int index = unsolvedList.getSelectionModel().getSelectedIndex();
+
             solvedList.getItems().add((unsolvedListData.get(index)));
             unsolvedListData.remove(index);
 
