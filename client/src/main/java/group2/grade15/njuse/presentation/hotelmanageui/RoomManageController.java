@@ -56,6 +56,8 @@ public class RoomManageController implements Initializable {
     @FXML
     private Label cancel;
     @FXML
+    private Label refresh;
+    @FXML
     private Group opGroup;
     private GridPane now=new GridPane();
     @FXML
@@ -83,6 +85,8 @@ public class RoomManageController implements Initializable {
         CustomeButton.implButton(addButton,"file:client/src/main/res/hotelmanage/add");
         CustomeButton.implButton(modifyButton,"file:client/src/main/res/hotelmanage/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/hotelmanage/delete");
+        CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
+
         ObservableList<RoomType> typeList=FXCollections.observableArrayList(
                 RoomType.stadardDoubleBed,
                 RoomType.bigSingleBed,

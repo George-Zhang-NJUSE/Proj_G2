@@ -375,6 +375,16 @@
                   </Label>
                </children>
             </GridPane>
+            <Label fx:id="refresh" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+                <graphic>
+                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#showAllOrder">
+                        <Image url="file:client/src/main/res/button/refresh.png"/>
+                    </ImageView>
+                </graphic>
+            </Label>
          </children>
       </GridPane>
    </children>

@@ -217,6 +217,16 @@
                   <Insets left="10.0" right="50.0" top="10.0" />
                </GridPane.margin>
             </Label>
+            <Label fx:id="refresh" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" onMouseClicked="#showRoomList">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+                <graphic>
+                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="file:client/src/main/res/button/refresh.png"/>
+                    </ImageView>
+                </graphic>
+            </Label>
          </children>
       </GridPane>
    </children>

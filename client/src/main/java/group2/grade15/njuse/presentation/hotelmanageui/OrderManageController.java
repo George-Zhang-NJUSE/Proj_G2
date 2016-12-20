@@ -129,6 +129,8 @@ public class OrderManageController implements Initializable {
     private Label check;
     @FXML
     private Label cancel;
+    @FXML
+    private Label refresh;
 
     @FXML
     private Label message;
@@ -155,6 +157,7 @@ public class OrderManageController implements Initializable {
         impleButton(overtimeButton);
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel,"file:client/src/main/res/hotelmanage/Cancel");
+        CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
         for(int i=0;i<properties.length;i++) {
             ((TableColumn)unexeList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
             ((TableColumn)checkinList.getColumns().get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
@@ -229,13 +232,15 @@ public class OrderManageController implements Initializable {
     private void addOrderToList(TableView table, OrderVO vo) {
         table.getItems().add(new Order(vo));
     }
-    private void showAllOrder(){
+    @FXML
+    private void showAllOrder() {
+
         unexeList.getItems().clear();
         checkinList.getItems().clear();
         innormalListData.clear();
         cancelListData.clear();
-        ArrayList<OrderVO> orderVOs=HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId()).getOrderList();
-        for(int i=0;i<orderVOs.size();i++) {
+        ArrayList<OrderVO> orderVOs = HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId()).getOrderList();
+        for (int i = 0; i < orderVOs.size(); i++) {
             OrderVO vo = orderVOs.get(i);
             switch (vo.getState()) {
                 case unexecuted:

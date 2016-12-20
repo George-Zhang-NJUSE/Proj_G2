@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
+<Group xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="260.0" layoutY="540.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
@@ -167,6 +176,16 @@
                     </children>
                 </GridPane>
             <Label fx:id="searchMessage" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Label fx:id="refresh" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="TOP" onMouseClicked="#showAllOrder">
+               <GridPane.margin>
+                  <Insets left="-20.0" />
+               </GridPane.margin>
+                <graphic>
+                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="file:client/src/main/res/button/refresh.png"/>
+                    </ImageView>
+                </graphic>
+            </Label>
             </children>
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />

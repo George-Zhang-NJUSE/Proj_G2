@@ -67,6 +67,8 @@ public class PromotionManageController implements Initializable{
     private Pane opPane;
     @FXML
     private Pane checkPane;
+    @FXML
+    private Label refresh;
 
     private ObservableList<Promotion> unactivatedData,activatedData;
 
@@ -84,6 +86,7 @@ public class PromotionManageController implements Initializable{
         CustomeButton.implButton(modifyButton, "file:client/src/main/res/hotelmanage/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/hotelmanage/delete");
         CustomeButton.implButton(addButton,"file:client/src/main/res/hotelmanage/add");
+        CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
         unactivatedData= FXCollections.observableArrayList();
         activatedData=FXCollections.observableArrayList();
 

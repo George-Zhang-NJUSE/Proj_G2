@@ -68,6 +68,8 @@ public class FixController implements Initializable {
     private TableView<Order> unsolvedList;
     @FXML
     private TableView<Order> solvedList;
+    @FXML
+    private Label refresh;
 
     private ObservableList<Order> unsolvedListData;
     private ObservableList<Order> solvedListData;
@@ -79,6 +81,8 @@ public class FixController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
         CustomeButton.implButton(clear, "file:client/src/main/res/webmarketer/Cancel");
+        CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
+
         ObservableList unList=unsolvedList.getColumns();
         ObservableList sList = solvedList.getColumns();
         for(int i=0;i<properties.length;i++) {

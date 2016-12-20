@@ -62,6 +62,8 @@ public class PromotionManageController implements Initializable{
     private Pane opPane;
     @FXML
     private Label message;
+    @FXML
+    private Label refresh;
 
     private boolean inActivated=false;
 
@@ -84,6 +86,7 @@ public class PromotionManageController implements Initializable{
         CustomeButton.implButton(modifyButton, "file:client/src/main/res/webmarketer/modify");
         CustomeButton.implButton(deleteButton,"file:client/src/main/res/webmarketer/delete");
         CustomeButton.implButton(addButton,"file:client/src/main/res/webmarketer/add");
+        CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
 
         ObservableList a =activatedList.getColumns();
         ObservableList u = unactivatedList.getColumns();
