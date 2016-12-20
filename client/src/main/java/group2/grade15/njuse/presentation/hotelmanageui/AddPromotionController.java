@@ -9,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -49,6 +46,8 @@ public class AddPromotionController implements Initializable {
     private DatePicker startDate;
     @FXML
     private DatePicker endDate;
+    @FXML
+    private ChoiceBox provinceBox;
 
     public PromotionManageController promotionManageController;
 

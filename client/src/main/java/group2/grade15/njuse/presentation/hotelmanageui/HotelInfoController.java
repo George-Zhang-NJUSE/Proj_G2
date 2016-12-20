@@ -1,12 +1,11 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
 import group2.grade15.njuse.bl.hotelmanagerbl.HotelManagerController;
+import group2.grade15.njuse.bl.searchbl.Search;
+import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.ResultMessage;
-import group2.grade15.njuse.vo.CustomerVO;
-import group2.grade15.njuse.vo.HotelPromotionVO;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.RoomVO;
+import group2.grade15.njuse.vo.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +39,14 @@ public class HotelInfoController implements Initializable {
     @FXML
     private TextField address;
     @FXML
+    private ChoiceBox provinceBox;
+    @FXML
+    private ChoiceBox cityBox;
+    @FXML
+    private ChoiceBox districtBox;
+    @FXML
+    private ChoiceBox cbdBox;
+    @FXML
     private TextField rank;
     @FXML
     private TextField contact;
@@ -70,6 +77,7 @@ public class HotelInfoController implements Initializable {
     public Stage ownerStage;
 
     public HotelManageMainController hotelManageMainController;
+    public SearchServ searchServ=new Search();
     @Override
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,7 +94,8 @@ public class HotelInfoController implements Initializable {
         check.setOnMouseClicked((MouseEvent e)->{
             modifyInfo();
         });
-
+        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
     }
     public void showFileChooser(){
         final List<File> files = fileChooser.showOpenMultipleDialog(ownerStage);
@@ -107,14 +116,42 @@ public class HotelInfoController implements Initializable {
         describeEditor.setText(vo.getIntroduction());
 
     }
+    @FXML
+    private void loadCityBox() {
+        ProvinceVO selectedProvince= (ProvinceVO) provinceBox.getValue();
+        ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
+        cityBox.setItems(FXCollections.observableArrayList(cityVOList));
+
+        districtBox.setItems(FXCollections.observableArrayList());
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadDistrictBox() {
+        CityVO selectedCity = (CityVO) cityBox.getValue();
+        ArrayList<DistrictVO> districtVOList = searchServ.getDistrict(selectedCity.getCityNum()).getList();
+        districtBox.setItems(FXCollections.observableArrayList(districtVOList));
+
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadCbdBox() {
+        DistrictVO selectedDistrict = (DistrictVO) districtBox.getValue();
+        ArrayList<CbdVO> cbdVOList = searchServ.getCbd(selectedDistrict.getDistrictNum()).getList();
+        cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
+
+    }
     //逻辑数据采集部分
     private boolean checkEmpty(){
         boolean result=
-                name.getText()==""||
-                address.getText()==""||
-                rank.getText()==""||
-                contact.getText()==""||
-                facility.getText()=="";
+                name.getText()==null||
+                address.getText()==null||
+                rank.getText()==null||
+                contact.getText()==null|
+                facility.getText()==null||
+                cbdBox.getValue()==null;
+
         return result;
     }
     public HotelVO getVO(){
@@ -131,7 +168,7 @@ public class HotelInfoController implements Initializable {
         HotelVO result = new HotelVO(
                 ID,
                 name.getText(),
-                "null",
+                ((CbdVO)cbdBox.getValue()).getCbdNum(),
                 address.getText(),
                 contact.getText(),
                 introduction,
