@@ -46,8 +46,7 @@ public class AddPromotionController implements Initializable {
     private DatePicker startDate;
     @FXML
     private DatePicker endDate;
-    @FXML
-    private ChoiceBox provinceBox;
+
 
     public PromotionManageController promotionManageController;
 

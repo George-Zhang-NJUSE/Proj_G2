@@ -1,29 +1,35 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
+import group2.grade15.njuse.bl.searchbl.Search;
+import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
 import group2.grade15.njuse.utility.PromotionState;
 import group2.grade15.njuse.utility.WebPromotionType;
-import group2.grade15.njuse.vo.WebPromotionVO;
+import group2.grade15.njuse.vo.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
  * Created by ALIENWARE-PC on 2016/12/2.
  */
 public class AddPromotionController implements Initializable {
+
+
+    private SearchServ searchServ=new Search();
+
+
+
     private int ID;
     @FXML
     private TextField name;
@@ -40,7 +46,13 @@ public class AddPromotionController implements Initializable {
     @FXML
     private ComboBox<Integer> requiredRank;
     @FXML
-    private TextField CBD;
+    private ChoiceBox provinceBox;
+    @FXML
+    private ChoiceBox cityBox;
+    @FXML
+    private ChoiceBox districtBox;
+    @FXML
+    private ChoiceBox cbdBox;
     @FXML
     private DatePicker startDate;
     @FXML
@@ -52,7 +64,32 @@ public class AddPromotionController implements Initializable {
     @FXML
     private Label message;
 
+    @FXML
+    private void loadCityBox() {
+        ProvinceVO selectedProvince= (ProvinceVO) provinceBox.getValue();
+        ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
+        cityBox.setItems(FXCollections.observableArrayList(cityVOList));
 
+        districtBox.setItems(FXCollections.observableArrayList());
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadDistrictBox() {
+        CityVO selectedCity = (CityVO) cityBox.getValue();
+        ArrayList<DistrictVO> districtVOList = searchServ.getDistrict(selectedCity.getCityNum()).getList();
+        districtBox.setItems(FXCollections.observableArrayList(districtVOList));
+
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadCbdBox() {
+        DistrictVO selectedDistrict = (DistrictVO) districtBox.getValue();
+        ArrayList<CbdVO> cbdVOList = searchServ.getCbd(selectedDistrict.getDistrictNum()).getList();
+        cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
+
+    }
     public PromotionManageController promotionManageController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,6 +122,9 @@ public class AddPromotionController implements Initializable {
                 1,2,3,4,5,6,7,8,9,10
         );
         requiredRank.setItems(ranks);
+
+        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
     }
     public WebPromotionVO gatherVO(){
         Date sD,eD;
@@ -122,7 +162,7 @@ public class AddPromotionController implements Initializable {
                 typeOfVO,
                 sD,
                 eD,
-                CBD.getText(),
+                ((CbdVO)cbdBox.getValue()).getCbdNum(),
                 rerank,
                 Double.parseDouble(cut.getText()),
                 name.getText(),
@@ -160,7 +200,7 @@ public class AddPromotionController implements Initializable {
                 result=true;
             }
         } else if (type.getValue()=="特定商区优惠") {
-            if (CBD.getText().length()==0) {
+            if (cbdBox.getValue()==null) {
                 result = true;
             }
         }

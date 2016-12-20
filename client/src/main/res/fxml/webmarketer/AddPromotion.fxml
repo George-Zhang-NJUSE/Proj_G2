@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -25,13 +26,25 @@
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
     </padding>
     <children>
-        <Label text="促销名称：" />
-        <Label text="促销类型：" GridPane.rowIndex="1" />
-        <Label text="折扣力度：" GridPane.rowIndex="2" />
+        <Label text="促销名称：">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label text="促销类型：" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label text="折扣力度：" GridPane.rowIndex="2">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
         <TextField fx:id="name" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
         <TextField fx:id="cut" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <ComboBox fx:id="type" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="折扣条件：" GridPane.rowIndex="3" />
+        <Label text="折扣条件：" GridPane.rowIndex="3">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
         <Group GridPane.columnIndex="1" GridPane.rowIndex="3">
             <children>
                 <GridPane fx:id="rank" visible="false">
@@ -68,18 +81,41 @@
                 </GridPane>
                 <GridPane fx:id="VIP" visible="false">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="71.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <children>
-                        <Label text="折扣商圈：" />
-                        <TextField fx:id="CBD" GridPane.columnIndex="1" />
-                    </children>
+               <children>
+                  <Label text="省份：" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="城市：" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="区：" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="商圈：" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
                 </GridPane>
             </children>
         </Group>
