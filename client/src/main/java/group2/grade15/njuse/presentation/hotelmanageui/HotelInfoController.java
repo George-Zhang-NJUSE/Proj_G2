@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelController;
 import static group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController.hotelManagerController;
 
 /**

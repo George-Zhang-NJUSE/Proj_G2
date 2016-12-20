@@ -46,6 +46,8 @@ public class AddPromotionController implements Initializable {
     @FXML
     private ComboBox<Integer> requiredRank;
     @FXML
+    private TextField minCredit;
+    @FXML
     private ChoiceBox provinceBox;
     @FXML
     private ChoiceBox cityBox;
@@ -196,7 +198,7 @@ public class AddPromotionController implements Initializable {
                 result=true;
             }
         } else if (type.getValue() == "会员优惠") {
-            if (requiredRank.getValue()==null) {
+            if (requiredRank.getValue()==null||minCredit.getText().length()==0) {
                 result=true;
             }
         } else if (type.getValue()=="特定商区优惠") {

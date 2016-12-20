@@ -47,7 +47,7 @@
          </font></Label>
         <Group GridPane.columnIndex="1" GridPane.rowIndex="3">
             <children>
-                <GridPane fx:id="rank" visible="false">
+                <GridPane fx:id="rank">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,6 +60,8 @@
                     <children>
                         <Label text="需求等级：" />
                         <ComboBox fx:id="requiredRank" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label text="最低信用：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <TextField fx:id="minCredit" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
                 <GridPane fx:id="time" visible="false">
@@ -111,9 +113,9 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <ChoiceBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                 </GridPane>
