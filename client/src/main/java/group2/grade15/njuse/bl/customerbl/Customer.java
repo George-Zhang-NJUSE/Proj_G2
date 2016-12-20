@@ -35,7 +35,7 @@ public class Customer implements CustomerBL {
             }
 
             if (po != null) {
-                CacheManager.getInstance().putChace("customerVO" + customerID, new CustomerVO(po));
+                CacheManager.getInstance().putCache("customerVO" + customerID, new CustomerVO(po));
                 return new CustomerVO(po);
             } else {
                 return null;
@@ -47,7 +47,7 @@ public class Customer implements CustomerBL {
         ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
-            CacheManager.getInstance().removeChace("customerVO" + customerVO.getId());
+            CacheManager.getInstance().removeCache("customerVO" + customerVO.getId());
         } catch (RemoteException e) {
             e.printStackTrace();
             result = ResultMessage.CONNECTION_EXCEPTION;
