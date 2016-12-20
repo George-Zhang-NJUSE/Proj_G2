@@ -43,7 +43,7 @@ public class CustomerInfoController implements Initializable{
     private TextField userNameField, phoneNumberField;
 
     @FXML
-    private Label editUserNameLabel, editPhoneNumberLabel, cancelLabel, confirmLabel;
+    private Label editUserNameLabel, editPhoneNumberLabel, cancelLabel, confirmLabel, creditLabel;
 
     @FXML
     private void requestEditUserName() {
@@ -164,6 +164,7 @@ public class CustomerInfoController implements Initializable{
         customerServ = new CustomerController();
 
         customerVO = CommonData.getInstance().getCustomerVO();
+        creditLabel.setText(Double.toString(customerVO.getCredit()));
         userNameField.setText(customerVO.getName());
         phoneNumberField.setText(customerVO.getContact());
         show();
