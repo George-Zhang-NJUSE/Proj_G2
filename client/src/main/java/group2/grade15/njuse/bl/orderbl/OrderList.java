@@ -1,5 +1,6 @@
 package group2.grade15.njuse.bl.orderbl;
 
+import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
@@ -19,6 +20,7 @@ public class OrderList implements OrderListBL {
 
     public OrderListVO getAllOrderListByCustomerID(int customerID) {
         ArrayList<OrderPO> orderPOList = null;
+
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getListByCustomer(customerID);
         } catch (RemoteException e) {
