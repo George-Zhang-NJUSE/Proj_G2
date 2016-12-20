@@ -27,12 +27,14 @@ public class CacheManager{
         return hashMap.get(key);
     }
 
-    public void putChace(String key, Object element){
+    public void putCache(String key, Object element){
         Cache cache = new Cache(key, element);
         hashMap.put(key, cache);
     }
 
-    public void removeChace(String key){
-        hashMap.remove(key);
+    public void removeCache(String key){
+        if(containsCache(key)) {
+            hashMap.remove(key);
+        }
     }
 }
