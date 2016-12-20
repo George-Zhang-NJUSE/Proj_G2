@@ -326,6 +326,7 @@ public class PromotionManageController implements Initializable{
                 case SUCCESS:
                     message.setText("操作成功");
                     showAllPromotion();
+                    modifyPromotionController.setEditable(false);
                     break;
                 case CONNECTION_EXCEPTION:
                     message.setText("未连接到服务器");

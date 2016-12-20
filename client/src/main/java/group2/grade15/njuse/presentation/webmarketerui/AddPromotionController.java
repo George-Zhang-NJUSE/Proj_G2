@@ -138,6 +138,12 @@ public class AddPromotionController implements Initializable {
             message.setText("填写内容不能为空");
             return;
         }
+        if (type.getValue() == "特定时间优惠") {
+            if (1==startDate.getValue().compareTo(endDate.getValue())) {
+                message.setText("起始日期不能晚于结束日期");
+                return;
+            }
+        }
         promotionManageController.addPromotion(gatherVO());
     }
     public boolean checkEmpty(){
