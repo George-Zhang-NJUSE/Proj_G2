@@ -1,6 +1,7 @@
 package group2.grade15.njuse.bl.customerbl;
 
 
+import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.CreditPO;
 import group2.grade15.njuse.po.CustomerPO;
 import group2.grade15.njuse.po.RankPO;
@@ -22,17 +23,23 @@ import java.util.stream.Collectors;
 public class Customer implements CustomerBL {
 
     public CustomerVO getInfo(int customerID) {
-        CustomerPO po = null;
-        try {
-            po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(customerID);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
 
-        if (po != null) {
-            return new CustomerVO(po);
+        if(CacheManager.getInstance().containsCache("customerVO" + customerID)){
+            return (CustomerVO) CacheManager.getInstance().getCache("customerVO" + customerID).getElement();
         } else {
-            return null;
+            CustomerPO po = null;
+            try {
+                po = RemoteHelper.getInstance().getCustomerDataService().getCustomer(customerID);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            if (po != null) {
+                CacheManager.getInstance().putChace("customerVO" + customerID, new CustomerVO(po));
+                return new CustomerVO(po);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -40,6 +47,7 @@ public class Customer implements CustomerBL {
         ResultMessage result;
         try {
             result = RemoteHelper.getInstance().getCustomerDataService().modify(customerVO.toPO());
+            CacheManager.getInstance().removeChace("customerVO" + customerVO.getId());
         } catch (RemoteException e) {
             e.printStackTrace();
             result = ResultMessage.CONNECTION_EXCEPTION;
