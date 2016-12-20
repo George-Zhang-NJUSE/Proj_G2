@@ -144,16 +144,16 @@ public class AddPromotionController implements Initializable {
         boolean result=
                 name.getText().length()==0||
                         cut.getText().length()==0||
-                        type.getEditor().getText().length()==0;
-        if(type.getEditor().getText()=="TimeWeb"){
-            if (startDate.getEditor().getText().length()==0 || endDate.getEditor().getText().length()==0) {
+                        type.getValue()==null;
+        if(type.getValue()=="特定时间优惠"){
+            if (startDate.getValue()==null|| endDate.getValue()==null) {
                 result=true;
             }
-        } else if (type.getEditor().getText() == "LevelWeb") {
-            if (requiredRank.getEditor().getText().length()==0) {
+        } else if (type.getValue() == "会员优惠") {
+            if (requiredRank.getValue()==null) {
                 result=true;
             }
-        } else if (type.getEditor().getText().length()==0) {
+        } else if (type.getValue()=="特定商区优惠") {
             if (CBD.getText().length()==0) {
                 result = true;
             }

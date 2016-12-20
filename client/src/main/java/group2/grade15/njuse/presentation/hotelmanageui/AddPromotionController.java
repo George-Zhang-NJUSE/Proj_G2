@@ -149,7 +149,9 @@ public class AddPromotionController implements Initializable {
                         (cut.getText().length()==0 )||
                         (type.getValue()==null)
                 ;
-
+        if (type.getValue() == null) {
+            return true;
+        }
         switch (type.getValue()) {
             case TimeHotel:
                 result = result || (startDate.getEditor().getText().length()==0) || (endDate.getEditor().getText().length()==0);

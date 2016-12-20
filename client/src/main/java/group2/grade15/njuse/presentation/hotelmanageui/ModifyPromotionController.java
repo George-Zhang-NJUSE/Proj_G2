@@ -142,8 +142,8 @@ public class ModifyPromotionController implements Initializable {
                 //TODO 确认这些地方没问题
                 Date sD,eD;
 
-                eD = Date.valueOf(endDate.getValue());
-                sD = Date.valueOf(startDate.getValue());
+                eD = Date.valueOf(endDate.getEditor().getText());
+                sD = Date.valueOf(startDate.getEditor().getText());
                 result = new HotelPromotionVO(id, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), promotionManageController.getSelectedPromotion().getState(), HotelManageMainController.hotelVO.getId());
                 break;
             case PartnerHotel:

@@ -15,6 +15,7 @@ import group2.grade15.njuse.vo.HotelVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -49,6 +50,8 @@ public class HotelManageMainController implements Initializable {
     private Rectangle promotionManageRec;
     @FXML
     private Pane opPane;
+    @FXML
+    private Label hotelName;
 
     public Stage stage;
     //Controller的持有
@@ -75,6 +78,8 @@ public class HotelManageMainController implements Initializable {
     public void setHotelManagerVO(HotelManagerVO vo){
         hotelManagerVO=vo;
         hotelVO=hotelManagerController.getHotelInfo(vo.getHotelID());
+        hotelName.setText(hotelVO.getName());
+
     }
     public void upDateHotelVO(){
         hotelVO = hotelManagerController.getHotelInfo(hotelVO.getId());
