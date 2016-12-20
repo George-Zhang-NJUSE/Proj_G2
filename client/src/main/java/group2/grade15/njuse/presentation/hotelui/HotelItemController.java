@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -118,7 +119,9 @@ public class HotelItemController implements Initializable {
             hotelNameLabel.setText(hotelVO.getName());
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());
-            scoreLabel.setText(Double.toString(hotelVO.getScore()));
+
+            DecimalFormat scoreFormat=new DecimalFormat("0.00");
+            scoreLabel.setText(scoreFormat.format(hotelVO.getScore()));
 
         }else{
             System.out.println("没有联网数据");
