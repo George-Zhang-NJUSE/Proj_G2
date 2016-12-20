@@ -147,12 +147,13 @@ public class AddPromotionController implements Initializable {
         boolean result =
                 (name.getText().length()==0 )||
                         (cut.getText().length()==0 )||
-                        (type.getEditor().getText().length()==0)
+                        (type.getValue()==null)
                 ;
 
         switch (type.getValue()) {
             case TimeHotel:
                 result = result || (startDate.getEditor().getText().length()==0) || (endDate.getEditor().getText().length()==0);
+                System.out.println("test");
                 break;
         }
         return result;

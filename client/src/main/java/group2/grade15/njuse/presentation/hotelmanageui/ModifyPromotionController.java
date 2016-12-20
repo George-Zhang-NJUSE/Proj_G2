@@ -142,8 +142,8 @@ public class ModifyPromotionController implements Initializable {
                 //TODO 确认这些地方没问题
                 Date sD,eD;
 
-                sD = Date.valueOf(endDate.getValue());
-                eD = Date.valueOf(startDate.getValue());
+                eD = Date.valueOf(endDate.getValue());
+                sD = Date.valueOf(startDate.getValue());
                 result = new HotelPromotionVO(id, type, sD, eD, -1, Double.parseDouble(cut.getText()), name.getText(), promotionManageController.getSelectedPromotion().getState(), HotelManageMainController.hotelVO.getId());
                 break;
             case PartnerHotel:
@@ -172,6 +172,7 @@ public class ModifyPromotionController implements Initializable {
         return result;
     }
     public void commitModify(){
+
         if (checkEmpty()) {
             message.setText("填写部分不能为空");
             return;

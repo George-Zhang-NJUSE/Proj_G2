@@ -1,10 +1,14 @@
 package group2.grade15.njuse.presentation.webmarketerui;
 
 import group2.grade15.njuse.bl.orderbl.OrderController;
+import group2.grade15.njuse.bl.webmarketerbl.WebMarketerController;
 import group2.grade15.njuse.blservice.OrderListServ;
+import group2.grade15.njuse.blservice.WebMarketerServ;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
+import group2.grade15.njuse.utility.ChangeReason;
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
+import group2.grade15.njuse.vo.CreditVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -19,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,11 +57,7 @@ public class FixController implements Initializable {
     @FXML
     private TextField roomNum;
     @FXML
-    private TextField numOfCustomer;
-    @FXML
-    private CheckBox kidCheck;
-    @FXML
-    private TextField restoredCredit;
+    private ChoiceBox<String> creditRestore;
     @FXML
     private TextArea fixReason;
     @FXML
@@ -73,6 +74,7 @@ public class FixController implements Initializable {
     private String[] properties = {"orderId", "customerId", "hotelId", "promotionId", "amount", "inDate", "outDate", "createTime", "finalDate", "RoomNum", "roomType"};
 
     public OrderListServ orderListServ=new OrderController();
+    public WebMarketerServ webMarketerServ = new WebMarketerController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
@@ -119,7 +121,9 @@ public class FixController implements Initializable {
             openFromID();
         });
         showAllOrder();
-
+        creditRestore.setItems(FXCollections.observableArrayList(
+                "全额恢复", "恢复一半"
+        ));
 
     }
     public void showAllOrder(){
@@ -137,7 +141,7 @@ public class FixController implements Initializable {
         prefCheckInTime.setText("");
         prefCheckOutTime.setText("");
         finalExeTime.setText("");
-        restoredCredit.setText("");
+        creditRestore.setValue("全额恢复");
         fixReason.setText("");
         roomType.setText("");
         roomNum.setText("");
@@ -174,12 +178,6 @@ public class FixController implements Initializable {
         prefCheckInTime.setText(order.getInDate());
         prefCheckOutTime.setText(order.getOutDate());
         finalExeTime.setText(order.getFinalDate());
-        numOfCustomer.setText(String.valueOf(order.getNumOfCustomer()));
-        if (order.getHaveKid()) {
-            kidCheck.setSelected(true);
-        }else{
-            kidCheck.setSelected(false);
-        }
     }
     public OrderVO getSelectedOrderVO(){
         int index=unsolvedList.getSelectionModel().getSelectedIndex();
@@ -191,7 +189,15 @@ public class FixController implements Initializable {
     public void fixCommit(OrderVO vo) {
         //TODO implement the function of committing an order fixing.
         if(ResultMessage.SUCCESS==WebMarketerMainController.webMarketerService.modifyState(vo.getOrderID(), OrderState.revoked)){
-            int index=unsolvedList.getSelectionModel().getSelectedIndex();
+            double change=vo.getAmount();
+            if (creditRestore.getValue() == "恢复一半") {
+                change=change/2;
+            }
+            CreditVO creditVO = new CreditVO(vo.getCustomerID(), vo.getOrderID(), 0, 0, change, new Date(System.currentTimeMillis()), ChangeReason.orderCancelled);
+            webMarketerServ.modifyCredit(creditVO);
+            int index = unsolvedList.getSelectionModel().getSelectedIndex();
+
+            solvedList.getItems().add((unsolvedListData.get(index)));
             unsolvedListData.remove(index);
 
         }

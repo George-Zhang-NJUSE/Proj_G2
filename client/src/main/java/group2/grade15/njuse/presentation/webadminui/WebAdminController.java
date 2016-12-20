@@ -224,7 +224,14 @@ public class WebAdminController implements Initializable{
             name = new SimpleStringProperty(vo.getName());
             password = new SimpleStringProperty(vo.getPassword());
             contact = new SimpleStringProperty(vo.getContact());
-            birthday = new SimpleStringProperty(vo.getBirthday().toString());
+            if (vo.getType() == MemberType.normal) {
+                birthday = new SimpleStringProperty(vo.getBirthday().toString());
+                companyName = new SimpleStringProperty("none");
+            }else{
+                companyName = new SimpleStringProperty(vo.getCompanyName());
+                birthday = new SimpleStringProperty("none");
+            }
+
             credit = new SimpleDoubleProperty(vo.getCredit());
             switch(vo.getType()){
                 case normal:
@@ -237,7 +244,6 @@ public class WebAdminController implements Initializable{
                     type = new SimpleStringProperty("未知");
                     break;
             }
-            companyName = new SimpleStringProperty(vo.getCompanyName());
         }
 
         private Account(HotelManagerVO vo) {
