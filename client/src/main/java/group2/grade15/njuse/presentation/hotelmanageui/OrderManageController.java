@@ -364,8 +364,13 @@ public class OrderManageController implements Initializable {
 
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
+        if (adultCI.getText().length() == 0 || kidCI.getText().length() == 0) {
+            message.setText("填写内容不能为空");
+            return;
+        }
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
         order.inDate.set(new Timestamp(System.currentTimeMillis()).toString());
+
         try{
             vo = toVO(order);
         }catch(Exception e){
@@ -437,6 +442,10 @@ public class OrderManageController implements Initializable {
     }
     public void overtimeCheckin(){
         //TODO
+        if (adultOC.getText().length() == 0 || kidOC.getText().length() == 0) {
+            message.setText("填写内容不能为空");
+            return;
+        }
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         order.numOfCustomer.set(Integer.parseInt(adultOC.getText())+Integer.parseInt(kidOC.getText()));
