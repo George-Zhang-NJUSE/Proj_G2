@@ -12,6 +12,7 @@ import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
 import group2.grade15.njuse.bl.webmarketerbl.WebPromotionProxy;
 import group2.grade15.njuse.bl.webpromotionbl.WebPromotionController;
 import group2.grade15.njuse.bl.webpromotionbl.WebPromotionControllerBL;
+import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.OrderPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.OrderState;
@@ -25,9 +26,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-/**
- * Created by George on 2016/11/6.
- */
 public class Order implements OrderBL{
 
     private CustomerBL customer;
@@ -71,6 +69,7 @@ public class Order implements OrderBL{
 
         if(credit > 0) {
             try {
+                CacheManager.getInstance().clearAll();
                 return RemoteHelper.getInstance().getOrderDataService().addOrder(order.toPO());
             } catch (RemoteException e) {
                 e.printStackTrace();
