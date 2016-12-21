@@ -359,6 +359,9 @@ public class WebAdminController implements Initializable{
         public double getScore(){
             return score.get();
         }
+        public String toString(){
+            return "ID: "+id.get()+": "+name.get();
+        }
 
     }
 
@@ -397,6 +400,10 @@ public class WebAdminController implements Initializable{
     }
 
     public void addAccount(){
+        if (checkAccountEmpty()){
+            aaInfo.setText("输入信息不能为空");
+            return;
+        }
         switch(userType.getValue()){
             case "酒店管理用户":
                 HotelManagerVO hmvo=gatherHotelManagerVO();
@@ -425,6 +432,10 @@ public class WebAdminController implements Initializable{
         }
     }
     public void addHotel(){
+        if (checkHotelEmpty()) {
+            haInfo.setText("输入信息不能为空");
+            return;
+        }
         HotelVO vo=gatherHotelVO();
         try{
             webAdminService.createHotel(vo);
@@ -454,7 +465,26 @@ public class WebAdminController implements Initializable{
     public void  deleteAccount(int id){
 
     }
-
+    private boolean checkAccountEmpty(){
+        if (userName.getText().length() == 0 || userPW.getText().length() == 0) {
+            return true;
+        }
+        if (userType.getValue() == null) {
+            return true;
+        }
+        if (userType.getValue() == "酒店管理用户") {
+            if (hotelID.getValue() == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean checkHotelEmpty(){
+        if (hotelName.getText().length() == 0 || hotelAddress.getText().length() == 0 || hotelRank.getText().length() == 0) {
+            return true;
+        }
+        return false;
+    }
 
     public void setAdminVO(WebAdminVO vo){
         webAdminVO=vo;
