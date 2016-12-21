@@ -67,4 +67,14 @@ public interface HotelServ {
      *         失败返回null
      */
     public HotelListVO getBookedHotelList(int customerID);
+
+    /**
+     * 删除酒店的图片
+     * @param picNum int型，界面层传递来的需要删除的图片ID
+     * @param hotelID int型，界面层传递来的需要删除的图片所在的酒店ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage deletePic(int picNum, int hotelID);
 }

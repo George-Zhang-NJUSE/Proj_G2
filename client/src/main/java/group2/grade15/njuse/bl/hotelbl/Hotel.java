@@ -42,4 +42,15 @@ public class Hotel implements HotelBL {
         }
     }
 
+    public ResultMessage deletePic(int picNum, int hotelID){
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getHotelDataService().deletePic(picNum, hotelID);
+        } catch (RemoteException e) {
+            result = ResultMessage.CONNECTION_EXCEPTION;
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
