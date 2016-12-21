@@ -24,7 +24,7 @@
         <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextArea fx:id="describeEditor" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+        <TextArea fx:id="describeEditor" style="-fx-border-color: black" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
         <GridPane vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3">
             <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="40.0" />
@@ -61,23 +61,23 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextField fx:id="name" GridPane.columnIndex="1" />
-                <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="rank" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="contact" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="name" style="-fx-border-color: black" GridPane.columnIndex="1" />
+                <TextField fx:id="address" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="rank" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="contact" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="设施描述：" GridPane.rowIndex="5">
                     <font>
                         <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="facility" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextArea fx:id="facility" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label text="合作企业：" GridPane.rowIndex="6">
                     <font>
                         <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <ListView fx:id="company" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ListView fx:id="picturePathList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <ListView fx:id="company" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ListView fx:id="picturePathList" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="7">
                <children>
                   <Label text="添加图片：">
@@ -85,7 +85,11 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="callFileChooserButton" mnemonicParsing="false" text="..." />
+                   <Button fx:id="callFileChooserButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="...">
+                     <VBox.margin>
+                        <Insets right="10.0" />
+                     </VBox.margin>
+                   </Button>
                   <Label fx:id="fileNumber">
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -130,10 +134,10 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="provinceBox" prefWidth="150.0" onAction="#loadCityBox" />
-                  <ChoiceBox fx:id="cityBox" prefWidth="150.0" GridPane.rowIndex="1"  onAction="#loadDistrictBox"/>
-                  <ChoiceBox fx:id="districtBox" prefWidth="150.0" GridPane.rowIndex="2" onAction="#loadCbdBox"/>
-                  <ChoiceBox fx:id="cbdBox" prefWidth="150.0" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" />
+                  <ChoiceBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="cbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             </children>

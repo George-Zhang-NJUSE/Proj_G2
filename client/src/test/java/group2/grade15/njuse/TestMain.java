@@ -19,7 +19,7 @@ public class TestMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelManageMain.fxml"));
+            FXMLLoader loader = new FXMLLoader(new URL("file:client/src/main/res/fxml/hotelmanager/HotelInfo.fxml"));
 
             primaryStage.setTitle("testWindow");
             primaryStage.setScene(new Scene((Parent) loader.load()));

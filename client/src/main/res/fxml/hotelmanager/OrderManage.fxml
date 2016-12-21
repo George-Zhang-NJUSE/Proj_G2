@@ -375,15 +375,20 @@
                   </Label>
                </children>
             </GridPane>
-            <Label fx:id="refresh" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Label fx:id="refresh" contentDisplay="RIGHT" text="刷新" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
                 <graphic>
-                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#showAllOrder">
-                        <Image url="file:client/src/main/res/button/refresh.png"/>
+                    <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#showAllOrder" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="file:client/src/main/res/button/refresh.png" />
+                       </image>
                     </ImageView>
                 </graphic>
+               <font>
+                  <Font name="Microsoft YaHei Light" size="18.0" />
+               </font>
             </Label>
          </children>
       </GridPane>
