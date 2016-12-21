@@ -105,10 +105,14 @@ public class HotelVO implements Serializable {
     }
 
     public HotelPO toPO() {
-        ArrayList<RoomPO> roomPOList = roomList.stream()
-                                               .map(RoomVO::toPO)
-                                               .collect(Collectors.toCollection(ArrayList::new));
-
+        ArrayList<RoomPO> roomPOList;
+        if(roomList != null) {
+            roomPOList = roomList.stream()
+                    .map(RoomVO::toPO)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        } else {
+            roomPOList = null;
+        }
         return new HotelPO(id, name, address, concreteAddress, contact, introduction, facility, roomPOList, rank, score, picture);
     }
 }
