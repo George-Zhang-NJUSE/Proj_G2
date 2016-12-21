@@ -77,7 +77,7 @@ public class HotelManageLoginController implements Initializable{
             currentStage.close();
             hotelManagerMainStage.sizeToScene();
             hotelManagerMainStage.setResizable(false);
-            hotelManagerMainStage.setTitle("酒店预订系统——网站营销人员端");
+            hotelManagerMainStage.setTitle("酒店预订系统——酒店管理人员端");
             hotelManagerMainStage.show();
         }catch (MalformedURLException e){
             e.printStackTrace();
