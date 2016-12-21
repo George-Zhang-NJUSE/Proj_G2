@@ -166,7 +166,7 @@ public class AddPromotionController implements Initializable {
             return;
         }
         if(type.getValue()==HotelPromotionType.TimeHotel)
-            if(startDate.getValue().getDayOfYear()>=endDate.getValue().getDayOfYear()){
+            if(startDate.getValue().getDayOfYear()+365*startDate.getValue().getYear()>=endDate.getValue().getDayOfYear()+365*endDate.getValue().getYear()){
                 hotelManageMainController.alert("结束日期必须晚于起始日期");
                 return;
             }
