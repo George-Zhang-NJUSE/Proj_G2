@@ -82,45 +82,25 @@ public class Order implements OrderBL{
 
     public OrderVO createPO(OrderVO orderVO){
         int hotelID = orderVO.getHotelID();
-
-        double minPrice = getOriginalPrice(orderVO);
+        double webInfo[] = new double[2];
+        double hotelInfo[] = new double[2];
+        double minPrice = 0;
         int usedPromotionID = 0;
 
         //优惠策略的计算
-        WebPromotionListVO webPromotionListVO = webPromotionController.getWebPromotionList();
+        webInfo = getPriceWithWebPro(orderVO);
+        hotelInfo = getPriceWithHotelPro(orderVO);
 
-        if(webPromotionListVO != null) {
-            ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
-            for (WebPromotionVO webPromotionVO : webPromotionList) {
-                String promotionType = webPromotionVO.getType().toString();
-                WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
-
-                boolean isMin = webPromotionVO.getState() == PromotionState.start
-                                && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
-
-                if (isMin) {
-                    minPrice = webPromotion.countPrice(orderVO, webPromotionVO);
-                    usedPromotionID = webPromotionVO.getPromotionID();
-                }
-            }
+        if(webInfo[0] >= hotelInfo[0]){
+            minPrice = webInfo[0];
+        } else {
+            minPrice = hotelInfo[0];
         }
 
-        HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
-
-        if(hotelPromotionListVO != null) {
-            ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
-            for (HotelPromotionVO hotelPromotionVO : hotelPromotionList) {
-                String promotionType = hotelPromotionVO.getType().toString();
-                HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
-
-                boolean isMin = hotelPromotionVO.getState() == PromotionState.start
-                                && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
-
-                if (isMin) {
-                    minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
-                    usedPromotionID = hotelPromotionVO.getPromotionID();
-                }
-            }
+        if(webInfo[1] >= hotelInfo[1]){
+            usedPromotionID = (int) webInfo[1];
+        } else {
+            usedPromotionID = (int) hotelInfo[1];
         }
 
         return new OrderVO(orderVO, minPrice, usedPromotionID);
@@ -174,5 +154,66 @@ public class Order implements OrderBL{
         }
 
         return result;
+    }
+
+    private double[] getPriceWithWebPro(OrderVO orderVO){
+        double[] info = new double[2]; //0中存储minPrice，1中存储usedPromotion
+        double minPrice = getOriginalPrice(orderVO);
+        int usedPromotionID = 0;
+
+        //获取优惠策略的列表
+        WebPromotionListVO webPromotionListVO = webPromotionController.getWebPromotionList();
+
+        //对优惠策略列表里的策略进行遍历，依次与原价相乘，取最小的优惠值和优惠策略ID
+        if(webPromotionListVO != null) {
+            ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
+            for (WebPromotionVO webPromotionVO : webPromotionList) {
+                String promotionType = webPromotionVO.getType().toString();
+                WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
+
+                boolean isMin = webPromotionVO.getState() == PromotionState.start
+                        && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
+
+                if (isMin) {
+                    minPrice = webPromotion.countPrice(orderVO, webPromotionVO);
+                    usedPromotionID = webPromotionVO.getPromotionID();
+                }
+            }
+        }
+
+        info[0] = minPrice;
+        info[1] = usedPromotionID;
+        return info;
+    }
+
+    private double[] getPriceWithHotelPro(OrderVO orderVO){
+        double[] info = new double[2]; //0中存储minPrice，1中存储usedPromotion
+        int hotelID = orderVO.getHotelID();
+        double minPrice = getOriginalPrice(orderVO);
+        int usedPromotionID = 0;
+
+        //获取优惠策略的列表
+        HotelPromotionListVO hotelPromotionListVO = hotelPromotionController.getHotelPromotionList(hotelID);
+
+        //对优惠策略列表里的策略进行遍历，依次与原价相乘，取最小的优惠值和优惠策略ID
+        if(hotelPromotionListVO != null) {
+            ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
+            for (HotelPromotionVO hotelPromotionVO : hotelPromotionList) {
+                String promotionType = hotelPromotionVO.getType().toString();
+                HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
+
+                boolean isMin = hotelPromotionVO.getState() == PromotionState.start
+                        && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
+
+                if (isMin) {
+                    minPrice = hotelPromotion.countPrice(orderVO, hotelPromotionVO);
+                    usedPromotionID = hotelPromotionVO.getPromotionID();
+                }
+            }
+        }
+
+        info[0] = minPrice;
+        info[1] = usedPromotionID;
+        return info;
     }
 }
