@@ -49,6 +49,7 @@ public class AddPromotionController implements Initializable {
 
 
     public PromotionManageController promotionManageController;
+    public HotelManageMainController hotelManageMainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,19 +161,20 @@ public class AddPromotionController implements Initializable {
     }
     public void commitAddition(){
         if(checkEmpty()){
-            message.setText("填写部分不能为空");
+
+            hotelManageMainController.alert("填写部分不能为空");
             return;
         }
         if(type.getValue()==HotelPromotionType.TimeHotel)
-            if(startDate.getValue().compareTo(endDate.getValue())!=-1){
-                message.setText("开始日期不能早于结束日期");
+            if(startDate.getValue().compareTo(endDate.getValue())!=1){
+                hotelManageMainController.alert("起始日期不能早于结束日期");
                 return;
             }
         if (type.getValue() == HotelPromotionType.PartnerHotel) {
             try {
                 Integer.parseInt(companyID.getText());
             } catch (Exception e) {
-                message.setText("请输出有效数字");
+                hotelManageMainController.alert("请输出有效数字");
                 return;
             }
             }

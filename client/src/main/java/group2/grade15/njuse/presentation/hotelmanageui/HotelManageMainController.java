@@ -52,6 +52,8 @@ public class HotelManageMainController implements Initializable {
     private Pane opPane;
     @FXML
     private Label hotelName;
+    @FXML
+    private Label message;
 
     public Stage stage;
     //Controller的持有
@@ -184,6 +186,12 @@ public class HotelManageMainController implements Initializable {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public void alert(String info) {
+        Fade fade = new Fade(message, 2500, false);
+        message.setText(info);
+        fade.play();
     }
     //逻辑数据处理的方法：
 

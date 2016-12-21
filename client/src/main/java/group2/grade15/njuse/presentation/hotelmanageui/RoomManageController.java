@@ -221,15 +221,15 @@ public class RoomManageController implements Initializable {
         try {
             switch(hotelServ.addRoomType(HotelManageMainController.hotelVO.getId(),roomToAdd)){
                 case SUCCESS:
-                    message.setText("添加成功");
+                    hotelManageMainController.alert("添加成功");
                     hotelManageMainController.upDateHotelVO();
                     showRoomList();
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    hotelManageMainController.alert("未连接到服务器");
                     break;
                 case FAILED:
-                    message.setText("添加失败");
+                    hotelManageMainController.alert("添加失败");
                     break;
             }
         }catch (Exception e){
@@ -244,27 +244,27 @@ public class RoomManageController implements Initializable {
         room.setTotalRoomNum(Integer.parseInt(countM.getText()));
         RoomVO roomToModify = new RoomVO(typeM.getValue(), room.getPrice(), room.getTotalRoomNum(), room.getSpareRoomNum());
         if (roomToModify.getSpareRoomNum() > roomToModify.getTotalRoomNum()) {
-            message.setText("空闲房间不能多于总房间数");
+            hotelManageMainController.alert("空闲房间不能多于总房间数");
             return;
         }
         try {
             switch (hotelManagerController.modifyRoomInfo(HotelManageMainController.hotelVO.getId(),
                     roomToModify)) {
                 case SUCCESS:
-                    message.setText("修改成功");
+                    hotelManageMainController.alert("修改成功");
                     hotelManageMainController.upDateHotelVO();
                     showRoomList();
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    hotelManageMainController.alert("未连接到服务器");
                     break;
                 case FAILED:
-                    message.setText("修改失败");
+                    hotelManageMainController.alert("修改失败");
                     break;
             }
         }catch (Exception e){
             e.printStackTrace();
-            message.setText("修改失败");
+            hotelManageMainController.alert("修改失败");
         }
     }
     public void deleteRoom(){
@@ -288,20 +288,20 @@ public class RoomManageController implements Initializable {
         try {
             switch (hotelServ.deleteRoomType(HotelManageMainController.hotelVO.getId(), type)) {
                 case SUCCESS:
-                    message.setText("房间已删除");
+                    hotelManageMainController.alert("房间已删除");
                     hotelManageMainController.upDateHotelVO();
                     showRoomList();
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    hotelManageMainController.alert("未连接到服务器");
                     break;
                 case FAILED:
-                    message.setText("删除失败");
+                    hotelManageMainController.alert("删除失败");
                     break;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            message.setText("删除失败");
+            hotelManageMainController.alert("删除失败");
 
         }
     }

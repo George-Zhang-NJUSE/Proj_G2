@@ -54,6 +54,7 @@ public class ModifyPromotionController implements Initializable {
     private Label message;
 
     public PromotionManageController promotionManageController;
+    public HotelManageMainController hotelManageMainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -174,12 +175,12 @@ public class ModifyPromotionController implements Initializable {
     public void commitModify(){
 
         if (checkEmpty()) {
-            message.setText("填写部分不能为空");
+            hotelManageMainController.alert("填写部分不能为空");
             return;
         }
         if(type.getText()=="TimeHotel")
         if(startDate.getValue().compareTo(endDate.getValue())!=-1){
-            message.setText("开始日期不能早于结束日期");
+            hotelManageMainController.alert("开始日期不能早于结束日期");
             return;
         }
 

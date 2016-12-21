@@ -24,7 +24,7 @@
         <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextArea fx:id="describeEditor" style="-fx-border-color: black" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+        <TextArea fx:id="describeEditor" editable="false" style="-fx-border-color: black" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
         <GridPane vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3">
             <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="40.0" />
@@ -61,16 +61,16 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextField fx:id="name" style="-fx-border-color: black" GridPane.columnIndex="1" />
-                <TextField fx:id="address" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="rank" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="contact" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="name" editable="false" style="-fx-border-color: black" GridPane.columnIndex="1" />
+                <TextField fx:id="address" editable="false" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="rank" editable="false" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="contact" editable="false" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="设施描述：" GridPane.rowIndex="5">
                     <font>
                         <Font name="Microsoft YaHei Light" size="18.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="facility" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextArea fx:id="facility" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label text="合作企业：" GridPane.rowIndex="6">
                     <font>
                         <Font name="Microsoft YaHei Light" size="18.0" />
@@ -150,7 +150,7 @@
                 <Insets left="10.0" top="10.0" />
             </GridPane.margin>
             <children>
-                <Label fx:id="check">
+                <Label fx:id="check" visible="false">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -159,7 +159,7 @@
                         </ImageView>
                     </graphic>
                 </Label>
-                <Label fx:id="cancel">
+                <Label fx:id="cancel" visible="false">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -177,7 +177,11 @@
             <children>
                 <Label fx:id="editButton" graphicTextGap="10.0" text="编辑">
                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="file:client/src/main/res/hotelmanage/modify.png" />
+                           </image>
+                        </ImageView>
                     </graphic>
                     <font>
                         <Font name="Microsoft YaHei Light" size="18.0" />

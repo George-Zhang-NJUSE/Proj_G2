@@ -84,6 +84,7 @@ public class HotelInfoController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
+        CustomeButton.implButton(editButton, "file:client/src/main/res/hotelmanage/modify");
 
         fileChooser.setTitle("选择图片文件");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG", "*.jpg"));
@@ -94,6 +95,12 @@ public class HotelInfoController implements Initializable {
         });
         check.setOnMouseClicked((MouseEvent e)->{
             modifyInfo();
+        });
+        cancel.setOnMouseClicked((MouseEvent e)->{
+            cancelModify();
+        });
+        editButton.setOnMouseClicked((MouseEvent e)->{
+            setEditable(true);
         });
         ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
         provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
@@ -143,6 +150,28 @@ public class HotelInfoController implements Initializable {
         cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
 
     }
+
+    @FXML
+    private void setEditable(boolean sw) {
+        address.setEditable(sw);
+        if (sw) {
+            ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+            provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
+            cityBox.setItems(FXCollections.observableArrayList());
+            districtBox.setItems(FXCollections.observableArrayList());
+            cbdBox.setItems(FXCollections.observableArrayList());
+        }
+        facility.setEditable(sw);
+        describeEditor.setEditable(sw);
+        callFileChooserButton.setVisible(sw);
+        check.setVisible(sw);
+        cancel.setVisible(sw);
+    }
+    private void cancelModify(){
+        showInfo();
+        setEditable(false);
+    }
+
     //逻辑数据采集部分
     private boolean checkEmpty(){
         boolean result=

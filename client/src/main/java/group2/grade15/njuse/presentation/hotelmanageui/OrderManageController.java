@@ -205,22 +205,38 @@ public class OrderManageController implements Initializable {
         });
 
         showAllOrder();
+        tab1();
     }
     public void tab1(){
         //OrderListVO list=orderListService.get;
         workingTab =WorkingTab.UNEXE;
+        checkoutButton.setVisible(false);
+        overtimeButton.setVisible(false);
+        checkinButton.setVisible(true);
     }
     public void tab2(){
         workingTab =WorkingTab.CHECKIN;
+        checkoutButton.setVisible(false);
+        overtimeButton.setVisible(false);
+        checkinButton.setVisible(true);
     }
     public void tab3(){
-        workingTab =WorkingTab.COMPLETE;
+        workingTab = WorkingTab.COMPLETE;
+        checkoutButton.setVisible(false);
+        overtimeButton.setVisible(false);
+        checkinButton.setVisible(false);
     }
     public void tab4(){
-        workingTab =WorkingTab.INNORMAL;
+        workingTab = WorkingTab.INNORMAL;
+        checkoutButton.setVisible(false);
+        overtimeButton.setVisible(true);
+        checkinButton.setVisible(false);
     }
     public void tab5(){
         workingTab =WorkingTab.CANCEL;
+        checkoutButton.setVisible(false);
+        overtimeButton.setVisible(false);
+        checkinButton.setVisible(false);
     }
 
 
