@@ -37,6 +37,8 @@ public class WebMarketerMainController implements Initializable {
     private Rectangle creditChargeTag;
     @FXML
     private Rectangle fixTag;
+    @FXML
+    private Label message;
 
     @FXML
     public Label workingNumber;
@@ -53,6 +55,11 @@ public class WebMarketerMainController implements Initializable {
 
     }
 
+    public void alert(String info) {
+        Fade fade = new Fade(message, 2500, false);
+        message.setText(info);
+        fade.play();
+    }
     public void setVo(WebMarketerVO vo) {
         this.vo=vo;
     }
@@ -68,6 +75,7 @@ public class WebMarketerMainController implements Initializable {
             FXMLLoader creditChargeLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/CreditCharge.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(creditChargeLoader.load());
+            ((CreditChargeController)creditChargeLoader.getController()).webMarketerMainController=this;
             motherPaneFadeout();
             Fade fadein = new Fade(motherPane, 500, true);
             fadein.play();
@@ -117,6 +125,7 @@ public class WebMarketerMainController implements Initializable {
             FXMLLoader fixLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/webmarketer/Fix.fxml"));
             motherPane.getChildren().clear();
             motherPane.getChildren().add(fixLoader.load());
+            ((FixController)fixLoader.getController()).webMarketerMainController=this;
             Fade fadein = new Fade(motherPane, 500, true);
             fadein.play();
         } catch (MalformedURLException e) {

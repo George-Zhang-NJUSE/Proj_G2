@@ -299,17 +299,17 @@ public class PromotionManageController implements Initializable{
         try {
             switch(webMarketerService.createWebPromotion(vo)){
                 case SUCCESS:
-                    message.setText("添加成功");
+                    webMarketerMainController.alert("添加成功");
                     showAllPromotion();
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    webMarketerMainController.alert("未连接到服务器");
                     break;
 
             }
 
         }catch (NullPointerException e){
-            message.setText("添加失败");
+            webMarketerMainController.alert("添加失败");
         }
     }
 
@@ -322,29 +322,29 @@ public class PromotionManageController implements Initializable{
     public void modifyPromotion(WebPromotionVO vo){
         try {
             if (vo.getState() == PromotionState.start) {
-                message.setText("不能更改适用中的促销策略");
+                webMarketerMainController.alert("不能更改适用中的促销策略");
                 return;
             }
             switch (webMarketerService.modifyWebPromotion(vo)){
                 case SUCCESS:
-                    message.setText("操作成功");
+                    webMarketerMainController.alert("操作成功");
                     showAllPromotion();
                     modifyPromotionController.setEditable(false);
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    webMarketerMainController.alert("未连接到服务器");
                     break;
             }
 
         }catch (Exception e){
-            message.setText("操作未成功");
+            webMarketerMainController.alert("操作未成功");
         }
     }
     public void activatePromotion(){
         try {
             Promotion promotion = getSelectedPromotion();
             if (promotion.getState() == "start"){
-                message.setText("已经被激活");
+                webMarketerMainController.alert("已经被激活");
 
                 return;
             }
@@ -353,18 +353,18 @@ public class PromotionManageController implements Initializable{
             WebPromotionVO vo = promotionToVO(promotion);
             switch (webMarketerService.changeState(vo)){
                 case SUCCESS:
-                    message.setText("已激活");
+                    webMarketerMainController.alert("已激活");
                     showAllPromotion();
                     break;
                 case CONNECTION_EXCEPTION:
-                    message.setText("未连接到服务器");
+                    webMarketerMainController.alert("未连接到服务器");
                     break;
                 case FAILED:
-                    message.setText("激活失败");
+                    webMarketerMainController.alert("激活失败");
                     break;
             }
         }catch (Exception e){
-            message.setText("操作未成功");
+            webMarketerMainController.alert("操作未成功");
         }
     }
     public void stopPromotion(){
@@ -376,30 +376,30 @@ public class PromotionManageController implements Initializable{
             promotion.setState("stop");
             WebPromotionVO vo = promotionToVO(promotion);
             webMarketerService.changeState(vo);
-            message.setText("操作成功");
+            webMarketerMainController.alert("操作成功");
 
             showAllPromotion();
         } catch (Exception e) {
-            message.setText("操作未成功");
+            webMarketerMainController.alert("操作未成功");
         }
     }
     public void deletePromotion(){
         Promotion promotion=getSelectedPromotion();
         if(promotion.getState()=="start"){
-            message.setText("激活中的促销策略不能删除");
+            webMarketerMainController.alert("激活中的促销策略不能删除");
             return;
         }
         switch (webMarketerService.deleteWebPromotion(promotion.getId())) {
             case SUCCESS:
-                message.setText("已删除促销策略");
+                webMarketerMainController.alert("已删除促销策略");
                 showAllPromotion();
                 back();
                 break;
             case CONNECTION_EXCEPTION:
-                message.setText("未连接到服务器");
+                webMarketerMainController.alert("未连接到服务器");
                 break;
             case FAILED:
-                message.setText("删除失败");
+                webMarketerMainController.alert("删除失败");
                 break;
         }
 

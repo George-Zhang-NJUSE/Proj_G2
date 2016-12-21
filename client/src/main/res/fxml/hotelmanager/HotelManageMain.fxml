@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1400.0" prefHeight="824.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelManageMainController">
     <left>
         <GridPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -122,7 +122,7 @@
                     </image>
                 </ImageView>
                 <Pane fx:id="opPane" prefHeight="800.0" prefWidth="1200.0" />
-            <Label fx:id="message" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="1000.0" layoutY="700.0" opacity="0.0" style="-fx-background-color: rgb(173,244,255); -fx-background-radius: 5;" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+            <Label fx:id="message" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="800.0" layoutY="750.0" opacity="0.0" style="-fx-background-color: rgb(173,244,255); -fx-background-radius: 5;" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>

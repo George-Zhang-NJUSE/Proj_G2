@@ -244,21 +244,24 @@ public class HotelInfoController implements Initializable {
     }
 
     //逻辑实现部分
+    public void deletePic(){
+        
+    }
     public void modifyInfo() {
         if (checkEmpty()){
-            message.setText("必填信息不能为空");
+            hotelManageMainController.alert("必填信息不能为空");
             return;
         }
         switch(hotelManagerController.modifyHotelInfo(getVO())){
             case SUCCESS:
-                message.setText("信息更新成功");
+                hotelManageMainController.alert("信息更新成功");
                 hotelManageMainController.upDateHotelVO();
                 break;
             case CONNECTION_EXCEPTION:
-                message.setText("与服务器失去连接");
+                hotelManageMainController.alert("与服务器失去连接");
                 break;
             case FAILED:
-                message.setText("更新信息失败");
+                hotelManageMainController.alert("更新信息失败");
         };
     }
 }

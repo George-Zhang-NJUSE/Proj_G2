@@ -35,6 +35,7 @@ public class CreditChargeController implements Initializable {
     @FXML
     private Label cancel;
 
+    public WebMarketerMainController webMarketerMainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,14 +58,14 @@ public class CreditChargeController implements Initializable {
         CreditVO creditVO=new CreditVO(Integer.parseInt(accountField.getText()),0,0,0,Double.parseDouble(amountField.getText()),null, ChangeReason.charge);
         switch (WebMarketerMainController.webMarketerService.modifyCredit(creditVO)) {
             case SUCCESS:
-                backInfo.setText("充值完成");
+                webMarketerMainController.alert("充值完成");
                 clean();
                 break;
             case CONNECTION_EXCEPTION:
-                backInfo.setText("未连接到服务器");
+                webMarketerMainController.alert("未连接到服务器");
                 break;
             case FAILED:
-                backInfo.setText("充值失败");
+                webMarketerMainController.alert("充值失败");
                 break;
         }
     }

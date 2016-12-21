@@ -77,6 +77,7 @@ public class FixController implements Initializable {
 
     public OrderListServ orderListServ=new OrderController();
     public WebMarketerServ webMarketerServ = new WebMarketerController();
+    public WebMarketerMainController webMarketerMainController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
@@ -203,7 +204,7 @@ public class FixController implements Initializable {
 
             solvedList.getItems().add((unsolvedListData.get(index)));
             unsolvedListData.remove(index);
-
+            webMarketerMainController.alert("已经完成申述");
         }
 
     }
