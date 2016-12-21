@@ -386,7 +386,7 @@ public class OrderManageController implements Initializable {
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         if (adultCI.getText().length() == 0 || kidCI.getText().length() == 0) {
-            message.setText("填写内容不能为空");
+            hotelManageMainController.alert("填写内容不能为空");
             return;
         }
         order.numOfCustomer.set(Integer.parseInt(adultCI.getText())+Integer.parseInt(kidCI.getText()));
@@ -395,19 +395,19 @@ public class OrderManageController implements Initializable {
         try{
             vo = toVO(order);
         }catch(Exception e){
-            message.setText("未按照格式输入数据");
+            hotelManageMainController.alert("未按照格式输入数据");
             return;
         }
         if(vo.getState()==OrderState.unexecuted){
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
-                message.setText("操作成功");
+                hotelManageMainController.alert("操作成功");
                 hotelManageMainController.upDateHotelVO();
                 showAllOrder();
             }else{
-                message.setText("操作失败");
+                hotelManageMainController.alert("操作失败");
             };
         }else{
-            message.setText("该订单不是未执行订单");
+            hotelManageMainController.alert("该订单不是未执行订单");
         }
     }
     private void showFromClick(){
@@ -435,26 +435,26 @@ public class OrderManageController implements Initializable {
         Order order = new Order(vo);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(timeCO.getText()==""){
-            message.setText("不能为空");
+            hotelManageMainController.alert("不能为空");
             return;
         }
         order.inDate.set(new Timestamp(System.currentTimeMillis()).toString());
         try{
             vo = toVO(order);
         }catch(Exception e){
-            message.setText("未按照格式输入数据");
+            hotelManageMainController.alert("未按照格式输入数据");
             return;
         }
         if(vo.getState()==OrderState.executed){
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
-                message.setText("操作成功");
+                hotelManageMainController.alert("操作成功");
                 hotelManageMainController.upDateHotelVO();
                 showAllOrder();
             }else{
-                message.setText("操作失败");
+                hotelManageMainController.alert("操作失败");
             };
         }else{
-            message.setText("该订单不是已入住订单");
+            hotelManageMainController.alert("该订单不是已入住订单");
         }
 
     }
@@ -464,7 +464,7 @@ public class OrderManageController implements Initializable {
     public void overtimeCheckin(){
         //TODO
         if (adultOC.getText().length() == 0 || kidOC.getText().length() == 0) {
-            message.setText("填写内容不能为空");
+            hotelManageMainController.alert("填写内容不能为空");
             return;
         }
         OrderVO vo=getSelectedOrderVO();
@@ -474,14 +474,14 @@ public class OrderManageController implements Initializable {
         vo = toVO(order);
         if (vo.getState() == OrderState.abnormal) {
             if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(),OrderState.executed)){
-                message.setText("操作成功");
+                hotelManageMainController.alert("操作成功");
                 hotelManageMainController.upDateHotelVO();
                 showAllOrder();
             }else{
-                message.setText("操作失败");
+                hotelManageMainController.alert("操作失败");
             }
         }else{
-            message.setText("该订单不是异常订单");
+            hotelManageMainController.alert("该订单不是异常订单");
         }
 
     }
