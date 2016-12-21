@@ -37,4 +37,8 @@ public class CacheManager{
             hashMap.remove(key);
         }
     }
+
+    public void clearAll(){
+        hashMap.clear();
+    }
 }

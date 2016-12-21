@@ -3,15 +3,13 @@ package group2.grade15.njuse.bl.hotelbl;
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
 import group2.grade15.njuse.blservice.HotelServ;
+import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.HotelPO;
 import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
-import group2.grade15.njuse.vo.HotelListVO;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.OrderVO;
-import group2.grade15.njuse.vo.RoomVO;
+import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
@@ -63,35 +61,40 @@ public class HotelController implements HotelServ, GetHotelListBL{
 
     @Override
     public HotelListVO getBookedHotelList(int customerID) {
-        ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
-
-        if(orderList == null) {
-            return null;
-        }
-
-        ArrayList<HotelVO> hotelList = new ArrayList();
-
-        HashSet<Integer> hotelIDSet = orderList.stream()
-                                      .map(OrderVO::getHotelID)
-                                      .collect(Collectors.toCollection(HashSet::new));
-
-        for (int hotelID : hotelIDSet) {
-            HotelPO hotelPO = null;
-            try {
-                hotelPO = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-
-            if (hotelPO != null) {
-                hotelList.add(new HotelVO(hotelPO));
-            }
-        }
-
-        if(hotelList.size() != 0) {
-            return new HotelListVO(hotelList);
+        if(CacheManager.getInstance().containsCache("BookedHotelListVO" + customerID)) {
+            return (HotelListVO) CacheManager.getInstance().getCache("BookedHotelListVO" + customerID).getElement();
         } else {
-            return null;
+            ArrayList<OrderVO> orderList = orderListBL.getAllOrderListByCustomerID(customerID).getOrderList();
+
+            if (orderList == null) {
+                return null;
+            }
+
+            ArrayList<HotelVO> hotelList = new ArrayList();
+
+            HashSet<Integer> hotelIDSet = orderList.stream()
+                    .map(OrderVO::getHotelID)
+                    .collect(Collectors.toCollection(HashSet::new));
+
+            for (int hotelID : hotelIDSet) {
+                HotelPO hotelPO = null;
+                try {
+                    hotelPO = RemoteHelper.getInstance().getHotelDataService().getHotel(hotelID);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+
+                if (hotelPO != null) {
+                    hotelList.add(new HotelVO(hotelPO));
+                }
+            }
+
+            if (hotelList.size() != 0) {
+                CacheManager.getInstance().putCache("BookedHotelListVO" + customerID, new HotelListVO(hotelList));
+                return new HotelListVO(hotelList);
+            } else {
+                return null;
+            }
         }
     }
 
