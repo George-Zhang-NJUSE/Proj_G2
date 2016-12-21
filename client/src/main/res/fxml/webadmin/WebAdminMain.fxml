@@ -237,7 +237,7 @@
                                 <RowConstraints maxHeight="679.0" minHeight="10.0" prefHeight="661.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                         </GridPane>
-                        <Pane fx:id="accountAddFrame" layoutX="900.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);" visible="false">
+                        <Pane fx:id="accountAddFrame" layoutX="900.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
                             <children>
                                 <Label layoutX="20.0" layoutY="20.0" text="添加账户">
                                     <font>
@@ -279,8 +279,8 @@
                                                 <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
                                             </font>
                                         </Label>
-                                        <TextField fx:id="hotelIdField" editable="false" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                         <ComboBox fx:id="userType" prefWidth="150.0" style="-fx-background-radius: 0; -fx-border-color: WHITE; -fx-background-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="hotelID" editable="true" prefWidth="150.0" style="-fx-background-radius: 0; -fx-background-color: WHITE; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     </children>
                                 </GridPane>
                                 <Label fx:id="aaInfo" layoutX="20.0" layoutY="268.0" text="Feed back infomation here">

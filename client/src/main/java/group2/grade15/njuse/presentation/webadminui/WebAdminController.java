@@ -103,7 +103,7 @@ public class WebAdminController implements Initializable{
     private TextField hotelRank;
 
     @FXML
-    private TextField hotelIdField;
+    private ComboBox<Hotel> hotelID;
     @FXML
     private Label hotelIdLabel;
 
@@ -129,6 +129,7 @@ public class WebAdminController implements Initializable{
         accountListData = FXCollections.observableArrayList();
         accountList.setItems(accountListData);
         hotelList.setItems(hotelListData);
+        hotelID.setItems(hotelListData);
 
         ObservableList<String> types=FXCollections.observableArrayList(
                 new String("酒店管理用户"),
@@ -165,10 +166,10 @@ public class WebAdminController implements Initializable{
             switch (userType.getValue()) {
                 case "酒店管理用户":
                     hotelIdLabel.setVisible(true);
-                    hotelIdField.setVisible(true);
+                    hotelID.setVisible(true);
                     break;
                 default:
-                    hotelIdField.setVisible(false);
+                    hotelID.setVisible(false);
                     hotelIdLabel.setVisible(false);
                     break;
             }
@@ -364,7 +365,7 @@ public class WebAdminController implements Initializable{
     private HotelManagerVO gatherHotelManagerVO(){
         String name=userName.getText();
         String pw=userPW.getText();
-        int hotelId= Integer.parseInt(hotelIdField.getText());
+        int hotelId= (hotelID.getValue().getId());
         HotelManagerVO vo=new HotelManagerVO(0,pw,name,"",hotelId);
         return vo;
     }

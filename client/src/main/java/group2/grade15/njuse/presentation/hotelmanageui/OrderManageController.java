@@ -271,6 +271,8 @@ public class OrderManageController implements Initializable {
                 case revoked:
                     cancelListData.add(new Order(vo));
                     break;
+                case complete:
+                    completeListData.add(new Order(vo));
             }
         }
 
