@@ -12,4 +12,6 @@ public interface HotelBL {
     public ResultMessage modifyInfo(HotelVO hotel);
 
     public HotelVO getInfo(int hotelID);
+
+    public ResultMessage deletePic(int picNum, int hotelID);
 }

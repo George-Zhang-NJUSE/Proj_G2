@@ -94,4 +94,9 @@ public class HotelController implements HotelServ, GetHotelListBL{
             return null;
         }
     }
+
+    @Override
+    public ResultMessage deletePic(int picNum, int hotelID) {
+        return hotelBL.deletePic(picNum, hotelID);
+    }
 }
