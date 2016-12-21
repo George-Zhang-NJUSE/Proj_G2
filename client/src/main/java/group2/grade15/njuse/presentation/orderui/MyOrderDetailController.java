@@ -79,7 +79,11 @@ public class MyOrderDetailController implements Initializable {
 
     @FXML
     private void requestRevokeOrder() {
-        Alert confirmRevokeAlert = new Alert(Alert.AlertType.CONFIRMATION, "确定要撤销该订单吗？", ButtonType.NO, ButtonType.YES);
+        String warningMessage="确定要撤销该订单吗？";
+        if(orderVO.getFinalExecuteTime().getTime()-System.currentTimeMillis()<6*60*60*1000){
+            warningMessage = "现在距离最晚订单执行时间不足6小时，如果撤销订单，您的信用值将会下降，" + warningMessage;
+        }
+        Alert confirmRevokeAlert = new Alert(Alert.AlertType.CONFIRMATION, warningMessage, ButtonType.NO, ButtonType.YES);
         Optional<ButtonType> confirm = confirmRevokeAlert.showAndWait();
         if (confirm.isPresent() && confirm.get() == ButtonType.YES) {
             revokeOrder();

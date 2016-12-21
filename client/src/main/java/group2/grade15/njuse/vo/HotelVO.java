@@ -35,11 +35,12 @@ public class HotelVO implements Serializable {
 
         roomList = new ArrayList();
         ArrayList<RoomPO> roomPOList = hotel.getRoomList();
-        for (RoomPO po : roomPOList) {
-            RoomVO room = new RoomVO(po);
-            roomList.add(room);
+        if(roomPOList!=null) {
+            for (RoomPO po : roomPOList) {
+                RoomVO room = new RoomVO(po);
+                roomList.add(room);
+            }
         }
-
     }
 
     public HotelVO(int id, String name, String address, String concreteAddress, String contact, String introduction,
