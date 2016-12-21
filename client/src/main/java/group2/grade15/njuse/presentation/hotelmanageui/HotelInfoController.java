@@ -68,6 +68,8 @@ public class HotelInfoController implements Initializable {
     @FXML
     private ListView<String> picturePathList;
     @FXML
+    private ListView<String> pictureList;
+    @FXML
     private Label message;
 
     private FileChooser fileChooser=new FileChooser();
@@ -244,8 +246,23 @@ public class HotelInfoController implements Initializable {
     }
 
     //逻辑实现部分
+    public void addPic(){
+        //TODO
+    }
     public void deletePic(){
-        
+        int index=pictureList.getSelectionModel().getSelectedIndex();
+        switch (hotelController.deletePic(index, HotelManageMainController.hotelVO.getId())) {
+            case SUCCESS:
+                hotelManageMainController.alert("图片已删除");
+                break;
+            case CONNECTION_EXCEPTION:
+                hotelManageMainController.alert("未连接到服务器");
+                break;
+            case FAILED:
+                hotelManageMainController.alert("图片删除失败");
+                break;
+        }
+
     }
     public void modifyInfo() {
         if (checkEmpty()){
