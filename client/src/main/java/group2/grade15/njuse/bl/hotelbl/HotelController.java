@@ -2,6 +2,7 @@ package group2.grade15.njuse.bl.hotelbl;
 
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
+import group2.grade15.njuse.bl.searchbl.SearchBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.HotelPO;
@@ -27,6 +28,7 @@ public class HotelController implements HotelServ, GetHotelListBL{
     HotelBL hotelBL;
     RoomBL roomBL;
     OrderListBL orderListBL;
+    SearchBL searchBL;
 
     public HotelController() {
         hotelBL = new Hotel();
@@ -101,5 +103,37 @@ public class HotelController implements HotelServ, GetHotelListBL{
     @Override
     public ResultMessage deletePic(int picNum, int hotelID) {
         return hotelBL.deletePic(picNum, hotelID);
+    }
+
+    @Override
+    public ResultMessage uploadPic(byte[][] picture, int hotelID) {
+        return hotelBL.uploadPic(picture, hotelID);
+    }
+
+    @Override
+    public String getProvinceName(String provinceNum) {
+        ArrayList<ProvinceVO> provinceVOs  = searchBL.getProvince().getList();
+        int index = Integer.parseInt(provinceNum, 2);
+        return provinceVOs.get(index).getProvinceName();
+    }
+
+    @Override
+    public String getCityName(String cityNum) {
+        ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
+        int index = Integer.parseInt(cityNum.substring(5), 2);
+        return cityVOs.get(index).getCityName();    }
+
+    @Override
+    public String getDistrictName(String districtNum) {
+        ArrayList<DistrictVO> districtListVOs = searchBL.getDistrict(districtNum).getList();
+        int index = Integer.parseInt(districtNum.substring(10), 2);
+        return districtListVOs.get(index).getDistrictName();
+    }
+
+    @Override
+    public String getCbdName(String cbdNum) {
+        ArrayList<CbdVO> cbdVOs = searchBL.getCbd(cbdNum).getList();
+        int index = Integer.parseInt(cbdNum.substring(15), 2);
+        return cbdVOs.get(index).getCbdName();
     }
 }

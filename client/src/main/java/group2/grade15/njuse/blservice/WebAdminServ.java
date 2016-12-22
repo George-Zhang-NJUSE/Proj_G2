@@ -22,11 +22,10 @@ public interface WebAdminServ {
     /**
      * 创建酒店
      * @param hotel HotelVO型，传入的参数是界面层填写好信息的酒店VO
-     * @return 成功返回ResultMessage.SUCCESS
-     *         失败返回ResultMessage.FAILED
-     *         网络问题返回ResultMessage.CONNECTION_EXCEPTION
+     * @return 成功返回HotelVO
+     *         失败返回null
      */
-    public ResultMessage createHotel(HotelVO hotel);
+    public HotelVO createHotel(HotelVO hotel);
 
     /**
      * 获取所有酒店列表

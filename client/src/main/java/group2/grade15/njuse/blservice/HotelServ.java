@@ -77,4 +77,42 @@ public interface HotelServ {
      *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
      */
     public ResultMessage deletePic(int picNum, int hotelID);
+
+    /**
+     * 上传酒店的图片
+     * @param picture byte[][]型，界面层传递来的需要上传的图片ID
+     * @param hotelID int型，界面层传递来的需要上传的图片所在的酒店ID
+     * @return 成功返回ResultMessage.SUCCESS
+     *         失败返回ResultMessage.FAILED
+     *         网络问题则返回ResultMessage.CONNECTION_EXCEPTION
+     */
+    public ResultMessage uploadPic(byte[][] picture, int hotelID);
+
+    /**
+     * 根据输入的省的编码，获取该省份的名称
+     * @param provinceNum int型，用户需要翻译的省份编码
+     * @return 返回该省份的名称
+     */
+    public String getProvinceName(String provinceNum);
+
+    /**
+     * 根据输入的城市的编码，获取该城市的名称
+     * @param cityNum int型，用户需要翻译的城市编码
+     * @return 返回该城市的名称
+     */
+    public String getCityName(String cityNum);
+
+    /**
+     * 根据输入的城市的编码，获取该城市的名称
+     * @param districtNum int型，用户需要翻译的地区编码
+     * @return 返回该城市的名称
+     */
+    public String getDistrictName(String districtNum);
+
+    /**
+     * 根据输入的商圈的编码，获取该商圈的名称
+     * @param cbdNum int型，用户需要翻译的商圈编码
+     * @return 返回该城市的名称
+     */
+    public String getCbdName(String cbdNum);
 }

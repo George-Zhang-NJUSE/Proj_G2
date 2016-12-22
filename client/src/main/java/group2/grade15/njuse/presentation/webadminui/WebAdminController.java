@@ -103,7 +103,9 @@ public class WebAdminController implements Initializable{
     private TextField hotelRank;
 
     @FXML
-    private ComboBox<Hotel> hotelID;
+    private TextField hmID;
+    @FXML
+    private TextField hmPW;
     @FXML
     private Label hotelIdLabel;
 
@@ -129,7 +131,6 @@ public class WebAdminController implements Initializable{
         accountListData = FXCollections.observableArrayList();
         accountList.setItems(accountListData);
         hotelList.setItems(hotelListData);
-        hotelID.setItems(hotelListData);
 
         ObservableList<String> types=FXCollections.observableArrayList(
                 new String("酒店管理用户"),
@@ -164,14 +165,7 @@ public class WebAdminController implements Initializable{
         }
         userType.setOnAction((ActionEvent e)->{
             switch (userType.getValue()) {
-                case "酒店管理用户":
-                    hotelIdLabel.setVisible(true);
-                    hotelID.setVisible(true);
-                    break;
-                default:
-                    hotelID.setVisible(false);
-                    hotelIdLabel.setVisible(false);
-                    break;
+
             }
         });
     }
@@ -365,10 +359,10 @@ public class WebAdminController implements Initializable{
 
     }
 
-    private HotelManagerVO gatherHotelManagerVO(){
-        String name=userName.getText();
-        String pw=userPW.getText();
-        int hotelId= (hotelID.getValue().getId());
+    private HotelManagerVO gatherHotelManagerVO(int hotelID){
+        String name=hmID.getText();
+        String pw=hmPW.getText();
+        int hotelId = hotelID;
         HotelManagerVO vo=new HotelManagerVO(0,pw,name,"",hotelId);
         return vo;
     }
@@ -438,7 +432,7 @@ public class WebAdminController implements Initializable{
         }
         HotelVO vo=gatherHotelVO();
         try{
-            webAdminService.createHotel(vo);
+            HotelVO hotelvVO=webAdminService.createHotel(vo);
             hotelListData.add(new Hotel(vo));
 
             haInfo.setText("添加成功");
