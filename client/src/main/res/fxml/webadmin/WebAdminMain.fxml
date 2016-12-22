@@ -78,7 +78,6 @@
                                                             <columns>
                                                                 <TableColumn prefWidth="69.99999618530273" text="ID" />
                                                                 <TableColumn minWidth="0.0" prefWidth="176.00001525878906" text="用户名" />
-                                                                <TableColumn minWidth="0.0" prefWidth="179.00006103515625" text="密码" />
                                                                 <TableColumn prefWidth="79.00006103515625" text="账户类型" />
                                                 <TableColumn prefWidth="154.0" text="联系方式" />
                                                 <TableColumn prefWidth="103.0" text="生日" />
@@ -302,7 +301,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="hotelAddFrame" visible="false" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
+                        <Pane fx:id="hotelAddFrame" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);" visible="false">
                             <children>
                                 <Label layoutX="20.0" layoutY="20.0" text="添加酒店">
                                     <font>
@@ -374,9 +373,9 @@
                                     <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#loadCityBox"/>
-                              <ComboBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#loadDistrictBox"/>
-                              <ComboBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#loadCbdBox"/>
+                              <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <ComboBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                     </children>
                                     <columnConstraints>
