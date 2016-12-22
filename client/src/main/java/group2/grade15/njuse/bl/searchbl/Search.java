@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Search implements SearchServ {
+public class Search implements SearchServ, SearchBL {
     SearchFilterBL searchFilter;
 
     public Search(){

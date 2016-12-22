@@ -15,19 +15,21 @@ import java.util.ArrayList;
  */
 public class HotelManageImpl implements HotelManageBL {
 
-    public ResultMessage createHotel(HotelVO hotel) {
+    public HotelVO createHotel(HotelVO hotel) {
 
-        ResultMessage result;
+        HotelPO hotelPO = null;
 
         try {
-            RemoteHelper.getInstance().getWebAdminDataService().addHotel(hotel.toPO());
-            result = ResultMessage.SUCCESS;
+            hotelPO = RemoteHelper.getInstance().getWebAdminDataService().addHotel(hotel.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
-            result = ResultMessage.CONNECTION_EXCEPTION;
         }
 
-        return result;
+        if(hotelPO != null) {
+            return new HotelVO(hotelPO);
+        } else {
+            return null;
+        }
     }
 
     public HotelListVO getHotelList() {

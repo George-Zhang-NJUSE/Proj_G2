@@ -53,4 +53,16 @@ public class Hotel implements HotelBL {
         return result;
     }
 
+    @Override
+    public ResultMessage uploadPic(byte[][] picture, int hotelID) {
+        ResultMessage result;
+        try {
+            result = RemoteHelper.getInstance().getHotelDataService().uploadPic(picture, hotelID);
+        } catch (RemoteException e) {
+            result = ResultMessage.CONNECTION_EXCEPTION;
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

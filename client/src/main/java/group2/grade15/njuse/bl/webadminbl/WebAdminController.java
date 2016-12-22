@@ -42,7 +42,7 @@ public class WebAdminController implements WebAdminServ, HotelManageBL, UserMana
     }
 
     @Override
-    public ResultMessage createHotel(HotelVO hotel) {
+    public HotelVO createHotel(HotelVO hotel) {
         return hotelManage.createHotel(hotel);
     }
 

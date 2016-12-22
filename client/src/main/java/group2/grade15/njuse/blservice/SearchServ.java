@@ -29,30 +29,31 @@ public interface SearchServ {
     public ProvinceListVO getProvince();
 
     /**
-     * 根据输入的省名，获取该省份的所有城市名列表
+     * 根据输入的省的编码，获取该省份的所有城市名列表
      * @param provinceNum String型，用户在搜索界面选择的省份
      * @return 返回该省份的所有城市列表CityListVO
      */
     public CityListVO getCity(String provinceNum);
 
     /**
-     * 根据输入的城市名，获取该城市的所有地区名列表
+     * 根据输入的城市的编码，获取该城市的所有地区名列表
      * @param cityNum String型，用户在搜索界面选择的城市
      * @return 返回该城市的所有地区列表DistrictListVO
      */
     public DistrictListVO getDistrict(String cityNum);
 
     /**
-     * 根据输入地区名，获取该地区的所有商圈名列表
+     * 根据输入地区的编码，获取该地区的所有商圈名列表
      * @param districtNum String型，用户在搜索界面选择的地区名
      * @return 返回该地区所有的商圈列表CbdListVO
      */
     public CbdListVO getCbd(String districtNum);
 
     /**
-     * 根据输入的商圈名，获取该商圈的所有酒店列表
+     * 根据输入的商圈的编码，获取该商圈的所有酒店列表
      * @param address String型，用户在搜索界面选择的商圈名
      * @return 返回该商圈的所有酒店列表
      */
     public HotelListVO getHotel(String address);
+
 }

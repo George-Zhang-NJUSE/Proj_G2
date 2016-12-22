@@ -28,7 +28,6 @@ public class OrderVO implements Serializable {
         orderID = po.getOrderID();
         customerID = po.getCustomerID();
         hotelID = po.getHotelID();
-       // promotionID = po.getPromotionID();
         amount = po.getAmount();
         createTime = po.getCreateTime();
         checkInTime = po.getCheckInTime();
