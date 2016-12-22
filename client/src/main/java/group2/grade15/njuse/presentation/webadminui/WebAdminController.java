@@ -379,7 +379,7 @@ public class WebAdminController implements Initializable{
         result = new HotelVO(
                 0,//id
                 hotelName.getText(),//name
-                "",//address
+                "00000000000000000000",//address
                 hotelAddress.getText(),//concretAddress
                 contactField.getText(),//contact
                 "", //introduction
