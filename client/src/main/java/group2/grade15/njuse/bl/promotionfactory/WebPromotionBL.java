@@ -1,6 +1,5 @@
 package group2.grade15.njuse.bl.promotionfactory;
 
-import group2.grade15.njuse.vo.HotelPromotionVO;
 import group2.grade15.njuse.vo.OrderVO;
 import group2.grade15.njuse.vo.WebPromotionVO;
 

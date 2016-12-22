@@ -2,6 +2,7 @@ package group2.grade15.njuse.bl.hotelbl;
 
 import group2.grade15.njuse.bl.orderbl.OrderList;
 import group2.grade15.njuse.bl.orderbl.OrderListBL;
+import group2.grade15.njuse.bl.searchbl.Search;
 import group2.grade15.njuse.bl.searchbl.SearchBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.cache.CacheManager;
@@ -34,6 +35,7 @@ public class HotelController implements HotelServ, GetHotelListBL{
         hotelBL = new Hotel();
         roomBL = new Room();
         orderListBL = new OrderList();
+        searchBL = new Search();
     }
 
     @Override
@@ -122,7 +124,8 @@ public class HotelController implements HotelServ, GetHotelListBL{
     public String getCityName(String cityNum) {
         ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
         int index = Integer.parseInt(cityNum.substring(5), 2);
-        return cityVOs.get(index).getCityName();    }
+        return cityVOs.get(index).getCityName();
+    }
 
     @Override
     public String getDistrictName(String districtNum) {
