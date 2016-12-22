@@ -107,6 +107,7 @@ public class HotelController implements HotelServ, GetHotelListBL{
 
     @Override
     public ResultMessage uploadPic(byte[][] picture, int hotelID) {
+        System.out.println(picture[0].length + "\n" + picture[1].length);
         return hotelBL.uploadPic(picture, hotelID);
     }
 
