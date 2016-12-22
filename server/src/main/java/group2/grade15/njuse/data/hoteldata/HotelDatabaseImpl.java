@@ -55,11 +55,11 @@ public class HotelDatabaseImpl implements HotelDataService {
                 name = resultSet.getString(2);
                 tel = resultSet.getString(3);
                 rank = resultSet.getInt(4);
-                address = resultSet.getString(5);
-                introduction = resultSet.getString(6);
-                facility = resultSet.getString(7);
-                concreteAddress = resultSet.getString(9);
-                picPath = new File(resultSet.getString(5));
+                address = resultSet.getString("address");
+                introduction = resultSet.getString("introduction");
+                facility = resultSet.getString("facility");
+                concreteAddress = resultSet.getString("concreteaddress");
+                picPath = new File(resultSet.getString("picture"));
 
                 File[] allPic = picPath.listFiles();
                 if (allPic.length > 0) {
