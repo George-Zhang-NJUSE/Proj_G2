@@ -302,7 +302,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="hotelAddFrame" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
+                        <Pane fx:id="hotelAddFrame" visible="false" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
                             <children>
                                 <Label layoutX="20.0" layoutY="20.0" text="添加酒店">
                                     <font>

@@ -35,8 +35,8 @@
               <columns>
                 <TableColumn prefWidth="75.0" text="房间类型" />
                 <TableColumn prefWidth="75.0" text="房间单价" />
-                  <TableColumn prefWidth="100.0" text="当前可用房间" />
-                  <TableColumn prefWidth="75.0" text="房间总数" />
+                  <TableColumn prefWidth="100.0" text="房间总数" />
+                  <TableColumn prefWidth="75.0" text="可用房间数" />
               </columns>
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="1">

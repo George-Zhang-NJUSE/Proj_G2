@@ -41,7 +41,6 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="订单ID" />
                                     <TableColumn prefWidth="75.0" text="用户ID" />
-                                    <TableColumn prefWidth="75.0" text="适用优惠" />
                                     <TableColumn prefWidth="75.0" text="订单总价值" />
                                     <TableColumn prefWidth="75.0" text="入住时间" />
                                     <TableColumn prefWidth="75.0" text="退房时间" />
@@ -61,7 +60,6 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="订单ID" />
                                     <TableColumn prefWidth="75.0" text="用户ID" />
-                                    <TableColumn prefWidth="75.0" text="适用优惠" />
                                     <TableColumn prefWidth="75.0" text="订单总价值" />
                                     <TableColumn prefWidth="75.0" text="入住时间" />
                                     <TableColumn prefWidth="75.0" text="退房时间" />
@@ -80,7 +78,6 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="订单ID" />
                                     <TableColumn prefWidth="75.0" text="用户ID" />
-                                    <TableColumn prefWidth="75.0" text="适用优惠" />
                                     <TableColumn prefWidth="75.0" text="订单总价值" />
                                     <TableColumn prefWidth="75.0" text="入住时间" />
                                     <TableColumn prefWidth="75.0" text="退房时间" />
@@ -99,7 +96,6 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="订单ID" />
                                     <TableColumn prefWidth="75.0" text="用户ID" />
-                                    <TableColumn prefWidth="75.0" text="适用优惠" />
                                     <TableColumn prefWidth="75.0" text="订单总价值" />
                                     <TableColumn prefWidth="75.0" text="入住时间" />
                                     <TableColumn prefWidth="75.0" text="退房时间" />
@@ -118,7 +114,6 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="订单ID" />
                                     <TableColumn prefWidth="75.0" text="用户ID" />
-                                    <TableColumn prefWidth="75.0" text="适用优惠" />
                                     <TableColumn prefWidth="75.0" text="订单总价值" />
                                     <TableColumn prefWidth="75.0" text="入住时间" />
                                     <TableColumn prefWidth="75.0" text="退房时间" />

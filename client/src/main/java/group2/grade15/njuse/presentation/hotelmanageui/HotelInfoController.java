@@ -131,6 +131,8 @@ public class HotelInfoController implements Initializable {
         contact.setText(vo.getContact());
         facility.setText(vo.getFacility());
         describeEditor.setText(vo.getIntroduction());
+        System.out.println(vo.getAddress());
+
         provinceBox.setItems(FXCollections.observableArrayList(
                 hotelController.getProvinceName(vo.getAddress().substring(0, 5))
         ));
@@ -143,7 +145,7 @@ public class HotelInfoController implements Initializable {
         cbdBox.setItems(FXCollections.observableArrayList(
                 hotelController.getCbdName(vo.getAddress())
         ));
-
+        
         ObservableList<Pic> picList = FXCollections.observableArrayList();
         if (vo.getPicture() != null) {
             for (int i = 0; i < vo.getPicture().length; i++) {

@@ -143,7 +143,7 @@ public class OrderManageController implements Initializable {
         UNEXE,CHECKIN,COMPLETE,INNORMAL,CANCEL
     }
     private ObservableList<Order> unexeListData,checkinListData,completeListData,innormalListData,cancelListData;
-    private String[] properties={"orderId","customerId","promotionId","amount","inDate","outDate","createTime","finalDate"};
+    private String[] properties={"orderId","customerId","amount","inDate","outDate","createTime","finalDate"};
 
     //逻辑部分
     private WorkingTab workingTab;
@@ -529,7 +529,6 @@ public class OrderManageController implements Initializable {
         private final SimpleIntegerProperty orderId;
         private final SimpleIntegerProperty customerId;
         private final SimpleIntegerProperty hotelId;
-        private final SimpleIntegerProperty promotionId;
         private final SimpleDoubleProperty amount;
         private final SimpleStringProperty inDate;
         private final SimpleStringProperty outDate;
@@ -546,7 +545,6 @@ public class OrderManageController implements Initializable {
             orderId = new SimpleIntegerProperty(vo.getOrderID());
             customerId = new SimpleIntegerProperty(vo.getCustomerID());
             hotelId = new SimpleIntegerProperty(vo.getHotelID());
-            promotionId = new SimpleIntegerProperty(vo.getPromotionID());
             amount = new SimpleDoubleProperty(vo.getAmount());
 
             //
@@ -578,9 +576,7 @@ public class OrderManageController implements Initializable {
         public int getHotelId(){
             return hotelId.get();
         }
-        public int getPromotionId(){
-            return promotionId.get();
-        }
+
         public double getAmount(){
             return amount.get();
         }
