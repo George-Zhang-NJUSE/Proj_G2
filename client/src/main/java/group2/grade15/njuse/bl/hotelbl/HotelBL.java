@@ -14,4 +14,6 @@ public interface HotelBL {
     public HotelVO getInfo(int hotelID);
 
     public ResultMessage deletePic(int picNum, int hotelID);
+
+    public ResultMessage uploadPic(byte[][] picture, int hotelID);
 }
