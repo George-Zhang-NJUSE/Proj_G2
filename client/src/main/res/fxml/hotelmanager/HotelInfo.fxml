@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: rgb(255,255,255,0.3);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelInfoController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.hotelmanageui.HotelInfoController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
@@ -20,10 +21,11 @@
     <rowConstraints>
         <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="409.0" minHeight="10.0" prefHeight="374.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="504.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+      <Rectangle arcHeight="5.0" fill="WHITE" height="700.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" GridPane.columnSpan="5" GridPane.rowIndex="1" GridPane.rowSpan="3" />
         <TextArea fx:id="describeEditor" editable="false" style="-fx-border-color: black" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <GridPane.margin>
             <Insets top="30.0" />
@@ -98,7 +100,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="commitAddButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="提交添加" onAction="#addPic">
+                  <Button fx:id="commitAddButton" mnemonicParsing="false" onAction="#addPic" style="-fx-border-color: black; -fx-background-color: white" text="提交添加">
                      <VBox.margin>
                         <Insets right="10.0" />
                      </VBox.margin>
@@ -232,7 +234,7 @@
                   <ImageView fx:id="pic" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Button fx:id="deletePicButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="删除图片" GridPane.rowIndex="1" GridPane.valignment="TOP" onAction="#deletePic">
+            <Button fx:id="deletePicButton" mnemonicParsing="false" onAction="#deletePic" style="-fx-border-color: black; -fx-background-color: white" text="删除图片" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin>
