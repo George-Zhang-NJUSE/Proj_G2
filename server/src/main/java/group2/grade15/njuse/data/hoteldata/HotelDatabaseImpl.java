@@ -273,7 +273,10 @@ public class HotelDatabaseImpl implements HotelDataService {
 
             File directory = new File(picPath);
             File[] pics = directory.listFiles();
-            int picNum = Integer.parseInt((pics[pics.length - 1].getName()).split("\\.")[0]) + 1;
+            int picNum=1;
+            if(pics.length!=0){
+                picNum = Integer.parseInt((pics[pics.length - 1].getName()).split("\\.")[0]) + 1;
+            }
             for (int i = 0; i < picList.length; i++) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(picList[i]);
                 BufferedImage bi = ImageIO.read(bis);
