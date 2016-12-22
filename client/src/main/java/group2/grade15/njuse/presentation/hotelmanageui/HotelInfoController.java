@@ -131,6 +131,18 @@ public class HotelInfoController implements Initializable {
         contact.setText(vo.getContact());
         facility.setText(vo.getFacility());
         describeEditor.setText(vo.getIntroduction());
+        provinceBox.setItems(FXCollections.observableArrayList(
+                hotelController.getProvinceName(vo.getAddress().substring(0, 5))
+        ));
+        cityBox.setItems(FXCollections.observableArrayList(
+                hotelController.getCityName(vo.getAddress().substring(0, 10))
+        ));
+        districtBox.setItems(FXCollections.observableArrayList(
+                hotelController.getDistrictName(vo.getAddress().substring(0, 15))
+        ));
+        cbdBox.setItems(FXCollections.observableArrayList(
+                hotelController.getCbdName(vo.getAddress())
+        ));
 
         ObservableList<Pic> picList = FXCollections.observableArrayList();
         if (vo.getPicture() != null) {
