@@ -7,9 +7,9 @@ import group2.grade15.njuse.bl.hotelbl.HotelBL;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionController;
 import group2.grade15.njuse.bl.hotelpromotionbl.HotelPromotionControllerBL;
 import group2.grade15.njuse.bl.promotionfactory.HotelPromotionBL;
-import group2.grade15.njuse.bl.promotionfactory.PromotionFactory;
+import group2.grade15.njuse.bl.promotionfactory.HotelPromotionFactory;
 import group2.grade15.njuse.bl.promotionfactory.WebPromotionBL;
-import group2.grade15.njuse.bl.webmarketerbl.WebPromotionProxy;
+import group2.grade15.njuse.bl.promotionfactory.WebPromotionFactory;
 import group2.grade15.njuse.bl.webpromotionbl.WebPromotionController;
 import group2.grade15.njuse.bl.webpromotionbl.WebPromotionControllerBL;
 import group2.grade15.njuse.cache.CacheManager;
@@ -169,7 +169,7 @@ public class Order implements OrderBL{
             ArrayList<WebPromotionVO> webPromotionList = webPromotionListVO.getWebPromotionList();
             for (WebPromotionVO webPromotionVO : webPromotionList) {
                 String promotionType = webPromotionVO.getType().toString();
-                WebPromotionBL webPromotion = PromotionFactory.getInstance().getWebPromotion(promotionType);
+                WebPromotionBL webPromotion = WebPromotionFactory.getWebPromotion(promotionType);
 
                 boolean isMin = webPromotionVO.getState() == PromotionState.start
                         && webPromotion.countPrice(orderVO, webPromotionVO) < minPrice;
@@ -200,7 +200,7 @@ public class Order implements OrderBL{
             ArrayList<HotelPromotionVO> hotelPromotionList = hotelPromotionListVO.getHotelPromotionList();
             for (HotelPromotionVO hotelPromotionVO : hotelPromotionList) {
                 String promotionType = hotelPromotionVO.getType().toString();
-                HotelPromotionBL hotelPromotion = PromotionFactory.getInstance().getHotelPromotion(promotionType);
+                HotelPromotionBL hotelPromotion = HotelPromotionFactory.getHotelPromotion(promotionType);
 
                 boolean isMin = hotelPromotionVO.getState() == PromotionState.start
                         && hotelPromotion.countPrice(orderVO, hotelPromotionVO) < minPrice;
