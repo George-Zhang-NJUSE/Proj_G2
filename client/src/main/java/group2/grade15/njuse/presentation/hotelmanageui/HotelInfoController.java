@@ -75,7 +75,9 @@ public class HotelInfoController implements Initializable {
     @FXML
     private Label message;
 
-    private FileChooser fileChooser=new FileChooser();
+    private FileChooser fileChooser = new FileChooser();
+
+
 
     @FXML
     private Label fileNumber;
@@ -83,7 +85,8 @@ public class HotelInfoController implements Initializable {
     public Stage ownerStage;
 
     public HotelManageMainController hotelManageMainController;
-    public SearchServ searchServ=new Search();
+    public SearchServ searchServ = new Search();
+
     @Override
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,32 +97,34 @@ public class HotelInfoController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG", "*.jpg"));
 
         showInfo();
-        callFileChooserButton.setOnAction((ActionEvent e)->{
+        callFileChooserButton.setOnAction((ActionEvent e) -> {
             showFileChooser();
         });
-        check.setOnMouseClicked((MouseEvent e)->{
+        check.setOnMouseClicked((MouseEvent e) -> {
             modifyInfo();
         });
-        cancel.setOnMouseClicked((MouseEvent e)->{
+        cancel.setOnMouseClicked((MouseEvent e) -> {
             cancelModify();
         });
-        editButton.setOnMouseClicked((MouseEvent e)->{
+        editButton.setOnMouseClicked((MouseEvent e) -> {
             setEditable(true);
         });
         ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
         provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
     }
-    public void showFileChooser(){
+
+    public void showFileChooser() {
         final List<File> files = fileChooser.showOpenMultipleDialog(ownerStage);
-        ObservableList<String> list=FXCollections.observableArrayList();
-        for(int i=0;i<files.size();i++) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (int i = 0; i < files.size(); i++) {
             list.add(files.get(i).getPath());
         }
         picturePathList.setItems(list);
-        fileNumber.setText("选择了"+String.valueOf(files.size())+"张图片");
+        fileNumber.setText("选择了" + String.valueOf(files.size()) + "张图片");
     }
-    private void showInfo(){
-        HotelVO vo=HotelManageMainController.hotelVO;
+
+    private void showInfo() {
+        HotelVO vo = HotelManageMainController.hotelVO;
         name.setText(vo.getName());
         address.setText(vo.getConcreteAddress());
         rank.setText(String.valueOf(vo.getRank()));
@@ -127,18 +132,19 @@ public class HotelInfoController implements Initializable {
         facility.setText(vo.getFacility());
         describeEditor.setText(vo.getIntroduction());
 
-        ObservableList<Pic> picList=FXCollections.observableArrayList();
+        ObservableList<Pic> picList = FXCollections.observableArrayList();
         if (vo.getPicture() != null) {
-            for(int i=0;i<vo.getPicture().length;i++) {
+            for (int i = 0; i < vo.getPicture().length; i++) {
                 picList.add(new Pic(i, vo.getPicture()[i]));
             }
         }
 
         pictureList.setItems(picList);
     }
+
     @FXML
     private void loadCityBox() {
-        ProvinceVO selectedProvince= (ProvinceVO) provinceBox.getValue();
+        ProvinceVO selectedProvince = (ProvinceVO) provinceBox.getValue();
         ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
         cityBox.setItems(FXCollections.observableArrayList(cityVOList));
 
@@ -162,14 +168,15 @@ public class HotelInfoController implements Initializable {
         cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
 
     }
+
     @FXML
-    private void showPicture(){
-        int index=pictureList.getSelectionModel().getSelectedIndex();
+    private void showPicture() {
+        int index = pictureList.getSelectionModel().getSelectedIndex();
         if (index < 0) {
             return;
         }
-        Pic p=pictureList.getItems().get(index);
-        Image image=p.getImage();
+        Pic p = pictureList.getItems().get(index);
+        Image image = p.getImage();
         pic.setImage(image);
     }
 
@@ -194,38 +201,40 @@ public class HotelInfoController implements Initializable {
         pictureList.setVisible(!sw);
 
     }
-    private void cancelModify(){
+
+    private void cancelModify() {
         showInfo();
         setEditable(false);
     }
 
     //逻辑数据采集部分
-    private boolean checkEmpty(){
-        boolean result=
-                name.getText()==null||
-                address.getText()==null||
-                rank.getText()==null||
-                contact.getText()==null|
-                facility.getText()==null||
-                cbdBox.getValue()==null;
+    private boolean checkEmpty() {
+        boolean result =
+                name.getText() == null ||
+                        address.getText() == null ||
+                        rank.getText() == null ||
+                        contact.getText() == null |
+                                facility.getText() == null ||
+                        cbdBox.getValue() == null;
 
         return result;
     }
-    public HotelVO getVO(){
 
-        int ID=HotelManageMainController.hotelVO.getId();
-        ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
+    public HotelVO getVO() {
+
+        int ID = HotelManageMainController.hotelVO.getId();
+        ArrayList<RoomVO> roomList = HotelManageMainController.hotelVO.getRoomList();
 
 
-        int rank=Integer.parseInt(this.rank.getText());
+        int rank = Integer.parseInt(this.rank.getText());
 
-        String introduction=describeEditor.getText();
+        String introduction = describeEditor.getText();
 
         //TODO 从concreteAddress 到 address 的转换
         HotelVO result = new HotelVO(
                 ID,
                 name.getText(),
-                ((CbdVO)cbdBox.getValue()).getCbdNum(),
+                ((CbdVO) cbdBox.getValue()).getCbdNum(),
                 address.getText(),
                 contact.getText(),
                 introduction,
@@ -239,16 +248,15 @@ public class HotelInfoController implements Initializable {
     }
 
     /**
-     *
      * @param paths 图片的路径
      * @return 转换后的byte[][]数组
      * 讲图片从系统中读入并转换为byte[][]数组的方法
      */
-    private byte[][] pictureToByte(ObservableList<String> paths){
-        ArrayList<byte[]> bytes=new ArrayList<byte[]>();
-        FileImageInputStream input=null;
+    private byte[][] pictureToByte(ObservableList<String> paths) {
+        ArrayList<byte[]> bytes = new ArrayList<byte[]>();
+        FileImageInputStream input = null;
         byte[] buffer;
-        try{
+        try {
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             byte[] buf;
             for (int i = 0; i < paths.size(); i++) {
@@ -256,34 +264,35 @@ public class HotelInfoController implements Initializable {
                 File f = new File(paths.get(i));
                 input = new FileImageInputStream(new File(paths.get(i)));
                 int numByteRead = 0;
-                while((numByteRead = input.read(buf))!=-1){
+                while ((numByteRead = input.read(buf)) != -1) {
                     output.write(buf, 0, numByteRead);
                 }
-                buffer=output.toByteArray();
+                buffer = output.toByteArray();
                 bytes.add(buffer);
             }
             output.close();
-            if(input!=null)
+            if (input != null)
                 input.close();
-            buf=null;
+            buf = null;
             System.gc();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        byte[][] re=new byte[bytes.size()][];
-        for(int i=0;i<re.length;i++){
+        byte[][] re = new byte[bytes.size()][];
+        for (int i = 0; i < re.length; i++) {
             re[i] = bytes.get(i);
+            System.out.println(i + " " + re[i].length);
         }
         return re;
     }
 
     //逻辑实现部分
-    public void addPic(){
+    public void addPic() {
         //TODO
         switch (hotelController.uploadPic(
                 pictureToByte(picturePathList.getItems()),
                 HotelManageMainController.hotelVO.getId())
-                ){
+                ) {
             case SUCCESS:
                 hotelManageMainController.alert("添加成功");
                 hotelManageMainController.upDateHotelVO();
@@ -297,9 +306,10 @@ public class HotelInfoController implements Initializable {
                 return;
         }
     }
-    public void deletePic(){
 
-        int index=pictureList.getSelectionModel().getSelectedIndex();
+    public void deletePic() {
+
+        int index = pictureList.getSelectionModel().getSelectedIndex();
         if (!(index >= 0)) {
             hotelManageMainController.alert("未选中图片");
             return;
@@ -319,12 +329,13 @@ public class HotelInfoController implements Initializable {
         }
 
     }
+
     public void modifyInfo() {
-        if (checkEmpty()){
+        if (checkEmpty()) {
             hotelManageMainController.alert("必填信息不能为空");
             return;
         }
-        switch(hotelManagerController.modifyHotelInfo(getVO())){
+        switch (hotelManagerController.modifyHotelInfo(getVO())) {
             case SUCCESS:
                 hotelManageMainController.alert("信息更新成功");
                 hotelManageMainController.upDateHotelVO();
@@ -334,14 +345,16 @@ public class HotelInfoController implements Initializable {
                 break;
             case FAILED:
                 hotelManageMainController.alert("更新信息失败");
-        };
+        }
+        ;
     }
-    public class Pic{
+
+    public class Pic {
         private final Image image;
         private final int ID;
 
         private Pic(int id, byte[] image) {
-            this.ID=id;
+            this.ID = id;
             this.image = new Image(new ByteArrayInputStream(image));
         }
 
@@ -352,7 +365,8 @@ public class HotelInfoController implements Initializable {
         public int getID() {
             return ID;
         }
-        public String toString(){
+
+        public String toString() {
             return String.valueOf(ID);
         }
     }

@@ -1,6 +1,8 @@
 package group2.grade15.njuse.presentation.webadminui;
 
 import group2.grade15.njuse.bl.customerbl.Customer;
+import group2.grade15.njuse.bl.searchbl.Search;
+import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.blservice.WebAdminServ;
 import group2.grade15.njuse.presentation.myanimation.Fade;
 import group2.grade15.njuse.presentation.mycontrol.CustomeButton;
@@ -105,6 +107,16 @@ public class WebAdminController implements Initializable{
     private TextField contactField;
 
     @FXML
+    private ComboBox<ProvinceVO> provinceBox;
+    @FXML
+    private ComboBox<CityVO> cityBox;
+    @FXML
+    private ComboBox<DistrictVO> districtBox;
+    @FXML
+    private ComboBox<CbdVO> cbdBox;
+
+
+    @FXML
     private TextField hmID;
     @FXML
     private TextField hmPW;
@@ -125,6 +137,7 @@ public class WebAdminController implements Initializable{
     private ObservableList<Hotel> hotelListData;
     private ObservableList<Account> accountListData;
 
+    public static SearchServ searchServ=new Search();
     public static WebAdminServ webAdminService=new group2.grade15.njuse.bl.webadminbl.WebAdminController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -170,10 +183,37 @@ public class WebAdminController implements Initializable{
 
             }
         });
+        ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
+        provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
     }
 
 
+    @FXML
+    private void loadCityBox() {
+        ProvinceVO selectedProvince = (ProvinceVO) provinceBox.getValue();
+        ArrayList<CityVO> cityVOList = searchServ.getCity(selectedProvince.getProvinceID()).getList();
+        cityBox.setItems(FXCollections.observableArrayList(cityVOList));
 
+        districtBox.setItems(FXCollections.observableArrayList());
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadDistrictBox() {
+        CityVO selectedCity = (CityVO) cityBox.getValue();
+        ArrayList<DistrictVO> districtVOList = searchServ.getDistrict(selectedCity.getCityNum()).getList();
+        districtBox.setItems(FXCollections.observableArrayList(districtVOList));
+
+        cbdBox.setItems(FXCollections.observableArrayList());
+    }
+
+    @FXML
+    private void loadCbdBox() {
+        DistrictVO selectedDistrict = (DistrictVO) districtBox.getValue();
+        ArrayList<CbdVO> cbdVOList = searchServ.getCbd(selectedDistrict.getDistrictNum()).getList();
+        cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
+
+    }
     //初始化承收并展示来自数据库的账号列表方法
     public void showAllAccount() throws RemoteException{
         accountListData.clear();
@@ -379,7 +419,7 @@ public class WebAdminController implements Initializable{
         result = new HotelVO(
                 0,//id
                 hotelName.getText(),//name
-                "00000000000000000000",//address
+                cbdBox.getValue().getCbdNum(),//address
                 hotelAddress.getText(),//concretAddress
                 contactField.getText(),//contact
                 "", //introduction
@@ -468,7 +508,7 @@ public class WebAdminController implements Initializable{
         return false;
     }
     private boolean checkHotelEmpty(){
-        if (hotelName.getText().length() == 0 || hotelAddress.getText().length() == 0 || hotelRank.getText().length() == 0) {
+        if (hotelName.getText().length() == 0 || hotelAddress.getText().length() == 0 || hotelRank.getText().length() == 0||hmID.getText().length()==0||hmPW.getText().length()==0||cbdBox.getValue()==null) {
             return true;
         }
         return false;
