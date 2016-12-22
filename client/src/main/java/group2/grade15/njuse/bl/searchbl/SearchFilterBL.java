@@ -1,15 +1,9 @@
 package group2.grade15.njuse.bl.searchbl;
 
-import group2.grade15.njuse.bl.hotelbl.GetHotelListBL;
-import group2.grade15.njuse.bl.hotelbl.HotelController;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.utility.SortMethod;
-import group2.grade15.njuse.vo.HotelListVO;
 import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.RoomVO;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**

@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class WebPromotionController implements WebPromotionServ, GetWebPromotionBL, WebPromotionControllerBL {
+public class WebPromotionController implements WebPromotionServ, WebPromotionControllerBL {
 
     @Override
     public ResultMessage createWebPromotion(WebPromotionVO promotionInfo) {
