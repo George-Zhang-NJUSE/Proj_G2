@@ -81,17 +81,16 @@ public class Order implements OrderBL{
     }
 
     public OrderVO createPO(OrderVO orderVO){
-        int hotelID = orderVO.getHotelID();
-        double webInfo[] = new double[2];
-        double hotelInfo[] = new double[2];
-        double minPrice = 0;
-        int usedPromotionID = 0;
+        double webInfo[];
+        double hotelInfo[];
+        double minPrice;
+        int usedPromotionID;
 
         //优惠策略的计算
         webInfo = getPriceWithWebPro(orderVO);
         hotelInfo = getPriceWithHotelPro(orderVO);
 
-        if(webInfo[0] >= hotelInfo[0]){
+        if(webInfo[0] <= hotelInfo[0]){
             minPrice = webInfo[0];
         } else {
             minPrice = hotelInfo[0];
