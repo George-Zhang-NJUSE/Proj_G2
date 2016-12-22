@@ -117,27 +117,27 @@ public class HotelController implements HotelServ, GetHotelListBL{
     public String getProvinceName(String provinceNum) {
         ArrayList<ProvinceVO> provinceVOs  = searchBL.getProvince().getList();
         int index = Integer.parseInt(provinceNum, 2);
-        return provinceVOs.get(index).getProvinceName();
+        return provinceVOs.get(index - 1).getProvinceName();
     }
 
     @Override
     public String getCityName(String cityNum) {
         ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
         int index = Integer.parseInt(cityNum.substring(5), 2);
-        return cityVOs.get(index).getCityName();
+        return cityVOs.get(index - 1).getCityName();
     }
 
     @Override
     public String getDistrictName(String districtNum) {
         ArrayList<DistrictVO> districtListVOs = searchBL.getDistrict(districtNum).getList();
         int index = Integer.parseInt(districtNum.substring(10), 2);
-        return districtListVOs.get(index).getDistrictName();
+        return districtListVOs.get(index - 1).getDistrictName();
     }
 
     @Override
     public String getCbdName(String cbdNum) {
         ArrayList<CbdVO> cbdVOs = searchBL.getCbd(cbdNum).getList();
         int index = Integer.parseInt(cbdNum.substring(15), 2);
-        return cbdVOs.get(index).getCbdName();
+        return cbdVOs.get(index - 1).getCbdName();
     }
 }
