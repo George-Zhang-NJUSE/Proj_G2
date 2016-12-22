@@ -46,7 +46,7 @@ public class HotelPart implements HotelPartService {
             String path = "D:/hotelpicture/";
             File file = new File(path + id);
             file.mkdir();
-            PreparedStatement add = hotelPartDatabase.prepareStatement("insert into hotel values(?,?,?,?,?,?,?,?)");
+            PreparedStatement add = hotelPartDatabase.prepareStatement("insert into hotel values(?,?,?,?,?,?,?,?,?)");
             add.setInt(1, id);
             add.setString(2, hotelPO.getName());
             add.setString(3, hotelPO.getContact());
