@@ -28,7 +28,7 @@ public class OrderVO implements Serializable {
         orderID = po.getOrderID();
         customerID = po.getCustomerID();
         hotelID = po.getHotelID();
-        promotionID = po.getPromotionID();
+       // promotionID = po.getPromotionID();
         amount = po.getAmount();
         createTime = po.getCreateTime();
         checkInTime = po.getCheckInTime();
@@ -135,7 +135,7 @@ public class OrderVO implements Serializable {
     }
 
     public OrderPO toPO() {
-        return new OrderPO(orderID, customerID, hotelID, promotionID, amount, createTime, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
+        return new OrderPO(orderID, customerID, hotelID, amount, createTime, checkInTime, checkOutTime, finalExecuteTime, roomSum, type, numOfCustomer, haveChild, state);
     }
 
 }

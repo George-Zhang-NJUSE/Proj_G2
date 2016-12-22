@@ -13,16 +13,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.stream.FileImageInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +63,15 @@ public class HotelInfoController implements Initializable {
     @FXML
     private Label editButton;
     @FXML
+    private Button deletePicButton;
+    @FXML
     private Button callFileChooserButton;
     @FXML
     private ListView<String> picturePathList;
     @FXML
-    private ListView<String> pictureList;
+    private ListView<Pic> pictureList;
+    @FXML
+    private ImageView pic;
     @FXML
     private Label message;
 
@@ -87,7 +90,6 @@ public class HotelInfoController implements Initializable {
         CustomeButton.implButton(check, "file:client/src/main/res/hotelmanage/Check");
         CustomeButton.implButton(cancel, "file:client/src/main/res/hotelmanage/Cancel");
         CustomeButton.implButton(editButton, "file:client/src/main/res/hotelmanage/modify");
-
         fileChooser.setTitle("选择图片文件");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG", "*.jpg"));
 
@@ -125,6 +127,11 @@ public class HotelInfoController implements Initializable {
         facility.setText(vo.getFacility());
         describeEditor.setText(vo.getIntroduction());
 
+        ObservableList<Pic> picList=FXCollections.observableArrayList();
+        for(int i=0;i<vo.getPicture().length;i++) {
+            picList.add(new Pic(i, vo.getPicture()[i]));
+        }
+        pictureList.setItems(picList);
     }
     @FXML
     private void loadCityBox() {
@@ -152,10 +159,22 @@ public class HotelInfoController implements Initializable {
         cbdBox.setItems(FXCollections.observableArrayList(cbdVOList));
 
     }
+    @FXML
+    private void showPicture(){
+        int index=pictureList.getSelectionModel().getSelectedIndex();
+        if (index < 0) {
+            return;
+        }
+        Pic p=pictureList.getItems().get(index);
+        Image image=p.getImage();
+        pic.setImage(image);
+    }
 
     @FXML
     private void setEditable(boolean sw) {
         address.setEditable(sw);
+        rank.setEditable(sw);
+
         if (sw) {
             ArrayList<ProvinceVO> provinceVOList = searchServ.getProvince().getList();
             provinceBox.setItems(FXCollections.observableArrayList(provinceVOList));
@@ -168,6 +187,9 @@ public class HotelInfoController implements Initializable {
         callFileChooserButton.setVisible(sw);
         check.setVisible(sw);
         cancel.setVisible(sw);
+        pic.setVisible(!sw);
+        pictureList.setVisible(!sw);
+
     }
     private void cancelModify(){
         showInfo();
@@ -212,6 +234,13 @@ public class HotelInfoController implements Initializable {
         );
         return result;
     }
+
+    /**
+     *
+     * @param paths 图片的路径
+     * @return 转换后的byte[][]数组
+     * 讲图片从系统中读入并转换为byte[][]数组的方法
+     */
     private byte[][] pictureToByte(ObservableList<String> paths){
         ArrayList<byte[]> bytes=new ArrayList<byte[]>();
         FileImageInputStream input=null;
@@ -250,7 +279,12 @@ public class HotelInfoController implements Initializable {
         //TODO
     }
     public void deletePic(){
+
         int index=pictureList.getSelectionModel().getSelectedIndex();
+        if (!(index >= 0)) {
+            hotelManageMainController.alert("未选中图片");
+            return;
+        }
         switch (hotelController.deletePic(index, HotelManageMainController.hotelVO.getId())) {
             case SUCCESS:
                 hotelManageMainController.alert("图片已删除");
@@ -280,5 +314,25 @@ public class HotelInfoController implements Initializable {
             case FAILED:
                 hotelManageMainController.alert("更新信息失败");
         };
+    }
+    public class Pic{
+        private final Image image;
+        private final int ID;
+
+        private Pic(int id, byte[] image) {
+            this.ID=id;
+            this.image = new Image(new ByteArrayInputStream(image));
+        }
+
+        public Image getImage() {
+            return image;
+        }
+
+        public int getID() {
+            return ID;
+        }
+        public String toString(){
+            return String.valueOf(ID);
+        }
     }
 }
