@@ -60,19 +60,39 @@ public class HotelDatabaseTest {
 
     @Test
     public void addPicTest() throws RemoteException {
-        byte[] pic = null;
+        byte[] pic1 = null;
+        byte[] pic2=null;
+        byte[] pic3=null;
         try {
-            File file = new File("C:/Users/dell/Pictures/lemon.jpg");
-            BufferedImage temp = ImageIO.read(file);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(temp, "jpg", bos);
-            pic = bos.toByteArray();
-            bos.close();
+            File file1 = new File("C:/Users/dell/Pictures/lemon.jpg");
+            File file2=new File("C:/Users/dell/Pictures/scenery.jpg");
+            File file3=new File("C:/Users/dell/Pictures/psb.jpg");
+
+            BufferedImage temp1 = ImageIO.read(file1);
+            ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+            ImageIO.write(temp1, "jpg", bos1);
+            pic1 = bos1.toByteArray();
+
+            BufferedImage temp2 = ImageIO.read(file2);
+            ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
+            ImageIO.write(temp2, "jpg", bos2);
+            pic2 = bos2.toByteArray();
+
+            BufferedImage temp3 = ImageIO.read(file3);
+            ByteArrayOutputStream bos3 = new ByteArrayOutputStream();
+            ImageIO.write(temp3, "jpg", bos3);
+            pic3 = bos3.toByteArray();
+
+            bos1.close();
+            bos2.close();
+            bos3.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        byte[][] picList = new byte[1][];
-        picList[0] = pic;
+        byte[][] picList = new byte[3][];
+        picList[0] = pic1;
+        picList[1]=pic2;
+        picList[2]=pic3;
         assertEquals(ResultMessage.SUCCESS, hotelDatabase.uploadPic(picList, 2));
     }
 
