@@ -3,6 +3,7 @@ package group2.grade15.njuse.bl.commentbl;
 import group2.grade15.njuse.bl.orderbl.Order;
 import group2.grade15.njuse.bl.orderbl.OrderBL;
 import group2.grade15.njuse.blservice.CommentServ;
+import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.CommentPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
@@ -31,6 +32,7 @@ public class CommentController implements CommentServ, CommentBL {
     @Override
     public ResultMessage createComment(CommentVO commentInfo) {
         try {
+            CacheManager.getInstance().clearAll();
             return RemoteHelper.getInstance().getCommentDataService().add(commentInfo.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();

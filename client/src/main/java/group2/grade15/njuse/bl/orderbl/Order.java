@@ -22,7 +22,6 @@ import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -56,6 +55,7 @@ public class Order implements OrderBL{
 
     public ResultMessage modifyState(int orderID, OrderState state) {
         try {
+            CacheManager.getInstance().clearAll();
             return RemoteHelper.getInstance().getOrderDataService().modifyOrder(orderID, state);
         } catch (RemoteException e) {
             e.printStackTrace();
