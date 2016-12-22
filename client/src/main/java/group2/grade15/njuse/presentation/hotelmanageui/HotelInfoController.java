@@ -280,7 +280,10 @@ public class HotelInfoController implements Initializable {
     //逻辑实现部分
     public void addPic(){
         //TODO
-        switch (hotelController.uploadPic(pictureToByte(picturePathList.getItems()), HotelManageMainController.hotelVO.getId())){
+        switch (hotelController.uploadPic(
+                pictureToByte(picturePathList.getItems()),
+                HotelManageMainController.hotelVO.getId())
+                ){
             case SUCCESS:
                 hotelManageMainController.alert("添加成功");
                 hotelManageMainController.upDateHotelVO();

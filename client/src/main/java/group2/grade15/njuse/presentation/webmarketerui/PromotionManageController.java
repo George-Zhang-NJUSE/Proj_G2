@@ -385,6 +385,7 @@ public class PromotionManageController implements Initializable{
     }
     public void deletePromotion(){
         Promotion promotion=getSelectedPromotion();
+        System.out.println("promotionid: " + promotion.getId());
         if(promotion.getState()=="start"){
             webMarketerMainController.alert("激活中的促销策略不能删除");
             return;
@@ -435,7 +436,7 @@ public class PromotionManageController implements Initializable{
                     break;
             }
             level=new SimpleIntegerProperty(vo.getLevel());
-            address=new SimpleStringProperty(vo.getAddress());
+            address=new SimpleStringProperty(vo.getAddress().toString());
         }
         public String getName(){
             return name.get();
