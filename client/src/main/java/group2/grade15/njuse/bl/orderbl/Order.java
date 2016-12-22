@@ -92,13 +92,9 @@ public class Order implements OrderBL{
 
         if(webInfo[0] <= hotelInfo[0]){
             minPrice = webInfo[0];
-        } else {
-            minPrice = hotelInfo[0];
-        }
-
-        if(webInfo[1] >= hotelInfo[1]){
             usedPromotionID = (int) webInfo[1];
         } else {
+            minPrice = hotelInfo[0];
             usedPromotionID = (int) hotelInfo[1];
         }
 
