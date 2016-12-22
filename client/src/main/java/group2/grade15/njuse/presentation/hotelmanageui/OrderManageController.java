@@ -137,6 +137,8 @@ public class OrderManageController implements Initializable {
 
     private int stage;//0= checkin 1=checkout 2=overtimecheckin
 
+
+    private boolean initialized=false;
     enum WorkingTab{
         UNEXE,CHECKIN,COMPLETE,INNORMAL,CANCEL
     }
@@ -205,34 +207,45 @@ public class OrderManageController implements Initializable {
         });
 
         showAllOrder();
+        initialized=true;
         tab1();
     }
     public void tab1(){
         //OrderListVO list=orderListService.get;
+        if(!initialized)
+            return;
         workingTab =WorkingTab.UNEXE;
         checkoutButton.setVisible(false);
         overtimeButton.setVisible(false);
         checkinButton.setVisible(true);
     }
     public void tab2(){
+        if(!initialized)
+            return;
         workingTab =WorkingTab.CHECKIN;
-        checkoutButton.setVisible(false);
+        checkoutButton.setVisible(true);
         overtimeButton.setVisible(false);
-        checkinButton.setVisible(true);
+        checkinButton.setVisible(false);
     }
     public void tab3(){
+        if(!initialized)
+            return;
         workingTab = WorkingTab.COMPLETE;
         checkoutButton.setVisible(false);
         overtimeButton.setVisible(false);
         checkinButton.setVisible(false);
     }
     public void tab4(){
+        if(!initialized)
+            return;
         workingTab = WorkingTab.INNORMAL;
         checkoutButton.setVisible(false);
         overtimeButton.setVisible(true);
         checkinButton.setVisible(false);
     }
     public void tab5(){
+        if(!initialized)
+            return;
         workingTab =WorkingTab.CANCEL;
         checkoutButton.setVisible(false);
         overtimeButton.setVisible(false);
@@ -448,7 +461,7 @@ public class OrderManageController implements Initializable {
             return;
         }
         if(vo.getState()==OrderState.executed){
-            if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.executed)){
+            if(ResultMessage.SUCCESS== hotelManagerController.modifyState(vo.getOrderID(), OrderState.complete)){
                 hotelManageMainController.alert("操作成功");
                 hotelManageMainController.upDateHotelVO();
                 showAllOrder();

@@ -55,7 +55,7 @@ public class HotelPart implements HotelPartService {
             add.setString(6, hotelPO.getIntroduction());
             add.setString(7, hotelPO.getFacility());
             add.setString(8, hotelPO.getAddress());
-            add.setString(9, hotelPO.getConcreteAddress());
+                add.setString(9, hotelPO.getConcreteAddress());
             add.executeUpdate();
 
             add.close();

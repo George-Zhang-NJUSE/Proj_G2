@@ -101,6 +101,8 @@ public class WebAdminController implements Initializable{
     private TextField hotelAddress;
     @FXML
     private TextField hotelRank;
+    @FXML
+    private TextField contactField;
 
     @FXML
     private TextField hmID;
@@ -379,7 +381,7 @@ public class WebAdminController implements Initializable{
                 hotelName.getText(),//name
                 "",//address
                 hotelAddress.getText(),//concretAddress
-                "",//contact
+                contactField.getText(),//contact
                 "", //introduction
                 "",//facility
                 new ArrayList<RoomVO>(),//roomList
@@ -390,7 +392,12 @@ public class WebAdminController implements Initializable{
         return result;
     }
     public ResultMessage addHotelToData(HotelVO vo) throws RemoteException {
-        return webAdminService.createHotel(vo);
+        if (webAdminService.createHotel(vo) != null) {
+            return ResultMessage.SUCCESS;
+        }else{
+            return ResultMessage.FAILED;
+        }
+
     }
 
     public void addAccount(){
@@ -399,18 +406,6 @@ public class WebAdminController implements Initializable{
             return;
         }
         switch(userType.getValue()){
-            case "酒店管理用户":
-                HotelManagerVO hmvo=gatherHotelManagerVO();
-                try {
-                    webAdminService.createHotelManager(hmvo);
-                    accountListData.add(new Account(hmvo));
-                    aaInfo.setText("添加成功");
-                    AAClear();
-                }catch (NullPointerException e){
-                    aaInfo.setText("添加失败");
-                }
-
-                break;
             case "网站营销用户":
                 WebMarketerVO wmvo=gatherWebMarketerVO();
                 try {
@@ -433,12 +428,16 @@ public class WebAdminController implements Initializable{
         HotelVO vo=gatherHotelVO();
         try{
             HotelVO hotelvVO=webAdminService.createHotel(vo);
-            hotelListData.add(new Hotel(vo));
-
+            HotelManagerVO hotelManagerVO = gatherHotelManagerVO(hotelvVO.getId());
+            webAdminService.createHotelManager(hotelManagerVO);
+            showAllAccount();
+            showAllHotel();
             haInfo.setText("添加成功");
             HAClear();
         }catch(NullPointerException e){
             haInfo.setText("添加失败");
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
 
     }
@@ -465,11 +464,6 @@ public class WebAdminController implements Initializable{
         }
         if (userType.getValue() == null) {
             return true;
-        }
-        if (userType.getValue() == "酒店管理用户") {
-            if (hotelID.getValue() == null) {
-                return true;
-            }
         }
         return false;
     }

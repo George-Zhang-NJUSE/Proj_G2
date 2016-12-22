@@ -128,9 +128,12 @@ public class HotelInfoController implements Initializable {
         describeEditor.setText(vo.getIntroduction());
 
         ObservableList<Pic> picList=FXCollections.observableArrayList();
-        for(int i=0;i<vo.getPicture().length;i++) {
-            picList.add(new Pic(i, vo.getPicture()[i]));
+        if (vo.getPicture() != null) {
+            for(int i=0;i<vo.getPicture().length;i++) {
+                picList.add(new Pic(i, vo.getPicture()[i]));
+            }
         }
+
         pictureList.setItems(picList);
     }
     @FXML
@@ -277,6 +280,19 @@ public class HotelInfoController implements Initializable {
     //逻辑实现部分
     public void addPic(){
         //TODO
+        switch (hotelController.uploadPic(pictureToByte(picturePathList.getItems()), HotelManageMainController.hotelVO.getId())){
+            case SUCCESS:
+                hotelManageMainController.alert("添加成功");
+                hotelManageMainController.upDateHotelVO();
+                showInfo();
+                return;
+            case CONNECTION_EXCEPTION:
+                hotelManageMainController.alert("未连接到服务器");
+                return;
+            case FAILED:
+                hotelManageMainController.alert("添加失败");
+                return;
+        }
     }
     public void deletePic(){
 
@@ -288,6 +304,8 @@ public class HotelInfoController implements Initializable {
         switch (hotelController.deletePic(index, HotelManageMainController.hotelVO.getId())) {
             case SUCCESS:
                 hotelManageMainController.alert("图片已删除");
+                hotelManageMainController.upDateHotelVO();
+                showInfo();
                 break;
             case CONNECTION_EXCEPTION:
                 hotelManageMainController.alert("未连接到服务器");

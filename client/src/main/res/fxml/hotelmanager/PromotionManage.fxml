@@ -76,7 +76,7 @@
             </TabPane>
             <Label text="酒店促销管理" GridPane.columnIndex="1">
                <font>
-                  <Font name="MFYueHei_Noncommercial-Regular" size="40.0" />
+                  <Font name="Microsoft YaHei Light" size="40.0" />
                </font>
             </Label>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0" GridPane.columnIndex="4" GridPane.rowIndex="1">

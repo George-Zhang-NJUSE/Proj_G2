@@ -98,7 +98,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="commitAddButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="提交添加">
+                  <Button fx:id="commitAddButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="提交添加" onAction="#addPic">
                      <VBox.margin>
                         <Insets right="10.0" />
                      </VBox.margin>
@@ -232,7 +232,7 @@
                   <ImageView fx:id="pic" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Button fx:id="deletePicButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="删除图片" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Button fx:id="deletePicButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white" text="删除图片" GridPane.rowIndex="1" GridPane.valignment="TOP" onAction="#deletePic">
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin>
