@@ -62,7 +62,7 @@ public class HotelDatabaseTest {
     public void addPicTest() throws RemoteException {
         byte[] pic = null;
         try {
-            File file = new File("C:/Users/dell/Pictures/scenery.jpg");
+            File file = new File("C:/Users/dell/Pictures/lemon.jpg");
             BufferedImage temp = ImageIO.read(file);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(temp, "jpg", bos);
@@ -73,7 +73,7 @@ public class HotelDatabaseTest {
         }
         byte[][] picList = new byte[1][];
         picList[0] = pic;
-        assertEquals(ResultMessage.SUCCESS, hotelDatabase.uploadPic(picList, 1));
+        assertEquals(ResultMessage.SUCCESS, hotelDatabase.uploadPic(picList, 2));
     }
 
     @Test
