@@ -10,7 +10,7 @@ import group2.grade15.njuse.vo.HotelVO;
  */
 public interface HotelManageBL {
 
-    public ResultMessage createHotel(HotelVO hotel);
+    public HotelVO createHotel(HotelVO hotel);
 
     public HotelListVO getHotelList();
 
