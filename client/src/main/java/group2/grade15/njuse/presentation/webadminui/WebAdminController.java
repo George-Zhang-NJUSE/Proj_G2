@@ -157,12 +157,11 @@ public class WebAdminController implements Initializable{
 
         ((TableColumn)acCols.get(0)).setCellValueFactory(new PropertyValueFactory<>("id"));
         ((TableColumn)acCols.get(1)).setCellValueFactory(new PropertyValueFactory<>("name"));
-        ((TableColumn)acCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("password"));
-        ((TableColumn)acCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("type"));
-        ((TableColumn)acCols.get(4)).setCellValueFactory(new PropertyValueFactory<>("contact"));
-        ((TableColumn)acCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("birthday"));
-        ((TableColumn)acCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("credit"));
-        ((TableColumn)acCols.get(7)).setCellValueFactory(new PropertyValueFactory<>("company"));
+        ((TableColumn)acCols.get(2)).setCellValueFactory(new PropertyValueFactory<>("type"));
+        ((TableColumn)acCols.get(3)).setCellValueFactory(new PropertyValueFactory<>("contact"));
+        ((TableColumn)acCols.get(4)).setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        ((TableColumn)acCols.get(5)).setCellValueFactory(new PropertyValueFactory<>("credit"));
+        ((TableColumn)acCols.get(6)).setCellValueFactory(new PropertyValueFactory<>("company"));
 
 
 

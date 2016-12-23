@@ -1,10 +1,9 @@
 package group2.grade15.njuse.bl.searchbl;
 
+import group2.grade15.njuse.bl.searchbl.filter.SearchFilter;
 import group2.grade15.njuse.blservice.SearchServ;
 import group2.grade15.njuse.po.*;
 import group2.grade15.njuse.rmi.RemoteHelper;
-import group2.grade15.njuse.utility.RoomType;
-import group2.grade15.njuse.utility.SortMethod;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
@@ -12,71 +11,15 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Search implements SearchServ, SearchBL {
-    SearchFilterBL searchFilter;
-
+    SearchFilter searchFilter;
     public Search(){
         searchFilter = new SearchFilter();
     }
 
     @Override
     public HotelListVO getHotelBySearch(SearchConditionVO searchCondition, HotelListVO hotelListVO) {
-        ArrayList<HotelVO> hotelList = hotelListVO.getList();
 
-        //将酒店搜索的判定条件简化成一系列新的布尔变量
-        boolean isListNotNull = (hotelList != null);
-        boolean isBooked = (searchCondition.isBooked()
-                            && isListNotNull);
-        boolean isSort = (searchCondition.getSortBy() != SortMethod.DEFAULT)
-                         && isListNotNull;
-        boolean isFilterName = (searchCondition.getName().length() > 0)
-                                && isListNotNull;
-        boolean isFilterStar = (searchCondition.getMinStarLevel() != 0)
-                                && isListNotNull;
-        boolean isFilterScore = (searchCondition.getMinScore() != 0
-                                 || searchCondition.getMaxScore() != 10)
-                                 && isListNotNull;
-        boolean isFilterPrice = (searchCondition.getMinPrice() != 0
-                                 || searchCondition.getMaxPrice() != 0)
-                                 && isListNotNull;
-        boolean isFilterRoom = (searchCondition.getFreeRoomNum() != 0
-                                || searchCondition.getRoomType() != RoomType.all)
-                                && isListNotNull;
-        boolean isFilterTime = (searchCondition.getCheckInTime() != null
-                                || searchCondition.getCheckOutTime() != null)
-                                && isListNotNull;
-
-        //根据搜索条件对酒店列表进行对应的筛选
-        if (isBooked) {
-            hotelList = searchFilter.filterByBooked(searchCondition.getCsutomerID(), hotelList);
-        }
-
-        if (isSort) {
-            hotelList = searchFilter.sort(searchCondition.getSortBy(), hotelList);
-        }
-
-        if (isFilterName) {
-            hotelList = searchFilter.filterByName(searchCondition.getName(), hotelList);
-        }
-
-        if (isFilterStar) {
-            hotelList = searchFilter.filterByStarLevel(searchCondition.getMinStarLevel(), hotelList);
-        }
-
-        if (isFilterScore) {
-            hotelList = searchFilter.filterByScore(searchCondition.getMinScore(), searchCondition.getMaxScore(), hotelList);
-        }
-
-        if (isFilterPrice) {
-            hotelList = searchFilter.filterByRoomPrice(searchCondition.getMinPrice(), searchCondition.getMaxPrice(), hotelList);
-        }
-
-        if (isFilterRoom) {
-            hotelList = searchFilter.filterByRoomType(searchCondition.getRoomType(), hotelList);
-        }
-
-        if (isFilterTime) {
-            hotelList = searchFilter.filterByTime(searchCondition.getCheckInTime(), searchCondition.getCheckOutTime(), searchCondition.getFreeRoomNum(), searchCondition.getRoomType(), hotelList);
-        }
+        ArrayList<HotelVO> hotelList = searchFilter.filterByCondition(searchCondition, hotelListVO);
 
         if(hotelList == null || hotelList.size() == 0) {
             return null;
@@ -194,5 +137,4 @@ public class Search implements SearchServ, SearchBL {
             return null;
         }
     }
-
 }

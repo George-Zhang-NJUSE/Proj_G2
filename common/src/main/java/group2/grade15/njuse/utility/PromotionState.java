@@ -7,15 +7,4 @@ public enum PromotionState {
     start,
     unlaunched,
     stop;
-    public String toString(){
-        switch (this) {
-            case start:
-                return"激活";
-            case unlaunched:
-                return "未启动";
-            case stop:
-                return "已停止";
-        }
-        return "";
-    }
 }

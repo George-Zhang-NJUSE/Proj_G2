@@ -90,8 +90,6 @@ public class HotelDatabaseImpl implements HotelDataService {
                                 room.getInt(12), room.getInt(12)-room.getInt(11));
                         roomList.add(roomPO3);
                     }
-                } else {
-                    throw new SQLException();
                 }
                 getRoom.close();
 

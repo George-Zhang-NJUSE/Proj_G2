@@ -219,6 +219,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public HotelManagerPO getHotelManager(int hotelManagerId) throws RemoteException {
+        System.out.println(hotelManagerId);
         return hotelManagerDataService.getHotelManager(hotelManagerId);
     }
 
