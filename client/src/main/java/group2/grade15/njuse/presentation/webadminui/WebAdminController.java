@@ -121,7 +121,7 @@ public class WebAdminController implements Initializable{
     @FXML
     private TextField hmPW;
     @FXML
-    private Label hotelIdLabel;
+    private TextField hmContact;
 
     @FXML
     private TextField userName;
@@ -404,8 +404,9 @@ public class WebAdminController implements Initializable{
     private HotelManagerVO gatherHotelManagerVO(int hotelID){
         String name=hmID.getText();
         String pw=hmPW.getText();
+        String contact=hmContact.getText();
         int hotelId = hotelID;
-        HotelManagerVO vo=new HotelManagerVO(0,pw,name,"",hotelId);
+        HotelManagerVO vo=new HotelManagerVO(0,pw,name,contact,hotelId);
         return vo;
     }
     private WebMarketerVO gatherWebMarketerVO(){
@@ -472,7 +473,7 @@ public class WebAdminController implements Initializable{
             webAdminService.createHotelManager(hotelManagerVO);
             showAllAccount();
             showAllHotel();
-            haInfo.setText("添加成功");
+            haInfo.setText("添加成功,酒店ID为" + hotelvVO.getId());
             HAClear();
         }catch(NullPointerException e){
             haInfo.setText("添加失败");
@@ -508,7 +509,7 @@ public class WebAdminController implements Initializable{
         return false;
     }
     private boolean checkHotelEmpty(){
-        if (hotelName.getText().length() == 0 || hotelAddress.getText().length() == 0 || hotelRank.getText().length() == 0||hmID.getText().length()==0||hmPW.getText().length()==0||cbdBox.getValue()==null) {
+        if (hotelName.getText().length() == 0 || hotelAddress.getText().length() == 0 || hotelRank.getText().length() == 0||hmID.getText().length()==0||hmPW.getText().length()==0||cbdBox.getValue()==null||hmContact.getText().length()==0) {
             return true;
         }
         return false;

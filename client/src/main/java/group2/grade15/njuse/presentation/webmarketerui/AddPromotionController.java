@@ -159,12 +159,18 @@ public class AddPromotionController implements Initializable {
         }catch (NullPointerException e){
             rerank=0;
         }
+        String cbdNum;
+        if (typeOfVO!=WebPromotionType.AreaWeb) {
+            cbdNum = "none";
+        }else{
+            cbdNum=((CbdVO)cbdBox.getValue()).getCbdNum();
+        }
         WebPromotionVO vo=new WebPromotionVO(
                 0,
                 typeOfVO,
                 sD,
                 eD,
-                ((CbdVO)cbdBox.getValue()).getCbdNum(),
+                cbdNum,
                 rerank,
                 Double.parseDouble(cut.getText()),
                 name.getText(),

@@ -80,6 +80,9 @@ public class HotelManageMainController implements Initializable {
     public void setHotelManagerVO(HotelManagerVO vo){
         hotelManagerVO=vo;
         hotelVO=hotelManagerController.getHotelInfo(vo.getHotelID());
+        if (hotelVO == null) {
+            System.out.println("空指针");
+        }
         hotelName.setText(hotelVO.getName());
 
     }

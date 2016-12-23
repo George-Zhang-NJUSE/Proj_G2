@@ -302,7 +302,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="hotelAddFrame" visible="false" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="560.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
+                        <Pane fx:id="hotelAddFrame" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="692.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
                             <children>
                                 <Label layoutX="20.0" layoutY="20.0" text="添加酒店">
                                     <font>
@@ -330,7 +330,7 @@
                                         <TextField fx:id="hotelName" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" />
                                         <TextField fx:id="hotelRank" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                         <TextField fx:id="hotelAddress" style="-fx-background-radius: 0; -fx-border-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="工作人员账号" GridPane.rowIndex="9">
+                              <Label text="工作人员名称" GridPane.rowIndex="9">
                                  <font>
                                     <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
                                  </font>
@@ -374,10 +374,16 @@
                                     <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="provinceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#loadCityBox"/>
-                              <ComboBox fx:id="cityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#loadDistrictBox"/>
-                              <ComboBox fx:id="districtBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#loadCbdBox"/>
+                              <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <ComboBox fx:id="cbdBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label text="员工联系方式" GridPane.rowIndex="11">
+                                 <font>
+                                    <Font name="MFYueHei_Noncommercial-Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="hmContact" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                                     </children>
                                     <columnConstraints>
                                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="110.0" />
@@ -395,6 +401,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                 </GridPane>
                                 <Label fx:id="haInfo" layoutX="10.0" layoutY="500.0">
@@ -402,7 +409,7 @@
                                         <Font name="Microsoft YaHei" size="14.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="240.0" layoutY="460.0" onMouseClicked="#HAcheck_action" onMouseEntered="#HAcheck_movin" onMouseExited="#HAcheck_moveout" onMousePressed="#HAcheck_press" onMouseReleased="#HAcheck_release">
+                                <Label layoutX="240.0" layoutY="560.0" onMouseClicked="#HAcheck_action" onMouseEntered="#HAcheck_movin" onMouseExited="#HAcheck_moveout" onMousePressed="#HAcheck_press" onMouseReleased="#HAcheck_release">
                                     <graphic>
                                         <ImageView fx:id="HAcheck" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -411,7 +418,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Label>
-                                <Label layoutX="240.0" layoutY="510.0" onMouseClicked="#HAcancel_action" onMouseEntered="#HAcancel_movein" onMouseExited="#HAcancel_moveout" onMousePressed="#HAcancel_press" onMouseReleased="#HAcancel_release">
+                                <Label layoutX="240.0" layoutY="610.0" onMouseClicked="#HAcancel_action" onMouseEntered="#HAcancel_movein" onMouseExited="#HAcancel_moveout" onMousePressed="#HAcancel_press" onMouseReleased="#HAcancel_release">
                                     <graphic>
                                         <ImageView fx:id="HAcancel" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>

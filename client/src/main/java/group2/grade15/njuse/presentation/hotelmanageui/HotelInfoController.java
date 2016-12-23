@@ -145,7 +145,7 @@ public class HotelInfoController implements Initializable {
         cbdBox.setItems(FXCollections.observableArrayList(
                 hotelController.getCbdName(vo.getAddress())
         ));
-        
+
         ObservableList<Pic> picList = FXCollections.observableArrayList();
         if (vo.getPicture() != null) {
             for (int i = 0; i < vo.getPicture().length; i++) {
