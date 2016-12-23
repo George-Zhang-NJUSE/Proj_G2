@@ -35,13 +35,13 @@ public class WebAdminDatabaseTest {
     @Test
     public void getCustomerInfoTest() throws RemoteException {
         ArrayList<CustomerPO> customerList = webAdminDatabase.getCustomerInfo();
-        assertEquals("Sue", customerList.get(0).getName());
+        assertEquals("12", customerList.get(0).getName());
     }
 
     @Test
     public void modifyCustomerInfoTest() throws RemoteException {
         Date birthday = Date.valueOf("1993-01-22");
-        CustomerPO customerPO = new CustomerPO(0, "Sue", "12345", "6883221", birthday,
+        CustomerPO customerPO = new CustomerPO(1, "Sue", "12345", "6883221", birthday,
                 0, MemberType.vip,null);
         assertEquals(ResultMessage.SUCCESS, webAdminDatabase.modifyCustomerInfo(customerPO));
     }

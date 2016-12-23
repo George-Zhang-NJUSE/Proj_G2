@@ -27,12 +27,12 @@ public class CustomerDatabaseTest {
 
     @Test
     public void getTest() throws RemoteException {
-        CustomerPO temp = customerDataBase.getCustomer(2);
+        CustomerPO temp = customerDataBase.getCustomer(1);
         if (temp == null) {
             System.err.print("wrong");
         }
-        assertEquals("123abc", temp.getPassword());
-        assertEquals(MemberType.normal, temp.getType());
+        assertEquals("12345", temp.getPassword());
+        assertEquals(MemberType.vip, temp.getType());
     }
 
     @Test

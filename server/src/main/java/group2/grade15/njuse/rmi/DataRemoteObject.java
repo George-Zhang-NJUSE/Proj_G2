@@ -1,9 +1,11 @@
 package group2.grade15.njuse.rmi;
 
+import group2.grade15.njuse.data.commentdata.CustomerCommentPart;
 import group2.grade15.njuse.data.datafactory.DatabaseFactory;
+import group2.grade15.njuse.dataservice.commentdataservice.CustomerCommentPartService;
+import group2.grade15.njuse.dataservice.commentdataservice.HotelCommentPartService;
 import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
-import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
@@ -18,20 +20,18 @@ import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 
-import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
  * Created by Guo on 2016/11/26.
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommentDataService, CustomerDataService, HotelManagerDataService,
+public class DataRemoteObject extends UnicastRemoteObject implements CustomerDataService, HotelManagerDataService,
         WebAdminDataService, WebMarketerDataService, AreaDataService, CreditDataService, HotelDataService, HotelPromotionDataService,
-        OrderDataService, WebPromotionDataService, Remote {
+        OrderDataService, WebPromotionDataService, Remote,CustomerCommentPartService,HotelCommentPartService {
 
     private DataFactory dataFactory;
     private CustomerDataService customerDataService;
@@ -39,7 +39,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
     private WebAdminDataService webAdminDataService;
     private WebMarketerDataService webMarketerDataService;
     private AreaDataService areaDataService;
-    private CommentDataService commentDataService;
+    private CustomerCommentPartService customerCommentDataService;
+    private HotelCommentPartService hotelCommentPartService;
     private CreditDataService creditDataService;
     private HotelDataService hotelDataService;
     private HotelPromotionDataService hotelPromotionDataService;
@@ -52,7 +53,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
         hotelManagerDataService = dataFactory.getHotelManagerDataService();
         webMarketerDataService = dataFactory.getWebMarketerDataService();
         webAdminDataService = dataFactory.getWebAdminDataService();
-        commentDataService = dataFactory.getCommentDataService();
+        customerCommentDataService = dataFactory.getCommentDataService();
+        hotelCommentPartService=dataFactory.getCommentDataService();
         creditDataService = dataFactory.getCreditDataService();
         areaDataService = dataFactory.getAreaDataService();
         hotelDataService = dataFactory.getHotelDataService();
@@ -300,22 +302,22 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommentData
 
     @Override
     public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
-        return commentDataService.getCustomerComments(customerID);
+        return customerCommentDataService.getCustomerComments(customerID);
     }
 
     @Override
     public ResultMessage add(CommentPO po) throws RemoteException {
-        return commentDataService.add(po);
+        return customerCommentDataService.add(po);
     }
 
     @Override
     public ResultMessage modify(CommentPO po) throws RemoteException {
-        return commentDataService.modify(po);
+        return customerCommentDataService.modify(po);
     }
 
     @Override
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
-        return commentDataService.getHotelComments(hotelID);
+        return hotelCommentPartService.getHotelComments(hotelID);
     }
 
     @Override

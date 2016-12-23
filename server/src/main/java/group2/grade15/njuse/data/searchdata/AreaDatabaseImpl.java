@@ -22,7 +22,7 @@ public class AreaDatabaseImpl implements AreaDataService {
     }
 
     @Override
-    public ArrayList<ProvincePO> getProvince() {
+    public ArrayList<ProvincePO> getProvince(){
         if (searchDatabase == null) {
             searchDatabase = mySql.init();
         }

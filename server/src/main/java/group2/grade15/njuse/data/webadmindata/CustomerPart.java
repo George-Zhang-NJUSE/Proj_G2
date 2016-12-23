@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public class CustomerPart implements CustomerPartService {
+public class CustomerPart{
     private DatabaseMySql mySql = null;
     private Connection customerPartDatabase = null;
     private Encrypt encrypt=null;
@@ -25,7 +25,6 @@ public class CustomerPart implements CustomerPartService {
         encrypt=new Encrypt();
     }
 
-    @Override
     public ArrayList<CustomerPO> getCustomerInfo() throws RemoteException {
         if (customerPartDatabase == null) {
             customerPartDatabase = mySql.init();
@@ -66,7 +65,6 @@ public class CustomerPart implements CustomerPartService {
      * @return ResultMessage
      * @throws RemoteException 除id,credit之外其它均可修改
      */
-    @Override
     public ResultMessage modifyCustomerInfo(CustomerPO customerPO) throws RemoteException {
         if (customerPartDatabase == null) {
             customerPartDatabase = mySql.init();

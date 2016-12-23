@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public class HotelPart implements HotelPartService {
+public class HotelPart{
     private DatabaseMySql mySql = null;
     private Connection hotelPartDatabase = null;
 
@@ -28,7 +28,6 @@ public class HotelPart implements HotelPartService {
      * @throws RemoteException 只注册酒店基本信息(包括详细地址)，不进行图片，房间,vip list录入，要求逻辑层在执行完本方法后立即执行酒店工作人员的注册
      *                         酒店的地址要通过search方法获得
      */
-    @Override
     public HotelPO addHotel(HotelPO hotelPO) throws RemoteException {
         if (hotelPartDatabase == null) {
             hotelPartDatabase = mySql.init();
@@ -74,7 +73,6 @@ public class HotelPart implements HotelPartService {
      * @return ArrayList<HotelPO>
      * @throws RemoteException 仅返回酒店基本信息(包括详细地址)，不返回图片，简介，设施,房间，vip list的信息
      */
-    @Override
     public ArrayList<HotelPO> getHotelInfo() throws RemoteException {
         if (hotelPartDatabase == null) {
             hotelPartDatabase = mySql.init();
@@ -118,7 +116,6 @@ public class HotelPart implements HotelPartService {
      * @return ResultMessage
      * @throws RemoteException 仅可以更改基本信息（同上）
      */
-    @Override
     public ResultMessage modifyHotelInfo(HotelPO hotelPO) throws RemoteException {
         if (hotelPartDatabase == null) {
             hotelPartDatabase = mySql.init();
@@ -150,7 +147,6 @@ public class HotelPart implements HotelPartService {
      * @return ResultMessage
      * @throws RemoteException 同时删除酒店工作人员
      */
-    @Override
     public ResultMessage deleteHotelInfo(int hotelID) throws RemoteException {
         if (hotelPartDatabase == null) {
             hotelPartDatabase = mySql.init();
