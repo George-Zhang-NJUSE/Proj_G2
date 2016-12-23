@@ -98,21 +98,24 @@ public interface HotelServ {
     /**
      * 根据输入的城市的编码，获取该城市的名称
      * @param cityNum int型，用户需要翻译的城市编码
-     * @return 返回该城市的名称
+     * @return 成功返回该城市的名称
+     *         查询不到返回null
      */
     public String getCityName(String cityNum);
 
     /**
-     * 根据输入的城市的编码，获取该城市的名称
+     * 根据输入得地区的编码，获取该地区的名称
      * @param districtNum int型，用户需要翻译的地区编码
-     * @return 返回该城市的名称
+     * @return 成功返回该地区的名称
+     *         查询不到返回null
      */
     public String getDistrictName(String districtNum);
 
     /**
      * 根据输入的商圈的编码，获取该商圈的名称
      * @param cbdNum int型，用户需要翻译的商圈编码
-     * @return 返回该城市的名称
+     * @return 成功返回该商圈的名称
+     *         查询不到返回null
      */
     public String getCbdName(String cbdNum);
 }
