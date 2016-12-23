@@ -122,22 +122,37 @@ public class HotelController implements HotelServ, GetHotelListBL{
 
     @Override
     public String getCityName(String cityNum) {
-        ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
-        int index = Integer.parseInt(cityNum.substring(5), 2);
-        return cityVOs.get(index - 1).getCityName();
+        CityListVO cityListVO = searchBL.getCity(cityNum);
+        if(cityListVO != null){
+            ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
+            int index = Integer.parseInt(cityNum.substring(5), 2);
+            return cityVOs.get(index - 1).getCityName();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String getDistrictName(String districtNum) {
-        ArrayList<DistrictVO> districtListVOs = searchBL.getDistrict(districtNum).getList();
-        int index = Integer.parseInt(districtNum.substring(10), 2);
-        return districtListVOs.get(index - 1).getDistrictName();
+        DistrictListVO districtListVO = searchBL.getDistrict(districtNum);
+        if(districtListVO != null) {
+            ArrayList<DistrictVO> districtListVOs = searchBL.getDistrict(districtNum).getList();
+            int index = Integer.parseInt(districtNum.substring(10), 2);
+            return districtListVOs.get(index - 1).getDistrictName();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String getCbdName(String cbdNum) {
-        ArrayList<CbdVO> cbdVOs = searchBL.getCbd(cbdNum).getList();
-        int index = Integer.parseInt(cbdNum.substring(15), 2);
-        return cbdVOs.get(index - 1).getCbdName();
+        CbdListVO cbdListVO = searchBL.getCbd(cbdNum);
+        if(cbdListVO != null) {
+            ArrayList<CbdVO> cbdVOs = searchBL.getCbd(cbdNum).getList();
+            int index = Integer.parseInt(cbdNum.substring(15), 2);
+            return cbdVOs.get(index - 1).getCbdName();
+        } else {
+            return null;
+        }
     }
 }
