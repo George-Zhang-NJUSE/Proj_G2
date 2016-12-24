@@ -1,6 +1,8 @@
 package group2.grade15.njuse.rmi;
 
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
+import group2.grade15.njuse.dataservice.commentdataservice.CustomerCommentPartService;
+import group2.grade15.njuse.dataservice.commentdataservice.HotelCommentPartService;
 import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -52,9 +54,14 @@ public class RemoteHelper {
         return (AreaDataService) remote;
     }
 
-    public CommentDataService getCommentDataService() {
-        return (CommentDataService) remote;
+    public HotelCommentPartService getHotelCommentDataService() {
+        return (HotelCommentPartService) remote;
     }
+
+    public CustomerCommentPartService getCustomerCommentDataService(){
+        return (CustomerCommentPartService) remote;
+    }
+
 
     public CreditDataService getCreditDataService() {
         return (CreditDataService) remote;

@@ -33,7 +33,7 @@ public class CommentController implements CommentServ, CommentBL {
     public ResultMessage createComment(CommentVO commentInfo) {
         try {
             CacheManager.getInstance().clearAll();
-            return RemoteHelper.getInstance().getCommentDataService().add(commentInfo.toPO());
+            return RemoteHelper.getInstance().getCustomerCommentDataService().add(commentInfo.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
             return ResultMessage.CONNECTION_EXCEPTION;
@@ -43,7 +43,7 @@ public class CommentController implements CommentServ, CommentBL {
     @Override
     public ResultMessage modifyComment(CommentVO modifyInfo) {
         try {
-            return RemoteHelper.getInstance().getCommentDataService().modify(modifyInfo.toPO());
+            return RemoteHelper.getInstance().getCustomerCommentDataService().modify(modifyInfo.toPO());
         } catch (RemoteException e) {
             e.printStackTrace();
             return ResultMessage.CONNECTION_EXCEPTION;
@@ -57,7 +57,7 @@ public class CommentController implements CommentServ, CommentBL {
 
         try {
             System.out.println("酒店ID：" + hotelId);
-            commentPOList = RemoteHelper.getInstance().getCommentDataService().getHotelComments(hotelId);
+            commentPOList = RemoteHelper.getInstance().getHotelCommentDataService().getHotelComments(hotelId);
             System.out.println("评论条数：" + commentPOList.size());
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class CommentController implements CommentServ, CommentBL {
         ArrayList<CommentPO> commentPOList = new ArrayList();
 
         try {
-            commentPOList = RemoteHelper.getInstance().getCommentDataService().getCustomerComments(customerID);
+            commentPOList = RemoteHelper.getInstance().getCustomerCommentDataService().getCustomerComments(customerID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
