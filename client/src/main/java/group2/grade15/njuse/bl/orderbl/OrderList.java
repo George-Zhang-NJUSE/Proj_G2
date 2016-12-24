@@ -59,7 +59,7 @@ public class OrderList implements OrderListBL {
     }
 
     @Override
-    public OrderListVO getExecutedOrderListToday(Date begin, Date end) {
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end) {
         ArrayList<OrderPO> orderPOList = null;
         try {
             orderPOList = RemoteHelper.getInstance().getOrderDataService().getUnexecutedList();

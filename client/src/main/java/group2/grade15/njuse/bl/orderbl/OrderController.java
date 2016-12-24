@@ -103,7 +103,7 @@ public class OrderController implements OrderServ, OrderListServ {
     }
 
     @Override
-    public OrderListVO getExecutedOrderListToday(Date begin, Date end) {
-        return orderList.getExecutedOrderListToday(begin, end);
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end) {
+        return orderList.getUnexecutedOrderListToday(begin, end);
     }
 }
