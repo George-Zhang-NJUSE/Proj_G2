@@ -109,5 +109,5 @@ public interface OrderListServ {
      * @return 成功返回该网站的含有当天全部未执行订单的OrderListVO
      *         失败返回null
      */
-    public OrderListVO getExecutedOrderListToday(Date begin, Date end);
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end);
 }

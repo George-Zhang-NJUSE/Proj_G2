@@ -14,6 +14,6 @@ public interface OrderListBL {
 
     public OrderListVO getAbnormalOrderList(int id);
 
-    public OrderListVO getExecutedOrderListToday(Date begin, Date end);
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end);
 
 }
