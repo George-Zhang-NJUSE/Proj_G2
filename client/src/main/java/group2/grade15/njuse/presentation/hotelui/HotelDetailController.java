@@ -95,9 +95,14 @@ public class HotelDetailController implements Initializable {
 
             //加载图片
             byte[][] pictures=hotelVO.getPicture();
-            imageList = new Image[pictures.length];
-            for(int a=0;a<imageList.length;a++) {
-                imageList[a]=new Image(new ByteArrayInputStream(pictures[a]));
+            if(pictures!=null) {
+                imageList = new Image[pictures.length];
+                for (int a = 0; a < imageList.length; a++) {
+                    imageList[a] = new Image(new ByteArrayInputStream(pictures[a]));
+                }
+            }else{
+                imageList = new Image[1];
+                imageList[0] = new Image("file:client/src/main/res/customer/defaultimage.png");
             }
 
             //加载房间列表

@@ -12,16 +12,15 @@ import group2.grade15.njuse.data.searchdata.AreaDatabaseImpl;
 import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
 import group2.grade15.njuse.data.webpromotiondata.WebPromotionDatabaseImpl;
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
-import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.datafactory.DataFactory;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;
 import group2.grade15.njuse.dataservice.hotelpromotiondataservice.HotelPromotionDataService;
 import group2.grade15.njuse.dataservice.orderdataservice.OrderDataService;
-import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
 
 import java.rmi.RemoteException;
 
@@ -37,12 +36,12 @@ public class DatabaseFactory implements DataFactory {
     private WebMarketerDatabaseImpl webMarketerDatabase = null;
     private WebAdminDatabaseImpl webAdminDatabase = null;
     private CommentDatabaseImpl commentDatabase = null;
-    private CreditDataService creditDatabase = null;
-    private AreaDataService areaDatabase = null;
-    private HotelDataService hotelDataService = null;
-    private OrderDataService orderDataService = null;
-    private HotelPromotionDataService hotelPromotionDataService = null;
-    private WebPromotionDataService webPromotionDataService = null;
+    private CreditDatabaseImpl creditDatabase = null;
+    private AreaDatabaseImpl areaDatabase = null;
+    private HotelDatabaseImpl hotelDataService = null;
+    private OrderDatabaseImpl orderDataService = null;
+    private HotelPromotionDatabaseImpl hotelPromotionDataService = null;
+    private WebPromotionDatabaseImpl webPromotionDataService = null;
 
 
     private DatabaseFactory() {
@@ -93,7 +92,7 @@ public class DatabaseFactory implements DataFactory {
     }
 
     @Override
-    public WebAdminDataService getWebAdminDataService() throws RemoteException {
+    public WebAdminDatabaseImpl getWebAdminDataService() throws RemoteException {
         if (webAdminDatabase == null) {
             try {
                 webAdminDatabase = new WebAdminDatabaseImpl(info);

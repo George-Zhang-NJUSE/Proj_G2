@@ -115,7 +115,12 @@ public class HotelItemController implements Initializable {
                 myOrders.addAll(abnormalOrders);
             }
 
-            hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture()[0])));
+            if (hotelVO.getPicture() != null) {
+                hotelImageView.setImage(new Image(new ByteArrayInputStream(hotelVO.getPicture()[0])));
+            } else {
+                hotelImageView.setImage(new Image("file:client/src/main/res/customer/defaultimage.png"));
+            }
+
             hotelNameLabel.setText(hotelVO.getName());
             starLabel.setText(Integer.toString(hotelVO.getRank()));
             addressLabel.setText(hotelVO.getConcreteAddress());

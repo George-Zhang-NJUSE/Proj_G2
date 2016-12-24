@@ -1,8 +1,8 @@
 package group2.grade15.njuse.rmi;
 
+import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
-import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
 import group2.grade15.njuse.dataservice.cusotmerdataservice.CustomerDataService;
 import group2.grade15.njuse.dataservice.hoteldataservice.HotelDataService;

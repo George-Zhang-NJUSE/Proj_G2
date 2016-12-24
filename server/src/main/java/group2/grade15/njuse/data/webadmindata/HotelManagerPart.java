@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public class HotelManagerPart implements HotelManagerPartService {
+public class HotelManagerPart{
     private DatabaseMySql mySql = null;
     private Connection hotelManagerPartDatabase = null;
     private Encrypt encrypt=null;
@@ -24,7 +24,6 @@ public class HotelManagerPart implements HotelManagerPartService {
         encrypt=new Encrypt();
     }
 
-    @Override
     public ArrayList<HotelManagerPO> getHotelManagerInfo() throws RemoteException {
         if (hotelManagerPartDatabase == null) {
             hotelManagerPartDatabase = mySql.init();
@@ -45,7 +44,7 @@ public class HotelManagerPart implements HotelManagerPartService {
                 HotelManagerPO hotelManagerPO = new HotelManagerPO(id, password, name, tel, hotelID);
                 list.add(hotelManagerPO);
             }
-            ;
+
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,7 +57,6 @@ public class HotelManagerPart implements HotelManagerPartService {
      * @return ResultMessage
      * @throws RemoteException 除id外其它均可以修改
      */
-    @Override
     public ResultMessage modifyHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
         if (hotelManagerPartDatabase == null) {
             hotelManagerPartDatabase = mySql.init();
@@ -84,7 +82,6 @@ public class HotelManagerPart implements HotelManagerPartService {
         }
     }
 
-    @Override
     public HotelManagerPO addHotelManagerInfo(HotelManagerPO hotelManagerPO) throws RemoteException {
         if (hotelManagerPartDatabase == null) {
             hotelManagerPartDatabase = mySql.init();

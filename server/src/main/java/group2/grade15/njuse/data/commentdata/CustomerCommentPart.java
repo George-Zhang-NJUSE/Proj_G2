@@ -13,10 +13,10 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/27.
  */
-public class CustomerCommentPart implements CustomerComment {
+public class CustomerCommentPart{
     private DatabaseMySql mySql = null;
     private Connection customerCommentDatabase = null;
-    Encrypt encrypt=null;
+    private Encrypt encrypt=null;
 
     public CustomerCommentPart(DatabaseInfo info) {
         mySql = new DatabaseMySql(info);
@@ -24,7 +24,6 @@ public class CustomerCommentPart implements CustomerComment {
         encrypt=new Encrypt();
     }
 
-    @Override
     public ArrayList<CommentPO> getCustomerComments(int customerID) throws RemoteException {
         if (customerCommentDatabase == null) {
             customerCommentDatabase = mySql.init();
@@ -64,7 +63,6 @@ public class CustomerCommentPart implements CustomerComment {
      * @return ResultMessage
      * @throws RemoteException Date,commentID应由服务器生成
      */
-    @Override
     public ResultMessage add(CommentPO po) throws RemoteException {
         if (customerCommentDatabase == null) {
             customerCommentDatabase = mySql.init();
@@ -116,7 +114,6 @@ public class CustomerCommentPart implements CustomerComment {
      * @return ResultMessage
      * @throws RemoteException Date应由服务器生成,只能修改文字
      */
-    @Override
     public ResultMessage modify(CommentPO po) throws RemoteException {
         if (customerCommentDatabase == null) {
             customerCommentDatabase = mySql.init();

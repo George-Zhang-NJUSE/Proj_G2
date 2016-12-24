@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/27.
  */
-public class HotelCommentPart implements HotelComment {
+public class HotelCommentPart{
     private DatabaseMySql mySql = null;
     private Connection hotelCommentDatabase = null;
     private Encrypt encrypt=null;
@@ -23,7 +23,6 @@ public class HotelCommentPart implements HotelComment {
         encrypt=new Encrypt();
     }
 
-    @Override
     public ArrayList<CommentPO> getHotelComments(int hotelID) throws RemoteException {
         if (hotelCommentDatabase == null) {
             hotelCommentDatabase = mySql.init();

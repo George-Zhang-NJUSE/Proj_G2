@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class WebAdminDatabaseImpl implements WebAdminDataService, CustomerPartService, HotelManagerPartService, HotelPartService, WebMarketerPartService {
+public class WebAdminDatabaseImpl implements WebAdminDataService{
     private DatabaseInfo info = null;
     private DatabaseMySql mySql = null;
     private Connection webAdminConnection = null;

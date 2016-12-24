@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by dell on 2016/11/25.
  */
-public class WebMarketerPart implements WebMarketerPartService {
+public class WebMarketerPart{
     private DatabaseMySql mySql = null;
     private Connection webMarketerPartDatabase = null;
     private Encrypt encrypt;
@@ -24,7 +24,6 @@ public class WebMarketerPart implements WebMarketerPartService {
         encrypt=new Encrypt();
     }
 
-    @Override
     public ResultMessage addWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
         if (webMarketerPartDatabase == null) {
             webMarketerPartDatabase = mySql.init();
@@ -47,7 +46,6 @@ public class WebMarketerPart implements WebMarketerPartService {
         }
     }
 
-    @Override
     public ArrayList<WebMarketerPO> getWebMarketerInfo() throws RemoteException {
         if (webMarketerPartDatabase == null) {
             webMarketerPartDatabase = mySql.init();
@@ -81,7 +79,6 @@ public class WebMarketerPart implements WebMarketerPartService {
      * @return
      * @throws RemoteException 只能修改密码
      */
-    @Override
     public ResultMessage modifyWebMarketerInfo(WebMarketerPO webMarketerPO) throws RemoteException {
         if (webMarketerPartDatabase == null) {
             webMarketerPartDatabase = mySql.init();
@@ -105,7 +102,6 @@ public class WebMarketerPart implements WebMarketerPartService {
         }
     }
 
-    @Override
     public ResultMessage deleteWebMarketer(String webMarketerID) throws RemoteException {
         if (webMarketerPartDatabase == null) {
             webMarketerPartDatabase = mySql.init();
