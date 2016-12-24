@@ -102,4 +102,8 @@ public class OrderController implements OrderServ, OrderListServ {
         return orderList.getAbnormalOrderList();
     }
 
+    @Override
+    public OrderListVO getExecutedOrderListToday(Date begin, Date end) {
+        return orderList.getExecutedOrderListToday(begin, end);
+    }
 }
