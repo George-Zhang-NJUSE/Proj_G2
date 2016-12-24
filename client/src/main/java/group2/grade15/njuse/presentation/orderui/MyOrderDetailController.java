@@ -150,11 +150,11 @@ public class MyOrderDetailController implements Initializable {
         roomTypeLabel.setText(LiteralList.roomTypeList[orderVO.getType().ordinal()]);
         roomNumLabel.setText(Integer.toString(orderVO.getRoomSum()));
         customerNumLabel.setText(Integer.toString(orderVO.getNumOfCustomer()));
-        
+
         int orderStateEnumOrdinal = orderVO.getState().ordinal();
         int orderStateLiteralIndex = orderStateEnumOrdinal == 4 ? 1 : orderStateEnumOrdinal;
-
         orderStateLabel.setText(LiteralList.orderStateList[orderStateLiteralIndex]);
+
         orderPriceLabel.setText(Double.toString(orderVO.getAmount()));
         hasChildCheckBox.setSelected(orderVO.isHaveChild());
 
