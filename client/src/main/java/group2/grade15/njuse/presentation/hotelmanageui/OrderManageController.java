@@ -11,6 +11,7 @@ import group2.grade15.njuse.presentation.webmarketerui.WebMarketerMainController
 import group2.grade15.njuse.utility.OrderState;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.vo.CreditVO;
+import group2.grade15.njuse.vo.OrderListVO;
 import group2.grade15.njuse.vo.OrderVO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -267,7 +268,12 @@ public class OrderManageController implements Initializable {
         checkinList.getItems().clear();
         innormalListData.clear();
         cancelListData.clear();
-        ArrayList<OrderVO> orderVOs = HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId()).getOrderList();
+        OrderListVO temp = HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId());
+        if (temp == null) {
+            return;
+        }
+
+        ArrayList<OrderVO> orderVOs = temp.getOrderList();
         for (int i = 0; i < orderVOs.size(); i++) {
             OrderVO vo = orderVOs.get(i);
             switch (vo.getState()) {

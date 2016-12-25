@@ -325,6 +325,9 @@ public class RoomManageController implements Initializable {
         data.remove(0,data.size());
 
         ArrayList<RoomVO> roomList=HotelManageMainController.hotelVO.getRoomList();
+        if (roomList == null) {
+            return;
+        }
         for(int i=0;i<roomList.size();i++) {
             data.add(new Room(roomList.get(i)));
         }

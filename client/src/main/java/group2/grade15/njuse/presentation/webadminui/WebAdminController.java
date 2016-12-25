@@ -216,18 +216,28 @@ public class WebAdminController implements Initializable{
     //初始化承收并展示来自数据库的账号列表方法
     public void showAllAccount() throws RemoteException{
         accountListData.clear();
-        ArrayList<CustomerVO> customerVOs=webAdminService.getCustomerList().getList();
-        ArrayList<HotelManagerVO> hotelManagerVOs=webAdminService.getHotelManagerList().getList();
-        ArrayList<WebMarketerVO> webMarketerVOs=webAdminService.getWebMarketerList().getList();
+        CustomerListVO clist = webAdminService.getCustomerList();
+        if (clist != null) {
+            ArrayList<CustomerVO> customerVOs=clist.getList();
+            for(int i=0;i<customerVOs.size();i++){
+                accountListData.add(new Account(customerVOs.get(i)));
+            }
 
-        for(int i=0;i<customerVOs.size();i++){
-            accountListData.add(new Account(customerVOs.get(i)));
         }
-        for (int i=0;i<hotelManagerVOs.size();i++) {
-            accountListData.add(new Account(hotelManagerVOs.get(i)));
+        HotelManagerListVO hlist=webAdminService.getHotelManagerList();
+        if (hlist != null) {
+            ArrayList<HotelManagerVO> hotelManagerVOs=webAdminService.getHotelManagerList().getList();
+            for (int i=0;i<hotelManagerVOs.size();i++) {
+                accountListData.add(new Account(hotelManagerVOs.get(i)));
+            }
         }
-        for (int i=0;i<webMarketerVOs.size();i++) {
-            accountListData.add(new Account(webMarketerVOs.get(i)));
+        WebMarketerListVO wmlist=webAdminService.getWebMarketerList();
+        if (wmlist != null) {
+            ArrayList<WebMarketerVO> webMarketerVOs=webAdminService.getWebMarketerList().getList();
+            for (int i=0;i<webMarketerVOs.size();i++) {
+                accountListData.add(new Account(webMarketerVOs.get(i)));
+            }
+
         }
 
     }
@@ -235,12 +245,15 @@ public class WebAdminController implements Initializable{
     //初始化承收并展示来自数据库的酒店列表方法
     public void showAllHotel() throws RemoteException{
         hotelListData.clear();
+        HotelListVO list=webAdminService.getHotelList();
+        if (list != null) {
+            ArrayList<HotelVO> hotelVOs=webAdminService.getHotelList().getList();
 
-        ArrayList<HotelVO> hotelVOs=webAdminService.getHotelList().getList();
-
-        for(int i=0;i<hotelVOs.size();i++) {
-            hotelListData.add(new Hotel(hotelVOs.get(i)));
+            for(int i=0;i<hotelVOs.size();i++) {
+                hotelListData.add(new Hotel(hotelVOs.get(i)));
+            }
         }
+
     }
     /**
      * Account的TableView的数据承载类，包括四种账户类型的构造函数

@@ -131,16 +131,33 @@ public class FixController implements Initializable {
         creditRestore.setItems(FXCollections.observableArrayList(
                 "全额恢复", "恢复一半"
         ));
+        creditRestore.setValue("全额恢复");
 
     }
+    @FXML
+    private void showCheck(){
+        check.setVisible(true);
+        clear.setVisible(true);
+        creditRestore.setVisible(true);
+        fixReason.setVisible(true);
+    }
+    @FXML
+    private void closeCheck(){
 
+        check.setVisible(false);
+        clear.setVisible(false);
+        creditRestore.setVisible(false);
+        fixReason.setVisible(false);
+    }
     /**
      * 获取所有的订单，并根据订单的状态分发到各个TableView
      */
     public void showAllOrder(){
          //这部分是用来添加异常订单部分的
         ArrayList<OrderVO> un=orderListServ.getAbnormalOrderList().getOrderList();
-
+        if (un == null) {
+            return;
+        }
         for(int i=0;i<un.size();i++) {
             unsolvedListData.add(new Order(un.get(i)));
         }
