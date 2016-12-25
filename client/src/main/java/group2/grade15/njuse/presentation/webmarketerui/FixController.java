@@ -81,6 +81,7 @@ public class FixController implements Initializable {
     public WebMarketerMainController webMarketerMainController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //将各个按钮用的LABEL绑定上按钮的样式
         CustomeButton.implButton(check, "file:client/src/main/res/webmarketer/Check");
         CustomeButton.implButton(clear, "file:client/src/main/res/webmarketer/Cancel");
         CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
@@ -132,6 +133,10 @@ public class FixController implements Initializable {
         ));
 
     }
+
+    /**
+     * 获取所有的订单，并根据订单的状态分发到各个TableView
+     */
     public void showAllOrder(){
          //这部分是用来添加异常订单部分的
         ArrayList<OrderVO> un=orderListServ.getAbnormalOrderList().getOrderList();
@@ -146,13 +151,19 @@ public class FixController implements Initializable {
         DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
         Date s = Date.valueOf(df2.format(temp));
         Date e = new Date(s.getTime() + 1000 * 60 * 60 * 24);
+        if (orderListServ.getUnexecutedOrderListToday(s, e)==null) {
+            return;
+        }
         ArrayList<OrderVO> unexe = orderListServ.getUnexecutedOrderListToday(s, e).getOrderList();
         for (int i=0;i<unexe.size();i++) {
             unexecutedListData.add(new Order(unexe.get(i)));
         }
     }
 
-    public void clear() {
+    /**
+     * 将下方信息栏清空
+     */
+    private void clear() {
         orderID.setText("");
         currentState.setText("");
         hotelID.setText("");
@@ -166,8 +177,11 @@ public class FixController implements Initializable {
 
     }
 
+    /**
+     * 在下方信息栏中显示订单详情
+     * 其中订单的是根据订单ID获取的
+     */
     public void openFromID() {
-        //TODO
         try {
             int id = Integer.parseInt(searchID.getText());
 
@@ -186,8 +200,11 @@ public class FixController implements Initializable {
         }
     }
 
+    /**
+     * 将作为映射数据类的Order显示到下方信息栏
+     * @param order
+     */
     public void openFromClick(Order order) {
-        //TODO
         orderID.setText(String.valueOf(order.getOrderId()));
         currentState.setText(order.getState());
         hotelID.setText(String.valueOf(order.getHotelId()));
@@ -197,15 +214,30 @@ public class FixController implements Initializable {
         prefCheckOutTime.setText(order.getOutDate());
         finalExeTime.setText(order.getFinalDate());
     }
+
+    /**
+     * 从未修复异常订单列表中获取选中订单
+     * @return
+     */
     public OrderVO getSelectedOrderVO(){
         int index=unsolvedList.getSelectionModel().getSelectedIndex();
         return unsolvedListData.get(index).vo;
     }
-    public void fixCommit(){
+
+    @FXML
+    /**
+     * 用于提交撤销异常订单
+     */
+    private void fixCommit(){
+        try {
+            OrderVO vo = getSelectedOrderVO();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            webMarketerMainController.alert("未选中订单");
+            return;
+        }
         fixCommit(getSelectedOrderVO());
     }
-    public void fixCommit(OrderVO vo) {
-        //TODO implement the function of committing an order fixing.
+    private void fixCommit(OrderVO vo) {
         if(ResultMessage.SUCCESS==WebMarketerMainController.webMarketerService.modifyState(vo.getOrderID(), OrderState.revoked)){
             double change=vo.getAmount();
             if (creditRestore.getValue() == "恢复一半") {
@@ -221,6 +253,10 @@ public class FixController implements Initializable {
         }
 
     }
+
+    /**
+     * 映射数据的包装内部类
+     */
     public static class Order{
         private final SimpleIntegerProperty orderId;
         private final SimpleIntegerProperty customerId;

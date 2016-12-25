@@ -39,13 +39,13 @@ public class HotelInfoController implements Initializable {
     @FXML
     private TextField address;
     @FXML
-    private ChoiceBox provinceBox;
+    private ComboBox provinceBox;
     @FXML
-    private ChoiceBox cityBox;
+    private ComboBox cityBox;
     @FXML
-    private ChoiceBox districtBox;
+    private ComboBox districtBox;
     @FXML
-    private ChoiceBox cbdBox;
+    private ComboBox cbdBox;
     @FXML
     private TextField rank;
     @FXML
@@ -133,19 +133,31 @@ public class HotelInfoController implements Initializable {
         describeEditor.setText(vo.getIntroduction());
         System.out.println(vo.getAddress());
 
-        provinceBox.setItems(FXCollections.observableArrayList(
+        provinceBox.getEditor().setText((
                 hotelController.getProvinceName(vo.getAddress().substring(0, 5))
         ));
-        cityBox.setItems(FXCollections.observableArrayList(
+
+
+        cityBox.getEditor().setText((
                 hotelController.getCityName(vo.getAddress().substring(0, 10))
         ));
-        districtBox.setItems(FXCollections.observableArrayList(
+
+
+        districtBox.getEditor().setText((
                 hotelController.getDistrictName(vo.getAddress().substring(0, 15))
         ));
-        cbdBox.setItems(FXCollections.observableArrayList(
+
+
+        cbdBox.getEditor().setText((
                 hotelController.getCbdName(vo.getAddress())
         ));
 
+/*
+        provinceBox.setValue(provinceBox.getItems().get(0));
+        cityBox.setValue(cityBox.getItems().get(0));
+        districtBox.setValue(districtBox.getItems().get(0));
+        cbdBox.setValue(cbdBox.getItems().get(0));
+*/
         ObservableList<Pic> picList = FXCollections.observableArrayList();
         if (vo.getPicture() != null) {
             for (int i = 0; i < vo.getPicture().length; i++) {

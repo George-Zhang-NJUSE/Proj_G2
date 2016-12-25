@@ -144,10 +144,10 @@
                         <Font name="Microsoft YaHei Light" size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" />
-                  <ChoiceBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="cbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="provinceBox" onAction="#loadCityBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" />
+                  <ComboBox fx:id="cityBox" onAction="#loadDistrictBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="districtBox" onAction="#loadCbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cbdBox" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: white" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             </children>

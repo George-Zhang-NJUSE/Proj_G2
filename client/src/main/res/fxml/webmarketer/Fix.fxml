@@ -43,7 +43,7 @@
                 </Label>
                 <TabPane maxWidth="1015.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <tabs>
-                        <Tab text="未解决异常">
+                        <Tab text="未解决异常" onSelectionChanged="#showCheck">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -74,7 +74,7 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="未执行订单">
+                        <Tab text="未执行订单" onSelectionChanged="#closeCheck">
                             <content>
                                 <AnchorPane maxHeight="400.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>

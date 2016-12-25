@@ -1,5 +1,6 @@
 package group2.grade15.njuse.presentation.hotelmanageui;
 
+import com.sun.istack.internal.Nullable;
 import com.sun.org.apache.regexp.internal.RE;
 import group2.grade15.njuse.bl.orderbl.OrderController;
 import group2.grade15.njuse.blservice.OrderListServ;
@@ -210,8 +211,8 @@ public class OrderManageController implements Initializable {
         initialized=true;
         tab1();
     }
-    public void tab1(){
-        //OrderListVO list=orderListService.get;
+    @FXML
+    private void tab1(){
         if(!initialized)
             return;
         workingTab =WorkingTab.UNEXE;
@@ -219,7 +220,8 @@ public class OrderManageController implements Initializable {
         overtimeButton.setVisible(false);
         checkinButton.setVisible(true);
     }
-    public void tab2(){
+    @FXML
+    private void tab2(){
         if(!initialized)
             return;
         workingTab =WorkingTab.CHECKIN;
@@ -227,7 +229,8 @@ public class OrderManageController implements Initializable {
         overtimeButton.setVisible(false);
         checkinButton.setVisible(false);
     }
-    public void tab3(){
+    @FXML
+    private void tab3(){
         if(!initialized)
             return;
         workingTab = WorkingTab.COMPLETE;
@@ -235,7 +238,8 @@ public class OrderManageController implements Initializable {
         overtimeButton.setVisible(false);
         checkinButton.setVisible(false);
     }
-    public void tab4(){
+    @FXML
+    private void tab4(){
         if(!initialized)
             return;
         workingTab = WorkingTab.INNORMAL;
@@ -243,7 +247,8 @@ public class OrderManageController implements Initializable {
         overtimeButton.setVisible(true);
         checkinButton.setVisible(false);
     }
-    public void tab5(){
+    @FXML
+    private void tab5(){
         if(!initialized)
             return;
         workingTab =WorkingTab.CANCEL;
@@ -252,16 +257,10 @@ public class OrderManageController implements Initializable {
         checkinButton.setVisible(false);
     }
 
-
-    private void removeSelectedOrderFromList(TableView table){
-        int index=table.getSelectionModel().getSelectedIndex();
-        table.getItems().remove(index);
-    }
-
-    private void addOrderToList(TableView table, OrderVO vo) {
-        table.getItems().add(new Order(vo));
-    }
     @FXML
+    /**
+     * 将所有表格清空 并重新获取数据库表格并分发到各个表格中
+     */
     private void showAllOrder() {
 
         unexeList.getItems().clear();
@@ -290,7 +289,12 @@ public class OrderManageController implements Initializable {
         }
 
     }
-    public void toCheckin(){
+
+    /**
+     * 以下三个方法都是分别调出各个子操作的界面的方法
+     */
+    @FXML
+    private void toCheckin(){
         stage=0;
         optionBox.setVisible(false);
         checkinPane.setVisible(true);
@@ -301,7 +305,8 @@ public class OrderManageController implements Initializable {
         Fade in = new Fade(checkinPane, 200, true);
         in.play();
     }
-    public void toCheckout(){
+    @FXML
+    private void toCheckout(){
         stage=1;
         optionBox.setVisible(false);
         checkoutPane.setVisible(true);
@@ -312,7 +317,8 @@ public class OrderManageController implements Initializable {
         Fade in = new Fade(checkoutPane, 200, true);
         in.play();
     }
-    public void toOvertimeCheckin(){
+    @FXML
+    private void toOvertimeCheckin(){
         stage=2;
         optionBox.setVisible(false);
         overtimeCheckinPane.setVisible(true);
@@ -324,7 +330,12 @@ public class OrderManageController implements Initializable {
         in.play();
 
     }
-    public void back(){
+
+    /**
+     * 将操作面板关闭的方法
+     */
+    @FXML
+    private void back(){
         now.setVisible(false);
         optionBox.setVisible(true);
         checkPane.setVisible(false);
@@ -332,10 +343,10 @@ public class OrderManageController implements Initializable {
         in.play();
     }
 
-    private void fillTable(){
-        OrderVO vo=getSelectedOrderVO();
-        fillTable(vo);
-    }
+    /**
+     * 将OrderVO信息填写到右侧信息栏中
+     * @param vo
+     */
     private void fillTable(OrderVO vo){
         orderID.setText(Integer.toString(vo.getOrderID()));
         customerID.setText(Integer.toString(vo.getCustomerID()));
@@ -348,6 +359,10 @@ public class OrderManageController implements Initializable {
 
     }
 
+    /**
+     * 将label实现按钮的样式变化方法
+     * @param label
+     */
     private void impleButton(Label label){
         label.setOnMouseEntered((MouseEvent e)->{
             label.setStyle("-fx-border-color: rgb(29,171,226);-fx-border-radius: 10; -fx-border-width: 2");
@@ -367,7 +382,12 @@ public class OrderManageController implements Initializable {
 
 
     //逻辑的数据处理部分
-    public OrderVO getSelectedOrderVO(){
+
+    /**
+     * 从列表中获取被选中的订单的VO
+     * @return 被选中的订单VO
+     */
+    private OrderVO getSelectedOrderVO(){
 
         switch (workingTab) {
             case UNEXE:
@@ -384,6 +404,12 @@ public class OrderManageController implements Initializable {
                 return null;
         }
     }
+
+    /**
+     * getSelectedOrderVO()的子方法
+     * @param List
+     * @return
+     */
     private OrderVO getOrderVO(TableView<Order> List){
         int index= List.getSelectionModel().getSelectedIndex();
         Order order=  List.getItems().get(index);
@@ -392,12 +418,10 @@ public class OrderManageController implements Initializable {
         return orderVO;
     }
 
-    public void checkeAction(){
-
-    }
+    /**
+     * 执行入住操作时的方法
+     */
     public void checkin(){
-        //TODO
-
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         if (adultCI.getText().length() == 0 || kidCI.getText().length() == 0) {
@@ -433,19 +457,15 @@ public class OrderManageController implements Initializable {
         }catch (Exception e){
             return;
         }
-        orderID.setText(String.valueOf(vo.getOrderID()));
-        customerID.setText(String.valueOf(vo.getCustomerID()));
-        checkInDate.setText(df.format(vo.getCheckInTime()));
-        checkOutDate.setText(df.format(vo.getCheckOutTime()));
-        finalDate.setText(df.format(vo.getFinalExecuteTime()));
-        roomType.setText(vo.getType().toString());
-        roomNum.setText(String.valueOf(vo.getRoomSum()));
-        totalPrice.setText(String.valueOf(vo.getAmount()));
-        orderState.setText(vo.getState().toString());
+        fillTable(vo);
 
     }
+
+    /**
+     * 执行退房操作的方法
+     * 将订单状态从 executed 改为 complete
+     */
     public void checkout(){
-        //TODO
         OrderVO vo=getSelectedOrderVO();
         Order order = new Order(vo);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -473,9 +493,10 @@ public class OrderManageController implements Initializable {
         }
 
     }
-    private void updateList(){
-        showAllOrder();
-    }
+
+    /**
+     * 执行延迟入住的方法
+     */
     public void overtimeCheckin(){
         //TODO
         if (adultOC.getText().length() == 0 || kidOC.getText().length() == 0) {
@@ -501,6 +522,11 @@ public class OrderManageController implements Initializable {
 
     }
 
+    /**
+     * 将包装类Order转换为OrderVO的方法
+     * @param order
+     * @return
+     */
     public static OrderVO toVO(Order order) {
         Timestamp indate=Timestamp.valueOf(order.getInDate());
         Timestamp outdate = Timestamp.valueOf(order.getOutDate());
@@ -524,7 +550,9 @@ public class OrderManageController implements Initializable {
     }
 
 
-
+    /**
+     * 用于列表显示时的包装类
+     */
     public static class Order{
         private final SimpleIntegerProperty orderId;
         private final SimpleIntegerProperty customerId;

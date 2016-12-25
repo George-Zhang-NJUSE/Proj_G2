@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class CustomeButton {
     /**
+     * 将label作为按钮使用时 鼠标事件不同样式的实现
      * @param label
      * @param url   不要加后缀名,比如直接写 "file:client/src/main/res/webadmin/setting"
      */
