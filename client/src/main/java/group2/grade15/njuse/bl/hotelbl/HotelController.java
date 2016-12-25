@@ -114,43 +114,43 @@ public class HotelController implements HotelServ, GetHotelListBL{
     }
 
     @Override
-    public String getProvinceName(String provinceNum) {
+    public ProvinceVO getProvinceByNum(String provinceNum) {
         ArrayList<ProvinceVO> provinceVOs  = searchBL.getProvince().getList();
         int index = Integer.parseInt(provinceNum, 2);
-        return provinceVOs.get(index - 1).getProvinceName();
+        return provinceVOs.get(index - 1);
     }
 
     @Override
-    public String getCityName(String cityNum) {
+    public CityVO getCityByNum(String cityNum) {
         CityListVO cityListVO = searchBL.getCity(cityNum);
         if(cityListVO != null){
             ArrayList<CityVO> cityVOs = searchBL.getCity(cityNum).getList();
             int index = Integer.parseInt(cityNum.substring(5), 2);
-            return cityVOs.get(index - 1).getCityName();
+            return cityVOs.get(index - 1);
         } else {
             return null;
         }
     }
 
     @Override
-    public String getDistrictName(String districtNum) {
+    public DistrictVO getDistrictByNum(String districtNum) {
         DistrictListVO districtListVO = searchBL.getDistrict(districtNum);
         if(districtListVO != null) {
             ArrayList<DistrictVO> districtListVOs = searchBL.getDistrict(districtNum).getList();
             int index = Integer.parseInt(districtNum.substring(10), 2);
-            return districtListVOs.get(index - 1).getDistrictName();
+            return districtListVOs.get(index - 1);
         } else {
             return null;
         }
     }
 
     @Override
-    public String getCbdName(String cbdNum) {
+    public CbdVO getCbdByNum(String cbdNum) {
         CbdListVO cbdListVO = searchBL.getCbd(cbdNum);
         if(cbdListVO != null) {
             ArrayList<CbdVO> cbdVOs = searchBL.getCbd(cbdNum).getList();
             int index = Integer.parseInt(cbdNum.substring(15), 2);
-            return cbdVOs.get(index - 1).getCbdName();
+            return cbdVOs.get(index - 1);
         } else {
             return null;
         }
