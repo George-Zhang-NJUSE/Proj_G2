@@ -27,6 +27,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 /**
@@ -67,12 +68,12 @@ public class FixController implements Initializable {
     @FXML
     private TableView<Order> unsolvedList;
     @FXML
-    private TableView<Order> solvedList;
+    private TableView<Order> unexecutedList;
     @FXML
     private Label refresh;
 
     private ObservableList<Order> unsolvedListData;
-    private ObservableList<Order> solvedListData;
+    private ObservableList<Order> unexecutedListData;
     private String[] properties = {"orderId", "customerId", "hotelId", "promotionId", "amount", "inDate", "outDate", "createTime", "finalDate", "RoomNum", "roomType"};
 
     public OrderListServ orderListServ=new OrderController();
@@ -85,16 +86,16 @@ public class FixController implements Initializable {
         CustomeButton.implButton(refresh, "file:client/src/main/res/button/refresh");
 
         ObservableList unList=unsolvedList.getColumns();
-        ObservableList sList = solvedList.getColumns();
+        ObservableList sList = unexecutedList.getColumns();
         for(int i=0;i<properties.length;i++) {
             ((TableColumn)unList.get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
             ((TableColumn)sList.get(i)).setCellValueFactory(new PropertyValueFactory<>(properties[i]));
         }
         unsolvedListData= FXCollections.observableArrayList();
-        solvedListData=FXCollections.observableArrayList();
+        unexecutedListData=FXCollections.observableArrayList();
 
         unsolvedList.setItems(unsolvedListData);
-        solvedList.setItems(solvedListData);
+        unexecutedList.setItems(unexecutedListData);
 
         unsolvedList.setOnMouseClicked((MouseEvent e)->{
             try {
@@ -110,10 +111,10 @@ public class FixController implements Initializable {
                 exception.printStackTrace();
             }
         });
-        solvedList.setOnMouseClicked((MouseEvent e)->{
+        unexecutedList.setOnMouseClicked((MouseEvent e)->{
             try {
-                int index = solvedList.getSelectionModel().getSelectedIndex();
-                openFromClick(solvedListData.get(index));
+                int index = unexecutedList.getSelectionModel().getSelectedIndex();
+                openFromClick(unexecutedListData.get(index));
                 check.setVisible(false);
                 clear.setVisible(false);
             }catch (ArrayIndexOutOfBoundsException e2){
@@ -132,10 +133,22 @@ public class FixController implements Initializable {
 
     }
     public void showAllOrder(){
-        //TODO 从网站营销这边拿到的列表应该不需要ID
+         //这部分是用来添加异常订单部分的
         ArrayList<OrderVO> un=orderListServ.getAbnormalOrderList().getOrderList();
+
         for(int i=0;i<un.size();i++) {
             unsolvedListData.add(new Order(un.get(i)));
+        }
+
+        //下面是用来添加未执行订单部分的
+
+        Date temp = new Date(System.currentTimeMillis());
+        DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        Date s = Date.valueOf(df2.format(temp));
+        Date e = new Date(s.getTime() + 1000 * 60 * 60 * 24);
+        ArrayList<OrderVO> unexe = orderListServ.getUnexecutedOrderListToday(s, e).getOrderList();
+        for (int i=0;i<unexe.size();i++) {
+            unexecutedListData.add(new Order(unexe.get(i)));
         }
     }
 
@@ -202,7 +215,7 @@ public class FixController implements Initializable {
             webMarketerServ.modifyCredit(creditVO);
             int index = unsolvedList.getSelectionModel().getSelectedIndex();
 
-            solvedList.getItems().add((unsolvedListData.get(index)));
+            unexecutedList.getItems().add((unsolvedListData.get(index)));
             unsolvedListData.remove(index);
             webMarketerMainController.alert("已经完成申述");
         }

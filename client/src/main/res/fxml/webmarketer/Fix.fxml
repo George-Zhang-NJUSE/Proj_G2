@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -22,7 +30,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.grade15.njuse.presentation.webmarketerui.FixController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="700.0" layoutY="100.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="260.0" layoutY="540.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
@@ -66,7 +74,7 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="已解决异常">
+                        <Tab text="未执行订单">
                             <content>
                                 <AnchorPane maxHeight="400.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -74,7 +82,7 @@
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1017.0">
                                                     <children>
-                                                        <TableView fx:id="solvedList" prefHeight="400.0" prefWidth="1025.0">
+                                                        <TableView fx:id="unexecutedList" prefHeight="400.0" prefWidth="1025.0">
                                              <columns>
                                                 <TableColumn prefWidth="75.0" text="订单ID" />
                                                 <TableColumn prefWidth="75.0" text="用户ID" />
@@ -176,13 +184,15 @@
                     </children>
                 </GridPane>
             <Label fx:id="searchMessage" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            <Label fx:id="refresh" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="TOP" onMouseClicked="#showAllOrder">
+            <Label fx:id="refresh" onMouseClicked="#showAllOrder" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="-20.0" />
                </GridPane.margin>
                 <graphic>
                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="file:client/src/main/res/button/refresh.png"/>
+                       <image>
+                           <Image url="file:client/src/main/res/button/refresh.png" />
+                       </image>
                     </ImageView>
                 </graphic>
             </Label>
