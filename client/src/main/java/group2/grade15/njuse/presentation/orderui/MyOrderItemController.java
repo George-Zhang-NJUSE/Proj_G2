@@ -67,7 +67,10 @@ public class MyOrderItemController implements Initializable{
         hotelVO=hotelServ.getInfo(orderVO.getHotelID());
         hotelNameLabel.setText(hotelVO.getName());
         addressLabel.setText(hotelVO.getConcreteAddress());
-        orderStateLabel.setText(LiteralList.orderStateList[orderVO.getState().ordinal()]);
+
+        int orderStateEnumOrdinal = orderVO.getState().ordinal();
+        int orderStateLiteralIndex = orderStateEnumOrdinal == 4 ? 1 : orderStateEnumOrdinal;
+        orderStateLabel.setText(LiteralList.orderStateList[orderStateLiteralIndex]);
 
     }
 

@@ -38,7 +38,12 @@ public class OrderList implements OrderListBL {
     }
 
     public OrderListVO getExecutedOrderList(int customerID) {
-        return filterOrderByState(customerID, OrderState.executed);
+        OrderListVO excutedOrderListVO = filterOrderByState(customerID, OrderState.executed);
+        OrderListVO completedOrderListVO = filterOrderByState(customerID, OrderState.complete);
+        ArrayList<OrderVO> orderVOs = new ArrayList<>();
+        orderVOs.addAll(excutedOrderListVO.getOrderList());
+        orderVOs.addAll(completedOrderListVO.getOrderList());
+        return new OrderListVO(orderVOs);
     }
 
     public OrderListVO getUnexecutedOrderList(int customerID) {
@@ -51,6 +56,35 @@ public class OrderList implements OrderListBL {
 
     public OrderListVO getAbnormalOrderList(int customerID) {
         return filterOrderByState(customerID, OrderState.abnormal);
+    }
+
+    @Override
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end) {
+        ArrayList<OrderPO> orderPOList = null;
+        try {
+            orderPOList = RemoteHelper.getInstance().getOrderDataService().getUnexecutedList();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        if (orderPOList != null) {
+            ArrayList<OrderVO> orderList = new ArrayList<>();
+            for(OrderPO po : orderPOList){
+                long time = po.getCreateTime().getTime();
+                long beginTime = begin.getTime();
+                long endTime = end.getTime();
+                if(beginTime <= time && endTime >= time ){
+                    orderList.add(new OrderVO(po));
+                }
+            }
+            if(orderList.size() != 0) {
+                return new OrderListVO(orderList);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     public OrderListVO getExecutedOrderListInHotel(int customerID, int hotelID) {

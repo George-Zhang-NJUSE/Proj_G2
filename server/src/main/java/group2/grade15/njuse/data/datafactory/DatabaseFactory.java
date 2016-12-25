@@ -13,6 +13,9 @@ import group2.grade15.njuse.data.webadmindata.WebAdminDatabaseImpl;
 import group2.grade15.njuse.data.webmarketerdata.WebMarketerDatabaseImpl;
 import group2.grade15.njuse.data.webpromotiondata.WebPromotionDatabaseImpl;
 import group2.grade15.njuse.dataservice.commentdataservice.CommentDataService;
+import group2.grade15.njuse.dataservice.hotelmanagerdataservice.HotelManagerDataService;
+import group2.grade15.njuse.dataservice.webadmindataservice.WebAdminDataService;
+import group2.grade15.njuse.dataservice.webmarketerdataservice.WebMarketerDataService;
 import group2.grade15.njuse.dataservice.webpromotiondataservice.WebPromotionDataService;
 import group2.grade15.njuse.dataservice.areadataservice.AreaDataService;
 import group2.grade15.njuse.dataservice.creditdataservice.CreditDataService;
@@ -67,7 +70,7 @@ public class DatabaseFactory implements DataFactory {
         return customerDatabase;
     }
 
-    public HotelManagerDatabaseImpl getHotelManagerDataService() throws RemoteException {
+    public HotelManagerDataService getHotelManagerDataService() throws RemoteException {
         if (hotelManagerDatabase == null) {
             try {
                 hotelManagerDatabase = new HotelManagerDatabaseImpl(info);
@@ -79,7 +82,7 @@ public class DatabaseFactory implements DataFactory {
         return hotelManagerDatabase;
     }
 
-    public WebMarketerDatabaseImpl getWebMarketerDataService() throws RemoteException {
+    public WebMarketerDataService getWebMarketerDataService() throws RemoteException {
         if (webMarketerDatabase == null) {
             try {
                 webMarketerDatabase = new WebMarketerDatabaseImpl(info);
@@ -92,7 +95,7 @@ public class DatabaseFactory implements DataFactory {
     }
 
     @Override
-    public WebAdminDatabaseImpl getWebAdminDataService() throws RemoteException {
+    public WebAdminDataService getWebAdminDataService() throws RemoteException {
         if (webAdminDatabase == null) {
             try {
                 webAdminDatabase = new WebAdminDatabaseImpl(info);

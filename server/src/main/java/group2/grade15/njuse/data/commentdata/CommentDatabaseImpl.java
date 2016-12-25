@@ -13,18 +13,14 @@ import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public class CommentDatabaseImpl implements Remote,CommentDataService {
+public class CommentDatabaseImpl implements CommentDataService {
     private DatabaseInfo info = null;
-    private DatabaseMySql mySql = null;
-    private Connection commentDatabase = null;
 
     CustomerCommentPart customerCommentPart = null;
     HotelCommentPart hotelCommentPart = null;
 
     public CommentDatabaseImpl(DatabaseInfo info) throws RemoteException {
         this.info = info;
-        mySql = new DatabaseMySql(info);
-        commentDatabase = mySql.init();
     }
 
     public ResultMessage add(CommentPO po) throws RemoteException {

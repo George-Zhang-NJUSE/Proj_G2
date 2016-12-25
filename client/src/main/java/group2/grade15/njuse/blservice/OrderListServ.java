@@ -102,4 +102,12 @@ public interface OrderListServ {
      */
     public OrderListVO getAbnormalOrderList();
 
+    /**
+     ** 获取该网站的当日所有未执行订单
+     * @param begin Date型，当天时间的起始点
+     * @param end Date型，当天时间的结束点
+     * @return 成功返回该网站的含有当天全部未执行订单的OrderListVO
+     *         失败返回null
+     */
+    public OrderListVO getUnexecutedOrderListToday(Date begin, Date end);
 }
