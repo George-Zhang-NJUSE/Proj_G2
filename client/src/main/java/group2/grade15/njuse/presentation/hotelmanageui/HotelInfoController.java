@@ -133,23 +133,23 @@ public class HotelInfoController implements Initializable {
         describeEditor.setText(vo.getIntroduction());
         System.out.println(vo.getAddress());
 
-        provinceBox.getEditor().setText((
-                hotelController.getProvinceName(vo.getAddress().substring(0, 5))
+        provinceBox.setValue((
+                hotelController.getProvinceByNum(vo.getAddress().substring(0, 5))
         ));
 
 
-        cityBox.getEditor().setText((
-                hotelController.getCityName(vo.getAddress().substring(0, 10))
+        cityBox.setValue((
+                hotelController.getCityByNum(vo.getAddress().substring(0, 10))
         ));
 
 
-        districtBox.getEditor().setText((
-                hotelController.getDistrictName(vo.getAddress().substring(0, 15))
-        ));
+        districtBox.setValue(
+                hotelController.getDistrictByNum(vo.getAddress().substring(0, 15))
+        );
 
 
-        cbdBox.getEditor().setText((
-                hotelController.getCbdName(vo.getAddress())
+        cbdBox.setValue((
+                hotelController.getCbdByNum(vo.getAddress())
         ));
 
 /*
