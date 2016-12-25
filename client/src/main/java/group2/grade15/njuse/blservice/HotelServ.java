@@ -2,9 +2,7 @@ package group2.grade15.njuse.blservice;
 
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
-import group2.grade15.njuse.vo.HotelListVO;
-import group2.grade15.njuse.vo.HotelVO;
-import group2.grade15.njuse.vo.RoomVO;
+import group2.grade15.njuse.vo.*;
 
 /**
  * 酒店业务逻辑的层间接口
@@ -89,33 +87,33 @@ public interface HotelServ {
     public ResultMessage uploadPic(byte[][] picture, int hotelID);
 
     /**
-     * 根据输入的省的编码，获取该省份的名称
-     * @param provinceNum int型，用户需要翻译的省份编码
-     * @return 返回该省份的名称
+     * 根据输入的省的编码，获取该省份
+     * @param provinceNum int型，用户需要的省份编码
+     * @return 返回该省份
      */
-    public String getProvinceName(String provinceNum);
+    public ProvinceVO getProvinceByNum(String provinceNum);
 
     /**
-     * 根据输入的城市的编码，获取该城市的名称
-     * @param cityNum int型，用户需要翻译的城市编码
-     * @return 成功返回该城市的名称
+     * 根据输入的城市的编码，获取该城市
+     * @param cityNum int型，用户需要的城市编码
+     * @return 成功返回该城市
      *         查询不到返回null
      */
-    public String getCityName(String cityNum);
+    public CityVO getCityByNum(String cityNum);
 
     /**
-     * 根据输入得地区的编码，获取该地区的名称
-     * @param districtNum int型，用户需要翻译的地区编码
-     * @return 成功返回该地区的名称
+     * 根据输入得地区的编码，获取该地区
+     * @param districtNum int型，用户需要的地区编码
+     * @return 成功返回该地区
      *         查询不到返回null
      */
-    public String getDistrictName(String districtNum);
+    public DistrictVO getDistrictByNum(String districtNum);
 
     /**
-     * 根据输入的商圈的编码，获取该商圈的名称
-     * @param cbdNum int型，用户需要翻译的商圈编码
-     * @return 成功返回该商圈的名称
+     * 根据输入的商圈的编码，获取该商圈
+     * @param cbdNum int型，用户需要的商圈编码
+     * @return 成功返回该商圈
      *         查询不到返回null
      */
-    public String getCbdName(String cbdNum);
+    public CbdVO getCbdByNum(String cbdNum);
 }
