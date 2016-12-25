@@ -41,9 +41,17 @@ public class OrderList implements OrderListBL {
         OrderListVO excutedOrderListVO = filterOrderByState(customerID, OrderState.executed);
         OrderListVO completedOrderListVO = filterOrderByState(customerID, OrderState.complete);
         ArrayList<OrderVO> orderVOs = new ArrayList<>();
-        orderVOs.addAll(excutedOrderListVO.getOrderList());
-        orderVOs.addAll(completedOrderListVO.getOrderList());
-        return new OrderListVO(orderVOs);
+        if(excutedOrderListVO != null){
+            orderVOs.addAll(excutedOrderListVO.getOrderList());
+        }
+        if(completedOrderListVO != null) {
+            orderVOs.addAll(completedOrderListVO.getOrderList());
+        }
+        if(orderVOs.size() != 0) {
+            return new OrderListVO(orderVOs);
+        } else {
+            return null;
+        }
     }
 
     public OrderListVO getUnexecutedOrderList(int customerID) {
