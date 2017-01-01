@@ -73,7 +73,7 @@ public class RoomManageController implements Initializable {
     private TextField restM;
 
     //逻辑实现部分
-    private HotelManagerServ hotelManagerController;
+    public HotelManagerServ hotelManagerController;
     public HotelManageMainController hotelManageMainController;
     public HotelServ hotelServ;
     private ObservableList<Room> data;
