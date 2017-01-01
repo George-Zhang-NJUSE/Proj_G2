@@ -141,7 +141,7 @@ public class HotelInfoController implements Initializable {
         cityBox.setValue((
                 hotelController.getCityByNum(vo.getAddress().substring(0, 10))
         ));
-
+        System.out.println(hotelController.getCityByNum(vo.getAddress().substring(0, 10)));
 
         districtBox.setValue(
                 hotelController.getDistrictByNum(vo.getAddress().substring(0, 15))

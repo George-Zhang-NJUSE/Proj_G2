@@ -266,7 +266,7 @@ public class OrderManageController implements Initializable {
         checkinList.getItems().clear();
         innormalListData.clear();
         cancelListData.clear();
-        OrderListVO temp = HotelManageMainController.hotelOrderController.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId());
+        OrderListVO temp = orderListService.getAllOrderListByHotelID(HotelManageMainController.hotelVO.getId());
         if (temp == null) {
             return;
         }
