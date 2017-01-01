@@ -76,6 +76,8 @@ public class FixController implements Initializable {
     private ObservableList<Order> unexecutedListData;
     private String[] properties = {"orderId", "customerId", "hotelId", "promotionId", "amount", "inDate", "outDate", "createTime", "finalDate", "RoomNum", "roomType"};
 
+    private boolean inied=false;
+
     public OrderListServ orderListServ=new OrderController();
     public WebMarketerServ webMarketerServ = new WebMarketerController();
     public WebMarketerMainController webMarketerMainController;
@@ -132,10 +134,14 @@ public class FixController implements Initializable {
                 "全额恢复", "恢复一半"
         ));
         creditRestore.setValue("全额恢复");
+        inied=true;
 
     }
     @FXML
     private void showCheck(){
+        if (!inied) {
+            return;
+        }
         check.setVisible(true);
         clear.setVisible(true);
         creditRestore.setVisible(true);
@@ -143,7 +149,9 @@ public class FixController implements Initializable {
     }
     @FXML
     private void closeCheck(){
-
+        if (!inied) {
+            return;
+        }
         check.setVisible(false);
         clear.setVisible(false);
         creditRestore.setVisible(false);
@@ -180,6 +188,7 @@ public class FixController implements Initializable {
     /**
      * 将下方信息栏清空
      */
+    @FXML
     private void clear() {
         orderID.setText("");
         currentState.setText("");

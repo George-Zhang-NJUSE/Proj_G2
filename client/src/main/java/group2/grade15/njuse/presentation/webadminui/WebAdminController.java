@@ -146,7 +146,6 @@ public class WebAdminController implements Initializable{
         accountListData = FXCollections.observableArrayList();
         accountList.setItems(accountListData);
         hotelList.setItems(hotelListData);
-
         ObservableList<String> types=FXCollections.observableArrayList(
                 new String("酒店管理用户"),
                 new String("网站营销用户")
