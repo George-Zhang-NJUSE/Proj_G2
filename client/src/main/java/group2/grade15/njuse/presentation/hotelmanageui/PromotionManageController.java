@@ -312,7 +312,11 @@ public class PromotionManageController implements Initializable{
 
     //逻辑实现部分
     public void setModify(){
-        modifyPromotionController.setEditable(true);
+        try {
+            modifyPromotionController.setEditable(true);
+        } catch (NullPointerException e) {
+            return;
+        }
     }
     public void changePromotionState(){
         if(activatedMode){
