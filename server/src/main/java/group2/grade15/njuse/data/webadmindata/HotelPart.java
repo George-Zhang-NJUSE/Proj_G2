@@ -57,7 +57,13 @@ public class HotelPart{
                 add.setString(9, hotelPO.getConcreteAddress());
             add.executeUpdate();
 
+            PreparedStatement room=hotelPartDatabase.prepareStatement("insert into room values(?,false,null,null,null," +
+                    "false,null,null,null,false,null,null,null)");
+            room.setInt(1,id);
+            room.executeUpdate();
+
             add.close();
+            room.close();
             hotelPartDatabase.close();
             hotelPartDatabase = null;
 
