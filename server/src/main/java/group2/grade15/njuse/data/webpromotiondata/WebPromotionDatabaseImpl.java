@@ -157,7 +157,7 @@ public class WebPromotionDatabaseImpl implements WebPromotionDataService {
             ResultSet resultSet = makeID.executeQuery("select max(promotionid) from webpromotion");
             int promotionID;
             if (resultSet.next()) {
-                promotionID = resultSet.getInt(1) + 1;
+                promotionID = resultSet.getInt(1) + 2;
             } else {
                 throw new SQLException();
             }
