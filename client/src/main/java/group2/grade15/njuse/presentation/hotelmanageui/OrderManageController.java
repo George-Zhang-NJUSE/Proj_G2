@@ -149,8 +149,6 @@ public class OrderManageController implements Initializable {
 
     //逻辑部分
     private WorkingTab workingTab;
-    public static OrderServ orderService=new OrderController();
-    public static OrderListServ orderListService=new OrderController();
     public HotelManageMainController hotelManageMainController;
 
 
