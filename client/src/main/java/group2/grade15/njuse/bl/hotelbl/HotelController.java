@@ -7,14 +7,12 @@ import group2.grade15.njuse.bl.searchbl.SearchBL;
 import group2.grade15.njuse.blservice.HotelServ;
 import group2.grade15.njuse.cache.CacheManager;
 import group2.grade15.njuse.po.HotelPO;
-import group2.grade15.njuse.po.RoomPO;
 import group2.grade15.njuse.rmi.RemoteHelper;
 import group2.grade15.njuse.utility.ResultMessage;
 import group2.grade15.njuse.utility.RoomType;
 import group2.grade15.njuse.vo.*;
 
 import java.rmi.RemoteException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -109,7 +107,6 @@ public class HotelController implements HotelServ, GetHotelListBL{
 
     @Override
     public ResultMessage uploadPic(byte[][] picture, int hotelID) {
-        System.out.println(picture[0].length + "\n" + picture[1].length);
         return hotelBL.uploadPic(picture, hotelID);
     }
 

@@ -216,31 +216,39 @@ public class CustomerSearchHotelController implements Initializable {
 
 
         if (hotelListVO != null) {
-//            System.out.println("界面前段筛选后："+hotelListVO.getList().get(0).getName());
+
             ArrayList<HotelVO> hotelVOList = hotelListVO.getList();
+            searchItemBox.getChildren().clear();
 
-            try {
-
-                searchItemBox.getChildren().clear();
-                for (HotelVO hotelVO : hotelVOList) {
-                    FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelItem.fxml"));
-                    Node singleNode = hotelItemLoader.load();
-                    HotelItemController hotelItemController = hotelItemLoader.getController();
-                    searchItemBox.getChildren().add(singleNode);
-                    hotelItemController.initData(hotelVO);
-                    hotelItemController.show();
+            if(sortTypeChoiceBox.getSelectionModel().isSelected(0)){
+                for (int i=0;i<hotelVOList.size();++i) {
+                    addHotelItem(hotelVOList.get(i));
                 }
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            }else{//用户选择逆序查看
+                for (int i=hotelVOList.size()-1;i>=0;--i) {
+                    addHotelItem(hotelVOList.get(i));
+                }
             }
 
         }else{
             searchItemBox.getChildren().clear();
         }
 
+    }
+
+    private void addHotelItem(HotelVO hotelVO) {
+        try {
+            FXMLLoader hotelItemLoader = new FXMLLoader(new URL("file:client/src/main/res/fxml/customer/HotelItem.fxml"));
+            Node singleNode = hotelItemLoader.load();
+            HotelItemController hotelItemController = hotelItemLoader.getController();
+            searchItemBox.getChildren().add(singleNode);
+            hotelItemController.initData(hotelVO);
+            hotelItemController.show();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showSearchPane() {
