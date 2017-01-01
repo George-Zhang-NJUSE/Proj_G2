@@ -126,8 +126,8 @@ public class PromotionManageController implements Initializable{
     public void showAllPromotion(){
         try {
             ArrayList<WebPromotionVO> list = webMarketerService.getWebPromotionList().getWebPromotionList();
-            activatedListData.remove(0, activatedListData.size());
-            unactivatedListData.remove(0, unactivatedListData.size());
+            activatedListData.clear();
+            unactivatedListData.clear();
             for (int i = 0; i < list.size(); i++) {
                 WebPromotionVO vo = list.get(i);
                 if (vo.getState() == PromotionState.start)
