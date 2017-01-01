@@ -78,7 +78,6 @@
                                                             <columns>
                                                                 <TableColumn prefWidth="69.99999618530273" text="ID" />
                                                                 <TableColumn minWidth="0.0" prefWidth="176.00001525878906" text="用户名" />
-                                                                <TableColumn minWidth="0.0" prefWidth="179.00006103515625" text="密码" />
                                                                 <TableColumn prefWidth="79.00006103515625" text="账户类型" />
                                                 <TableColumn prefWidth="154.0" text="联系方式" />
                                                 <TableColumn prefWidth="103.0" text="生日" />
@@ -302,7 +301,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="hotelAddFrame" visible="false" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="692.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);">
+                        <Pane fx:id="hotelAddFrame" layoutX="890.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="692.0" prefWidth="300.0" style="-fx-background-color: rgb(240,240,240);" visible="false">
                             <children>
                                 <Label layoutX="20.0" layoutY="20.0" text="添加酒店">
                                     <font>
